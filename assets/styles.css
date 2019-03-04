@@ -1,0 +1,9 @@
+body {
+    background-color: #F0EBE6;
+}
+
+.app-content {
+    max-width: 1050px;
+    margin-right: auto;
+    margin-left: auto;
+}
