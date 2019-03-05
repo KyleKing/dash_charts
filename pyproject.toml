@@ -11,10 +11,9 @@ dash-core-components = "^0.43.1"
 dash-daq = "^0.1.4"
 dash-html-components = "^0.13.5"
 dash-table = "^3.5"
-random-word = "=1.0.2"
+pandas = "^0.24.1"
 
 [tool.poetry.dev-dependencies]
-doit = "^0.31.1"
 flake8 = "^3.7"
 flake8-blind-except = "^0.1.1"
 flake8-bugbear = "^18.8"
@@ -27,13 +26,9 @@ flake8-mock = "^0.3.0"
 flake8-print = "^3.1"
 flake8-quotes = "^1.0"
 flake8-tuple = "^0.2.13"
-jsonlines = "^1.2"
-pandas = "^0.24.1"
 pep8-naming = "^0.8.2"
 pytest = "^4.3"
 pytest-cov = "^2.6"
-tinydb = "^3.12"
-toml = "^0.10.0"
 
 [build-system]
 requires = ["poetry>=0.12"]

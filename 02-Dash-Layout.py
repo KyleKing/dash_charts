@@ -17,13 +17,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
-from random_word import RandomWords
 
-external_stylesheets = [
-    'https://codepen.io/chriddyp/pen/bWLwgP.css',
-    # {'src': 'file:///Users/kyleking/Developer/Werk/__LocalProjects/Dash-HelloWorld/assets/styles.css'},
-]
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)  # , assets_url_path='../')
+app = dash.Dash(__name__)
 
 colors = {
     'background': '#FFF',
@@ -34,11 +29,12 @@ colors = {
 # Barchart
 
 # Create data for Bar Chart
-rWords = RandomWords()
-try:
-    x = rWords.get_random_words(limit=20)
-except Exception:  # Known API Error, see: https://github.com/vaibhavsingh97/random-word/issues/13
-    x = ['Test123', 'Test234']
+x = [
+    'aerial tramways', 'aircrafts', 'aircraft carriers', 'airplanes', 'balloons', 'barges', 'cabs', 'cable cars',
+    'cabooses', 'delivery trucks', 'destroyers', 'diesel trucks', 'earth movers', 'eighteen-wheelers', 'electric cars',
+    'elevated railroads', 'ferries', 'fireboats', 'galleons', 'garbage trucks', 'gliders', 'handcars', 'hang gliders',
+]
+random.shuffle(x)
 
 
 def randY():
@@ -49,19 +45,19 @@ def randY():
 # =====================================================================================================================
 # Table
 
-agricDF = pd.read_csv(
-    'https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/'
-    'c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv')
+agricDF = pd.read_csv('assets/usa-agricultural-exports-2011.csv')
 
 
 def generate_table(dataframe, max_rows=10, max_cols=10):
     """Reusable Pandas HTML data table component."""
     return html.Table(
         [
-            html.Tr([html.Th(col) for cIdx, col in enumerate(dataframe.columns) if cIdx < max_cols])
+            html.Tr([html.Th(col) for cIdx, col in enumerate(dataframe.columns) if cIdx > 0 and cIdx <= max_cols])
         ] + [
             html.Tr([
-                html.Td(dataframe.iloc[i][col]) for cIdx, col in enumerate(dataframe.columns) if cIdx < max_cols
+                html.Td(
+                    dataframe.iloc[i][col]
+                ) for cIdx, col in enumerate(dataframe.columns) if cIdx > 0 and cIdx <= max_cols
             ]) for i in range(min(len(dataframe), max_rows))
         ]
     )
@@ -70,9 +66,7 @@ def generate_table(dataframe, max_rows=10, max_cols=10):
 # =====================================================================================================================
 # Configure Scatter Plot
 
-lifeExpDF = pd.read_csv(
-    'https://gist.githubusercontent.com/chriddyp/5d1ea79569ed194d432e56108a04d188/raw/'
-    'a9f9e8076b837d541398e999dcbac2b2826a81f8/gdp-life-exp-2007.csv')
+lifeExpDF = pd.read_csv('assets/gdp-life-exp-2007.csv')
 
 # =====================================================================================================================
 # Layout the application
@@ -107,22 +101,14 @@ app.layout = html.Div([
                             'color': colors['text']
                         }
                     }
-                }
+                },
+                style={'margin-top': '20px'},
             ),
 
             html.H4(children='US Agriculture Exports (2011)'),
             generate_table(agricDF),
 
-            dcc.Markdown(children="""
-### Dash and Markdown
-
-Dash apps can be written in Markdown.
-Dash uses the [CommonMark](http://commonmark.org/)
-specification of Markdown.
-Check out their [60 Second Markdown Tutorial](http://commonmark.org/help/)
-if this is your first introduction to Markdown!
-            """),
-
+            html.H4(children='Life Expectancy vs. GDP (2007)'),
             dcc.Graph(
                 id='life-exp-vs-gdp',
                 figure={
@@ -147,12 +133,31 @@ if this is your first introduction to Markdown!
                         legend={'x': 0, 'y': 1},
                         hovermode='closest'
                     )
-                }
+                },
+                style={'margin-top': '20px'},
             ),
+
+            dcc.Markdown(children="""
+---
+
+### Dash and Markdown
+
+- Dash apps can be written in Markdown.
+- Dash uses the [CommonMark](http://commonmark.org/) specification of Markdown.
+- Check out their [60 Second Markdown Tutorial](http://commonmark.org/help/)
+
+Code snippet:
+
+```python
+print('I am Code Block')
+print('Syntax highlighting could work if Highlight.js is included')
+```
+---
+"""),
 
             html.H4(children='(Some of) Dash HTML Elements'),
 
-            html.Label('Dropdown'),
+            html.Label('Dropdown', style={'margin-top': '20px'}),
             dcc.Dropdown(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
@@ -162,7 +167,7 @@ if this is your first introduction to Markdown!
                 value='MTL'
             ),
 
-            html.Label('Multi-Select Dropdown'),
+            html.Label('Multi-Select Dropdown', style={'margin-top': '20px'}),
             dcc.Dropdown(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
@@ -173,7 +178,7 @@ if this is your first introduction to Markdown!
                 multi=True
             ),
 
-            html.Label('Radio Items'),
+            html.Label('Radio Items', style={'margin-top': '20px'}),
             dcc.RadioItems(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
@@ -183,7 +188,7 @@ if this is your first introduction to Markdown!
                 value='MTL'
             ),
 
-            html.Label('Checkboxes'),
+            html.Label('Checkboxes', style={'margin-top': '20px'}),
             dcc.Checklist(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
@@ -193,10 +198,10 @@ if this is your first introduction to Markdown!
                 values=['MTL', 'SF']
             ),
 
-            html.Label('Text Input'),
+            html.Label('Text Input', style={'margin-top': '20px'}),
             dcc.Input(value='MTL', type='text'),
 
-            html.Label('Slider'),
+            html.Label('Slider', style={'margin-top': '20px'}),
             dcc.Slider(
                 min=0,
                 max=9,

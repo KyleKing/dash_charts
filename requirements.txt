@@ -1,0 +1,6 @@
+dash==0.38.0
+dash-core-components==0.43.1
+dash-daq==0.1.4
+dash-html-components==0.13.5
+dash-table==3.5.0
+pandas==0.24.1
