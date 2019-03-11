@@ -1,3 +1,13 @@
+[tool.flake8]
+# Pending support in flake8: https://gitlab.com/pycqa/flake8/merge_requests/245
+max-line-length = 120
+ignore = "E265,E266,E262,E121,E123,E126,E24,E704,N802,N803,N806,N815,N816"
+
+[tool.isort]
+line_length = 120
+length_sort = false
+default_section = "THIRDPARTY"
+
 [tool.poetry]
 name = "dash-helloworld"
 version = "0.0.1"
@@ -26,9 +36,11 @@ flake8-mock = "^0.3.0"
 flake8-print = "^3.1"
 flake8-quotes = "^1.0"
 flake8-tuple = "^0.2.13"
+isort = "^4.3.14"
 pep8-naming = "^0.8.2"
 pytest = "^4.3"
 pytest-cov = "^2.6"
+radon = "^3.0"
 
 [build-system]
 requires = ["poetry>=0.12"]

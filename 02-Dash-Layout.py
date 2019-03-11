@@ -11,6 +11,7 @@ For reference see:
 """
 
 import random
+from pathlib import Path
 
 import dash
 import dash_core_components as dcc
@@ -18,7 +19,8 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-app = dash.Dash(__name__)
+assets_dir = Path('assets')
+app = dash.Dash(__name__)  # FYI: doesn't work? assets_url_path=str(assets_dir)
 
 colors = {
     'background': '#FFF',
@@ -45,7 +47,7 @@ def randY():
 # =====================================================================================================================
 # Table
 
-agricDF = pd.read_csv('assets/usa-agricultural-exports-2011.csv')
+agricDF = pd.read_csv(assets_dir / 'usa-agricultural-exports-2011.csv')
 
 
 def generate_table(dataframe, max_rows=10, max_cols=10):
@@ -66,7 +68,7 @@ def generate_table(dataframe, max_rows=10, max_cols=10):
 # =====================================================================================================================
 # Configure Scatter Plot
 
-lifeExpDF = pd.read_csv('assets/gdp-life-exp-2007.csv')
+lifeExpDF = pd.read_csv(assets_dir / 'gdp-life-exp-2007.csv')
 
 # =====================================================================================================================
 # Layout the application
