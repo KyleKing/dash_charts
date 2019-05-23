@@ -1,23 +1,23 @@
 # Dash-HelloWorld
 
-Experiments with plotly Dash: https://dash.plot.ly/
+Windows/Mac comparison for loading from static assets/ directory or specific CSS file
 
-## Quick Start
-
-Make sure to clone the repository as the necessary assets are in the `assets/` directory
-
-### Run with Poetry
+## Option 1: Run with Poetry
 
 ```sh
+git clone https://github.com/KyleKing/dash.git
+git checkout debug/assets_path
 # See Poetry README for install instructions: https://github.com/sdispater/poetry
 poetry install
-poetry run python 02-Dash-Layout.py
+poetry run python main.py
 ```
 
-### Run without Poetry / Plain Python 3
+## Option 2: Run without Poetry / Plain Python 3
 
 ```sh
+git clone https://github.com/KyleKing/dash.git
+git checkout debug/assets_path
 # Note: use Python3
 pip install -r requirements.txt
-python 02-Dash-Layout.py
+python main.py
 ```

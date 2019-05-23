@@ -16,7 +16,7 @@ authors = ["Kyle King <KyleKing@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-dash = "^0.42.0"
+dash = {git = "https://github.com/KyleKing/dash/tree/debug/assets_path"}
 dash-core-components = "^0.47.0"
 dash-daq = "^0.1.4"
 dash-html-components = "^0.16.0"
