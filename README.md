@@ -12,4 +12,10 @@ poetry install
 poetry run python main.py
 
 # In main.py, try different `app` variables to test the path
+
+# Build with PyInstaller
+poetry run pyinstaller main.py --noupx --add-data ./styles/blue-bg.css:./styles --add-data styles/question.jpg:styles --onefile
+
+# FIXME: for onefile, the styles.css isn't loaded. But this works for --onedir. In both, the questions.jpg file loads
+
 ```
