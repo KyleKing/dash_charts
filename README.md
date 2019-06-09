@@ -1,23 +1,15 @@
-# Dash-HelloWorld
+# Dash-HelloWorld/debug/assets-path
 
-Windows/Mac comparison for loading from static assets/ directory or specific CSS file
-
-## Option 1: Run with Poetry
+Appears to be an issue with how the assets/ directory is loaded on Windows vs. NIX.
 
 ```sh
-git clone https://github.com/KyleKing/dash.git
-git checkout debug/assets_path
-# See Poetry README for install instructions: https://github.com/sdispater/poetry
 poetry install
+
+# # Optional - uses custom version of Dash with extra debugging
+# poetry run pip install -e "/Users/kyleking/Developer/Pull Requests/dash/"
+
+# Launch the app and open in browser
 poetry run python main.py
-```
 
-## Option 2: Run without Poetry / Plain Python 3
-
-```sh
-git clone https://github.com/KyleKing/dash.git
-git checkout debug/assets_path
-# Note: use Python3
-pip install -r requirements.txt
-python main.py
+# In main.py, try different `app` variables to test the path
 ```
