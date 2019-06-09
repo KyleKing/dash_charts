@@ -1,8 +1,5 @@
 # TODO
 
-- Add data table examples, files: 02020X
-
-- Add tabs, file: 0203
 - Test routing: https://dash.plot.ly/urls
 - Test D3/VX: https://dash.plot.ly/d3-react-components
 - Check FAQs: https://dash.plot.ly/faqs

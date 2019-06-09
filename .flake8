@@ -1,0 +1,10 @@
+[flake8]
+max-line-length = 120
+
+# Prefer camelCase, ignore some pep8-naming rules
+#   N802 - function name should be lowercase
+#   N803 - argument name should be lowercase
+#   N806 - variable in function should be lowercase
+#   N815 - mixedCase variable in class scope
+#   N816 - mixedCase variable in global scope
+ignore = N802,N803,N806,N815,N816

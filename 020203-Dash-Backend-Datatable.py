@@ -70,6 +70,7 @@ app.layout = html.Div([
      Input('table-paging-with-graph', "sorting_settings"),
      Input('table-paging-with-graph', "filtering_settings")])
 def update_table(pagination_settings, sorting_settings, filtering_settings):
+    """TODO."""
     filtering_expressions = filtering_settings.split(' && ')
     dff = df
     for filter in filtering_expressions:
@@ -106,6 +107,7 @@ def update_table(pagination_settings, sorting_settings, filtering_settings):
     Output('table-paging-with-graph-container', "children"),
     [Input('table-paging-with-graph', "data")])
 def update_graph(rows):
+    """TODO."""
     dff = pd.DataFrame(rows)
     return html.Div(
         [
