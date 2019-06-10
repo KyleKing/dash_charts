@@ -7,7 +7,6 @@ plotly ref: https://plot.ly/python/reference/
 """
 
 import math
-from pathlib import Path
 
 import dash
 import dash_core_components as dcc
@@ -16,8 +15,7 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
-assets_dir = Path.cwd() / 'assets/styles.css'
-app = dash.Dash(__name__, assets_url_path=str(assets_dir))
+app = dash.Dash(__name__)
 
 app.layout = html.Div(
     className='app-content',
