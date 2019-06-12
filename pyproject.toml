@@ -11,11 +11,11 @@ authors = ["Kyle King <KyleKing@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-dash = "^0.42.0"
-dash-core-components = "^0.47.0"
+dash = "^0.43.0"
+dash-core-components = "^0.48.0"
 dash-daq = "^0.1.4"
 dash-html-components = "^0.16.0"
-dash-table = "^3.6"
+dash-table = "^3.7"
 pandas = "^0.24.2"
 
 [tool.poetry.dev-dependencies]
