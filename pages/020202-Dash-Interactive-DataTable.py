@@ -27,14 +27,15 @@ app.layout = html.Div([
         children=[
             html.H2(children='Interactive DataTable'),
             dcc.Markdown(children="""
-Filtering is slight awkward for now, try entering the below text to filter the columns
+Example filtering ([full documentation here](https://dash.plot.ly/datatable/filtering)):
 
-- `eq "Europe"` for continent
-- `> num(80)` for life expectancy
+- Try `contains al` in country
+- Try `= Europe` in continent
+- Try `> 80` in life expectancy
 
-Pending changes tracked in [Issue 169](https://github.com/plotly/dash-table/issues/169)
+TODO: Improve this example
 
-Also, there are some charts at the bottom (not connected to the table rn)"""),
+Also, there are some charts at the bottom"""),
             html.P(children=''),
             dash_table.DataTable(
                 id='datatable-interactivity',
@@ -70,7 +71,7 @@ Also, there are some charts at the bottom (not connected to the table rn)"""),
 def update_graph(rows, derived_virtual_selected_rows):
     # When the table is first rendered, `derived_virtual_data` and
     # `derived_virtual_selected_rows` will be `None`. This is due to an
-    # idiosyncracy in Dash (unsupplied properties are always None and Dash
+    # idiosyncrasy in Dash (unsupplied properties are always None and Dash
     # calls the dependent callbacks when the component is first rendered).
     # So, if `rows` is `None`, then the component was just rendered
     # and its value will be the same as the component's dataframe.
@@ -110,9 +111,7 @@ def update_graph(rows, derived_virtual_selected_rows):
                     ],
                     "layout": {
                         "xaxis": {"automargin": True},
-                        "yaxis": {"automargin": True},
-                        "height": 250,
-                        "margin": {"t": 10, "l": 10, "r": 10},
+                        "yaxis": {"automargin": True, 'title': column},
                     },
                 },
             )

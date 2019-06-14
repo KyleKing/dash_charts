@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 """02-0203, Dash Interactive DataTable (With Python).
 
-Based on: https://dash.plot.ly/datatable/callbacks
-
-FIXME: Several '500' server errors with KeyError in filtering
+Based on: https://dash.plot.ly/datatable/filtering
 
 """
 
 from pathlib import Path
 
 import dash
-import dash_core_components as dcc
 import dash_html_components as html
 import dash_table
 import pandas as pd
@@ -20,121 +17,77 @@ app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 
-PAGE_SIZE = 5
-
-# =====================================================================================================================
-# Layout the application
 
 app.layout = html.Div([
     html.Div(
         className='app-content',
         children=[
-            html.H2(children='Interactive DataTable (With Python backend)'),
-            html.Div(
-                className="row",
-                children=[
-                    html.Div(
-                        dash_table.DataTable(
-                            id='table-paging-with-graph',
-                            columns=[
-                                {"name": i, "id": i} for i in sorted(df.columns)
-                            ],
-                            pagination_settings={
-                                'current_page': 0,
-                                'page_size': 20
-                            },
-                            pagination_mode='be',
-
-                            filtering='be',
-                            filtering_settings='',
-
-                            sorting='be',
-                            sorting_type='multi',
-                            sorting_settings=[]
-                        ),
-                        style={'height': 750, 'overflowY': 'scroll'},
-                        className='six columns'
-                    ),
-                    html.Div(
-                        id='table-paging-with-graph-container',
-                        className="five columns"
-                    )
-                ]
-            )
-        ]
-    )
+            dash_table.DataTable(
+                id='table-filtering-be',
+                columns=[
+                    {'name': i, 'id': i} for i in sorted(df.columns)
+                ],
+                filtering='be',
+                filter='',
+            ),
+        ],
+    ),
 ])
 
+operators = [['ge ', '>='],
+             ['le ', '<='],
+             ['lt ', '<'],
+             ['gt ', '>'],
+             ['ne ', '!='],
+             ['eq ', '='],
+             ['contains '],
+             ['datestartswith ']]
+
+
+def split_filter_part(filter_part):
+    for operator_type in operators:
+        for operator in operator_type:
+            if operator in filter_part:
+                name_part, value_part = filter_part.split(operator, 1)
+                name = name_part[name_part.find('{') + 1: name_part.rfind('}')]
+
+                value_part = value_part.strip()
+                v0 = value_part[0]
+                if (v0 == value_part[-1] and v0 in ("'", '"', '`')):
+                    value = value_part[1: -1].replace('\\' + v0, v0)
+                else:
+                    try:
+                        value = float(value_part)
+                    except ValueError:
+                        value = value_part
+
+                # word operators need spaces after them in the filter string,
+                # but we don't want these later
+                return name, operator_type[0].strip(), value
+
+    return [None] * 3
+
 
 @app.callback(
-    Output('table-paging-with-graph', "data"),
-    [Input('table-paging-with-graph', "pagination_settings"),
-     Input('table-paging-with-graph', "sorting_settings"),
-     Input('table-paging-with-graph', "filtering_settings")])
-def update_table(pagination_settings, sorting_settings, filtering_settings):
-    """TODO."""
-    filtering_expressions = filtering_settings.split(' && ')
+    Output('table-filtering-be', 'data'),
+    [Input('table-filtering-be', 'filter')])
+def update_table(_filter):
+    filtering_expressions = _filter.split(' && ')
     dff = df
-    for filter in filtering_expressions:
-        if ' eq ' in filter:
-            col_name = filter.split(' eq ')[0]
-            filter_value = filter.split(' eq ')[1]
-            dff = dff.loc[dff[col_name] == filter_value]
-        if ' > ' in filter:
-            col_name = filter.split(' > ')[0]
-            filter_value = float(filter.split(' > ')[1])
-            dff = dff.loc[dff[col_name] > filter_value]
-        if ' < ' in filter:
-            col_name = filter.split(' < ')[0]
-            filter_value = float(filter.split(' < ')[1])
-            dff = dff.loc[dff[col_name] < filter_value]
+    for filter_part in filtering_expressions:
+        col_name, operator, filter_value = split_filter_part(filter_part)
 
-    if len(sorting_settings):
-        dff = dff.sort_values(
-            [col['column_id'] for col in sorting_settings],
-            ascending=[
-                col['direction'] == 'asc'
-                for col in sorting_settings
-            ],
-            inplace=False
-        )
+        if operator in ('eq', 'ne', 'lt', 'le', 'gt', 'ge'):
+            # these operators match pandas series operator method names
+            dff = dff.loc[getattr(dff[col_name], operator)(filter_value)]
+        elif operator == 'contains':
+            dff = dff.loc[dff[col_name].str.contains(filter_value)]
+        elif operator == 'datestartswith':
+            # this is a simplification of the front-end filtering logic,
+            # only works with complete fields in standard format
+            dff = dff.loc[dff[col_name].str.startswith(filter_value)]
 
-    return dff.iloc[
-        pagination_settings['current_page'] * pagination_settings['page_size']:
-        (pagination_settings['current_page'] + 1) * pagination_settings['page_size']
-    ].to_dict('rows')
-
-
-@app.callback(
-    Output('table-paging-with-graph-container', "children"),
-    [Input('table-paging-with-graph', "data")])
-def update_graph(rows):
-    """TODO."""
-    dff = pd.DataFrame(rows)
-    return html.Div(
-        [
-            dcc.Graph(
-                id=column,
-                figure={
-                    "data": [
-                        {
-                            "x": dff["country"],
-                            "y": dff[column] if column in dff else [],
-                            "type": "bar",
-                            "marker": {"color": "#0074D9"},
-                        }
-                    ],
-                    "layout": {
-                        "xaxis": {"automargin": True},
-                        "yaxis": {"automargin": True},
-                        "height": 250,
-                        "margin": {"t": 10, "l": 10, "r": 10},
-                    },
-                },
-            )
-            for column in ["pop", "lifeExp", "gdpPercap"]
-        ]
-    )
+    return dff.to_dict('records')
 
 
 if __name__ == '__main__':
