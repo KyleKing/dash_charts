@@ -1,6 +1,9 @@
 """Demonstrate realtime updates from a SQLite db.
 
-See: https://www.dataquest.io/blog/python-pandas-databases/
+Example Python/SQLite: https://www.dataquest.io/blog/python-pandas-databases/
+    https://sebastianraschka.com/Articles/2014_sqlite_in_python_tutorial.html
+
+TODO: https://plot.ly/python/big-data-analytics-with-pandas-and-sqlite/
 
 """
 
@@ -10,6 +13,7 @@ from pathlib import Path
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
@@ -24,8 +28,8 @@ app.layout = html.Div([
             html.H1(
                 children='SQLite/Dash Testing',
             ),
-            dcc.Graph(id='sqlite-scatter'),
-            html.Button('UPDATE', id='update-button'),
+            dcc.Graph(id='sqlite-scatter', animate=True),
+            dcc.Interval(id='graph-update', interval=400, n_intervals=0),
         ],
     ),
 ])
@@ -33,8 +37,8 @@ app.layout = html.Div([
 
 @app.callback(
     Output('sqlite-scatter', 'figure'),
-    [Input('update-button', 'n_clicks')])
-def updateScatter(_n_clicks):
+    [Input('graph-update', 'n_intervals')])
+def updateScatter(n_intervals):
     """Update the scatter plot with latest from db."""
     conn = sqlite3.connect(dbFile)
     # cursor = conn.cursor()
@@ -42,6 +46,8 @@ def updateScatter(_n_clicks):
     df = pd.read_sql_query('SELECT id, name, age from SCHOOL', conn)
 
     conn.close()
+
+    fit = np.poly1d(np.polyfit(df['ID'], df['AGE'], 5))
 
     return {
         'data': [
@@ -51,14 +57,28 @@ def updateScatter(_n_clicks):
                 x=df['ID'],
                 y=df['AGE'],
             ),
+            go.Scatter(
+                # line={'color': '#D93D40', 'dash': 'solid'},
+                mode='lines',
+                x=df['ID'],
+                y=fit(df['ID']),
+                # opacity=0.4,
+            ),
         ],
         'layout': go.Layout(
             title=go.layout.Title(text='Live-Updating Plot'),
             xaxis={
+                'automargin': True,
+                # 'autorange': True,  # FIXME: forces full page refresh on range change?
+                'range': [0, 1000],
                 'showgrid': True,
                 'title': 'Index',
             },
             yaxis={
+                'automargin': True,
+                'zeroline': True,
+                # 'autorange': True,  # FIXME: Doesn't work
+                'range': [-150, 150],
                 'showgrid': True,
                 'title': 'Age',
             },
@@ -68,6 +88,4 @@ def updateScatter(_n_clicks):
 
 
 if __name__ == '__main__':
-    # FYI: For PyInstaller, debug must be False. Otherwise returns:
-    #   "AttributeError: 'FrozenImporter' object has no attribute 'filename'"
-    app.run_server(debug=False)
+    app.run_server(debug=True)
