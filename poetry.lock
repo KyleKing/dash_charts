@@ -88,6 +88,7 @@ plotly = "*"
 reference = "52b473b78082cda0b89afc122882cd5d4c755d66"
 type = "git"
 url = "https://github.com/plotly/dash"
+
 [[package]]
 category = "main"
 description = "Dash UI core component suite"
@@ -758,6 +759,17 @@ test = ["pytest (>=3.6)", "pytest-cov", "pytest-django", "sybil", "zope.componen
 
 [[package]]
 category = "main"
+description = "Fast, Extensible Progress Meter"
+name = "tqdm"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*"
+version = "4.32.1"
+
+[package.extras]
+dev = ["py-make (>=0.1.0)", "twine", "argopt", "pydoc-markdown"]
+
+[[package]]
+category = "main"
 description = "Traitlets Python config system"
 name = "traitlets"
 optional = false
@@ -819,7 +831,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "faf25c92ae36fb92d648350809feb771f3e47717f321fb23d20951ef10a909b8"
+content-hash = "2df4b1ed663d83bfa62f261de8abda83f977609ce3392759aca157da0ffeff26"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -891,6 +903,7 @@ requests = ["11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4", 
 retrying = ["08c039560a6da2fe4f2c426d0766e284d3b736e355f8dd24b37367b0bb41973b"]
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
 testfixtures = ["1fec9b69328777c7ca4b0f645325ce71de5368551e897b957d514d0f9bb10d3e", "772c9e3a2743782c9e432de4334da71d2896a94a35748d60dbcdd30271010beb"]
+tqdm = ["0a860bf2683fdbb4812fe539a6c22ea3f1777843ea985cb8c3807db448a0f7ab", "e288416eecd4df19d12407d0c913cbf77aa8009d7fddb18f632aded3bdbdda6b"]
 traitlets = ["9c4bd2d267b7153df9152698efb1050a5d84982d3384a37b2c1f7723ba3e7835", "c6cb5e6f57c5a9bdaa40fa71ce7b4af30298fbab9ece9815b5d995ab6217c7d9"]
 urllib3 = ["b246607a25ac80bedac05c6f282e3cdaf3afb65420fd024ac94435cabe6e18d1", "dbe59173209418ae49d485b87d1681aefa36252ee85884c31346debd19463232"]
 wcwidth = ["3df37372226d6e63e1b1e1eda15c594bca98a22d33a23832a90998faa96bc65e", "f4ebe71925af7b40a864553f761ed559b43544f8f71746c2d756c7fe788ade7c"]

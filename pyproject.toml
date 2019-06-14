@@ -17,6 +17,7 @@ dash-daq = "^0.1.4"
 dash-html-components = "^0.16.0"
 dash-table = "^3.7"
 pandas = "^0.24.2"
+tqdm = "^4.32"
 
 [tool.poetry.dev-dependencies]
 doit = "^0.31.1"
