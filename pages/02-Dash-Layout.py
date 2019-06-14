@@ -19,7 +19,9 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-app = dash.Dash(__name__)
+assets_dir = Path.cwd() / 'pages/assets'
+
+app = dash.Dash(__name__, assets_folder=str(assets_dir))
 
 colors = {
     'background': '#FFF',
@@ -45,8 +47,6 @@ def randY():
 
 # =====================================================================================================================
 # Table
-
-assets_dir = Path('assets')
 
 agricDF = pd.read_csv(assets_dir / 'usa-agricultural-exports-2011.csv')
 

@@ -7,6 +7,8 @@ Based on: https://dash.plot.ly/datatable
 
 """
 
+from pathlib import Path
+
 import dash
 import dash_html_components as html
 import dash_table
@@ -15,7 +17,7 @@ import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/26k-consumer-complaints.csv')
 df = df[:45]
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
 
 # =====================================================================================================================
 # Layout the application
@@ -27,8 +29,8 @@ app.layout = html.Div([
             html.H2(children='Example DataTable'),
             dash_table.DataTable(
                 id='table',
-                columns=[{"name": i, "id": i} for i in df.columns],
-                data=df.to_dict("rows"),
+                columns=[{'name': i, 'id': i} for i in df.columns],
+                data=df.to_dict('rows'),
                 # # > Setting a fixed row can cause the header row to have the wrong horizontal spacing as the data
                 # n_fixed_rows=1,
                 style_table={
@@ -55,9 +57,9 @@ app.layout = html.Div([
                 }],
                 merge_duplicate_headers=True,
                 # style_as_list_view=True,  # Remove vertical lines for short tables
-            )
-        ]
-    )
+            ),
+        ],
+    ),
 ])
 
 if __name__ == '__main__':

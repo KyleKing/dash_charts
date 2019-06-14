@@ -7,6 +7,8 @@ FIXME: Several '500' server errors with KeyError in filtering
 
 """
 
+from pathlib import Path
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -14,7 +16,7 @@ import dash_table
 import pandas as pd
 from dash.dependencies import Input, Output
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 

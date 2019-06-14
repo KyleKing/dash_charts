@@ -12,13 +12,14 @@ Other Examples:
 """
 
 from datetime import datetime as dt
+from pathlib import Path
 
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
 
 # =====================================================================================================================
 # Layout the application
@@ -33,7 +34,7 @@ app.layout = html.Div([
             # Dropdowns
             # ==========
 
-            html.Label('Dropdown', style={'margin-top': '20px'}),
+            html.Label('Dropdown'),
             dcc.Dropdown(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
@@ -43,7 +44,7 @@ app.layout = html.Div([
                 value='MTL',
             ),
 
-            html.Label('Multi-Select Dropdown', style={'margin-top': '20px'}),
+            html.Label('Multi-Select Dropdown'),
             dcc.Dropdown(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
@@ -58,7 +59,7 @@ app.layout = html.Div([
             # Sliders
             # ==========
 
-            html.Label('Basic Slider', style={'margin-top': '20px'}),
+            html.Label('Basic Slider'),
             dcc.Slider(
                 id='example-id',
                 min=0,
@@ -67,7 +68,7 @@ app.layout = html.Div([
                 value=3.3,
                 updatemode='drag',  # Faster updates
             ),
-            html.Label('Labeled Slider', style={'margin-top': '20px'}),
+            html.Label('Labeled Slider'),
             dcc.Slider(
                 min=0,
                 max=10,
@@ -76,7 +77,7 @@ app.layout = html.Div([
                 dots=False,
             ),
 
-            html.Label('Range Slider With Nice Labels (No Inclusion)', style={'margin-top': '45px'}),
+            html.Label('Range Slider With Nice Labels (No Inclusion)'),
             dcc.RangeSlider(
                 min=0,
                 max=100,
@@ -89,9 +90,8 @@ app.layout = html.Div([
                 },
                 included=False,
             ),
-            html.Label('Pushable Multi-Range Slider', style={'margin-top': '45px'}),
+            html.Label('Pushable Multi-Range Slider'),
             dcc.RangeSlider(
-                marks={i: i for i in range(-5, 30)},
                 min=-5,
                 max=30,
                 value=[1, 3, 4, 5, 12, 17],
@@ -102,7 +102,7 @@ app.layout = html.Div([
             # Inputs
             # ==========
 
-            html.Label('Input and Text Area', style={'margin-top': '45px'}),
+            html.Label('Input and Text Area'),
             dcc.Input(
                 placeholder='Enter a value...',
                 type='text',
@@ -118,7 +118,7 @@ app.layout = html.Div([
             # Select (Radio/Checkbox)
             # ==========
 
-            html.Label('Radio Items', style={'margin-top': '20px'}),
+            html.Label('Radio Items'),
             dcc.RadioItems(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
@@ -128,7 +128,7 @@ app.layout = html.Div([
                 value='MTL',
                 # labelStyle={'display': 'inline-block'},
             ),
-            html.Label('Checkboxes', style={'margin-top': '20px'}),
+            html.Label('Checkboxes'),
             dcc.Checklist(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
@@ -142,30 +142,30 @@ app.layout = html.Div([
             # Button and Callback
             # ==========
 
-            html.Label('Example Button with Callback', style={'margin-top': '20px'}),
+            html.Label('Example Button with Callback'),
             html.Div(dcc.Input(id='input-box', type='text')),
             html.Button('Submit', id='button'),
             html.Div(
                 id='output-container-button',
-                children='Enter a value and press submit'
+                children='Enter a value and press submit',
             ),
 
             # ==========
             # Datepicker
             # ==========
 
-            html.Label('Single Date Picker', style={'margin-top': '20px'}),
+            html.Label('Single Date Picker'),
             dcc.DatePickerSingle(
                 id='date-picker-single',
                 date=dt(2020, 4, 1),
             ),
-            html.Label('Ranged Date Picker', style={'margin-top': '20px'}),
+            html.Label('Ranged Date Picker'),
             dcc.DatePickerRange(
                 id='date-picker-range',
                 start_date=dt(1997, 5, 3),
-                end_date_placeholder_text='Select a date!'
+                end_date_placeholder_text='Select a date!',
             ),
-            html.H6('^ fyi: need padding below for dropdown element', style={'margin-top': '20px'}),
+            html.H6('^ fyi: need padding below for dropdown element'),
 
             # ==========
             # Graphs - of course
@@ -180,8 +180,8 @@ app.layout = html.Div([
                             y=[219, 99, 97, 112, 127, 180, 236, 207, 236, 263, 350, 430, 474, 526, 488, 537, 500, 439],
                             name='Rest of world',
                             marker=go.bar.Marker(
-                                color='rgb(55, 83, 109)'
-                            )
+                                color='rgb(55, 83, 109)',
+                            ),
                         ),
                         go.Bar(
                             x=[1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
@@ -189,19 +189,19 @@ app.layout = html.Div([
                             y=[16, 13, 10, 11, 28, 37, 43, 55, 56, 88, 105, 156, 270, 299, 340, 403, 549, 499],
                             name='China',
                             marker=go.bar.Marker(
-                                color='rgb(26, 118, 255)'
-                            )
-                        )
+                                color='rgb(26, 118, 255)',
+                            ),
+                        ),
                     ],
                     layout=go.Layout(
                         title='US Export of Plastic Scrap',
                         showlegend=True,
                         legend=go.layout.Legend(
                             x=0,
-                            y=1.0
+                            y=1.0,
                         ),
                         margin=go.layout.Margin(l=40, r=0, t=40, b=30),  # noqa: E741
-                    )
+                    ),
                 ),
                 style={'height': 300},
                 id='my-graph',

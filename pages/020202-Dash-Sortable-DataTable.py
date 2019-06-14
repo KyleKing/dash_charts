@@ -5,6 +5,8 @@ Based on: https://dash.plot.ly/datatable/interactivity
 
 """
 
+from pathlib import Path
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -14,7 +16,7 @@ from dash.dependencies import Input, Output
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
 
 # =====================================================================================================================
 # Layout the application

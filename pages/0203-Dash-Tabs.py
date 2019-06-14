@@ -5,6 +5,8 @@ TODO: https://dash.plot.ly/dash-core-components/tabs
 
 """
 
+from pathlib import Path
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html

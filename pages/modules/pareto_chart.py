@@ -5,13 +5,15 @@ plotly ref: https://plot.ly/python/reference/
 
 """
 
+from pathlib import Path
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
 
 
 def createPareto(df, ylabel='Measurement (units)', colors=('#62A4D1', '#C5676B')):
