@@ -12,38 +12,30 @@ import numpy as np
 from tqdm import tqdm
 
 dbFile = Path.cwd() / 'pages/assets/sqlite-demo.sqlite'
-dbFile.unlink()  # FIXME: Only for development
-conn = sqlite3.connect(dbFile)
-cursor = conn.cursor()
+points = 1000
+delay = 0.1  # time between new data points in seconds
 
-cursor.execute("""CREATE TABLE SCHOOL
-         (ID INT PRIMARY KEY     NOT NULL,
-         NAME           TEXT    NOT NULL,
-         AGE            INT     NOT NULL,
-         ADDRESS        CHAR(50),
-         MARKS          INT);""")
-conn.commit()
+if __name__ == '__main__':
+    dbFile.unlink()  # Reset database on each iteration
+    conn = sqlite3.connect(dbFile)
+    cursor = conn.cursor()
 
-cursor.execute('INSERT INTO SCHOOL (ID,NAME,AGE,ADDRESS,MARKS)'
-               "VALUES (1, 'Rohan', 14, 'Delhi', 200)")
-# cursor.execute('INSERT INTO SCHOOL (ID,NAME,AGE,ADDRESS,MARKS)'
-#                "VALUES (2, 'Allen', 14, 'Bangalore', 150 )")
-# cursor.execute('INSERT INTO SCHOOL (ID,NAME,AGE,ADDRESS,MARKS)'
-#                "VALUES (3, 'Martha', 15, 'Hyderabad', 200 )")
-# cursor.execute('INSERT INTO SCHOOL (ID,NAME,AGE,ADDRESS,MARKS)'
-#                "VALUES (4, 'Palak', 15, 'Kolkata', 650)")
-conn.commit()
-
-mu, sigma = (10, 8)  # mean and standard deviation
-samples = np.random.normal(mu, sigma, 1000)
-for _i in tqdm(range(5, 1000)):
-    val = (-1 if _i > 500 else 1) * _i / 10.0
-    cursor.execute(
-        'INSERT INTO SCHOOL (ID,NAME,AGE,ADDRESS,MARKS)'
-        "VALUES ({}, 'idx-{}', {}, 'COUNTRY', 400)".format(_i, _i, samples[_i] + val),
-    )
+    cursor.execute("""CREATE TABLE EVENTS (
+        ID   INT   PRIMARY KEY   NOT NULL,
+        LABEL   TEXT   NOT NULL,
+        VALUE   INT   NOT NULL
+    );""")
     conn.commit()
-    time.sleep(0.01)
 
+    # Generate random data points
+    mu, sigma = (10, 8)  # mean and standard deviation
+    samples = np.random.normal(mu, sigma, points)
 
-conn.close()
+    # Fill the database with sample data
+    for _i in tqdm(range(points)):
+        val = (-1 if _i > 500 else 1) * _i / 10.0  # Make the graph kind of interesting
+        cursor.execute('INSERT INTO EVENTS (ID,LABEL,VALUE) VALUES ({}, "idx-{}", {})'.format(_i, _i, samples[_i] + val))
+        conn.commit()
+        time.sleep(delay)
+
+    conn.close()

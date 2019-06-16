@@ -10,6 +10,7 @@ TODO: https://plot.ly/python/big-data-analytics-with-pandas-and-sqlite/
 import sqlite3
 from pathlib import Path
 
+import bottleneck
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -18,16 +19,14 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
-dbFile = Path.cwd() / 'pages/assets/sqlite-demo.sqlite'
+from . import sqlite_demo_backend as backend
 
 app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
 app.layout = html.Div([
     html.Div(
         className='app-content',
         children=[
-            html.H1(
-                children='SQLite/Dash Testing',
-            ),
+            html.H1(children='SQLite/Dash Testing'),
             dcc.Graph(id='sqlite-scatter', animate=True),
             dcc.Interval(id='graph-update', interval=400, n_intervals=0),
         ],
@@ -40,48 +39,63 @@ app.layout = html.Div([
     [Input('graph-update', 'n_intervals')])
 def updateScatter(n_intervals):
     """Update the scatter plot with latest from db."""
-    conn = sqlite3.connect(dbFile)
-    # cursor = conn.cursor()
-    # cursor.execute("SELECT id, name, marks from SCHOOL").fetchall()
-    df = pd.read_sql_query('SELECT id, name, age from SCHOOL', conn)
-
+    conn = sqlite3.connect(backend.dbFile)
+    df = pd.read_sql_query('SELECT ID,LABEL,VALUE from EVENTS', conn)
     conn.close()
-
-    fit = np.poly1d(np.polyfit(df['ID'], df['AGE'], 5))
-
+    # Demo fitting wth a polynomial (not that useful)
+    fit = np.poly1d(np.polyfit(df['ID'], df['VALUE'], 5))
+    # Demo using a moving mean/std
+    rollingMean = bottleneck.move_mean(df['VALUE'], 5)
+    rollingSTD = bottleneck.move_std(df['VALUE'], 5)
     return {
         'data': [
             go.Scatter(
                 mode='markers',
-                text=df['NAME'],
+                name='scatter',
+                text=df['LABEL'],
                 x=df['ID'],
-                y=df['AGE'],
+                y=df['VALUE'],
+                opacity=0.1,
             ),
             go.Scatter(
                 # line={'color': '#D93D40', 'dash': 'solid'},
                 mode='lines',
+                name='fit',
                 x=df['ID'],
                 y=fit(df['ID']),
-                # opacity=0.4,
+                opacity=0.4,
+            ),
+            go.Scatter(
+                mode='lines',
+                name='move_mean',
+                x=df['ID'],
+                y=rollingMean,
+            ),
+            go.Scatter(
+                name='2x STD',
+                fill='toself',
+                x=list(df['ID']) + list(df['ID'])[::-1],
+                y=list(np.add(rollingMean, np.multiply(2, rollingSTD))) + \
+                list(np.subtract(rollingMean, np.multiply(2, rollingSTD)))[::-1],
             ),
         ],
         'layout': go.Layout(
             title=go.layout.Title(text='Live-Updating Plot'),
             xaxis={
                 'automargin': True,
-                # 'autorange': True,  # FIXME: forces full page refresh on range change?
-                'range': [0, 1000],
+                # 'autorange': True,  # FYI: requires full page refresh
+                'range': [0, backend.points],
                 'showgrid': True,
                 'title': 'Index',
             },
             yaxis={
                 'automargin': True,
                 'zeroline': True,
-                # 'autorange': True,  # FIXME: Doesn't work
-                'range': [-150, 150],
+                'autorange': True,
                 'showgrid': True,
-                'title': 'Age',
+                'title': 'VALUE',
             },
+            legend={'orientation': 'h'},
             hovermode='closest',
         ),
     }
