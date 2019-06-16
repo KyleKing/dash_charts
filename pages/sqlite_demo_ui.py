@@ -19,7 +19,7 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
-from . import sqlite_demo_backend as backend
+import sqlite_demo_backend as backend
 
 app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
 app.layout = html.Div([
@@ -55,21 +55,7 @@ def updateScatter(n_intervals):
                 text=df['LABEL'],
                 x=df['ID'],
                 y=df['VALUE'],
-                opacity=0.1,
-            ),
-            go.Scatter(
-                # line={'color': '#D93D40', 'dash': 'solid'},
-                mode='lines',
-                name='fit',
-                x=df['ID'],
-                y=fit(df['ID']),
-                opacity=0.4,
-            ),
-            go.Scatter(
-                mode='lines',
-                name='move_mean',
-                x=df['ID'],
-                y=rollingMean,
+                opacity=0.3,
             ),
             go.Scatter(
                 name='2x STD',
@@ -77,6 +63,22 @@ def updateScatter(n_intervals):
                 x=list(df['ID']) + list(df['ID'])[::-1],
                 y=list(np.add(rollingMean, np.multiply(2, rollingSTD))) + \
                 list(np.subtract(rollingMean, np.multiply(2, rollingSTD)))[::-1],
+                opacity=0.5,
+            ),
+            go.Scatter(
+                # line={'color': '#D93D40', 'dash': 'solid'},
+                mode='lines',
+                name='fit',
+                x=df['ID'],
+                y=fit(df['ID']),
+                opacity=0.7,
+            ),
+            go.Scatter(
+                mode='lines',
+                name='move_mean',
+                x=df['ID'],
+                y=rollingMean,
+                opacity=0.9,
             ),
         ],
         'layout': go.Layout(
