@@ -4,10 +4,11 @@ length_sort = false
 default_section = "THIRDPARTY"
 
 [tool.poetry]
-name = "dash-helloworld"
+name = "dash_charts"
 version = "0.0.1"
-description = "Experiments with plotly Dash: https://dash.plot.ly/"
+description = "Helpful functions for Plotly Dash apps"
 authors = ["Kyle King <KyleKing@users.noreply.github.com>"]
+repository = "https://github.com/kyleking/Dash-HelloWorld"
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -18,7 +19,6 @@ dash-daq = "^0.1.4"
 dash-html-components = "^0.16.0"
 dash-table = "^3.7"
 pandas = "^0.24.2"
-tqdm = "^4.32"
 
 [tool.poetry.dev-dependencies]
 doit = "^0.31.1"
@@ -39,6 +39,7 @@ pep8-naming = "^0.8.2"
 pytest = "^4.6"
 pytest-cov = "^2.7"
 radon = "^3.0"
+tqdm = "^4.32"
 
 [build-system]
 requires = ["poetry>=0.12"]

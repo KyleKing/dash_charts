@@ -18,10 +18,9 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
+from dash_charts import sqlite_demo_backend as backend
 
-import sqlite_demo_backend as backend
-
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
 app.layout = html.Div([
     html.Div(
         className='app-content',

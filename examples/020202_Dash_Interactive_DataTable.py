@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """02-0202, Dash Interactive DataTable.
 
 Based on: https://dash.plot.ly/datatable/interactivity
@@ -16,7 +15,7 @@ from dash.dependencies import Input, Output
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
 
 # =====================================================================================================================
 # Layout the application

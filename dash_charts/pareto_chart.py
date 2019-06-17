@@ -1,9 +1,4 @@
-"""Pareto chart.
-
-dash ref: https://dash.plot.ly/
-plotly ref: https://plot.ly/python/reference/
-
-"""
+"""Pareto chart."""
 
 from pathlib import Path
 
@@ -13,7 +8,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
 
 
 def createPareto(df, ylabel='Measurement (units)', colors=('#62A4D1', '#C5676B')):

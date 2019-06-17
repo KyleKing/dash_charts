@@ -1,23 +1,57 @@
-# Dash-HelloWorld
+# Dash-Charts
 
-Experiments with plotly Dash: https://dash.plot.ly/
+Helpful functions for Plotly Dash apps: https://dash.plot.ly/
 
 ## Quick Start
 
-Make sure to clone the repository as the necessary assets are in the `assets/` directory
+1. Install Poetry: https://github.com/sdispater/poetry
+1. (not on PyPi) install from Github with Poetry: `poetry add dash-charts --git `
+1. In python:
 
-### Run with Poetry
+    ```py
+    import dash_charts
+
+    app.layout = html.Div([
+        dcc.Graph(figure=dash_charts.createPareto(df)),
+    ])
+    ```
+
+## Local Development
 
 ```sh
-# See Poetry README for install instructions: https://github.com/sdispater/poetry
+git clone https://github.com/KyleKing/Dash-HelloWorld.git
+cd Dash-HelloWorld
 poetry install
-poetry run python 02-Dash-Layout.py
+poetry shell
+python examples/01_hello_world.py
 ```
 
-### Run without Poetry / Plain Python 3
+## TODO
 
-```sh
-# Note: use Python3
-pip install -r requirements.txt
-python 02-Dash-Layout.py
-```
+- Add tests/configure application
+- Checkout the v2 Table Filtering in Dash 0.43
+- Check FAQs: https://dash.plot.ly/faqs
+- Checkout example charts: https://plot.ly/python/statistical-charts/
+  - More examples:
+    - https://gist.github.com/chriddyp/9b2b3e8a6c67697279d3724dce5dab3c
+    - https://github.com/plotly/dash-recession-report-demo
+    - https://github.com/plotly/dash-opioid-epidemic-demo
+    - https://github.com/plotly/dash-web-trader
+- Test routing: https://dash.plot.ly/urls
+- Experiment with sharing state: https://dash.plot.ly/sharing-data-between-callbacks
+
+## Docs
+
+TODO: export documentation as pdoc3 then make available as gh-pages
+
+### Pareto
+
+TODO: Add Pareto example
+
+### Distortion
+
+TODO: Add distortion chart example
+
+## Examples
+
+TODO: Show image and link to file in `examples/`

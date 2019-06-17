@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 from tqdm import tqdm
 
-dbFile = Path.cwd() / 'pages/assets/sqlite-demo.sqlite'
+dbFile = Path.cwd() / 'examples/assets/sqlite-demo.sqlite'
 points = 1000
 delay = 0.1  # time between new data points in seconds
 

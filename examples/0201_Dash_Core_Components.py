@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """02-01, Dash Core Components.
 
 Based on: https://dash.plot.ly/dash-core-components.
@@ -19,7 +18,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
 
 # =====================================================================================================================
 # Layout the application

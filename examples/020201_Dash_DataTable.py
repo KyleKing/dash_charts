@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """02-0201, Basic Dash DataTable Styling.
 
 Based on: https://dash.plot.ly/datatable
@@ -17,7 +16,7 @@ import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/26k-consumer-complaints.csv')
 df = df[:45]
 
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
 
 # =====================================================================================================================
 # Layout the application

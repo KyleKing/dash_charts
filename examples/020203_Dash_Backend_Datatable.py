@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """02-0203, Dash Interactive DataTable (With Python).
 
 Based on: https://dash.plot.ly/datatable/filtering
@@ -13,7 +12,7 @@ import dash_table
 import pandas as pd
 from dash.dependencies import Input, Output
 
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'pages/assets'))
+app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 

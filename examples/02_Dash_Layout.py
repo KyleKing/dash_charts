@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """02, Dash Layout.
 
 Based on: https://dash.plot.ly/getting-started.
@@ -19,7 +18,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-assets_dir = Path.cwd() / 'pages/assets'
+assets_dir = Path.cwd() / 'examples/assets'
 
 app = dash.Dash(__name__, assets_folder=str(assets_dir))
 
