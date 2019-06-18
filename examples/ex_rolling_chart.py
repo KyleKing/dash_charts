@@ -29,7 +29,7 @@ dfDemo = pd.DataFrame(data={
 # Layout
 
 # Initialize an example chart
-exampleRollingChart = RollingChart(
+exRolling = RollingChart(
     title='Sample Timeseries Chart',
     xLbl='Index',
     yLbl='Measured Value',
@@ -43,7 +43,7 @@ app.layout = html.Div(
         html.Div([
             dcc.Graph(
                 id='rolling-chart',
-                figure=exampleRollingChart.createFigure(
+                figure=exRolling.createFigure(
                     df=dfDemo, dataLbl='Demo Data', rollingCount=4,
                 ),
             ),

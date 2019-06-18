@@ -25,7 +25,7 @@ dfDemo = pd.DataFrame(data={
 # Layout
 
 # Initialize an example chart
-exampleParetoChart = ParetoChart(
+exPareto = ParetoChart(
     title='Sample Pareto Chart',
     xLbl='Category Title',
     yLbl='Measured Downtime (hours)',
@@ -40,7 +40,7 @@ app.layout = html.Div(
         html.Div([
             dcc.Graph(
                 id='pareto-chart',
-                figure=exampleParetoChart.createFigure(df=dfDemo),
+                figure=exPareto.createFigure(df=dfDemo),
             ),
         ]),
     ],

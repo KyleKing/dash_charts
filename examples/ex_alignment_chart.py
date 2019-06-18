@@ -29,7 +29,7 @@ dfDemo = pd.DataFrame(data={
 # Layout
 
 # Initialize an example chart
-exampleAlignChart = AlignChart(
+exAlign = AlignChart(
     title='Positioning Error Analysis',
     xLbl='X-Axis Measurements (µm)',
     yLbl='Y-Axis Measurements (µm)',
@@ -61,7 +61,7 @@ app.layout = html.Div(
     [Input('stretch-input', 'value')])
 def updateAlignChart(stretch):
     """Create/update the alignment chart with the user-configurable stretch input."""
-    return exampleAlignChart.createFigure(df=dfDemo, stretch=stretch)
+    return exAlign.createFigure(df=dfDemo, stretch=stretch)
 
 
 @app.callback(
