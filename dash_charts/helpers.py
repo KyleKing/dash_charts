@@ -66,6 +66,7 @@ class CustomChart:
                 'automargin': True,
                 'showgrid': True,
                 'title': self.labels['y'],
+                'zeroline': True,
             },
             legend={'orientation': 'h'},
             hovermode='closest',

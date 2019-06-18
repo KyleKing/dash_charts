@@ -26,8 +26,9 @@ poetry shell
 python examples/01_hello_world.py
 ```
 
-## TODO
+## TODO Tasks (README)
 
+- Rename and publish as PyPi package
 - Add tests/configure application
 - Checkout the v2 Table Filtering in Dash 0.43
 - Check FAQs: https://dash.plot.ly/faqs
@@ -44,9 +45,11 @@ python examples/01_hello_world.py
 
 TODO: export documentation as pdoc3 then make available as gh-pages
 
-### Pareto
+### Pareto Chart
 
-TODO: Add Pareto example
+Create a Pareto chart in Dash. Handles ordering the categories, calculating the cumulative percentage, and configuring both YAxis.
+
+![ex_pareto_chart.png](.images/ex_pareto_chart.png)
 
 ### Alignment Chart
 

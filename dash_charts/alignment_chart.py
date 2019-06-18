@@ -92,3 +92,9 @@ class AlignChart(helpers.CustomChart):
             ) for idx in range(len(measLabels))
         ])
         return chartData
+
+    def createLayout(self):
+        """Override the default layout and add additional settings."""
+        layout = super().createLayout()
+        layout['yaxis']['zeroline'] = False
+        return layout

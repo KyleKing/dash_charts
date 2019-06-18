@@ -41,7 +41,12 @@ app.layout = html.Div(
     children=[
         html.H4(children='Example Rolling  Chart'),
         html.Div([
-            dcc.Graph(id='rolling-chart', figure=exampleRollingChart.createFigure(df=dfDemo)),
+            dcc.Graph(
+                id='rolling-chart',
+                figure=exampleRollingChart.createFigure(
+                    df=dfDemo, dataLbl='Demo Data', rollingCount=4,
+                ),
+            ),
         ]),
     ],
 )

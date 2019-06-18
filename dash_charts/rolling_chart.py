@@ -67,9 +67,3 @@ class RollingChart(helpers.CustomChart):
             ])
 
         return chartData
-
-    def createLayout(self):
-        """Override the default layout and add additional settings."""
-        layout = super().createLayout()
-        layout['yaxis']['zeroline'] = True
-        return layout
