@@ -1,11 +1,11 @@
-# Dash-Charts
+# Dash_Charts
 
-Helpful functions for Plotly Dash apps: https://dash.plot.ly/
+Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the `examples/` directory and Example Charts below
 
 ## Quick Start
 
 1. Install Poetry: https://github.com/sdispater/poetry
-1. Not on PyPi and can't use `pip install ...`. Instead, install from Github with Poetry: `poetry add dash-charts --git `
+1. Not on PyPi sp can't use `pip install ...`. Instead, install from Github with Poetry: `poetry add dash_charts --git `
 1. Then use in python:
 
     ```py
@@ -34,8 +34,8 @@ Helpful functions for Plotly Dash apps: https://dash.plot.ly/
 ## Local Development
 
 ```sh
-git clone https://github.com/KyleKing/Dash-HelloWorld.git
-cd Dash-HelloWorld
+git clone https://github.com/KyleKing/dash_charts.git
+cd dash_charts
 poetry install
 poetry shell
 python examples/01_hello_world.py
@@ -43,9 +43,7 @@ python examples/01_hello_world.py
 
 ## Example Charts and Documentation
 
-List and images of example charts below. Full package documentation at: [TODO](./TODO/)
-
-TODO: export documentation as pdoc3 then make available as gh-pages or PDF?
+Full documentation is available at: [https://kyleking.me/dash_charts/](https://kyleking.me/dash_charts/). Below headers highlight some of the examples and included chart functionality
 
 ### Pareto Chart
 

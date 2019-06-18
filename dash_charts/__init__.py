@@ -1,6 +1,6 @@
 """Documentation for Dash_Charts. Helpful functions for Plotly Dash apps.
 
-See the [Github README for project information](https://github.com/KyleKing/Dash-HelloWorld)
+See the [Github README for project information](https://github.com/KyleKing/dash_charts)
 
 """
 

@@ -1,20 +1,30 @@
 """DoIt Script. Run with `poetry run doit` or `poetry run doit run exportReq`."""
 
+import shutil
+import webbrowser
 from pathlib import Path
 
 import toml
 
+# Create list of all tasks run with `poetry run doit`
+DOIT_CONFIG = {'default_tasks': [
+    'exportReq', 'document',
+    # 'commitDocs',
+]}
+
 # Configure Globals
 TOML_PTH = Path.cwd() / 'pyproject.toml'
 PKG_NAME = toml.load(TOML_PTH)['tool']['poetry']['name']
-# Create list of all tasks run with `poetry run doit`
-DOIT_CONFIG = {'default_tasks': [
-    'exportReq',
-]}
+
+# Determine documentation paths
+DOC_DIR = Path.cwd() / 'docs'
+STAGING_DIR = DOC_DIR / PKG_NAME
+GH_PAGES_DIR = Path.cwd() / '../Dash_Charts_gh-pages'
+assert GH_PAGES_DIR.is_dir(), 'Expected directory at: {}'.format(GH_PAGES_DIR)
+
 
 # ------------------
 # DoIt Utilities
-
 
 def show_cmd(task):
     """For debugging, log the full command to the console.
@@ -48,19 +58,43 @@ def task_exportReq():
     return debug_action(['poetry export -f requirements.txt --without-hashes --dev'])
 
 
-def task_document():
-    """Build the HTML documentation."""
-    docDir = Path.cwd() / 'docs'
-    args = '{} --html --force'.format(PKG_NAME)
-    tempDir = '--template-dir "{}"'.format(docDir)
-    outDir = '--output-dir "{}"'.format(docDir)
-    return debug_action([
-        'poetry run pdoc3 {} {} {}'.format(args, tempDir, outDir),
-    ])
-    # TODO: Copy the output HTML files from docs/dash_charts/*.html to
-    #   the separate gh-pages repo and push
+def clearDocs():
+    """Clear the documentation files from the directories."""
+    for pth in list(STAGING_DIR.glob('*.html')) + list(GH_PAGES_DIR.glob('*.html')):
+        pth.unlink()
 
-    # Create a clean gh-pages branch
-    # git checkout --orphan gh-pages
-    # git rm -rf --dry-run .
-    # git rm -rf .
+
+def copyDocs():
+    """Copy the documentation files from the staging to the output."""
+    for pth in list(STAGING_DIR.glob('*.html')):
+        shutil.copyfile(pth, GH_PAGES_DIR / pth.name)
+
+
+def task_document():
+    """Build the HTML documentation and push to gh-pages branch."""
+    # Format the pdoc CLI args
+    args = '{} --html --force --template-dir "{}" --output-dir "{}"'.format(PKG_NAME, DOC_DIR, DOC_DIR)
+    return debug_action([
+        (clearDocs, ()),
+        'poetry run pdoc3 {}'.format(args),
+        (copyDocs, ()),
+    ])
+
+
+def task_commitDocs():
+    """Commit the documentation to gh-pages."""
+    return debug_action([
+        'cd {}; git add .; git commit -m "Add: pdoc files"; git push'.format(GH_PAGES_DIR),
+    ])
+
+
+def openInBrowser(pth):
+    """Open the path in the default web browser)."""
+    webbrowser.open('file:///{}'.format(pth))
+
+
+def task_openDocs():
+    """Open the documentation files in the default browser."""
+    return debug_action([
+        (openInBrowser, (STAGING_DIR / 'index.html',)),
+    ])
