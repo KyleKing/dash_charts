@@ -48,10 +48,8 @@ TODO: export documentation as pdoc3 then make available as gh-pages
 
 TODO: Add Pareto example
 
-### Distortion
+### Alignment Chart
 
-TODO: Add distortion chart example
+Useful for visualizing misalignment between measured values and expected values. Accepts a `stretch` argument to visually increase the spacing between the measured and expected value.
 
-## Examples
-
-TODO: Show image and link to file in `examples/`
+![ex_alignment_chart.png](.images/ex_alignment_chart.png)
