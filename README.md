@@ -53,3 +53,9 @@ TODO: Add Pareto example
 Useful for visualizing misalignment between measured values and expected values. Accepts a `stretch` argument to visually increase the spacing between the measured and expected value.
 
 ![ex_alignment_chart.png](.images/ex_alignment_chart.png)
+
+### Rolling Mean/STD Chart
+
+Easily chart the rolling mean and standard deviation for a given scatter data set.
+
+![ex_rolling_chart.png](.images/ex_rolling_chart.png)

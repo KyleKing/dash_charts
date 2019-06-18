@@ -30,7 +30,7 @@ class AlignChart(helpers.CustomChart):
         self.pad = pad
 
     def formatData(self, df, stretch=1):
-        """Format and return the data for the alignment chart.
+        """Format and return the data for the chart.
 
         df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
         stretch -- optional, float value to change the spacing between ideal and measured coordinates
@@ -47,6 +47,8 @@ class AlignChart(helpers.CustomChart):
         ```
 
         """
+        # TODO: Handle multiple data sets? - use greyscale for ideal?
+
         # Re-format the data into list format for plotting
         measLabels = []
         data = {
@@ -90,10 +92,3 @@ class AlignChart(helpers.CustomChart):
             ) for idx in range(len(measLabels))
         ])
         return chartData
-
-    def createLayout(self):
-        """Override the default layout and add additional settings."""
-        layout = super().createLayout()
-        layout['xaxis']['showgrid'] = True
-        layout['yaxis']['showgrid'] = True
-        return layout

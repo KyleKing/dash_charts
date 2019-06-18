@@ -41,7 +41,7 @@ class CustomChart:
 
         self.range = {}
 
-    def createFigure(self, data, **kwargsData):
+    def createFigure(self, df, **kwargsData):
         """Create the figure dictionary.
 
         data -- data to pass to formatter method
@@ -49,7 +49,7 @@ class CustomChart:
 
         """
         return{
-            'data': self.formatData(data, **kwargsData),
+            'data': self.formatData(df, **kwargsData),
             'layout': go.Layout(self.createLayout()),
         }
 
@@ -58,12 +58,16 @@ class CustomChart:
         layout = dict(
             title=go.layout.Title(text=self.title),
             xaxis={
+                'automargin': True,
+                'showgrid': True,
                 'title': self.labels['x'],
             },
             yaxis={
+                'automargin': True,
+                'showgrid': True,
                 'title': self.labels['y'],
             },
-            legend=dict(orientation='h'),
+            legend={'orientation': 'h'},
             hovermode='closest',
         )
 

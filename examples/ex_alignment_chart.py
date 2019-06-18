@@ -12,11 +12,11 @@ from dash_charts.alignment_chart import AlignChart
 # Sample Data
 
 # Generate a grid of initial points
-points = 5
-count = pow(points, 2)
-grid = np.meshgrid(*([np.linspace(1, points, points)] * 2))
+dim = 5
+count = pow(dim, 2)
+grid = np.meshgrid(*([np.linspace(1, dim, dim)] * 2))
 
-# Combine into a dataframe and
+# Combine into a dataframe
 dfDemo = pd.DataFrame(data={
     'x': grid[0].flatten(),
     'y': grid[1].flatten(),
@@ -28,7 +28,7 @@ dfDemo = pd.DataFrame(data={
 # ------------------
 # Layout
 
-# Initialize an example alignment chart
+# Initialize an example chart
 exampleAlignChart = AlignChart(
     title='Positioning Error Analysis',
     xLbl='X-Axis Measurements (µm)',
@@ -61,7 +61,7 @@ app.layout = html.Div(
     [Input('stretch-input', 'value')])
 def updateAlignChart(stretch):
     """Create/update the alignment chart with the user-configurable stretch input."""
-    return exampleAlignChart.createFigure(data=dfDemo, stretch=stretch)
+    return exampleAlignChart.createFigure(df=dfDemo, stretch=stretch)
 
 
 @app.callback(
