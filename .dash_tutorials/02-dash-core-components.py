@@ -8,17 +8,27 @@ Other Examples:
 - Confirm Dialog: https://dash.plot.ly/dash-core-components/confirm
 - Upload Component: https://dash.plot.ly/dash-core-components/upload
 
+---
+
+FYI: Need additional styling for the sliders
+
+```
+.rc-slider {
+    min-height: 45px;
+}
+```
+
 """
 
 from datetime import datetime as dt
-from pathlib import Path
 
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # =====================================================================================================================
 # Layout the application
@@ -26,6 +36,11 @@ app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
 app.layout = html.Div([
     html.Div(
         className='app-content',
+        style={
+            'max-width': '1100px',
+            'margin-left': 'auto',
+            'margin-right': 'auto',
+        },
         children=[
             html.H4(children='(Most of) Dash HTML Elements'),
 

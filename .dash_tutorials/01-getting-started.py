@@ -10,7 +10,6 @@ For reference see:
 """
 
 import random
-from pathlib import Path
 
 import dash
 import dash_core_components as dcc
@@ -18,9 +17,8 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 
-assets_dir = Path.cwd() / 'examples/assets'
-
-app = dash.Dash(__name__, assets_folder=str(assets_dir))
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 colors = {
     'background': '#FFF',
@@ -47,7 +45,11 @@ def randY():
 # =====================================================================================================================
 # Table
 
-agricDF = pd.read_csv(assets_dir / 'usa-agricultural-exports-2011.csv')
+agricDF = pd.read_csv(
+    'https://gist.githubusercontent.com/chriddyp/'
+    'c78bf172206ce24f77d6363a2d754b59/raw/'
+    'c353e8ef842413cae56ae3920b8fd78468aa4cb2/'
+    'usa-agricultural-exports-2011.csv')
 
 
 def generate_table(dataframe, max_rows=10, max_cols=10):
@@ -68,7 +70,11 @@ def generate_table(dataframe, max_rows=10, max_cols=10):
 # =====================================================================================================================
 # Configure Scatter Plot
 
-lifeExpDF = pd.read_csv(assets_dir / 'gdp-life-exp-2007.csv')
+lifeExpDF = pd.read_csv(
+    'https://gist.githubusercontent.com/chriddyp/'
+    '5d1ea79569ed194d432e56108a04d188/raw/'
+    'a9f9e8076b837d541398e999dcbac2b2826a81f8/'
+    'gdp-life-exp-2007.csv')
 
 # =====================================================================================================================
 # Layout the application
@@ -76,6 +82,11 @@ lifeExpDF = pd.read_csv(assets_dir / 'gdp-life-exp-2007.csv')
 app.layout = html.Div([
     html.Div(
         className='app-content',
+        style={
+            'max-width': '1100px',
+            'margin-left': 'auto',
+            'margin-right': 'auto',
+        },
         children=[
             html.H1(
                 children='Dash: Hello Barchart',

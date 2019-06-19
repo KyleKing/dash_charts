@@ -1,4 +1,0 @@
-# (This line is a comment, all non-comments lines must be URLs)
-# List all external files necessary for the Dash app. This will be downloaded and bundled with the PyInstaller output
-# During development, these links will be based as CLI arguments to the app, so the app can live reload as you edit the source files in this folder
-# https://codepen.io/chriddyp/pen/bWLwgP.css

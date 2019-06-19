@@ -18,9 +18,12 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
-from dash_charts import sqlite_demo_backend as backend
 
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
+dbFile = Path.cwd() / 'sqlite-demo.sqlite'
+points = 1000
+
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.layout = html.Div([
     html.Div(
         className='app-content',
@@ -38,7 +41,7 @@ app.layout = html.Div([
     [Input('graph-update', 'n_intervals')])
 def updateScatter(n_intervals):
     """Update the scatter plot with latest from db."""
-    conn = sqlite3.connect(backend.dbFile)
+    conn = sqlite3.connect(dbFile)
     df = pd.read_sql_query('SELECT ID,LABEL,VALUE from EVENTS', conn)
     conn.close()
     # Demo fitting wth a polynomial (not that useful)
@@ -85,7 +88,7 @@ def updateScatter(n_intervals):
             xaxis={
                 'automargin': True,
                 # 'autorange': True,  # FYI: requires full page refresh
-                'range': [0, backend.points],
+                'range': [0, points],
                 'showgrid': True,
                 'title': 'Index',
             },

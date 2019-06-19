@@ -4,15 +4,14 @@ Based on: https://dash.plot.ly/datatable/filtering
 
 """
 
-from pathlib import Path
-
 import dash
 import dash_html_components as html
 import dash_table
 import pandas as pd
 from dash.dependencies import Input, Output
 
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 
@@ -20,6 +19,11 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapmi
 app.layout = html.Div([
     html.Div(
         className='app-content',
+        style={
+            'max-width': '1100px',
+            'margin-left': 'auto',
+            'margin-right': 'auto',
+        },
         children=[
             dash_table.DataTable(
                 id='table-filtering-be',

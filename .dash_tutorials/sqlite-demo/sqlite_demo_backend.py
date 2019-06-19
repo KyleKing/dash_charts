@@ -11,12 +11,13 @@ from pathlib import Path
 import numpy as np
 from tqdm import tqdm
 
-dbFile = Path.cwd() / 'examples/assets/sqlite-demo.sqlite'
+dbFile = Path.cwd() / 'sqlite-demo.sqlite'
 points = 1000
 delay = 0.1  # time between new data points in seconds
 
 if __name__ == '__main__':
-    dbFile.unlink()  # Reset database on each iteration
+    if dbFile.is_file():
+        dbFile.unlink()  # Reset database on each iteration
     conn = sqlite3.connect(dbFile)
     cursor = conn.cursor()
 

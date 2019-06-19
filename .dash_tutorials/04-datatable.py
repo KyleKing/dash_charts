@@ -6,8 +6,6 @@ Based on: https://dash.plot.ly/datatable
 
 """
 
-from pathlib import Path
-
 import dash
 import dash_html_components as html
 import dash_table
@@ -16,7 +14,8 @@ import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/26k-consumer-complaints.csv')
 df = df[:45]
 
-app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # =====================================================================================================================
 # Layout the application
@@ -24,6 +23,11 @@ app = dash.Dash(__name__, assets_folder=str(Path.cwd() / 'examples/assets'))
 app.layout = html.Div([
     html.Div(
         className='app-content',
+        style={
+            'max-width': '1100px',
+            'margin-left': 'auto',
+            'margin-right': 'auto',
+        },
         children=[
             html.H2(children='Example DataTable'),
             dash_table.DataTable(
