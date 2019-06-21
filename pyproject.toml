@@ -20,6 +20,8 @@ dash-html-components = "^0.16.0"
 dash-table = "^3.7"
 pandas = "^0.24.2"
 plotly = "^3.10"
+plotly_express = "^0.3.1"
+icecream = "^1.5"
 
 [tool.poetry.dev-dependencies]
 doit = "^0.31.1"
