@@ -5,31 +5,50 @@ Docs: https://www.plotly.express/plotly_express/
 
 """
 
+from collections import OrderedDict
+
+import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly_express as px
-from _config import app
 from dash.dependencies import Input, Output
-from dash_charts.helpers import MinGraph
-from icecream import ic
-from collections import OrderedDict
+from icecream import ic  # noqa: F401
 
 # ======================================================================================================================
-# Demo uses sample data. User should replace with data loaded from a static CSV file, TinyDB, SQLite, etc.
-
-# Create classes to manage tabs state. Easy to scale up or down
+# (Helper Functions)
 
 
 def ddOpts(lbl, val):
     """Return the formatted dictionary for a dcc.Dropdown element."""
-    return {'label': lbl, 'value': val}
+    return {'label': str(lbl), 'value': str(val)}
+
+
+def MinGraph(**kwargs):
+    """Return dcc.Graph element with Plotly overlay removed.
+
+    See: https://community.plot.ly/t/is-it-possible-to-hide-the-floating-toolbar/4911/7
+
+    """
+    return dcc.Graph(
+        config={
+            'displayModeBar': False,
+            # 'modeBarButtonsToRemove': ['sendDataToCloud'],
+        },
+        **kwargs,
+    )
+
+
+# ======================================================================================================================
+# Create classes to manage tabs state. Easy to scale up or down
+# >> Demo uses sample data. User should replace with data loaded from a static CSV file, TinyDB, SQLite, etc.
 
 
 class TabBase:
     """Base tab class with helper methods."""
 
-    name = ''
+    title = ''
+    takesArgs = True
     data = pd.DataFrame()
     funcMap = OrderedDict([])
     dims = tuple()
@@ -42,7 +61,7 @@ class TabBase:
 
 class Tab1(TabBase):
     """Tab1 properties."""
-    name = 'Scatter-Style'
+    title = 'Scatter-Style'
     data = px.data.tips()
     funcMap = OrderedDict([
         ('scatter', px.scatter),
@@ -59,7 +78,8 @@ class Tab1(TabBase):
 
 class Tab2(TabBase):
     """Tab2 properties."""
-    name = 'Color Swatches'
+    title = 'Color Swatches'
+    takesArgs = False
     funcMap = OrderedDict([
         ('colors.qualitative', px.colors.qualitative.swatches),
         ('colors.sequential', px.colors.sequential.swatches),
@@ -72,37 +92,67 @@ class Tab2(TabBase):
 
 
 TABS = [Tab1(), Tab2()]
+TAB_LOOKUP = {_tab.title: _tab for _tab in TABS}
 
 # ======================================================================================================================
 # Declare the layout and callbacks
+app = dash.Dash(__name__, external_stylesheets=['https://codepen.io/chriddyp/pen/bWLwgP.css'])
 
-# FIXME: Add tabs!
-tab = TABS[0]
+# Suppress callback verification because the tab content won't be rendered to check the graph callbacks
+app.config['suppress_callback_exceptions'] = True
+
+# Declare layout and each tab content
 app.layout = html.Div([
     html.H1('Dash/Plotly Express Data Exploration Demo'),
-    html.Div(
-        [html.P([
-            'Plot Type:',
-            dcc.Dropdown(id='{}-func'.format(tab.name), options=tab.funcOpts, value=tab.funcOpts[0]['label']),
-        ])] + [html.P([
-            _d + ':', dcc.Dropdown(id='{}-{}'.format(tab.name, _d), options=tab.colOpts)
-        ]) for idx, _d in enumerate(tab.dims)],
-        style={'width': '25%', 'float': 'left'},
-    ),
-    MinGraph(id='{}-graph'.format(tab.name), style={'width': '75%', 'display': 'inline-block'}),
+    dcc.Tabs(id='tabs-select', value=TABS[0].title, children=[
+        dcc.Tab(label=_tab.title, value=_tab.title) for _tab in TABS
+    ], style={'margin-bottom': '15px'}),
+    html.Div(id='tabs-content')
 ])
+TAB_MAP = {
+    _tab.title: html.Div([
+        html.Div([
+            html.P([
+                'Plot Type:',
+                dcc.Dropdown(
+                    id='{}-func'.format(_tab.title), options=_tab.funcOpts, value=_tab.funcOpts[0]['label']
+                ),
+            ])
+        ] + [
+            html.P([
+                _d + ':', dcc.Dropdown(id='{}-{}'.format(_tab.title, _d), options=_tab.colOpts)
+            ]) for idx, _d in enumerate(_tab.dims)
+        ], style={'width': '25%', 'float': 'left'},
+        ),
+        MinGraph(id='{}-graph'.format(_tab.title), style={'width': '75%', 'display': 'inline-block'}),
+    ])
+    for _tab in TABS
+}
+
+
+@app.callback(Output('tabs-content', 'children'), [Input('tabs-select', 'value')])
+def renderTabs(tabName):
+    """Render tabs when switched."""
+    return TAB_MAP[tabName]
+
 
 # Register callbacks for each tab
-for tab in [TABS[0]]:
-    inputs = [Input('{}-func'.format(tab.name), 'value')]
-    inputs.extend([Input('{}-{}'.format(tab.name, _d), 'value') for _d in tab.dims])
+for _tab in TABS:
+    inputs = [Input('tabs-select', 'value'), Input('{}-func'.format(_tab.title), 'value')]
+    inputs.extend([Input('{}-{}'.format(_tab.title, _d), 'value') for _d in _tab.dims])
 
-    @app.callback(Output('{}-graph'.format(tab.name), 'figure'), inputs)
-    def make_figure(func, *args):
+    @app.callback(Output('{}-graph'.format(_tab.title), 'figure'), inputs)
+    def renderFigure(tabName, nameFunc, *args):
         """Create the express figure."""
-        # Return the figure from plotly express
-        kwargs = dict(zip(tab.dims, args))
-        return tab.funcMap[func](tab.data, height=700, **kwargs)
+        tab = TAB_LOOKUP[tabName]  # Read tab class from input
+        # Suppress errors when switching tabs
+        if nameFunc is None or nameFunc not in tab.funcMap:
+            return {}
+        # Return the figure based on the tab settings
+        if tab.takesArgs:
+            kwargs = dict(zip(tab.dims, args))
+            return tab.funcMap[nameFunc](tab.data, height=650, **kwargs)
+        return tab.funcMap[nameFunc]()
 
 
 if __name__ == '__main__':

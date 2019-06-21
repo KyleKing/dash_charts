@@ -1,6 +1,22 @@
 """Main Helper Functions."""
 
+import dash_core_components as dcc
 import plotly.graph_objs as go
+
+
+def MinGraph(**kwargs):
+    """Return dcc.Graph element with Plotly overlay removed.
+
+    See: https://community.plot.ly/t/is-it-possible-to-hide-the-floating-toolbar/4911/7
+
+    """
+    return dcc.Graph(
+        config={
+            'displayModeBar': False,
+            # 'modeBarButtonsToRemove': ['sendDataToCloud'],
+        },
+        **kwargs,
+    )
 
 
 class ChartState:
@@ -48,10 +64,14 @@ class CustomChart:
         kwargsData -- keyword arguments to pass to the data formatter method
 
         """
-        return{
+        return {
             'data': self.formatData(df, **kwargsData),
             'layout': go.Layout(self.createLayout()),
         }
+
+    def formatData(self, df, **kwargsData):
+        """Return formatted data for data key of figure."""
+        raise NotImplementedError('formatData must be implemented by child class')
 
     def createLayout(self):
         """Return the standard layout. Can be overridden and modified when inherited."""
