@@ -13,15 +13,16 @@ repository = "https://github.com/kyleking/dash_charts"
 [tool.poetry.dependencies]
 python = "^3.7"
 bottleneck = "^1.2"
-dash = "^0.43.0"
-dash-core-components = "^0.48.0"
-dash-daq = "^0.1.4"
-dash-html-components = "^0.16.0"
-dash-table = "^3.7"
+dash = {git = "https://github.com/plotly/dash.git"}
+dash-core-components = {git = "https://github.com/plotly/dash-core-components.git"}
+dash-daq = {git = "https://github.com/plotly/dash-daq.git"}
+dash-html-components = {git = "https://github.com/plotly/dash-html-components.git"}
+dash-table = {git = "https://github.com/plotly/dash-table.git"}
+icecream = "^1.5"
 pandas = "^0.24.2"
 plotly = "^3.10"
 plotly_express = "^0.3.1"
-icecream = "^1.5"
+statsmodels = {path = "/Users/kyleking/Downloads/statsmodels-0.10.0rc2-cp37-cp37m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl"}
 
 [tool.poetry.dev-dependencies]
 doit = "^0.31.1"
