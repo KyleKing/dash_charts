@@ -52,12 +52,13 @@ class TabBase:
 
 class Tab1(TabBase):
     """Tab1 properties."""
-    title = 'Scatter Plot'
-    data = px.data.iris()
+    title = 'Tip Data'
+    data = px.data.tips()
     funcMap = OrderedDict([
         ('scatter', px.scatter),
+        ('density_contour', px.density_contour),
     ])
-    dims = ('x', 'y', 'color', 'size', 'facet_row', 'facet_col')
+    dims = ('x', 'y', 'color', 'facet_row', 'facet_col')
     dimsDict = OrderedDict([
         ('marginal_x', ('histogram', 'rag', 'violin', 'box')),
         ('marginal_y', ('histogram', 'rag', 'violin', 'box')),
@@ -65,6 +66,33 @@ class Tab1(TabBase):
         # Consider: 'log_y'/'log_x' > daq.BooleanSwitch(id='{}-bool', on=False)
         # Won't work: error_x..., animation_frame/animation_group, category_orders, labels, etc.
     ])
+
+
+class Tab2(TabBase):
+    """Tab2 properties."""
+    title = 'Iris Data'
+    data = px.data.iris()
+    funcMap = OrderedDict([
+        ('scatter', px.scatter),
+        ('histogram', px.histogram),
+        ('density_contour', px.density_contour),
+        ('strip', px.strip),
+        ('box', px.box),
+        ('violin', px.violin),
+        ('scatter', px.scatter),
+    ])
+    dims = ('x', 'y', 'color', 'facet_col', 'facet_row')
+
+
+class Tab3(TabBase):
+    """Tab3 properties."""
+    title = 'Gapminder Data'
+    data = px.data.gapminder()
+    funcMap = OrderedDict([
+        ('line', px.line),
+        ('area', px.area),
+    ])
+    dims = ('x', 'y', 'color', 'line_group', 'facet_row', 'facet_col')
 
 
 class Tab4(TabBase):
@@ -104,7 +132,7 @@ class Tab6(TabBase):
     ])
 
 
-TABS = [Tab1(),  Tab4(), Tab5(), Tab6()]
+TABS = [Tab1(), Tab2(), Tab3(), Tab4(), Tab5(), Tab6()]
 TAB_LOOKUP = {_tab.title: _tab for _tab in TABS}
 
 # ======================================================================================================================
@@ -114,7 +142,7 @@ app = dash.Dash(__name__, external_stylesheets=['https://codepen.io/chriddyp/pen
 # Suppress callback verification because the tab content won't be rendered to check the graph callbacks
 app.config['suppress_callback_exceptions'] = True
 
-# Declare layout and each tab content
+# Create layout, then individual tabs
 app.layout = html.Div([
     html.H1('Dash/Plotly Express Data Exploration Demo'),
     dcc.Tabs(id='tabs-select', value=TABS[0].title, children=[
@@ -122,6 +150,7 @@ app.layout = html.Div([
     ], style={'margin-bottom': '15px'}),
     html.Div(id='tabs-content'),
 ])
+
 TAB_MAP = {
     _tab.title: html.Div([
         html.Div([
