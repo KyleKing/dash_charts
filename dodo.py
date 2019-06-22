@@ -8,8 +8,7 @@ import toml
 
 # Create list of all tasks run with `poetry run doit`
 DOIT_CONFIG = {'default_tasks': [
-    'exportReq', 'document',
-    # 'commitDocs',
+    'exportReq', 'updateCL', 'document', # 'commitDocs',
 ]}
 
 # Configure Globals
