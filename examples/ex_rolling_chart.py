@@ -5,6 +5,7 @@ import dash_html_components as html
 import numpy as np
 import pandas as pd
 from _config import app
+from dash_charts.helpers import MinGraph
 from dash_charts.rolling_chart import RollingChart
 
 # ------------------
@@ -41,7 +42,7 @@ app.layout = html.Div(
     children=[
         html.H4(children='Example Rolling  Chart'),
         html.Div([
-            dcc.Graph(
+            MinGraph(
                 id='rolling-chart',
                 figure=exRolling.createFigure(
                     df=dfDemo, dataLbl='Demo Data', rollingCount=4,

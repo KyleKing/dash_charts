@@ -24,6 +24,7 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
 
     ```py
     import pandas as pd
+    from dash_charts.helpers import MinGraph
     from dash_charts.pareto_chart import ParetoChart
 
     # Create the data (could be CSV, database, etc.)
@@ -38,7 +39,7 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
 
     # Create the figure dictionary and add to the layout
     app.layout = html.Div([
-        dcc.Graph(figure=exPareto.createFigure(df=dfDemo)),
+        MinGraph(figure=exPareto.createFigure(df=dfDemo)),
     ])
     ```
 
@@ -87,6 +88,10 @@ Useful Dash reference links
 - General [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
 - Cool Callback Chain debugger [dash_callback_chain](https://github.com/nicolaskruchten/dash_callback_chain)
 - [Awesome CSS Frameworks](https://github.com/troxler/awesome-css-frameworks)
+    - Deciding between [Bulma](https://bulma.io) and [Materialize](https://materializecss.com/showcase.html)
+    - [Bulma Flatly Theme preview](https://jenil.github.io/bulmaswatch/flatly/)
+    - [Bulma Customizer](https://bulma-customizer.bstash.io/)
+    - See the [Admin Template here](https://bulmatemplates.github.io/bulma-templates/)
 
 ## TODO
 
@@ -100,4 +105,6 @@ Useful Dash reference links
     - [Text & Annotations](https://plot.ly/python/text-and-annotations/)
     - [Shapes in Plotly](https://plot.ly/python/shapes/)
     - (Want annotations like: [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app)
+- Probably better changelogs?
+    - [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Add tests

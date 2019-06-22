@@ -25,21 +25,10 @@ fnMap = {
     'strip()': px.strip,
     'box()': px.box,
     'violin()': px.violin,
-
-    # # Other plots, but which need a different source data set
-    # 'density_heatmap()': px.density_heatmap,
-    # 'bar()': px.bar,
-    # 'scatter_ternary()': px.scatter_ternary,  # < Cool!
-    # 'line_ternary()': px.line_ternary,  # < Cool!
-    # 'scatter_polar()': px.scatter_polar,
-    # 'scatter_line()': px.scatter_line,
-    # 'scatter_bar()': px.scatter_bar,
-    # 'scatter_matrix()': px.scatter_matrix,
-    # 'parallel_coordinates()': px.parallel_coordinates,
 }
 funcOpts = [dict(label=_x, value=_x) for _x in fnMap.keys()]
 
-dimensions = ['x', 'y', 'color', 'size', 'facet_col', 'facet_row']
+dimensions = ['x', 'y', 'color', 'facet_col', 'facet_row']
 
 app.layout = html.Div([
     html.H1('Demo: Plotly Express in Dash with Tips Dataset'),
@@ -60,7 +49,7 @@ app.layout = html.Div([
 @app.callback(
     Output('graph', 'figure'),
     [Input('func', 'value')] + [Input(d, 'value') for d in dimensions])
-def make_figure(fnName, x, y, color, size, facet_col, facet_row):
+def make_figure(fnName, x, y, color, facet_col, facet_row):
     """Create the px figure."""
     ic(fnName, x, y)
     # Ensure that the minimum parameters exist
@@ -75,18 +64,11 @@ def make_figure(fnName, x, y, color, size, facet_col, facet_row):
         tips,
         x=x,
         y=y,
-        # color=color,
-        # size=size,
-        # facet_col=facet_col,
-        # facet_row=facet_row,
+        color=color,
+        facet_col=facet_col,
+        facet_row=facet_row,
         height=700,
-        # marginal_x="histogram",
-        # marginal_y="histogram",
-        # # Alt: histogram, rug, box, violin
     )
-
-    # # Plotting color swatches
-    # return px.colors.diverging.swatches()
 
 
 if __name__ == '__main__':

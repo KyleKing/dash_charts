@@ -10,6 +10,7 @@ import dash_html_components as html
 import dash_table
 import pandas as pd
 from dash.dependencies import Input, Output
+from dash_charts import helpers
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 
@@ -74,7 +75,7 @@ Also, there are some charts at the bottom"""),
 def update_graph(rows, derived_virtual_selected_rows):
     # When the table is first rendered, `derived_virtual_data` and
     # `derived_virtual_selected_rows` will be `None`. This is due to an
-    # idiosyncrasy in Dash (unsupplied properties are always None and Dash
+    # idiosyncrasy in Dash (non-triggered properties are always None and Dash
     # calls the dependent callbacks when the component is first rendered).
     # So, if `rows` is `None`, then the component was just rendered
     # and its value will be the same as the component's dataframe.
@@ -98,7 +99,7 @@ def update_graph(rows, derived_virtual_selected_rows):
 
     return html.Div(
         [
-            dcc.Graph(
+            helpers.MinGraph(
                 id=column,
                 figure={
                     "data": [

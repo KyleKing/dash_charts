@@ -13,21 +13,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly_express as px
 from dash.dependencies import Input, Output
-from icecream import ic  # noqa: F401
-
-# ======================================================================================================================
-# (Helper Functions)
-
-
-def ddOpts(lbl, val):
-    """Return the formatted dictionary for a dcc.Dropdown element."""
-    return {'label': str(lbl), 'value': str(val)}
-
-
-def MinGraph(**kwargs):
-    """Return dcc.Graph element with Plotly overlay removed."""
-    return dcc.Graph(config={'displayModeBar': False}, **kwargs)
-
+from dash_charts.helpers import MinGraph, ddOpts
 
 # ======================================================================================================================
 # Create classes to manage tabs state. Easy to scale up or down

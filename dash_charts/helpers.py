@@ -19,6 +19,16 @@ def MinGraph(**kwargs):
     )
 
 
+def ddOpts(lbl, val):
+    """Format an individual item in a dropdown list. Return the dictionary.
+
+    lbl -- Dropdown label
+    val -- Dropdown value (will be converted to JSON)
+
+    """
+    return {'label': str(lbl), 'value': val}
+
+
 class ChartState:
     """Configurable Chart."""
 

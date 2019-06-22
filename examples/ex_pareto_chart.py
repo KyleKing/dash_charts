@@ -4,6 +4,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 from _config import app
+from dash_charts import helpers
 from dash_charts.pareto_chart import ParetoChart
 
 # ------------------
@@ -38,7 +39,7 @@ app.layout = html.Div(
     children=[
         html.H4(children='Example Pareto Chart'),
         html.Div([
-            dcc.Graph(
+            helpers.MinGraph(
                 id='pareto-chart',
                 figure=exPareto.createFigure(df=dfDemo),
             ),

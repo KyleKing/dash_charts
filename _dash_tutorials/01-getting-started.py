@@ -16,6 +16,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
+from dash_charts import helpers
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -99,7 +100,7 @@ app.layout = html.Div([
                 'textAlign': 'center',
                 'color': colors['text'],
             }),
-            dcc.Graph(
+            helpers.MinGraph(
                 id='example-graph-2',
                 figure={
                     'data': [
@@ -122,7 +123,7 @@ app.layout = html.Div([
             generate_table(agricDF),
 
             html.H4(children='Life Expectancy vs. GDP (2007)'),
-            dcc.Graph(
+            helpers.MinGraph(
                 id='life-exp-vs-gdp',
                 figure={
                     'data': [

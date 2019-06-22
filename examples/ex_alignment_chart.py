@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from _config import app
 from dash.dependencies import Input, Output
+from dash_charts import helpers
 from dash_charts.alignment_chart import AlignChart
 
 # ------------------
@@ -44,7 +45,7 @@ app.layout = html.Div(
     children=[
         html.H4(children='Example Alignment Chart'),
         html.Div([
-            dcc.Graph(id='alignment-chart'),
+            helpers.MinGraph(id='alignment-chart'),
         ]),
         dcc.Slider(id='stretch-input', min=0, max=20, step=0.1, value=5),
         html.Div(id='slider-output-container'),
