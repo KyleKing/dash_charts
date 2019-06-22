@@ -2,6 +2,16 @@ Changelog
 =========
 
 
+(unreleased)
+------------
+
+New
+~~~
+- Example dark theme w/ toggle. [Kyle King]
+
+  Fixed release tags in history
+
+
 0.0.3 (2019-06-22)
 ------------------
 - Add: CHANGELOG (0.0.3) [Kyle King]

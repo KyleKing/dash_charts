@@ -2,10 +2,24 @@
 
 Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the `examples/` directory and Example Charts below
 
+<!-- TOC -->
+
+- [Dash_Charts](#dash_charts)
+    - [Quick Start](#quick-start)
+    - [Local Development](#local-development)
+    - [Example Charts and Documentation](#example-charts-and-documentation)
+        - [Pareto Chart](#pareto-chart)
+        - [Alignment Chart](#alignment-chart)
+        - [Rolling Mean/STD Chart](#rolling-meanstd-chart)
+    - [External Links](#external-links)
+    - [TODO](#todo)
+
+<!-- /TOC -->
+
 ## Quick Start
 
 1. Install Poetry: https://github.com/sdispater/poetry
-1. Not on PyPi sp can't use `pip install ...`. Instead, install from Github with Poetry: `poetry add dash_charts --git `
+1. Not on PyPi sp can't use `pip install dash_charts`. Instead, install from Github with Poetry: `poetry add dash_charts --git https://github.com/KyleKing/dash_charts.git`
 1. Then use in python:
 
     ```py
@@ -29,7 +43,6 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
     ```
 
 1. See the full examples in [`examples/`](./examples)
-1. The chart classes are a good starting point and can be overridden for further personalization
 
 ## Local Development
 
@@ -63,17 +76,28 @@ Easily chart the rolling mean and standard deviation for a given scatter data se
 
 ![ex_rolling_chart.png](.images/ex_rolling_chart.png)
 
-## TODO Tasks (README)
+## External Links
 
-- Rename and publish as PyPi package
-- Add tests/configure application
-- Checkout the v2 Table Filtering in Dash 0.43
-- Check FAQs: https://dash.plot.ly/faqs
-- Checkout example charts: https://plot.ly/python/statistical-charts/
-  - More examples:
-    - https://gist.github.com/chriddyp/9b2b3e8a6c67697279d3724dce5dab3c
-    - https://github.com/plotly/dash-recession-report-demo
-    - https://github.com/plotly/dash-opioid-epidemic-demo
-    - https://github.com/plotly/dash-web-trader
-- Test routing: https://dash.plot.ly/urls
-- Experiment with sharing state: https://dash.plot.ly/sharing-data-between-callbacks
+Useful Dash reference links
+
+- [Official Dash Docs](https://dash.plot.ly)
+- [Official Plotly Docs](https://plot.ly/python/)
+- Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app
+- Really Pretty dark app from Dash-Bio [Circos](https://github.com/plotly/dash-bio/blob/master/tests/dashbio_demos/app_circos.py)
+- General [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
+- Cool Callback Chain debugger [dash_callback_chain](https://github.com/nicolaskruchten/dash_callback_chain)
+- [Awesome CSS Frameworks](https://github.com/troxler/awesome-css-frameworks)
+
+## TODO
+
+- Checkout the v2 Table Filtering in Dash 0.43 / https://dash.plot.ly/datatable
+    - [Filtering Syntax](https://dash.plot.ly/datatable/filtering)
+- Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)
+- Implement multi-page apps:
+    - See ["SlapDash" Multi-Page Cookie Cutter App](https://github.com/ned2/slapdash)
+    - Official Docs: https://dash.plot.ly/urls
+- See annotations
+    - [Text & Annotations](https://plot.ly/python/text-and-annotations/)
+    - [Shapes in Plotly](https://plot.ly/python/shapes/)
+    - (Want annotations like: [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app)
+- Add tests
