@@ -129,6 +129,7 @@ ci = ["dash_flow_example (0.0.5)", "dash-dangerously-set-inner-html", "six", "mo
 reference = "ba27febf71caf112294c53e568d4ff407c5a10ee"
 type = "git"
 url = "https://github.com/plotly/dash.git"
+
 [[package]]
 category = "main"
 description = "Core component suite for Dash"
@@ -141,6 +142,7 @@ version = "1.0.0"
 reference = "38bf34a9d525bfd796d2dc8698ec0c96b0502523"
 type = "git"
 url = "https://github.com/plotly/dash-core-components.git"
+
 [[package]]
 category = "main"
 description = "DAQ components for Dash"
@@ -153,6 +155,7 @@ version = "0.1.5"
 reference = "729aa73ac9fd82aabe8a00fae164c23f616922bc"
 type = "git"
 url = "https://github.com/plotly/dash-daq.git"
+
 [[package]]
 category = "main"
 description = "Vanilla HTML components for Dash"
@@ -165,6 +168,7 @@ version = "1.0.0"
 reference = "42d4389be0b3ad68559ddd4343aabe7322e3610a"
 type = "git"
 url = "https://github.com/plotly/dash-html-components.git"
+
 [[package]]
 category = "main"
 description = "Front-end component renderer for dash"
@@ -185,6 +189,7 @@ version = "4.0.0"
 reference = "0d6b7c41ad06a1c67655f7645a4bbcca2160b0ac"
 type = "git"
 url = "https://github.com/plotly/dash-table.git"
+
 [[package]]
 category = "main"
 description = "Better living through Python with decorators"
@@ -403,6 +408,19 @@ name = "future"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "0.17.1"
+
+[[package]]
+category = "dev"
+description = "gitchangelog generates a changelog thanks to git log."
+name = "gitchangelog"
+optional = false
+python-versions = "*"
+version = "3.0.4"
+
+[package.extras]
+Mako = ["mako"]
+Mustache = ["pystache"]
+test = ["mako", "minimock", "nose", "pystache"]
 
 [[package]]
 category = "main"
@@ -1115,7 +1133,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "e882e09bb7c5c054bdac7f034c58b277bede8e1c3316843118877d5020477ba0"
+content-hash = "3c043a1737a75e382b6389bc0f52d05f3368499f6859070e947dae86b8edfd33"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -1154,6 +1172,7 @@ flake8-tuple = ["81b16bc753616d7940275951f69db4cd8c6afafca00eb5767942215c9e45507
 flask = ["ad7c6d841e64296b962296c2c2dabc6543752985727af86a975072dea984b6f3", "e7d32475d1de5facaa55e3958bc4ec66d3762076b074296aa50ef8fdc5b9df61"]
 flask-compress = ["468693f4ddd11ac6a41bca4eb5f94b071b763256d54136f77957cfee635badb3"]
 future = ["67045236dcfd6816dc439556d009594abf643e5eb48992e36beac09c2ca659b8"]
+gitchangelog = ["3d8d6a730450fbd5b0a9bc58d0dd3e269c967d7eb4fece0c5cff4372a3f77421", "45f8b8e64cece0d9bb03a35ecd8ee62c1c7157f8dac0ef3cb68381bfcc1bde29"]
 icecream = ["2f47e967bb5d2cf67cdb68cfb02b2e4adbe44f3e77f234559db33a2f1b40a0e6", "859ae6679ef00b7bb9b3c3c0aded7970af487ebf91e306aa9ff98fbbaf8f2a47"]
 idna = ["c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407", "ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"]
 importlib-metadata = ["6dfd58dfe281e8d240937776065dd3624ad5469c835248219bd16cf2e12dbeb7", "cb6ee23b46173539939964df59d3d72c3e0c1b5d54b84f1d8a7e912fe43612db"]

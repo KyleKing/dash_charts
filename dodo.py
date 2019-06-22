@@ -49,6 +49,11 @@ def debug_action(actions, verb=2):
     }
 
 
+def openInBrowser(pth):
+    """Open the path in the default web browser)."""
+    webbrowser.open('file:///{}'.format(pth))
+
+
 # ------------------
 # Tasks
 
@@ -88,13 +93,13 @@ def task_commitDocs():
     ])
 
 
-def openInBrowser(pth):
-    """Open the path in the default web browser)."""
-    webbrowser.open('file:///{}'.format(pth))
-
-
 def task_openDocs():
     """Open the documentation files in the default browser."""
     return debug_action([
         (openInBrowser, (STAGING_DIR / 'index.html',)),
     ])
+
+
+def task_updateCL():
+    """Automate updating the Changelog file."""
+    return debug_action(['gitchangelog > CHANGELOG.md'])
