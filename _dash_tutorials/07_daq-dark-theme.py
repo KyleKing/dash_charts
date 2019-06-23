@@ -6,8 +6,10 @@ Source: https://dash.plot.ly/dash-daq
 
 import dash_daq as daq
 import dash_html_components as html
-from _config import app
 from dash.dependencies import Input, Output
+from dash_charts.helpers import initApp
+
+app = initApp()
 
 THEME = {
     'dark': False,

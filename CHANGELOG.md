@@ -7,9 +7,16 @@ Changelog
 
 New
 ~~~
+- Add Bulma stylesheet to assets. [Kyle King]
+
+  Added `limitCat` argument to ParetoChart()
 - Example dark theme w/ toggle. [Kyle King]
 
   Fixed release tags in history
+
+Changes
+~~~~~~~
+- Add ddOpts to package and use MinGraph. [Kyle King]
 
 
 0.0.3 (2019-06-22)

@@ -1,7 +1,20 @@
 """Main Helper Functions."""
 
+import dash
+from pathlib import Path
 import dash_core_components as dcc
 import plotly.graph_objs as go
+
+ASSETS_DIR = Path(__file__).parent / 'assets'
+
+
+def initApp(**kwargs):
+    """Return new Dash app with `assets_folder` set to local assets.
+
+    kwargs -- any kwargs to pass to the dash initializer
+
+    """
+    return dash.Dash(__name__, assets_folder=str(ASSETS_DIR), **kwargs)
 
 
 def MinGraph(**kwargs):

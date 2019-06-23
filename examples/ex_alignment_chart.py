@@ -4,10 +4,12 @@ import dash_core_components as dcc
 import dash_html_components as html
 import numpy as np
 import pandas as pd
-from _config import app
 from dash.dependencies import Input, Output
 from dash_charts import helpers
 from dash_charts.alignment_chart import AlignChart
+from dash_charts.helpers import initApp
+
+app = initApp()
 
 # ------------------
 # Sample Data

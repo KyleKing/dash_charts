@@ -4,9 +4,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 import numpy as np
 import pandas as pd
-from _config import app
-from dash_charts.helpers import MinGraph
+from dash_charts.helpers import MinGraph, initApp
 from dash_charts.rolling_chart import RollingChart
+
+app = initApp()
 
 # ------------------
 # Sample Data

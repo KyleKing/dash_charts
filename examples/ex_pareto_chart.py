@@ -2,9 +2,11 @@
 
 import dash_html_components as html
 import pandas as pd
-from _config import app
 from dash_charts import helpers
+from dash_charts.helpers import initApp
 from dash_charts.pareto_chart import ParetoChart
+
+app = initApp()
 
 # ------------------
 # Sample Data

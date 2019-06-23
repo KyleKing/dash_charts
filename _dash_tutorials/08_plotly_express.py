@@ -8,10 +8,11 @@ Docs: https://www.plotly.express/plotly_express/
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly_express as px
-from _config import app
 from dash.dependencies import Input, Output
-from dash_charts.helpers import MinGraph
+from dash_charts.helpers import MinGraph, initApp
 from icecream import ic
+
+app = initApp()
 
 tips = px.data.tips()
 colOpts = [dict(label=x, value=x) for x in tips.columns]
