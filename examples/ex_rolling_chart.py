@@ -39,7 +39,7 @@ exRolling = RollingChart(
 
 # Initialize the dashboard layout
 app.layout = html.Div(
-    className='app-content',
+    className='section',
     children=[
         html.H4(children='Example Rolling  Chart'),
         html.Div([

@@ -82,7 +82,7 @@ lifeExpDF = pd.read_csv(
 
 app.layout = html.Div([
     html.Div(
-        className='app-content',
+        className='section',
         style={
             'max-width': '1100px',
             'margin-left': 'auto',

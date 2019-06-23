@@ -25,6 +25,7 @@ plotly_express = "^0.3.1"
 statsmodels = {path = "/Users/kyleking/Downloads/statsmodels-0.10.0rc2-cp37-cp37m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl"}
 
 [tool.poetry.dev-dependencies]
+autopep8 = "^1.4"
 doit = "^0.31.1"
 flake8 = "^3.7"
 flake8-blind-except = "^0.1.1"

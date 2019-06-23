@@ -5,14 +5,7 @@ body {
     min-height: 0;
 }
 
-/*
-.app-content {
-    max-width: 1050px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
+/* FIXME: Add a class specifically for sliders that need additional height */
 .rc-slider {
     min-height: 45px;
 }
- */

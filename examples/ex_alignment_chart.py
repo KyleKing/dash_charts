@@ -42,7 +42,7 @@ exAlign = AlignChart(
 )
 
 # Initialize the dashboard layout
-app.layout = html.Div(className='container is-fullhd', children=html.Div(
+app.layout = html.Div(className='section', children=html.Div(
     className='something',
     children=[
         html.H4(children='Example Alignment Chart'),

@@ -39,7 +39,7 @@ exPareto = ParetoChart(
 
 # Initialize the dashboard layout
 app.layout = html.Div(
-    className='app-content',
+    className='section',
     children=[
         html.H4(children='Example Pareto Chart'),
         html.Div([

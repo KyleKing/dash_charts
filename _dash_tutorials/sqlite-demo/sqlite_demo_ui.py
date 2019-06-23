@@ -26,7 +26,7 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.layout = html.Div([
     html.Div(
-        className='app-content',
+        className='section',
         children=[
             html.H1(children='SQLite/Dash Testing'),
             helpers.MinGraph(id='sqlite-scatter', animate=True),

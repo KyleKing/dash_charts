@@ -36,7 +36,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Div(
-        className='app-content',
+        className='section',
         style={
             'max-width': '1100px',
             'margin-left': 'auto',
