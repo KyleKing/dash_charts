@@ -12,16 +12,18 @@ class ParetoChart(helpers.CustomChart):
 
     """
 
-    def __init__(self, title='', xLbl='', yLbl='', colors=('#62A4D1', '#C5676B')):
+    def __init__(self, title='', xLbl='', yLbl='', colors=('#62A4D1', '#C5676B'), limitCat=50):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
         xLbl/yLbl -- optional, X and Y Axis axis titles. Defaults to blank
         colors -- optional color scheme. 1st value is for the bar color. 2nd is for cum percentage
+        limitCat -- set the maximum number of categories. Defaults to 50
 
         """
         super().__init__(title, xLbl, yLbl)
         self.colors = colors
+        self.limitCat = limitCat
 
     def formatData(self, df):
         """Format and return the data for the chart.
@@ -37,7 +39,7 @@ class ParetoChart(helpers.CustomChart):
         assert all([_k in foundK for _k in expecK]), 'df must have keys {}'.format(expecK)
 
         # Sort and calculate percentage
-        df = df.sort_values(by=['value'], ascending=False)
+        df = df.sort_values(by=['value'], ascending=False).head(self.limitCat)
         df['cumPer'] = df['value'].divide(df['value'].sum()).cumsum().fillna(1)
 
         chartData = [
@@ -70,9 +72,7 @@ class ParetoChart(helpers.CustomChart):
             'overlaying': 'y',
             'range': [0, 1],
             'side': 'right',
-            'tickfont': {'color': self.colors[1]},
             'tickformat': '%',
             'title': 'Cumulative Percentage',
-            'titlefont': {'color': self.colors[1]},
         }
         return layout

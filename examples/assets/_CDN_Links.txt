@@ -1,0 +1,5 @@
+# Reference links if CDN host used instead of local file
+# https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css
+https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css
+# https://jenil.github.io/bulmaswatch/flatly/bulmaswatch.min.css
+https://codepen.io/chriddyp/pen/bWLwgP.css

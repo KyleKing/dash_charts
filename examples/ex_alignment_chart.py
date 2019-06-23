@@ -40,8 +40,8 @@ exAlign = AlignChart(
 )
 
 # Initialize the dashboard layout
-app.layout = html.Div(
-    className='app-content',
+app.layout = html.Div(className='container is-fullhd', children=html.Div(
+    className='something',
     children=[
         html.H4(children='Example Alignment Chart'),
         html.Div([
@@ -49,9 +49,9 @@ app.layout = html.Div(
         ]),
         dcc.Slider(id='stretch-input', min=0, max=20, step=0.1, value=5),
         html.Div(id='slider-output-container'),
-        html.Button('Reset to 1', id='reset-button'),
+        html.Button('Reset to 1', id='reset-button', className='button is-primary'),
     ],
-)
+))
 
 # ------------------
 # Callbacks
