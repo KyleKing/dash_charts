@@ -88,7 +88,7 @@ def task_document():
 def task_commitDocs():
     """Commit the documentation to gh-pages."""
     return debug_action([
-        'cd {}; git add .; git commit -m "Add: pdoc files"; git push'.format(GH_PAGES_DIR),
+        'cd {}; git add .; git commit -m "Chg: update pdoc files"; git push'.format(GH_PAGES_DIR),
     ])
 
 
@@ -101,4 +101,4 @@ def task_openDocs():
 
 def task_updateCL():
     """Automate updating the Changelog file."""
-    return debug_action(['gitchangelog > CHANGELOG.md'])
+    return debug_action(['gitchangelog > CHANGELOG-raw.md'])

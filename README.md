@@ -105,6 +105,4 @@ Useful Dash reference links
     - [Text & Annotations](https://plot.ly/python/text-and-annotations/)
     - [Shapes in Plotly](https://plot.ly/python/shapes/)
     - (Want annotations like: [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app)
-- Probably better changelogs?
-    - [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Add tests

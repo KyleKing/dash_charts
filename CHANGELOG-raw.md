@@ -7,6 +7,8 @@ Changelog
 
 New
 ~~~
+- Responsive Bulma example Dash app. [Kyle King]
+- InitApp selects assets from package. [Kyle King]
 - Add Bulma stylesheet to assets. [Kyle King]
 
   Added `limitCat` argument to ParetoChart()

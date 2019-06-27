@@ -1,5 +1,6 @@
 atomicwrites==1.3.0
 attrs==19.1.0
+autopep8==1.4.4
 beautifulsoup4==4.7.1
 bottleneck==1.2.1
 certifi==2019.6.16
@@ -11,9 +12,9 @@ coverage==4.5.3
 -e git+https://github.com/plotly/dash.git@ba27febf71caf112294c53e568d4ff407c5a10ee#egg=dash
 -e git+https://github.com/plotly/dash-core-components.git@38bf34a9d525bfd796d2dc8698ec0c96b0502523#egg=dash-core-components
 -e git+https://github.com/plotly/dash-daq.git@729aa73ac9fd82aabe8a00fae164c23f616922bc#egg=dash-daq
--e git+https://github.com/plotly/dash-html-components.git@42d4389be0b3ad68559ddd4343aabe7322e3610a#egg=dash-html-components
+-e git+https://github.com/plotly/dash-html-components.git@32c087a76ef108ed0caa3583138677cecf6dd304#egg=dash-html-components
 dash-renderer==1.0.0
--e git+https://github.com/plotly/dash-table.git@0d6b7c41ad06a1c67655f7645a4bbcca2160b0ac#egg=dash-table
+-e git+https://github.com/plotly/dash-table.git@6721d03ae3bda1836ec157e097bdc4648b28bd59#egg=dash-table
 decorator==4.4.0
 doit==0.31.1
 entrypoints==0.3
@@ -38,7 +39,7 @@ icecream==1.5.0
 idna==2.8
 importlib-metadata==0.18
 ipython-genutils==0.2.0
-isort==4.3.20
+isort==4.3.21
 itsdangerous==1.1.0
 jinja2==2.10.1
 jsonschema==3.0.1
@@ -50,7 +51,7 @@ mando==0.6.4
 markdown==3.1.1
 markupsafe==1.1.1
 mccabe==0.6.1
-more-itertools==7.0.0
+more-itertools==7.1.0
 nbformat==4.4.0
 numpy==1.16.4
 packaging==19.0
@@ -81,8 +82,8 @@ retrying==1.3.3
 scipy==1.3.0
 selenium==3.141.0
 six==1.12.0
-soupsieve==1.9.1
--e /Users/kyleking/Downloads/statsmodels-0.10.0rc2-cp37-cp37m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl
+soupsieve==1.9.2
+statsmodels==0.10.0
 termcolor==1.1.0
 testfixtures==6.10.0
 toml==0.10.0

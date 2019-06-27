@@ -13,19 +13,17 @@ repository = "https://github.com/kyleking/dash_charts"
 [tool.poetry.dependencies]
 python = "^3.7"
 bottleneck = "^1.2"
-dash = {git = "https://github.com/plotly/dash.git"}
-dash-core-components = {git = "https://github.com/plotly/dash-core-components.git"}
-dash-daq = {git = "https://github.com/plotly/dash-daq.git"}
-dash-html-components = {git = "https://github.com/plotly/dash-html-components.git"}
-dash-table = {git = "https://github.com/plotly/dash-table.git"}
+dash = "^1.0.0"
+dash-core-components = "^1.0"
+dash-html-components = "^1.0"
+dash-table = "^4.0.0"
 icecream = "^1.5"
 pandas = "^0.24.2"
 plotly = "^3.10"
-plotly_express = "^0.3.1"
-statsmodels = {path = "/Users/kyleking/Downloads/statsmodels-0.10.0rc2-cp37-cp37m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl"}
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.4"
+dash-daq = {git = "https://github.com/plotly/dash-daq.git"}
 doit = "^0.31.1"
 flake8 = "^3.7"
 flake8-blind-except = "^0.1.1"
@@ -39,15 +37,16 @@ flake8-mock = "^0.3.0"
 flake8-print = "^3.1"
 flake8-quotes = "^2.0"
 flake8-tuple = "^0.3.1"
+gitchangelog = "^3.0"
 isort = "^4.3"
 pdoc3 = "^0.6.2"
 pep8-naming = "^0.8.2"
+plotly_express = "^0.3.1"
 pytest = "^4.6"
 pytest-cov = "^2.7"
 radon = "^3.0"
 toml = "^0.10.0"
 tqdm = "^4.32"
-gitchangelog = "^3.0"
 
 [build-system]
 requires = ["poetry>=0.12"]

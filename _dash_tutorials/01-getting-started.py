@@ -209,7 +209,7 @@ print('Syntax highlighting could work if Highlight.js is included')
                     {'label': u'Montréal', 'value': 'MTL'},
                     {'label': 'San Francisco', 'value': 'SF'},
                 ],
-                values=['MTL', 'SF'],
+                value=['MTL', 'SF'],
             ),
 
             html.Label('Text Input', style={'margin-top': '20px'}),
