@@ -7,6 +7,7 @@ Changelog
 
 New
 ~~~
+- Move DoIt base utilities to separate file. [Kyle King]
 - Responsive Bulma example Dash app. [Kyle King]
 - InitApp selects assets from package. [Kyle King]
 - Add Bulma stylesheet to assets. [Kyle King]
