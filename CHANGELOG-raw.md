@@ -20,6 +20,10 @@ Changes
 ~~~~~~~
 - Add ddOpts to package and use MinGraph. [Kyle King]
 
+Fix
+~~~
+- Remove github dependencies. [Kyle King]
+
 
 0.0.3 (2019-06-22)
 ------------------
