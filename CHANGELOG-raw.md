@@ -22,6 +22,7 @@ Changes
 
 Fix
 ~~~
+- Cleanup lockfile and requirements. [Kyle King]
 - Remove github dependencies. [Kyle King]
 
 
