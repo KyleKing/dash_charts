@@ -67,16 +67,18 @@ class ChartState:
 class CustomChart:
     """Base Class for Custom Charts."""
 
-    def __init__(self, title='', xLbl='', yLbl=''):
+    def __init__(self, title='', xLbl='', yLbl='', customLayoutParams=()):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
         xLbl/yLbl -- optional, X- and Y-Axis axis labels. Defaults to blank
+        customLayoutParams -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
 
         """
         # Store kwargs as data members
         self.title = title
         self.labels = {'x': xLbl, 'y': yLbl}
+        self.customLayoutParams = customLayoutParams
 
         self.range = {}
 
@@ -89,7 +91,7 @@ class CustomChart:
         """
         return {
             'data': self.formatData(df, **kwargsData),
-            'layout': go.Layout(self.createLayout()),
+            'layout': go.Layout(self.applyCustomlayoutParams(self.createLayout())),
         }
 
     def formatData(self, df, **kwargsData):
@@ -122,5 +124,19 @@ class CustomChart:
                 layout[axisName]['range'] = self.range[axis]
             else:
                 layout[axisName]['autorange'] = True
+
+        return layout
+
+    def applyCustomlayoutParams(self, layout):
+        """Apply/override layout with custom layout parameters.
+
+        layout -- layout dictionary from self.createLayout()
+
+        """
+        for parentKey, subKey, val in self.customLayoutParams:
+            if subKey is not None:
+                layout[parentKey][subKey] = val
+            else:
+                layout[parentKey] = val
 
         return layout

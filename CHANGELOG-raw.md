@@ -23,8 +23,13 @@ Changes
 
 Fix
 ~~~
+- Move base DoDo file into package. [Kyle King]
 - Cleanup lockfile and requirements. [Kyle King]
 - Remove github dependencies. [Kyle King]
+
+Other
+~~~~~
+- Change: implement OOP for examples. [Kyle King]
 
 
 0.0.3 (2019-06-22)

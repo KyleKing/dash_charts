@@ -14,16 +14,17 @@ class AlignChart(helpers.CustomChart):
 
     """
 
-    def __init__(self, title='', xLbl='', yLbl='', measLbl='Meas', idealLbl='Ideal', pad=0):
+    def __init__(self, title='', xLbl='', yLbl='', customLayoutParams=(), measLbl='Meas', idealLbl='Ideal', pad=0):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
         xLbl/yLbl -- optional, X and Y Axis axis titles. Defaults to blank
+        customLayoutParams -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
         measLbl/idealLbl -- optional, legend names for the respective values
         pad -- optional, internal padding within the chart. Defaults to 0
 
         """
-        super().__init__(title, xLbl, yLbl)
+        super().__init__(title, xLbl, yLbl, customLayoutParams)
         # Store the additional kwargs as data members
         self.measLbl = measLbl
         self.idealLbl = idealLbl
@@ -47,7 +48,7 @@ class AlignChart(helpers.CustomChart):
         ```
 
         """
-        # TODO: Handle multiple data sets? - use greyscale for ideal?
+        # TODO: Handle multiple data sets/missing points? - use greyscale for ideal?
 
         # Re-format the data into list format for plotting
         measLabels = []

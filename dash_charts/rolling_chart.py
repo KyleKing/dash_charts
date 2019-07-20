@@ -14,14 +14,15 @@ class RollingChart(helpers.CustomChart):
 
     """
 
-    def __init__(self, title='', xLbl='', yLbl=''):
+    def __init__(self, title='', xLbl='', yLbl='', customLayoutParams=()):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
         xLbl/yLbl -- optional, X and Y Axis axis titles. Defaults to blank
+        customLayoutParams -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
 
         """
-        super().__init__(title, xLbl, yLbl)
+        super().__init__(title, xLbl, yLbl, customLayoutParams)
 
     def formatData(self, df, dataLbl='Data', rollingCount=5, stdCount=2):
         """Format and return the data for the chart.
