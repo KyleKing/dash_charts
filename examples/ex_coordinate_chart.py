@@ -3,7 +3,7 @@
 import dash_html_components as html
 import numpy as np
 import pandas as pd
-from dash_charts import coordinate_chart, custom_colorscales, helpers
+from dash_charts import coordinate_chart, helpers  # custom_colorscales
 
 
 class CoordinateDemo:
@@ -27,6 +27,7 @@ class CoordinateDemo:
             ),
             gridDims=self.grid.dims,
             coord=self.grid.coord,
+            titles=self.grid.titles,
         )
 
         # Create sample data and application layout
@@ -42,6 +43,11 @@ class CoordinateDemo:
         vals = np.random.randint(10000, size=lenPoints)
         self.dfDemo = pd.DataFrame(data={'values': vals})
 
+        # Remove a known number of random values from the data set (for the circle Demo)
+        removeCount = 5
+        for idx in list(set(np.random.randint(len(vals), size=removeCount * 2)))[:removeCount]:
+            self.dfDemo['values'][idx] = None
+
     def _createLayout(self):
         """Create application layout."""
         self.app.layout = html.Div(
@@ -53,7 +59,7 @@ class CoordinateDemo:
                         figure=self.exCoord.createFigure(
                             df=self.dfDemo,
                             markerKwargs={
-                                'colorscale': custom_colorscales.logFire,
+                                # 'colorscale': custom_colorscales.logFire,
                                 'size': 10, 'symbol': 'square',
                             },
                         ),
