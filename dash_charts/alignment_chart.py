@@ -72,10 +72,11 @@ class AlignChart(helpers.CustomChart):
         # Plot the ideal and measured scatter points
         chartData = [
             go.Scatter(
+                legendgroup='Points',
                 mode='markers',
                 name=lbl,
+                opacity=1 if lbl == self.measLbl else 0.2,
                 text=measLabels if lbl == self.measLbl else lbl,
-                opacity=1 if lbl == self.measLbl else 0.25,
                 x=data['x'][lbl],
                 y=data['y'][lbl],
             ) for lbl in [self.idealLbl, self.measLbl]
@@ -86,7 +87,6 @@ class AlignChart(helpers.CustomChart):
                 line={'color': '#D93D40', 'dash': 'solid'},
                 mode='lines',
                 opacity=0.15,
-                legendgroup='Visual-Guides',
                 showlegend=False,
                 x=[data['x'][self.idealLbl][idx], data['x'][self.measLbl][idx]],
                 y=[data['y'][self.idealLbl][idx], data['y'][self.measLbl][idx]],
@@ -97,5 +97,8 @@ class AlignChart(helpers.CustomChart):
     def createLayout(self):
         """Override the default layout and add additional settings."""
         layout = super().createLayout()
-        layout['yaxis']['zeroline'] = False
+        for axis in ['yaxis', 'xaxis']:
+            layout[axis]['zeroline'] = False
+        layout['yaxis']['scaleanchor'] = 'x'
+        layout['yaxis']['scaleratio'] = 1
         return layout

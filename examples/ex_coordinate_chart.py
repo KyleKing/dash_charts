@@ -59,7 +59,7 @@ class CoordinateDemo:
                         id='coordinate-chart',
                         figure=self.exCoord.createFigure(
                             df=self.dfDemo,
-                            markerKwargs={'colorscale':'Viridis', 'size': 16, 'symbol': 'square'},
+                            markerKwargs={'colorscale': 'Viridis', 'size': 16, 'symbol': 'square'},
                         ),
                     ),
                 ]),

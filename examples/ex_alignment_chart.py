@@ -22,6 +22,10 @@ class AlignmentDemo:
             title='Positioning Error Analysis',
             xLbl='X-Axis Measurements (µm)',
             yLbl='Y-Axis Measurements (µm)',
+            customLayoutParams=(
+                ('height', None, 650),
+                ('width', None, 750),
+            ),
             measLbl='Positioning Error',
             idealLbl='Expected Position',
             pad=0.75,
@@ -53,14 +57,21 @@ class AlignmentDemo:
 
     def _createLayout(self):
         """Create application layout."""
-        self.app.layout = html.Div(className='section', children=[
-            html.H4(children='Example Alignment Chart'),
-            html.Div([
-                helpers.MinGraph(id='alignment-chart'),
+        self.app.layout = html.Div(className='section', style={
+            'max-width': '800px',
+            'margin-right': 'auto',
+            'margin-left': 'auto',
+        }, children=[
+            html.Div([helpers.MinGraph(id='alignment-chart')]),
+            html.Div(style={
+                'max-width': '400px',
+                'margin-right': 'auto',
+                'margin-left': 'auto',
+            }, children=[
+                html.Div(id='slider-output-container'),
+                dcc.Slider(id='stretch-input', min=0, max=20, step=0.1, value=5),
+                html.Button('Reset to 1', id='reset-button', className='button is-primary'),
             ]),
-            dcc.Slider(id='stretch-input', min=0, max=20, step=0.1, value=5),
-            html.Div(id='slider-output-container'),
-            html.Button('Reset to 1', id='reset-button', className='button is-primary'),
         ])
 
     def _registerCallbacks(self):

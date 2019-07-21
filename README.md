@@ -74,7 +74,7 @@ Easily chart the rolling mean and standard deviation for a given scatter data se
 
 ### Coordinate Chart
 
-Chart a fixed data set on a 2D plane with color for intensity.
+Chart a discrete data set on a 2D plane with color for intensity.
 
 ![ex_coordinate_chart.png](.images/ex_coordinate_chart.png)
 
@@ -89,10 +89,12 @@ Useful for visualizing misalignment between measured values and expected values.
 Useful Dash reference links
 
 - [Official Dash Docs](https://dash.plot.ly)
-- [Official Plotly Docs](https://plot.ly/python/)
-- Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app
-- Really Pretty dark app from Dash-Bio [Circos](https://github.com/plotly/dash-bio/blob/master/tests/dashbio_demos/app_circos.py)
-- General [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
+    - Using [URLs in Dash](https://dash.plot.ly/urls)
+- [Official Plotly Docs](https://plot.ly/python/) (Searchable)
+- Example Apps
+    - Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app
+    - Pleasant dark app from Dash-Bio, [Circos](https://github.com/plotly/dash-bio/blob/master/tests/dashbio_demos/app_circos.py)
+    - All [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
 - Cool Callback Chain debugger [dash_callback_chain](https://github.com/nicolaskruchten/dash_callback_chain)
 - [Awesome CSS Frameworks](https://github.com/troxler/awesome-css-frameworks)
     - Bulma Themes

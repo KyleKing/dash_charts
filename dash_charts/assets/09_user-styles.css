@@ -6,7 +6,7 @@ body {
 }
 
 /* FIXME: Add a class specifically for sliders that need additional height */
-.rc-slider {
+.rc-slider-with-legend {
     min-height: 45px;
 }
 
