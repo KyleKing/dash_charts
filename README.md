@@ -9,8 +9,9 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
     - [Local Development](#local-development)
     - [Example Charts and Documentation](#example-charts-and-documentation)
         - [Pareto Chart](#pareto-chart)
-        - [Alignment Chart](#alignment-chart)
         - [Rolling Mean/STD Chart](#rolling-meanstd-chart)
+        - [Coordinate Chart](#coordinate-chart)
+        - [Alignment Chart](#alignment-chart)
     - [External Links](#external-links)
     - [TODO](#todo)
 
@@ -65,17 +66,23 @@ Create a Pareto chart in Dash. Handles ordering the categories, calculating the 
 
 ![ex_pareto_chart.png](.images/ex_pareto_chart.png)
 
-### Alignment Chart
-
-Useful for visualizing misalignment between measured values and expected values. Accepts a `stretch` argument to visually increase the spacing between the measured and expected value.
-
-![ex_alignment_chart.png](.images/ex_alignment_chart.png)
-
 ### Rolling Mean/STD Chart
 
 Easily chart the rolling mean and standard deviation for a given scatter data set.
 
 ![ex_rolling_chart.png](.images/ex_rolling_chart.png)
+
+### Coordinate Chart
+
+Chart a fixed data set on a 2D plane with color for intensity.
+
+![ex_coordinate_chart.png](.images/ex_coordinate_chart.png)
+
+### Alignment Chart
+
+Useful for visualizing misalignment between measured values and expected values. Accepts a `stretch` argument to visually increase the spacing between the measured and expected value.
+
+![ex_alignment_chart.png](.images/ex_alignment_chart.png)
 
 ## External Links
 
@@ -88,21 +95,18 @@ Useful Dash reference links
 - General [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
 - Cool Callback Chain debugger [dash_callback_chain](https://github.com/nicolaskruchten/dash_callback_chain)
 - [Awesome CSS Frameworks](https://github.com/troxler/awesome-css-frameworks)
-    - Deciding between [Bulma](https://bulma.io) and [Materialize](https://materializecss.com/showcase.html)
-    - [Bulma Flatly Theme preview](https://jenil.github.io/bulmaswatch/flatly/)
-    - [Bulma Customizer](https://bulma-customizer.bstash.io/)
-    - See the [Admin Template here](https://bulmatemplates.github.io/bulma-templates/)
+    - Bulma Themes
+        - [Bulma Flatly Theme preview](https://jenil.github.io/bulmaswatch/flatly/)
+        - [Bulma Customizer](https://bulma-customizer.bstash.io/)
+        - [Admin Template](https://bulmatemplates.github.io/bulma-templates/)
 
 ## TODO
 
+- FIXME: Add the 3D version of the Coordinate chart
+- Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)
 - Checkout the v2 Table Filtering in Dash 0.43 / https://dash.plot.ly/datatable
     - [Filtering Syntax](https://dash.plot.ly/datatable/filtering)
-- Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)
-- Implement multi-page apps:
-    - See ["SlapDash" Multi-Page Cookie Cutter App](https://github.com/ned2/slapdash)
-    - Official Docs: https://dash.plot.ly/urls
-- See annotations
+- Create nice looking annotations like the [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app
     - [Text & Annotations](https://plot.ly/python/text-and-annotations/)
     - [Shapes in Plotly](https://plot.ly/python/shapes/)
-    - (Want annotations like: [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app)
-- Add tests
+- Add tests?

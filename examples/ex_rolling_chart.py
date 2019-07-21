@@ -51,7 +51,7 @@ class RollingDemo:
         self.app.layout = html.Div(
             className='section',
             children=[
-                html.H4(children='Example Rolling  Chart'),
+                html.H4(children='Example Rolling Chart'),
                 html.Div([
                     helpers.MinGraph(
                         id='rolling-chart',

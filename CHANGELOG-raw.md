@@ -7,6 +7,7 @@ Changelog
 
 New
 ~~~
+- Coordinate chart. [Kyle King]
 - Move DoIt base utilities to separate file. [Kyle King]
 - Responsive Bulma example Dash app. [Kyle King]
 - InitApp selects assets from package. [Kyle King]
@@ -19,6 +20,7 @@ New
 
 Changes
 ~~~~~~~
+- Add customLayoutParams arg. [Kyle King]
 - Add ddOpts to package and use MinGraph. [Kyle King]
 
 Fix
