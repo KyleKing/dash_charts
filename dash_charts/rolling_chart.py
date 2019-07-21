@@ -24,8 +24,8 @@ class RollingChart(helpers.CustomChart):
         """
         super().__init__(title, xLbl, yLbl, customLayoutParams)
 
-    def formatData(self, df, dataLbl='Data', rollingCount=5, stdCount=2):
-        """Format and return the data for the chart.
+    def createTraces(self, df, dataLbl='Data', rollingCount=5, stdCount=2):
+        """Return traces for plotly chart.
 
         df -- Pandas dataframe with columns names: ['x', 'y', 'label']
         dataLbl --

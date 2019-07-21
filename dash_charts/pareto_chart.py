@@ -26,8 +26,8 @@ class ParetoChart(helpers.CustomChart):
         self.colors = colors
         self.limitCat = limitCat
 
-    def formatData(self, df):
-        """Format and return the data for the chart.
+    def createTraces(self, df):
+        """Return traces for plotly chart.
 
         df -- Pandas dataframe with keys (value, percent)
 

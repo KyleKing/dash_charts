@@ -1,7 +1,8 @@
 """Main Helper Functions."""
 
-import dash
 from pathlib import Path
+
+import dash
 import dash_core_components as dcc
 import plotly.graph_objects as go
 
@@ -90,13 +91,13 @@ class CustomChart:
 
         """
         return {
-            'data': self.formatData(df, **kwargsData),
+            'data': self.createTraces(df, **kwargsData),
             'layout': go.Layout(self.applyCustomlayoutParams(self.createLayout())),
         }
 
-    def formatData(self, df, **kwargsData):
-        """Return formatted data for data key of figure."""
-        raise NotImplementedError('formatData must be implemented by child class')
+    def createTraces(self, df, **kwargsData):
+        """Return traces for plotly chart."""
+        raise NotImplementedError('createTraces must be implemented by child class')
 
     def createLayout(self):
         """Return the standard layout. Can be overridden and modified when inherited."""

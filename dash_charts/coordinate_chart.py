@@ -1,9 +1,12 @@
 """Coordinate chart."""
 
+import cmath
+import math
+
 import numpy as np
 import plotly.graph_objects as go
 
-from . import helpers
+from . import custom_colorscales, helpers
 
 
 class CoordinateChart(helpers.CustomChart):
@@ -37,15 +40,15 @@ class CoordinateChart(helpers.CustomChart):
                 self.grid['y'].extend(yGrid)
         # Store points used to create the black grid borders
         self.borders = [{
-            'x': [cIdx * gridDims[1]] * 2,
+            'x': [cIdx * width] * 2,
             'y': [0, height * gridDims[0]],
         } for cIdx in range(gridDims[1] + 1)] + [{
             'x': [0, width * gridDims[1]],
             'y': [rIdx * height] * 2,
         } for rIdx in range(gridDims[0] + 1)]
 
-    def formatData(self, df, borderOp=0.2, borderLine={'color': 'black'}, markerKwargs={}):
-        """Format and return the data for the chart.
+    def createTraces(self, df, borderOp=0.2, borderLine={'color': 'black'}, markerKwargs={}):
+        """Return traces for plotly chart.
 
         df -- Pandas dataframe with columns names: ['values']
         markerKwargs -- optional keyword arguments to pass to scatterMarker()
@@ -80,20 +83,23 @@ class CoordinateChart(helpers.CustomChart):
         """Return a dictionary for the scatter plot.
 
         df -- Pandas dataframe
-        colorscale -- plotly colorscale name or list of values (Reds, Bluered, Jet, Viridis, Cividis, etc.)
+        colorscale -- list of values or plotly colorscale name (Reds, Bluered, Jet, Viridis, Cividis, etc.)
         size -- marker size
         symbol -- marker symbol (square, circle, circle-open, x, etc.)
 
         See: https://plot.ly/python/colorscales/
 
         """
-        return {
+        marker = {
             'color': df['values'],
             'colorscale': colorscale,
             'showscale': True,
             'size': size,
             'symbol': symbol,
         }
+        if type(colorscale) is list:
+            marker['colorbar'] = custom_colorscales.makecolorbar(colorscale)
+        return marker
 
     def createLayout(self):
         """Override the default layout and add additional settings."""
@@ -105,3 +111,24 @@ class CoordinateChart(helpers.CustomChart):
         layout['yaxis']['scaleanchor'] = 'x'
         layout['yaxis']['scaleratio'] = 1
         return layout
+
+
+# Standard Coordinate Grids
+
+
+class circleGrid:
+    """Grid of circular coordinates."""
+
+    def __init__(self, dims=(4, 5)):
+        """Initialize the coordinates.
+
+        dims -- tuple of iterations in the x/y axis respectively
+
+        """
+        self.dims = dims
+        opp = 0.5 * math.cos(cmath.pi / 4)
+        adj = 0.5 * math.sin(cmath.pi / 4)
+        self.coord = {
+            'x': [0.5, 1 - adj, 1.0, 1 + adj, 1.5, 1 + adj, 1.0, 1 - adj],
+            'y': [1.0, 1 - opp, 0.5, 1 - opp, 1.0, 1 + opp, 1.5, 1 + opp],
+        }

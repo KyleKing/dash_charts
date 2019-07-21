@@ -1,13 +1,9 @@
 """Example Coordinate Chart."""
 
-import cmath
-import math
-
 import dash_html_components as html
 import numpy as np
 import pandas as pd
-from dash_charts import helpers
-from dash_charts.coordinate_chart import CoordinateChart
+from dash_charts import coordinate_chart, custom_colorscales, helpers
 
 
 class CoordinateDemo:
@@ -19,21 +15,18 @@ class CoordinateDemo:
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
-        self.gridDims = (3, 2)
-        opp = 0.5 * math.cos(cmath.pi / 4)
-        adj = 0.5 * math.sin(cmath.pi / 4)
-        self.coord = {
-            'x': [0.5, 1 - adj, 1.0, 1 + adj, 1.5, 1 + adj, 1.0, 1 - adj],
-            'y': [1.0, 1 - opp, 0.5, 1 - opp, 1.0, 1 + opp, 1.5, 1 + opp],
-        }
-        self.exCoord = CoordinateChart(
+        # Select the grid system
+        # self.grid = monthGrid()
+        self.grid = coordinate_chart.circleGrid()
+
+        self.exCoord = coordinate_chart.CoordinateChart(
             title='Example Coordinate Chart',
             customLayoutParams=(
                 ('height', None, 650),
                 ('width', None, 750),
             ),
-            gridDims=self.gridDims,
-            coord=self.coord,
+            gridDims=self.grid.dims,
+            coord=self.grid.coord,
         )
 
         # Create sample data and application layout
@@ -45,9 +38,9 @@ class CoordinateDemo:
     def _generateData(self):
         """Create self.dfDemo with sample data."""
         # Generate a list of random values for the chart
-        self.dfDemo = pd.DataFrame(data={
-            'values': np.random.randint(500, size=(self.gridDims[0] * self.gridDims[1] * len(self.coord['x']))),
-        })
+        lenPoints = (self.grid.dims[0] * self.grid.dims[1] * len(self.grid.coord['x']))
+        vals = np.random.randint(10000, size=lenPoints)
+        self.dfDemo = pd.DataFrame(data={'values': vals})
 
     def _createLayout(self):
         """Create application layout."""
@@ -59,7 +52,10 @@ class CoordinateDemo:
                         id='coordinate-chart',
                         figure=self.exCoord.createFigure(
                             df=self.dfDemo,
-                            markerKwargs={'colorscale': 'Viridis', 'size': 16, 'symbol': 'square'},
+                            markerKwargs={
+                                'colorscale': custom_colorscales.logFire,
+                                'size': 10, 'symbol': 'square',
+                            },
                         ),
                     ),
                 ]),
