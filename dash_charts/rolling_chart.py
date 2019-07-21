@@ -2,7 +2,7 @@
 
 import bottleneck
 import numpy as np
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
 from . import helpers
 

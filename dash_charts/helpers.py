@@ -3,7 +3,7 @@
 import dash
 from pathlib import Path
 import dash_core_components as dcc
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
 ASSETS_DIR = Path(__file__).parent / 'assets'
 
