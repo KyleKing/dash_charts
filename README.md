@@ -78,6 +78,7 @@ Chart a discrete data set on a 2D plane with color for intensity. Below examples
 
 ![ex_coordinate_chart-circle.png](.images/ex_coordinate_chart-circle.png)
 ![ex_coordinate_chart-year.png](.images/ex_coordinate_chart-year.png)
+![ex_coordinate_chart-month.png](.images/ex_coordinate_chart-month.png)
 
 ### Alignment Chart
 

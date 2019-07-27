@@ -21,7 +21,8 @@ class CoordinateDemo:
         # ----------------------------------------------------------------------
         # FYI: Select the grid system. Toggle these lines to update the chart
         # self.grid = coordinate_chart.CircleGrid()
-        self.grid = coordinate_chart.MonthGrid()
+        # self.grid = coordinate_chart.YearGrid()
+        self.grid = coordinate_chart.MonthGrid(titles=[calendar.month_name[2]])  # uses Feb
         # ----------------------------------------------------------------------
 
         self.exCoord = coordinate_chart.CoordinateChart(
@@ -53,8 +54,9 @@ class CoordinateDemo:
             removeCount = 5
             for idx in list(set(np.random.randint(len(vals), size=removeCount * 2)))[:removeCount]:
                 self.dfDemo['values'][idx] = None
-        elif isinstance(self.grid, coordinate_chart.MonthGrid):
-            # Data for the MonthGrid demo
+
+        elif isinstance(self.grid, coordinate_chart.YearGrid):
+            # Data for the YearGrid demo
             now = datetime.datetime.now()
             monthList = [
                 np.random.randint(10000, size=calendar.monthrange(now.year, monthIdx)[1])
@@ -63,11 +65,21 @@ class CoordinateDemo:
             # Remove all future data for the current month
             monthList[now.month - 1] = monthList[now.month - 1][:(now.day - 1)]
             self.dfDemo = pd.DataFrame(data={'values': self.grid.formatData(monthList, now.year)})
+
+        elif isinstance(self.grid, coordinate_chart.MonthGrid):
+            # Data for the MonthGrid demo
+            month, year = (2, 2016)  # Always plot for February 2016 (Leap Year)
+            monthList = np.random.randint(10000, size=calendar.monthrange(year, month)[1])
+            self.dfDemo = pd.DataFrame(data={'values': self.grid.formatData(monthList, year, month)})
+
         else:
             raise RuntimeError('Unknown Grid Type: {}'.format(self.grid))
 
     def _createLayout(self):
         """Create application layout."""
+        markerKwargs = self.grid.markerKwargs
+        # markerKwargs['colorscale'] = custom_colorscales.logFire  # FYI: Uncomment for logarithmic colorscale
+
         self.app.layout = html.Div(
             className='section',
             children=[
@@ -76,10 +88,7 @@ class CoordinateDemo:
                         id='coordinate-chart',
                         figure=self.exCoord.createFigure(
                             df=self.dfDemo,
-                            markerKwargs={
-                                # 'colorscale': custom_colorscales.logFire,  # FYI: Uncomment for logarithmic colorscale
-                                'size': 10, 'symbol': 'square',
-                            },
+                            markerKwargs=markerKwargs,
                         ),
                     ),
                 ]),

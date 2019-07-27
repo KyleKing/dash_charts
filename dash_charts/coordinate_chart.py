@@ -18,7 +18,7 @@ class CoordinateChart(helpers.CustomChart):
 
     """
 
-    def __init__(self, title='', xLbl='', yLbl='', customLayoutParams=(), gridDims=None, coord=None, titles=()):
+    def __init__(self, title='', xLbl='', yLbl='', customLayoutParams=(), gridDims=None, coord=None, titles=None):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
@@ -58,7 +58,7 @@ class CoordinateChart(helpers.CustomChart):
                 text=title,
             )
             for idx, title in enumerate(titles) if title is not None
-        ]
+        ] if titles is not None else []
 
     def createTraces(self, dfRaw, borderOp=0.2, borderLine={'color': 'black'}, markerKwargs={}):
         """Return traces for plotly chart.
@@ -69,9 +69,12 @@ class CoordinateChart(helpers.CustomChart):
         markerKwargs -- optional keyword arguments to pass to scatterMarker()
 
         """
+        # Ensure that the provides values are the same length as the total number of grid points
+        vals = list(dfRaw['values'])
+        vals.extend([None] * (len(self.grid['x']) - len(vals)))
         # Remove 'None' values from grid
         df = pd.DataFrame(data={
-            'values': dfRaw['values'],
+            'values': vals,
             'x': self.grid['x'],
             'y': self.grid['y'],
         }).dropna()
@@ -140,6 +143,8 @@ class CoordinateChart(helpers.CustomChart):
 class CircleGrid:
     """Grid of circular coordinates."""
 
+    markerKwargs = {'size': 10}
+
     def __init__(self, dims=(4, 5), titles=None):
         """Initialize the coordinates.
 
@@ -163,8 +168,10 @@ class CircleGrid:
         }
 
 
-class MonthGrid:
-    """Grid of day coordinates within each month."""
+class YearGrid:
+    """Coordinates of days within a grid of months over one year."""
+
+    markerKwargs = {'size': 10, 'symbol': 'square'}
 
     def __init__(self, dims=(4, 3), titles=None):
         """Initialize the coordinates.
@@ -186,16 +193,49 @@ class MonthGrid:
         """Return the formatted list that can be passed to a coordinate chart.
 
         monthLists -- list of lists where each sub-list is a month and contains the daily value
-        year -- current year expressed in 4 decimal places (i.e. 2019)
+        year -- year expressed in 4 decimal places (i.e. 2019)
 
         """
         vals = []
-        for idx, month in enumerate(monthLists):
+        for idx, monthList in enumerate(monthLists):
             idxFirstDay, countDays = calendar.monthrange(year, idx + 1)
             idxFirstDay += 1  # Increment to start on Sunday
             vals.extend([None] * idxFirstDay)
-            vals.extend(month)
+            vals.extend(monthList)
             vals.extend([None] * (len(self.coord['x']) - idxFirstDay - countDays))
-        totalDays = self.dims[0] * self.dims[1] * len(self.coord['x'])
-        vals.extend([None] * (totalDays - len(vals)))
+        return vals
+
+
+class MonthGrid:
+    """Coordinates of days within a single month."""
+
+    markerKwargs = {'size': 35, 'symbol': 'square'}
+
+    def __init__(self, dims=(1, 1), titles=None):
+        """Initialize the coordinates.
+
+        dims -- tuple of iterations in the x/y axis respectively
+        titles -- list of titles to place in each grid element
+
+        """
+        self.dims = dims
+        assert dims == (1, 1), 'Day grid can only show one month, expected (1, 1)'
+        self.titles = titles
+        margin = 1.25
+        self.coord = {
+            'x': np.add(list(range(7)) * 6, margin),
+            'y': np.add([0] * 7 + [1] * 7 + [2] * 7 + [3] * 7 + [4] * 7 + [5] * 7, margin),
+        }
+
+    def formatData(self, monthList, year, month):
+        """Return the formatted list that can be passed to a coordinate chart.
+
+        monthList -- list of daily values
+        year -- year expressed in 4 decimal places (i.e. 2019)
+        month -- month in 1-12
+
+        """
+        idxFirstDay = calendar.monthrange(year, month)[0]
+        vals = [None] * idxFirstDay
+        vals.extend(monthList)
         return vals

@@ -7,6 +7,8 @@ Changelog
 
 New
 ~~~
+- Subtitles for each plot in coordinate chart. [Kyle King]
+- Log colors for coordinate chart. [Kyle King]
 - Coordinate chart. [Kyle King]
 - Move DoIt base utilities to separate file. [Kyle King]
 - Responsive Bulma example Dash app. [Kyle King]
@@ -20,6 +22,9 @@ New
 
 Changes
 ~~~~~~~
+- Proper month grid for the current year/day. [Kyle King]
+- Migrate to Plotly v4. [Kyle King]
+- Minor tweaks to alignment chart. [Kyle King]
 - Add customLayoutParams arg. [Kyle King]
 - Add ddOpts to package and use MinGraph. [Kyle King]
 
