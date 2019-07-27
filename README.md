@@ -74,9 +74,10 @@ Easily chart the rolling mean and standard deviation for a given scatter data se
 
 ### Coordinate Chart
 
-Chart a discrete data set on a 2D plane with color for intensity.
+Chart a discrete data set on a 2D plane with color for intensity. Below examples show how to use the CircleGrid() and MonthGrid() classes
 
-![ex_coordinate_chart.png](.images/ex_coordinate_chart.png)
+![ex_coordinate_chart-circle.png](.images/ex_coordinate_chart-circle.png)
+![ex_coordinate_chart-year.png](.images/ex_coordinate_chart-year.png)
 
 ### Alignment Chart
 
@@ -104,6 +105,11 @@ Useful Dash reference links
 
 ## TODO
 
+- FIXME: Capture new `ex_coordinate_chart-circles.png` with fixed subplot titles from demo
+- FIXME: Finish implementing the calendar view
+- FIXME: Enable stacked subplots for multiple years of calendar charts (Subplot title is year)
+
+- FIXME: Enable the marginal charts for the alignment chart
 - FIXME: Add the 3D version of the Coordinate chart
 - Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)
 - Checkout the v2 Table Filtering in Dash 0.43 / https://dash.plot.ly/datatable

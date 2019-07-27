@@ -1,5 +1,6 @@
 """Coordinate chart."""
 
+import calendar
 import cmath
 import math
 
@@ -48,12 +49,12 @@ class CoordinateChart(helpers.CustomChart):
             'y': [rIdx * self.height] * 2,
         } for rIdx in range(gridDims[0] + 1)]
         # Create annotations
-        vOffset = np.min(coord['y']) * 0.25
+        vOffset = np.min(coord['y']) * 0.4
         self.annotations = [
             go.layout.Annotation(
                 ax=0, ay=0,
                 x=(idx % gridDims[1] + 0.5) * self.width,
-                y=(gridDims[0] - idx % gridDims[0]) * self.height - vOffset,
+                y=(gridDims[0] - int(idx / gridDims[1]) % gridDims[0]) * self.height - vOffset,
                 text=title,
             )
             for idx, title in enumerate(titles) if title is not None
@@ -136,7 +137,7 @@ class CoordinateChart(helpers.CustomChart):
 # Standard Coordinate Grids
 
 
-class circleGrid:
+class CircleGrid:
     """Grid of circular coordinates."""
 
     def __init__(self, dims=(4, 5), titles=None):
@@ -148,7 +149,10 @@ class circleGrid:
         """
         self.dims = dims
         self.titles = titles if titles is not None else [
-            'Subtitle for ({}, {})'.format(idx % dims[0] + 1, idx % dims[1] + 1)
+            'Subtitle for ({}, {})'.format(
+                int(idx / dims[1]) + 1,
+                idx % (dims[0] + 1) + 1,
+            )
             for idx in range(dims[0] * dims[1])
         ]
         opp = 0.5 * math.cos(cmath.pi / 4)
@@ -157,3 +161,41 @@ class circleGrid:
             'x': [0.5, 1 - adj, 1.0, 1 + adj, 1.5, 1 + adj, 1.0, 1 - adj],
             'y': [1.0, 1 - opp, 0.5, 1 - opp, 1.0, 1 + opp, 1.5, 1 + opp],
         }
+
+
+class MonthGrid:
+    """Grid of day coordinates within each month."""
+
+    def __init__(self, dims=(4, 3), titles=None):
+        """Initialize the coordinates.
+
+        dims -- tuple of iterations in the x/y axis respectively
+        titles -- list of titles to place in each grid element
+
+        """
+        self.dims = dims
+        assert dims[0] * dims[1] == 12, 'Calendar must show all 12 months Expected (12,1), (6,2), (4,3), (1,12), etc.'
+        self.titles = titles if titles is not None else calendar.month_name[1:]
+        margin = 2
+        self.coord = {
+            'x': np.add(list(range(7)) * 6, margin),
+            'y': np.add([0] * 7 + [1] * 7 + [2] * 7 + [3] * 7 + [4] * 7 + [5] * 7, margin),
+        }
+
+    def formatData(self, monthLists, year):
+        """Return the formatted list that can be passed to a coordinate chart.
+
+        monthLists -- list of lists where each sub-list is a month and contains the daily value
+        year -- current year expressed in 4 decimal places (i.e. 2019)
+
+        """
+        vals = []
+        for idx, month in enumerate(monthLists):
+            idxFirstDay, countDays = calendar.monthrange(year, idx + 1)
+            idxFirstDay += 1  # Increment to start on Sunday
+            vals.extend([None] * idxFirstDay)
+            vals.extend(month)
+            vals.extend([None] * (len(self.coord['x']) - idxFirstDay - countDays))
+        totalDays = self.dims[0] * self.dims[1] * len(self.coord['x'])
+        vals.extend([None] * (totalDays - len(vals)))
+        return vals

@@ -1,5 +1,8 @@
 """Example Coordinate Chart."""
 
+import calendar
+import datetime
+
 import dash_html_components as html
 import numpy as np
 import pandas as pd
@@ -15,9 +18,11 @@ class CoordinateDemo:
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
-        # Select the grid system
-        # self.grid = monthGrid()
-        self.grid = coordinate_chart.circleGrid()
+        # ----------------------------------------------------------------------
+        # FYI: Select the grid system. Toggle these lines to update the chart
+        # self.grid = coordinate_chart.CircleGrid()
+        self.grid = coordinate_chart.MonthGrid()
+        # ----------------------------------------------------------------------
 
         self.exCoord = coordinate_chart.CoordinateChart(
             title='Example Coordinate Chart',
@@ -38,15 +43,28 @@ class CoordinateDemo:
 
     def _generateData(self):
         """Create self.dfDemo with sample data."""
-        # Generate a list of random values for the chart
-        lenPoints = (self.grid.dims[0] * self.grid.dims[1] * len(self.grid.coord['x']))
-        vals = np.random.randint(10000, size=lenPoints)
-        self.dfDemo = pd.DataFrame(data={'values': vals})
-
-        # Remove a known number of random values from the data set (for the circle Demo)
-        removeCount = 5
-        for idx in list(set(np.random.randint(len(vals), size=removeCount * 2)))[:removeCount]:
-            self.dfDemo['values'][idx] = None
+        if isinstance(self.grid, coordinate_chart.CircleGrid):
+            # Generated data for the circleGrid demo
+            # Generate a list of random values for the chart
+            lenPoints = (self.grid.dims[0] * self.grid.dims[1] * len(self.grid.coord['x']))
+            vals = np.random.randint(10000, size=lenPoints)
+            self.dfDemo = pd.DataFrame(data={'values': vals})
+            # Remove a known number of random values from the data set (for the circle Demo)
+            removeCount = 5
+            for idx in list(set(np.random.randint(len(vals), size=removeCount * 2)))[:removeCount]:
+                self.dfDemo['values'][idx] = None
+        elif isinstance(self.grid, coordinate_chart.MonthGrid):
+            # Data for the MonthGrid demo
+            now = datetime.datetime.now()
+            monthList = [
+                np.random.randint(10000, size=calendar.monthrange(now.year, monthIdx)[1])
+                for monthIdx in range(1, now.month + 1)
+            ]
+            # Remove all future data for the current month
+            monthList[now.month - 1] = monthList[now.month - 1][:(now.day - 1)]
+            self.dfDemo = pd.DataFrame(data={'values': self.grid.formatData(monthList, now.year)})
+        else:
+            raise RuntimeError('Unknown Grid Type: {}'.format(self.grid))
 
     def _createLayout(self):
         """Create application layout."""
@@ -59,7 +77,7 @@ class CoordinateDemo:
                         figure=self.exCoord.createFigure(
                             df=self.dfDemo,
                             markerKwargs={
-                                # 'colorscale': custom_colorscales.logFire,
+                                # 'colorscale': custom_colorscales.logFire,  # FYI: Uncomment for logarithmic colorscale
                                 'size': 10, 'symbol': 'square',
                             },
                         ),
