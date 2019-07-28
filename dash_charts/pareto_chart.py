@@ -1,5 +1,6 @@
 """Pareto Chart."""
 
+import pandas as pd
 import plotly.graph_objects as go
 
 from . import helpers
@@ -26,21 +27,30 @@ class ParetoChart(helpers.CustomChart):
         self.colors = colors
         self.limitCat = limitCat
 
-    def createTraces(self, df):
+    def createTraces(self, dfRaw, showCount=True):
         """Return traces for plotly chart.
 
-        df -- Pandas dataframe with keys (value, percent)
+        dfRaw -- Pandas dataframe with keys (categories, percent)
 
         """
         # Verify data format
-        expecK = ['value', 'label']
-        foundK = df.keys()
+        expecK = ['value', 'categories']
+        foundK = dfRaw.keys()
         assert all([_k in foundK for _k in expecK]), 'df must have keys {}'.format(expecK)
-
+        # Compress dataframe to only the unique values
+        df = None
+        for cat in dfRaw['categories'].unique():
+            data = {'value': [dfRaw.loc[dfRaw['categories'] == cat]['value'].sum()], 'label': [cat]}
+            if showCount:
+                data['counts'] = dfRaw['categories'].value_counts()[cat]
+            dfRow = pd.DataFrame(data=data)
+            df = dfRow if df is None else df.append(dfRow)
         # Sort and calculate percentage
         df = df.sort_values(by=['value'], ascending=False).head(self.limitCat)
         df = df[df['value'] != 0]
         df['cumPer'] = df['value'].divide(df['value'].sum()).cumsum()
+        # Add auto-generated count to each bar
+        textKwargs = {'text': df['counts'], 'textposition': 'auto'} if showCount else {}
 
         chartData = [
             go.Bar(
@@ -50,6 +60,7 @@ class ParetoChart(helpers.CustomChart):
                 x=df['label'],
                 y=df['value'],
                 yaxis='y1',
+                **textKwargs,
             ),
         ] + [
             go.Scatter(

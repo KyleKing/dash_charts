@@ -106,12 +106,10 @@ Useful Dash reference links
 
 ## TODO
 
-- FIXME: Capture new `ex_coordinate_chart-circles.png` with fixed subplot titles from demo
-- FIXME: Finish implementing the calendar view
-- FIXME: Enable stacked subplots for multiple years of calendar charts (Subplot title is year)
-
 - FIXME: Enable the marginal charts for the alignment chart
+- FIXME: Enable stacked subplots for multiple years of calendar charts (Subplot title is year)
 - FIXME: Add the 3D version of the Coordinate chart
+- FIXME: Add a tree map?
 - Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)
 - Checkout the v2 Table Filtering in Dash 0.43 / https://dash.plot.ly/datatable
     - [Filtering Syntax](https://dash.plot.ly/datatable/filtering)

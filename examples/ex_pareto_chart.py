@@ -2,11 +2,11 @@
 
 from pathlib import Path
 
-from icecream import ic
 import dash_html_components as html
 import pandas as pd
 from dash_charts import helpers
 from dash_charts.pareto_chart import ParetoChart
+from icecream import ic
 
 
 class ParetoDemo:
@@ -47,25 +47,23 @@ class ParetoDemo:
 
     def _generateData(self):
         """Create self.dfPareto with sample data."""
-        df = pd.read_csv(Path(__file__).parent / 'DowntimeData.csv')
-        # Example looping raw data to create the data/label dataframe expected by ParetoChart()
-        self.dfPareto = None
-        for cat in df['categories'].unique():
-            downtime = df.loc[df['categories'] == cat]['downtime'].sum()
-            dfRow = pd.DataFrame(data={'value': [downtime], 'label': [cat]})
-            self.dfPareto = dfRow if self.dfPareto is None else self.dfPareto.append(dfRow)
+        self.dfPareto = pd.read_csv(Path(__file__).parent / 'DowntimeData.csv')
+        self.dfPareto = self.dfPareto.rename(columns={'downtime': 'value'})
         ic(self.dfPareto)
 
     def _createLayout(self):
         """Create application layout."""
         self.app.layout = html.Div(
-            className='section',
-            children=[
+            className='section', style={
+                'max-width': '1000px',
+                'margin-right': 'auto',
+                'margin-left': 'auto',
+            }, children=[
                 html.H4(children='Example Pareto Chart'),
                 html.Div([
                     helpers.MinGraph(
                         id='pareto-chart',
-                        figure=self.exPareto.createFigure(df=self.dfPareto),
+                        figure=self.exPareto.createFigure(df=self.dfPareto, showCount=True),
                     ),
                 ]),
             ],
