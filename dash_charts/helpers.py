@@ -159,7 +159,10 @@ class MarginalChart(CustomChart):
             vertical_spacing=0.02, horizontal_spacing=0.02,
             row_width=[0.8, 0.2], column_width=[0.8, 0.2],
         )
-        for traceFunc, row, col in [(self.createTraces, 2, 1), (self.createMargTop, 1, 1), (self.createMargRight, 2, 2)]:
+        traces = [
+            (self.createTraces, 2, 1), (self.createMargTop, 1, 1), (self.createMargRight, 2, 2),
+        ]
+        for traceFunc, row, col in traces:
             for trace in traceFunc(df, **kwargsData):
                 fig.add_trace(trace, row, col)
         # Apply axis labels

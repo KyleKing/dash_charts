@@ -12,6 +12,7 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
         - [Rolling Mean/STD Chart](#rolling-meanstd-chart)
         - [Coordinate Chart](#coordinate-chart)
         - [Alignment Chart](#alignment-chart)
+        - [Tabbed Application](#tabbed-application)
     - [External Links](#external-links)
     - [TODO](#todo)
 
@@ -85,6 +86,12 @@ Chart a discrete data set on a 2D plane with color for intensity. Below examples
 Useful for visualizing misalignment between measured values and expected values. Accepts a `stretch` argument to visually increase the spacing between the measured and expected value.
 
 ![ex_alignment_chart.png](.images/ex_alignment_chart.png)
+
+### Tabbed Application
+
+Useful for putting together a multi-page complex application.
+
+![ex_app.png](.images/ex_app.png)
 
 ## External Links
 

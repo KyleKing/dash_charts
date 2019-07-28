@@ -64,7 +64,7 @@ class RollingChart(helpers.CustomChart):
         return chartData
 
     def createAnnotations(self, annotations, yRange):
-        """Create the annotations. May be overriden when inherited to customize annotation styling and positioning.
+        """Create the annotations. May be overridden when inherited to customize annotation styling and positioning.
 
         annotations -- list of tuples with values (x,y,label,color). Color may be None
         yRange -- FIXME: Document
