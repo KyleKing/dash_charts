@@ -5,6 +5,7 @@ from pathlib import Path
 import dash
 import dash_core_components as dcc
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 ASSETS_DIR = Path(__file__).parent / 'assets'
 
@@ -86,7 +87,7 @@ class CustomChart:
     def createFigure(self, df, **kwargsData):
         """Create the figure dictionary.
 
-        data -- data to pass to formatter method
+        df -- data to pass to formatter method
         kwargsData -- keyword arguments to pass to the data formatter method
 
         """
@@ -105,12 +106,10 @@ class CustomChart:
             title=go.layout.Title(text=self.title),
             xaxis={
                 'automargin': True,
-                'showgrid': True,
                 'title': self.labels['x'],
             },
             yaxis={
                 'automargin': True,
-                'showgrid': True,
                 'title': self.labels['y'],
                 'zeroline': True,
             },
@@ -140,4 +139,54 @@ class CustomChart:
             else:
                 layout[parentKey] = val
 
+        return layout
+
+
+class MarginalChart(CustomChart):
+    """Base Class for Custom Charts with Marginal X and Marginal Y Plots."""
+
+    def createFigure(self, df, **kwargsData):
+        """Create the figure dictionary.
+
+        data -- data to pass to formatter method
+        kwargsData -- keyword arguments to pass to the data formatter method
+
+        """
+        fig = make_subplots(
+            rows=2, cols=2,
+            shared_xaxes=True, shared_yaxes=True,
+            vertical_spacing=0.02, horizontal_spacing=0.02,
+            row_width=[0.8, 0.2], column_width=[0.8, 0.2],
+        )
+        for traceFunc, row, col in [(self.createTraces, 2, 1), (self.createMargTop, 1, 1), (self.createMargRight, 2, 2)]:
+            for trace in traceFunc(df, **kwargsData):
+                fig.add_trace(trace, row, col)
+        # Apply axis labels
+        fig.update_xaxes(title_text=self.labels['x'], row=2, col=1)
+        fig.update_yaxes(title_text=self.labels['y'], row=2, col=1)
+        # Replace the default blue/white grid introduced in Plotly v4
+        fig.update_xaxes(showgrid=True, gridcolor='white')
+        fig.update_yaxes(showgrid=True, gridcolor='white')
+        fig['layout'].update(self.applyCustomlayoutParams(self.createLayout()))
+        return fig
+
+    def createTraces(self, df, **kwargsData):
+        """Return traces for plotly chart."""
+        return []
+
+    def createMargTop(self, df, **kwargsData):
+        """Return traces for the top marginal chart."""
+        return []
+
+    def createMargRight(self, df, **kwargsData):
+        """Return traces for the right marginal chart."""
+        return []
+
+    def createLayout(self):
+        """Override the default layout and add additional settings."""
+        layout = super().createLayout()
+        # Remove axis lables from layout as they would be applied to row=1,col=1
+        layout['xaxis']['title'] = ''
+        layout['yaxis']['title'] = ''
+        layout['plot_bgcolor'] = '#F0F0F0'
         return layout

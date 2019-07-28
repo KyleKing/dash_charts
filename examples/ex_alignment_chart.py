@@ -7,6 +7,7 @@ import pandas as pd
 from dash.dependencies import Input, Output
 from dash_charts import helpers
 from dash_charts.alignment_chart import AlignChart
+from icecream import ic
 
 
 class AlignmentDemo:
@@ -23,8 +24,8 @@ class AlignmentDemo:
             xLbl='X-Axis Measurements (µm)',
             yLbl='Y-Axis Measurements (µm)',
             customLayoutParams=(
-                ('height', None, 650),
-                ('width', None, 750),
+                ('height', None, 800),
+                ('width', None, 1000),
             ),
             measLbl='Positioning Error',
             idealLbl='Expected Position',
@@ -57,20 +58,29 @@ class AlignmentDemo:
 
     def _createLayout(self):
         """Create application layout."""
-        self.app.layout = html.Div(className='section', style={
-            'max-width': '800px',
-            'margin-right': 'auto',
-            'margin-left': 'auto',
-        }, children=[
-            html.Div([helpers.MinGraph(id='alignment-chart')]),
-            html.Div(style={
-                'max-width': '400px',
-                'margin-right': 'auto',
-                'margin-left': 'auto',
-            }, children=[
-                html.Div(id='slider-output-container'),
-                dcc.Slider(id='stretch-input', min=0, max=20, step=0.1, value=5),
-                html.Button('Reset to 1', id='reset-button', className='button is-primary'),
+        sTicks = range(0, 20 + 1, 2)
+        # Create centered, 2-column layout
+        self.app.layout = html.Div(className='columns', children=[
+            html.Div(className='column', children=[
+                html.Div([helpers.MinGraph(id='alignment-chart')]),
+            ]),
+            html.Div(className='column', children=[
+                html.Div(style={
+                    'padding-top': '200px',
+                    'max-width': '250px',
+                }, children=[
+                    html.Div(style={
+                        'height': '400px',
+                        'margin': '25px 0 25px 50px',
+                    }, children=[
+                        dcc.Slider(
+                            id='stretch-input', step=0.1, vertical=True,
+                            min=min(sTicks), max=max(sTicks), marks={idx: '{}'.format(idx) for idx in sTicks},
+                        ),
+                    ]),
+                    html.Div(id='slider-output-container'),
+                    html.Button('Reset to 1', id='reset-button', className='button is-primary'),
+                ]),
             ]),
         ])
 

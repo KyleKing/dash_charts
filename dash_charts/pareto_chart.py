@@ -27,38 +27,38 @@ class ParetoChart(helpers.CustomChart):
         self.colors = colors
         self.limitCat = limitCat
 
-    def createTraces(self, dfRaw, showCount=True):
+    def createTraces(self, df, showCount=True):
         """Return traces for plotly chart.
 
-        dfRaw -- Pandas dataframe with keys (categories, percent)
+        df -- Pandas dataframe with keys (categories, percent)
 
         """
         # Verify data format
         expecK = ['value', 'categories']
-        foundK = dfRaw.keys()
+        foundK = df.keys()
         assert all([_k in foundK for _k in expecK]), 'df must have keys {}'.format(expecK)
         # Compress dataframe to only the unique values
-        df = None
-        for cat in dfRaw['categories'].unique():
-            data = {'value': [dfRaw.loc[dfRaw['categories'] == cat]['value'].sum()], 'label': [cat]}
+        dfP = None
+        for cat in df['categories'].unique():
+            data = {'value': [df.loc[df['categories'] == cat]['value'].sum()], 'label': [cat]}
             if showCount:
-                data['counts'] = dfRaw['categories'].value_counts()[cat]
+                data['counts'] = df['categories'].value_counts()[cat]
             dfRow = pd.DataFrame(data=data)
-            df = dfRow if df is None else df.append(dfRow)
+            dfP = dfRow if dfP is None else dfP.append(dfRow)
         # Sort and calculate percentage
-        df = df.sort_values(by=['value'], ascending=False).head(self.limitCat)
-        df = df[df['value'] != 0]
-        df['cumPer'] = df['value'].divide(df['value'].sum()).cumsum()
+        dfP = dfP.sort_values(by=['value'], ascending=False).head(self.limitCat)
+        dfP = dfP[dfP['value'] != 0]
+        dfP['cumPer'] = dfP['value'].divide(dfP['value'].sum()).cumsum()
         # Add auto-generated count to each bar
-        textKwargs = {'text': df['counts'], 'textposition': 'auto'} if showCount else {}
+        textKwargs = {'text': dfP['counts'], 'textposition': 'auto'} if showCount else {}
 
         chartData = [
             go.Bar(
                 hoverinfo='y',
                 marker={'color': self.colors[0]},
                 name='Raw Value',
-                x=df['label'],
-                y=df['value'],
+                x=dfP['label'],
+                y=dfP['value'],
                 yaxis='y1',
                 **textKwargs,
             ),
@@ -68,8 +68,8 @@ class ParetoChart(helpers.CustomChart):
                 line={'color': self.colors[1]},
                 mode='lines',
                 name='Cumulative Percentage',
-                x=df['label'],
-                y=df['cumPer'],
+                x=dfP['label'],
+                y=dfP['cumPer'],
                 yaxis='y2',
             ),
         ]

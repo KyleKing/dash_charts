@@ -1,13 +1,13 @@
 """Alignment chart."""
-
 import math
 
+import numpy as np
 import plotly.graph_objects as go
 
 from . import helpers
 
 
-class AlignChart(helpers.CustomChart):
+class AlignChart(helpers.MarginalChart):
     """Alignment/Distortion/Positioning Error Chart.
 
     Example Use: analyze inspection data for trends in misalignment, such as in molded parts
@@ -30,27 +30,13 @@ class AlignChart(helpers.CustomChart):
         self.idealLbl = idealLbl
         self.pad = pad
 
-    def formatData(self, df, stretch=1):
-        """Format and return the data for the chart.
+    def listifyData(self, df, stretch):
+        """Convert the dataframe into a list for plotting.
 
         df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
         stretch -- optional, float value to change the spacing between ideal and measured coordinates
 
-        ```py
-        # Example dataframe
-        df = pd.DataFrame(data={
-            'x': [1, 2, 1, 2],
-            'y': [1, 2, 2, 1],
-            'xDelta': [0.01, 0.02, 0.005, -0.04],
-            'yDelta': [0.01, -0.05, 0.005, 0.005],
-            'label': ['A', 'B', 'C', 'D'],
-        })
-        ```
-
         """
-        # TODO: Handle multiple data sets/missing points? - use greyscale for ideal?
-
-        # Re-format the data into list format for plotting
         measLabels = []
         data = {
             'x': {self.idealLbl: [], self.measLbl: []},
@@ -68,7 +54,29 @@ class AlignChart(helpers.CustomChart):
         for axis in ['x', 'y']:
             vals = data[axis][self.idealLbl] + data[axis][self.measLbl]
             self.range[axis] = math.floor(min(vals) - self.pad), math.ceil(max(vals) + self.pad)
+        return (measLabels, data)
 
+    def createTraces(self, df, stretch=1):
+        """Return traces for plotly chart.
+
+        df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
+        stretch -- optional, float value to change the spacing between ideal and measured coordinates
+
+        ```py
+        # Example dataframe
+        df = pd.DataFrame(data={
+            'x': [1, 2, 1, 2],
+            'y': [1, 2, 2, 1],
+            'xDelta': [0.01, 0.02, 0.005, -0.04],
+            'yDelta': [0.01, -0.05, 0.005, 0.005],
+            'label': ['A', 'B', 'C', 'D'],
+        })
+        ```
+
+        """
+        # FIXME: Handle multiple data sets/missing points? - use greyscale for ideal?
+
+        measLabels, data = self.listifyData(df, stretch)
         # Plot the ideal and measured scatter points
         chartData = [
             go.Scatter(
@@ -94,6 +102,42 @@ class AlignChart(helpers.CustomChart):
         ])
         return chartData
 
+    def createMargTop(self, df, stretch=1):
+        """Return traces for the top marginal chart.
+
+        df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
+        stretch -- optional, float value to change the spacing between ideal and measured coordinates
+
+        """
+        return [
+            go.Box(
+                marker_color='royalblue',
+                name=xVal,
+                showlegend=False,
+                x=df['x'][df['x'] == xVal] + df['xDelta'][df['x'] == xVal] * stretch
+            )
+            for xVal in np.sort(df['x'].unique())
+        ]
+
+    def createMargRight(self, df, stretch=1):
+        """Return traces for the right marginal chart.
+
+        df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
+        stretch -- optional, float value to change the spacing between ideal and measured coordinates
+
+        """
+        df['yNew'] = df['y'] + df['yDelta'] * stretch
+        return [
+            go.Box(
+                marker_color='royalblue',
+                name=yVal,
+                showlegend=False,
+                x=[idx] * len(df['y'] == yVal),
+                y=df['yNew'][df['y'] == yVal],
+            )
+            for idx, yVal in enumerate(np.sort(df['y'].unique()))
+        ]
+
     def createLayout(self):
         """Override the default layout and add additional settings."""
         layout = super().createLayout()
@@ -101,4 +145,5 @@ class AlignChart(helpers.CustomChart):
             layout[axis]['zeroline'] = False
         layout['yaxis']['scaleanchor'] = 'x'
         layout['yaxis']['scaleratio'] = 1
+        layout['legend'] = {}  # Reset legend to default position on top right
         return layout

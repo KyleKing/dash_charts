@@ -23,6 +23,7 @@ New
 
 Changes
 ~~~~~~~
+- Add optional count to Pareto bars. [Kyle King]
 - Proper month grid for the current year/day. [Kyle King]
 - Migrate to Plotly v4. [Kyle King]
 - Minor tweaks to alignment chart. [Kyle King]
