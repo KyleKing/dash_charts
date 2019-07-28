@@ -7,6 +7,7 @@ Changelog
 
 New
 ~~~
+- Add marginal charts with alignment demo. [Kyle King]
 - Create YearGrid and MonthGrid. [Kyle King]
 - Subtitles for each plot in coordinate chart. [Kyle King]
 - Log colors for coordinate chart. [Kyle King]

@@ -70,7 +70,7 @@ Create a Pareto chart in Dash. Handles ordering the categories, calculating the 
 
 Easily chart the rolling mean and standard deviation for a given scatter data set.
 
-![ex_rolling_chart.png](.images/ex_rolling_chart.png)
+![ex_rolling_chart-annotated.png](.images/ex_rolling_chart-annotated.png)
 
 ### Coordinate Chart
 
@@ -106,14 +106,13 @@ Useful Dash reference links
 
 ## TODO
 
-- FIXME: Enable the marginal charts for the alignment chart
-- FIXME: Enable stacked subplots for multiple years of calendar charts (Subplot title is year)
-- FIXME: Add the 3D version of the Coordinate chart
-- FIXME: Add a tree map?
-- Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)
-- Checkout the v2 Table Filtering in Dash 0.43 / https://dash.plot.ly/datatable
+- Add data table
+    - Checkout the v2 Table Filtering in Dash 0.43 / https://dash.plot.ly/datatable
     - [Filtering Syntax](https://dash.plot.ly/datatable/filtering)
-- Create nice looking annotations like the [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app
-    - [Text & Annotations](https://plot.ly/python/text-and-annotations/)
-    - [Shapes in Plotly](https://plot.ly/python/shapes/)
+- TODO: Add the 3D version of the Coordinate chart
+    - [Ribbon](https://plot.ly/python/v3/ribbon-plots/)
+    - [Surface](https://plot.ly/python/3d-surface-plots/)
+- TODO: Enable stacked subplots for multiple years of calendar charts (Subplot title is year)
+- Add a tree map
+- Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)
 - Add tests?

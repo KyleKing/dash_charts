@@ -45,18 +45,26 @@ class RollingDemo:
             'y': yVals,
             'label': ['Point {}'.format(idx) for idx in range(count)],
         })
+        colors = [
+            '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#e377c2', '#7f7f7f', '#17becf', None,
+        ]
+        idxs = [20 + int(idx * count / len(colors)) for idx in range(len(colors))]
+        self.annotations = [
+            (self.dfDemo['x'][idxs[idx]], self.dfDemo['y'][idxs[idx]], 'Additional Information', color)
+            for idx, color in enumerate(colors)
+        ]
 
     def _createLayout(self):
         """Create application layout."""
         self.app.layout = html.Div(
             className='section',
             children=[
-                html.H4(children='Example Rolling Chart'),
                 html.Div([
                     helpers.MinGraph(
                         id='rolling-chart',
                         figure=self.exRolling.createFigure(
                             df=self.dfDemo, dataLbl='Demo Data', rollingCount=4,
+                            annotations=self.annotations,
                         ),
                     ),
                 ]),

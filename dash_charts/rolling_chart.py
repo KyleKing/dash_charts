@@ -14,25 +14,20 @@ class RollingChart(helpers.CustomChart):
 
     """
 
-    def __init__(self, title='', xLbl='', yLbl='', customLayoutParams=()):
-        """Initialize chart parameters.
-
-        title -- optional, string title for chart. Defaults to blank
-        xLbl/yLbl -- optional, X and Y Axis axis titles. Defaults to blank
-        customLayoutParams -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
-
-        """
-        super().__init__(title, xLbl, yLbl, customLayoutParams)
-
-    def createTraces(self, df, dataLbl='Data', rollingCount=5, stdCount=2):
+    def createTraces(self, df, dataLbl='Data', rollingCount=5, stdCount=2, annotations=None):
         """Return traces for plotly chart.
 
         df -- Pandas dataframe with columns names: ['x', 'y', 'label']
         dataLbl --
         rollingCount -- count of items to use for rolling calculations. Default 5
         stdCount -- count of STD deviations to display. Default 2
+        annotations -- list of tuples with values (x,y,label)
 
         """
+        if annotations is not None:
+            yRange = [-100, 200]  # FIXME: Use calculation
+            self.createAnnotations(annotations, yRange)
+
         chartData = [
             go.Scatter(
                 mode='markers',
@@ -66,5 +61,40 @@ class RollingChart(helpers.CustomChart):
                     y=rollingMean,
                 ),
             ])
-
         return chartData
+
+    def createAnnotations(self, annotations, yRange):
+        """Create the annotations. May be overriden when inherited to customize annotation styling and positioning.
+
+        annotations -- list of tuples with values (x,y,label,color). Color may be None
+        yRange -- FIXME: Document
+
+        """
+        self.annotations = [
+            go.layout.Annotation(
+                arrowcolor='black' if color is None else color,
+                arrowhead=7,
+                arrowsize=0.3,
+                arrowwidth=1.5,
+                ax=x, ay=y + np.amax([(yRange[1] - y) * 0.3, 10]),
+                bgcolor='black' if color is None else color,
+                bordercolor='black' if color is None else color,
+                borderpad=2,
+                borderwidth=1,
+                font=dict(color='#ffffff'),
+                # hoverlabel={bgcolor, bordercolor, font},
+                hovertext=label,
+                opacity=0.8,
+                showarrow=True,
+                text=str(idx + 1),
+                x=x, y=y,
+                xref='x', yref='y', axref='x', ayref='y',
+            )
+            for idx, (x, y, label, color) in enumerate(annotations)
+        ]
+
+    def createLayout(self):
+        """Override the default layout and add additional settings."""
+        layout = super().createLayout()
+        layout['annotations'] = self.annotations
+        return layout

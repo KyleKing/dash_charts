@@ -81,6 +81,7 @@ class CustomChart:
         self.title = title
         self.labels = {'x': xLbl, 'y': yLbl}
         self.customLayoutParams = customLayoutParams
+        self.annotations = None
 
         self.range = {}
 
