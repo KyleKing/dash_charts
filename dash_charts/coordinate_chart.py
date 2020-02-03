@@ -18,17 +18,17 @@ class CoordinateChart(helpers.CustomChart):
 
     """
 
-    def __init__(self, title='', xLbl='', yLbl='', customLayoutParams=(), gridDims=None, coord=None, titles=None):
+    def __init__(self, title='', x_label='', y_label='', cust_layout_params=(), gridDims=None, coord=None, titles=None):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
-        xLbl/yLbl -- optional, X and Y Axis axis titles. Defaults to blank
-        customLayoutParams -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+        x_label/y_label -- optional, X and Y Axis axis titles. Defaults to blank
+        cust_layout_params -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
         gridDims -- tuple of two values with the rectangular grid size
         coord -- lists of the x/y coordinates from the top left corner of a single grid rectangle
 
         """
-        super().__init__(title, xLbl, yLbl, customLayoutParams)
+        super().__init__(title, x_label, y_label, cust_layout_params)
         # Calculate each point in the grid
         self.width = float(np.max(coord['x']) + np.min(coord['x']))
         self.height = float(np.max(coord['y']) + np.min(coord['y']))
@@ -60,7 +60,7 @@ class CoordinateChart(helpers.CustomChart):
             for idx, title in enumerate(titles) if title is not None
         ] if titles is not None else []
 
-    def createTraces(self, dfRaw, borderOp=0.2, borderLine={'color': 'black'}, markerKwargs={}):
+    def create_traces(self, dfRaw, borderOp=0.2, borderLine={'color': 'black'}, markerKwargs={}):
         """Return traces for plotly chart.
 
         dfRaw -- Pandas dataframe with columns names: ['values']
@@ -124,9 +124,9 @@ class CoordinateChart(helpers.CustomChart):
             marker['colorbar'] = custom_colorscales.makecolorbar(colorscale)
         return marker
 
-    def createLayout(self):
+    def create_layout(self):
         """Override the default layout and add additional settings."""
-        layout = super().createLayout()
+        layout = super().create_layout()
         layout['annotations'] = self.annotations
         for axis in ['xaxis', 'yaxis']:
             layout[axis]['showgrid'] = False

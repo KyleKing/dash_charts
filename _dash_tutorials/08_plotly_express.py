@@ -9,10 +9,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly_express as px
 from dash.dependencies import Input, Output
-from dash_charts.helpers import MinGraph, initApp
+from dash_charts.helpers import min_graph, init_app
 from icecream import ic
 
-app = initApp()
+app = init_app()
 
 tips = px.data.tips()
 colOpts = [dict(label=x, value=x) for x in tips.columns]
@@ -43,7 +43,7 @@ app.layout = html.Div([
         ],
         style={'width': '25%', 'float': 'left'},
     ),
-    MinGraph(id='graph', style={'width': '75%', 'display': 'inline-block'}),
+    min_graph(id='graph', style={'width': '75%', 'display': 'inline-block'}),
 ])
 
 

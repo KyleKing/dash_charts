@@ -8,7 +8,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
-from dash_charts.helpers import MinGraph
+from dash_charts.helpers import min_graph
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -39,7 +39,7 @@ app.layout = html.Div([html.Div([
     ],
     className="row",
     style={"display": "block", "width": "60%", "margin-left": "auto", "margin-right": "auto"}),
-    html.Div([MinGraph(id="my-graph")]),
+    html.Div([min_graph(id="my-graph")]),
     html.Div([
         dcc.RangeSlider(
             id="year-range", min=1948, max=2015, step=1, value=[1998, 2000],

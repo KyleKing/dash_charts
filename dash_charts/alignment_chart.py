@@ -14,17 +14,17 @@ class AlignChart(helpers.MarginalChart):
 
     """
 
-    def __init__(self, title='', xLbl='', yLbl='', customLayoutParams=(), measLbl='Meas', idealLbl='Ideal', pad=0):
+    def __init__(self, title='', x_label='', y_label='', cust_layout_params=(), measLbl='Meas', idealLbl='Ideal', pad=0):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
-        xLbl/yLbl -- optional, X and Y Axis axis titles. Defaults to blank
-        customLayoutParams -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+        x_label/y_label -- optional, X and Y Axis axis titles. Defaults to blank
+        cust_layout_params -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
         measLbl/idealLbl -- optional, legend names for the respective values
         pad -- optional, internal padding within the chart. Defaults to 0
 
         """
-        super().__init__(title, xLbl, yLbl, customLayoutParams)
+        super().__init__(title, x_label, y_label, cust_layout_params)
         # Store the additional kwargs as data members
         self.measLbl = measLbl
         self.idealLbl = idealLbl
@@ -56,7 +56,7 @@ class AlignChart(helpers.MarginalChart):
             self.range[axis] = math.floor(min(vals) - self.pad), math.ceil(max(vals) + self.pad)
         return (measLabels, data)
 
-    def createTraces(self, df, stretch=1):
+    def create_traces(self, df, stretch=1):
         """Return traces for plotly chart.
 
         df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
@@ -102,7 +102,7 @@ class AlignChart(helpers.MarginalChart):
         ])
         return chartData
 
-    def createMargTop(self, df, stretch=1):
+    def create_marg_top(self, df, stretch=1):
         """Return traces for the top marginal chart.
 
         df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
@@ -119,7 +119,7 @@ class AlignChart(helpers.MarginalChart):
             for xVal in np.sort(df['x'].unique())
         ]
 
-    def createMargRight(self, df, stretch=1):
+    def create_marg_right(self, df, stretch=1):
         """Return traces for the right marginal chart.
 
         df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
@@ -138,9 +138,9 @@ class AlignChart(helpers.MarginalChart):
             for idx, yVal in enumerate(np.sort(df['y'].unique()))
         ]
 
-    def createLayout(self):
+    def create_layout(self):
         """Override the default layout and add additional settings."""
-        layout = super().createLayout()
+        layout = super().create_layout()
         for axis in ['yaxis', 'xaxis']:
             layout[axis]['zeroline'] = False
         layout['yaxis']['scaleanchor'] = 'x'

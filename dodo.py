@@ -3,7 +3,7 @@
 import shutil
 from pathlib import Path
 
-from dash_charts.dodoBase import PKG_NAME, debug_action, openInBrowser, task_exportReq, task_updateCL  # noqa: F401
+from dash_charts.base_dodo import PKG_NAME, debug_action, openInBrowser, task_exportReq, task_updateCL  # noqa: F401
 
 # Create list of all tasks run with `poetry run doit`
 DOIT_CONFIG = {'default_tasks': [

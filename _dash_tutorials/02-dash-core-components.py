@@ -186,7 +186,7 @@ app.layout = html.Div([
             # Graphs - of course
             # ==========
 
-            helpers.MinGraph(
+            helpers.min_graph(
                 figure=go.Figure(
                     data=[
                         go.Bar(

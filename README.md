@@ -26,7 +26,7 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
 
     ```py
     import pandas as pd
-    from dash_charts.helpers import MinGraph
+    from dash_charts.helpers import min_graph
     from dash_charts.pareto_chart import ParetoChart
 
     # Create the data (could be CSV, database, etc.)
@@ -35,13 +35,13 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
     # Initialize the chart
     exPareto = ParetoChart(
         title='Sample Pareto Chart',
-        xLbl='Category Title',
-        yLbl='Measured Downtime (hours)',
+        x_label='Category Title',
+        y_label='Measured Downtime (hours)',
     )
 
     # Create the figure dictionary and add to the layout
     app.layout = html.Div([
-        MinGraph(figure=exPareto.createFigure(df=dfDemo)),
+        min_graph(figure=exPareto.create_figure(df=dfDemo)),
     ])
     ```
 

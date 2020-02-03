@@ -29,7 +29,7 @@ app.layout = html.Div([
         className='section',
         children=[
             html.H1(children='SQLite/Dash Testing'),
-            helpers.MinGraph(id='sqlite-scatter', animate=True),
+            helpers.min_graph(id='sqlite-scatter', animate=True),
             dcc.Interval(id='graph-update', interval=400, n_intervals=0),
         ],
     ),

@@ -13,7 +13,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly_express as px
 from dash.dependencies import Input, Output
-from dash_charts.helpers import MinGraph, ddOpts
+from dash_charts.helpers import min_graph, opts_dd
 
 # ======================================================================================================================
 # Create classes to manage tabs state. Easy to scale up or down
@@ -32,8 +32,8 @@ class TabBase:
 
     def __init__(self):
         """Resolve higher-order data members."""
-        self.colOpts = tuple([ddOpts(_c, _c) for _c in self.data.columns])
-        self.funcOpts = tuple([ddOpts(lbl, lbl) for idx, lbl in enumerate(self.funcMap.keys())])
+        self.colOpts = tuple([opts_dd(_c, _c) for _c in self.data.columns])
+        self.funcOpts = tuple([opts_dd(lbl, lbl) for idx, lbl in enumerate(self.funcMap.keys())])
 
 
 class Tab1(TabBase):
@@ -124,8 +124,8 @@ class PXDemoApp:
 
     def __init__(self):
         """Initialize tabs and application."""
-        self.TABS = [Tab1(), Tab2(), Tab3(), Tab4(), Tab5(), Tab6()]
-        self.TAB_LOOKUP = {_tab.title: _tab for _tab in self.TABS}
+        self.tab_list_tbd = [Tab1(), Tab2(), Tab3(), Tab4(), Tab5(), Tab6()]
+        self.app_tabs = {_tab.title: _tab for _tab in self.tab_list_tbd}
 
         self.app = dash.Dash(__name__, external_stylesheets=['https://codepen.io/chriddyp/pen/bWLwgP.css'])
 
@@ -134,19 +134,19 @@ class PXDemoApp:
         # Suppress callback verification since tab content won't be rendered when callbacks created
         self.app.config['suppress_callback_exceptions'] = True
 
-        self.createLayout()
+        self.create_layout()
         self._registerTabCB()
-        for tab in self.TABS:
+        for tab in self.tab_list_tbd:
             self._registerChartCB(tab)
 
         self.app.run_server(debug=debug, **kwargs)
 
-    def createLayout(self):
+    def create_layout(self):
         """Create layout."""
         self.app.layout = html.Div([
             html.H1('Dash/Plotly Express Data Exploration Demo'),
-            dcc.Tabs(id='tabs-select', value=self.TABS[0].title, children=[
-                dcc.Tab(label=_tab.title, value=_tab.title) for _tab in self.TABS
+            dcc.Tabs(id='tabs-select', value=self.tab_list_tbd[0].title, children=[
+                dcc.Tab(label=_tab.title, value=_tab.title) for _tab in self.tab_list_tbd
             ], style={'margin-bottom': '15px'}),
             html.Div(id='tabs-content'),
         ])
@@ -154,8 +154,8 @@ class PXDemoApp:
         self.__createTabMap()
 
     def __createTabMap(self):
-        """Create TAB_MAP to store the tab individual tab layouts."""
-        self.TAB_MAP = {
+        """Create tab_map_tbd to store the tab individual tab layouts."""
+        self.tab_map_tbd = {
             tab.title: html.Div([
                 html.Div([
                     html.P([
@@ -172,13 +172,13 @@ class PXDemoApp:
                     html.P([
                         _d + ':',
                         dcc.Dropdown(id='{}-{}'.format(tab.title, _d),
-                                     options=[ddOpts(_l, _l) for _l in _list]),
+                                     options=[opts_dd(_l, _l) for _l in _list]),
                     ]) for _d, _list in tab.dimsDict.items()
                 ], style={'width': '25%', 'float': 'left'},
                 ),
-                MinGraph(id='{}-graph'.format(tab.title), style={'width': '75%', 'display': 'inline-block'}),
+                min_graph(id='{}-graph'.format(tab.title), style={'width': '75%', 'display': 'inline-block'}),
             ])
-            for tab in self.TABS
+            for tab in self.tab_list_tbd
         }
 
     def _registerTabCB(self):
@@ -189,7 +189,7 @@ class PXDemoApp:
         )
         def renderTabs(tabName):
             """Render tabs when switched."""
-            return self.TAB_MAP[tabName]
+            return self.tab_map_tbd[tabName]
 
     def _registerChartCB(self, tab):
         """Register the callbacks for handling the user input panel and chart rendering.
@@ -213,7 +213,7 @@ class PXDemoApp:
             if 'tabs-select.value' in [_t['prop_id'] for _t in ctx.triggered]:
                 return {}
             # Otherwise, parse the arguments to generate a new plot
-            _tab = self.TAB_LOOKUP[tabName]
+            _tab = self.app_tabs[tabName]
             if tab.takesArgs:
                 keys = list(_tab.dims) + list(_tab.dimsDict.keys())
                 kwargs = OrderedDict(zip(keys, args))

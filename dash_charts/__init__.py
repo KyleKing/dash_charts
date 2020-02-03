@@ -4,5 +4,4 @@ See the [Github README for project information](https://github.com/KyleKing/dash
 
 """
 
-# FYI: need to keep up to date with pyproject.toml file
 __version__ = '0.0.2'

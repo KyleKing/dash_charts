@@ -13,21 +13,21 @@ class ParetoChart(helpers.CustomChart):
 
     """
 
-    def __init__(self, title='', xLbl='', yLbl='', customLayoutParams=(), colors=('#4682b4', '#b44646'), limitCat=20):
+    def __init__(self, title='', x_label='', y_label='', cust_layout_params=(), colors=('#4682b4', '#b44646'), limitCat=20):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
-        xLbl/yLbl -- optional, X and Y Axis axis titles. Defaults to blank
-        customLayoutParams -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+        x_label/y_label -- optional, X and Y Axis axis titles. Defaults to blank
+        cust_layout_params -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
         colors -- optional color scheme. 1st value is for the bar color. 2nd is for cum percentage
         limitCat -- set the maximum number of categories. Defaults to 20
 
         """
-        super().__init__(title, xLbl, yLbl, customLayoutParams)
+        super().__init__(title, x_label, y_label, cust_layout_params)
         self.colors = colors
         self.limitCat = limitCat
 
-    def createTraces(self, df, showCount=True):
+    def create_traces(self, df, showCount=True):
         """Return traces for plotly chart.
 
         df -- Pandas dataframe with keys (categories, percent)
@@ -75,9 +75,9 @@ class ParetoChart(helpers.CustomChart):
         ]
         return chartData
 
-    def createLayout(self):
+    def create_layout(self):
         """Override the default layout and add additional settings."""
-        layout = super().createLayout()
+        layout = super().create_layout()
         layout['legend'] = {}
         layout['showlegend'] = False
 

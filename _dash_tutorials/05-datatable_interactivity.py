@@ -99,7 +99,7 @@ def update_graph(rows, derived_virtual_selected_rows):
 
     return html.Div(
         [
-            helpers.MinGraph(
+            helpers.min_graph(
                 id=column,
                 figure={
                     "data": [

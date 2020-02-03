@@ -14,7 +14,7 @@ class CoordinateDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.initApp()
+        self.app = helpers.init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
@@ -27,7 +27,7 @@ class CoordinateDemo:
 
         self.exCoord = coordinate_chart.CoordinateChart(
             title='Example Coordinate Chart',
-            customLayoutParams=(
+            cust_layout_params=(
                 ('height', None, 650),
                 ('width', None, 750),
             ),
@@ -84,9 +84,9 @@ class CoordinateDemo:
             className='section',
             children=[
                 html.Div([
-                    helpers.MinGraph(
+                    helpers.min_graph(
                         id='coordinate-chart',
-                        figure=self.exCoord.createFigure(
+                        figure=self.exCoord.create_figure(
                             df=self.dfDemo,
                             markerKwargs=markerKwargs,
                         ),

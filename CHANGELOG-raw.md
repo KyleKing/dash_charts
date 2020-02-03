@@ -7,6 +7,7 @@ Changelog
 
 New
 ~~~
+- Add Tabbed Application GUI from PFE. [Kyle King]
 - Add annotations to rolling chart. [Kyle King]
 - Add marginal charts with alignment demo. [Kyle King]
 - Create YearGrid and MonthGrid. [Kyle King]
@@ -15,7 +16,7 @@ New
 - Coordinate chart. [Kyle King]
 - Move DoIt base utilities to separate file. [Kyle King]
 - Responsive Bulma example Dash app. [Kyle King]
-- InitApp selects assets from package. [Kyle King]
+- init_app selects assets from package. [Kyle King]
 - Add Bulma stylesheet to assets. [Kyle King]
 
   Added `limitCat` argument to ParetoChart()
@@ -29,8 +30,8 @@ Changes
 - Proper month grid for the current year/day. [Kyle King]
 - Migrate to Plotly v4. [Kyle King]
 - Minor tweaks to alignment chart. [Kyle King]
-- Add customLayoutParams arg. [Kyle King]
-- Add ddOpts to package and use MinGraph. [Kyle King]
+- Add cust_layout_params arg. [Kyle King]
+- Add opts_dd to package and use min_graph. [Kyle King]
 
 Fix
 ~~~
@@ -90,5 +91,3 @@ Other
 - Refac: use local assets instead of external links. [Kyle King]
 - Init: first example following chapter 02. [Kyle King]
 - Initial commit. [Kyle King]
-
-

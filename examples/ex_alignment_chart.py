@@ -15,15 +15,15 @@ class AlignmentDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.initApp()
+        self.app = helpers.init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
         self.exAlign = AlignChart(
             title='Positioning Error Analysis',
-            xLbl='X-Axis Measurements (µm)',
-            yLbl='Y-Axis Measurements (µm)',
-            customLayoutParams=(
+            x_label='X-Axis Measurements (µm)',
+            y_label='Y-Axis Measurements (µm)',
+            cust_layout_params=(
                 ('height', None, 800),
                 ('width', None, 1000),
             ),
@@ -62,7 +62,7 @@ class AlignmentDemo:
         # Create centered, 2-column layout
         self.app.layout = html.Div(className='columns', children=[
             html.Div(className='column', children=[
-                html.Div([helpers.MinGraph(id='alignment-chart')]),
+                html.Div([helpers.min_graph(id='alignment-chart')]),
             ]),
             html.Div(className='column', children=[
                 html.Div(style={
@@ -91,7 +91,7 @@ class AlignmentDemo:
             [Input('stretch-input', 'value')])
         def updateAlignChart(stretch):
             """Create/update the alignment chart with the user-configurable stretch input."""
-            return self.exAlign.createFigure(df=self.dfDemo, stretch=stretch)
+            return self.exAlign.create_figure(df=self.dfDemo, stretch=stretch)
 
         @self.app.callback(
             Output('slider-output-container', 'children'),

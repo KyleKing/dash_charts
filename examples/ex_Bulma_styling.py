@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 import plotly_express as px
 from dash_charts import helpers
-from dash_charts.helpers import MinGraph
+from dash_charts.helpers import min_graph
 from dash_charts.rolling_chart import RollingChart
 
 
@@ -24,7 +24,7 @@ class BulmaStylingDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.initApp()
+        self.app = helpers.init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
@@ -49,8 +49,8 @@ class BulmaStylingDemo:
         # Initialize an example chart
         self.exRolling = RollingChart(
             title='Sample Timeseries Chart',
-            xLbl='Index',
-            yLbl='Measured Value',
+            x_label='Index',
+            y_label='Measured Value',
         )
 
         # Create application layout
@@ -75,25 +75,25 @@ class BulmaStylingDemo:
                     html.Article(className='tile is-child', children=[
                         html.P(className='title', children='Vertical...'),
                         html.P(className='subtitle', children='(Top tile)'),
-                        MinGraph(
+                        min_graph(
                             figure=px.scatter(px.data.iris(), x="sepal_width", y="sepal_length", height=200),
                         ),
                     ]),
                     html.Article(className='tile is-child', children=[
                         html.P(className='title', children='...tiles'),
                         html.P(className='subtitle', children='(Bottom tile)'),
-                        MinGraph(
+                        min_graph(
                             figure=px.scatter(px.data.iris(), x="sepal_width", y="sepal_length", height=200),
                         ),
                     ]),
                 ]),
-                MinGraph(
+                min_graph(
                     className='tile is-child is-6 is-block-desktop',
-                    figure=self.exRolling.createFigure(df=self.dfDemo, dataLbl='Demo Data', rollingCount=4),
+                    figure=self.exRolling.create_figure(df=self.dfDemo, dataLbl='Demo Data', rollingCount=4),
                 ),
                 html.Article(className='tile is-child is-3 is-block-desktop', children=[
                     html.P(className='title', children='A Small Chart'),
-                    MinGraph(
+                    min_graph(
                         figure=px.scatter(px.data.iris(), x="sepal_width", y="sepal_length", height=350),
                     ),
                     html.P(className='subtitle', children='An Image'),

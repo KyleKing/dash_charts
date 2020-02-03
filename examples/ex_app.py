@@ -2,31 +2,31 @@
 
 import dash_html_components as html
 import plotly_express as px
-from dash_charts import appUtils
-from dash_charts.helpers import MinGraph
+from dash_charts import utils_app
+from dash_charts.helpers import min_graph
 
 
-class TabOne(appUtils.TabBase):
+class TabOne(utils_app.TabBase):
     """Tab One."""
 
-    NAME = 'Tab One'
+    tab_name = 'Tab One'
 
-    def createLayout(self):
+    def create_layout(self):
         """Return the Dash layout components."""
         return html.Div(className='columns', children=[
             html.Div(className='column', children=[
                 html.P(className='title', children='First Chart'),
-                MinGraph(
+                min_graph(
                     figure=px.scatter(px.data.iris(), x="sepal_width", y="sepal_length", height=300),
                 ),
                 html.P(className='title', children='Another Chart'),
-                MinGraph(
+                min_graph(
                     figure=px.scatter(px.data.iris(), x="sepal_width", y="sepal_length", height=300),
                 ),
             ]),
             html.Div(className='column', children=[
                 html.P(className='title', children='A Small Chart'),
-                MinGraph(
+                min_graph(
                     figure=px.scatter(px.data.iris(), x="sepal_width", y="sepal_length", height=300),
                 ),
                 html.P(className='subtitle', children='An Image'),
@@ -39,16 +39,16 @@ class TabOne(appUtils.TabBase):
         pass
 
 
-class TabTwo(appUtils.TabBase):
+class TabTwo(utils_app.TabBase):
     """Tab Two."""
 
-    NAME = 'Tab Two'
+    tab_name = 'Tab Two'
 
-    def createLayout(self):
+    def create_layout(self):
         """Return the Dash layout components."""
         return html.Div(className='section', children=[
             html.P(className='title', children='Tab Two Chart'),
-            MinGraph(figure=px.scatter(px.data.iris(), x="sepal_width", y="sepal_length")),
+            min_graph(figure=px.scatter(px.data.iris(), x="sepal_width", y="sepal_length")),
         ])
 
     def registerCallbacks(self):
@@ -56,16 +56,16 @@ class TabTwo(appUtils.TabBase):
         pass
 
 
-class TabThree(appUtils.TabBase):
+class TabThree(utils_app.TabBase):
     """Tab Three."""
 
-    NAME = 'Tab Three'
+    tab_name = 'Tab Three'
 
-    def createLayout(self):
+    def create_layout(self):
         """Return the Dash layout components."""
         return html.Div(className='section', children=[
             html.P(className='title', children='Tab Three Chart'),
-            MinGraph(figure=px.scatter(
+            min_graph(figure=px.scatter(
                 px.data.iris(), x="sepal_width", y="sepal_length", color="species",
                 marginal_y="rug", marginal_x="histogram",
             )),
@@ -76,10 +76,10 @@ class TabThree(appUtils.TabBase):
         pass
 
 
-class DemoApp(appUtils.TabbedDashApp):
+class DemoApp(utils_app.TabbedDashApp):
     """Demo application."""
 
-    def defineTABS(self):
+    def define_tabs(self):
         """Define the tabs."""
         return [
             TabOne(self.app),

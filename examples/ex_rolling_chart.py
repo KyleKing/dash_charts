@@ -12,15 +12,15 @@ class RollingDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.initApp()
+        self.app = helpers.init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
         # Initialize an example chart
         self.exRolling = RollingChart(
             title='Sample Timeseries Chart',
-            xLbl='Index',
-            yLbl='Measured Value',
+            x_label='Index',
+            y_label='Measured Value',
         )
 
         # Create sample data and application layout
@@ -60,9 +60,9 @@ class RollingDemo:
             className='section',
             children=[
                 html.Div([
-                    helpers.MinGraph(
+                    helpers.min_graph(
                         id='rolling-chart',
-                        figure=self.exRolling.createFigure(
+                        figure=self.exRolling.create_figure(
                             df=self.dfDemo, dataLbl='Demo Data', rollingCount=4,
                             annotations=self.annotations,
                         ),

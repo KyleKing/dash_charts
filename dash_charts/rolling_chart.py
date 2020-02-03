@@ -14,7 +14,7 @@ class RollingChart(helpers.CustomChart):
 
     """
 
-    def createTraces(self, df, dataLbl='Data', rollingCount=5, stdCount=2, annotations=None):
+    def create_traces(self, df, dataLbl='Data', rollingCount=5, stdCount=2, annotations=None):
         """Return traces for plotly chart.
 
         df -- Pandas dataframe with columns names: ['x', 'y', 'label']
@@ -93,8 +93,8 @@ class RollingChart(helpers.CustomChart):
             for idx, (x, y, label, color) in enumerate(annotations)
         ]
 
-    def createLayout(self):
+    def create_layout(self):
         """Override the default layout and add additional settings."""
-        layout = super().createLayout()
+        layout = super().create_layout()
         layout['annotations'] = self.annotations
         return layout

@@ -100,7 +100,7 @@ app.layout = html.Div([
                 'textAlign': 'center',
                 'color': colors['text'],
             }),
-            helpers.MinGraph(
+            helpers.min_graph(
                 id='example-graph-2',
                 figure={
                     'data': [
@@ -123,7 +123,7 @@ app.layout = html.Div([
             generate_table(agricDF),
 
             html.H4(children='Life Expectancy vs. GDP (2007)'),
-            helpers.MinGraph(
+            helpers.min_graph(
                 id='life-exp-vs-gdp',
                 figure={
                     'data': [

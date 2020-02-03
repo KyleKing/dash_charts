@@ -14,7 +14,7 @@ class ParetoDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.initApp()
+        self.app = helpers.init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
@@ -26,9 +26,9 @@ class ParetoDemo:
         )
         self.exPareto = ParetoChart(
             title='Sample Pareto Chart',
-            xLbl='Category Title',
-            yLbl='Measured Downtime (hours)',
-            customLayoutParams=(
+            x_label='Category Title',
+            y_label='Measured Downtime (hours)',
+            cust_layout_params=(
                 ('yaxis', 'dtick', 10),
                 ('yaxis', 'tickformat', '.0f'),
                 ('margin', None, {'l': 75, 'b': 100, 't': 50, 'r': 125}),
@@ -61,9 +61,9 @@ class ParetoDemo:
             }, children=[
                 html.H4(children='Example Pareto Chart'),
                 html.Div([
-                    helpers.MinGraph(
+                    helpers.min_graph(
                         id='pareto-chart',
-                        figure=self.exPareto.createFigure(df=self.dfPareto, showCount=True),
+                        figure=self.exPareto.create_figure(df=self.dfPareto, showCount=True),
                     ),
                 ]),
             ],
