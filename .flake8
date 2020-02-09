@@ -1,10 +1,13 @@
 [flake8]
+annoy = true
+assertive-snakecase = true
+cohesion-below = 50.0
+docstring-convention = all
+ignore = E266,W503,D203,D407,D213,D214,D406,D407,G004,S322,SC100,SC200,PD005
+max-cognitive-complexity = 3
+max-complexity = 10
+max-function-length = 55
 max-line-length = 120
-
-# Prefer camelCase, ignore some pep8-naming rules
-#   N802 - function name should be lowercase
-#   N803 - argument name should be lowercase
-#   N806 - variable in function should be lowercase
-#   N815 - mixedCase variable in class scope
-#   N816 - mixedCase variable in global scope
-ignore = N802,N803,N806,N815,N816
+max-parameters-amount = 6
+select = A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z
+whitelist = .whitelist.txt

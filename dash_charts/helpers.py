@@ -5,6 +5,7 @@ from pathlib import Path
 import dash
 import dash_core_components as dcc
 import plotly.graph_objects as go
+from dash.dependencies import Input, Output, State
 from plotly.subplots import make_subplots
 
 ASSETS_DIR = Path(__file__).parent / 'assets'
@@ -17,7 +18,7 @@ def init_app(**kwargs):
         kwargs: any kwargs to pass to the dash initializer other than `assets_folder`
 
     Returns:
-        dash.Dash() instance (i.e. APP)
+        app `dash.Dash()` instance
 
     """
     return dash.Dash(__name__, assets_folder=str(ASSETS_DIR), **kwargs)
@@ -44,63 +45,90 @@ def min_graph(**kwargs):
     )
 
 
-def opts_dd(lbl, val):
+def opts_dd(lbl, value):
     """Format an individual item in a dropdown list. Return the dictionary.
 
-    lbl -- Dropdown label
-    val -- Dropdown value (will be converted to JSON)
+    Args:
+        lbl: Dropdown label
+        value: Dropdown value (will be converted to JSON)
+
+    Returns:
+        dict with keys label and value
 
     """
-    return {'label': str(lbl), 'value': val}
+    return {'label': str(lbl), 'value': value}
 
 
-# TODO: Unused - should re-examine if this could create problems with modified state
-class ChartState:
-    """Configurable Chart."""
+def format_callback(lookup, outputs, inputs, states):
+    """Return list of Output, Input, and State lists for `@app.callback()`.
 
-    def __init__(self, chart_func, **kwargs_def):
-        """Store parameters.
+    Args:
+        lookup: dict with generic key that maps to unique string
+        outputs: list of tuples with id and key
+        inputs: list of tuples with id and key
+        states: list of tuples with id and key
 
-        chart_func -- callback to create the figure object
-        kwargs_def -- default keyword arguments passed to chart function
+    Returns:
+        list of lists for `@app.callback()`
 
-        """
-        self.kwargs_def = kwargs_def
-        self.chart_func = chart_func
+    """
+    return ([Output(lookup[_id], key) for _id, key in outputs],
+            [Input(lookup[_id], key) for _id, key in inputs],
+            [State(lookup[_id], key) for _id, key in states])
 
-    def figure(self, **kwargsNew):
-        """Return the Dash figure dictionary.
 
-        kwargsNew -- new keyword arguments to pass to the chart function
+def unwrap_args(raw_args, inputs, states):
+    """TODO.
 
-        """
-        return self.chart_func(**kwargsNew, **self.kwargs_def)
+    Args:
+        raw_args: TODO
+        inputs: TODO
+        states: TODO
+
+    Returns:
+        TODO
+
+    """
+    input_args = raw_args[:len(inputs)]
+    state_args = raw_args[-len(states):]
+
+    results = [{}, {}]
+    for result_idx, keys, args in enumerate(((inputs, input_args), (states, state_args))):
+        for arg_idx, uniq_id, key in enumerate(keys):
+            results[result_idx][uniq_id].update([key, args[arg_idx]])
+    return results
+
+
+# Charts
 
 
 class CustomChart:
     """Base Class for Custom Charts."""
 
-    def __init__(self, title='', x_label='', y_label='', cust_layout_params=()):
-        """Initialize chart parameters.
+    def __init__(self, title, x_label, y_label, cust_layout_params=()):
+        """Create basic instance of a custom Dash chart.
 
-        title -- optional, string title for chart. Defaults to blank
-        x_label/y_label -- optional, X- and Y-Axis axis labels. Defaults to an empty string (blank)
-        cust_layout_params -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+        Args:
+            title: optional, string title for chart. Defaults to blank
+            x_label: optional, X- and Y-Axis axis labels. Defaults to an empty string (blank)
+            y_label: TODO
+            cust_layout_params: Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
 
         """
         # Store kwargs as data members
         self.title = title
         self.labels = {'x': x_label, 'y': y_label}
         self.cust_layout_params = cust_layout_params
-        self.annotations = None
-
-        self.range = {}
 
     def create_figure(self, df, **kwargs_data):
         """Create the figure dictionary.
 
-        df -- data to pass to formatter method
-        kwargs_data -- keyword arguments to pass to the data formatter method
+        Args:
+            df: data to pass to formatter method
+            kwargs_data: keyword arguments to pass to the data formatter method
+
+        Return:
+            TODO
 
         """
         return {
@@ -142,7 +170,11 @@ class CustomChart:
     def apply_cust_layout(self, layout):
         """Apply/override layout with custom layout parameters.
 
-        layout -- layout dictionary from self.create_layout()
+        Args:
+            layout: layout dictionary from self.create_layout()
+
+        Return:
+            TODO
 
         """
         for parent_key, sub_key, val in self.cust_layout_params:
@@ -160,8 +192,12 @@ class MarginalChart(CustomChart):
     def create_figure(self, df, **kwargs_data):
         """Create the figure dictionary.
 
-        data -- data to pass to formatter method
-        kwargs_data -- keyword arguments to pass to the data formatter method
+        Args:
+            data: data to pass to formatter method
+            kwargs_data: keyword arguments to pass to the data formatter method
+
+        Return:
+            TODO
 
         """
         fig = make_subplots(
@@ -205,3 +241,12 @@ class MarginalChart(CustomChart):
         layout['yaxis']['title'] = ''
         layout['plot_bgcolor'] = '#F0F0F0'
         return layout
+
+
+# Component: May consist of one or more charts and/or user inputs
+# Combines elements into module that can be integrated into larger app. May have callbacks
+
+
+# TODO
+
+# Base App: Base class for application that includes components, charts, and/or other Dash inputs
