@@ -104,4 +104,5 @@ class BulmaStylingDemo:
 
 
 if __name__ == '__main__':
-    BulmaStylingDemo().run()
+    port = helpers.parse_cli_args()
+    BulmaStylingDemo().run(port=port)

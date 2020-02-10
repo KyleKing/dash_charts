@@ -109,4 +109,5 @@ class AlignmentDemo:
 
 
 if __name__ == '__main__':
-    AlignmentDemo().run()
+    port = helpers.parse_cli_args()
+    AlignmentDemo().run(port=port)

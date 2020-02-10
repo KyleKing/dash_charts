@@ -1,5 +1,6 @@
 """Main Helper Functions."""
 
+import argparse
 from pathlib import Path
 
 import dash
@@ -9,6 +10,21 @@ from dash.dependencies import Input, Output, State
 from plotly.subplots import make_subplots
 
 ASSETS_DIR = Path(__file__).parent / 'assets'
+"""Path to the static files directory."""
+
+
+def parse_cli_args():
+    """Configure the CLI options for Dash applications.
+
+    Returns:
+        port number
+
+    """
+    parser = argparse.ArgumentParser(description='Process Dash Parameters.')
+    parser.add_argument('--port', type=int, default=8050,
+                        help='Pass port number to Dash server. Default is 8050')
+    args = parser.parse_args()
+    return args.port
 
 
 def init_app(**kwargs):
@@ -33,34 +49,28 @@ def min_graph(**kwargs):
         kwargs: any kwargs to pass to the dash initializer other than `assets_folder`
 
     Returns:
-        dcc.Graph object
+        Dash `dcc.Graph` object
 
     """
-    return dcc.Graph(
-        config={
-            'displayModeBar': False,
-            # 'modeBarButtonsToRemove': ['sendDataToCloud'],
-        },
-        **kwargs,
-    )
+    return dcc.Graph(config={'displayModeBar': False}, **kwargs)
 
 
 def opts_dd(lbl, value):
-    """Format an individual item in a dropdown list. Return the dictionary.
+    """Format an individual item in a Dash dcc dropdown list.
 
     Args:
         lbl: Dropdown label
-        value: Dropdown value (will be converted to JSON)
+        value: Dropdown value
 
     Returns:
-        dict with keys label and value
+        dict with keys `label` and `value`
 
     """
     return {'label': str(lbl), 'value': value}
 
 
 def format_callback(lookup, outputs, inputs, states):
-    """Return list of Output, Input, and State lists for `@app.callback()`.
+    """Format list of [Output, Input, State] for `@app.callback()`.
 
     Args:
         lookup: dict with generic key that maps to unique string
@@ -77,25 +87,25 @@ def format_callback(lookup, outputs, inputs, states):
             [State(lookup[_id], key) for _id, key in states])
 
 
-def unwrap_args(raw_args, inputs, states):
-    """TODO.
+def map_args(raw_args, inputs, states):
+    """Map the function arguments into a dictionary with keys the unique input and state names.
 
     Args:
-        raw_args: TODO
-        inputs: TODO
-        states: TODO
+        raw_args: list of arguments passed to callback
+        inputs: list of unique input element ids
+        states: list of unique state element ids
 
     Returns:
-        TODO
+        Returns dictionary with arguments mapped to the unique ids
 
     """
     input_args = raw_args[:len(inputs)]
     state_args = raw_args[-len(states):]
 
-    results = [{}, {}]
-    for result_idx, keys, args in enumerate(((inputs, input_args), (states, state_args))):
+    results = {}
+    for keys, args in ((inputs, input_args), (states, state_args)):
         for arg_idx, uniq_id, key in enumerate(keys):
-            results[result_idx][uniq_id].update([key, args[arg_idx]])
+            results[uniq_id].update([key, args[arg_idx]])
     return results
 
 
@@ -105,17 +115,18 @@ def unwrap_args(raw_args, inputs, states):
 class CustomChart:
     """Base Class for Custom Charts."""
 
+    axis_range = {}  # If None or empty dict, will enable autorange. Add X/Y keys to set range
+
     def __init__(self, title, x_label, y_label, cust_layout_params=()):
-        """Create basic instance of a custom Dash chart.
+        """Initialize Custom Dash Chart and store parameters as data members.
 
         Args:
-            title: optional, string title for chart. Defaults to blank
-            x_label: optional, X- and Y-Axis axis labels. Defaults to an empty string (blank)
-            y_label: TODO
-            cust_layout_params: Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+            title: String title for chart  (can be an empty string for blank)
+            x_label: XAxis string label (can be an empty string for blank)
+            y_label: YAxis string label (can be an empty string for blank)
+            cust_layout_params: Custom parameters in format [ParentKey, SubKey, Value] to customize 'go.layout'
 
         """
-        # Store kwargs as data members
         self.title = title
         self.labels = {'x': x_label, 'y': y_label}
         self.cust_layout_params = cust_layout_params
@@ -128,7 +139,7 @@ class CustomChart:
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Return:
-            TODO
+            Dictionary with keys `data` and `layout` for Dash
 
         """
         return {
@@ -141,47 +152,52 @@ class CustomChart:
         raise NotImplementedError('create_traces must be implemented by child class')
 
     def create_layout(self):
-        """Return the standard layout. Can be overridden and modified when inherited."""
-        layout = dict(
-            title=go.layout.Title(text=self.title),
-            xaxis={
+        """Return the standard layout. Can be overridden and modified when inherited.
+
+        Return:
+            layout dictionary for Dash figure
+
+        """
+        layout = {
+            'title': go.layout.Title(text=self.title),
+            'xaxis': {
                 'automargin': True,
                 'title': self.labels['x'],
             },
-            yaxis={
+            'yaxis': {
                 'automargin': True,
                 'title': self.labels['y'],
                 'zeroline': True,
             },
-            legend={'orientation': 'h'},
-            hovermode='closest',
-        )
+            'legend': {'orientation': 'h'},
+            'hovermode': 'closest',
+        }
 
         # Optionally apply the specified range
         for axis in ['x', 'y']:
             axis_name = '{}axis'.format(axis)
-            if axis in self.range:
-                layout[axis_name]['range'] = self.range[axis]
+            if axis in self.axis_range:
+                layout[axis_name]['range'] = self.axis_range[axis]
             else:
                 layout[axis_name]['autorange'] = True
 
         return layout
 
     def apply_cust_layout(self, layout):
-        """Apply/override layout with custom layout parameters.
+        """Extend and/or override layout with custom settings.
 
         Args:
-            layout: layout dictionary from self.create_layout()
+            layout: base layout dictionary. Typically from self.create_layout()
 
         Return:
-            TODO
+            layout dictionary for Dash figure
 
         """
-        for parent_key, sub_key, val in self.cust_layout_params:
+        for parent_key, sub_key, value in self.cust_layout_params:
             if sub_key is not None:
-                layout[parent_key][sub_key] = val
+                layout[parent_key][sub_key] = value
             else:
-                layout[parent_key] = val
+                layout[parent_key] = value
 
         return layout
 

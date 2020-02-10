@@ -97,4 +97,5 @@ class CoordinateDemo:
 
 
 if __name__ == '__main__':
-    CoordinateDemo().run()
+    port = helpers.parse_cli_args()
+    CoordinateDemo().run(port=port)

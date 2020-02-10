@@ -2,7 +2,7 @@
 
 import dash_html_components as html
 import plotly_express as px
-from dash_charts import utils_app
+from dash_charts import helpers, utils_app
 from dash_charts.helpers import min_graph
 
 
@@ -89,4 +89,5 @@ class DemoApp(utils_app.TabbedDashApp):
 
 
 if __name__ == '__main__':
-    DemoApp().run()
+    port = helpers.parse_cli_args()
+    DemoApp().run(port=port)

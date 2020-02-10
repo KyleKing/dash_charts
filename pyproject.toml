@@ -22,7 +22,6 @@ pandas = "^0.24"
 plotly = "^4.0"
 
 [tool.poetry.dev-dependencies]
-flake8-expression-complexity = "^0.0.6"  # >> AssertionError('should always get node type')
 autopep8 = "^1.4"
 cohesion = "^1.0.0"
 darglint = "^1.1.2"

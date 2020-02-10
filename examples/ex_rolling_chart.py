@@ -73,4 +73,5 @@ class RollingDemo:
 
 
 if __name__ == '__main__':
-    RollingDemo().run()
+    port = helpers.parse_cli_args()
+    RollingDemo().run(port=port)

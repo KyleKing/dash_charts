@@ -50,10 +50,10 @@ class AlignChart(helpers.MarginalChart):
             data['y'][self.measLbl].append(row.y + stretch * row.yDelta)
 
         # Calculate the chart range
-        self.range = {}
+        self.axis_range = {}
         for axis in ['x', 'y']:
             vals = data[axis][self.idealLbl] + data[axis][self.measLbl]
-            self.range[axis] = math.floor(min(vals) - self.pad), math.ceil(max(vals) + self.pad)
+            self.axis_range[axis] = math.floor(min(vals) - self.pad), math.ceil(max(vals) + self.pad)
         return (measLabels, data)
 
     def create_traces(self, df, stretch=1):

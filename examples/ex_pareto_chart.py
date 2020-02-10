@@ -71,4 +71,5 @@ class ParetoDemo:
 
 
 if __name__ == '__main__':
-    ParetoDemo().run()
+    port = helpers.parse_cli_args()
+    ParetoDemo().run(port=port)
