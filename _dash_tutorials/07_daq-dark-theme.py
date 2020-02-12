@@ -7,7 +7,7 @@ Source: https://dash.plot.ly/dash-daq
 import dash_daq as daq
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from dash_charts.helpers import init_app
+from dash_charts.utils_app import init_app
 
 app = init_app()
 

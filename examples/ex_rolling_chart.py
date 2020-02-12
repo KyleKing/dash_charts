@@ -3,8 +3,10 @@
 import dash_html_components as html
 import numpy as np
 import pandas as pd
-from dash_charts import helpers
+from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.rolling_chart import RollingChart
+from dash_charts.utils_app import init_app
+from dash_charts.utils_fig import min_graph
 
 
 class RollingDemo:
@@ -12,7 +14,7 @@ class RollingDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.init_app()
+        self.app = init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
@@ -60,7 +62,7 @@ class RollingDemo:
             className='section',
             children=[
                 html.Div([
-                    helpers.min_graph(
+                    min_graph(
                         id='rolling-chart',
                         figure=self.exRolling.create_figure(
                             df=self.dfDemo, dataLbl='Demo Data', rollingCount=4,
@@ -73,5 +75,5 @@ class RollingDemo:
 
 
 if __name__ == '__main__':
-    port = helpers.parse_cli_args()
+    port = parse_cli_port()
     RollingDemo().run(port=port)

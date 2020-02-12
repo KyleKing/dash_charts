@@ -7,6 +7,7 @@ Changelog
 
 New
 ~~~
+- Base application class. [Kyle King]
 - Add Tabbed Application GUI from PFE. [Kyle King]
 - Add annotations to rolling chart. [Kyle King]
 - Add marginal charts with alignment demo. [Kyle King]
@@ -26,6 +27,7 @@ New
 
 Changes
 ~~~~~~~
+- Select port at CLI and more doc updates. [Kyle King]
 - Update requirements. [Kyle King]
 - Chg: start converting to snake_case and rethinking app structure @WIP.
   [Kyle King]

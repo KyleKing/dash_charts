@@ -10,7 +10,7 @@ import dash_html_components as html
 import dash_table
 import pandas as pd
 from dash.dependencies import Input, Output
-from dash_charts import helpers
+from dash_charts.utils_fig import min_graph
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 
@@ -99,7 +99,7 @@ def update_graph(rows, derived_virtual_selected_rows):
 
     return html.Div(
         [
-            helpers.min_graph(
+            min_graph(
                 id=column,
                 figure={
                     "data": [

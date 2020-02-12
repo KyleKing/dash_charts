@@ -1,5 +1,5 @@
 [[package]]
-category = "dev"
+category = "main"
 description = "Annotate AST trees with source code positions"
 name = "asttokens"
 optional = false
@@ -89,7 +89,7 @@ description = "Extended pickling support for Python objects"
 name = "cloudpickle"
 optional = false
 python-versions = "*"
-version = "1.2.2"
+version = "1.3.0"
 
 [[package]]
 category = "dev"
@@ -115,8 +115,8 @@ category = "main"
 description = "Cross-platform colored terminal text."
 name = "colorama"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-version = "0.4.3"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.4.1"
 
 [[package]]
 category = "dev"
@@ -223,7 +223,7 @@ description = "doit - Automation Tool"
 name = "doit"
 optional = false
 python-versions = ">=3.4"
-version = "0.31.1"
+version = "0.32.0"
 
 [package.dependencies]
 cloudpickle = "*"
@@ -245,6 +245,14 @@ name = "eradicate"
 optional = false
 python-versions = "*"
 version = "1.0"
+
+[[package]]
+category = "main"
+description = "Get the currently executing AST node of a frame, and other information"
+name = "executing"
+optional = false
+python-versions = "*"
+version = "0.4.1"
 
 [[package]]
 category = "dev"
@@ -349,11 +357,11 @@ category = "dev"
 description = "A plugin for flake8 finding likely bugs and design problems in your program. Contains warnings that don't belong in pyflakes and pycodestyle."
 name = "flake8-bugbear"
 optional = false
-python-versions = ">=3.5"
-version = "19.8.0"
+python-versions = ">=3.6"
+version = "20.1.4"
 
 [package.dependencies]
-attrs = "*"
+attrs = ">=19.2.0"
 flake8 = ">=3.0.0"
 
 [[package]]
@@ -637,6 +645,17 @@ flake8-plugin-utils = ">=1.0,<2.0"
 
 [[package]]
 category = "dev"
+description = "Spellcheck variables, comments and docstrings"
+name = "flake8-spellcheck"
+optional = false
+python-versions = "*"
+version = "0.12.1"
+
+[package.dependencies]
+flake8 = ">3.0.0"
+
+[[package]]
+category = "dev"
 description = "Flake8 plugin that checks SQL code against opinionated style rules"
 name = "flake8-sql"
 optional = false
@@ -761,12 +780,13 @@ description = "Inspect variables, expressions, and program execution with a sing
 name = "icecream"
 optional = false
 python-versions = "*"
-version = "1.5.0"
+version = "2.0.0"
 
 [package.dependencies]
+asttokens = ">=2.0.1"
 colorama = ">=0.3.9"
+executing = ">=0.3.1"
 pygments = ">=2.2.0"
-untokenize = ">=0.1.1"
 
 [[package]]
 category = "dev"
@@ -960,13 +980,16 @@ category = "main"
 description = "Powerful data structures for data analysis, time series, and statistics"
 name = "pandas"
 optional = false
-python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
-version = "0.24.2"
+python-versions = ">=3.6.1"
+version = "1.0.1"
 
 [package.dependencies]
-numpy = ">=1.12.0"
-python-dateutil = ">=2.5.0"
-pytz = ">=2011k"
+numpy = ">=1.13.3"
+python-dateutil = ">=2.6.1"
+pytz = ">=2017.2"
+
+[package.extras]
+test = ["pytest (>=4.0.2)", "pytest-xdist", "hypothesis (>=3.58)"]
 
 [[package]]
 category = "dev"
@@ -981,7 +1004,7 @@ attrs = "*"
 flake8 = ">3.0.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "A Python package for describing statistical models and for building design matrices."
 name = "patsy"
 optional = false
@@ -1006,7 +1029,7 @@ description = "Auto-generate API documentation for Python projects."
 name = "pdoc3"
 optional = false
 python-versions = ">= 3.5"
-version = "0.6.4"
+version = "0.7.4"
 
 [package.dependencies]
 mako = "*"
@@ -1018,7 +1041,7 @@ description = "Check PEP-8 naming conventions, plugin for flake8"
 name = "pep8-naming"
 optional = false
 python-versions = "*"
-version = "0.8.2"
+version = "0.9.1"
 
 [package.dependencies]
 flake8-polyfill = ">=1.0.2,<2"
@@ -1036,18 +1059,18 @@ retrying = ">=1.3.3"
 six = "*"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Plotly Express - a high level wrapper for Plotly.py"
 name = "plotly-express"
 optional = false
 python-versions = "*"
-version = "0.3.0"
+version = "0.4.1"
 
 [package.dependencies]
 numpy = ">=1.11"
 pandas = ">=0.20.0"
 patsy = ">=0.5"
-plotly = ">=3.10.0"
+plotly = ">=4.1.0"
 scipy = ">=0.18"
 statsmodels = ">=0.9.0"
 
@@ -1259,10 +1282,10 @@ description = "Code Metrics in Python"
 name = "radon"
 optional = false
 python-versions = "*"
-version = "3.0.3"
+version = "4.1.0"
 
 [package.dependencies]
-colorama = ">=0.4,<0.5"
+colorama = "0.4.1"
 flake8-polyfill = "*"
 future = "*"
 mando = ">=0.6,<0.7"
@@ -1279,7 +1302,7 @@ version = "1.3.3"
 six = ">=1.7.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "SciPy: Scientific Library for Python"
 name = "scipy"
 optional = false
@@ -1322,7 +1345,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.3.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Statistical computations and models for Python"
 name = "statsmodels"
 optional = false
@@ -1346,7 +1369,7 @@ description = "Manage dynamic plugins for Python applications"
 name = "stevedore"
 optional = false
 python-versions = "*"
-version = "1.31.0"
+version = "1.32.0"
 
 [package.dependencies]
 pbr = ">=2.0.0,<2.1.0 || >2.1.0"
@@ -1393,14 +1416,6 @@ version = "4.42.1"
 dev = ["py-make (>=0.1.0)", "twine", "argopt", "pydoc-markdown"]
 
 [[package]]
-category = "main"
-description = "Transforms tokens into original source code (while preserving whitespace)."
-name = "untokenize"
-optional = false
-python-versions = "*"
-version = "0.1.1"
-
-[[package]]
 category = "dev"
 description = "Find dead code"
 name = "vulture"
@@ -1431,7 +1446,6 @@ watchdog = ["watchdog"]
 [[package]]
 category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
@@ -1442,7 +1456,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools"]
 
 [metadata]
-content-hash = "a890d4a43ac00553d1786c230eb21fe32c7ef80d6fe491b757336277f76cd952"
+content-hash = "b4d17f1ae21e48977b45ce1f5c9371c6824216db6a0622d07584acb1417dcc4a"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1473,8 +1487,8 @@ click = [
     {file = "Click-7.0.tar.gz", hash = "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"},
 ]
 cloudpickle = [
-    {file = "cloudpickle-1.2.2-py2.py3-none-any.whl", hash = "sha256:f3ef2c9d438f1553ce7795afb18c1f190d8146132496169ef6aa9b7b65caa4c3"},
-    {file = "cloudpickle-1.2.2.tar.gz", hash = "sha256:922401d7140e133253ff5fab4faa4a1166416066453a783b00b507dca93f8859"},
+    {file = "cloudpickle-1.3.0-py2.py3-none-any.whl", hash = "sha256:8664761f810efc07dbb301459e413c99b68fcc6d8703912bd39d86618ac631e3"},
+    {file = "cloudpickle-1.3.0.tar.gz", hash = "sha256:38af54d0e7705d87a287bdefe1df00f936aadb1f629dca383e825cca927fa753"},
 ]
 cognitive-complexity = [
     {file = "cognitive_complexity-0.0.4.tar.gz", hash = "sha256:8a456bf2871a40c73f33c937ec0b42bc2daaefafa850b3158b0f7a2a91af2b64"},
@@ -1483,8 +1497,8 @@ cohesion = [
     {file = "cohesion-1.0.0-py2.py3-none-any.whl", hash = "sha256:a33a526eb8922c7dbfef19257b3532d16e6246c4ece3ab3b492b290d9d3f2d4b"},
 ]
 colorama = [
-    {file = "colorama-0.4.3-py2.py3-none-any.whl", hash = "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff"},
-    {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
+    {file = "colorama-0.4.1-py2.py3-none-any.whl", hash = "sha256:f8ac84de7840f5b9c4e3347b3c1eaa50f7e49c2b07596221daec5edaabbd7c48"},
+    {file = "colorama-0.4.1.tar.gz", hash = "sha256:05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d"},
 ]
 coverage = [
     {file = "coverage-5.0.3-cp27-cp27m-macosx_10_12_x86_64.whl", hash = "sha256:cc1109f54a14d940b8512ee9f1c3975c181bbb200306c6d8b87d93376538782f"},
@@ -1546,8 +1560,7 @@ dlint = [
     {file = "dlint-0.10.1-py2.py3-none-any.whl", hash = "sha256:a4cef4480d0fba382da97cb162704d5c45cd6e6002c0907cb544d632edb732f7"},
 ]
 doit = [
-    {file = "doit-0.31.1-py3-none-any.whl", hash = "sha256:52b7ad1c0095425bd719c2fc9fb27af94fb0ee478762c50abf385faaf786d010"},
-    {file = "doit-0.31.1.tar.gz", hash = "sha256:bad01949effd537cade3aea286cc2cde074bdb7a4f442015557b1228dd46f5ea"},
+    {file = "doit-0.32.0.tar.gz", hash = "sha256:323d0411e50a0babb945e2a639aa6e633fbb84a9f98086df0c880e739237750c"},
 ]
 entrypoints = [
     {file = "entrypoints-0.3-py2.py3-none-any.whl", hash = "sha256:589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19"},
@@ -1555,6 +1568,9 @@ entrypoints = [
 ]
 eradicate = [
     {file = "eradicate-1.0.tar.gz", hash = "sha256:4ffda82aae6fd49dfffa777a857cb758d77502a1f2e0f54c9ac5155a39d2d01a"},
+]
+executing = [
+    {file = "executing-0.4.1.tar.gz", hash = "sha256:b180cd26e6bc23305a20a7cbd228a6bab94ae359e0a304dfc58425e3b0bdf6be"},
 ]
 flake8 = [
     {file = "flake8-3.7.9-py2.py3-none-any.whl", hash = "sha256:49356e766643ad15072a789a20915d3c91dc89fd313ccd71802303fd67e4deca"},
@@ -1588,8 +1604,8 @@ flake8-broken-line = [
     {file = "flake8_broken_line-0.1.1-py3-none-any.whl", hash = "sha256:7721725dce3aeee1df371a252822f1fcecfaf2766dcf5bac54ee1b3f779ee9d1"},
 ]
 flake8-bugbear = [
-    {file = "flake8-bugbear-19.8.0.tar.gz", hash = "sha256:d8c466ea79d5020cb20bf9f11cf349026e09517a42264f313d3f6fddb83e0571"},
-    {file = "flake8_bugbear-19.8.0-py35.py36.py37-none-any.whl", hash = "sha256:ded4d282778969b5ab5530ceba7aa1a9f1b86fa7618fc96a19a1d512331640f8"},
+    {file = "flake8-bugbear-20.1.4.tar.gz", hash = "sha256:bd02e4b009fb153fe6072c31c52aeab5b133d508095befb2ffcf3b41c4823162"},
+    {file = "flake8_bugbear-20.1.4-py36.py37.py38-none-any.whl", hash = "sha256:a3ddc03ec28ba2296fc6f89444d1c946a6b76460f859795b35b77d4920a51b63"},
 ]
 flake8-builtins = [
     {file = "flake8-builtins-1.4.2.tar.gz", hash = "sha256:c44415fb19162ef3737056e700d5b99d48c3612a533943b4e16419a5d3de3a64"},
@@ -1680,6 +1696,9 @@ flake8-return = [
     {file = "flake8-return-1.1.1.tar.gz", hash = "sha256:03b920cf2784370af4447a754fb7133ce165a6ecf6d4f506a95c4032ece48d8a"},
     {file = "flake8_return-1.1.1-py3-none-any.whl", hash = "sha256:a219b619cdca3cd07dae150772f21083a11ce5280e2198acbac82bd9be0f574f"},
 ]
+flake8-spellcheck = [
+    {file = "flake8-spellcheck-0.12.1.tar.gz", hash = "sha256:dc336b51714d86dce45e42a4004c89159244bae200052beb0b0412107048ec64"},
+]
 flake8-sql = [
     {file = "flake8-SQL-0.4.0.tar.gz", hash = "sha256:39805ed1da18daef4bfaf177d353e5a9cf9099ab95269fef9617de711ce24dd5"},
     {file = "flake8_SQL-0.4.0-py2.py3-none-any.whl", hash = "sha256:7444179b9b4d04a07c36ad6a22a2daf939ee2a622ebae4335b0b5bb423eaab7e"},
@@ -1717,8 +1736,8 @@ gitpython = [
     {file = "GitPython-3.0.7.tar.gz", hash = "sha256:99cd0403cecd8a13b95d2e045b9fcaa7837137fcc5ec3105f2c413305d82c143"},
 ]
 icecream = [
-    {file = "icecream-1.5.0-py2.py3-none-any.whl", hash = "sha256:859ae6679ef00b7bb9b3c3c0aded7970af487ebf91e306aa9ff98fbbaf8f2a47"},
-    {file = "icecream-1.5.0.tar.gz", hash = "sha256:2f47e967bb5d2cf67cdb68cfb02b2e4adbe44f3e77f234559db33a2f1b40a0e6"},
+    {file = "icecream-2.0.0-py2.py3-none-any.whl", hash = "sha256:9000acd16dc9d3c78a95ac9abc54c172e4f47fbd54541ab10d280fae5bfb8efa"},
+    {file = "icecream-2.0.0.tar.gz", hash = "sha256:434e14a50da01f9dc1e5757efec7613db5df048ebdcecd460236db41688f779a"},
 ]
 importlib-metadata = [
     {file = "importlib_metadata-1.5.0-py2.py3-none-any.whl", hash = "sha256:b97607a1a18a5100839aec1dc26a1ea17ee0d93b20b0f008d80a5a050afb200b"},
@@ -1834,26 +1853,20 @@ packaging = [
     {file = "packaging-20.1.tar.gz", hash = "sha256:e665345f9eef0c621aa0bf2f8d78cf6d21904eef16a93f020240b704a57f1334"},
 ]
 pandas = [
-    {file = "pandas-0.24.2-cp27-cp27m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:17916d818592c9ec891cbef2e90f98cc85e0f1e89ed0924c9b5220dc3209c846"},
-    {file = "pandas-0.24.2-cp27-cp27m-win32.whl", hash = "sha256:42e5ad741a0d09232efbc7fc648226ed93306551772fc8aecc6dce9f0e676794"},
-    {file = "pandas-0.24.2-cp27-cp27m-win_amd64.whl", hash = "sha256:c9a4b7c55115eb278c19aa14b34fcf5920c8fe7797a09b7b053ddd6195ea89b3"},
-    {file = "pandas-0.24.2-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:5149a6db3e74f23dc3f5a216c2c9ae2e12920aa2d4a5b77e44e5b804a5f93248"},
-    {file = "pandas-0.24.2-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:cc8fc0c7a8d5951dc738f1c1447f71c43734244453616f32b8aa0ef6013a5dfb"},
-    {file = "pandas-0.24.2-cp35-cp35m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:17450e25ae69e2e6b303817bdf26b2cd57f69595d8550a77c308be0cd0fd58fa"},
-    {file = "pandas-0.24.2-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:366f30710172cb45a6b4f43b66c220653b1ea50303fbbd94e50571637ffb9167"},
-    {file = "pandas-0.24.2-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:4e718e7f395ba5bfe8b6f6aaf2ff1c65a09bb77a36af6394621434e7cc813204"},
-    {file = "pandas-0.24.2-cp35-cp35m-win32.whl", hash = "sha256:8c872f7fdf3018b7891e1e3e86c55b190e6c5cee70cab771e8f246c855001296"},
-    {file = "pandas-0.24.2-cp35-cp35m-win_amd64.whl", hash = "sha256:a3352bacac12e1fc646213b998bce586f965c9d431773d9e91db27c7c48a1f7d"},
-    {file = "pandas-0.24.2-cp36-cp36m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:d7b460bc316064540ce0c41c1438c416a40746fd8a4fb2999668bf18f3c4acf1"},
-    {file = "pandas-0.24.2-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:c1bd07ebc15285535f61ddd8c0c75d0d6293e80e1ee6d9a8d73f3f36954342d0"},
-    {file = "pandas-0.24.2-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:071e42b89b57baa17031af8c6b6bbd2e9a5c68c595bc6bf9adabd7a9ed125d3b"},
-    {file = "pandas-0.24.2-cp36-cp36m-win32.whl", hash = "sha256:2538f099ab0e9f9c9d09bbcd94b47fd889bad06dc7ae96b1ed583f1dc1a7a822"},
-    {file = "pandas-0.24.2-cp36-cp36m-win_amd64.whl", hash = "sha256:83c702615052f2a0a7fb1dd289726e29ec87a27272d775cb77affe749cca28f8"},
-    {file = "pandas-0.24.2-cp37-cp37m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:627594338d6dd995cfc0bacd8e654cd9e1252d2a7c959449228df6740d737eb8"},
-    {file = "pandas-0.24.2-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:4fe0d7e6438212e839fc5010c78b822664f1a824c0d263fd858f44131d9166e2"},
-    {file = "pandas-0.24.2-cp37-cp37m-win32.whl", hash = "sha256:bcdd06007cca02d51350f96debe51331dec429ac8f93930a43eb8fb5639e3eb5"},
-    {file = "pandas-0.24.2-cp37-cp37m-win_amd64.whl", hash = "sha256:90f116086063934afd51e61a802a943826d2aac572b2f7d55caaac51c13db5b5"},
-    {file = "pandas-0.24.2.tar.gz", hash = "sha256:4f919f409c433577a501e023943e582c57355d50a724c589e78bc1d551a535a2"},
+    {file = "pandas-1.0.1-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:74a470d349d52b9d00a2ba192ae1ee22155bb0a300fd1ccb2961006c3fa98ed3"},
+    {file = "pandas-1.0.1-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:e2140e1bbf9c46db9936ee70f4be6584d15ff8dc3dfff1da022d71227d53bad3"},
+    {file = "pandas-1.0.1-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:d10e83866b48c0cdb83281f786564e2a2b51a7ae7b8a950c3442ad3c9e36b48c"},
+    {file = "pandas-1.0.1-cp36-cp36m-win32.whl", hash = "sha256:303827f0bb40ff610fbada5b12d50014811efcc37aaf6ef03202dc3054bfdda1"},
+    {file = "pandas-1.0.1-cp36-cp36m-win_amd64.whl", hash = "sha256:6f38969e2325056f9959efbe06c27aa2e94dd35382265ad0703681d993036052"},
+    {file = "pandas-1.0.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:2530aea4fe46e8df7829c3f05e0a0f821c893885d53cb8ac9b89cc67c143448c"},
+    {file = "pandas-1.0.1-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:3b019e3ea9f5d0cfee0efabae2cfd3976874e90bcc3e97b29600e5a9b345ae3d"},
+    {file = "pandas-1.0.1-cp37-cp37m-win32.whl", hash = "sha256:23e177d43e4bf68950b0f8788b6a2fef2f478f4ec94883acb627b9264522a98a"},
+    {file = "pandas-1.0.1-cp37-cp37m-win_amd64.whl", hash = "sha256:a9fbe41663416bb70ed05f4e16c5f377519c0dc292ba9aa45f5356e37df03a38"},
+    {file = "pandas-1.0.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:7f9a509f6f11fa8b9313002ebdf6f690a7aa1dd91efd95d90185371a0d68220e"},
+    {file = "pandas-1.0.1-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:942b5d04762feb0e55b2ad97ce2b254a0ffdd344b56493b04a627266e24f2d82"},
+    {file = "pandas-1.0.1-cp38-cp38-win32.whl", hash = "sha256:7d77034e402165b947f43050a8a415aa3205abfed38d127ea66e57a2b7b5a9e0"},
+    {file = "pandas-1.0.1-cp38-cp38-win_amd64.whl", hash = "sha256:5036d4009012a44aa3e50173e482b664c1fae36decd277c49e453463798eca4e"},
+    {file = "pandas-1.0.1.tar.gz", hash = "sha256:3c07765308f091d81b6735d4f2242bb43c332cc3461cae60543df6b10967fe27"},
 ]
 pandas-vet = [
     {file = "pandas-vet-0.2.2.tar.gz", hash = "sha256:0a316c3edaaa1bcd772bfaea0e8d2b2aa409b740198746a2b60f2007b313f42e"},
@@ -1868,19 +1881,19 @@ pbr = [
     {file = "pbr-5.4.4.tar.gz", hash = "sha256:139d2625547dbfa5fb0b81daebb39601c478c21956dc57e2e07b74450a8c506b"},
 ]
 pdoc3 = [
-    {file = "pdoc3-0.6.4.tar.gz", hash = "sha256:85cbb0de17d1306157d19b08b67ad84817098c12ad9f92ec203b79d0307b6a25"},
+    {file = "pdoc3-0.7.4.tar.gz", hash = "sha256:1a9393d6b1e8c2976c0e1a8d0b897ba5e5ea9515058470422cf57ee54293ab05"},
 ]
 pep8-naming = [
-    {file = "pep8-naming-0.8.2.tar.gz", hash = "sha256:01cb1dab2f3ce9045133d08449f1b6b93531dceacb9ef04f67087c11c723cea9"},
-    {file = "pep8_naming-0.8.2-py2.py3-none-any.whl", hash = "sha256:0ec891e59eea766efd3059c3d81f1da304d858220678bdc351aab73c533f2fbb"},
+    {file = "pep8-naming-0.9.1.tar.gz", hash = "sha256:a33d38177056321a167decd6ba70b890856ba5025f0a8eca6a3eda607da93caf"},
+    {file = "pep8_naming-0.9.1-py2.py3-none-any.whl", hash = "sha256:45f330db8fcfb0fba57458c77385e288e7a3be1d01e8ea4268263ef677ceea5f"},
 ]
 plotly = [
     {file = "plotly-4.5.0-py2.py3-none-any.whl", hash = "sha256:a19ed783bcf094e6207b3699ab261465bf3c7d299403678801de634bf17e2559"},
     {file = "plotly-4.5.0.tar.gz", hash = "sha256:bb5271f648913cf330a0de4ede3084cda848f8ad8b080330a0678e1b21df97b0"},
 ]
 plotly-express = [
-    {file = "plotly_express-0.3.0-py2.py3-none-any.whl", hash = "sha256:a07d3bf3b9d222ada4f3b18d5e110cde1824292aebc2fd27de30d7b34b48eec0"},
-    {file = "plotly_express-0.3.0.tar.gz", hash = "sha256:d3b116b205ec958828636d6efae66d5aa2b9995b7e41354bd8756e35743bd249"},
+    {file = "plotly_express-0.4.1-py2.py3-none-any.whl", hash = "sha256:5f112922b0a6225dc7c010e3b86295a74449e3eac6cac8faa95175e99b7698ce"},
+    {file = "plotly_express-0.4.1.tar.gz", hash = "sha256:ff73a41ce02fb43d1d8e8fa131ef3e6589857349ca216b941b8f3f862bce0278"},
 ]
 pluggy = [
     {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},
@@ -1962,8 +1975,8 @@ pyyaml = [
     {file = "PyYAML-5.3.tar.gz", hash = "sha256:e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e691615"},
 ]
 radon = [
-    {file = "radon-3.0.3-py2.py3-none-any.whl", hash = "sha256:0cde1953547a164d24420ed6ccdfa18b61f1457b96a2b99ff0de76b22d504a0f"},
-    {file = "radon-3.0.3.tar.gz", hash = "sha256:ee20308ce8bae7a89b067425b63b141a0077632ab318d5288da649c830882b3d"},
+    {file = "radon-4.1.0-py2.py3-none-any.whl", hash = "sha256:0c18111ec6cfe7f664bf9db6c51586714ac8c6d9741542706df8a85aca39b99a"},
+    {file = "radon-4.1.0.tar.gz", hash = "sha256:56082c52206db45027d4a73612e1b21663c4cc2be3760fee769d966fd7efdd6d"},
 ]
 retrying = [
     {file = "retrying-1.3.3.tar.gz", hash = "sha256:08c039560a6da2fe4f2c426d0766e284d3b736e355f8dd24b37367b0bb41973b"},
@@ -2031,8 +2044,8 @@ statsmodels = [
     {file = "statsmodels-0.11.0.tar.gz", hash = "sha256:0a8ee8fc091d9ef1db68f01e6e0079acc0f41671dfbac463131939ca573f8c71"},
 ]
 stevedore = [
-    {file = "stevedore-1.31.0-py2.py3-none-any.whl", hash = "sha256:01d9f4beecf0fbd070ddb18e5efb10567801ba7ef3ddab0074f54e3cd4e91730"},
-    {file = "stevedore-1.31.0.tar.gz", hash = "sha256:e0739f9739a681c7a1fda76a102b65295e96a144ccdb552f2ae03c5f0abe8a14"},
+    {file = "stevedore-1.32.0-py2.py3-none-any.whl", hash = "sha256:a4e7dc759fb0f2e3e2f7d8ffe2358c19d45b9b8297f393ef1256858d82f69c9b"},
+    {file = "stevedore-1.32.0.tar.gz", hash = "sha256:18afaf1d623af5950cc0f7e75e70f917784c73b652a34a12d90b309451b5500b"},
 ]
 testfixtures = [
     {file = "testfixtures-6.12.0-py2.py3-none-any.whl", hash = "sha256:76eef0c048d6c1ad28bb74ae2b28fa9e3ea3a2f42a56715a4102480b8188e588"},
@@ -2050,9 +2063,6 @@ toml = [
 tqdm = [
     {file = "tqdm-4.42.1-py2.py3-none-any.whl", hash = "sha256:fe231261cfcbc6f4a99165455f8f6b9ef4e1032a6e29bccf168b4bf42012f09c"},
     {file = "tqdm-4.42.1.tar.gz", hash = "sha256:251ee8440dbda126b8dfa8a7c028eb3f13704898caaef7caa699b35e119301e2"},
-]
-untokenize = [
-    {file = "untokenize-0.1.1.tar.gz", hash = "sha256:3865dbbbb8efb4bb5eaa72f1be7f3e0be00ea8b7f125c69cbd1f5fda926f37a2"},
 ]
 vulture = [
     {file = "vulture-1.3-py2.py3-none-any.whl", hash = "sha256:54f013779e071c7e1657e3a0b567f7400e046a8beb08585179ffbe762661fb5e"},

@@ -6,7 +6,10 @@ import datetime
 import dash_html_components as html
 import numpy as np
 import pandas as pd
-from dash_charts import coordinate_chart, helpers  # custom_colorscales
+from dash_charts import coordinate_chart  # custom_colorscales
+from dash_charts.dash_helpers import parse_cli_port
+from dash_charts.utils_app import init_app
+from dash_charts.utils_fig import min_graph
 
 
 class CoordinateDemo:
@@ -14,7 +17,7 @@ class CoordinateDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.init_app()
+        self.app = init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
@@ -84,7 +87,7 @@ class CoordinateDemo:
             className='section',
             children=[
                 html.Div([
-                    helpers.min_graph(
+                    min_graph(
                         id='coordinate-chart',
                         figure=self.exCoord.create_figure(
                             df=self.dfDemo,
@@ -97,5 +100,5 @@ class CoordinateDemo:
 
 
 if __name__ == '__main__':
-    port = helpers.parse_cli_args()
+    port = parse_cli_port()
     CoordinateDemo().run(port=port)

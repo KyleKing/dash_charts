@@ -4,10 +4,10 @@ import math
 import numpy as np
 import plotly.graph_objects as go
 
-from . import helpers
+from .utils_fig import MarginalChart
 
 
-class AlignChart(helpers.MarginalChart):
+class AlignChart(MarginalChart):
     """Alignment/Distortion/Positioning Error Chart.
 
     Example Use: analyze inspection data for trends in misalignment, such as in molded parts

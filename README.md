@@ -26,7 +26,7 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
 
     ```py
     import pandas as pd
-    from dash_charts.helpers import min_graph
+    from dash_charts.utils_fig import min_graph
     from dash_charts.pareto_chart import ParetoChart
 
     # Create the data (could be CSV, database, etc.)

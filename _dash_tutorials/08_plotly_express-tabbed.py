@@ -13,7 +13,8 @@ import dash_html_components as html
 import pandas as pd
 import plotly_express as px
 from dash.dependencies import Input, Output
-from dash_charts.helpers import min_graph, opts_dd
+from dash_charts.utils_app import opts_dd
+from dash_charts.utils_fig import min_graph
 
 # ======================================================================================================================
 # Create classes to manage tabs state. Easy to scale up or down

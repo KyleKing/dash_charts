@@ -8,7 +8,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
-from dash_charts.helpers import min_graph
+from dash_charts.utils_fig import min_graph
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 

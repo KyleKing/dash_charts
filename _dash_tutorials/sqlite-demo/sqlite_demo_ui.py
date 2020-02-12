@@ -18,6 +18,7 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
+from dash_charts.utils_fig import min_graph
 
 dbFile = Path.cwd() / 'sqlite-demo.sqlite'
 points = 1000
@@ -29,7 +30,7 @@ app.layout = html.Div([
         className='section',
         children=[
             html.H1(children='SQLite/Dash Testing'),
-            helpers.min_graph(id='sqlite-scatter', animate=True),
+            min_graph(id='sqlite-scatter', animate=True),
             dcc.Interval(id='graph-update', interval=400, n_intervals=0),
         ],
     ),

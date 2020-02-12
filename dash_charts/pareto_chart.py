@@ -3,10 +3,10 @@
 import pandas as pd
 import plotly.graph_objects as go
 
-from . import helpers
+from .utils_fig import CustomChart
 
 
-class ParetoChart(helpers.CustomChart):
+class ParetoChart(CustomChart):
     """Pareto Chart.
 
     Example Use: Tracking ticket occurrences in a ticketing system or associated downtime

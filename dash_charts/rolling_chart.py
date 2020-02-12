@@ -4,10 +4,10 @@ import bottleneck
 import numpy as np
 import plotly.graph_objects as go
 
-from . import helpers
+from .utils_fig import CustomChart
 
 
-class RollingChart(helpers.CustomChart):
+class RollingChart(CustomChart):
     """Rolling Mean and Filled Standard Deviation Chart.
 
     Example Use: Timeseries data

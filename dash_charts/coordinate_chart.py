@@ -8,10 +8,12 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 
-from . import custom_colorscales, helpers
+from . import custom_colorscales
+from .utils_fig import CustomChart
 
 
-class CoordinateChart(helpers.CustomChart):
+
+class CoordinateChart(CustomChart):
     """Coordinate Chart.
 
     Example Use: visualizing a discrete dataset

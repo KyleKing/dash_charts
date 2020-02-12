@@ -9,7 +9,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly_express as px
 from dash.dependencies import Input, Output
-from dash_charts.helpers import min_graph, init_app
+from dash_charts.utils_app import init_app
+from dash_charts.utils_fig import min_graph
 from icecream import ic
 
 app = init_app()

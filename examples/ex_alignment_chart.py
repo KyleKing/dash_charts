@@ -5,9 +5,10 @@ import dash_html_components as html
 import numpy as np
 import pandas as pd
 from dash.dependencies import Input, Output
-from dash_charts import helpers
 from dash_charts.alignment_chart import AlignChart
-from icecream import ic
+from dash_charts.dash_helpers import parse_cli_port
+from dash_charts.utils_app import init_app
+from dash_charts.utils_fig import min_graph
 
 
 class AlignmentDemo:
@@ -15,7 +16,7 @@ class AlignmentDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.init_app()
+        self.app = init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
@@ -62,7 +63,7 @@ class AlignmentDemo:
         # Create centered, 2-column layout
         self.app.layout = html.Div(className='columns', children=[
             html.Div(className='column', children=[
-                html.Div([helpers.min_graph(id='alignment-chart')]),
+                html.Div([min_graph(id='alignment-chart')]),
             ]),
             html.Div(className='column', children=[
                 html.Div(style={
@@ -109,5 +110,5 @@ class AlignmentDemo:
 
 
 if __name__ == '__main__':
-    port = helpers.parse_cli_args()
+    port = parse_cli_port()
     AlignmentDemo().run(port=port)

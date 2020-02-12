@@ -4,8 +4,10 @@ from pathlib import Path
 
 import dash_html_components as html
 import pandas as pd
-from dash_charts import helpers
+from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.pareto_chart import ParetoChart
+from dash_charts.utils_app import init_app
+from dash_charts.utils_fig import min_graph
 from icecream import ic
 
 
@@ -14,7 +16,7 @@ class ParetoDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.init_app()
+        self.app = init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
@@ -61,7 +63,7 @@ class ParetoDemo:
             }, children=[
                 html.H4(children='Example Pareto Chart'),
                 html.Div([
-                    helpers.min_graph(
+                    min_graph(
                         id='pareto-chart',
                         figure=self.exPareto.create_figure(df=self.dfPareto, showCount=True),
                     ),
@@ -71,5 +73,5 @@ class ParetoDemo:
 
 
 if __name__ == '__main__':
-    port = helpers.parse_cli_args()
+    port = parse_cli_port()
     ParetoDemo().run(port=port)

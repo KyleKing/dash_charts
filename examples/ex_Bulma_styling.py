@@ -8,9 +8,10 @@ import dash_html_components as html
 import numpy as np
 import pandas as pd
 import plotly_express as px
-from dash_charts import helpers
-from dash_charts.helpers import min_graph
+from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.rolling_chart import RollingChart
+from dash_charts.utils_app import init_app
+from dash_charts.utils_fig import min_graph
 
 
 class BulmaStylingDemo:
@@ -24,7 +25,7 @@ class BulmaStylingDemo:
 
     def __init__(self):
         """Initialize app."""
-        self.app = helpers.init_app()
+        self.app = init_app()
 
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
@@ -104,5 +105,5 @@ class BulmaStylingDemo:
 
 
 if __name__ == '__main__':
-    port = helpers.parse_cli_args()
+    port = parse_cli_port()
     BulmaStylingDemo().run(port=port)
