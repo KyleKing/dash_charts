@@ -3,52 +3,72 @@
 import shutil
 from pathlib import Path
 
-from dash_charts.base_dodo import PKG_NAME, debug_action, openInBrowser, task_exportReq, task_updateCL  # noqa: F401
+from dash_charts.utils_dodo import (PKG_NAME, debug_action, open_in_browser, task_check_req,  # noqa: F401
+                                    task_export_req, task_update_cl)
 
 # Create list of all tasks run with `poetry run doit`
 DOIT_CONFIG = {'default_tasks': [
-    'exportReq', 'updateCL', 'document', 'commitDocs',
+    'export_req', 'check_req', 'update_cl', 'document',
+    # 'commit_docs',  # Optionally comment to remove from task list
 ]}
 
 # Set documentation paths
-DOC_DIR = Path.cwd() / 'docs'
+DOC_DIR = Path(__file__).parent / 'docs'
 STAGING_DIR = DOC_DIR / PKG_NAME
-GH_PAGES_DIR = Path.cwd() / '../Dash_Charts_gh-pages'
-assert GH_PAGES_DIR.is_dir(), 'Expected directory at: {}'.format(GH_PAGES_DIR)
+
+GH_PAGES_DIR = Path(__file__).parents[1] / 'Dash_Charts_gh-pages'
+if not GH_PAGES_DIR.is_dir():
+    raise RuntimeError(f'Expected directory at: {GH_PAGES_DIR}')
 
 
-def clearDocs():
+def clear_docs():
     """Clear the documentation files from the directories."""
-    for pth in list(STAGING_DIR.glob('*.html')) + list(GH_PAGES_DIR.glob('*.html')):
-        pth.unlink()
+    for dir_path in [STAGING_DIR, GH_PAGES_DIR]:
+        for file_path in dir_path.glob('*.html'):
+            file_path.unlink()
 
 
-def copyDocs():
+def copy_docs():
     """Copy the documentation files from the staging to the output."""
-    for pth in list(STAGING_DIR.glob('*.html')):
-        shutil.copyfile(pth, GH_PAGES_DIR / pth.name)
+    for file_path in list(STAGING_DIR.glob('*.html')):
+        shutil.copyfile(file_path, GH_PAGES_DIR / file_path.name)
 
 
 def task_document():
-    """Build the HTML documentation and push to gh-pages branch."""
+    """Build the HTML documentation and push to gh-pages branch.
+
+    Returns:
+        DoIt task
+
+    """
     # Format the pdoc CLI args
-    args = '{} --html --force --template-dir "{}" --output-dir "{}"'.format(PKG_NAME, DOC_DIR, DOC_DIR)
+    args = f'{PKG_NAME} --html --force --template-dir "{DOC_DIR}" --output-dir "{DOC_DIR}"'
     return debug_action([
-        (clearDocs, ()),
-        'poetry run pdoc3 {}'.format(args),
-        (copyDocs, ()),
+        (clear_docs, ()),
+        f'poetry run pdoc3 {args}',
+        (copy_docs, ()),
     ])
 
 
-def task_commitDocs():
-    """Commit the documentation to gh-pages."""
+def task_commit_docs():
+    """Commit the documentation to gh-pages.
+
+    Returns:
+        DoIt task
+
+    """
     return debug_action([
-        'cd {}; git add .; git commit -m "Chg: update pdoc files"; git push'.format(GH_PAGES_DIR),
+        f'cd {GH_PAGES_DIR}; git add .; git commit -m "Chg: update pdoc files"; git push',
     ])
 
 
-def task_openDocs():
-    """Open the documentation files in the default browser."""
+def task_open_docs():
+    """Open the documentation files in the default browser.
+
+    Returns:
+        DoIt task
+
+    """
     return debug_action([
-        (openInBrowser, (STAGING_DIR / 'index.html',)),
+        (open_in_browser, (STAGING_DIR / 'index.html',)),
     ])
