@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-(unreleased)
-------------
+0.0.3 (2020-02-13)
+------------------
 
 New
 ~~~
@@ -50,10 +50,6 @@ Fix
 Other
 ~~~~~
 - Change: implement OOP for examples. [Kyle King]
-
-
-0.0.3 (2019-06-22)
-------------------
 - Add: CHANGELOG (0.0.3) [Kyle King]
 - Refac: use class to manage app variables. [Kyle King]
 - Add: additional px chart types. [Kyle King]
