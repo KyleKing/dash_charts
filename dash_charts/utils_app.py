@@ -9,6 +9,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
+# FIXME: All "Returns" should have a type with ":" for pdoc
+
 ASSETS_DIR = Path(__file__).parent / 'assets'
 """Path to the static files directory."""
 

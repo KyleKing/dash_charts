@@ -27,6 +27,8 @@ New
 
 Changes
 ~~~~~~~
+- Update imports for newly split helpers file. [Kyle King]
+- Split helpers into charts and app utility files. [Kyle King]
 - Select port at CLI and more doc updates. [Kyle King]
 - Update requirements. [Kyle King]
 - Chg: start converting to snake_case and rethinking app structure @WIP.

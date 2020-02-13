@@ -9,12 +9,15 @@ from dash_charts.utils_dodo import (PKG_NAME, debug_action, open_in_browser, tas
 # Create list of all tasks run with `poetry run doit`
 DOIT_CONFIG = {'default_tasks': [
     'export_req', 'check_req', 'update_cl', 'document',
-    # 'commit_docs',  # Optionally comment to remove from task list
+    'open_docs',  # Comment on/off as needed
+    'commit_docs',  # Comment on/off as needed
 ]}
 
 # Set documentation paths
-DOC_DIR = Path(__file__).parent / 'docs'
+GIT_DIR = Path(__file__).parent
+DOC_DIR = GIT_DIR / 'docs'
 STAGING_DIR = DOC_DIR / PKG_NAME
+TMP_EXAMPLES_DIR = GIT_DIR / 'dash_charts/0EX'
 
 GH_PAGES_DIR = Path(__file__).parents[1] / 'Dash_Charts_gh-pages'
 if not GH_PAGES_DIR.is_dir():
@@ -28,11 +31,23 @@ def clear_docs():
             file_path.unlink()
 
 
-def copy_docs():
+def stage_documentation():
     """Copy the documentation files from the staging to the output."""
     for file_path in list(STAGING_DIR.glob('*.html')):
         shutil.copyfile(file_path, GH_PAGES_DIR / file_path.name)
 
+def stage_examples():
+    """Format the code examples as docstrings to be loaded into the documentation."""
+    TMP_EXAMPLES_DIR.mkdir(exist_ok=False)
+    (TMP_EXAMPLES_DIR / '__init__.py').write_text('"""Code Examples (documentation-only, not in `dash_charts`)."""')
+    for file_path in (GIT_DIR / 'examples').glob('*.py'):
+        content = file_path.read_text().replace('"', r'\"')
+        dest_fn = TMP_EXAMPLES_DIR / file_path.name
+        dest_fn.write_text(f'"""File: `{file_path.relative_to(GIT_DIR)}`\n```\n{content}\n```\n"""')
+
+def clear_examples():
+    """Clear the examples from within the dash_charts package."""
+    shutil.rmtree(TMP_EXAMPLES_DIR)
 
 def task_document():
     """Build the HTML documentation and push to gh-pages branch.
@@ -45,8 +60,10 @@ def task_document():
     args = f'{PKG_NAME} --html --force --template-dir "{DOC_DIR}" --output-dir "{DOC_DIR}"'
     return debug_action([
         (clear_docs, ()),
+        (stage_examples, ()),
         f'poetry run pdoc3 {args}',
-        (copy_docs, ()),
+        (clear_examples, ()),
+        (stage_documentation, ()),
     ])
 
 

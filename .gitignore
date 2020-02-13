@@ -109,5 +109,6 @@ venv.bak/
 # ======
 # Custom
 .vscode/*
-docs/dash_charts/*.html
 *.sqlite
+
+docs/dash_charts/*

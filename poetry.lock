@@ -1446,6 +1446,7 @@ watchdog = ["watchdog"]
 [[package]]
 category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
+marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
