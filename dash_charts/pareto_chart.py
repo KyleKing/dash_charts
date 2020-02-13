@@ -7,76 +7,71 @@ from .utils_fig import CustomChart
 
 
 class ParetoChart(CustomChart):
-    """Pareto Chart.
+    """Pareto Chart: both bar and line graph chart for strategic decision making."""
 
-    Example Use: Tracking ticket occurrences in a ticketing system or associated downtime
+    pareto_colors = {'bar': '#4682b4', 'line': '#b44646'}
+    """Default colors for pareto bar and line respectively."""
 
-    """
+    cap_categories = 20
+    """Maximum number of categories (bars). Default is 20."""
 
-    def __init__(self, title='', x_label='', y_label='', cust_layout_params=(), colors=('#4682b4', '#b44646'), limitCat=20):
-        """Initialize chart parameters.
-
-        title -- optional, string title for chart. Defaults to blank
-        x_label/y_label -- optional, X and Y Axis axis titles. Defaults to blank
-        cust_layout_params -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
-        colors -- optional color scheme. 1st value is for the bar color. 2nd is for cum percentage
-        limitCat -- set the maximum number of categories. Defaults to 20
-
-        """
-        super().__init__(title, x_label, y_label, cust_layout_params)
-        self.colors = colors
-        self.limitCat = limitCat
-
-    def create_traces(self, df, showCount=True):
+    def create_traces(self, raw_df, *, show_count=True):
         """Return traces for plotly chart.
 
-        df -- Pandas dataframe with keys (categories, percent)
+        Args:
+            raw_df: pandas dataframe with at minimum the two below columns
+                value: float
+                categories: str
+            show_count: boolean and if True, will show numeric count on each bar. Default is True.
+
+        Returns:
+            list: Dash chart traces
+
+        Raises:
+            RuntimeError: if the `raw_df` is missing any necessary columns
 
         """
         # Verify data format
-        expecK = ['value', 'categories']
-        foundK = df.keys()
-        assert all([_k in foundK for _k in expecK]), 'df must have keys {}'.format(expecK)
-        # Compress dataframe to only the unique values
-        dfP = None
-        for cat in df['categories'].unique():
-            data = {'value': [df.loc[df['categories'] == cat]['value'].sum()], 'label': [cat]}
-            if showCount:
-                data['counts'] = df['categories'].value_counts()[cat]
-            dfRow = pd.DataFrame(data=data)
-            dfP = dfRow if dfP is None else dfP.append(dfRow)
-        # Sort and calculate percentage
-        dfP = dfP.sort_values(by=['value'], ascending=False).head(self.limitCat)
-        dfP = dfP[dfP['value'] != 0]
-        dfP['cumPer'] = dfP['value'].divide(dfP['value'].sum()).cumsum()
-        # Add auto-generated count to each bar
-        textKwargs = {'text': dfP['counts'], 'textposition': 'auto'} if showCount else {}
+        min_keys = ['value', 'categories']
+        all_keys = raw_df.keys()
+        if len([_k for _k in min_keys if _k in all_keys]) != len(min_keys):
+            raise RuntimeError(f'`raw_df` must have keys {min_keys}. Found: {all_keys}')
 
-        chartData = [
-            go.Bar(
-                hoverinfo='y',
-                marker={'color': self.colors[0]},
-                name='Raw Value',
-                x=dfP['label'],
-                y=dfP['value'],
-                yaxis='y1',
-                **textKwargs,
-            ),
+        # Created compressed Pareto dataframe of only the unique values
+        df_p = None
+        for cat in raw_df['categories'].unique():
+            df_row = pd.DataFrame(data={
+                'value': [raw_df.loc[raw_df['categories'] == cat]['value'].sum()],
+                'label': [cat],
+                'counts': raw_df['categories'].value_counts()[cat],
+            })
+            df_p = df_row if df_p is None else df_p.append(df_row)
+        # Sort and calculate percentage
+        df_p = df_p.sort_values(by=['value'], ascending=False).head(self.cap_categories)
+        df_p = df_p[df_p['value'] != 0]
+        df_p['cumPer'] = df_p['value'].divide(df_p['value'].sum()).cumsum()
+
+        # Create the traces and optionally add the count to the bar chart
+        text_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if show_count else {}
+        return [
+            go.Bar(hoverinfo='y', yaxis='y1', name='Raw Value',
+                   marker={'color': self.pareto_colors['bar']},
+                   x=df_p['label'], y=df_p['value'], **text_kwargs,
+                   ),
         ] + [
-            go.Scatter(
-                hoverinfo='y',
-                line={'color': self.colors[1]},
-                mode='lines',
-                name='Cumulative Percentage',
-                x=dfP['label'],
-                y=dfP['cumPer'],
-                yaxis='y2',
-            ),
+            go.Scatter(hoverinfo='y', yaxis='y2', name='Cumulative Percentage',
+                       marker={'color': self.pareto_colors['line']}, mode='lines',
+                       x=df_p['label'], y=df_p['cumPer'],
+                       ),
         ]
-        return chartData
 
     def create_layout(self):
-        """Override the default layout and add additional settings."""
+        """Override the standard layout and add additional settings.
+
+        Returns:
+            dict: layout for Dash figure
+
+        """
         layout = super().create_layout()
         layout['legend'] = {}
         layout['showlegend'] = False

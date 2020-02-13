@@ -49,12 +49,12 @@ class AppBase:
     name = None
     """Child class must specify a name for the application"""
 
-    uniq_ids = {}
+    ids = {}
     """Lookup dictionary used to track each element in UI that requires a callback"""
 
     # In child class, declare the rest of the static data members here
 
-    def __init__(self, app=None):
+    def __init__(self, *, app=None):
         """Initialize app and initial data members. Should be inherited in child class and called with super().
 
         Args:
@@ -76,7 +76,7 @@ class AppBase:
 
         """
         for base_id in base_ids:
-            self.uniq_ids[base_id] = f'{self.name}-{base_id}'
+            self.ids[base_id] = f'{self.name}-{base_id}'
 
     def run(self, **dash_kwargs):
         """Run the application passing any kwargs to Dash.
@@ -88,7 +88,7 @@ class AppBase:
             RuntimeError: if child class has not called `self.register_uniq_ids`
 
         """
-        if not self.uniq_ids.keys():
+        if not self.ids.keys():
             raise RuntimeError('Child class must first call `self.register_uniq_ids(__)` before self.run()')
 
         # Register the charts, the app layout, the callbacks, then start the Dash server

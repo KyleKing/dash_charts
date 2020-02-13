@@ -24,7 +24,7 @@ def min_graph(**kwargs):
     return dcc.Graph(config={'displayModeBar': False}, **kwargs)
 
 
-def format_callback(lookup, outputs, inputs, states):
+def format_app_callback(lookup, outputs, inputs, states):
     """Format list of [Output, Input, State] for `@app.callback()`.
 
     Args:
@@ -42,25 +42,30 @@ def format_callback(lookup, outputs, inputs, states):
             [State(lookup[_id], key) for _id, key in states])
 
 
-def map_args(raw_args, inputs, states):
+def map_args(lookup, raw_args, inputs, states):
     """Map the function arguments into a dictionary with keys for the unique input and state names.
 
     Args:
+        lookup: dict with generic key that maps to unique string
         raw_args: list of arguments passed to callback
-        inputs: list of unique input element ids
-        states: list of unique state element ids
+        inputs: list of input element
+        states: list of state element
 
     Returns:
-        dict: arguments mapped to the unique ids
+        dict: with keys of the unique id, group type, and arg value
 
     """
     input_args = raw_args[:len(inputs)]
     state_args = raw_args[len(inputs):]
 
-    results = {}
-    for keys, args in ((inputs, input_args), (states, state_args)):
-        for arg_idx, uniq_id, key in enumerate(keys):
-            results[uniq_id].update([key, args[arg_idx]])
+    # TODO: simplify this logic. Accessing `arg_in[self.ids[key]][arg_type]` is too long...
+    results = [{}, {}]
+    for group_idx, (groups, args) in enumerate([(inputs, input_args), (states, state_args)]):
+        for arg_idx, (key, arg_type) in enumerate(groups):
+            uniq = lookup[key]
+            if uniq not in results:
+                results[group_idx][uniq] = {}
+            results[group_idx][lookup[key]][arg_type] = args[arg_idx]
     return results
 
 
@@ -69,19 +74,19 @@ class CustomChart:
 
     axis_range = {}  # If None or empty dict, will enable autorange. Add X/Y keys to set range
 
-    def __init__(self, title, x_label, y_label, cust_layout_params=()):
+    def __init__(self, *, title, x_label, y_label, layout_overrides=()):
         """Initialize Custom Dash Chart and store parameters as data members.
 
         Args:
             title: String title for chart  (can be an empty string for blank)
             x_label: XAxis string label (can be an empty string for blank)
             y_label: YAxis string label (can be an empty string for blank)
-            cust_layout_params: Custom parameters in format [ParentKey, SubKey, Value] to customize 'go.layout'
+            layout_overrides: Custom parameters in format [ParentKey, SubKey, Value] to customize 'go.layout'
 
         """
         self.title = title
         self.labels = {'x': x_label, 'y': y_label}
-        self.cust_layout_params = cust_layout_params
+        self.layout_overrides = layout_overrides
 
     def create_figure(self, raw_df, **kwargs_data):
         """Create the figure dictionary.
@@ -154,7 +159,7 @@ class CustomChart:
             dict: layout for Dash figure
 
         """
-        for parent_key, sub_key, value in self.cust_layout_params:
+        for parent_key, sub_key, value in self.layout_overrides:
             if sub_key is not None:
                 layout[parent_key][sub_key] = value
             else:
