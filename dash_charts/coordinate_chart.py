@@ -20,17 +20,17 @@ class CoordinateChart(CustomChart):
 
     """
 
-    def __init__(self, title='', x_label='', y_label='', cust_layout_params=(), gridDims=None, coord=None, titles=None):
+    def __init__(self, title='', x_label='', y_label='', layout_overrides=(), gridDims=None, coord=None, titles=None):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
         x_label/y_label -- optional, X and Y Axis axis titles. Defaults to blank
-        cust_layout_params -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+        layout_overrides -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
         gridDims -- tuple of two values with the rectangular grid size
         coord -- lists of the x/y coordinates from the top left corner of a single grid rectangle
 
         """
-        super().__init__(title, x_label, y_label, cust_layout_params)
+        super().__init__(title, x_label, y_label, layout_overrides)
         # Calculate each point in the grid
         self.width = float(np.max(coord['x']) + np.min(coord['x']))
         self.height = float(np.max(coord['y']) + np.min(coord['y']))

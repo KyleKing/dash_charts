@@ -24,7 +24,7 @@ class AlignmentDemo:
             title='Positioning Error Analysis',
             x_label='X-Axis Measurements (µm)',
             y_label='Y-Axis Measurements (µm)',
-            cust_layout_params=(
+            layout_overrides=(
                 ('height', None, 800),
                 ('width', None, 1000),
             ),

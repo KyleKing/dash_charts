@@ -30,7 +30,7 @@ class CoordinateDemo:
 
         self.exCoord = coordinate_chart.CoordinateChart(
             title='Example Coordinate Chart',
-            cust_layout_params=(
+            layout_overrides=(
                 ('height', None, 650),
                 ('width', None, 750),
             ),

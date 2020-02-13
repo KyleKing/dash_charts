@@ -6,8 +6,6 @@ from pathlib import Path
 import toml
 from icecream import ic
 
-# TODO: Add function to set git tags for version control
-
 TOML_PTH = Path(__file__).parents[1] / 'pyproject.toml'
 """Path to `pyproject.toml` file."""
 
