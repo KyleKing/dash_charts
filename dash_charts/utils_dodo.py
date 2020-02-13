@@ -37,7 +37,7 @@ def debug_action(actions, verbosity=2):
         verbosity: 2 is maximum, while 0 is disabled
 
     Returns:
-        dict: keys `actions`, `title`, and `verbosity` for DoIt task
+        dict: keys `actions`, `title`, and `verbosity` for dict: DoIt task
 
     """
     return {
@@ -61,7 +61,7 @@ def task_export_req():
     """Create a `requirements.txt` file for non-Poetry users and for Github security tools.
 
     Returns:
-        DoIt task
+        dict: DoIt task
 
     """
     req_path = TOML_PTH.parent / 'requirements.txt'
@@ -82,7 +82,7 @@ def task_check_req():
     """Use pur to check for the latest versions of available packages.
 
     Returns:
-        DoIt task
+        dict: DoIt task
 
     """
     req_path = TOML_PTH.parent / 'requirements.txt'
@@ -98,7 +98,28 @@ def task_update_cl():
     """Update a Changelog file with the raw Git history.
 
     Returns:
-        DoIt task
+        dict: DoIt task
 
     """
     return debug_action(['gitchangelog > CHANGELOG-raw.md'])
+
+
+def task_create_tag():
+    """Create a git tag based on the version in pyproject.toml."""
+    version = toml.load(TOML_PTH)['tool']['poetry']['version']
+    message = "New Revision from PyProject.toml"
+    return debug_action([
+        f'git tag -a {version} -m "{message}"',
+        'git tag -n10 --list',
+        'git push origin --tags',
+    ])
+
+
+def task_remove_tag():
+    """Delete tag for current version in pyproject.toml."""
+    version = toml.load(TOML_PTH)['tool']['poetry']['version']
+    return debug_action([
+        f'git tag -d "{version}"',
+        'git tag -n10 --list',
+        f'git push origin :refs/tags/{version}',
+    ])

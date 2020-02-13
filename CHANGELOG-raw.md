@@ -7,6 +7,7 @@ Changelog
 
 New
 ~~~
+- Show examples in documentation. [Kyle King]
 - Base application class. [Kyle King]
 - Add Tabbed Application GUI from PFE. [Kyle King]
 - Add annotations to rolling chart. [Kyle King]

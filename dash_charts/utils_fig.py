@@ -18,7 +18,7 @@ def min_graph(**kwargs):
         kwargs: any kwargs to pass to the dash initializer other than `assets_folder`
 
     Returns:
-        Dash `dcc.Graph` object
+        dict: Dash `dcc.Graph` object
 
     """
     return dcc.Graph(config={'displayModeBar': False}, **kwargs)
@@ -34,7 +34,7 @@ def format_callback(lookup, outputs, inputs, states):
         states: list of tuples with id and key
 
     Returns:
-        list of lists for `@app.callback()`
+        lit: (of lists) for `Output`, `Input`, and `State` to be passed to `@app.callback()`
 
     """
     return ([Output(lookup[_id], key) for _id, key in outputs],
@@ -51,7 +51,7 @@ def map_args(raw_args, inputs, states):
         states: list of unique state element ids
 
     Returns:
-        Returns dictionary with arguments mapped to the unique ids
+        dict: arguments mapped to the unique ids
 
     """
     input_args = raw_args[:len(inputs)]
@@ -91,7 +91,7 @@ class CustomChart:
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Returns:
-            Dictionary with keys `data` and `layout` for Dash
+            dict: keys `data` and `layout` for Dash
 
         """
         return {
@@ -174,7 +174,7 @@ class MarginalChart(CustomChart):
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Returns:
-            Dash figure object
+            dict: Dash figure object
 
         """
         # Initialize figure with subplots

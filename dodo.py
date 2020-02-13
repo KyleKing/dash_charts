@@ -1,17 +1,20 @@
-"""DoIt Script. Run with `poetry run doit` or `poetry run doit run exportReq`."""
+"""DoIt Script. Run all tasks with `poetry run doit` or single task with `poetry run doit run update_cl`."""
 
 import shutil
 from pathlib import Path
 
 from dash_charts.utils_dodo import (PKG_NAME, debug_action, open_in_browser, task_check_req,  # noqa: F401
-                                    task_export_req, task_update_cl)
+                                    task_create_tag, task_export_req, task_remove_tag, task_update_cl)
 
 # Create list of all tasks run with `poetry run doit`
-DOIT_CONFIG = {'default_tasks': [
-    'export_req', 'check_req', 'update_cl', 'document',
-    'open_docs',  # Comment on/off as needed
-    'commit_docs',  # Comment on/off as needed
-]}
+DOIT_CONFIG = {
+    'action_string_formatting': 'old',  # Required for keyword-based tasks
+    'default_tasks': [
+        'export_req', 'check_req', 'update_cl', 'document',
+        'open_docs',  # Comment on/off as needed
+        'commit_docs',  # Comment on/off as needed
+    ],
+}
 
 # Set documentation paths
 GIT_DIR = Path(__file__).parent
@@ -41,9 +44,10 @@ def stage_examples():
     TMP_EXAMPLES_DIR.mkdir(exist_ok=False)
     (TMP_EXAMPLES_DIR / '__init__.py').write_text('"""Code Examples (documentation-only, not in `dash_charts`)."""')
     for file_path in (GIT_DIR / 'examples').glob('*.py'):
-        content = file_path.read_text().replace('"', r'\"')
+        content = file_path.read_text().replace('"', r'\"')  # read and escape quotes
         dest_fn = TMP_EXAMPLES_DIR / file_path.name
-        dest_fn.write_text(f'"""File: `{file_path.relative_to(GIT_DIR)}`\n```\n{content}\n```\n"""')
+        docstring = f'From file: `{file_path.relative_to(GIT_DIR.parent)}`'
+        dest_fn.write_text(f'"""{docstring}\n```\n{content}\n```\n"""')
 
 def clear_examples():
     """Clear the examples from within the dash_charts package."""
@@ -53,7 +57,7 @@ def task_document():
     """Build the HTML documentation and push to gh-pages branch.
 
     Returns:
-        DoIt task
+        dict: DoIt task
 
     """
     # Format the pdoc CLI args
@@ -71,7 +75,7 @@ def task_commit_docs():
     """Commit the documentation to gh-pages.
 
     Returns:
-        DoIt task
+        dict: DoIt task
 
     """
     return debug_action([
@@ -83,7 +87,7 @@ def task_open_docs():
     """Open the documentation files in the default browser.
 
     Returns:
-        DoIt task
+        dict: DoIt task
 
     """
     return debug_action([
