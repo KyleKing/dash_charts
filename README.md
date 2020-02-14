@@ -5,23 +5,23 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
 <!-- TOC -->
 
 - [Dash_Charts](#dash_charts)
-    - [Quick Start](#quick-start)
-    - [Local Development](#local-development)
-    - [Example Charts and Documentation](#example-charts-and-documentation)
-        - [Pareto Chart](#pareto-chart)
-        - [Rolling Mean/STD Chart](#rolling-meanstd-chart)
-        - [Coordinate Chart](#coordinate-chart)
-        - [Alignment Chart](#alignment-chart)
-        - [Tabbed Application](#tabbed-application)
-    - [External Links](#external-links)
-    - [TODO](#todo)
+  - [Quick Start](#quick-start)
+  - [Local Development](#local-development)
+  - [Example Charts and Documentation](#example-charts-and-documentation)
+    - [Pareto Chart](#pareto-chart)
+    - [Rolling Mean/STD Chart](#rolling-meanstd-chart)
+    - [Coordinate Chart](#coordinate-chart)
+    - [Alignment Chart](#alignment-chart)
+    - [Tabbed Application](#tabbed-application)
+  - [External Links](#external-links)
+  - [TODO](#todo)
 
 <!-- /TOC -->
 
 ## Quick Start
 
-1. Install Poetry: https://github.com/sdispater/poetry
-1. Not on PyPi sp can't use `pip install dash_charts`. Instead, install from Github with Poetry: `poetry add dash_charts --git https://github.com/KyleKing/dash_charts.git`
+1. Install Poetry: [https://github.com/sdispater/poetry](https://github.com/sdispater/poetry)
+1. Not on PyPi so can't use `pip install dash_charts`. Instead, install from Github with Poetry: `poetry add dash_charts --git https://github.com/KyleKing/dash_charts.git`
 1. Then use in python:
 
     ```py
@@ -98,27 +98,27 @@ Useful for putting together a multi-page complex application.
 Useful Dash reference links
 
 - [Official Dash Docs](https://dash.plot.ly)
-    - Using [URLs in Dash](https://dash.plot.ly/urls)
+  - Using [URLs in Dash](https://dash.plot.ly/urls)
 - [Official Plotly Docs](https://plot.ly/python/) (Searchable)
 - Example Apps
-    - Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app
-    - Pleasant dark app from Dash-Bio, [Circos](https://github.com/plotly/dash-bio/blob/master/tests/dashbio_demos/app_circos.py)
-    - All [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
+  - Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app
+  - Pleasant dark app from Dash-Bio, [Circos](https://github.com/plotly/dash-bio/blob/master/tests/dashbio_demos/app_circos.py)
+  - All [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
 - Cool Callback Chain debugger [dash_callback_chain](https://github.com/nicolaskruchten/dash_callback_chain)
 - [Awesome CSS Frameworks](https://github.com/troxler/awesome-css-frameworks)
-    - Bulma Themes
-        - [Bulma Flatly Theme preview](https://jenil.github.io/bulmaswatch/flatly/)
-        - [Bulma Customizer](https://bulma-customizer.bstash.io/)
-        - [Admin Template](https://bulmatemplates.github.io/bulma-templates/)
+  - Bulma Themes
+    - [Bulma Flatly Theme preview](https://jenil.github.io/bulmaswatch/flatly/)
+    - [Bulma Customizer](https://bulma-customizer.bstash.io/)
+    - [Admin Template](https://bulmatemplates.github.io/bulma-templates/)
 
 ## TODO
 
 - Add data table
-    - Checkout the v2 Table Filtering in Dash 0.43 / https://dash.plot.ly/datatable
-    - [Filtering Syntax](https://dash.plot.ly/datatable/filtering)
+  - Checkout the v2 Table Filtering in Dash 0.43 / [https://dash.plot.ly/datatable](https://dash.plot.ly/datatable)
+  - [Filtering Syntax](https://dash.plot.ly/datatable/filtering)
 - TODO: Add the 3D version of the Coordinate chart
-    - [Ribbon](https://plot.ly/python/v3/ribbon-plots/)
-    - [Surface](https://plot.ly/python/3d-surface-plots/)
+  - [Ribbon](https://plot.ly/python/v3/ribbon-plots/)
+  - [Surface](https://plot.ly/python/3d-surface-plots/)
 - TODO: Enable stacked subplots for multiple years of calendar charts (Subplot title is year)
 - Add a tree map
 - Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)

@@ -42,30 +42,62 @@ def format_app_callback(lookup, outputs, inputs, states):
             [State(lookup[_id], key) for _id, key in states])
 
 
-def map_args(lookup, raw_args, inputs, states):
-    """Map the function arguments into a dictionary with keys for the unique input and state names.
+def map_args(raw_args, inputs, states):
+    """Map the function arguments into a dictionary with keys for the input and state names.
 
     Args:
-        lookup: dict with generic key that maps to unique string
         raw_args: list of arguments passed to callback
-        inputs: list of input element
-        states: list of state element
+        inputs: list of input elements. May be empty list
+        states: list of state elements. May be empty list
 
     Returns:
-        dict: with keys of the unique id, group type, and arg value
+        dict: with keys of the id, group type, and arg value (`args_in[key][arg_type]`)
+
+    Alternatively, just unwrap arguments positionally with:
+    ```py
+    click_data, input_name = args[:len(inputs)]
+    data_cache = args[len(inputs):]
+    ```
 
     """
     input_args = raw_args[:len(inputs)]
     state_args = raw_args[len(inputs):]
 
-    # TODO: simplify this logic. Accessing `arg_in[self.ids[key]][arg_type]` is too long...
+    # TODO: These variable names could be improved (group > ?)
+    # TODO: Can I use `results = dict(zip(keys, values))`
     results = [{}, {}]
     for group_idx, (groups, args) in enumerate([(inputs, input_args), (states, state_args)]):
         for arg_idx, (key, arg_type) in enumerate(groups):
-            uniq = lookup[key]
-            if uniq not in results:
-                results[group_idx][uniq] = {}
-            results[group_idx][lookup[key]][arg_type] = args[arg_idx]
+            if key not in results[group_idx]:
+                results[group_idx][key] = {}
+            results[group_idx][key][arg_type] = args[arg_idx]
+    return results
+
+
+def map_outputs(outputs, new_elements):
+    """TODO: Document this method...
+
+    Args:
+        outputs: list of output elements
+        new_elements: list of state element
+
+    Returns:
+        list: ordered list to match the order of outputs
+
+    Alternatively, for simple cases of 1-2 outputs, just return the list with:
+    ```py
+    return [new_element_1, new_element_2]
+    ```
+
+    """
+    # TODO: Need better variable names. Can I use dict(zip())?
+    tmp = {}
+    for key_1, key_2, value in new_elements:
+        tmp[key_1] = {key_2: value}
+
+    results = []
+    for group_key, arg_key in outputs:
+        results.append(tmp[group_key][arg_key])
     return results
 
 

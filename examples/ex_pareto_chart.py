@@ -7,7 +7,7 @@ import pandas as pd
 from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.pareto_chart import ParetoChart
 from dash_charts.utils_app import AppBase
-from dash_charts.utils_fig import format_app_callback, map_args, min_graph
+from dash_charts.utils_fig import map_args, map_outputs, min_graph
 from icecream import ic
 
 
@@ -79,15 +79,15 @@ class ParetoDemo(AppBase):
         inputs = ((self.chart_id, 'clickData'), )
         states = ()
 
-        # TODO: Make this simpler - maybe format_app_callback can be a decorator?
-        @self.app.callback(*format_app_callback(self.ids, outputs, inputs, states))
+        @self.callback(outputs, inputs, states)
         def update_chart(*args):
-            a_in, a_states = map_args(self.ids, args, inputs, states)
-            ic(a_in[self.ids[self.chart_id]])  # clickData
-            return [self.main_chart.create_figure(raw_df=self.raw_data, show_count=True)]
-            # # Better return outputs
-            # new_figure = self.main_chart.create_figure(raw_df=self.raw_data, show_count=True)
-            # return map_outputs({self.chart_id: new_figure})
+            # Example handling input arguments
+            a_in, a_states = map_args(args, inputs, states)
+            ic(a_in[self.chart_id]['clickData'])
+
+            # Example mapping output results
+            new_figure = self.main_chart.create_figure(raw_df=self.raw_data, show_count=True)
+            return map_outputs(outputs, [(self.chart_id, 'figure', new_figure)])
 
 
 if __name__ == '__main__':

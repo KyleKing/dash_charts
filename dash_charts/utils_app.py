@@ -9,6 +9,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
+from .utils_fig import format_app_callback
+
 ASSETS_DIR = Path(__file__).parent / 'assets'
 """Path to the static files directory."""
 
@@ -114,6 +116,15 @@ class AppBase:
 
         """
         return html.Div(children=['Welcome to the BaseApp!'])
+
+    def callback(self, outputs, inputs, states):
+        """Programmatically call the app callback.
+
+        Args:
+            TODO
+
+        """
+        return self.app.callback(*format_app_callback(self.ids, outputs, inputs, states))
 
     def register_callbacks(self):
         """Register the chart callbacks.

@@ -2,6 +2,21 @@ Changelog
 =========
 
 
+(unreleased)
+------------
+
+New
+~~~
+- First refactored example with Pareto chart. [Kyle King]
+
+Changes
+~~~~~~~
+- Rename examples files to be different from package files. [Kyle King]
+- Update data members based on Pareto changes. [Kyle King]
+- Experimented and semi-broke 0.0.3 tag reference. [Kyle King]
+- Improve documentation. [Kyle King]
+
+
 0.0.3 (2020-02-13)
 ------------------
 
