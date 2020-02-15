@@ -19,10 +19,8 @@ class ParetoChart(CustomChart):
         """Return traces for plotly chart.
 
         Args:
-            raw_df: pandas dataframe with at minimum the two below columns
-                value: float
-                categories: str
-            show_count: boolean and if True, will show numeric count on each bar. Default is True.
+            raw_df: pandas dataframe with at minimum the two columns `value: float` and `categories: str`
+            show_count: boolean and if True, will show numeric count on each bar. Default is True
 
         Returns:
             list: Dash chart traces
@@ -52,17 +50,15 @@ class ParetoChart(CustomChart):
         df_p['cumPer'] = df_p['value'].divide(df_p['value'].sum()).cumsum()
 
         # Create the traces and optionally add the count to the bar chart
-        text_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if show_count else {}
+        count_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if show_count else {}
         return [
             go.Bar(hoverinfo='y', yaxis='y1', name='Raw Value',
                    marker={'color': self.pareto_colors['bar']},
-                   x=df_p['label'], y=df_p['value'], **text_kwargs,
-                   ),
+                   x=df_p['label'], y=df_p['value'], **count_kwargs),
         ] + [
             go.Scatter(hoverinfo='y', yaxis='y2', name='Cumulative Percentage',
                        marker={'color': self.pareto_colors['line']}, mode='lines',
-                       x=df_p['label'], y=df_p['cumPer'],
-                       ),
+                       x=df_p['label'], y=df_p['cumPer']),
         ]
 
     def create_layout(self):

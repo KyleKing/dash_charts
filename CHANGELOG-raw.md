@@ -11,6 +11,10 @@ New
 
 Changes
 ~~~~~~~
+- Reduce complexity for map_args. [Kyle King]
+- Refactor utilities and initilze AppWithTabs. [Kyle King]
+- Update TODO annotations. [Kyle King]
+- Refactor the app.callback utilities. [Kyle King]
 - Rename examples files to be different from package files. [Kyle King]
 - Update data members based on Pareto changes. [Kyle King]
 - Experimented and semi-broke 0.0.3 tag reference. [Kyle King]

@@ -62,7 +62,7 @@ class AlignChart(MarginalChart):
         df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
         stretch -- optional, float value to change the spacing between ideal and measured coordinates
 
-        ```py
+        ```python
         # Example dataframe
         df = pd.DataFrame(data={
             'x': [1, 2, 1, 2],

@@ -34,7 +34,7 @@ def format_app_callback(lookup, outputs, inputs, states):
         states: list of tuples with app_id and property name
 
     Returns:
-        list of lists: in order `(Outputs, Inputs, States)` for `@app.callback()`. Some sublists may be empty
+        list: list[lists] in order `(Outputs, Inputs, States)` for `@app.callback()`. Some sublists may be empty
 
     """
     return ([Output(component_id=lookup[_id], component_property=prop) for _id, prop in outputs],
@@ -45,16 +45,9 @@ def format_app_callback(lookup, outputs, inputs, states):
 def map_args(raw_args, inputs, states):
     """Map the function arguments into a dictionary with keys for the input and state names.
 
-    Args:
-        raw_args: list of arguments passed to callback
-        inputs: list of input components. May be empty list
-        states: list of state components. May be empty list
-
-    Returns:
-        dict: with keys of the app_id, property, and arg value (`args_in[key][arg_type]`)
-
     For situations where the order of inputs and states may change, use this function to verbosely define the inputs:
-    ```py
+
+    ```python
     args_in, args_state = map_args(raw_args, inputs, states)
     click_data = args_in[self.main_figure_id]['clickData']
     n_clicks = args_in[self.randomize_button_id]['n_clicks']
@@ -62,10 +55,19 @@ def map_args(raw_args, inputs, states):
     ```
 
     Alternatively, for use cases that are unlikely to change the order of Inputs/State, unwrap positionally with:
-    ```py
+
+    ```python
     click_data, n_clicks = args[:len(inputs)]
     data_cache = args[len(inputs):]
     ```
+
+    Args:
+        raw_args: list of arguments passed to callback
+        inputs: list of input components. May be empty list
+        states: list of state components. May be empty list
+
+    Returns:
+        dict: with keys of the app_id, property, and arg value (`args_in[key][arg_type]`)
 
     """
     # Split args into groups of inputs/states
@@ -86,6 +88,12 @@ def map_args(raw_args, inputs, states):
 def map_outputs(outputs, element_info):
     """Return properly ordered list of new Dash elements based on the order of outputs.
 
+    Alternatively, for simple cases of 1-2 outputs, just return the list with:
+
+    ```python
+    return [new_element_1, new_element_2]
+    ```
+
     Args:
         outputs: list of output components
         element_info: list of tuples with keys `(app_id, prop, element)`
@@ -95,11 +103,6 @@ def map_outputs(outputs, element_info):
 
     Raises:
         RuntimeError: Check that the number of outputs and the number of element_info match
-
-    Alternatively, for simple cases of 1-2 outputs, just return the list with:
-    ```py
-    return [new_element_1, new_element_2]
-    ```
 
     """
     if len(outputs) != len(element_info):
@@ -157,14 +160,14 @@ class CustomChart:
     def create_traces(self, raw_df, **kwargs_data):
         """Return traces for plotly chart.
 
+        Should return, list: trace data points. List may be empty
+
         Args:
             raw_df: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Raises:
             NotImplementedError: Must be overridden by child class
-
-        Should return, list: trace data points. List may be empty
 
         """
         raise NotImplementedError('create_traces must be implemented by child class')
@@ -262,14 +265,14 @@ class MarginalChart(CustomChart):
     def create_traces(self, raw_df, **kwargs_data):
         """Return traces for the main plotly chart.
 
+        Should return, list: trace data points. List may be empty
+
         Args:
             raw_df: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Raises:
             NotImplementedError: Must be overridden by child class
-
-        Should return, list: trace data points. List may be empty
 
         """
         raise NotImplementedError('create_traces must be implemented by child class')
@@ -277,14 +280,14 @@ class MarginalChart(CustomChart):
     def create_marg_top(self, raw_df, **kwargs_data):
         """Return traces for the top marginal chart.
 
+        Should return, list: trace data points. List may be empty
+
         Args:
             raw_df: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Raises:
             NotImplementedError: Must be overridden by child class
-
-        Should return, list: trace data points. List may be empty
 
         """
         raise NotImplementedError('create_marg_top must be implemented by child class')
@@ -292,14 +295,14 @@ class MarginalChart(CustomChart):
     def create_marg_right(self, raw_df, **kwargs_data):
         """Return traces for the right marginal chart.
 
+        Should return, list: trace data points. List may be empty
+
         Args:
             raw_df: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Raises:
             NotImplementedError: Must be overridden by child class
-
-        Should return, list: trace data points. List may be empty
 
         """
         raise NotImplementedError('create_marg_right must be implemented by child class')

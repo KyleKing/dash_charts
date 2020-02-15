@@ -7,7 +7,7 @@ def parse_cli_port():
     """Configure the CLI options for Dash applications.
 
     Returns:
-        port number
+        int: port number
 
     """
     parser = argparse.ArgumentParser(description='Process Dash Parameters.')

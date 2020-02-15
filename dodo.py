@@ -6,11 +6,13 @@ from pathlib import Path
 from dash_charts.utils_dodo import (PKG_NAME, debug_action, open_in_browser, task_check_req,  # noqa: F401
                                     task_create_tag, task_export_req, task_remove_tag, task_update_cl)
 
+# PLANNED: use this regex to check for return formatting issues `Returns:\n\s+\S+[^:]\s`
+
 # Create list of all tasks run with `poetry run doit`
 DOIT_CONFIG = {
     'action_string_formatting': 'old',  # Required for keyword-based tasks
     'default_tasks': [
-        'export_req', 'check_req', 'update_cl', 'document',
+        'export_req', 'check_req', 'update_cl', 'document',  # Comment on/off as needed
         'open_docs',  # Comment on/off as needed
         'commit_docs',  # Comment on/off as needed
     ],
@@ -39,6 +41,7 @@ def stage_documentation():
     for file_path in list(STAGING_DIR.glob('*.html')):
         shutil.copyfile(file_path, GH_PAGES_DIR / file_path.name)
 
+
 def stage_examples():
     """Format the code examples as docstrings to be loaded into the documentation."""
     TMP_EXAMPLES_DIR.mkdir(exist_ok=False)
@@ -49,9 +52,11 @@ def stage_examples():
         docstring = f'From file: `{file_path.relative_to(GIT_DIR.parent)}`'
         dest_fn.write_text(f'"""{docstring}\n```\n{content}\n```\n"""')
 
+
 def clear_examples():
     """Clear the examples from within the dash_charts package."""
     shutil.rmtree(TMP_EXAMPLES_DIR)
+
 
 def task_document():
     """Build the HTML documentation and push to gh-pages branch.

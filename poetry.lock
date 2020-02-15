@@ -757,8 +757,8 @@ category = "dev"
 description = "Git Object Database"
 name = "gitdb2"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "2.0.6"
+python-versions = ">=3.4"
+version = "3.0.0"
 
 [package.dependencies]
 smmap2 = ">=2.0.0"
@@ -923,7 +923,7 @@ description = "Python implementation of Markdown."
 name = "markdown"
 optional = false
 python-versions = ">=3.5"
-version = "3.2"
+version = "3.2.1"
 
 [package.dependencies]
 setuptools = ">=36"
@@ -1029,12 +1029,16 @@ description = "Auto-generate API documentation for Python projects."
 name = "pdoc3"
 optional = false
 python-versions = ">= 3.5"
-version = "0.7.4"
+version = "0.7.5.dev4+g1709915"
 
 [package.dependencies]
 mako = "*"
 markdown = ">=3.0"
 
+[package.source]
+reference = "1709915249cdbdf9d79f08628a1ff08190678adf"
+type = "git"
+url = "https://github.com/pdoc3/pdoc.git"
 [[package]]
 category = "dev"
 description = "Check PEP-8 naming conventions, plugin for flake8"
@@ -1457,7 +1461,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools"]
 
 [metadata]
-content-hash = "b4d17f1ae21e48977b45ce1f5c9371c6824216db6a0622d07584acb1417dcc4a"
+content-hash = "4d96bacb4b5d1bb1bc063830eaa3c56d1ee9780dcdce9a83aac964f2f979fb5d"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1729,8 +1733,8 @@ gitchangelog = [
     {file = "gitchangelog-3.0.4.tar.gz", hash = "sha256:3d8d6a730450fbd5b0a9bc58d0dd3e269c967d7eb4fece0c5cff4372a3f77421"},
 ]
 gitdb2 = [
-    {file = "gitdb2-2.0.6-py2.py3-none-any.whl", hash = "sha256:96bbb507d765a7f51eb802554a9cfe194a174582f772e0d89f4e87288c288b7b"},
-    {file = "gitdb2-2.0.6.tar.gz", hash = "sha256:1b6df1433567a51a4a9c1a5a0de977aa351a405cc56d7d35f3388bad1f630350"},
+    {file = "gitdb2-3.0.0-py2.py3-none-any.whl", hash = "sha256:0a84c85d07166cefaf10fa4b728a8a1b847a7f0d081e2fbe083185462158c126"},
+    {file = "gitdb2-3.0.0.tar.gz", hash = "sha256:51380b9d8b977b42ac9fc3a8e17af90a56ffc573ca9c6b79f99033b04f29f457"},
 ]
 gitpython = [
     {file = "GitPython-3.0.7-py3-none-any.whl", hash = "sha256:99c77677f31f255e130f3fed4c8e0eebb35f1a09df98ff965fff6774f71688cf"},
@@ -1780,8 +1784,8 @@ mando = [
     {file = "mando-0.6.4.tar.gz", hash = "sha256:79feb19dc0f097daa64a1243db578e7674909b75f88ac2220f1c065c10a0d960"},
 ]
 markdown = [
-    {file = "Markdown-3.2-py2.py3-none-any.whl", hash = "sha256:9c71241ec237505535eabff7a38b1307250f16cea174bb1e505c3e032f108867"},
-    {file = "Markdown-3.2.tar.gz", hash = "sha256:5ad7180c3ec16422a764568ad6409ec82460c40d1631591fa53d597033cc98bf"},
+    {file = "Markdown-3.2.1-py2.py3-none-any.whl", hash = "sha256:e4795399163109457d4c5af2183fbe6b60326c17cfdf25ce6e7474c6624f725d"},
+    {file = "Markdown-3.2.1.tar.gz", hash = "sha256:90fee683eeabe1a92e149f7ba74e5ccdc81cd397bd6c516d93a8da0ef90b6902"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},
@@ -1881,9 +1885,7 @@ pbr = [
     {file = "pbr-5.4.4-py2.py3-none-any.whl", hash = "sha256:61aa52a0f18b71c5cc58232d2cf8f8d09cd67fcad60b742a60124cb8d6951488"},
     {file = "pbr-5.4.4.tar.gz", hash = "sha256:139d2625547dbfa5fb0b81daebb39601c478c21956dc57e2e07b74450a8c506b"},
 ]
-pdoc3 = [
-    {file = "pdoc3-0.7.4.tar.gz", hash = "sha256:1a9393d6b1e8c2976c0e1a8d0b897ba5e5ea9515058470422cf57ee54293ab05"},
-]
+pdoc3 = []
 pep8-naming = [
     {file = "pep8-naming-0.9.1.tar.gz", hash = "sha256:a33d38177056321a167decd6ba70b890856ba5025f0a8eca6a3eda607da93caf"},
     {file = "pep8_naming-0.9.1-py2.py3-none-any.whl", hash = "sha256:45f330db8fcfb0fba57458c77385e288e7a3be1d01e8ea4268263ef677ceea5f"},

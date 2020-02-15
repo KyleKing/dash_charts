@@ -25,7 +25,7 @@ def init_app(**app_kwargs):
         app_kwargs: any kwargs to pass to the dash initializer other than `assets_folder`
 
     Returns:
-        app `dash.Dash()` instance
+        dict: `dash.Dash()` instance (`app`)
 
     """
     return dash.Dash(__name__, assets_folder=str(ASSETS_DIR), **app_kwargs)
@@ -73,13 +73,13 @@ class AppBase:
     def register_uniq_ids(self, app_ids):
         """Register the `app_ids` to the corresponding global_id in the `self.ids` lookup dictionary.
 
+        The app_ids must be unique within this App so that a layout can be created. This method registers `self.ids`
+          which are a list of globally unique ids (incorporating this App's unique `self.name`) allowing for the child
+          class of this base App to be resused multiple times within a tabbed or multi-page application without
+          id-collision
+
         Args:
             app_ids: list of strings that are unique within this App
-
-        The app_ids must be unique within this App so that a layout can be created. This method registers `self.ids`
-        which are a list of globally unique ids (incorporating this App's unique `self.name`) allowing for the child
-        class of this base App to be resused multiple times within a tabbed or multi-page application without id
-        collision
 
         """
         for app_id in app_ids:
@@ -113,10 +113,10 @@ class AppBase:
     def register_charts(self):
         """Register the initial charts.
 
+        Does not return a result. All charts should be initialized in this method (ex `self.main_chart = ParetoChart()`)
+
         Raises:
             NotImplementedError: Child class must implement this method
-
-        Does not return a result. All charts should be initialized in this method (`self.main_chart = ParetoChart(...)`)
 
         """
         raise NotImplementedError('register_charts must be implemented by child class')
@@ -147,19 +147,13 @@ class AppBase:
     def register_callbacks(self):
         """Register the chart callbacks.
 
+        Does not return a result. May `pass` as long as no callbacks are needed for application
+
         Raises:
             NotImplementedError: Child class must implement this method
 
-        Does not return a result. May `pass` as long as no callbacks are needed for application
-
         """
         raise NotImplementedError('register_callbacks must be implemented by child class')
-
-
-class AppMultiPage(AppBase):
-    """Base class for building multi-page Dash Applications."""
-
-    pass  # FIXME: Implement
 
 
 class AppWithTabs(AppBase):
@@ -178,17 +172,19 @@ class AppWithTabs(AppBase):
     """Dictionary with tab_names as keys and corresponding layout as value."""
 
     # App ids
-    tabs_content_id = 'tabs-wrapper'
-    tabs_select_id = 'tabs-content'
-    app_ids = [tabs_content_id, tabs_select_id]
+    id_tabs_content = 'tabs-wrapper'
+    id_tabs_select = 'tabs-content'
+
+    app_ids = [id_tabs_content, id_tabs_select]
+    """List of all ids for this app view. Will be mapped to `self.ids` for globally unique ids."""
 
     def define_tabs(self):
         """Return list of tuples: each tuple is `(tab_name, tab_class)` in order each tab is rendered.
 
+        Should return, list of tuples: each tuple is `(tab_name, tab_class)` in order each tab is rendered
+
         Raises:
             NotImplementedError: Child class must implement this method
-
-        Should return, list of tuples: each tuple is `(tab_name, tab_class)` in order each tab is rendered
 
         """
         raise NotImplementedError('define_tabs must be implemented by child class')
@@ -248,7 +244,7 @@ class AppWithTabs(AppBase):
         return html.Div(children=[
             self.tab_menu(),
             html.Div(style=div_style, children=[
-                html.Div(id=self.ids[self.tabs_content_id]),
+                html.Div(id=self.ids[self.id_tabs_content]),
             ]),
         ])
 
@@ -295,15 +291,21 @@ class AppWithTabs(AppBase):
         # Create the tab menu
         return html.Div(children=[
             dcc.Tabs(
-                id=self.ids[self.tabs_select_id], value=self.tab_lookup.keys()[0], children=tabs, **tabs_kwargs,
+                id=self.ids[self.id_tabs_select], value=self.tab_lookup.keys()[0], children=tabs, **tabs_kwargs,
             ),
         ], style=tabs_style)
 
     def register_callbacks(self):
         """Register the navigation callback."""
-        outputs = [(self.tabs_content_id, 'children')]
-        inputs = [(self.tabs_select_id, 'value')]
+        outputs = [(self.id_tabs_content, 'children')]
+        inputs = [(self.id_tabs_select, 'value')]
 
         @self.callback(outputs, inputs, [])
         def render_tab(tab_name):
             return self.tab_layouts[tab_name]
+
+
+class AppMultiPage(AppBase):
+    """Base class for building multi-page Dash Applications."""
+
+    pass  # FIXME: Implement
