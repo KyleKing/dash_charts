@@ -74,7 +74,7 @@ class AlignChart(MarginalChart):
         ```
 
         """
-        # FIXME: Handle multiple data sets/missing points? - use greyscale for ideal?
+        # PLANNED: Handle multiple data sets/missing points? - use greyscale for ideal?
 
         measLabels, data = self.listifyData(df, stretch)
         # Plot the ideal and measured scatter points

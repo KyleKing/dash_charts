@@ -14,7 +14,7 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
     - [Alignment Chart](#alignment-chart)
     - [Tabbed Application](#tabbed-application)
   - [External Links](#external-links)
-  - [TODO](#todo)
+  - [Task List/Action Items](#task-listaction-items)
 
 <!-- /TOC -->
 
@@ -111,15 +111,17 @@ Useful Dash reference links
     - [Bulma Customizer](https://bulma-customizer.bstash.io/)
     - [Admin Template](https://bulmatemplates.github.io/bulma-templates/)
 
-## TODO
+## Task List/Action Items
 
-- Add data table
+See TODO/FIXME items in the code as well
+
+- TODO: Add tests
+- TODO: Add data table
   - Checkout the v2 Table Filtering in Dash 0.43 / [https://dash.plot.ly/datatable](https://dash.plot.ly/datatable)
   - [Filtering Syntax](https://dash.plot.ly/datatable/filtering)
-- TODO: Add the 3D version of the Coordinate chart
+- PLANNED: Add the 3D version of the Coordinate chart
   - [Ribbon](https://plot.ly/python/v3/ribbon-plots/)
   - [Surface](https://plot.ly/python/3d-surface-plots/)
-- TODO: Enable stacked subplots for multiple years of calendar charts (Subplot title is year)
-- Add a tree map
-- Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)
-- Add tests?
+- PLANNED: Enable stacked subplots for multiple years of calendar charts (Subplot title is year)
+- PLANNED: Add a tree map
+- PLANNED: Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)

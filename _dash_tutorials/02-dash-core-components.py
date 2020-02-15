@@ -10,7 +10,7 @@ Other Examples:
 
 ---
 
-FYI: Need additional styling for the sliders
+PLANNED: Need additional styling for the sliders
 
 ```
 .rc-slider {
@@ -180,7 +180,7 @@ app.layout = html.Div([
                 start_date=dt(1997, 5, 3),
                 end_date_placeholder_text='Select a date!',
             ),
-            html.H6('^ fyi: need padding below for dropdown element'),
+            html.H6('^ NOTE: need padding below for dropdown element'),
 
             # ==========
             # Graphs - of course

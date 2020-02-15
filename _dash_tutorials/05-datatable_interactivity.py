@@ -37,7 +37,7 @@ Example filtering ([full documentation here](https://dash.plot.ly/datatable/filt
 - Try `= Europe` in continent
 - Try `> 80` in life expectancy
 
-TODO: Improve this example
+PLANNED: Improve this example
 
 Also, there are some charts at the bottom"""),
             html.P(children=''),

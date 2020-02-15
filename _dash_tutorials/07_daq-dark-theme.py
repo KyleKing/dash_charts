@@ -49,7 +49,7 @@ def activateDarkTheme(darkEnabled):
 
 
 @app.callback(
-    Output('full-window', 'style'),  # FYI: Overwrites style prop for this div
+    Output('full-window', 'style'),  # NOTE: Overwrites style prop for this div
     [Input('theme-toggle', 'value')]
 )
 def setBackground(darkEnabled):

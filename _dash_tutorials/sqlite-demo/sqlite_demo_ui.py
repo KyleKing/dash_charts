@@ -3,7 +3,7 @@
 Example Python/SQLite: https://www.dataquest.io/blog/python-pandas-databases/
     https://sebastianraschka.com/Articles/2014_sqlite_in_python_tutorial.html
 
-TODO: https://plot.ly/python/big-data-analytics-with-pandas-and-sqlite/
+PLANNED: https://plot.ly/python/big-data-analytics-with-pandas-and-sqlite/
 
 """
 
@@ -88,7 +88,7 @@ def updateScatter(n_intervals):
             title=go.layout.Title(text='Live-Updating Plot'),
             xaxis={
                 'automargin': True,
-                # 'autorange': True,  # FYI: requires full page refresh
+                # 'autorange': True,  # NOTE: requires full page refresh
                 'range': [0, points],
                 'showgrid': True,
                 'title': 'Index',

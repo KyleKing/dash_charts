@@ -22,7 +22,7 @@ class CoordinateDemo:
     def run(self, *, debug=True, **kwargs):
         """Run the application passing any kwargs to dash."""
         # ----------------------------------------------------------------------
-        # FYI: Select the grid system. Toggle these lines to update the chart
+        # NOTE: Select the grid system. Toggle these lines to update the chart
         # self.grid = coordinate_chart.CircleGrid()
         # self.grid = coordinate_chart.YearGrid()
         self.grid = coordinate_chart.MonthGrid(titles=[calendar.month_name[2]])  # uses Feb
@@ -81,7 +81,7 @@ class CoordinateDemo:
     def _createLayout(self):
         """Create application layout."""
         markerKwargs = self.grid.markerKwargs
-        # markerKwargs['colorscale'] = custom_colorscales.logFire  # FYI: Uncomment for logarithmic colorscale
+        # markerKwargs['colorscale'] = custom_colorscales.logFire  # NOTE: Uncomment for logarithmic colorscale
 
         self.app.layout = html.Div(
             className='section',

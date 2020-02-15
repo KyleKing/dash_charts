@@ -10,6 +10,9 @@ from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import map_args, map_outputs, min_graph
 from icecream import ic
 
+# TODO: Move data into string within this file
+# TODO: Add time filter or other input to be more realistic
+
 
 class ParetoDemo(AppBase):
     """Example creating a simple Pareto chart."""

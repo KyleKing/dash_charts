@@ -25,7 +25,7 @@ class RollingChart(CustomChart):
 
         """
         if annotations is not None:
-            yRange = [-100, 200]  # FIXME: Use calculation
+            yRange = [-100, 200]  # PLANNED: Use calculation
             self.createAnnotations(annotations, yRange)
 
         chartData = [
@@ -67,7 +67,7 @@ class RollingChart(CustomChart):
         """Create the annotations. May be overridden when inherited to customize annotation styling and positioning.
 
         annotations -- list of tuples with values (x,y,label,color). Color may be None
-        yRange -- FIXME: Document
+        yRange -- PLANNED: Document
 
         """
         self.annotations = [

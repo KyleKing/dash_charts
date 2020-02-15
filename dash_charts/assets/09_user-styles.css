@@ -5,12 +5,12 @@ body {
     min-height: 0;
 }
 
-/* FIXME: Add a class specifically for sliders that need additional height */
+/* PLANNED: Add a class specifically for sliders that need additional height */
 .rc-slider-with-legend {
     min-height: 45px;
 }
 
-/* FIXME: Implement user-customizable styles, but for now manually add this */
+/* PLANNED: Implement user-customizable styles, but for now manually add this */
 /* Will probably move all assets to a temporary directory, then add the user's specified files. Will need to cleanup dir */
 iframe#plaid-link-iframe-1 {
     height: 100vh;
