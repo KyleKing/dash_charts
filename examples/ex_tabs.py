@@ -10,6 +10,13 @@ from dash_charts.utils_fig import min_graph
 class StaticTab(AppBase):
     """Simple App without charts or callbacks."""
 
+    basic_style = {
+        'margin-left': 'auto',
+        'margin-right': 'auto',
+        'max-width': '1000px',
+        'padding-top': '10px',
+    }
+
     def register_charts(self):
         """Register the initial charts."""
         pass
@@ -19,10 +26,13 @@ class StaticTab(AppBase):
         pass
 
 
-class TabOne(StaticTab):
-    """Tab One."""
+# ----------------------------------------------------------------------------------------------------------------------
 
-    name = 'Tab One'
+
+class TabZero(StaticTab):
+    """Tab Zero."""
+
+    name = 'Tab Name for Tab Zero'
 
     def return_layout(self):
         """Return Dash application layout.
@@ -31,32 +41,34 @@ class TabOne(StaticTab):
             obj: Dash HTML object. Default is simple HTML text
 
         """
-        return html.Div(className='columns', children=[
-            html.Div(className='column', children=[
-                html.P(className='title', children='First Chart'),
-                min_graph(
-                    figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=300),
-                ),
-                html.P(className='title', children='Another Chart'),
-                min_graph(
-                    figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=300),
-                ),
-            ]),
-            html.Div(className='column', children=[
-                html.P(className='title', children='A Small Chart'),
-                min_graph(
-                    figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=300),
-                ),
-                html.P(className='subtitle', children='An Image'),
-                html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif'),
-            ]),
+        return html.Div(style=self.basic_style, children=(
+            [html.H1(children=f'{self.name} Scrollable Content')]
+            + [html.P(children=[str(count) + '-word' * 10]) for count in range(500)]
+        ))
+
+
+class TabOne(StaticTab):
+    """Tab One."""
+
+    name = 'Tab Name for Tab One'
+
+    def return_layout(self):
+        """Return Dash application layout.
+
+        Returns:
+            obj: Dash HTML object. Default is simple HTML text
+
+        """
+        return html.Div(style=self.basic_style, children=[
+            html.H1(children=f'Image from {self.name}'),
+            html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif'),
         ])
 
 
 class TabTwo(StaticTab):
     """Tab Two."""
 
-    name = 'Tab Two'
+    name = 'Tab Name for Tab Two'
 
     def return_layout(self):
         """Return Dash application layout.
@@ -65,16 +77,16 @@ class TabTwo(StaticTab):
             obj: Dash HTML object. Default is simple HTML text
 
         """
-        return html.Div(className='section', children=[
-            html.P(className='title', children=f'{self.name} Chart'),
-            min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length')),
+        return html.Div(style=self.basic_style, children=[
+            html.H1(children=f'{self.name} Chart'),
+            min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=500)),
         ])
 
 
 class TabThree(StaticTab):
     """Tab Three."""
 
-    name = 'Tab Three'
+    name = 'Tab Name for Tab Three'
 
     def return_layout(self):
         """Return Dash application layout.
@@ -83,13 +95,16 @@ class TabThree(StaticTab):
             obj: Dash HTML object. Default is simple HTML text
 
         """
-        return html.Div(className='section', children=[
-            html.P(className='title', children=f'{self.name} Chart'),
+        return html.Div(style=self.basic_style, children=[
+            html.H1(children=f'{self.name} Chart'),
             min_graph(figure=px.scatter(
                 px.data.iris(), x='sepal_width', y='sepal_length', color='species',
-                marginal_y='rug', marginal_x='histogram',
+                marginal_y='rug', marginal_x='histogram', height=500,
             )),
         ])
+
+
+# ----------------------------------------------------------------------------------------------------------------------
 
 
 class TabAppDemo(AppWithTabs):
@@ -108,6 +123,7 @@ class TabAppDemo(AppWithTabs):
 
         """
         return [
+            TabZero(self.app),
             TabOne(self.app),
             TabTwo(self.app),
             TabThree(self.app),
