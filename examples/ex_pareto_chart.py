@@ -56,8 +56,7 @@ class ParetoDemo(AppBase):
         self.register_uniq_ids([self.id_chart])
 
     def register_charts(self):
-        """Register an empty Pareto chart."""
-        # Initialize an example chart
+        """Initialize charts."""
         self.main_chart = ParetoChart(
             title='Example Pareto Chart',
             x_label='Category Title',

@@ -8,7 +8,6 @@ from pathlib import Path
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from icecream import ic
 
 from .utils_fig import format_app_callback
 
@@ -17,6 +16,37 @@ ASSETS_DIR = Path(__file__).parent / 'assets'
 
 COUNTER = count(start=0, step=1)
 """Initialize iterator to provide set of unique integers when called with `next()`."""
+
+STATIC_URLS = {
+    'dash': {
+        'href': 'https://codepen.io/chriddyp/pen/bWLwgP.css',
+        'rel': 'stylesheet',
+        'crossorigin': 'anonymous',
+    },
+    'bulma': {
+        'href': 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css',
+        'rel': 'stylesheet',
+        'integrity': 'sha384-H5O3U+oUYwd/bFECZMaQ1XJlueV5e1gB4b7Xt0M06fPbgz48WH33qxUyQNPeZVou',
+        'crossorigin': 'anonymous',
+    },
+    'bulmaswatch-flatly': {
+        'href': 'https://jenil.github.io/bulmaswatch/flatly/bulmaswatch.min.css',
+        'rel': 'stylesheet',
+        'integrity': 'sha384-grOdOgbiGLquXGKNXkKpsnbx1eEGLCSnYloh9JKQdX31HHHQiQFf3uz8hhuIzUy8',
+        'crossorigin': 'anonymous',
+    },
+    'normalize': {
+        'href': 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
+        'rel': 'stylesheet',
+        'integrity': 'sha384-9Z9AuAj0Xi0z7WFOSgjjow8EnNY9wPNp925TVLlAyWhvZPsf5Ks23Ex0mxIrWJzJ',
+        'crossorigin': 'anonymous',
+    },
+}
+"""Dictionary of stylesheet names and URL to minimized CSS asset.
+
+Hashes generated from: https://www.srihash.org/
+
+"""
 
 
 def init_app(**app_kwargs):
@@ -69,6 +99,7 @@ class AppBase:
         """
         if self.name is None:
             raise RuntimeError('Child class must set `self.name` to a unique string for this app')
+
         self.app = init_app() if app is None else app
 
     def register_uniq_ids(self, app_ids):
