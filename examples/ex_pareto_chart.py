@@ -6,7 +6,7 @@ import dash_html_components as html
 import pandas as pd
 from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.pareto_chart import ParetoChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import STATIC_URLS, AppBase, init_app
 from dash_charts.utils_fig import min_graph
 
 CSV_DATA = """categories,downtime
@@ -43,14 +43,10 @@ class ParetoDemo(AppBase):
     id_chart = 'pareto'
     """Unique name for the main chart."""
 
-    def __init__(self, **kwargs):
-        """Initialize raw dataset.
-
-        Args:
-            **kwargs: Any keyword arguments to pass to the base class
-
-        """
-        super().__init__(**kwargs)
+    def __init__(self):
+        """Initialize app with custom stylesheets."""
+        app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['dash']])
+        super().__init__(app=app)
         self.raw_data = (pd.read_csv(StringIO(CSV_DATA))
                          .rename(columns={'downtime': 'value'}))
         self.register_uniq_ids([self.id_chart])

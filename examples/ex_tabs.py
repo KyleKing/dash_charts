@@ -1,10 +1,13 @@
 """Example Tabbed Applet."""
 
+import dash_core_components as dcc
 import dash_html_components as html
 import plotly_express as px
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import AppBase, AppWithTabs
+from dash_charts.utils_app import STATIC_URLS, AppBase, AppWithTabs, init_app
 from dash_charts.utils_fig import min_graph
+
+# FIXME: Show tabs with dbc? https://github.com/facultyai/dash-bootstrap-components/issues/182
 
 
 class StaticTab(AppBase):
@@ -43,7 +46,7 @@ class TabZero(StaticTab):
         """
         return html.Div(style=self.basic_style, children=(
             [html.H1(children=f'{self.name} Scrollable Content')]
-            + [html.P(children=[str(count) + '-word' * 10]) for count in range(500)]
+            + [html.P(children=[str(count) + '-word' * 10]) for count in range(100)]
         ))
 
 
@@ -61,7 +64,7 @@ class TabOne(StaticTab):
         """
         return html.Div(style=self.basic_style, children=[
             html.H1(children=f'Image from {self.name}'),
-            html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif'),
+            html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif')
         ])
 
 
@@ -79,7 +82,12 @@ class TabTwo(StaticTab):
         """
         return html.Div(style=self.basic_style, children=[
             html.H1(children=f'{self.name} Chart'),
-            min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=500)),
+            dcc.Loading(
+                type='circle',
+                children=[
+                    min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=500)),
+                ],
+            ),
         ])
 
 
@@ -97,10 +105,15 @@ class TabThree(StaticTab):
         """
         return html.Div(style=self.basic_style, children=[
             html.H1(children=f'{self.name} Chart'),
-            min_graph(figure=px.scatter(
-                px.data.iris(), x='sepal_width', y='sepal_length', color='species',
-                marginal_y='rug', marginal_x='histogram', height=500,
-            )),
+            dcc.Loading(
+                type='cube',
+                children=[
+                    min_graph(figure=px.scatter(
+                        px.data.iris(), x='sepal_width', y='sepal_length', color='species',
+                        marginal_y='rug', marginal_x='histogram', height=500,
+                    )),
+                ],
+            ),
         ])
 
 
@@ -114,6 +127,11 @@ class TabAppDemo(AppWithTabs):
 
     tabs_location = 'right'
     """Tab orientation setting. One of `(left, top, bottom, right)`."""
+
+    def __init__(self):
+        """Initialize app with custom stylesheets."""
+        app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['dash']])
+        super().__init__(app=app)
 
     def define_tabs(self):
         """Return list of initialized tabs.

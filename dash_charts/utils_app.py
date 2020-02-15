@@ -242,7 +242,7 @@ class AppWithTabs(AppBase):
         """
         # Suppress callback verification as tab content is rendered later
         self.app.config['suppress_callback_exceptions'] = True
-        # Register all unique elements id
+        # Register all unique element ids
         self.register_uniq_ids(self.app_ids)
         # Initialize the lookup for each tab then configure each tab
         self.tab_lookup = OrderedDict([(tab.name, tab) for tab in self.define_tabs()])

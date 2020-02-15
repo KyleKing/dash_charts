@@ -12,7 +12,7 @@ from dash_charts.utils_fig import min_graph
 
 
 class BulmaStylingDemo(AppBase):
-    """Demo laying out a 3 column grid with Bulma where:
+    """Demo laying out a 3 column grid with Bulma where.
 
     - the first column has three tiles
     - the middle column is half the full screen width
@@ -23,16 +23,11 @@ class BulmaStylingDemo(AppBase):
     name = 'Example Bulma Styling Demo'
     """Application name"""
 
-    def __init__(self, **kwargs):
-        """Initialize raw dataset.
-
-        Args:
-            **kwargs: Any keyword arguments to pass to the base class
-
-        """
+    def __init__(self):
+        """Initialize app with custom stylesheets."""
         app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['bulmaswatch-flatly']])
         super().__init__(app=app)
-        self.register_uniq_ids(['placeholder'])
+        self.register_uniq_ids(['---'])
 
     def register_charts(self):
         """Initialize charts."""

@@ -5,6 +5,11 @@ body {
     min-height: 0;
 }
 
+/* Override bootstrap max-width to better fill the window */
+.container {
+    max-width: 95%;
+}
+
 /* PLANNED: Add a class specifically for sliders that need additional height */
 .rc-slider-with-legend {
     min-height: 45px;
