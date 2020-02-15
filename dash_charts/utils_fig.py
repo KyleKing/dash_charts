@@ -28,18 +28,18 @@ def format_app_callback(lookup, outputs, inputs, states):
     """Format list of [Output, Input, State] for `@app.callback()`.
 
     Args:
-        lookup: dict with generic key that maps to unique string
-        outputs: list of tuples with id and key
-        inputs: list of tuples with id and key
-        states: list of tuples with id and key
+        lookup: dict with app_id keys that map to a globally unique component id
+        outputs: list of tuples with app_id and property name
+        inputs: list of tuples with app_id and property name
+        states: list of tuples with app_id and property name
 
     Returns:
-        lit: (of lists) for `Output`, `Input`, and `State` to be passed to `@app.callback()`
+        list of lists: in order `(Outputs, Inputs, States)` for `@app.callback()`. Some sublists may be empty
 
     """
-    return ([Output(lookup[_id], key) for _id, key in outputs],
-            [Input(lookup[_id], key) for _id, key in inputs],
-            [State(lookup[_id], key) for _id, key in states])
+    return ([Output(component_id=lookup[_id], component_property=prop) for _id, prop in outputs],
+            [Input(component_id=lookup[_id], component_property=prop) for _id, prop in inputs],
+            [State(component_id=lookup[_id], component_property=prop) for _id, prop in states])
 
 
 def map_args(raw_args, inputs, states):
@@ -47,42 +47,63 @@ def map_args(raw_args, inputs, states):
 
     Args:
         raw_args: list of arguments passed to callback
-        inputs: list of input elements. May be empty list
-        states: list of state elements. May be empty list
+        inputs: list of input components. May be empty list
+        states: list of state components. May be empty list
 
     Returns:
-        dict: with keys of the id, group type, and arg value (`args_in[key][arg_type]`)
+        dict: with keys of the app_id, property, and arg value (`args_in[key][arg_type]`)
 
-    Alternatively, just unwrap arguments positionally with:
+    Raises:
+        RuntimeError: if collision in id and property
+
+    For situations where the order of inputs and states may change, use this function to verbosely define the inputs:
     ```py
-    click_data, input_name = args[:len(inputs)]
+    args_in, args_state = map_args(raw_args, inputs, states)
+    click_data = args_in[self.main_figure_id]['clickData']
+    n_clicks = args_in[self.randomize_button_id]['n_clicks']
+    data_cache = args_state[self.store_id]['data']
+    ```
+
+    Alternatively, for use cases that are unlikely to change the order of Inputs/State, unwrap positionally with:
+    ```py
+    click_data, n_clicks = args[:len(inputs)]
     data_cache = args[len(inputs):]
     ```
 
     """
-    input_args = raw_args[:len(inputs)]
-    state_args = raw_args[len(inputs):]
+    # Split args into groups of inputs/states
+    args_in = raw_args[:len(inputs)]
+    args_state = raw_args[len(inputs):]
 
-    # TODO: These variable names could be improved (group > ?)
-    # TODO: Can I use `results = dict(zip(keys, values))`
-    results = [{}, {}]
-    for group_idx, (groups, args) in enumerate([(inputs, input_args), (states, state_args)]):
-        for arg_idx, (key, arg_type) in enumerate(groups):
-            if key not in results[group_idx]:
-                results[group_idx][key] = {}
-            results[group_idx][key][arg_type] = args[arg_idx]
-    return results
+    # PLANNED: revisit and simplify like the implementation in map_outputs
+    # Map args into dictionaries
+    arg_map = [{}, {}]
+    for group_idx, (groups, args) in enumerate([(inputs, args_in), (states, args_state)]):
+        for arg_idx, (app_id, prop) in enumerate(groups):
+            if app_id not in arg_map[group_idx]:
+                arg_map[group_idx][app_id] = {}
+            if prop in arg_map[group_idx][app_id]:
+                group_name = ['inputs', 'states'][group_idx]
+                raise RuntimeError(f'Found collision for {group_name}[{app_id}][{property}]'
+                                   f'\n1st: {arg_map[group_idx][app_id][prop]} / 2nd: "{args[arg_idx]}"'
+                                   f'\nCheck that all {group_name} are unique. There could be more collisions')
+            # Assign the arg to the appropriate dictionary in arg_map
+            arg_map[group_idx][app_id][prop] = args[arg_idx]
+    return arg_map
 
 
-def map_outputs(outputs, new_elements):
-    """TODO: Document this method...
+def map_outputs(outputs, element_info):
+    """Return properly ordered list of new Dash elements based on the order of outputs.
 
     Args:
-        outputs: list of output elements
-        new_elements: list of state element
+        outputs: list of output components
+        element_info: list of tuples with keys `(app_id, prop, element)`
 
     Returns:
         list: ordered list to match the order of outputs
+
+    Raises:
+        RuntimeError: Check that the number of outputs and the number of element_info match
 
     Alternatively, for simple cases of 1-2 outputs, just return the list with:
     ```py
@@ -90,14 +111,20 @@ def map_outputs(outputs, new_elements):
     ```
 
     """
-    # TODO: Need better variable names. Can I use dict(zip())?
-    tmp = {}
-    for key_1, key_2, value in new_elements:
-        tmp[key_1] = {key_2: value}
+    if len(outputs) != len(element_info):
+        raise RuntimeError(f'Expected same number of items between:\noutputs:{outputs}\nelement_info:{element_info}')
 
+    # Create a dictionary of the elements
+    lookup = {app_id: [] for app_id in {info[0] for info in element_info}}
+    for app_id, prop, element in element_info:
+        lookup[app_id].append((prop, element))
+    for app_id in lookup.keys():
+        lookup[app_id] = dict(lookup[app_id])
+
+    # Create the returned list in the order of the outputs
     results = []
-    for group_key, arg_key in outputs:
-        results.append(tmp[group_key][arg_key])
+    for app_id, prop in outputs:
+        results.append(lookup[app_id][prop])
     return results
 
 
@@ -133,7 +160,7 @@ class CustomChart:
         """
         return {
             'data': self.create_traces(raw_df, **kwargs_data),
-            'layout': go.Layout(self.apply_cust_layout(self.create_layout())),
+            'layout': go.Layout(self.apply_custom_layout(self.create_layout())),
         }
 
     def create_traces(self, raw_df, **kwargs_data):
@@ -145,6 +172,8 @@ class CustomChart:
 
         Raises:
             NotImplementedError: Must be overridden by child class
+
+        Should return, list: trace data points. List may be empty
 
         """
         raise NotImplementedError('create_traces must be implemented by child class')
@@ -181,7 +210,7 @@ class CustomChart:
 
         return layout
 
-    def apply_cust_layout(self, layout):
+    def apply_custom_layout(self, layout):
         """Extend and/or override layout with custom settings.
 
         Args:
@@ -227,7 +256,7 @@ class MarginalChart(CustomChart):
             (self.create_marg_top, 1, 1),
             (self.create_marg_right, 2, 2),
         ]
-        for (trace_func, row, col) in traces:
+        for trace_func, row, col in traces:
             for trace in trace_func(raw_df, **kwargs_data):
                 fig.add_trace(trace, row, col)
         # Apply axis labels
@@ -236,7 +265,7 @@ class MarginalChart(CustomChart):
         # Replace the default blue/white grid introduced in Plotly v4
         fig.update_xaxes(showgrid=True, gridcolor='white')
         fig.update_yaxes(showgrid=True, gridcolor='white')
-        fig['layout'].update(self.apply_cust_layout(self.create_layout()))
+        fig['layout'].update(self.apply_custom_layout(self.create_layout()))
         return fig
 
     def create_traces(self, raw_df, **kwargs_data):
@@ -246,11 +275,13 @@ class MarginalChart(CustomChart):
             raw_df: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
-        Returns:
-            list: trace data points. Must be overridden by child class or will otherwise be empty
+        Raises:
+            NotImplementedError: Must be overridden by child class
+
+        Should return, list: trace data points. List may be empty
 
         """
-        return []
+        raise NotImplementedError('create_traces must be implemented by child class')
 
     def create_marg_top(self, raw_df, **kwargs_data):
         """Return traces for the top marginal chart.
@@ -259,11 +290,13 @@ class MarginalChart(CustomChart):
             raw_df: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
-        Returns:
-            list: trace data points. Must be overridden by child class or will otherwise be empty
+        Raises:
+            NotImplementedError: Must be overridden by child class
+
+        Should return, list: trace data points. List may be empty
 
         """
-        return []
+        raise NotImplementedError('create_marg_top must be implemented by child class')
 
     def create_marg_right(self, raw_df, **kwargs_data):
         """Return traces for the right marginal chart.
@@ -272,14 +305,19 @@ class MarginalChart(CustomChart):
             raw_df: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
-        Returns:
-            list: trace data points. Must be overridden by child class or will otherwise be empty
+        Raises:
+            NotImplementedError: Must be overridden by child class
+
+        Should return, list: trace data points. List may be empty
 
         """
-        return []
+        raise NotImplementedError('create_marg_right must be implemented by child class')
 
-    def create_layout(self):
+    def create_layout(self, *, bg_color='#F0F0F0'):
         """Remove axis lables from base layout as they would be applied to (row=1,col=1).
+
+        Args:
+            bg_color: Background color for the chart. Default is white for light themes
 
         Returns:
             dict: updated layout for Dash figure
@@ -288,5 +326,5 @@ class MarginalChart(CustomChart):
         layout = super().create_layout()
         layout['xaxis']['title'] = ''
         layout['yaxis']['title'] = ''
-        layout['plot_bgcolor'] = '#F0F0F0'
+        layout['plot_bgcolor'] = bg_color
         return layout

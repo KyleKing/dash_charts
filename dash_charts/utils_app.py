@@ -1,13 +1,13 @@
 """Utility functions and classes for building applications."""
 
 import copy
+from collections import OrderedDict
 from itertools import count
 from pathlib import Path
 
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output
 
 from .utils_fig import format_app_callback
 
@@ -18,17 +18,17 @@ COUNTER = count(start=0, step=1)
 """Initialize iterator to provide set of unique integers when called with `next()`."""
 
 
-def init_app(**kwargs):
+def init_app(**app_kwargs):
     """Return new Dash app with `assets_folder` set to local assets.
 
     Args:
-        kwargs: any kwargs to pass to the dash initializer other than `assets_folder`
+        app_kwargs: any kwargs to pass to the dash initializer other than `assets_folder`
 
     Returns:
         app `dash.Dash()` instance
 
     """
-    return dash.Dash(__name__, assets_folder=str(ASSETS_DIR), **kwargs)
+    return dash.Dash(__name__, assets_folder=str(ASSETS_DIR), **app_kwargs)
 
 
 def opts_dd(lbl, value):
@@ -66,25 +66,27 @@ class AppBase:
             RuntimeError: if child class has not set a `self.name` data member
 
         """
-        self.app = init_app() if app is None else app
         if self.name is None:
             raise RuntimeError('Child class must set `self.name` to a unique string for this app')
+        self.app = init_app() if app is None else app
 
-    def register_uniq_ids(self, base_ids):
-        """Register all ids in the lookup dictionary.
+    def register_uniq_ids(self, app_ids):
+        """Register the `app_ids` to the corresponding global_id in the `self.ids` lookup dictionary.
 
         Args:
-            base_ids: list of unique strings to register with the lookup dictionary
+            app_ids: list of strings that are unique within this App
+
+        The app_ids must be unique within this App so that a layout can be created. This method registers `self.ids`
+        which are a list of globally unique ids (incorporating this App's unique `self.name`) allowing for the child
+        class of this base App to be resused multiple times within a tabbed or multi-page application without id
+        collision
 
         """
-        for base_id in base_ids:
-            self.ids[base_id] = f'{self.name}-{base_id}'
+        for app_id in app_ids:
+            self.ids[app_id] = f'{self.name}-{app_id}'
 
-    def run(self, **dash_kwargs):
-        """Run the application passing any kwargs to Dash.
-
-        Args:
-            **dash_kwargs: keyword arguments for `Dash.run_server()`
+    def verify_app_initialization(self):
+        """Check that the app was properly initialized.
 
         Raises:
             RuntimeError: if child class has not called `self.register_uniq_ids`
@@ -93,11 +95,20 @@ class AppBase:
         if not self.ids.keys():
             raise RuntimeError('Child class must first call `self.register_uniq_ids(__)` before self.run()')
 
-        # Register the charts, the app layout, the callbacks, then start the Dash server
+    def run(self, **dash_kwargs):
+        """Configure the app and start the Dash server instance.
+
+        Args:
+            **dash_kwargs: keyword arguments for `Dash.run_server()`
+
+        """
+        self.verify_app_initialization()
+        # Register the charts, the app layout, then the callbacks
         self.register_charts()
         self.app.layout = self.return_layout()
         self.register_callbacks()
-        self.app.run_server(**dash_kwargs)  # TODO: How does this work with multiple apps?
+        # Launch the server
+        self.app.run_server(**dash_kwargs)
 
     def register_charts(self):
         """Register the initial charts.
@@ -105,8 +116,10 @@ class AppBase:
         Raises:
             NotImplementedError: Child class must implement this method
 
+        Does not return a result. All charts should be initialized in this method (`self.main_chart = ParetoChart(...)`)
+
         """
-        raise NotImplementedError('register_charts is not implemented')
+        raise NotImplementedError('register_charts must be implemented by child class')
 
     def return_layout(self):
         """Return Dash application layout.
@@ -115,13 +128,18 @@ class AppBase:
             obj: Dash HTML object. Default is simple HTML text
 
         """
-        return html.Div(children=['Welcome to the BaseApp!'])
+        return html.Div(children=['Welcome to the BaseApp! Override return_layout() in child class.'])
 
     def callback(self, outputs, inputs, states):
-        """Programmatically call the app callback.
+        """Return app callback decorator based on provided components.
 
         Args:
-            TODO
+            outputs: list of tuples with app_id and property name
+            inputs: list of tuples with app_id and property name
+            states: list of tuples with app_id and property name
+
+        Returns:
+            dict: result of `self.app.callback()`
 
         """
         return self.app.callback(*format_app_callback(self.ids, outputs, inputs, states))
@@ -132,140 +150,160 @@ class AppBase:
         Raises:
             NotImplementedError: Child class must implement this method
 
+        Does not return a result. May `pass` as long as no callbacks are needed for application
+
         """
-        raise NotImplementedError('register_callbacks is not implemented')
-
-
-class AppWithTabs(AppBase):
-    """Base class for building tabbed Dash Applications."""
-
-    pass  # TODO: Implement
+        raise NotImplementedError('register_callbacks must be implemented by child class')
 
 
 class AppMultiPage(AppBase):
     """Base class for building multi-page Dash Applications."""
 
-    pass  # TODO: Implement
+    pass  # FIXME: Implement
 
 
-class TabBase:
-    """Base class for each tab (page) of the application."""
-
-    tab_name = None
-    """Unique keyname used to identify the tab."""
-
-    def __init__(self, app):
-        """Initialize the tab and verify data members.
-
-        app -- Dash application instance
-
-        """
-        if self.tab_name is None:
-            raise RuntimeError('The tab must be assigned a unique tab_name')
-
-        self.app = app
-
-    def create_layout(self):
-        """Return the Dash layout components."""
-        raise NotImplementedError('self.create_layout has not been implemented for "{}"'.format(self.tab_name))
-
-    def registerCallbacks(self):
-        """Register all callbacks necessary for this tab."""
-        raise NotImplementedError('self.registerCallbacks has not been implemented for "{}"'.format(self.tab_name))
-
-
-class TabbedDashApp:
-    """Base Dash Application with tabs in a left side bar."""
+class AppWithTabs(AppBase):
+    """Base class for building Dash Application with tabs. Tabs will be in specified `self.tabs_location`."""
 
     app = None
-    """Main Dash application."""
+    """Main Dash application to pass to all child tabs."""
 
-    # TODO: Convert tab_list_tbd to list so that tab_lookup is created by define_tabs
-    tab_list_tbd = None
-    """List of tabs (to be combined with app_tabs)."""
+    tabs_location = 'left'
+    """Tab orientation setting. One of `(left, top, bottom, right)`."""
 
-    app_tabs = None
-    """Dictionary of tabs created by `self.define_tabs()`."""
+    tab_lookup = None
+    """OrderedDict of tabs based on the list of tuples from `self.define_tabs()`."""
 
-    # FIXME: DOCUMENT
-    tab_map_tbd = None
-    """Not sure?"""
+    tab_layouts = None
+    """Dictionary with tab_names as keys and corresponding layout as value."""
 
-    source_data = None
-    """Source data used throughout app. Treat as `read-only` updating only as new data is available."""
-
-    def __init__(self):
-        """Initialize app."""
-        self.app = init_app()
+    # App ids
+    tabs_content_id = 'tabs-wrapper'
+    tabs_select_id = 'tabs-content'
+    app_ids = [tabs_content_id, tabs_select_id]
 
     def define_tabs(self):
-        """Define the list of tabs used to create the navigation and each page."""
-        raise NotImplementedError('This class must be overridden to return a list of TabBase elements.')
+        """Return list of tuples: each tuple is `(tab_name, tab_class)` in order each tab is rendered.
 
-    def run(self, *, debug=True, **kwargs):
-        """Run the application passing any kwargs to dash."""
+        Raises:
+            NotImplementedError: Child class must implement this method
+
+        Should return, list of tuples: each tuple is `(tab_name, tab_class)` in order each tab is rendered
+
+        """
+        raise NotImplementedError('define_tabs must be implemented by child class')
+
+    def verify_app_initialization(self):
+        """Check that the app was properly initialized.
+
+        Raises:
+            RuntimeError: if child class has not called `self.register_uniq_ids`
+
+        """
+        super().verify_app_initialization()
+        allowed_locations = ('left', 'top', 'bottom', 'right')
+        if self.tabs_location not in allowed_locations:
+            raise RuntimeError(f'`self.tabs_location = {self.tabs_location}` is not in {allowed_locations}')
+
+    def run(self, **dash_kwargs):
+        """Override base class. Configure the parent app and all tabs. Starts the Dash server instance.
+
+        Args:
+            **dash_kwargs: keyword arguments for `Dash.run_server()`
+
+        """
         # Suppress callback verification as tab content is rendered later
         self.app.config['suppress_callback_exceptions'] = True
-
-        self.tab_list_tbd = self.define_tabs()
-        self.app_tabs = {_tab.tab_name: _tab for _tab in self.tab_list_tbd}
-        self.tab_map_tbd = {tab.tab_name: tab.create_layout() for tab in self.tab_list_tbd}
-
-        # Create application layout and navigation callback
-        self._createLayout()
+        # Register all unique elements id
+        self.register_uniq_ids(self.app_ids)
+        # Initialize the lookup for each tab then initialize each app/tab
+        self.tab_lookup = OrderedDict(self.define_tabs())
+        self.verify_app_initialization()
+        self.tab_layouts = {}
+        for tab_name, tab in self.tab_lookup.items():
+            tab.verify_app_initialization()
+            tab.register_charts()
+            self.define_tabs.tab_layouts[tab_name] = tab.return_layout()
+            tab.register_callbacks()
+        # Create parent application layout and navigation
+        self.app.layout = self.return_layout()
         self.register_navigation_callback()
-        # Register callbacks from each tab
-        for _tab in self.tab_list_tbd:
-            _tab.registerCallbacks()
+        # Launch the server
+        self.app.run_server(**dash_kwargs)
 
-        self.app.run_server(debug=debug, **kwargs)
+    def return_layout(self):
+        """Return Dash application layout.
 
-    def _createLayout(self):
-        """Create application layout."""
-        self.app.layout = html.Div(children=[
-            self.__sideMenu(),
-            html.Div(style={'margin-left': '10%', 'width': '90%'}, children=[
-                self.__content()
+        Returns:
+            obj: Dash HTML object. Default is simple HTML text
+
+        """
+        # Determine style for containing div of the tab content
+        div_style = {f'margin-{self.tabs_location}': '10%'}
+        if self.tabs_location in ['left', 'right']:
+            div_style['width'] = '90%'
+        else:
+            div_style['height'] = '90%'
+        # Configure the tab menu and tab content div
+        return html.Div(children=[
+            self.tab_menu(),
+            html.Div(style=div_style, children=[
+                html.Div(id=self.ids[self.tabs_content_id]),
             ]),
         ])
 
-    def __sideMenu(self):
-        """Return the HTML elements for the tab side-menu."""
-        tab_style = {'padding': '10px 20px 10px 20px'}
-        tab_select = copy.copy(tab_style)
-        tab_select['border-left'] = '3px solid #119DFF'
+    def tab_menu(self):
+        """Return the HTML elements for the tab menu.
+
+        Returns:
+            obj: Dash HTML object. Default is simple HTML text
+
+        """
+        # Unselected tab style
+        tab_style = {
+            'padding': '10px 20px 10px 20px',
+        }
+        # Extend tab style for selected case
+        selected_style = copy.deepcopy(tab_style)
+        selected_style['border-left'] = '3px solid #119DFF'
+        tab_kwargs = {'style': tab_style, 'selected_style': selected_style}
+        tabs = [dcc.Tab(label=name, value=name, **tab_kwargs) for name, tab in self.tab_lookup.values()]
+        if self.tabs_location in ['left', 'right']:
+            # Configure for vertical case
+            tabs_kwargs = {
+                'vertical': True,
+                'style': {'width': '100%'},
+                'parent_style': {'width': '100%'},
+            }
+            tabs_style = {
+                'background-color': '#F9F9F9',
+                'padding': '15px 0 0 5px',
+                'position': 'fixed',
+                'top': '0', 'bottom': '0', self.tabs_location: '0',  # left/right
+                'width': '9%',
+            }
+        else:
+            # Configure for horizontal case
+            tabs_kwargs = {}
+            tabs_style = {
+                'background-color': '#F9F9F9',
+                'height': '9%',
+                'padding': '15px 0 0 5px',
+                'position': 'fixed',
+                'right': '0', 'left': '0', self.tabs_location: '0',  # top/bottom
+            }
+        # Create the tab menu
         return html.Div(children=[
             dcc.Tabs(
-                id='tabs-select', value=self.tab_list_tbd[0].tab_name, vertical=True,
-                children=[
-                    dcc.Tab(label=_tab.tab_name, value=_tab.tab_name, style=tab_style, selected_style=tab_select)
-                    for _tab in self.tab_list_tbd
-                ],
-                style={'width': '100%'},
-                parent_style={'width': '100%'},
+                id=self.ids[self.tabs_select_id], value=self.tab_lookup.keys()[0], children=tabs, **tabs_kwargs,
             ),
-        ], style={
-            'background-color': '#F9F9F9',
-            'bottom': '0',
-            'left': '0',
-            'padding': '15px 0 0 5px',
-            'position': 'fixed',
-            'top': '0',
-            'width': '9%',
-        })
+        ], style=tabs_style)
 
-    def __content(self):
-        """Return HTML elements for the main content."""
-        return html.Div(className='section', children=[
-            html.Div(id='tabs-content'),
-        ])
+    def register_callbacks(self):
+        """Register the navigation callback."""
+        outputs = [(self.tabs_content_id, 'children')]
+        inputs = [(self.tabs_select_id, 'value')]
 
-    def register_navigation_callback(self):
-        """Register callback to handle tab rendering/navigation."""
-        @self.app.callback(
-            Output('tabs-content', 'children'),
-            [Input('tabs-select', 'value')],
-        )
-        def render_tabs(name):
-            """Render tabs when switched."""
-            return self.tab_map_tbd[name]
+        @self.callback(outputs, inputs, [])
+        def render_tab(tab_name):
+            return self.tab_layouts[tab_name]
