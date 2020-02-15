@@ -111,4 +111,4 @@ class AlignmentDemo:
 
 if __name__ == '__main__':
     port = parse_cli_port()
-    AlignmentDemo().run(port=port)
+    AlignmentDemo().run(port=port, debug=True)

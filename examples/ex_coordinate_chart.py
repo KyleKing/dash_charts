@@ -101,4 +101,4 @@ class CoordinateDemo:
 
 if __name__ == '__main__':
     port = parse_cli_port()
-    CoordinateDemo().run(port=port)
+    CoordinateDemo().run(port=port, debug=True)

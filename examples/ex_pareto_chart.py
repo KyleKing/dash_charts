@@ -115,4 +115,4 @@ class ParetoDemo(AppBase):
 
 if __name__ == '__main__':
     port = parse_cli_port()
-    ParetoDemo().run(debug=True, port=port)
+    ParetoDemo().run(port=port, debug=True)

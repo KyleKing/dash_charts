@@ -76,4 +76,4 @@ class RollingDemo:
 
 if __name__ == '__main__':
     port = parse_cli_port()
-    RollingDemo().run(port=port)
+    RollingDemo().run(port=port, debug=True)

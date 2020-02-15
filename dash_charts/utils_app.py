@@ -8,6 +8,7 @@ from pathlib import Path
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+from icecream import ic
 
 from .utils_fig import format_app_callback
 
@@ -56,7 +57,7 @@ class AppBase:
 
     # In child class, declare the rest of the static data members here
 
-    def __init__(self, *, app=None):
+    def __init__(self, app=None):
         """Initialize app and initial data members. Should be inherited in child class and called with super().
 
         Args:
@@ -179,9 +180,9 @@ class AppWithTabs(AppBase):
     """List of all ids for this app view. Will be mapped to `self.ids` for globally unique ids."""
 
     def define_tabs(self):
-        """Return list of tuples: each tuple is `(tab_name, tab_class)` in order each tab is rendered.
+        """Return list of initialized tabs.
 
-        Should return, list of tuples: each tuple is `(tab_name, tab_class)` in order each tab is rendered
+        Should return, list: each item is an initialized tab (ex `[AppBase(self.app)]` in the order each tab is rendered
 
         Raises:
             NotImplementedError: Child class must implement this method
@@ -212,18 +213,18 @@ class AppWithTabs(AppBase):
         self.app.config['suppress_callback_exceptions'] = True
         # Register all unique elements id
         self.register_uniq_ids(self.app_ids)
-        # Initialize the lookup for each tab then initialize each app/tab
-        self.tab_lookup = OrderedDict(self.define_tabs())
+        # Initialize the lookup for each tab then configure each tab
+        self.tab_lookup = OrderedDict([(tab.name, tab) for tab in self.define_tabs()])
         self.verify_app_initialization()
         self.tab_layouts = {}
         for tab_name, tab in self.tab_lookup.items():
             tab.verify_app_initialization()
             tab.register_charts()
-            self.define_tabs.tab_layouts[tab_name] = tab.return_layout()
+            self.tab_layouts[tab_name] = tab.return_layout()
             tab.register_callbacks()
         # Create parent application layout and navigation
         self.app.layout = self.return_layout()
-        self.register_navigation_callback()
+        self.register_callbacks()
         # Launch the server
         self.app.run_server(**dash_kwargs)
 
@@ -261,11 +262,9 @@ class AppWithTabs(AppBase):
         }
         # Extend tab style for selected case
         selected_style = copy.deepcopy(tab_style)
-        selected_style['border-left'] = '3px solid #119DFF'
-        tab_kwargs = {'style': tab_style, 'selected_style': selected_style}
-        tabs = [dcc.Tab(label=name, value=name, **tab_kwargs) for name, tab in self.tab_lookup.values()]
         if self.tabs_location in ['left', 'right']:
             # Configure for vertical case
+            selected_style['border-left'] = '3px solid #119DFF'
             tabs_kwargs = {
                 'vertical': True,
                 'style': {'width': '100%'},
@@ -280,6 +279,7 @@ class AppWithTabs(AppBase):
             }
         else:
             # Configure for horizontal case
+            selected_style['border-top'] = '3px solid #119DFF'
             tabs_kwargs = {}
             tabs_style = {
                 'background-color': '#F9F9F9',
@@ -289,9 +289,12 @@ class AppWithTabs(AppBase):
                 'right': '0', 'left': '0', self.tabs_location: '0',  # top/bottom
             }
         # Create the tab menu
+        tab_kwargs = {'style': tab_style, 'selected_style': selected_style}
+        tabs = [dcc.Tab(label=name, value=name, **tab_kwargs) for name, tab in self.tab_lookup.items()]
         return html.Div(children=[
             dcc.Tabs(
-                id=self.ids[self.id_tabs_select], value=self.tab_lookup.keys()[0], children=tabs, **tabs_kwargs,
+                id=self.ids[self.id_tabs_select], value=list(self.tab_lookup.keys())[0],
+                children=tabs, **tabs_kwargs,
             ),
         ], style=tabs_style)
 
@@ -302,7 +305,7 @@ class AppWithTabs(AppBase):
 
         @self.callback(outputs, inputs, [])
         def render_tab(tab_name):
-            return self.tab_layouts[tab_name]
+            return [self.tab_layouts[tab_name]]
 
 
 class AppMultiPage(AppBase):

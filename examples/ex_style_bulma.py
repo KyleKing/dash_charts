@@ -106,4 +106,4 @@ class BulmaStylingDemo:
 
 if __name__ == '__main__':
     port = parse_cli_port()
-    BulmaStylingDemo().run(port=port)
+    BulmaStylingDemo().run(port=port, debug=True)

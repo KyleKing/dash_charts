@@ -13,14 +13,9 @@ repository = "https://github.com/kyleking/dash_charts"
 [tool.poetry.dependencies]
 python = "^3.7"
 bottleneck = "^1.2"
-dash = "^1.1"
-dash-core-components = "^1.1"
-dash-html-components = "^1.0"
-dash-table = "^4.1"
+dash = "^1.9"
 icecream = "^2.0"
 pandas = "^1.0"
-plotly = "^4.0"
-plotly_express = "^0.4"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.4"
@@ -72,6 +67,7 @@ pandas-vet = "^0.2.1"
 # pdoc3 = "^0.7.5"  # TODO: uncomment once 0.7.5 is available with fix for data members
 pdoc3 = {git= "https://github.com/pdoc3/pdoc.git"}
 pep8-naming = "^0.9"
+plotly_express = "^0.4"
 proselint = "^0.10.2"
 pur = "^5.2"
 pytest = "^5.0"
