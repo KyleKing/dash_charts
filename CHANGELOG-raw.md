@@ -7,10 +7,14 @@ Changelog
 
 New
 ~~~
+- Add Bootstrap example. [Kyle King]
+- Use external stylesheets for Bulma example. [Kyle King]
 - First refactored example with Pareto chart. [Kyle King]
 
 Changes
 ~~~~~~~
+- Simplify tab example. [Kyle King]
+- Update documentation. [Kyle King]
 - Reduce complexity for map_args. [Kyle King]
 - Refactor utilities and initilze AppWithTabs. [Kyle King]
 - Update TODO annotations. [Kyle King]
@@ -19,6 +23,10 @@ Changes
 - Update data members based on Pareto changes. [Kyle King]
 - Experimented and semi-broke 0.0.3 tag reference. [Kyle King]
 - Improve documentation. [Kyle King]
+
+Fix
+~~~
+- Tabs example. [Kyle King]
 
 
 0.0.3 (2020-02-13)

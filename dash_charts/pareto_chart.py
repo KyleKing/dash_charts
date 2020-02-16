@@ -49,7 +49,7 @@ class ParetoChart(CustomChart):
         df_p = df_p[df_p['value'] != 0]
         df_p['cumPer'] = df_p['value'].divide(df_p['value'].sum()).cumsum()
 
-        # Create the traces and optionally add the count to the bar chart
+        # Create and return the traces and optionally add the count to the bar chart
         count_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if show_count else {}
         return [
             go.Bar(hoverinfo='y', yaxis='y1', name='Raw Value',

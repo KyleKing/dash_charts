@@ -76,7 +76,7 @@ class ParetoDemo(AppBase):
 
         """
         return html.Div(
-            className='section', style={
+            style={
                 'max-width': '1000px',
                 'margin-right': 'auto',
                 'margin-left': 'auto',
