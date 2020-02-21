@@ -34,7 +34,7 @@ class CoordinateDemo:
                 ('height', None, 650),
                 ('width', None, 750),
             ),
-            gridDims=self.grid.dims,
+            grid_dims=self.grid.dims,
             coord=self.grid.coord,
             titles=self.grid.titles,
         )
@@ -46,34 +46,34 @@ class CoordinateDemo:
         self.app.run_server(debug=debug, **kwargs)
 
     def _generateData(self):
-        """Create self.dfDemo with sample data."""
+        """Create self.df_demo with sample data."""
         if isinstance(self.grid, coordinate_chart.CircleGrid):
             # Generated data for the circleGrid demo
             # Generate a list of random values for the chart
             lenPoints = (self.grid.dims[0] * self.grid.dims[1] * len(self.grid.coord['x']))
             vals = np.random.randint(10000, size=lenPoints)
-            self.dfDemo = pd.DataFrame(data={'values': vals})
+            self.df_demo = pd.DataFrame(data={'values': vals})
             # Remove a known number of random values from the data set (for the circle Demo)
             removeCount = 5
             for idx in list(set(np.random.randint(len(vals), size=removeCount * 2)))[:removeCount]:
-                self.dfDemo['values'][idx] = None
+                self.df_demo['values'][idx] = None
 
         elif isinstance(self.grid, coordinate_chart.YearGrid):
             # Data for the YearGrid demo
             now = datetime.datetime.now()
-            monthList = [
-                np.random.randint(10000, size=calendar.monthrange(now.year, monthIdx)[1])
-                for monthIdx in range(1, now.month + 1)
+            month_list = [
+                np.random.randint(10000, size=calendar.monthrange(now.year, month_idx)[1])
+                for month_idx in range(1, now.month + 1)
             ]
             # Remove all future data for the current month
-            monthList[now.month - 1] = monthList[now.month - 1][:(now.day - 1)]
-            self.dfDemo = pd.DataFrame(data={'values': self.grid.formatData(monthList, now.year)})
+            month_list[now.month - 1] = month_list[now.month - 1][:(now.day - 1)]
+            self.df_demo = pd.DataFrame(data={'values': self.grid.formatData(month_list, now.year)})
 
         elif isinstance(self.grid, coordinate_chart.MonthGrid):
             # Data for the MonthGrid demo
             month, year = (2, 2016)  # Always plot for February 2016 (Leap Year)
-            monthList = np.random.randint(10000, size=calendar.monthrange(year, month)[1])
-            self.dfDemo = pd.DataFrame(data={'values': self.grid.formatData(monthList, year, month)})
+            month_list = np.random.randint(10000, size=calendar.monthrange(year, month)[1])
+            self.df_demo = pd.DataFrame(data={'values': self.grid.formatData(month_list, year, month)})
 
         else:
             raise RuntimeError('Unknown Grid Type: {}'.format(self.grid))
@@ -90,7 +90,7 @@ class CoordinateDemo:
                     min_graph(
                         id='coordinate-chart',
                         figure=self.exCoord.create_figure(
-                            df=self.dfDemo,
+                            df=self.df_demo,
                             markerKwargs=markerKwargs,
                         ),
                     ),

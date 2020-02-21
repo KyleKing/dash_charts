@@ -37,12 +37,12 @@ class RollingDemo(AppBase):
         """Initialize charts."""
         self.main_chart = RollingChart(
             title='Sample Timeseries Chart with Rolling Calculations',
-            x_label='Index',
-            y_label='Measured Value',
+            xlabel='Index',
+            ylabel='Measured Value',
         )
 
     def _generate_data(self):
-        """Create self.dfDemo with sample data."""
+        """Create self.df_demo with sample data."""
         # Generate random data points
         count = 1000
         mu, sigma = (15, 10)  # mean and standard deviation

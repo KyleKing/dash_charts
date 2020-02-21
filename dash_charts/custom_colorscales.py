@@ -15,11 +15,11 @@ def makecolorbar(colorscale=((1,), (10,), (100,))):
     """
     # Set tickvalues array
     vals = [_c[0] for _c in colorscale]
-    minVal = np.min([val for val in vals if val != 0])
+    min_val = np.min([val for val in vals if val != 0])
     return {
         'tick0': 0,
         'tickmode': 'array',
-        'tickvals': np.divide(vals, minVal),
+        'tickvals': np.divide(vals, min_val),
     }
 
 

@@ -114,8 +114,9 @@ class AppBase:
             app_ids: list of strings that are unique within this App
 
         """
+        self.ids = copy.deepcopy(self.ids)
         for app_id in app_ids:
-            self.ids[app_id] = f'{self.name}-{app_id}'
+            self.ids[app_id] = f"{self.name}-{app_id}".replace(' ', '-')
 
     def verify_app_initialization(self):
         """Check that the app was properly initialized.
@@ -197,6 +198,12 @@ class AppWithTabs(AppBase):
     tabs_location = 'left'
     """Tab orientation setting. One of `(left, top, bottom, right)`."""
 
+    tabs_margin = '10%'
+    """Adjust this setting based on the width or height of the tabs to prevent the content from overlapping the tabs."""
+
+    tabs_compact = False
+    """Boolean setting to toggle between a padded tab layout if False and a minimal compact version if True."""
+
     tab_lookup = None
     """OrderedDict of tabs based on the list of tuples from `self.define_tabs()`."""
 
@@ -253,6 +260,7 @@ class AppWithTabs(AppBase):
             tab.register_charts()
             self.tab_layouts[tab_name] = tab.return_layout()
             tab.register_callbacks()
+
         # Create parent application layout and navigation
         self.app.layout = self.return_layout()
         self.register_callbacks()
@@ -267,11 +275,7 @@ class AppWithTabs(AppBase):
 
         """
         # Determine style for containing div of the tab content
-        div_style = {f'margin-{self.tabs_location}': '10%'}
-        if self.tabs_location in ['left', 'right']:
-            div_style['width'] = '90%'
-        else:
-            div_style['height'] = '90%'
+        div_style = {f'margin-{self.tabs_location}': self.tabs_margin}
         # Configure the tab menu and tab content div
         return html.Div(children=[
             self.tab_menu(),
@@ -288,11 +292,23 @@ class AppWithTabs(AppBase):
 
         """
         # Unselected tab style
-        tab_style = {
-            'padding': '10px 20px 10px 20px',
-        }
+        if self.tabs_compact:
+            tab_style = {'padding': '2px 4px 2px 4px'}
+            tabs_padding = '6px 0 0 2px'
+        else:
+            tab_style = {'padding': '10px 20px 10px 20px'}
+            tabs_padding = '15px 0 0 5px'
         # Extend tab style for selected case
         selected_style = copy.deepcopy(tab_style)
+        opposite_lookup = {'top': 'bottom', 'bottom': 'top', 'left': 'right', 'right': 'left', }
+        tabs_style = {
+            'background-color': '#F9F9F9',
+            'padding': tabs_padding,
+            'position': 'fixed',
+            'z-index': '999',
+            f'border-{opposite_lookup[self.tabs_location]}': '1px solid #d6d6d6',
+            self.tabs_location: '0',
+        }
         if self.tabs_location in ['left', 'right']:
             # Configure for vertical case
             selected_style['border-left'] = '3px solid #119DFF'
@@ -301,24 +317,16 @@ class AppWithTabs(AppBase):
                 'style': {'width': '100%'},
                 'parent_style': {'width': '100%'},
             }
-            tabs_style = {
-                'background-color': '#F9F9F9',
-                'padding': '15px 0 0 5px',
-                'position': 'fixed',
-                'top': '0', 'bottom': '0', self.tabs_location: '0',  # left/right
-                'width': '9%',
-            }
+            tabs_style['top'] = '0'
+            tabs_style['bottom'] = '0'
+            tabs_style['width'] = 'auto'
         else:
             # Configure for horizontal case
             selected_style['border-top'] = '3px solid #119DFF'
             tabs_kwargs = {}
-            tabs_style = {
-                'background-color': '#F9F9F9',
-                'height': '9%',
-                'padding': '15px 0 0 5px',
-                'position': 'fixed',
-                'right': '0', 'left': '0', self.tabs_location: '0',  # top/bottom
-            }
+            tabs_style['height'] = 'auto'
+            tabs_style['right'] = '0'
+            tabs_style['left'] = '0'
         # Create the tab menu
         tab_kwargs = {'style': tab_style, 'selected_style': selected_style}
         tabs = [dcc.Tab(label=name, value=name, **tab_kwargs) for name, tab in self.tab_lookup.items()]

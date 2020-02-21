@@ -22,8 +22,8 @@ class AlignmentDemo:
         """Run the application passing any kwargs to dash."""
         self.exAlign = AlignChart(
             title='Positioning Error Analysis',
-            x_label='X-Axis Measurements (µm)',
-            y_label='Y-Axis Measurements (µm)',
+            xlabel='X-Axis Measurements (µm)',
+            ylabel='Y-Axis Measurements (µm)',
             layout_overrides=(
                 ('height', None, 800),
                 ('width', None, 1000),
@@ -42,18 +42,18 @@ class AlignmentDemo:
         self.app.run_server(debug=debug, **kwargs)
 
     def _generateData(self):
-        """Create self.dfDemo with sample data."""
+        """Create self.df_demo with sample data."""
         # Generate a grid of initial points
         dim = 5
         count = pow(dim, 2)
         grid = np.meshgrid(*([np.linspace(1, dim, dim)] * 2))
 
         # Combine into a dataframe
-        self.dfDemo = pd.DataFrame(data={
+        self.df_demo = pd.DataFrame(data={
             'x': grid[0].flatten(),
             'y': grid[1].flatten(),
-            'xDelta': np.random.randn(count) / 12,
-            'yDelta': np.random.randn(count) / 8,
+            'x_delta': np.random.randn(count) / 12,
+            'y_delta': np.random.randn(count) / 8,
             'label': ['Point {}'.format(idx) for idx in range(count)],
         })
 
@@ -92,7 +92,7 @@ class AlignmentDemo:
             [Input('stretch-input', 'value')])
         def updateAlignChart(stretch):
             """Create/update the alignment chart with the user-configurable stretch input."""
-            return self.exAlign.create_figure(df=self.dfDemo, stretch=stretch)
+            return self.exAlign.create_figure(df=self.df_demo, stretch=stretch)
 
         @self.app.callback(
             Output('slider-output-container', 'children'),

@@ -20,6 +20,9 @@ class StaticTab(AppBase):
         'padding-top': '10px',
     }
 
+    def __init__(self, *args, **kwargs):
+        self.register_uniq_ids(['N/A'])
+
     def register_charts(self):
         """Register the initial charts."""
         pass

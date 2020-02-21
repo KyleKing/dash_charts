@@ -126,18 +126,18 @@ class CustomChart:
 
     axis_range = {}  # If None or empty dict, will enable autorange. Add X/Y keys to set range
 
-    def __init__(self, *, title, x_label, y_label, layout_overrides=()):
+    def __init__(self, *, title, xlabel, ylabel, layout_overrides=()):
         """Initialize Custom Dash Chart and store parameters as data members.
 
         Args:
             title: String title for chart  (can be an empty string for blank)
-            x_label: XAxis string label (can be an empty string for blank)
-            y_label: YAxis string label (can be an empty string for blank)
+            xlabel: XAxis string label (can be an empty string for blank)
+            ylabel: YAxis string label (can be an empty string for blank)
             layout_overrides: Custom parameters in format [ParentKey, SubKey, Value] to customize 'go.layout'
 
         """
         self.title = title
-        self.labels = {'x': x_label, 'y': y_label}
+        self.labels = {'x': xlabel, 'y': ylabel}
         self.layout_overrides = layout_overrides
 
     def create_figure(self, raw_df, **kwargs_data):

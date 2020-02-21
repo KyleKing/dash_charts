@@ -14,52 +14,53 @@ class AlignChart(MarginalChart):
 
     """
 
-    def __init__(self, title='', x_label='', y_label='', layout_overrides=(), measLbl='Meas', idealLbl='Ideal', pad=0):
+    def __init__(self, title='', xlabel='', ylabel='', custom_layout_params=(), meas_lbl='Meas', ideal_lbl='Ideal',
+                 pad=0):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
-        x_label/y_label -- optional, X and Y Axis axis titles. Defaults to blank
-        layout_overrides -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
-        measLbl/idealLbl -- optional, legend names for the respective values
+        xlabel/ylabel -- optional, X and Y Axis axis titles. Defaults to blank
+        custom_layout_params -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+        meas_lbl/ideal_lbl -- optional, legend names for the respective values
         pad -- optional, internal padding within the chart. Defaults to 0
 
         """
-        super().__init__(title, x_label, y_label, layout_overrides)
+        super().__init__(title, xlabel, ylabel, custom_layout_params)
         # Store the additional kwargs as data members
-        self.measLbl = measLbl
-        self.idealLbl = idealLbl
+        self.meas_lbl = meas_lbl
+        self.ideal_lbl = ideal_lbl
         self.pad = pad
 
-    def listifyData(self, df, stretch):
+    def listify_data(self, df, stretch):
         """Convert the dataframe into a list for plotting.
 
-        df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
+        df -- Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
         stretch -- optional, float value to change the spacing between ideal and measured coordinates
 
         """
-        measLabels = []
+        meas_labels = []
         data = {
-            'x': {self.idealLbl: [], self.measLbl: []},
-            'y': {self.idealLbl: [], self.measLbl: []},
+            'x': {self.ideal_lbl: [], self.meas_lbl: []},
+            'y': {self.ideal_lbl: [], self.meas_lbl: []},
         }
         for row in df.itertuples():
-            measLabels.append(row.label)
-            data['x'][self.idealLbl].append(row.x)
-            data['y'][self.idealLbl].append(row.y)
-            data['x'][self.measLbl].append(row.x + stretch * row.xDelta)
-            data['y'][self.measLbl].append(row.y + stretch * row.yDelta)
+            meas_labels.append(row.label)
+            data['x'][self.ideal_lbl].append(row.x)
+            data['y'][self.ideal_lbl].append(row.y)
+            data['x'][self.meas_lbl].append(row.x + stretch * row.x_delta)
+            data['y'][self.meas_lbl].append(row.y + stretch * row.y_delta)
 
         # Calculate the chart range
-        self.axis_range = {}
+        self.range = {}
         for axis in ['x', 'y']:
-            vals = data[axis][self.idealLbl] + data[axis][self.measLbl]
-            self.axis_range[axis] = math.floor(min(vals) - self.pad), math.ceil(max(vals) + self.pad)
-        return (measLabels, data)
+            vals = data[axis][self.ideal_lbl] + data[axis][self.meas_lbl]
+            self.range[axis] = math.floor(min(vals) - self.pad), math.ceil(max(vals) + self.pad)
+        return (meas_labels, data)
 
     def create_traces(self, df, stretch=1):
         """Return traces for plotly chart.
 
-        df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
+        df -- Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
         stretch -- optional, float value to change the spacing between ideal and measured coordinates
 
         ```python
@@ -67,8 +68,8 @@ class AlignChart(MarginalChart):
         df = pd.DataFrame(data={
             'x': [1, 2, 1, 2],
             'y': [1, 2, 2, 1],
-            'xDelta': [0.01, 0.02, 0.005, -0.04],
-            'yDelta': [0.01, -0.05, 0.005, 0.005],
+            'x_delta': [0.01, 0.02, 0.005, -0.04],
+            'y_delta': [0.01, -0.05, 0.005, 0.005],
             'label': ['A', 'B', 'C', 'D'],
         })
         ```
@@ -76,66 +77,66 @@ class AlignChart(MarginalChart):
         """
         # PLANNED: Handle multiple data sets/missing points? - use greyscale for ideal?
 
-        measLabels, data = self.listifyData(df, stretch)
+        meas_labels, data = self.listify_data(df, stretch)
         # Plot the ideal and measured scatter points
-        chartData = [
+        chart_data = [
             go.Scatter(
                 legendgroup='Points',
                 mode='markers',
                 name=lbl,
-                opacity=1 if lbl == self.measLbl else 0.2,
-                text=measLabels if lbl == self.measLbl else lbl,
+                opacity=1 if lbl == self.meas_lbl else 0.2,
+                text=meas_labels if lbl == self.meas_lbl else lbl,
                 x=data['x'][lbl],
                 y=data['y'][lbl],
-            ) for lbl in [self.idealLbl, self.measLbl]
+            ) for lbl in [self.ideal_lbl, self.meas_lbl]
         ]
         # Plot a semi-transparent connecting line between related points
-        chartData.extend([
+        chart_data.extend([
             go.Scatter(
                 line={'color': '#D93D40', 'dash': 'solid'},
                 mode='lines',
                 opacity=0.15,
                 showlegend=False,
-                x=[data['x'][self.idealLbl][idx], data['x'][self.measLbl][idx]],
-                y=[data['y'][self.idealLbl][idx], data['y'][self.measLbl][idx]],
-            ) for idx in range(len(measLabels))
+                x=[data['x'][self.ideal_lbl][idx], data['x'][self.meas_lbl][idx]],
+                y=[data['y'][self.ideal_lbl][idx], data['y'][self.meas_lbl][idx]],
+            ) for idx in range(len(meas_labels))
         ])
-        return chartData
+        return chart_data
 
     def create_marg_top(self, df, stretch=1):
         """Return traces for the top marginal chart.
 
-        df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
+        df -- Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
         stretch -- optional, float value to change the spacing between ideal and measured coordinates
 
         """
         return [
             go.Box(
                 marker_color='royalblue',
-                name=xVal,
+                name=str(x_val),
                 showlegend=False,
-                x=df['x'][df['x'] == xVal] + df['xDelta'][df['x'] == xVal] * stretch
+                x=df['x'][df['x'] == x_val] + df['x_delta'][df['x'] == x_val] * stretch,
             )
-            for xVal in np.sort(df['x'].unique())
+            for x_val in np.sort(df['x'].unique())
         ]
 
     def create_marg_right(self, df, stretch=1):
         """Return traces for the right marginal chart.
 
-        df -- Pandas dataframe with columns names: ['x', 'y', 'xDelta', 'yDelta', 'label']
+        df -- Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
         stretch -- optional, float value to change the spacing between ideal and measured coordinates
 
         """
-        df['yNew'] = df['y'] + df['yDelta'] * stretch
+        df['yNew'] = df['y'] + df['y_delta'] * stretch
         return [
             go.Box(
                 marker_color='royalblue',
-                name=yVal,
+                name=str(y_val),
                 showlegend=False,
-                x=[idx] * len(df['y'] == yVal),
-                y=df['yNew'][df['y'] == yVal],
+                x=[idx] * len(df['y'] == y_val),
+                y=df['yNew'][df['y'] == y_val],
             )
-            for idx, yVal in enumerate(np.sort(df['y'].unique()))
+            for idx, y_val in enumerate(np.sort(df['y'].unique()))
         ]
 
     def create_layout(self):
