@@ -30,6 +30,7 @@ app.layout = html.Div([
                 columns=[
                     {'name': i, 'id': i} for i in sorted(df.columns)
                 ],
+                # FIXME: this no longer works in recent Dash table
                 filtering='be',
                 filter='',
             ),

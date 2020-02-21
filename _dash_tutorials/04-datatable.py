@@ -33,7 +33,7 @@ app.layout = html.Div([
             dash_table.DataTable(
                 id='table',
                 columns=[{'name': i, 'id': i} for i in df.columns],
-                data=df.to_dict('rows'),
+                data=df.to_dict('records'),
                 # # > Setting a fixed row can cause the header row to have the wrong horizontal spacing as the data
                 # n_fixed_rows=1,
                 style_table={
@@ -44,16 +44,17 @@ app.layout = html.Div([
                 style_cell={
                     'maxWidth': '300px',
                 },
-                style_cell_conditional=[
-                    {'if': {'row_index': 'odd'},
-                     'backgroundColor': 'rgb(248, 248, 248)',
-                     },
-                ] + [
-                    {'if': {'column_id': c},
-                     'textAlign': 'center',
-                     'width': '80px',
-                     } for c in ['Unnamed: 0', 'Product']
-                ],
+                # # TODO: Fix for latest version of Dash
+                # style_cell_conditional=[
+                #     {'if': {'row_index': 'odd'},
+                #      'backgroundColor': 'rgb(248, 248, 248)',
+                #      },
+                # ] + [
+                #     {'if': {'column_id': c},
+                #      'textAlign': 'center',
+                #      'width': '80px',
+                #      } for c in ['Unnamed: 0', 'Product']
+                # ],
                 css=[{
                     'selector': '.dash-cell div.dash-cell-value',
                     'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;',

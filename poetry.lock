@@ -182,6 +182,17 @@ python-versions = "*"
 version = "1.8.0"
 
 [[package]]
+category = "dev"
+description = "DAQ components for Dash"
+name = "dash-daq"
+optional = false
+python-versions = "*"
+version = "0.3.3"
+
+[package.dependencies]
+dash = ">=1.6.1"
+
+[[package]]
 category = "main"
 description = "Vanilla HTML components for Dash"
 name = "dash-html-components"
@@ -1053,6 +1064,7 @@ markdown = ">=3.0"
 reference = "1709915249cdbdf9d79f08628a1ff08190678adf"
 type = "git"
 url = "https://github.com/pdoc3/pdoc.git"
+
 [[package]]
 category = "dev"
 description = "Check PEP-8 naming conventions, plugin for flake8"
@@ -1464,7 +1476,6 @@ watchdog = ["watchdog"]
 [[package]]
 category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
@@ -1475,7 +1486,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools"]
 
 [metadata]
-content-hash = "88bce3123c1032b4bc2dabc35048100f54f135fe3d555bbcb744d33fc8ef37d9"
+content-hash = "0eb212495e212c3d7341f462efa0906936ec46e3fb80715bcb7e1edca01d1c8d"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1564,6 +1575,9 @@ dash-bootstrap-components = [
 ]
 dash-core-components = [
     {file = "dash_core_components-1.8.0.tar.gz", hash = "sha256:6ed00e421e4ff5ebe1bb91b0add168ef89cf2afbdff1e0cef91633dd338569c8"},
+]
+dash-daq = [
+    {file = "dash_daq-0.3.3.tar.gz", hash = "sha256:8370e6624c2b2dd8c53ed8af9a5a376d4b4a8bb4eb4899b57ae8e55fdb8bad8f"},
 ]
 dash-html-components = [
     {file = "dash_html_components-1.0.2.tar.gz", hash = "sha256:8992097a044f5add21f86ccbe0caef8c499394a04d5f2b6cc4458a42f37cca98"},
