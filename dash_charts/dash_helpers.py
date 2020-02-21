@@ -15,3 +15,17 @@ def parse_cli_port():
                         help='Pass port number to Dash server. Default is 8050')
     args = parser.parse_args()
     return args.port
+
+
+# Probably not possible to implement as a class
+# TODO: Methods for convert df to json > dump to UI / load from UI > convert to DF
+# class DataCache:
+#
+#     name = 'TODO-UniqueName'
+#     element = (name, 'data')  # Use as input to state/input/output
+#
+#     def layout():
+#         return ?
+#
+#     def write_df():
+#         return {}

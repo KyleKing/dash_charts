@@ -5,8 +5,7 @@ import plotly.graph_objects as go
 from dash.dependencies import Input, Output, State
 from plotly.subplots import make_subplots
 
-# TODO: Methods for convert df to json > dump to UI / load from UI > convert to DF
-# TODO: Methods for making charts/callbacks that update when data changes in a SQL database
+# TODO: Methods for making charts/callbacks that update when data changes in a SQL database?
 
 
 def min_graph(**kwargs):
