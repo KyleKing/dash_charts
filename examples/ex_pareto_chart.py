@@ -74,7 +74,7 @@ class ParetoDemo(AppBase):
         )
         # Override ParetoParameters as needed
         self.main_chart.show_count = True
-        self.main_chart.pareto_colors = {'bar': '#fed500', 'line': '#124e53'}
+        self.main_chart.pareto_colors = {'bar': '#A5AFC8', 'line': '#391D2F'}
 
     def return_layout(self):
         """Return Dash application layout.
