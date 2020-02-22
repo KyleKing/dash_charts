@@ -9,7 +9,7 @@ from dash_charts.pareto_chart import ParetoChart
 from dash_charts.utils_app import STATIC_URLS, AppBase, init_app
 from dash_charts.utils_fig import min_graph
 
-CSV_DATA = """categories,downtime
+CSV_DATA = """category,downtime
 Every Cloud Has a Silver Lining,10
 Every Cloud Has a Silver Lining,66
 SHOULDN'T APPEAR BECAUSE NONE VALUE,
@@ -55,8 +55,8 @@ class ParetoDemo(AppBase):
         """Initialize charts."""
         self.main_chart = ParetoChart(
             title='Example Pareto Chart',
-            x_label='Category Title',
-            y_label='Measured Downtime (hours)',
+            xlabel='Category Title',
+            ylabel='Measured Downtime (hours)',
             layout_overrides=(
                 ('yaxis', 'dtick', 10),
                 ('yaxis', 'tickformat', '.0f'),
@@ -92,20 +92,6 @@ class ParetoDemo(AppBase):
     def register_callbacks(self):
         """Register the chart callbacks.."""
         pass  # No callbacks necessary for this simple example
-
-        # # TODO: Remove this code - keep for now until I can make a more complex example that utilizes this
-        # from dash_charts.utils_fig import map_args, map_outputs, min_graph  # noqa: E800
-        # outputs = ((self.id_chart, 'figure'), )  # noqa: E800
-        # inputs = ((self.id_chart, 'clickData'), )  # noqa: E800
-        # states = ()  # noqa: E800
-        # @self.callback(outputs, inputs, states)  # noqa: E800
-        # def update_chart(*args):  # noqa: E800
-        #     # Example handling input arguments  # noqa: E800
-        #     a_in, a_states = map_args(args, inputs, states)  # noqa: E800
-        #     ic(a_in[self.id_chart]['clickData'])  # noqa: E800
-        #     # Example mapping output results  # noqa: E800
-        #     new_figure = self.main_chart.create_figure(raw_df=self.raw_data, show_count=True)  # noqa: E800
-        #     return map_outputs(outputs, [(self.id_chart, 'figure', new_figure)])  # noqa: E800
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 # Dash_Charts
 
-Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the `examples/` directory and Example Charts below
+Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes base classes for building a custom chart or application, new charts such as a Pareto, and base classes for tabbed or multi-page applications. See full documentation at [https://kyleking.me/dash_charts/](https://kyleking.me/dash_charts/).
 
 <!-- TOC -->
 
@@ -21,31 +21,67 @@ Boilerplate chart classes for [Plotly/Dash](https://dash.plot.ly/) apps. See the
 ## Quick Start
 
 1. Install Poetry: [https://github.com/sdispater/poetry](https://github.com/sdispater/poetry)
-1. Not on PyPi so can't use `pip install dash_charts`. Instead, install from Github with Poetry: `poetry add dash_charts --git https://github.com/KyleKing/dash_charts.git`
-1. Then use in python:
+1. Install from Github with Poetry: `poetry add dash_charts --git https://github.com/KyleKing/dash_charts.git` (no plans to publish to PyPi for now)
+1. Minimum example:
 
     ```py
-    import pandas as pd
-    from dash_charts.utils_fig import min_graph
+    import dash_html_components as html
+    import plotly.express as px
     from dash_charts.pareto_chart import ParetoChart
+    from dash_charts.utils_app import AppBase
+    from dash_charts.utils_fig import min_graph
 
-    # Create the data (could be CSV, database, etc.)
-    dfDemo = pd.DataFrame(data={})
 
-    # Initialize the chart
-    exPareto = ParetoChart(
-        title='Sample Pareto Chart',
-        x_label='Category Title',
-        y_label='Measured Downtime (hours)',
-    )
+    class ParetoDemo(AppBase):
+        """Example creating a simple Pareto chart."""
 
-    # Create the figure dictionary and add to the layout
-    app.layout = html.Div([
-        min_graph(figure=exPareto.create_figure(df=dfDemo)),
-    ])
+        name = 'Car Share Pareto Demo'
+        """Application name"""
+
+        raw_data = None
+        """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
+
+        main_chart = None
+        """Main chart (Pareto)."""
+
+        id_chart = 'pareto'
+        """Unique name for the main chart."""
+
+        def __init__(self):
+            """Initialize app."""
+            super().__init__()
+            self.raw_data = (px.data.carshare()
+                            .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
+            # self.raw_data =
+            self.raw_data['category'] = [f'H:{cat:02}' for cat in self.raw_data['category']]
+            self.register_uniq_ids([self.id_chart])
+
+        def register_charts(self):
+            """Initialize charts."""
+            self.main_chart = ParetoChart(title='Car Share Pareto', xlabel='Peak Hours', ylabel='Car Hours')
+
+        def return_layout(self):
+            """Return Dash application layout.
+
+            Returns:
+                obj: Dash HTML object. Default is simple HTML text
+
+            """
+            return html.Div([
+                html.Div([min_graph(
+                    id=self.ids[self.id_chart],
+                    figure=self.main_chart.create_figure(raw_df=self.raw_data, show_count=True),
+                )]),
+            ])
+
+        def register_callbacks(self):
+            pass  # Override base class. Not necessary for this example
+
+
+    ParetoDemo().run(debug=True)
     ```
 
-1. See the full examples in [`examples/`](./examples)
+1. See full examples in [`examples/`](./examples)
 
 ## Local Development
 
@@ -54,7 +90,7 @@ git clone https://github.com/KyleKing/dash_charts.git
 cd dash_charts
 poetry install
 poetry shell
-python examples/01_hello_world.py
+python examples/ex_px.py
 ```
 
 ## Example Charts and Documentation
@@ -63,7 +99,7 @@ Full documentation is available at: [https://kyleking.me/dash_charts/](https://k
 
 ### Pareto Chart
 
-Create a Pareto chart in Dash. Handles ordering the categories, calculating the cumulative percentage, and configuring both YAxis.
+Create a Pareto chart in Dash. Handles ordering the category, calculating the cumulative percentage, and configuring both YAxis.
 
 ![ex_pareto_chart.png](.images/ex_pareto_chart.png)
 
@@ -75,7 +111,7 @@ Easily chart the rolling mean and standard deviation for a given scatter data se
 
 ### Coordinate Chart
 
-Chart a discrete data set on a 2D plane with color for intensity. Below examples show how to use the CircleGrid() and MonthGrid() classes
+Chart a discrete data set on a 2D plane with color for intensity. Below examples show how to use the `CircleGrid()` and `MonthGrid()` classes
 
 ![ex_coordinate_chart-circle.png](.images/ex_coordinate_chart-circle.png)
 ![ex_coordinate_chart-year.png](.images/ex_coordinate_chart-year.png)
@@ -89,9 +125,11 @@ Useful for visualizing misalignment between measured values and expected values.
 
 ### Tabbed Application
 
-Useful for putting together a multi-page complex application.
+Use the `AppWithTabs()` base class for quickly building complex applications.
 
 ![ex_app.png](.images/ex_app.png)
+
+<!-- TODO: Add the multi-page base class -->
 
 ## External Links
 
