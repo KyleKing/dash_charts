@@ -14,6 +14,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
     - [Alignment Chart](#alignment-chart)
   - [Applications](#applications)
     - [Tabbed Application](#tabbed-application)
+    - [Multi-Page Application](#multi-page-application)
   - [External Links](#external-links)
 
 <!-- /TOC -->
@@ -144,8 +145,13 @@ See sample code in [examples/ex_tabs.py](examples/ex_tabs.py). Screenshot below:
 
 ![ex_tabs.png](.images/ex_tabs.png)
 
+### Multi-Page Application
 
-<!-- TODO: Add the multi-page base class -->
+Use the `AppWithTabs()` base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.
+
+See sample code in [examples/ex_multi_page.py](examples/ex_multi_page.py). Screenshot below:
+
+![ex_multi_page.png](.images/ex_multi_page.png)
 
 ## External Links
 

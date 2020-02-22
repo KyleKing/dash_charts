@@ -1,14 +1,14 @@
-"""Example Tabbed Applet."""
+"""Example Multi Page Applet."""
 
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import STATIC_URLS, AppBase, AppWithTabs, init_app
+from dash_charts.utils_app import STATIC_URLS, AppBase, AppMultiPage, init_app
 from dash_charts.utils_fig import min_graph
 
 
-class StaticTab(AppBase):
+class StaticPage(AppBase):
     """Simple App without charts or callbacks."""
 
     basic_style = {
@@ -33,10 +33,10 @@ class StaticTab(AppBase):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-class TabZero(StaticTab):
-    """Tab Zero."""
+class PageText(StaticPage):
+    """Text page."""
 
-    name = 'Tab Name for Tab Zero'
+    name = 'Text Page'
 
     def return_layout(self):
         """Return Dash application layout.
@@ -51,28 +51,10 @@ class TabZero(StaticTab):
         ))
 
 
-class TabOne(StaticTab):
-    """Tab One."""
+class PageChart(StaticPage):
+    """Chart page."""
 
-    name = 'Tab Name for Tab One'
-
-    def return_layout(self):
-        """Return Dash application layout.
-
-        Returns:
-            obj: Dash HTML object. Default is simple HTML text
-
-        """
-        return html.Div(style=self.basic_style, children=[
-            html.H1(children=f'Image from {self.name}'),
-            html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif')
-        ])
-
-
-class TabTwo(StaticTab):
-    """Tab Two."""
-
-    name = 'Tab Name for Tab Two'
+    name = 'Chart Page'
 
     def return_layout(self):
         """Return Dash application layout.
@@ -82,7 +64,7 @@ class TabTwo(StaticTab):
 
         """
         return html.Div(style=self.basic_style, children=[
-            html.H1(children=f'{self.name} Chart'),
+            html.H1(children=self.name),
             dcc.Loading(
                 type='circle',
                 children=[
@@ -92,10 +74,10 @@ class TabTwo(StaticTab):
         ])
 
 
-class TabThree(StaticTab):
-    """Tab Three."""
+class Page404(StaticPage):
+    """404 page."""
 
-    name = 'Tab Name for Tab Three'
+    name = 'Page 404'
 
     def return_layout(self):
         """Return Dash application layout.
@@ -105,29 +87,18 @@ class TabThree(StaticTab):
 
         """
         return html.Div(style=self.basic_style, children=[
-            html.H1(children=f'{self.name} Chart'),
-            dcc.Loading(
-                type='cube',
-                children=[
-                    min_graph(figure=px.scatter(
-                        px.data.iris(), x='sepal_width', y='sepal_length', color='species',
-                        marginal_y='rug', marginal_x='histogram', height=500,
-                    )),
-                ],
-            ),
+            html.H1(children=f'404: Path not found'),
+            html.Img(src='https://upload.wikimedia.org/wikipedia/commons/2/26/NL_Route_404.svg')
         ])
 
 
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-class TabAppDemo(AppWithTabs):
+class MultiPageDemo(AppMultiPage):
     """Demo application."""
 
-    name = 'TabAppDemo'
-
-    tabs_location = 'right'
-    """Tab orientation setting. One of `(left, top, bottom, right)`."""
+    name = 'MultiPageDemo'
 
     def __init__(self, **kwargs):
         """Initialize app with custom stylesheets.
@@ -147,13 +118,40 @@ class TabAppDemo(AppWithTabs):
 
         """
         return [
-            TabZero(self.app),
-            TabOne(self.app),
-            TabTwo(self.app),
-            TabThree(self.app),
+            PageText(self.app),
+            PageChart(self.app),
+            Page404(self.app),
         ]
+
+    def nav_bar(self):
+        """Return Dash application layout.
+
+        Returns:
+            obj: Dash HTML object. Default is simple HTML text
+
+        """
+        return html.Div(children=['TODO...'])  # FIXME: Make navbar
+
+    def select_page_name(self, pathname):
+        """Return the page name determined based on the pathname.
+
+        Should return obj: Dash HTML object
+
+        Args:
+            pathname: relative pathname from URL
+
+        Raises:
+            NotImplementedError: Child class must implement this method
+
+        """
+        if pathname == '/':
+            return PageText.name
+        elif 'chart' in pathname:
+            return PageChart.name
+        else:
+            return Page404.name
 
 
 if __name__ == '__main__':
     port = parse_cli_port()
-    TabAppDemo().run(port=port, debug=True)
+    MultiPageDemo().run(port=port, debug=True)

@@ -31,7 +31,7 @@ class RollingDemo(AppBase):
             kwargs: keyword arguments passed to __init__
 
         """
-        app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['dash']])
+        app = init_app(external_stylesheets=[STATIC_URLS['dash']])
         super().__init__(app=app, **kwargs)
 
         self._generate_data()

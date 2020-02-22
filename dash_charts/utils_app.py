@@ -351,6 +351,62 @@ class AppWithTabs(AppWithNavigation):
             return [self.nav_layouts[tab_name]]
 
 
-class AppMultiPage(AppBase):
-    """Base class for building multi-page Dash Applications."""
+class AppMultiPage(AppWithNavigation):
+    """Base class for building Dash Application with multiple pages."""
 
+    # App ids
+    id_url = 'pages-url'
+    id_pages_content = 'pages-wrapper'
+
+    app_ids = [id_url, id_pages_content]
+    """List of all ids for the top-level pages view. Will be mapped to `self.ids` for globally unique ids."""
+
+    def return_layout(self):
+        """Return Dash application layout.
+
+        Returns:
+            obj: Dash HTML object. Default is simple HTML text
+
+        """
+        return html.Div(children=[
+            dcc.Location(id=self.ids[self.id_url], refresh=False),
+            self.nav_bar(),
+            html.Div(id=self.ids[self.id_pages_content]),
+        ])
+
+    def nav_bar(self):
+        """Return the HTML elements for the navigation menu.
+
+        Should return obj: Dash HTML object. Default is simple HTML text
+
+        Raises:
+            NotImplementedError: Child class must implement this method
+
+        """
+        raise NotImplementedError('nav_bar must be implemented by child class')
+
+    def register_callbacks(self):
+        """Register the navigation callback."""
+        outputs = [(self.id_pages_content, 'children')]
+        inputs = [(self.id_url, 'pathname')]
+
+        @self.callback(outputs, inputs, [])
+        def render_tab(pathname):
+            try:
+                return [self.nav_layouts[self.select_page_name(pathname)]]
+            except Exception as err:
+                return [html.Div(children=[f'Error rendering "{pathname}":\n{err}'])]
+
+    def select_page_name(self, pathname):
+        """Return the page name determined based on the pathname.
+
+        Should return obj: Dash HTML object
+
+        Args:
+            pathname: relative pathname from URL
+
+        Raises:
+            NotImplementedError: Child class must implement this method
+
+        """
+        raise NotImplementedError('nav_bar must be implemented by child class')
