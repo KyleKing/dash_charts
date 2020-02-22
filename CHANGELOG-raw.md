@@ -14,6 +14,7 @@ New
 
 Changes
 ~~~~~~~
+- Rename dash tutorial folder. [Kyle King]
 - Update README and pareto chart. [Kyle King]
 - Initialize tests and move to `plotly.express` [Kyle King]
 - Update dash tutorial examples. [Kyle King]
@@ -33,6 +34,7 @@ Changes
 
 Fix
 ~~~
+- Moving subdirectories to gh-pages branch. [Kyle King]
 - Tabs example. [Kyle King]
 
 

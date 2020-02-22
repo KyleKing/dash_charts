@@ -503,7 +503,7 @@ description = "A flake8 extension that checks functions"
 name = "flake8-functions"
 optional = false
 python-versions = "*"
-version = "0.0.2"
+version = "0.0.4"
 
 [package.dependencies]
 pytest = "*"
@@ -698,7 +698,7 @@ description = "string format checker, plugin for flake8"
 name = "flake8-string-format"
 optional = false
 python-versions = "*"
-version = "0.2.3"
+version = "0.3.0"
 
 [package.dependencies]
 flake8 = "*"
@@ -1052,7 +1052,6 @@ markdown = ">=3.0"
 reference = "725bc1f257e34c952497f2a8541fae2a21dc3773"
 type = "git"
 url = "https://github.com/pdoc3/pdoc.git"
-
 [[package]]
 category = "dev"
 description = "Check PEP-8 naming conventions, plugin for flake8"
@@ -1264,8 +1263,8 @@ category = "dev"
 description = "A tool to automatically upgrade syntax for newer versions."
 name = "pyupgrade"
 optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
-version = "1.27.0"
+python-versions = ">=3.6"
+version = "2.0.1"
 
 [package.dependencies]
 tokenize-rt = ">=3.2.0"
@@ -1429,6 +1428,7 @@ watchdog = ["watchdog"]
 [[package]]
 category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
+marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
@@ -1439,8 +1439,8 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "faae585eaa556f777589ac4f900c5ad6c9571e1ccda23074f3748d56752b8f53"
-python-versions = "^3.7"
+content-hash = "304e2debbaab318854ea407bcf8cf055872bc02910ebe4bd38edde262938b73b"
+python-versions = "^3.7, !=3.8"
 
 [metadata.files]
 asttokens = [
@@ -1631,7 +1631,8 @@ flake8-fixme = [
     {file = "flake8_fixme-1.1.1-py2.py3-none-any.whl", hash = "sha256:226a6f2ef916730899f29ac140bed5d4a17e5aba79f00a0e3ae1eff1997cb1ac"},
 ]
 flake8-functions = [
-    {file = "flake8_functions-0.0.2.tar.gz", hash = "sha256:8180515999746819f5e965fc45c2a8933889d5e1600f556b9d8d05115a5c27e4"},
+    {file = "flake8_functions-0.0.4-py3-none-any.whl", hash = "sha256:a0254bf465ca2ae8e3b0c9c948d2cac8d843094aa66496e0b9338755952c0b42"},
+    {file = "flake8_functions-0.0.4.tar.gz", hash = "sha256:e6cde085e3e8ceade4a0256619aa0e381473aff76bbb1d37111f44bbc49ecace"},
 ]
 flake8-isort = [
     {file = "flake8-isort-2.8.0.tar.gz", hash = "sha256:64454d1f154a303cfe23ee715aca37271d4f1d299b2f2663f45b73bff14e36a9"},
@@ -1693,8 +1694,8 @@ flake8-sql = [
     {file = "flake8_SQL-0.4.0-py2.py3-none-any.whl", hash = "sha256:7444179b9b4d04a07c36ad6a22a2daf939ee2a622ebae4335b0b5bb423eaab7e"},
 ]
 flake8-string-format = [
-    {file = "flake8-string-format-0.2.3.tar.gz", hash = "sha256:774d56103d9242ed968897455ef49b7d6de272000cfa83de5814273a868832f1"},
-    {file = "flake8_string_format-0.2.3-py2.py3-none-any.whl", hash = "sha256:68ea72a1a5b75e7018cae44d14f32473c798cf73d75cbaed86c6a9a907b770b2"},
+    {file = "flake8-string-format-0.3.0.tar.gz", hash = "sha256:65f3da786a1461ef77fca3780b314edb2853c377f2e35069723348c8917deaa2"},
+    {file = "flake8_string_format-0.3.0-py2.py3-none-any.whl", hash = "sha256:812ff431f10576a74c89be4e85b8e075a705be39bc40c4b4278b5b13e2afa9af"},
 ]
 flake8-tuple = [
     {file = "flake8_tuple-0.4.1.tar.gz", hash = "sha256:8a1b42aab134ef4c3fef13c6a8f383363f158b19fbc165bd91aed9c51851a61d"},
@@ -1937,8 +1938,8 @@ pytz = [
     {file = "pytz-2019.3.tar.gz", hash = "sha256:b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be"},
 ]
 pyupgrade = [
-    {file = "pyupgrade-1.27.0-py2.py3-none-any.whl", hash = "sha256:927d9945ade12a28c7a2f30cbd7f5af02b02846158ebf819c466f58a5720187e"},
-    {file = "pyupgrade-1.27.0.tar.gz", hash = "sha256:45df21f34b58f41945a8da76c413e3e585fe93d1676ed7d6e7e28061956d56d9"},
+    {file = "pyupgrade-2.0.1-py2.py3-none-any.whl", hash = "sha256:f944514989512203db38df1a5672db14bec2145c566555c06cb3a7bed53cdd77"},
+    {file = "pyupgrade-2.0.1.tar.gz", hash = "sha256:099f273de37c5c71a4bbee87f4689e22b4be013c71e0d350a1a26b5b1300bcf9"},
 ]
 pyyaml = [
     {file = "PyYAML-5.3-cp27-cp27m-win32.whl", hash = "sha256:940532b111b1952befd7db542c370887a8611660d2b9becff75d39355303d82d"},

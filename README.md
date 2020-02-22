@@ -20,8 +20,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
 ## Quick Start
 
-1. Install Poetry: [https://github.com/sdispater/poetry](https://github.com/sdispater/poetry)
-1. Install from Github with Poetry: `poetry add dash_charts --git https://github.com/KyleKing/dash_charts.git` (no plans to publish to PyPi for now)
+1. Install `dash_charts` from Github with: pip install git+https://github.com/KyleKing/dash_charts.git` (or in a Poetry project with `pip install dash_charts --git https://github.com/KyleKing/dash_charts.git`)
 1. Minimum example:
 
     ```py
@@ -80,8 +79,6 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
     ParetoDemo().run(debug=True)
     ```
-
-1. See full examples in [`examples/`](./examples)
 
 ## Local Development
 
