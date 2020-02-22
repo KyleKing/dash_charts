@@ -69,7 +69,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
             return html.Div([
                 html.Div([min_graph(
                     id=self.ids[self.id_chart],
-                    figure=self.main_chart.create_figure(raw_df=self.raw_data, show_count=True),
+                    figure=self.main_chart.create_figure(raw_df=self.raw_data),
                 )]),
             ])
 
@@ -79,6 +79,10 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
     ParetoDemo().run(debug=True)
     ```
+
+1. Resulting Pareto Chart
+
+    ![MinimumExampleScreenCapture](.images/pareto_readme.png)
 
 ## Local Development
 

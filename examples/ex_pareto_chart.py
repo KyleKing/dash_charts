@@ -9,7 +9,7 @@ from dash_charts.pareto_chart import ParetoChart
 from dash_charts.utils_app import STATIC_URLS, AppBase, init_app
 from dash_charts.utils_fig import min_graph
 
-CSV_DATA = """category,downtime
+CSV_DATA = """category,events
 Every Cloud Has a Silver Lining,10
 Every Cloud Has a Silver Lining,66
 SHOULDN'T APPEAR BECAUSE NONE VALUE,
@@ -53,15 +53,15 @@ class ParetoDemo(AppBase):
         app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['dash']])
         super().__init__(app=app, **kwargs)
         self.raw_data = (pd.read_csv(StringIO(CSV_DATA))
-                         .rename(columns={'downtime': 'value'}))
+                         .rename(columns={'events': 'value'}))
         self.register_uniq_ids([self.id_chart])
 
     def register_charts(self):
         """Initialize charts."""
         self.main_chart = ParetoChart(
-            title='Example Pareto Chart',
-            xlabel='Category Title',
-            ylabel='Measured Downtime (hours)',
+            title='Made Up Categories vs. Made Up Counts',
+            xlabel='Categories',
+            ylabel='Count',
             layout_overrides=(
                 ('yaxis', 'dtick', 10),
                 ('yaxis', 'tickformat', '.0f'),
@@ -72,7 +72,9 @@ class ParetoDemo(AppBase):
                 ('legend', None, {'x': 0.6, 'y': 0.8, 'bgcolor': 'rgba(240, 240, 240, 0.49)'}),
             ),
         )
+        # Override ParetoParameters as needed
         self.main_chart.show_count = True
+        self.main_chart.pareto_colors = {'bar': '#fed500', 'line': '#124e53'}
 
     def return_layout(self):
         """Return Dash application layout.

@@ -1,12 +1,47 @@
 """Pareto Chart."""
 
+from dataclasses import dataclass, field
+
 import pandas as pd
 import plotly.graph_objects as go
 
 from .utils_fig import CustomChart
 
 
-class ParetoChart(CustomChart):
+@dataclass
+class ParetoParameters:
+    """Dataclass for Pareto Parameters."""
+
+    # _pareto_colors: field(init=False, repr=False)
+    _pareto_colors: field(repr=False)
+
+    cap_categories: int = 20
+    """Maximum number of categories (bars). Default is 20."""
+
+    show_count: bool = True
+    """If True, will show numeric count on each bar. Default is True."""
+
+    pareto_colors: dict = {'bar': '#4682b4', 'line': '#b44646'}
+
+    @property
+    def pareto_colors(self):
+        """Colors for bar and line traces in Pareto chart.
+
+        Returns:
+            dict: dictionary with keys `(bar, line)`
+
+        """
+        return self._pareto_colors
+
+    @pareto_colors.setter
+    def pareto_colors(self, pareto_colors):
+        expected_keys = sorted(self.pareto_colors.keys())
+        if sorted(pareto_colors.keys()) != expected_keys:
+            raise RuntimeError(f'Expected {pareto_colors} to have keys: {expected_keys}')
+        self._pareto_colors = pareto_colors
+
+
+class ParetoChart(CustomChart, ParetoParameters):
     """Pareto Chart: both bar and line graph chart for strategic decision making."""
 
     cap_categories: int = 20
