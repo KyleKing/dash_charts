@@ -2,7 +2,7 @@
 
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly_express as px
+import plotly.express as px
 from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.utils_app import STATIC_URLS, AppBase, AppWithTabs, init_app
 from dash_charts.utils_fig import min_graph
