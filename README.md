@@ -9,12 +9,11 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
   - [Local Development](#local-development)
   - [Example Charts and Documentation](#example-charts-and-documentation)
     - [Pareto Chart](#pareto-chart)
-    - [Rolling Mean/STD Chart](#rolling-meanstd-chart)
+    - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
     - [Coordinate Chart](#coordinate-chart)
     - [Alignment Chart](#alignment-chart)
     - [Tabbed Application](#tabbed-application)
   - [External Links](#external-links)
-  - [Task List/Action Items](#task-listaction-items)
 
 <!-- /TOC -->
 
@@ -104,7 +103,7 @@ Create a Pareto chart in Dash. Handles ordering the category, calculating the cu
 
 ![ex_pareto_chart.png](.images/ex_pareto_chart.png)
 
-### Rolling Mean/STD Chart
+### Rolling Mean and STD Chart
 
 Easily chart the rolling mean and standard deviation for a given scatter data set.
 
@@ -137,30 +136,26 @@ Use the `AppWithTabs()` base class for quickly building complex applications. Ea
 Useful Dash reference links
 
 - [Official Dash Docs](https://dash.plot.ly)
-  - Using [URLs in Dash](https://dash.plot.ly/urls)
 - [Official Plotly Docs](https://plot.ly/python/) (Searchable)
+- Code Conceptual inspiration
+  - [On Tidy data](https://www.jeannicholashould.com/tidy-data-in-python.html)
+  - [Using field for properties in a @DataClass](https://florimond.dev/blog/articles/2018/10/reconciling-dataclasses-and-properties-in-python/)
 - Example Apps
-  - Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX) commercial Dash app
+  - Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX), a commercial Dash app
   - Pleasant dark app from Dash-Bio, [Circos](https://github.com/plotly/dash-bio/blob/master/tests/dashbio_demos/app_circos.py)
   - All [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
-- Cool Callback Chain debugger [dash_callback_chain](https://github.com/nicolaskruchten/dash_callback_chain)
-- [Awesome CSS Frameworks](https://github.com/troxler/awesome-css-frameworks)
-  - Bulma Themes
-    - [Bulma Flatly Theme preview](https://jenil.github.io/bulmaswatch/flatly/)
-    - [Bulma Customizer](https://bulma-customizer.bstash.io/)
-    - [Admin Template](https://bulmatemplates.github.io/bulma-templates/)
-
-## Task List/Action Items
-
-See TODO/FIXME items in the code as well
-
-- TODO: Add tests
-- TODO: Add data table
-  - Checkout the v2 Table Filtering in Dash 0.43 / [https://dash.plot.ly/datatable](https://dash.plot.ly/datatable)
-  - [Filtering Syntax](https://dash.plot.ly/datatable/filtering)
-- PLANNED: Add the 3D version of the Coordinate chart
-  - [Ribbon](https://plot.ly/python/v3/ribbon-plots/)
-  - [Surface](https://plot.ly/python/3d-surface-plots/)
-- PLANNED: Enable stacked subplots for multiple years of calendar charts (Subplot title is year)
-- PLANNED: Add a tree map
-- PLANNED: Review [Grammar of Graphics](https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149)
+- Best Practices
+  - IBM Design Language (note that v2 doesn't have documentation on visualization yet)
+    - [Process](https://www.ibm.com/design/v1/language/experience/data-visualization/process/)
+    - [Select Chart](https://www.ibm.com/design/v1/language/experience/data-visualization/chart-models/)
+      - Alt [Chart Decision Diagram](https://www.tatvic.com/blog/7-visualizations-learn-r/)
+    - [Principles (color conventions, etc.)](https://www.ibm.com/design/v1/language/experience/data-visualization/visualization/)
+    - [Color Library and Data Vis Swatches](https://www.ibm.com/design/v1/language/resources/color-library/)
+    - [Interaction](https://www.ibm.com/design/v1/language/experience/data-visualization/interaction/)
+    - [Style](https://www.ibm.com/design/v1/language/experience/data-visualization/style/)
+- Colors
+  - [Friendly Guide to Colors](https://lisacharlotterost.de/2016/04/22/Colors-for-DataVis/)
+  - [Viz-Palette Tool](https://projects.susielu.com/viz-palette)
+  - [AI Color Palette](http://colormind.io/) / [Coolors](https://coolors.co/2b303a-92dce5-eee5e9-7c7c7c-d64933)
+- Reference
+  - [Pandas CheatSheet for Data Manipulation](https://github.com/pandas-dev/pandas/blob/master/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)

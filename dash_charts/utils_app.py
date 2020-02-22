@@ -11,6 +11,8 @@ import dash_html_components as html
 
 from .utils_fig import format_app_callback
 
+# TODO: Sliding filter panel like in OmniScope projects?
+
 ASSETS_DIR = Path(__file__).parent / 'assets'
 """Path to the static files directory."""
 
@@ -350,4 +352,4 @@ class AppWithTabs(AppBase):
 class AppMultiPage(AppBase):
     """Base class for building multi-page Dash Applications."""
 
-    pass  # FIXME: Implement
+    pass  # FIXME: implement routing URLs in Dash: https://dash.plot.ly/urls
