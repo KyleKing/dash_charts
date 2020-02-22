@@ -17,6 +17,7 @@ from dash_charts.utils_app import STATIC_URLS, AppBase, AppWithTabs, init_app, o
 from dash_charts.utils_fig import map_args, map_outputs, min_graph
 
 # FIXME: Implement ability for user to select JSON or CSV data and graph interactively!
+#   Require user to submit "Tidy" data with non-value headers
 
 # All Chart - TODO: Make sure all these charts are in example
 # scatter([data_frame, x, y, color, symbol, …])

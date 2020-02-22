@@ -7,12 +7,19 @@ Changelog
 
 New
 ~~~
+- Update plotly express example. [Kyle King]
 - Add Bootstrap example. [Kyle King]
 - Use external stylesheets for Bulma example. [Kyle King]
 - First refactored example with Pareto chart. [Kyle King]
 
 Changes
 ~~~~~~~
+- Update README and pareto chart. [Kyle King]
+- Initialize tests and move to `plotly.express` [Kyle King]
+- Update dash tutorial examples. [Kyle King]
+- Additional snake_case refactor. [Kyle King]
+- Add notes. [Kyle King]
+- Update rolling chart. [Kyle King]
 - Simplify tab example. [Kyle King]
 - Update documentation. [Kyle King]
 - Reduce complexity for map_args. [Kyle King]

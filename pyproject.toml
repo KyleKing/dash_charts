@@ -16,6 +16,7 @@ bottleneck = "^1.2"
 dash = "^1.9"
 icecream = "^2.0"
 pandas = "^1.0"
+scipy = "^1.4.1"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.4"
