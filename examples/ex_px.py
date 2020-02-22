@@ -19,6 +19,15 @@ from dash_charts.utils_fig import map_args, map_outputs, min_graph
 # FIXME: Implement ability for user to select JSON or CSV data and graph interactively!
 #   Require user to submit "Tidy" data with non-value headers
 
+# # TODO: Show all data in code output
+# px.data.election_geojson()  # Dict
+# px.data.carshare().head()
+# px.data.election().head()
+# px.data.gapminder().head()
+# px.data.iris().head()
+# px.data.tips().head()
+# px.data.wind().head()
+
 # All Chart - TODO: Make sure all these charts are in example
 # scatter([data_frame, x, y, color, symbol, …])
 #    In a scatter plot, each row of data_frame is represented by a symbol
@@ -120,9 +129,14 @@ class TabBase(AppBase):
     dims: tuple = ()  # FIXME: should be able to be None
     dims_dict: OrderedDict = OrderedDict([])  # FIXME: should be able to be None
 
-    def __init__(self, *dash_args, **dash_kwargs):
-        """Resolve higher-order data members."""
-        super().__init__(*dash_args, **dash_kwargs)
+    def __init__(self, **kwargs):
+        """Resolve higher-order data members.
+
+        Args:
+            kwargs: keyword arguments passed to __init__
+
+        """
+        super().__init__(**kwargs)
 
         self.col_opts = [] if self.data is None else tuple(opts_dd(_c, _c) for _c in self.data.columns)
         self.func_opts = tuple(opts_dd(lbl, lbl) for lbl in self.func_map.keys())
@@ -297,10 +311,15 @@ class PXDemoApp(AppWithTabs):
     tabs_compact = False
     """Boolean setting to toggle between a padded tab layout if False and a minimal compact version if True."""
 
-    def __init__(self, **dash_kwargs):
-        """Initialize app with custom stylesheets."""
-        app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['dash']], **dash_kwargs)
-        super().__init__(app=app)
+    def __init__(self, **kwargs):
+        """Initialize app with custom stylesheets.
+
+        Args:
+            kwargs: keyword arguments passed to __init__
+
+        """
+        app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['dash']])
+        super().__init__(app=app, **kwargs)
 
     def define_tabs(self):
         """Return list of initialized tabs.

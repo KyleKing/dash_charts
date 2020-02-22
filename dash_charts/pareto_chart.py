@@ -9,18 +9,45 @@ from .utils_fig import CustomChart
 class ParetoChart(CustomChart):
     """Pareto Chart: both bar and line graph chart for strategic decision making."""
 
-    pareto_colors = {'bar': '#4682b4', 'line': '#b44646'}
-    """Default colors for pareto bar and line respectively."""
-
-    cap_categories = 20
+    cap_categories: int = 20
     """Maximum number of categories (bars). Default is 20."""
 
-    def create_traces(self, raw_df, *, show_count=True):
+    show_count: bool = True
+    """If True, will show numeric count on each bar. Default is True."""
+
+    pareto_colors: dict = {'bar': '#4682b4', 'line': '#b44646'}
+    """Colors for bar and line traces in Pareto chart."""
+
+    def tidy_pareto_data(self, raw_df):
+        """Return compressed Pareto dataframe of only the unique values.
+
+        Args:
+            raw_df: pandas dataframe with at minimum the two columns `category: str` and `value: float`
+
+        Returns:
+            dataframe: pandas dataframe with columns `(value, label, counts, cum_per)`
+
+        """
+        df_p = None
+        for cat in raw_df['category'].unique():
+            df_row = pd.DataFrame(data={
+                'label': [cat],
+                'value': [raw_df.loc[raw_df['category'] == cat]['value'].sum()],
+                'counts': raw_df['category'].value_counts()[cat],
+            })
+            df_p = df_row if df_p is None else df_p.append(df_row)
+        # Sort and calculate percentage
+        df_p = (df_p[df_p['value'] != 0]
+                .sort_values(by=['value'], ascending=False)
+                .head(self.cap_categories))
+        df_p['cum_per'] = df_p['value'].divide(df_p['value'].sum()).cumsum()
+        return df_p
+
+    def create_traces(self, raw_df):
         """Return traces for plotly chart.
 
         Args:
-            raw_df: pandas dataframe with at minimum the two columns `value: float` and `category: str`
-            show_count: boolean and if True, will show numeric count on each bar. Default is True
+            raw_df: pandas dataframe with at minimum the two columns `category: str` and `value: float`
 
         Returns:
             list: Dash chart traces
@@ -37,23 +64,9 @@ class ParetoChart(CustomChart):
         elif not pd.api.types.is_string_dtype(raw_df['category']):
             raise RuntimeError(f"category column must be string, but found {raw_df['category'].dtype}")
 
-        # Created compressed Pareto dataframe of only the unique values
-        df_p = None
-        for cat in raw_df['category'].unique():
-            df_row = pd.DataFrame(data={
-                'value': [raw_df.loc[raw_df['category'] == cat]['value'].sum()],
-                'label': [cat],
-                'counts': raw_df['category'].value_counts()[cat],
-            })
-            df_p = df_row if df_p is None else df_p.append(df_row)
-        # Sort and calculate percentage
-        df_p = (df_p[df_p['value'] != 0]
-                .sort_values(by=['value'], ascending=False)
-                .head(self.cap_categories))
-        df_p['cum_per'] = df_p['value'].divide(df_p['value'].sum()).cumsum()
-
         # Create and return the traces and optionally add the count to the bar chart
-        count_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if show_count else {}
+        df_p = self.tidy_pareto_data(raw_df)
+        count_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if self.show_count else {}
         return [
             go.Bar(hoverinfo='y', yaxis='y1', name='Raw Value',
                    marker={'color': self.pareto_colors['bar']},

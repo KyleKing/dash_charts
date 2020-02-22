@@ -12,7 +12,6 @@ from . import custom_colorscales
 from .utils_fig import CustomChart
 
 
-
 class CoordinateChart(CustomChart):
     """Coordinate Chart.
 
@@ -20,7 +19,7 @@ class CoordinateChart(CustomChart):
 
     """
 
-    def __init__(self, title='', xlabel='', ylabel='', custom_layout_params=(), grid_dims=None, coord=None, titles=None):
+    def __init__(self, title='', xlabel='', ylabel='', layout_overrides=(), grid_dims=None, coord=None, titles=None):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank

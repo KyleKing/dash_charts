@@ -20,7 +20,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
 ## Quick Start
 
-1. Install `dash_charts` from Github with: pip install git+https://github.com/KyleKing/dash_charts.git` (or in a Poetry project with `pip install dash_charts --git https://github.com/KyleKing/dash_charts.git`)
+1. Install `dash_charts` from Github with: `pip install git+https://github.com/KyleKing/dash_charts.git` (or in a Poetry project with `pip install dash_charts --git https://github.com/KyleKing/dash_charts.git`)
 1. Minimum example:
 
     ```py
@@ -46,9 +46,9 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
         id_chart = 'pareto'
         """Unique name for the main chart."""
 
-        def __init__(self):
+        def __init__(self, **kwargs):
             """Initialize app."""
-            super().__init__()
+            super().__init__(**kwargs)
             self.raw_data = (px.data.carshare()
                             .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
             # self.raw_data =
@@ -122,7 +122,7 @@ Useful for visualizing misalignment between measured values and expected values.
 
 ### Tabbed Application
 
-Use the `AppWithTabs()` base class for quickly building complex applications.
+Use the `AppWithTabs()` base class for quickly building complex applications. Each Tab is derived from `AppBase()` and can be a single page application or a tab within the tabbed application.
 
 ![ex_app.png](.images/ex_app.png)
 

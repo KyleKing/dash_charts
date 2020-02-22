@@ -14,18 +14,18 @@ class AlignChart(MarginalChart):
 
     """
 
-    def __init__(self, title='', xlabel='', ylabel='', custom_layout_params=(), meas_lbl='Meas', ideal_lbl='Ideal',
+    def __init__(self, title='', xlabel='', ylabel='', layout_overrides=(), meas_lbl='Meas', ideal_lbl='Ideal',
                  pad=0):
         """Initialize chart parameters.
 
         title -- optional, string title for chart. Defaults to blank
         xlabel/ylabel -- optional, X and Y Axis axis titles. Defaults to blank
-        custom_layout_params -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+        layout_overrides -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
         meas_lbl/ideal_lbl -- optional, legend names for the respective values
         pad -- optional, internal padding within the chart. Defaults to 0
 
         """
-        super().__init__(title, xlabel, ylabel, custom_layout_params)
+        super().__init__(title, xlabel, ylabel, layout_overrides)
         # Store the additional kwargs as data members
         self.meas_lbl = meas_lbl
         self.ideal_lbl = ideal_lbl

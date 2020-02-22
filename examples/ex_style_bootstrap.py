@@ -24,11 +24,16 @@ class BootstrapStylingDemo(AppBase):
     name = 'Example Bootstrap Styling Demo'
     """Application name"""
 
-    def __init__(self):
-        """Initialize app with custom stylesheets."""
+    def __init__(self, **kwargs):
+        """Initialize app with custom stylesheets.
+
+        Args:
+            kwargs: keyword arguments passed to __init__
+
+        """
         theme = dbc.themes.FLATLY  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
         app = init_app(external_stylesheets=[theme])
-        super().__init__(app=app)
+        super().__init__(app=app, **kwargs)
         self.register_uniq_ids(['placeholder'])
 
     def register_charts(self):

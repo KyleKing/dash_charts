@@ -131,10 +131,15 @@ class TabAppDemo(AppWithTabs):
     tabs_location = 'right'
     """Tab orientation setting. One of `(left, top, bottom, right)`."""
 
-    def __init__(self):
-        """Initialize app with custom stylesheets."""
+    def __init__(self, **kwargs):
+        """Initialize app with custom stylesheets.
+
+        Args:
+            kwargs: keyword arguments passed to __init__
+
+        """
         app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['dash']])
-        super().__init__(app=app)
+        super().__init__(app=app, **kwargs)
 
     def define_tabs(self):
         """Return list of initialized tabs.

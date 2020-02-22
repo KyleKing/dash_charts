@@ -43,10 +43,15 @@ class ParetoDemo(AppBase):
     id_chart = 'pareto'
     """Unique name for the main chart."""
 
-    def __init__(self):
-        """Initialize app with custom stylesheets."""
+    def __init__(self, **kwargs):
+        """Initialize app with custom stylesheets.
+
+        Args:
+            kwargs: keyword arguments passed to __init__
+
+        """
         app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['dash']])
-        super().__init__(app=app)
+        super().__init__(app=app, **kwargs)
         self.raw_data = (pd.read_csv(StringIO(CSV_DATA))
                          .rename(columns={'downtime': 'value'}))
         self.register_uniq_ids([self.id_chart])
@@ -67,6 +72,7 @@ class ParetoDemo(AppBase):
                 ('legend', None, {'x': 0.6, 'y': 0.8, 'bgcolor': 'rgba(240, 240, 240, 0.49)'}),
             ),
         )
+        self.main_chart.show_count = True
 
     def return_layout(self):
         """Return Dash application layout.
@@ -84,7 +90,7 @@ class ParetoDemo(AppBase):
                 html.H4(children=self.name),
                 html.Div([min_graph(
                     id=self.ids[self.id_chart],
-                    figure=self.main_chart.create_figure(raw_df=self.raw_data, show_count=True),
+                    figure=self.main_chart.create_figure(raw_df=self.raw_data),
                 )]),
             ],
         )
