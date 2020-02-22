@@ -12,16 +12,14 @@ from .utils_fig import CustomChart
 class ParetoParameters:
     """Dataclass for Pareto Parameters."""
 
-    # _pareto_colors: field(init=False, repr=False)
-    _pareto_colors: field(repr=False)
+    pareto_colors: dict
+    _pareto_colors: dict = field(init=False, repr=False)
 
     cap_categories: int = 20
     """Maximum number of categories (bars). Default is 20."""
 
     show_count: bool = True
     """If True, will show numeric count on each bar. Default is True."""
-
-    pareto_colors: dict = {'bar': '#4682b4', 'line': '#b44646'}
 
     @property
     def pareto_colors(self):
@@ -35,7 +33,9 @@ class ParetoParameters:
 
     @pareto_colors.setter
     def pareto_colors(self, pareto_colors):
-        expected_keys = sorted(self.pareto_colors.keys())
+        if isinstance(pareto_colors, property):
+            pareto_colors = {'bar': '#4682b4', 'line': '#b44646'}
+        expected_keys = sorted(['bar', 'line'])
         if sorted(pareto_colors.keys()) != expected_keys:
             raise RuntimeError(f'Expected {pareto_colors} to have keys: {expected_keys}')
         self._pareto_colors = pareto_colors
@@ -44,14 +44,8 @@ class ParetoParameters:
 class ParetoChart(CustomChart, ParetoParameters):
     """Pareto Chart: both bar and line graph chart for strategic decision making."""
 
-    cap_categories: int = 20
-    """Maximum number of categories (bars). Default is 20."""
-
-    show_count: bool = True
-    """If True, will show numeric count on each bar. Default is True."""
-
-    pareto_colors: dict = {'bar': '#4682b4', 'line': '#b44646'}
-    """Colors for bar and line traces in Pareto chart."""
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
     def tidy_pareto_data(self, raw_df):
         """Return compressed Pareto dataframe of only the unique values.
