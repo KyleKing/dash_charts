@@ -7,6 +7,7 @@ Changelog
 
 New
 ~~~
+- New: @dataclass for pareto to reduce method args. [Kyle King]
 - Update plotly express example. [Kyle King]
 - Add Bootstrap example. [Kyle King]
 - Use external stylesheets for Bulma example. [Kyle King]
@@ -14,6 +15,8 @@ New
 
 Changes
 ~~~~~~~
+- Remove TODOs from README and update links. [Kyle King]
+- Relax version requirements in toml. [Kyle King]
 - Rename dash tutorial folder. [Kyle King]
 - Update README and pareto chart. [Kyle King]
 - Initialize tests and move to `plotly.express` [Kyle King]
@@ -34,6 +37,8 @@ Changes
 
 Fix
 ~~~
+- Pareto chart dataclass. [Kyle King]
+- Pass kwargs to __init__ and update README. [Kyle King]
 - Moving subdirectories to gh-pages branch. [Kyle King]
 - Tabs example. [Kyle King]
 

@@ -141,7 +141,7 @@ class TabAppDemo(AppWithTabs):
         app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['dash']])
         super().__init__(app=app, **kwargs)
 
-    def define_tabs(self):
+    def define_nav_elements(self):
         """Return list of initialized tabs.
 
         Returns:

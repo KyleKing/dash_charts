@@ -118,7 +118,7 @@ class AppBase:
         """
         self.ids = copy.deepcopy(self.ids)
         for app_id in app_ids:
-            self.ids[app_id] = f"{self.name}-{app_id}".replace(' ', '-')
+            self.ids[app_id] = f'{self.name}-{app_id}'.replace(' ', '-')
 
     def verify_app_initialization(self):
         """Check that the app was properly initialized.
@@ -191,56 +191,28 @@ class AppBase:
         raise NotImplementedError('register_callbacks must be implemented by child class')
 
 
-class AppWithTabs(AppBase):
-    """Base class for building Dash Application with tabs. Tabs will be in specified `self.tabs_location`."""
+class AppWithNavigation(AppBase):
+    """Base class for building Dash Application with tabs or URL routing."""
 
     app = None
     """Main Dash application to pass to all child tabs."""
 
-    tabs_location = 'left'
-    """Tab orientation setting. One of `(left, top, bottom, right)`."""
+    nav_lookup = None
+    """OrderedDict based on the list of tuples from `self.define_nav_elements()`."""
 
-    tabs_margin = '10%'
-    """Adjust this setting based on the width or height of the tabs to prevent the content from overlapping the tabs."""
+    nav_layouts = None
+    """Dictionary with nav_names as keys and corresponding layout as value."""
 
-    tabs_compact = False
-    """Boolean setting to toggle between a padded tab layout if False and a minimal compact version if True."""
+    def define_nav_elements(self):
+        """Return list of initialized pages or tabs accordingly.
 
-    tab_lookup = None
-    """OrderedDict of tabs based on the list of tuples from `self.define_tabs()`."""
-
-    tab_layouts = None
-    """Dictionary with tab_names as keys and corresponding layout as value."""
-
-    # App ids
-    id_tabs_content = 'tabs-wrapper'
-    id_tabs_select = 'tabs-content'
-
-    app_ids = [id_tabs_content, id_tabs_select]
-    """List of all ids for this app view. Will be mapped to `self.ids` for globally unique ids."""
-
-    def define_tabs(self):
-        """Return list of initialized tabs.
-
-        Should return, list: each item is an initialized tab (ex `[AppBase(self.app)]` in the order each tab is rendered
+        Should return, list: each item is an initialized app (ex `[AppBase(self.app)]` in the order each tab is rendered
 
         Raises:
             NotImplementedError: Child class must implement this method
 
         """
-        raise NotImplementedError('define_tabs must be implemented by child class')
-
-    def verify_app_initialization(self):
-        """Check that the app was properly initialized.
-
-        Raises:
-            RuntimeError: if child class has not called `self.register_uniq_ids`
-
-        """
-        super().verify_app_initialization()
-        allowed_locations = ('left', 'top', 'bottom', 'right')
-        if self.tabs_location not in allowed_locations:
-            raise RuntimeError(f'`self.tabs_location = {self.tabs_location}` is not in {allowed_locations}')
+        raise NotImplementedError('define_nav_elements must be implemented by child class')
 
     def run(self, **dash_kwargs):
         """Override base class. Configure the parent app and all tabs. Starts the Dash server instance.
@@ -254,20 +226,52 @@ class AppWithTabs(AppBase):
         # Register all unique element ids
         self.register_uniq_ids(self.app_ids)
         # Initialize the lookup for each tab then configure each tab
-        self.tab_lookup = OrderedDict([(tab.name, tab) for tab in self.define_tabs()])
+        self.nav_lookup = OrderedDict([(tab.name, tab) for tab in self.define_nav_elements()])
         self.verify_app_initialization()
-        self.tab_layouts = {}
-        for tab_name, tab in self.tab_lookup.items():
-            tab.verify_app_initialization()
-            tab.register_charts()
-            self.tab_layouts[tab_name] = tab.return_layout()
-            tab.register_callbacks()
+        self.nav_layouts = {}
+        for nav_name, nav in self.nav_lookup.items():
+            nav.verify_app_initialization()
+            nav.register_charts()
+            self.nav_layouts[nav_name] = nav.return_layout()
+            nav.register_callbacks()
 
         # Create parent application layout and navigation
         self.app.layout = self.return_layout()
         self.register_callbacks()
         # Launch the server
         self.app.run_server(**dash_kwargs)
+
+
+class AppWithTabs(AppWithNavigation):
+    """Base class for building Dash Application with tabs."""
+
+    tabs_location = 'left'
+    """Tab orientation setting. One of `(left, top, bottom, right)`."""
+
+    tabs_margin = '10%'
+    """Adjust this setting based on the width or height of the tabs to prevent the content from overlapping the tabs."""
+
+    tabs_compact = False
+    """Boolean setting to toggle between a padded tab layout if False and a minimal compact version if True."""
+
+    # App ids
+    id_tabs_content = 'tabs-wrapper'
+    id_tabs_select = 'tabs-content'
+
+    app_ids = [id_tabs_content, id_tabs_select]
+    """List of all ids for the top-level tab view. Will be mapped to `self.ids` for globally unique ids."""
+
+    def verify_app_initialization(self):
+        """Check that the app was properly initialized.
+
+        Raises:
+            RuntimeError: if child class has not called `self.register_uniq_ids`
+
+        """
+        super().verify_app_initialization()
+        allowed_locations = ('left', 'top', 'bottom', 'right')
+        if self.tabs_location not in allowed_locations:
+            raise RuntimeError(f'`self.tabs_location = {self.tabs_location}` is not in {allowed_locations}')
 
     def return_layout(self):
         """Return Dash application layout.
@@ -276,14 +280,12 @@ class AppWithTabs(AppBase):
             obj: Dash HTML object. Default is simple HTML text
 
         """
-        # Determine style for containing div of the tab content
-        div_style = {f'margin-{self.tabs_location}': self.tabs_margin}
-        # Configure the tab menu and tab content div
         return html.Div(children=[
             self.tab_menu(),
-            html.Div(style=div_style, children=[
-                html.Div(id=self.ids[self.id_tabs_content]),
-            ]),
+            html.Div(
+                style={f'margin-{self.tabs_location}': self.tabs_margin},
+                children=[html.Div(id=self.ids[self.id_tabs_content])],
+            ),
         ])
 
     def tab_menu(self):
@@ -302,7 +304,7 @@ class AppWithTabs(AppBase):
             tabs_padding = '15px 0 0 5px'
         # Extend tab style for selected case
         selected_style = copy.deepcopy(tab_style)
-        opposite_lookup = {'top': 'bottom', 'bottom': 'top', 'left': 'right', 'right': 'left', }
+        opposite_lookup = {'top': 'bottom', 'bottom': 'top', 'left': 'right', 'right': 'left'}
         tabs_style = {
             'background-color': '#F9F9F9',
             'padding': tabs_padding,
@@ -331,10 +333,10 @@ class AppWithTabs(AppBase):
             tabs_style['left'] = '0'
         # Create the tab menu
         tab_kwargs = {'style': tab_style, 'selected_style': selected_style}
-        tabs = [dcc.Tab(label=name, value=name, **tab_kwargs) for name, tab in self.tab_lookup.items()]
+        tabs = [dcc.Tab(label=name, value=name, **tab_kwargs) for name, tab in self.nav_lookup.items()]
         return html.Div(children=[
             dcc.Tabs(
-                id=self.ids[self.id_tabs_select], value=list(self.tab_lookup.keys())[0],
+                id=self.ids[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
                 children=tabs, **tabs_kwargs,
             ),
         ], style=tabs_style)
@@ -346,10 +348,9 @@ class AppWithTabs(AppBase):
 
         @self.callback(outputs, inputs, [])
         def render_tab(tab_name):
-            return [self.tab_layouts[tab_name]]
+            return [self.nav_layouts[tab_name]]
 
 
 class AppMultiPage(AppBase):
     """Base class for building multi-page Dash Applications."""
 
-    pass  # FIXME: implement routing URLs in Dash: https://dash.plot.ly/urls

@@ -7,11 +7,12 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 - [Dash_Charts](#dash_charts)
   - [Quick Start](#quick-start)
   - [Local Development](#local-development)
-  - [Example Charts and Documentation](#example-charts-and-documentation)
+  - [Example Charts](#example-charts)
     - [Pareto Chart](#pareto-chart)
     - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
     - [Coordinate Chart](#coordinate-chart)
     - [Alignment Chart](#alignment-chart)
+  - [Applications](#applications)
     - [Tabbed Application](#tabbed-application)
   - [External Links](#external-links)
 
@@ -93,13 +94,15 @@ poetry shell
 python examples/ex_px.py
 ```
 
-## Example Charts and Documentation
+## Example Charts
 
-Full documentation is available at: [https://kyleking.me/dash_charts/](https://kyleking.me/dash_charts/). Below headers highlight some of the examples and included chart functionality
+Below are screenshots and links to the example code for each chart included in dash_charts
 
 ### Pareto Chart
 
 Create a Pareto chart in Dash. Handles ordering the category, calculating the cumulative percentage, and configuring both YAxis.
+
+See sample code in [examples/ex_pareto_chart.py](examples/ex_pareto_chart.py). Screenshot below:
 
 ![ex_pareto_chart.png](.images/ex_pareto_chart.png)
 
@@ -107,11 +110,15 @@ Create a Pareto chart in Dash. Handles ordering the category, calculating the cu
 
 Easily chart the rolling mean and standard deviation for a given scatter data set.
 
+See sample code in [examples/ex_rolling_chart.py](examples/ex_rolling_chart.py). Screenshot below:
+
 ![ex_rolling_chart-annotated.png](.images/ex_rolling_chart-annotated.png)
 
 ### Coordinate Chart
 
 Chart a discrete data set on a 2D plane with color for intensity. Below examples show how to use the `CircleGrid()` and `MonthGrid()` classes
+
+See sample code in [examples/ex_coordinate_chart.py](examples/ex_coordinate_chart.py). Screenshot below:
 
 ![ex_coordinate_chart-circle.png](.images/ex_coordinate_chart-circle.png)
 ![ex_coordinate_chart-year.png](.images/ex_coordinate_chart-year.png)
@@ -121,13 +128,22 @@ Chart a discrete data set on a 2D plane with color for intensity. Below examples
 
 Useful for visualizing misalignment between measured values and expected values. Accepts a `stretch` argument to visually increase the spacing between the measured and expected value.
 
+See sample code in [examples/ex_alignment_chart.py](examples/ex_alignment_chart.py). Screenshot below:
+
 ![ex_alignment_chart.png](.images/ex_alignment_chart.png)
+
+## Applications
+
+Every app derives from `AppBase()` so that each tab or page can be run independently or part of a more complicated application
 
 ### Tabbed Application
 
-Use the `AppWithTabs()` base class for quickly building complex applications. Each Tab is derived from `AppBase()` and can be a single page application or a tab within the tabbed application.
+Use the `AppWithTabs()` base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.
 
-![ex_app.png](.images/ex_app.png)
+See sample code in [examples/ex_tabs.py](examples/ex_tabs.py). Screenshot below:
+
+![ex_tabs.png](.images/ex_tabs.png)
+
 
 <!-- TODO: Add the multi-page base class -->
 
@@ -135,15 +151,14 @@ Use the `AppWithTabs()` base class for quickly building complex applications. Ea
 
 Useful Dash reference links
 
-- [Official Dash Docs](https://dash.plot.ly)
-- [Official Plotly Docs](https://plot.ly/python/) (Searchable)
-- Code Conceptual inspiration
-  - [On Tidy data](https://www.jeannicholashould.com/tidy-data-in-python.html)
-  - [Using field for properties in a @DataClass](https://florimond.dev/blog/articles/2018/10/reconciling-dataclasses-and-properties-in-python/)
+- Official [Dash Docs](https://dash.plot.ly) / [Plotly Docs](https://plot.ly/python/)
 - Example Apps
   - Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX), a commercial Dash app
   - Pleasant dark app from Dash-Bio, [Circos](https://github.com/plotly/dash-bio/blob/master/tests/dashbio_demos/app_circos.py)
   - All [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
+- Code Conceptual inspiration
+  - [On Tidy data](https://www.jeannicholashould.com/tidy-data-in-python.html)
+  - [Using field for properties in a @DataClass](https://florimond.dev/blog/articles/2018/10/reconciling-dataclasses-and-properties-in-python/)
 - Best Practices
   - IBM Design Language (note that v2 doesn't have documentation on visualization yet)
     - [Process](https://www.ibm.com/design/v1/language/experience/data-visualization/process/)
