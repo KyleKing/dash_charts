@@ -3,6 +3,8 @@
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 
+# TODO: Sliding filter panel like in OmniScope projects?
+
 
 def dropdown_group(name, _id, options, def_idx, persist=False):
     """Return a Form Group with label and dropdown.

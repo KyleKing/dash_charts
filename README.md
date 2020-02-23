@@ -48,7 +48,12 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
         """Unique name for the main chart."""
 
         def __init__(self, **kwargs):
-            """Initialize app."""
+            """Resolve higher-order data members.
+
+            Args:
+                kwargs: keyword arguments passed to __init__
+
+            """
             super().__init__(**kwargs)
             self.raw_data = (px.data.carshare()
                             .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))

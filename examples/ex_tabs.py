@@ -18,7 +18,14 @@ class StaticTab(AppBase):
         'padding-top': '10px',
     }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
+        """Resolve higher-order data members.
+
+        Args:
+            kwargs: keyword arguments passed to __init__
+
+        """
+        super().__init__(**kwargs)
         self.register_uniq_ids(['N/A'])
 
     def register_charts(self):
@@ -147,10 +154,10 @@ class TabAppDemo(AppWithTabs):
 
         """
         return [
-            TabZero(self.app),
-            TabOne(self.app),
-            TabTwo(self.app),
-            TabThree(self.app),
+            TabZero(app=self.app),
+            TabOne(app=self.app),
+            TabTwo(app=self.app),
+            TabThree(app=self.app),
         ]
 
 

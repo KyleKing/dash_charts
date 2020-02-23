@@ -18,7 +18,14 @@ class StaticPage(AppBase):
         'padding-top': '10px',
     }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
+        """Resolve higher-order data members.
+
+        Args:
+            kwargs: keyword arguments passed to __init__
+
+        """
+        super().__init__(**kwargs)
         self.register_uniq_ids(['N/A'])
 
     def register_charts(self):
@@ -88,7 +95,7 @@ class Page404(StaticPage):
         """
         return html.Div(style=self.basic_style, children=[
             html.H1(children=f'404: Path not found'),
-            html.Img(src='https://upload.wikimedia.org/wikipedia/commons/2/26/NL_Route_404.svg')
+            html.Img(src='https://upload.wikimedia.org/wikipedia/commons/2/26/NL_Route_404.svg'),
         ])
 
 
@@ -118,9 +125,9 @@ class MultiPageDemo(AppMultiPage):
 
         """
         return [
-            PageText(self.app),
-            PageChart(self.app),
-            Page404(self.app),
+            PageText(app=self.app),
+            PageChart(app=self.app),
+            Page404(app=self.app),
         ]
 
     def nav_bar(self):

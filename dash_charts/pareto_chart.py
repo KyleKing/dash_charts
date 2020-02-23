@@ -1,25 +1,21 @@
 """Pareto Chart."""
 
-from dataclasses import dataclass, field
-
 import pandas as pd
 import plotly.graph_objects as go
 
 from .utils_fig import CustomChart
 
 
-@dataclass
-class ParetoParameters:
-    """Dataclass for Pareto Parameters."""
-
-    pareto_colors: dict
-    _pareto_colors: dict = field(init=False, repr=False)
+class ParetoChart(CustomChart):
+    """Pareto Chart: both bar and line graph chart for strategic decision making."""
 
     cap_categories: int = 20
     """Maximum number of categories (bars). Default is 20."""
 
     show_count: bool = True
     """If True, will show numeric count on each bar. Default is True."""
+
+    _pareto_colors: dict = {'bar': '#4682b4', 'line': '#b44646'}
 
     @property
     def pareto_colors(self):
@@ -33,19 +29,10 @@ class ParetoParameters:
 
     @pareto_colors.setter
     def pareto_colors(self, pareto_colors):
-        if isinstance(pareto_colors, property):
-            pareto_colors = {'bar': '#4682b4', 'line': '#b44646'}
         expected_keys = sorted(['bar', 'line'])
         if sorted(pareto_colors.keys()) != expected_keys:
             raise RuntimeError(f'Expected {pareto_colors} to have keys: {expected_keys}')
         self._pareto_colors = pareto_colors
-
-
-class ParetoChart(CustomChart, ParetoParameters):
-    """Pareto Chart: both bar and line graph chart for strategic decision making."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
 
     def tidy_pareto_data(self, raw_df):
         """Return compressed Pareto dataframe of only the unique values.
