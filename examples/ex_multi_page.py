@@ -1,10 +1,11 @@
 """Example Multi Page Applet."""
 
+import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import STATIC_URLS, AppBase, AppMultiPage, init_app
+from dash_charts.utils_app import AppBase, AppMultiPage, init_app
 from dash_charts.utils_fig import min_graph
 
 
@@ -38,6 +39,24 @@ class StaticPage(AppBase):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
+# page_1_layout = html.Div([
+#     html.H1('Page 1'),
+#     dcc.Dropdown(
+#         id='page-1-dropdown',
+#         options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
+#         value='LA'
+#     ),
+#     html.Div(id='page-1-content'),
+#     html.Br(),
+#     dcc.Link('Go to Page 2', href='/page-2'),
+#     html.Br(),
+#     dcc.Link('Go back to home', href='/'),
+# ])
+#
+# @app.callback(dash.dependencies.Output('page-1-content', 'children'),
+#               [dash.dependencies.Input('page-1-dropdown', 'value')])
+# def page_1_dropdown(value):
+#     return 'You have selected "{}"'.format(value)
 
 
 class PageText(StaticPage):
@@ -107,6 +126,15 @@ class MultiPageDemo(AppMultiPage):
 
     name = 'MultiPageDemo'
 
+    navbar_links = [('Home', '/'), ('Chart', '/is-chart'), ('404', '/404')]
+    """Base class must create list of tuples `[('Link Name', '/link'), ]` to use default `self.nav_bar()`."""
+
+    dropdown_links = [('DBC', 'https://dash-bootstrap-components.opensource.faculty.ai/l/components/nav')]
+    """Base class must create list of tuples `[('Link Name', '/link'), ]` to use default `self.nav_bar()`."""
+
+    logo = 'https://images.plot.ly/logo/new-branding/plotly-logomark.png'
+    """Optional path to logo. If None, no logo will be shown in navbar."""
+
     def __init__(self, **kwargs):
         """Initialize app with custom stylesheets.
 
@@ -114,7 +142,8 @@ class MultiPageDemo(AppMultiPage):
             kwargs: keyword arguments passed to __init__
 
         """
-        app = init_app(external_stylesheets=[STATIC_URLS['dash']])
+        theme = dbc.themes.FLATLY  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
+        app = init_app(external_stylesheets=[theme])
         super().__init__(app=app, **kwargs)
 
     def define_nav_elements(self):
@@ -130,25 +159,14 @@ class MultiPageDemo(AppMultiPage):
             Page404(app=self.app),
         ]
 
-    def nav_bar(self):
-        """Return Dash application layout.
-
-        Returns:
-            obj: Dash HTML object. Default is simple HTML text
-
-        """
-        return html.Div(children=['TODO...'])  # FIXME: Make navbar
-
     def select_page_name(self, pathname):
         """Return the page name determined based on the pathname.
-
-        Should return obj: Dash HTML object
 
         Args:
             pathname: relative pathname from URL
 
-        Raises:
-            NotImplementedError: Child class must implement this method
+        Returns:
+            str: page name
 
         """
         if pathname == '/':

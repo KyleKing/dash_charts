@@ -72,7 +72,7 @@ class TabOne(StaticTab):
         """
         return html.Div(style=self.basic_style, children=[
             html.H1(children=f'Image from {self.name}'),
-            html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif')
+            html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif'),
         ])
 
 

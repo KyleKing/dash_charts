@@ -7,6 +7,7 @@ Changelog
 
 New
 ~~~
+- Added multi-page application base class. [Kyle King]
 - New: @dataclass for pareto to reduce method args. [Kyle King]
 - Update plotly express example. [Kyle King]
 - Add Bootstrap example. [Kyle King]
@@ -15,6 +16,9 @@ New
 
 Changes
 ~~~~~~~
+- Remove dataclass for pareto & move utils_dodo. [Kyle King]
+- Update color scheme for Pareto. [Kyle King]
+- Refactor AppWithTabs and update image. [Kyle King]
 - Remove TODOs from README and update links. [Kyle King]
 - Relax version requirements in toml. [Kyle King]
 - Rename dash tutorial folder. [Kyle King]

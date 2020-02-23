@@ -6,12 +6,11 @@ from itertools import count
 from pathlib import Path
 
 import dash
+import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
 from .utils_fig import format_app_callback
-
-# TODO: Sliding filter panel like in OmniScope projects?
 
 ASSETS_DIR = Path(__file__).parent / 'assets'
 """Path to the static files directory."""
@@ -354,11 +353,22 @@ class AppWithTabs(AppWithNavigation):
 class AppMultiPage(AppWithNavigation):
     """Base class for building Dash Application with multiple pages."""
 
+    navbar_links = None
+    """Base class must create list of tuples `[('Link Name', '/link'), ]` to use default `self.nav_bar()`."""
+
+    dropdown_links = None
+    """Base class must create list of tuples `[('Link Name', '/link'), ]` to use default `self.nav_bar()`."""
+
+    logo = None
+    """Optional path to logo. If None, no logo will be shown in navbar."""
+
     # App ids
     id_url = 'pages-url'
     id_pages_content = 'pages-wrapper'
+    id_toggler = 'nav-toggle'
+    id_collapse = 'nav-collapse'
 
-    app_ids = [id_url, id_pages_content]
+    app_ids = [id_url, id_pages_content, id_toggler, id_collapse]
     """List of all ids for the top-level pages view. Will be mapped to `self.ids` for globally unique ids."""
 
     def return_layout(self):
@@ -377,13 +387,59 @@ class AppMultiPage(AppWithNavigation):
     def nav_bar(self):
         """Return the HTML elements for the navigation menu.
 
-        Should return obj: Dash HTML object. Default is simple HTML text
-
-        Raises:
-            NotImplementedError: Child class must implement this method
+        Returns:
+            obj: Dash HTML object. Default is simple HTML text
 
         """
-        raise NotImplementedError('nav_bar must be implemented by child class')
+        # Create brand icon and name where icon in optional
+        brand = []
+        if self.logo:
+            brand.append(dbc.Col(html.Img(src=self.logo, height='25px')))
+        brand.append(dbc.Col(dbc.NavbarBrand(self.name, className='ml-2')))
+        # Create links in navbar and dropdown. Both are optional
+        links = []
+        if self.navbar_links:
+            links.append(dbc.Nav(
+                children=[dbc.NavItem(dbc.NavLink(name, href=link)) for name, link in self.navbar_links],
+                fill=True,
+                navbar=True,
+            ))
+        if self.dropdown_links:
+            links.append(dbc.Nav(
+                dbc.DropdownMenu(
+                    children=[dbc.DropdownMenuItem(name, href=link) for name, link in self.dropdown_links],
+                    in_navbar=True,
+                    label='Links',
+                    nav=True,
+                ),
+                navbar=True,
+            ))
+        # Layout default navbar
+        return dbc.Navbar(
+            children=[
+                dbc.NavLink([
+                    dbc.Row(
+                        children=brand,
+                        align='center',
+                        no_gutters=True,
+                    ),
+                ], href='/'),
+                dbc.NavbarToggler(id=self.ids[self.id_toggler]),
+                dbc.Collapse(
+                    dbc.Row(
+                        children=links,
+                        no_gutters=True,
+                        className='flex-nowrap mt-3 mt-md-0',
+                        align='center',
+                    ),
+                    id=self.ids[self.id_collapse],
+                    navbar=True,
+                ),
+            ],
+            sticky='top',
+            color='dark',
+            dark=True,
+        )
 
     def register_callbacks(self):
         """Register the navigation callback."""
@@ -397,10 +453,17 @@ class AppMultiPage(AppWithNavigation):
             except Exception as err:
                 return [html.Div(children=[f'Error rendering "{pathname}":\n{err}'])]
 
+        @self.callback(
+            [(self.id_collapse, 'is_open')],
+            [(self.id_toggler, 'n_clicks')],
+            [(self.id_collapse, 'is_open')])
+        def toggle_navbar_collapse(n_clicks, is_open):
+            return [not is_open if n_clicks else is_open]
+
     def select_page_name(self, pathname):
         """Return the page name determined based on the pathname.
 
-        Should return obj: Dash HTML object
+        Should return str: page name
 
         Args:
             pathname: relative pathname from URL
