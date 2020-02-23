@@ -50,8 +50,7 @@ class ParetoDemo(AppBase):
             kwargs: keyword arguments passed to __init__
 
         """
-        app = init_app(external_stylesheets=[STATIC_URLS['dash']])
-        super().__init__(app=app, **kwargs)
+        super().__init__(**kwargs)
         self.raw_data = (pd.read_csv(StringIO(CSV_DATA))
                          .rename(columns={'events': 'value'}))
         self.register_uniq_ids([self.id_chart])

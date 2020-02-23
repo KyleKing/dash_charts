@@ -31,11 +31,8 @@ class RollingDemo(AppBase):
             kwargs: keyword arguments passed to __init__
 
         """
-        app = init_app(external_stylesheets=[STATIC_URLS['dash']])
-        super().__init__(app=app, **kwargs)
-
+        super().__init__(**kwargs)
         self._generate_data()
-
         self.register_uniq_ids([self.id_chart])
 
     def register_charts(self):

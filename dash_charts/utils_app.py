@@ -51,16 +51,24 @@ Hashes generated from: https://www.srihash.org/
 
 
 def init_app(**app_kwargs):
-    """Return new Dash app with `assets_folder` set to local assets.
+    """Return new Dash app.
+
+    If not overridden in kwargs, will set path to assets folder, add dash stylesheets, and default meta tags.
 
     Args:
-        app_kwargs: any kwargs to pass to the dash initializer other than `assets_folder`
+        app_kwargs: any kwargs to pass to the dash initializer
 
     Returns:
         dict: `dash.Dash()` instance (`app`)
 
     """
-    return dash.Dash(__name__, assets_folder=str(ASSETS_DIR), **app_kwargs)
+    if 'assets_folder' not in app_kwargs:
+        app_kwargs['assets_folder'] = str(ASSETS_DIR)
+    if 'external_stylesheets' not in app_kwargs:
+        app_kwargs['external_stylesheets'] = [STATIC_URLS['dash']]
+    if 'meta_tags' not in app_kwargs:
+        app_kwargs['meta_tags'] = [{'name': 'viewport', 'content': 'width=device-width, initial-scale=1'}]
+    return dash.Dash(__name__, **app_kwargs)
 
 
 def opts_dd(lbl, value):
