@@ -13,7 +13,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly.express as px
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import STATIC_URLS, AppBase, AppWithTabs, init_app, opts_dd
+from dash_charts.utils_app import AppBase, AppWithTabs, opts_dd
 from dash_charts.utils_fig import map_args, map_outputs, min_graph
 
 # FIXME: Implement ability for user to select JSON or CSV data and graph interactively!
@@ -151,10 +151,21 @@ class TabBase(AppBase):
         Returns:
             obj: Dash HTML object. Default is simple HTML text
 
+        Raises:
+            RuntimeError: if any class data member is not the expected type
+
         """
-        assert isinstance(self.name, str)
-        assert isinstance(self.dims, tuple)
-        assert isinstance(self.dims_dict, OrderedDict)
+        errors = []
+        if not isinstance(self.name, str):
+            errors.append(f'Expected self.name="{self.name}" to be str')
+        if not isinstance(self.dims, tuple):
+            errors.append(f'Expected self.dims="{self.dims}" to be tuple')
+        if not isinstance(self.dims_dict, OrderedDict):
+            errors.append(f'Expected self.dims_dict="{self.dims_dict}" to be OrderedDict')
+        if len(errors):
+            formatted_errors = '\n' + '\n'.join(errors)
+            raise RuntimeError(f'Found errors in data members:{formatted_errors}')
+
         return html.Div([
             html.Div([
                 html.P([
@@ -176,15 +187,22 @@ class TabBase(AppBase):
             min_graph(id=self.ids[self.id_chart], style={'width': '75%', 'display': 'inline-block'}),
         ], style={'padding': '15px'})
 
-    def register_charts(self):
+    def create_charts(self):
         """Register the initial charts."""
         pass
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register callbacks necessary for this tab."""
-        assert isinstance(self.takes_args, bool)
-        assert isinstance(self.data, pd.DataFrame) or self.data is None, 'Data can be None...'
-        assert isinstance(self.func_map, OrderedDict)
+        errors = []
+        if not isinstance(self.takes_args, bool):
+            errors.append(f'Expected self.takes_args="{self.takes_args}" to be bool')
+        if not isinstance(self.data, pd.DataFrame) or self.data is None:
+            errors.append(f'Expected self.data="{self.data}" to be pd.DataFrame or None')
+        if not isinstance(self.func_map, OrderedDict):
+            errors.append(f'Expected self.func_map="{self.func_map}" to be OrderedDict')
+        if len(errors):
+            formatted_errors = '\n' + '\n'.join(errors)
+            raise RuntimeError(f'Found errors in data members:{formatted_errors}')
 
         outputs = ((self.id_chart, 'figure'), )
         inputs = [(_id, 'value') for _id in self.input_ids]
@@ -336,10 +354,13 @@ class PXDemoApp(AppWithTabs):
         """
         return html.Div([
             html.H1('Dash/Plotly Express Data Exploration Demo', style={'padding': '15px 0 0 15px'}),
-            super().return_layout()
+            super().return_layout(),
         ])
 
 
 if __name__ == '__main__':
     port = parse_cli_port()
     PXDemoApp().run(port=port, debug=True)
+else:
+    INSTANCE = PXDemoApp()
+    FLASK_HANDLE = INSTANCE.get_server()

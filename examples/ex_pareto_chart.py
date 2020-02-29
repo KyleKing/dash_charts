@@ -6,7 +6,7 @@ import dash_html_components as html
 import pandas as pd
 from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.pareto_chart import ParetoChart
-from dash_charts.utils_app import STATIC_URLS, AppBase, init_app
+from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
 
 CSV_DATA = """category,events
@@ -43,19 +43,14 @@ class ParetoDemo(AppBase):
     id_chart = 'pareto'
     """Unique name for the main chart."""
 
-    def __init__(self, **kwargs):
-        """Initialize app with custom stylesheets.
-
-        Args:
-            kwargs: keyword arguments passed to __init__
-
-        """
-        super().__init__(**kwargs)
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        self.register_uniq_ids([self.id_chart])
+        # Format sample CSV data for the Pareto
         self.raw_data = (pd.read_csv(StringIO(CSV_DATA))
                          .rename(columns={'events': 'value'}))
-        self.register_uniq_ids([self.id_chart])
 
-    def register_charts(self):
+    def create_charts(self):
         """Initialize charts."""
         self.main_chart = ParetoChart(
             title='Made Up Categories vs. Made Up Counts',
@@ -96,7 +91,7 @@ class ParetoDemo(AppBase):
             ],
         )
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register the chart callbacks.."""
         pass  # No callbacks necessary for this simple example
 
@@ -104,3 +99,6 @@ class ParetoDemo(AppBase):
 if __name__ == '__main__':
     port = parse_cli_port()
     ParetoDemo().run(port=port, debug=True)
+else:
+    INSTANCE = ParetoDemo()
+    FLASK_HANDLE = INSTANCE.get_server()

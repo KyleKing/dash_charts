@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.rolling_chart import RollingChart
-from dash_charts.utils_app import STATIC_URLS, AppBase, init_app
+from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
 
 
@@ -35,7 +35,7 @@ class RollingDemo(AppBase):
         self._generate_data()
         self.register_uniq_ids([self.id_chart])
 
-    def register_charts(self):
+    def create_charts(self):
         """Initialize charts."""
         self.main_chart = RollingChart(
             title='Sample Timeseries Chart with Rolling Calculations',
@@ -92,7 +92,7 @@ class RollingDemo(AppBase):
             ],
         )
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register the chart callbacks.."""
         pass  # No callbacks necessary for this simple example
 
@@ -114,3 +114,6 @@ class RollingDemo(AppBase):
 if __name__ == '__main__':
     port = parse_cli_port()
     RollingDemo().run(port=port, debug=True)
+else:
+    INSTANCE = RollingDemo()
+    FLASK_HANDLE = INSTANCE.get_server()

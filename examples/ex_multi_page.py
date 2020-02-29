@@ -5,7 +5,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import AppBase, AppMultiPage, init_app
+from dash_charts.utils_app import AppBase, AppMultiPage
 from dash_charts.utils_fig import min_graph
 
 
@@ -19,44 +19,17 @@ class StaticPage(AppBase):
         'padding-top': '10px',
     }
 
-    def __init__(self, **kwargs):
-        """Resolve higher-order data members.
-
-        Args:
-            kwargs: keyword arguments passed to __init__
-
-        """
-        super().__init__(**kwargs)
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         self.register_uniq_ids(['N/A'])
 
-    def register_charts(self):
+    def create_charts(self):
         """Register the initial charts."""
         pass
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register callbacks necessary for this tab."""
         pass
-
-
-# ----------------------------------------------------------------------------------------------------------------------
-# page_1_layout = html.Div([
-#     html.H1('Page 1'),
-#     dcc.Dropdown(
-#         id='page-1-dropdown',
-#         options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
-#         value='LA'
-#     ),
-#     html.Div(id='page-1-content'),
-#     html.Br(),
-#     dcc.Link('Go to Page 2', href='/page-2'),
-#     html.Br(),
-#     dcc.Link('Go back to home', href='/'),
-# ])
-#
-# @app.callback(dash.dependencies.Output('page-1-content', 'children'),
-#               [dash.dependencies.Input('page-1-dropdown', 'value')])
-# def page_1_dropdown(value):
-#     return 'You have selected "{}"'.format(value)
 
 
 class PageText(StaticPage):
@@ -135,16 +108,8 @@ class MultiPageDemo(AppMultiPage):
     logo = 'https://images.plot.ly/logo/new-branding/plotly-logomark.png'
     """Optional path to logo. If None, no logo will be shown in navbar."""
 
-    def __init__(self, **kwargs):
-        """Initialize app with custom stylesheets.
-
-        Args:
-            kwargs: keyword arguments passed to __init__
-
-        """
-        theme = dbc.themes.FLATLY  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
-        app = init_app(external_stylesheets=[theme])
-        super().__init__(app=app, **kwargs)
+    external_stylesheets = [dbc.themes.FLATLY]  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
+    """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
 
     def define_nav_elements(self):
         """Return list of initialized tabs.
@@ -180,3 +145,6 @@ class MultiPageDemo(AppMultiPage):
 if __name__ == '__main__':
     port = parse_cli_port()
     MultiPageDemo().run(port=port, debug=True)
+else:
+    INSTANCE = MultiPageDemo()
+    FLASK_HANDLE = INSTANCE.get_server()

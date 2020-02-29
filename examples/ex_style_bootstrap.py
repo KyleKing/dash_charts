@@ -8,7 +8,7 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import plotly.express as px
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import AppBase, init_app
+from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
 
 
@@ -24,19 +24,14 @@ class BootstrapStylingDemo(AppBase):
     name = 'Example Bootstrap Styling Demo'
     """Application name"""
 
-    def __init__(self, **kwargs):
-        """Initialize app with custom stylesheets.
+    external_stylesheets = [dbc.themes.FLATLY]  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
+    """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
 
-        Args:
-            kwargs: keyword arguments passed to __init__
-
-        """
-        theme = dbc.themes.FLATLY  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
-        app = init_app(external_stylesheets=[theme])
-        super().__init__(app=app, **kwargs)
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         self.register_uniq_ids(['placeholder'])
 
-    def register_charts(self):
+    def create_charts(self):
         """Initialize charts."""
         pass
 
@@ -125,14 +120,17 @@ class BootstrapStylingDemo(AppBase):
                             html.P(children='A Small Chart'),
                             min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=350)),
                             html.P(children='An Image'),
-                            html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif', style={'max-width': '100%'}),
+                            html.Img(
+                                src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif',
+                                style={'max-width': '100%'},
+                            ),
                         ]),
                     ], sm=12, md=3),
                 ]),
             ], className='mt-5'),  # Shorthand `mt-#` for margin top
         ])
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register the chart callbacks.."""
         pass  # No callbacks necessary for this simple example
 
@@ -140,3 +138,6 @@ class BootstrapStylingDemo(AppBase):
 if __name__ == '__main__':
     port = parse_cli_port()
     BootstrapStylingDemo().run(port=port, debug=True)
+else:
+    INSTANCE = BootstrapStylingDemo()
+    FLASK_HANDLE = INSTANCE.get_server()

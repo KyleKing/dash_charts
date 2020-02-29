@@ -47,21 +47,15 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
         id_chart = 'pareto'
         """Unique name for the main chart."""
 
-        def __init__(self, **kwargs):
-            """Resolve higher-order data members.
-
-            Args:
-                kwargs: keyword arguments passed to __init__
-
-            """
-            super().__init__(**kwargs)
+        def initialization(self):
+          """Initialize ids with `self.register_uniq_ids([...])` and application data."""
+            self.register_uniq_ids([self.id_chart])
+            # Format the car share data from plotly express for the Pareto
             self.raw_data = (px.data.carshare()
                             .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
-            # self.raw_data =
             self.raw_data['category'] = [f'H:{cat:02}' for cat in self.raw_data['category']]
-            self.register_uniq_ids([self.id_chart])
 
-        def register_charts(self):
+        def create_charts(self):
             """Initialize charts."""
             self.main_chart = ParetoChart(title='Car Share Pareto', xlabel='Peak Hours', ylabel='Car Hours')
 
@@ -79,7 +73,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
                 )]),
             ])
 
-        def register_callbacks(self):
+        def create_callbacks(self):
             pass  # Override base class. Not necessary for this example
 
 

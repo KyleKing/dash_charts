@@ -112,3 +112,6 @@ class AlignmentDemo:
 if __name__ == '__main__':
     port = parse_cli_port()
     AlignmentDemo().run(port=port, debug=True)
+else:
+    INSTANCE = AlignmentDemo()
+    FLASK_HANDLE = INSTANCE.get_server()

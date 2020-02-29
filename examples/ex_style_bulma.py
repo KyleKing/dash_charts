@@ -7,7 +7,7 @@ See documentation on Bulma layouts: https://bulma.io/documentation/layout/tiles/
 import dash_html_components as html
 import plotly.express as px
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import STATIC_URLS, AppBase, init_app
+from dash_charts.utils_app import STATIC_URLS, AppBase
 from dash_charts.utils_fig import min_graph
 
 
@@ -23,18 +23,14 @@ class BulmaStylingDemo(AppBase):
     name = 'Example Bulma Styling Demo'
     """Application name"""
 
-    def __init__(self, **kwargs):
-        """Initialize app with custom stylesheets.
+    external_stylesheets = [STATIC_URLS['bulmaswatch-flatly']]
+    """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
 
-        Args:
-            kwargs: keyword arguments passed to __init__
-
-        """
-        app = init_app(external_stylesheets=[STATIC_URLS[key] for key in ['bulmaswatch-flatly']])
-        super().__init__(app=app, **kwargs)
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         self.register_uniq_ids(['---'])
 
-    def register_charts(self):
+    def create_charts(self):
         """Initialize charts."""
         pass
 
@@ -81,7 +77,7 @@ class BulmaStylingDemo(AppBase):
             ]),
         ])
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register the chart callbacks.."""
         pass  # No callbacks necessary for this simple example
 
@@ -89,3 +85,6 @@ class BulmaStylingDemo(AppBase):
 if __name__ == '__main__':
     port = parse_cli_port()
     BulmaStylingDemo().run(port=port, debug=True)
+else:
+    INSTANCE = BulmaStylingDemo()
+    FLASK_HANDLE = INSTANCE.get_server()

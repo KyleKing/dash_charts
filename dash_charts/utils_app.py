@@ -94,6 +94,9 @@ class AppBase:
     ids = {}
     """Lookup dictionary used to track each element in UI that requires a callback"""
 
+    external_stylesheets = [STATIC_URLS['dash']]
+    """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
+
     # In child class, declare the rest of the static data members here
 
     def __init__(self, app=None):
@@ -109,7 +112,21 @@ class AppBase:
         if self.name is None:
             raise RuntimeError('Child class must set `self.name` to a unique string for this app')
 
-        self.app = init_app() if app is None else app
+        self.app = init_app(external_stylesheets=self.external_stylesheets) if app is None else app
+
+        self.create()
+
+    def create(self):
+        """Create the ids, app charts, layout, and callbacks. Called in `__init__`."""
+        self.initialization()
+        self.create_charts()
+        self.app.layout = self.return_layout()
+        self.create_callbacks()
+        self.verify_app_initialization()
+
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        pass
 
     def register_uniq_ids(self, app_ids):
         """Register the `app_ids` to the corresponding global_id in the `self.ids` lookup dictionary.
@@ -137,22 +154,7 @@ class AppBase:
         if not self.ids.keys():
             raise RuntimeError('Child class must first call `self.register_uniq_ids(__)` before self.run()')
 
-    def run(self, **dash_kwargs):
-        """Configure the app and start the Dash server instance.
-
-        Args:
-            **dash_kwargs: keyword arguments for `Dash.run_server()`
-
-        """
-        self.verify_app_initialization()
-        # Register the charts, the app layout, then the callbacks
-        self.register_charts()
-        self.app.layout = self.return_layout()
-        self.register_callbacks()
-        # Launch the server
-        self.app.run_server(**dash_kwargs)
-
-    def register_charts(self):
+    def create_charts(self):
         """Register the initial charts.
 
         Does not return a result. All charts should be initialized in this method (ex `self.main_chart = ParetoChart()`)
@@ -161,7 +163,7 @@ class AppBase:
             NotImplementedError: Child class must implement this method
 
         """
-        raise NotImplementedError('register_charts must be implemented by child class')
+        raise NotImplementedError('create_charts must be implemented by child class')
 
     def return_layout(self):
         """Return Dash application layout.
@@ -186,7 +188,7 @@ class AppBase:
         """
         return self.app.callback(*format_app_callback(self.ids, outputs, inputs, states))
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register the chart callbacks.
 
         Does not return a result. May `pass` as long as no callbacks are needed for application
@@ -195,7 +197,25 @@ class AppBase:
             NotImplementedError: Child class must implement this method
 
         """
-        raise NotImplementedError('register_callbacks must be implemented by child class')
+        raise NotImplementedError('create_callbacks must be implemented by child class')
+
+    def run(self, **dash_kwargs):
+        """Launch the Dash server instance.
+
+        Args:
+            **dash_kwargs: keyword arguments for `Dash.run_server()`
+
+        """
+        self.app.run_server(**dash_kwargs)
+
+    def get_server(self):
+        """Retrieve server from app instance for production hosting with green unicorn, waitress, IIS, etc.
+
+        Returns:
+            obj: the Flask `server` component of the Dash app
+
+        """
+        return self.app.server
 
 
 class AppWithNavigation(AppBase):
@@ -221,13 +241,8 @@ class AppWithNavigation(AppBase):
         """
         raise NotImplementedError('define_nav_elements must be implemented by child class')
 
-    def run(self, **dash_kwargs):
-        """Override base class. Configure the parent app and all tabs. Starts the Dash server instance.
-
-        Args:
-            **dash_kwargs: keyword arguments for `Dash.run_server()`
-
-        """
+    def create(self):
+        """Override base class to create each navigation component's elements. Called in `__init__`."""
         # Suppress callback verification as tab content is rendered later
         self.app.config['suppress_callback_exceptions'] = True
         # Register all unique element ids
@@ -238,15 +253,13 @@ class AppWithNavigation(AppBase):
         self.nav_layouts = {}
         for nav_name, nav in self.nav_lookup.items():
             nav.verify_app_initialization()
-            nav.register_charts()
+            nav.create_charts()
             self.nav_layouts[nav_name] = nav.return_layout()
-            nav.register_callbacks()
+            nav.create_callbacks()
 
         # Create parent application layout and navigation
         self.app.layout = self.return_layout()
-        self.register_callbacks()
-        # Launch the server
-        self.app.run_server(**dash_kwargs)
+        self.create_callbacks()
 
 
 class AppWithTabs(AppWithNavigation):
@@ -348,7 +361,7 @@ class AppWithTabs(AppWithNavigation):
             ),
         ], style=tabs_style)
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register the navigation callback."""
         outputs = [(self.id_tabs_content, 'children')]
         inputs = [(self.id_tabs_select, 'value')]
@@ -449,7 +462,7 @@ class AppMultiPage(AppWithNavigation):
             dark=True,
         )
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register the navigation callback."""
         outputs = [(self.id_pages_content, 'children')]
         inputs = [(self.id_url, 'pathname')]

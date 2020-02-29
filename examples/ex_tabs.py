@@ -4,7 +4,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import STATIC_URLS, AppBase, AppWithTabs, init_app
+from dash_charts.utils_app import AppBase, AppWithTabs
 from dash_charts.utils_fig import min_graph
 
 
@@ -18,21 +18,15 @@ class StaticTab(AppBase):
         'padding-top': '10px',
     }
 
-    def __init__(self, **kwargs):
-        """Resolve higher-order data members.
-
-        Args:
-            kwargs: keyword arguments passed to __init__
-
-        """
-        super().__init__(**kwargs)
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         self.register_uniq_ids(['N/A'])
 
-    def register_charts(self):
+    def create_charts(self):
         """Register the initial charts."""
         pass
 
-    def register_callbacks(self):
+    def create_callbacks(self):
         """Register callbacks necessary for this tab."""
         pass
 
@@ -154,3 +148,6 @@ class TabAppDemo(AppWithTabs):
 if __name__ == '__main__':
     port = parse_cli_port()
     TabAppDemo().run(port=port, debug=True)
+else:
+    INSTANCE = TabAppDemo()
+    FLASK_HANDLE = INSTANCE.get_server()
