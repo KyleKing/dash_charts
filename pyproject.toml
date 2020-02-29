@@ -16,6 +16,7 @@ bottleneck = "*"
 dash = "*, ^1.9"
 icecream = "*"
 pandas = "*"
+pystache = "^0.5.4"
 scipy = "*"
 
 [tool.poetry.dev-dependencies]

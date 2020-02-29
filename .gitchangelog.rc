@@ -1,0 +1,5 @@
+## ``output_engine`` is a callable
+##
+## This will change the output format of the generated changelog file
+## See: https://github.com/vaab/gitchangelog/blob/master/src/gitchangelog/gitchangelog.rc.reference
+output_engine = mustache("markdown")
