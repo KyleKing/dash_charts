@@ -7,7 +7,7 @@ from dash_charts import utils_fig
 class TestChart(utils_fig.CustomChart):  # noqa: H601
     """Custom chart for testing."""
 
-    pass
+    __test__ = False
 
 
 def test_axis_range_property():

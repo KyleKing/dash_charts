@@ -7,7 +7,7 @@ from dash_charts import pareto_chart
 class TestChart(pareto_chart.ParetoChart):  # noqa: H601
     """Custom chart for testing."""
 
-    pass
+    __test__ = False
 
 
 def test_pareto_colors_property():
