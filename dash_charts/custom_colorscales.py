@@ -33,23 +33,3 @@ DEFAULT_PLOTLY_COLORS_RGB = [
     'rgb(23,190,207)',   # 9
 ]
 """List of default Plotly colors in RGB strings."""
-
-
-# PLANNED: DELETE
-def make_colorbar(colorscale=((1,), (10,), (100,))):
-    """Return dictionary for Plotly colorbar.
-
-    Args:
-        colorscale: colorscale lists of lists where the value is the first index
-
-    Returns:
-        dict: colorbar dictionary with keys `(tick0, tickmode, tickvals)`
-
-    """
-    values = [_c[0] for _c in colorscale]
-    min_val = np.min([val for val in values if val != 0])
-    return {
-        'tick0': 0,
-        'tickmode': 'array',
-        'tickvals': np.divide(values, min_val),
-    }

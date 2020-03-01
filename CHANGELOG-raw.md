@@ -25,6 +25,12 @@
 
 ### Changes
 
+* Refactor make_colorbar and remove log_fire. [Kyle King]
+
+* Use itertools and * syntax in coord chart. [Kyle King]
+
+* Refactor coordinate chart. [Kyle King]
+
 * Standardize as chart_*, data_*, id_* [Kyle King]
 
 * Group bar placeholder. [Kyle King]
