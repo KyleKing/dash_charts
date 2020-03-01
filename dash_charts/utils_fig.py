@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 from dash.dependencies import Input, Output, State
 from plotly.subplots import make_subplots
 
+from .dash_helpers import validate
+
 # TODO: Methods for making charts/callbacks that update when data changes in a SQL database?
 
 
@@ -124,7 +126,37 @@ def map_outputs(outputs, element_info):
 class CustomChart:
     """Base Class for Custom Charts."""
 
-    axis_range = {}  # If None or empty dict, will enable autorange. Add X/Y keys to set range
+    _axis_range = {}
+    _axis_range_schema = {
+        'x': {
+            'items': [{'type': ['integer', 'float']}, {'type': ['integer', 'float']}],
+            'required': False,
+            'type': 'list',
+        },
+        'y': {
+            'items': [{'type': ['integer', 'float']}, {'type': ['integer', 'float']}],
+            'required': False,
+            'type': 'list',
+        },
+    }
+
+    @property
+    def axis_range(self):
+        """Specify x/y axis range or leave as empty dictionary for autorange.
+
+        Returns:
+            dict: dictionary potentially with keys `(x, y)`
+
+        """
+        return self._axis_range
+
+    @axis_range.setter
+    def axis_range(self, axis_range):
+        errors = validate(axis_range, self._axis_range_schema)
+        if errors:
+            raise RuntimeError(f'Validation of self.axis_range failed: {errors}')
+        # Assign new axis_range
+        self._axis_range = axis_range
 
     def __init__(self, *, title, xlabel, ylabel, layout_overrides=()):
         """Initialize Custom Dash Chart and store parameters as data members.

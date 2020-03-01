@@ -4,4 +4,4 @@ See the [Github README for project information](https://github.com/KyleKing/dash
 
 """
 
-__version__ = '0.0.2'
+__version__ = '0.0.4'

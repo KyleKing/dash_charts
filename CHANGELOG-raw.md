@@ -21,6 +21,8 @@
 
 ### Changes
 
+* Fix formatting of raw changelog. [Kyle King]
+
 * Refactor to split run/create tasks in app. [Kyle King]
 
   - Now supports production deployment with green unicorn, waitress, IIS, etc. where Flask instance needs to be a global variable

@@ -112,3 +112,5 @@ venv.bak/
 *.sqlite
 
 docs/dash_charts/*
+docs/coverage_html/*
+docs/test_report.html

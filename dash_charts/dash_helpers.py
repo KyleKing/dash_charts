@@ -2,6 +2,27 @@
 
 import argparse
 
+from cerberus import Validator
+
+
+def validate(document, schema, **validator_kwargs):
+    """Validate a data structure. Return errors if any found.
+
+    Cerberus Documentation: https://docs.python-cerberus.org/en/stable/validation-rules.html
+
+    Args:
+        document: data structure to validate
+        schema: expected structure
+        validator_kwargs: additional keyword arguments for Validator class
+
+    Returns:
+        list: validation errors
+
+    """
+    validator = Validator(schema, **validator_kwargs)
+    validator.validate(document)
+    return validator.errors
+
 
 def parse_cli_port():
     """Configure the CLI options for Dash applications.

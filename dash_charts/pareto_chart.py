@@ -3,6 +3,7 @@
 import pandas as pd
 import plotly.graph_objects as go
 
+from .dash_helpers import validate
 from .utils_fig import CustomChart
 
 
@@ -16,6 +17,10 @@ class ParetoChart(CustomChart):
     """If True, will show numeric count on each bar. Default is True."""
 
     _pareto_colors: dict = {'bar': '#4682b4', 'line': '#b44646'}
+    _pareto_colors_schema = {
+        'bar': {'required': True, 'type': 'string'},
+        'line': {'required': True, 'type': 'string'},
+    }
 
     @property
     def pareto_colors(self):
@@ -29,9 +34,10 @@ class ParetoChart(CustomChart):
 
     @pareto_colors.setter
     def pareto_colors(self, pareto_colors):
-        expected_keys = sorted(['bar', 'line'])
-        if sorted(pareto_colors.keys()) != expected_keys:
-            raise RuntimeError(f'Expected {pareto_colors} to have keys: {expected_keys}')
+        errors = validate(pareto_colors, self._pareto_colors_schema)
+        if errors:
+            raise RuntimeError(f'Validation of self.pareto_colors failed: {errors}')
+        # Assign new pareto_colors
         self._pareto_colors = pareto_colors
 
     def tidy_pareto_data(self, raw_df):
