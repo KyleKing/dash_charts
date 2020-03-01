@@ -35,7 +35,7 @@ class CoordinateDemo(AppBase):
 
     grid_years = coordinate_chart.YearGrid()
     grid_months = coordinate_chart.MonthGrid(titles=[calendar.month_name[2]])  # uses Feb
-    grid_circle = coordinate_chart.CircleGrid()
+    grid_circle = coordinate_chart.CircleGrid(grid_dims=(5, 4))  # set grid to arbitrary 5x4
     """Coordinate chart grids (Year/Month/Circle)."""
 
     def initialization(self):
@@ -58,7 +58,7 @@ class CoordinateDemo(AppBase):
         self.data_raw_months = pd.DataFrame(data={'values': self.grid_months.format_data(month_list, year, month)})
 
         # Generated data for the Circle Chart
-        len_points = (self.grid_circle.dims[0] * self.grid_circle.dims[1] * len(self.grid_circle.coord['x']))
+        len_points = (self.grid_circle.grid_dims[0] * self.grid_circle.grid_dims[1] * len(self.grid_circle.corners['x']))
         values = np.random.randint(10000, size=len_points)
         self.data_raw_circle = pd.DataFrame(data={'values': values})
         # Remove a known number of random values from the data set (for the circle Demo)
@@ -70,8 +70,8 @@ class CoordinateDemo(AppBase):
         """Initialize charts."""
         self.chart_years = CoordinateChart(
             title='Example Year Grid',
-            grid_dims=self.grid_years.dims,
-            coord=self.grid_years.coord,
+            grid_dims=self.grid_years.grid_dims,
+            corners=self.grid_years.corners,
             titles=self.grid_years.titles,
             layout_overrides=(
                 ('height', None, 700),
@@ -84,8 +84,8 @@ class CoordinateDemo(AppBase):
 
         self.chart_months = CoordinateChart(
             title='Example Month Grid',
-            grid_dims=self.grid_months.dims,
-            coord=self.grid_months.coord,
+            grid_dims=self.grid_months.grid_dims,
+            corners=self.grid_months.corners,
             titles=self.grid_months.titles,
             layout_overrides=(
                 ('height', None, 600),
@@ -97,12 +97,12 @@ class CoordinateDemo(AppBase):
 
         self.chart_circle = CoordinateChart(
             title='Example Circle Grid',
-            grid_dims=self.grid_circle.dims,
-            coord=self.grid_circle.coord,
+            grid_dims=self.grid_circle.grid_dims,
+            corners=self.grid_circle.corners,
             titles=self.grid_circle.titles,
             layout_overrides=(
-                ('height', None, 650),
-                ('width', None, 750),
+                ('height', None, 750),
+                ('width', None, 600),
             ),
         )
         # Override Coordinate Parameters as needed

@@ -114,7 +114,7 @@ class RollingChart(CustomChart):
         ]
 
     def create_layout(self):
-        """Override the default layout and add additional settings.
+        """Extend the standard layout.
 
         Returns:
             dict: layout for Dash figure

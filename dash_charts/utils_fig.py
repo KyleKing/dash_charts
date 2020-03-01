@@ -123,6 +123,22 @@ def map_outputs(outputs, element_info):
     return results
 
 
+def check_raw_data(df_raw, min_keys):
+    """Verify that dataframe contains the minimum columns.
+
+    Args:
+        df_raw: data to pass to formatter method
+        min_keys: list of string column names expected in dataframe
+
+    Raises:
+        RuntimeError: if any columns are missing from dataframe
+
+    """
+    all_keys = df_raw.keys()
+    if len([_k for _k in min_keys if _k in all_keys]) != len(min_keys):
+        raise RuntimeError(f'`df_raw` must have keys {min_keys}. Found: {all_keys}')
+
+
 class CustomChart:
     """Base Class for Custom Charts."""
 
@@ -162,7 +178,7 @@ class CustomChart:
         """Initialize Custom Dash Chart and store parameters as data members.
 
         Args:
-            title: String title for chart  (can be an empty string for blank)
+            title: String title for chart (can be an empty string for blank)
             xlabel: XAxis string label (can be an empty string for blank)
             ylabel: YAxis string label (can be an empty string for blank)
             layout_overrides: Custom parameters in format [ParentKey, SubKey, Value] to customize 'go.layout'

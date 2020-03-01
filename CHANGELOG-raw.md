@@ -25,6 +25,8 @@
 
 ### Changes
 
+* Standardize as chart_*, data_*, id_* [Kyle King]
+
 * Group bar placeholder. [Kyle King]
 
 * Fix formatting of raw changelog. [Kyle King]

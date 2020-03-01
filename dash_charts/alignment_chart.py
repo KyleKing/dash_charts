@@ -140,7 +140,12 @@ class AlignChart(MarginalChart):
         ]
 
     def create_layout(self):
-        """Override the default layout and add additional settings."""
+        """Extend the standard layout.
+
+        Returns:
+            dict: layout for Dash figure
+
+        """
         layout = super().create_layout()
         for axis in ['yaxis', 'xaxis']:
             layout[axis]['zeroline'] = False

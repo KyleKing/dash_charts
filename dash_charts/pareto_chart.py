@@ -4,7 +4,34 @@ import pandas as pd
 import plotly.graph_objects as go
 
 from .dash_helpers import validate
-from .utils_fig import CustomChart
+from .utils_fig import CustomChart, check_raw_data
+
+
+def tidy_pareto_data(df_raw, cap_categories):
+    """Return compressed Pareto dataframe of only the unique values.
+
+    Args:
+        df_raw: pandas dataframe with at minimum the two columns `category: str` and `value: float`
+        cap_categories: Maximum number of categories (bars)
+
+    Returns:
+        dataframe: pandas dataframe with columns `(value, label, counts, cum_per)`
+
+    """
+    df_p = None
+    for cat in df_raw['category'].unique():
+        df_row = pd.DataFrame(data={
+            'label': [cat],
+            'value': [df_raw.loc[df_raw['category'] == cat]['value'].sum()],
+            'counts': df_raw['category'].value_counts()[cat],
+        })
+        df_p = df_row if df_p is None else df_p.append(df_row)
+    # Sort and calculate percentage
+    df_p = (df_p[df_p['value'] != 0]
+            .sort_values(by=['value'], ascending=False)
+            .head(cap_categories))
+    df_p['cum_per'] = df_p['value'].divide(df_p['value'].sum()).cumsum()
+    return df_p
 
 
 class ParetoChart(CustomChart):
@@ -40,31 +67,6 @@ class ParetoChart(CustomChart):
         # Assign new pareto_colors
         self._pareto_colors = pareto_colors
 
-    def tidy_pareto_data(self, df_raw):
-        """Return compressed Pareto dataframe of only the unique values.
-
-        Args:
-            df_raw: pandas dataframe with at minimum the two columns `category: str` and `value: float`
-
-        Returns:
-            dataframe: pandas dataframe with columns `(value, label, counts, cum_per)`
-
-        """
-        df_p = None
-        for cat in df_raw['category'].unique():
-            df_row = pd.DataFrame(data={
-                'label': [cat],
-                'value': [df_raw.loc[df_raw['category'] == cat]['value'].sum()],
-                'counts': df_raw['category'].value_counts()[cat],
-            })
-            df_p = df_row if df_p is None else df_p.append(df_row)
-        # Sort and calculate percentage
-        df_p = (df_p[df_p['value'] != 0]
-                .sort_values(by=['value'], ascending=False)
-                .head(self.cap_categories))
-        df_p['cum_per'] = df_p['value'].divide(df_p['value'].sum()).cumsum()
-        return df_p
-
     def create_traces(self, df_raw):
         """Return traces for plotly chart.
 
@@ -78,16 +80,13 @@ class ParetoChart(CustomChart):
             RuntimeError: if the `df_raw` is missing any necessary columns
 
         """
-        # Verify data format
-        min_keys = ['category', 'value']
-        all_keys = df_raw.keys()
-        if len([_k for _k in min_keys if _k in all_keys]) != len(min_keys):
-            raise RuntimeError(f'`df_raw` must have keys {min_keys}. Found: {all_keys}')
-        elif not pd.api.types.is_string_dtype(df_raw['category']):
+        # Check that the raw data frame is properly formatted
+        check_raw_data(df_raw, min_keys=['category', 'value'])
+        if not pd.api.types.is_string_dtype(df_raw['category']):
             raise RuntimeError(f"category column must be string, but found {df_raw['category'].dtype}")
 
         # Create and return the traces and optionally add the count to the bar chart
-        df_p = self.tidy_pareto_data(df_raw)
+        df_p = tidy_pareto_data(df_raw, self.cap_categories)
         count_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if self.show_count else {}
         return [
             go.Bar(hoverinfo='y', yaxis='y1', name='Raw Value',
@@ -100,7 +99,7 @@ class ParetoChart(CustomChart):
         ]
 
     def create_layout(self):
-        """Override the standard layout and add additional settings.
+        """Extend the standard layout.
 
         Returns:
             dict: layout for Dash figure
