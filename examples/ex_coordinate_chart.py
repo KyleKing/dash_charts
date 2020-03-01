@@ -46,7 +46,7 @@ class CoordinateDemo(AppBase):
 
         # Data for the Year Chart
         month_list = [
-            np.random.randint(1e4, size=calendar.monthrange(year, month_idx)[1])
+            np.random.randint(1e2, size=calendar.monthrange(year, month_idx)[1])
             for month_idx in range(1, month + 1)
         ]
         # Remove all future data for the current month
@@ -59,7 +59,7 @@ class CoordinateDemo(AppBase):
 
         # Generated data for the Circle Chart
         len_points = np.multiply(*self.grid_circle.grid_dims) * len(self.grid_circle.corners['x'])
-        values = np.random.randint(1e4, size=len_points)
+        values = np.random.randint(1e9, size=len_points)
         self.data_raw_circle = pd.DataFrame(data={'values': values})
         # Remove a known number of random values from the data set (for the circle Demo)
         remove_count = 5
@@ -94,6 +94,7 @@ class CoordinateDemo(AppBase):
         )
         # Override Coordinate Parameters as needed
         self.chart_months.marker_kwargs = self.grid_months.marker_kwargs
+        self.chart_months.marker_kwargs['colorscale'] = 'Bluered'
 
         self.chart_circle = CoordinateChart(
             title='Example Circle Grid',
@@ -107,8 +108,7 @@ class CoordinateDemo(AppBase):
         )
         # Override Coordinate Parameters as needed
         self.chart_circle.marker_kwargs = self.grid_circle.marker_kwargs
-        # # NOTE: Uncomment for logarithmic colorscale
-        # self.chart_circle.marker_kwargs['colorscale'] = custom_colorscales.logFire
+        self.chart_circle.marker_kwargs['colorscale'] = 'Cividis'
 
     def return_layout(self):
         """Return Dash application layout.

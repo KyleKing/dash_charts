@@ -182,11 +182,11 @@ class CoordinateChart(CustomChart):
     def create_marker(self, df_grid, colorscale='Viridis', size=16, symbol='circle'):
         """Return a dictionary for the scatter plot.
 
-        See: https://plot.ly/python/colorscales/
+        See: https://plot.ly/python/colorscales/ (Named colorscales: Reds, Bluered, Jet, Viridis, Cividis, etc.)
 
         Args:
             df_grid: pandas dataframe with at minimum the column `values: str`, `x: float`, `y: float`
-            colorscale: list of values or plotly colorscale name (Reds, Bluered, Jet, Viridis, Cividis, etc.)
+            colorscale: plotly colorscale, see doc link above. Default is 'Viridis'
             size: integer marker size
             symbol: marker symbol (square, circle, circle-open, x, etc.)
 
@@ -201,8 +201,6 @@ class CoordinateChart(CustomChart):
             'size': size,
             'symbol': symbol,
         }
-        if type(colorscale) is list:
-            marker['colorbar'] = custom_colorscales.makecolorbar(colorscale)
         return marker
 
     def create_layout(self):
