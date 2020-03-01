@@ -66,7 +66,7 @@ class ParetoDemo(AppBase):
                 ('legend', None, {'x': 0.6, 'y': 0.8, 'bgcolor': 'rgba(240, 240, 240, 0.49)'}),
             ),
         )
-        # Override ParetoParameters as needed
+        # Override Pareto Parameters as needed
         self.main_chart.show_count = True
         self.main_chart.pareto_colors = {'bar': '#A5AFC8', 'line': '#391D2F'}
 

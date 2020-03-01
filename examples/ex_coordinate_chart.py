@@ -1,102 +1,147 @@
 """Example Coordinate Chart."""
 
 import calendar
-import datetime
 
 import dash_html_components as html
 import numpy as np
 import pandas as pd
-from dash_charts import coordinate_chart  # custom_colorscales
+from dash_charts import coordinate_chart
+from dash_charts.coordinate_chart import CoordinateChart
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import init_app
+from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
 
 
-class CoordinateDemo:
-    """Demo Simple Rolling Mean Chart."""
+class CoordinateDemo(AppBase):
+    """Example creating basic Coordinate Charts."""
 
-    def __init__(self):
-        """Initialize app."""
-        self.app = init_app()
+    name = 'Example Coordinate Charts'
+    """Application name"""
 
-    def run(self, *, debug=True, **kwargs):
-        """Run the application passing any kwargs to dash."""
-        # ----------------------------------------------------------------------
-        # NOTE: Select the grid system. Toggle these lines to update the chart
-        # self.grid = coordinate_chart.CircleGrid()
-        # self.grid = coordinate_chart.YearGrid()
-        self.grid = coordinate_chart.MonthGrid(titles=[calendar.month_name[2]])  # uses Feb
-        # ----------------------------------------------------------------------
+    data_raw_years = None
+    data_raw_months = None
+    data_raw_circle = None
+    """In-memory data referenced by callbacks. If modified, will impact all viewers (Years/Months/Circle)."""
 
-        self.exCoord = coordinate_chart.CoordinateChart(
-            title='Example Coordinate Chart',
+    chart_years = None
+    chart_months = None
+    chart_circle = None
+    """Main charts (Coordinate Year/Month/Circle)."""
+
+    id_chart_years = 'years-chart'
+    id_chart_months = 'months-chart'
+    id_chart_circle = 'circle-chart'
+    """Unique name for each chart (Year/Month/Circle)."""
+
+    grid_years = coordinate_chart.YearGrid()
+    grid_months = coordinate_chart.MonthGrid(titles=[calendar.month_name[2]])  # uses Feb
+    grid_circle = coordinate_chart.CircleGrid()
+    """Coordinate chart grids (Year/Month/Circle)."""
+
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        self.register_uniq_ids([self.id_chart_years, self.id_chart_months, self.id_chart_circle])
+
+        day, month, year = (20, 11, 2020)  # Alteratively use `now = datetime.datetime.now()`` and `now.day` etc.
+
+        # Data for the Year Chart
+        month_list = [
+            np.random.randint(10000, size=calendar.monthrange(year, month_idx)[1])
+            for month_idx in range(1, month + 1)
+        ]
+        # Remove all future data for the current month
+        month_list[month - 1] = month_list[month - 1][:(day - 1)]
+        self.data_raw_years = pd.DataFrame(data={'values': self.grid_years.format_data(month_list, year)})
+
+        # Data for the Month Chart
+        month_list = np.random.randint(10000, size=calendar.monthrange(year, month)[1])
+        self.data_raw_months = pd.DataFrame(data={'values': self.grid_months.format_data(month_list, year, month)})
+
+        # Generated data for the Circle Chart
+        len_points = (self.grid_circle.dims[0] * self.grid_circle.dims[1] * len(self.grid_circle.coord['x']))
+        values = np.random.randint(10000, size=len_points)
+        self.data_raw_circle = pd.DataFrame(data={'values': values})
+        # Remove a known number of random values from the data set (for the circle Demo)
+        remove_count = 5
+        for idx in list(set(np.random.randint(len(values), size=remove_count * 2)))[:remove_count]:
+            self.data_raw_circle['values'][idx] = None
+
+    def create_charts(self):
+        """Initialize charts."""
+        self.chart_years = CoordinateChart(
+            title='Example Year Grid',
+            grid_dims=self.grid_years.dims,
+            coord=self.grid_years.coord,
+            titles=self.grid_years.titles,
+            layout_overrides=(
+                ('height', None, 700),
+                ('width', None, 550),
+            ),
+        )
+        # Override Coordinate Parameters as needed
+        self.chart_years.marker_kwargs = self.grid_years.marker_kwargs
+        self.chart_years.border_opacity = 0
+
+        self.chart_months = CoordinateChart(
+            title='Example Month Grid',
+            grid_dims=self.grid_months.dims,
+            coord=self.grid_months.coord,
+            titles=self.grid_months.titles,
+            layout_overrides=(
+                ('height', None, 600),
+                ('width', None, 600),
+            ),
+        )
+        # Override Coordinate Parameters as needed
+        self.chart_months.marker_kwargs = self.grid_months.marker_kwargs
+
+        self.chart_circle = CoordinateChart(
+            title='Example Circle Grid',
+            grid_dims=self.grid_circle.dims,
+            coord=self.grid_circle.coord,
+            titles=self.grid_circle.titles,
             layout_overrides=(
                 ('height', None, 650),
                 ('width', None, 750),
             ),
-            grid_dims=self.grid.dims,
-            coord=self.grid.coord,
-            titles=self.grid.titles,
         )
+        # Override Coordinate Parameters as needed
+        self.chart_circle.marker_kwargs = self.grid_circle.marker_kwargs
+        # # NOTE: Uncomment for logarithmic colorscale
+        # self.chart_circle.marker_kwargs['colorscale'] = custom_colorscales.logFire
 
-        # Create sample data and application layout
-        self._generateData()
-        self._createLayout()
+    def return_layout(self):
+        """Return Dash application layout.
 
-        self.app.run_server(debug=debug, **kwargs)
+        Returns:
+            obj: Dash HTML object. Default is simple HTML text
 
-    def _generateData(self):
-        """Create self.df_demo with sample data."""
-        if isinstance(self.grid, coordinate_chart.CircleGrid):
-            # Generated data for the circleGrid demo
-            # Generate a list of random values for the chart
-            lenPoints = (self.grid.dims[0] * self.grid.dims[1] * len(self.grid.coord['x']))
-            vals = np.random.randint(10000, size=lenPoints)
-            self.df_demo = pd.DataFrame(data={'values': vals})
-            # Remove a known number of random values from the data set (for the circle Demo)
-            removeCount = 5
-            for idx in list(set(np.random.randint(len(vals), size=removeCount * 2)))[:removeCount]:
-                self.df_demo['values'][idx] = None
-
-        elif isinstance(self.grid, coordinate_chart.YearGrid):
-            # Data for the YearGrid demo
-            now = datetime.datetime.now()
-            month_list = [
-                np.random.randint(10000, size=calendar.monthrange(now.year, month_idx)[1])
-                for month_idx in range(1, now.month + 1)
-            ]
-            # Remove all future data for the current month
-            month_list[now.month - 1] = month_list[now.month - 1][:(now.day - 1)]
-            self.df_demo = pd.DataFrame(data={'values': self.grid.formatData(month_list, now.year)})
-
-        elif isinstance(self.grid, coordinate_chart.MonthGrid):
-            # Data for the MonthGrid demo
-            month, year = (2, 2016)  # Always plot for February 2016 (Leap Year)
-            month_list = np.random.randint(10000, size=calendar.monthrange(year, month)[1])
-            self.df_demo = pd.DataFrame(data={'values': self.grid.formatData(month_list, year, month)})
-
-        else:
-            raise RuntimeError('Unknown Grid Type: {}'.format(self.grid))
-
-    def _createLayout(self):
-        """Create application layout."""
-        markerKwargs = self.grid.markerKwargs
-        # markerKwargs['colorscale'] = custom_colorscales.logFire  # NOTE: Uncomment for logarithmic colorscale
-
-        self.app.layout = html.Div(
-            className='section',
-            children=[
-                html.Div([
-                    min_graph(
-                        id='coordinate-chart',
-                        figure=self.exCoord.create_figure(
-                            df=self.df_demo,
-                            markerKwargs=markerKwargs,
-                        ),
-                    ),
-                ]),
+        """
+        return html.Div(
+            style={
+                'max-width': '1000px',
+                'margin-right': 'auto',
+                'margin-left': 'auto',
+            }, children=[
+                html.H4(children=self.name),
+                html.Div([min_graph(
+                    id=self.ids[self.id_chart_years],
+                    figure=self.chart_years.create_figure(raw_df=self.data_raw_years),
+                )]),
+                html.Div([min_graph(
+                    id=self.ids[self.id_chart_months],
+                    figure=self.chart_months.create_figure(raw_df=self.data_raw_months),
+                )]),
+                html.Div([min_graph(
+                    id=self.ids[self.id_chart_circle],
+                    figure=self.chart_circle.create_figure(raw_df=self.data_raw_circle),
+                )]),
             ],
         )
+
+    def create_callbacks(self):
+        """Register the chart callbacks.."""
+        pass  # No callbacks necessary for this simple example
 
 
 if __name__ == '__main__':

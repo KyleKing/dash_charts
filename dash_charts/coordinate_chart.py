@@ -13,24 +13,50 @@ from .utils_fig import CustomChart
 
 # TODO: subplots for multiple years of calendar charts (Subplot title is year)
 
+
 class CoordinateChart(CustomChart):
-    """Coordinate Chart.
+    """Coordinate Chart."""
 
-    Example Use: visualizing a discrete dataset
+    border_opacity = 0.2
+    """Border opacity for grid. Value must be in [0-1] where 0 is none. Default is 0.2."""
 
-    """
+    border_line = None
+    """Dictionary passed to plotly `line`. Used to set thickness, color, dash style, etc. Default is None."""
 
-    def __init__(self, title='', xlabel='', ylabel='', layout_overrides=(), grid_dims=None, coord=None, titles=None):
+    marker_kwargs = None
+    """optional keyword arguments to pass to `scatter_marker()`. Default is None."""
+
+    # _pareto_colors: dict = {'bar': '#4682b4', 'line': '#b44646'}
+    #
+    # @property
+    # def pareto_colors(self):
+    #     """Colors for bar and line traces in Pareto chart.
+    #
+    #     Returns:
+    #         dict: dictionary with keys `(bar, line)`
+    #
+    #     """
+    #     return self._pareto_colors
+    #
+    # @pareto_colors.setter
+    # def pareto_colors(self, pareto_colors):
+    #     expected_keys = sorted(['bar', 'line'])
+    #     if sorted(pareto_colors.keys()) != expected_keys:
+    #         raise RuntimeError(f'Expected {pareto_colors} to have keys: {expected_keys}')
+    #     self._pareto_colors = pareto_colors
+
+    def __init__(self, title='', layout_overrides=(), grid_dims=None, coord=None, titles=None):
         """Initialize chart parameters.
 
-        title -- optional, string title for chart. Defaults to blank
-        xlabel/ylabel -- optional, X and Y Axis axis titles. Defaults to blank
-        layout_overrides -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
-        grid_dims -- tuple of two values with the rectangular grid size
-        coord -- lists of the x/y coordinates from the top left corner of a single grid rectangle
+        Args:
+            title: optional, string title for chart. Defaults to blank
+            xlabel/ylabel: optional, X and Y Axis axis titles. Defaults to blank
+            layout_overrides: Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+            grid_dims: tuple of two values with the rectangular grid size
+            coord: lists of the x/y coordinates from the top left corner of a single grid rectangle
 
         """
-        super().__init__(title, xlabel, ylabel, layout_overrides)
+        super().__init__(title=title, xlabel='', ylabel='', layout_overrides=layout_overrides)
         # Calculate each point in the grid
         self.width = float(np.max(coord['x']) + np.min(coord['x']))
         self.height = float(np.max(coord['y']) + np.min(coord['y']))
@@ -55,38 +81,42 @@ class CoordinateChart(CustomChart):
         self.annotations = [
             go.layout.Annotation(
                 ax=0, ay=0,
-                x=(idx % grid_dims[1] + 0.5) * self.width,
+                x=(idx % grid_dims[1] + 0.5) * self.width,  # noqa: S001
                 y=(grid_dims[0] - int(idx / grid_dims[1]) % grid_dims[0]) * self.height - v_offset,
                 text=title,
             )
             for idx, title in enumerate(titles) if title is not None
         ] if titles is not None else []
 
-    def create_traces(self, df_raw, border_opacity=0.2, border_line=None, marker_kwargs=None):
+    def create_traces(self, df_raw):
         """Return traces for plotly chart.
 
-        df_raw -- Pandas dataframe with columns names: ['values']
-        border_opacity - border opacity in [0-1] where 0 is none
-        border_line -- dictionary passed to plotly `line`. Used to set thickness, color, dash style, etc.
-        marker_kwargs -- optional keyword arguments to pass to scatter_marker()
+        Args:
+            df_raw: pandas dataframe with at minimum the column `values: str`
+
+        Returns:
+            list: Dash chart traces
+
+        Raises:
+            RuntimeError: if the `df_raw` is missing any necessary columns
 
         """
         # Ensure that the provides values are the same length as the total number of grid points
-        vals = list(df_raw['values'])
-        vals.extend([None] * (len(self.grid['x']) - len(vals)))
+        values = list(df_raw['values'])
+        values.extend([None] * (len(self.grid['x']) - len(values)))
         # Remove 'None' values from grid
-        df = pd.DataFrame(data={
-            'values': vals,
+        df_grid = pd.DataFrame(data={
+            'values': values,
             'x': self.grid['x'],
             'y': self.grid['y'],
         }).dropna()
 
-        chart_data = [
+        return [
             go.Scatter(
                 hoverinfo='none',
-                line={'color': 'black'} if border_line is None else border_line,
+                line={'color': 'black'} if self.border_line is None else self.border_line,
                 mode='lines',
-                opacity=border_opacity,
+                opacity=self.border_opacity,
                 showlegend=False,
                 x=border['x'],
                 y=border['y'],
@@ -96,23 +126,23 @@ class CoordinateChart(CustomChart):
                 hoverinfo='text',
                 mode='markers',
                 showlegend=False,
-                text=df['values'],
-                x=df['x'],
-                y=df['y'],
-                marker=self.scatter_marker(df, **({} if marker_kwargs is None else marker_kwargs)),
+                text=df_grid['values'],
+                x=df_grid['x'],
+                y=df_grid['y'],
+                marker=self.scatter_marker(df_grid, **({} if self.marker_kwargs is None else self.marker_kwargs)),
             ),
         ]
-        return chart_data
 
     def scatter_marker(self, df, colorscale='Viridis', size=16, symbol='circle'):
         """Return a dictionary for the scatter plot.
 
-        df -- Pandas dataframe
-        colorscale -- list of values or plotly colorscale name (Reds, Bluered, Jet, Viridis, Cividis, etc.)
-        size -- marker size
-        symbol -- marker symbol (square, circle, circle-open, x, etc.)
-
         See: https://plot.ly/python/colorscales/
+
+        Args:
+            df: Pandas dataframe
+            colorscale: list of values or plotly colorscale name (Reds, Bluered, Jet, Viridis, Cividis, etc.)
+            size: marker size
+            symbol: marker symbol (square, circle, circle-open, x, etc.)
 
         """
         marker = {
@@ -151,18 +181,21 @@ class CircleGrid:
     def __init__(self, dims=(4, 5), titles=None):
         """Initialize the coordinates.
 
-        dims -- tuple of iterations in the x/y axis respectively
-        titles -- list of titles to place in each grid element
+        Args:
+            dims: tuple of iterations in the x/y axis respectively
+            titles: list of titles to place in each grid element
 
         """
         self.dims = dims
-        self.titles = titles if titles is not None else [
-            'Subtitle for ({}, {})'.format(
-                int(idx / dims[1]) + 1,
-                idx % (dims[0] + 1) + 1,
-            )
-            for idx in range(dims[0] * dims[1])
-        ]
+        if titles is None:
+            self.titles = []
+            for idx in range(dims[0] * dims[1]):
+                x_coord = int(idx / dims[1]) + 1
+                y_coord = idx % (dims[0] + 1) + 1  # noqa: S001
+                self.titles.append(f'Subtitle for ({x_coord}, {y_coord})')
+        else:
+            self.titles = titles
+
         opp = 0.5 * math.cos(cmath.pi / 4)
         adj = 0.5 * math.sin(cmath.pi / 4)
         self.coord = {
@@ -179,8 +212,9 @@ class YearGrid:
     def __init__(self, dims=(4, 3), titles=None):
         """Initialize the coordinates.
 
-        dims -- tuple of iterations in the x/y axis respectively
-        titles -- list of titles to place in each grid element
+        Args:
+            dims: tuple of iterations in the x/y axis respectively
+            titles: list of titles to place in each grid element
 
         """
         self.dims = dims
@@ -195,18 +229,19 @@ class YearGrid:
     def format_data(self, month_lists, year):
         """Return the formatted list that can be passed to a coordinate chart.
 
-        month_lists -- list of lists where each sub-list is a month and contains the daily value
-        year -- year expressed in 4 decimal places (i.e. 2019)
+        Args:
+            month_lists: list of lists where each sub-list is a month and contains the daily value
+            year: year expressed in 4 decimal places (i.e. 2019)
 
         """
-        vals = []
+        values = []
         for idx, month_list in enumerate(month_lists):
-            idx_first_day, countDays = calendar.monthrange(year, idx + 1)
+            idx_first_day, count_days = calendar.monthrange(year, idx + 1)
             idx_first_day += 1  # Increment to start on Sunday
-            vals.extend([None] * idx_first_day)
-            vals.extend(month_list)
-            vals.extend([None] * (len(self.coord['x']) - idx_first_day - countDays))
-        return vals
+            values.extend([None] * idx_first_day)
+            values.extend(month_list)
+            values.extend([None] * (len(self.coord['x']) - idx_first_day - count_days))
+        return values
 
 
 class MonthGrid:
@@ -217,8 +252,9 @@ class MonthGrid:
     def __init__(self, dims=(1, 1), titles=None):
         """Initialize the coordinates.
 
-        dims -- tuple of iterations in the x/y axis respectively
-        titles -- list of titles to place in each grid element
+        Args:
+            dims: tuple of iterations in the x/y axis respectively
+            titles: list of titles to place in each grid element
 
         """
         self.dims = dims
@@ -233,12 +269,13 @@ class MonthGrid:
     def format_data(self, month_list, year, month):
         """Return the formatted list that can be passed to a coordinate chart.
 
-        month_list -- list of daily values
-        year -- year expressed in 4 decimal places (i.e. 2019)
-        month -- month in 1-12
+        Args:
+            month_list: list of daily values
+            year: year expressed in 4 decimal places (i.e. 2019)
+            month: month in 1-12
 
         """
         idx_first_day = calendar.monthrange(year, month)[0]
-        vals = [None] * idx_first_day
-        vals.extend(month_list)
-        return vals
+        values = [None] * idx_first_day
+        values.extend(month_list)
+        return values
