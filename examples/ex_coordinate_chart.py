@@ -46,7 +46,7 @@ class CoordinateDemo(AppBase):
 
         # Data for the Year Chart
         month_list = [
-            np.random.randint(10000, size=calendar.monthrange(year, month_idx)[1])
+            np.random.randint(1e4, size=calendar.monthrange(year, month_idx)[1])
             for month_idx in range(1, month + 1)
         ]
         # Remove all future data for the current month
@@ -54,12 +54,12 @@ class CoordinateDemo(AppBase):
         self.data_raw_years = pd.DataFrame(data={'values': self.grid_years.format_data(month_list, year)})
 
         # Data for the Month Chart
-        month_list = np.random.randint(10000, size=calendar.monthrange(year, month)[1])
+        month_list = np.random.randint(1e4, size=calendar.monthrange(year, month)[1])
         self.data_raw_months = pd.DataFrame(data={'values': self.grid_months.format_data(month_list, year, month)})
 
         # Generated data for the Circle Chart
-        len_points = (self.grid_circle.grid_dims[0] * self.grid_circle.grid_dims[1] * len(self.grid_circle.corners['x']))
-        values = np.random.randint(10000, size=len_points)
+        len_points = np.multiply(*self.grid_circle.grid_dims) * len(self.grid_circle.corners['x'])
+        values = np.random.randint(1e4, size=len_points)
         self.data_raw_circle = pd.DataFrame(data={'values': values})
         # Remove a known number of random values from the data set (for the circle Demo)
         remove_count = 5

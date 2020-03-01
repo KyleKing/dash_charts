@@ -8,6 +8,7 @@ unless None. This can be used to create all sorts of visualizations that have sp
 import calendar
 import cmath
 import math
+from itertools import chain
 
 import numpy as np
 import pandas as pd
@@ -276,6 +277,25 @@ class CircleGrid(GridClass):
         }
 
 
+def calculate_calendar_grid_corners(margin, days_in_week=7, max_weeks_in_month=6):
+    """Calculate the four exterior corner coordinates of a calendar coordinate grid.
+
+    Args:
+        margin: float spacing between tiles
+        days_in_week: number of days in week. Default is 7
+        max_weeks_in_month: max number of weeks in a month. Default is 6
+
+    Returns:
+        list: dictionary with keys `(x, y)` containing lists of the four exterior corner coordinates
+
+    """
+    y_indices = [[idx] * days_in_week for idx in range(max_weeks_in_month)]
+    return {
+        'x': np.add([*range(days_in_week)] * max_weeks_in_month, margin),
+        'y': np.add([*chain.from_iterable(y_indices)], margin),
+    }
+
+
 class YearGrid(GridClass):
     """Coordinates of days within a grid of months in one year."""
 
@@ -301,11 +321,7 @@ class YearGrid(GridClass):
         super().__init__(grid_dims=grid_dims, titles=titles)
 
         # Calculate four corners
-        margin = 2
-        self.corners = {
-            'x': np.add(list(range(7)) * 6, margin),
-            'y': np.add([0] * 7 + [1] * 7 + [2] * 7 + [3] * 7 + [4] * 7 + [5] * 7, margin),
-        }
+        self.corners = calculate_calendar_grid_corners(margin=2)
 
     def format_data(self, month_lists, year):
         """Return the formatted list that can be passed to a coordinate chart.
@@ -353,11 +369,7 @@ class MonthGrid(GridClass):
         super().__init__(grid_dims=grid_dims, titles=titles)
 
         # Calculate four corners
-        margin = 1.25
-        self.corners = {
-            'x': np.add(list(range(7)) * 6, margin),
-            'y': np.add([0] * 7 + [1] * 7 + [2] * 7 + [3] * 7 + [4] * 7 + [5] * 7, margin),
-        }
+        self.corners = calculate_calendar_grid_corners(margin=1.25)
 
     def format_data(self, daily_values, year, month):
         """Return the formatted list that can be passed to a coordinate chart.
