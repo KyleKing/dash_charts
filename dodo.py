@@ -8,14 +8,11 @@ from pathlib import Path
 import toml
 from icecream import ic
 
-# PLANNED: use this regex to check for return formatting issues `Returns:\n\s+\S+[^:]\s`
-
 TOML_PTH = Path(__file__).parent / 'pyproject.toml'
 """Path to `pyproject.toml` file."""
 
 PKG_NAME = toml.load(TOML_PTH)['tool']['poetry']['name']
 """Name of the current package based on the poetry configuration file."""
-
 
 # Create list of all tasks run with `poetry run doit`
 DOIT_CONFIG = {

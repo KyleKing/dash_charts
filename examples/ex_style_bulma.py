@@ -86,5 +86,5 @@ if __name__ == '__main__':
     port = parse_cli_port()
     BulmaStylingDemo().run(port=port, debug=True)
 else:
-    INSTANCE = BulmaStylingDemo()
-    FLASK_HANDLE = INSTANCE.get_server()
+    instance = BulmaStylingDemo()
+    FLASK_HANDLE = instance.get_server()

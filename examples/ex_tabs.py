@@ -149,5 +149,5 @@ if __name__ == '__main__':
     port = parse_cli_port()
     TabAppDemo().run(port=port, debug=True)
 else:
-    INSTANCE = TabAppDemo()
-    FLASK_HANDLE = INSTANCE.get_server()
+    instance = TabAppDemo()
+    FLASK_HANDLE = instance.get_server()

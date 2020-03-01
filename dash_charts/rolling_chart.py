@@ -22,18 +22,18 @@ class RollingChart(CustomChart):
     annotations = []
     """FIXME: DOCUMENT"""
 
-    def create_traces(self, raw_df, *, annotations=None):
+    def create_traces(self, df_raw, *, annotations=None):
         """Return traces for plotly chart.
 
         Args:
-            raw_df: pandas dataframe with columns `x: float`, `y: float` and `label: str`
+            df_raw: pandas dataframe with columns `x: float`, `y: float` and `label: str`
             annotations: list of tuples with values `(x, y, label)`. Default is None
 
         Returns:
             list: Dash chart traces
 
         Raises:
-            RuntimeError: if the `raw_df` is missing any necessary columns
+            RuntimeError: if the `df_raw` is missing any necessary columns
 
         """
         # # TODO: Implement annotations
@@ -43,9 +43,9 @@ class RollingChart(CustomChart):
 
         # Verify data format
         min_keys = ['x', 'y', 'label']
-        all_keys = raw_df.keys()
+        all_keys = df_raw.keys()
         if len([_k for _k in min_keys if _k in all_keys]) != len(min_keys):
-            raise RuntimeError(f'`raw_df` must have keys {min_keys}. Found: {all_keys}')
+            raise RuntimeError(f'`df_raw` must have keys {min_keys}. Found: {all_keys}')
 
         # Create and return the traces
         chart_data = [
@@ -53,22 +53,22 @@ class RollingChart(CustomChart):
                 mode='markers',
                 name=self.label_data,
                 opacity=0.5,
-                text=raw_df['label'],
-                x=raw_df['x'],
-                y=raw_df['y'],
+                text=df_raw['label'],
+                x=df_raw['x'],
+                y=df_raw['y'],
             ),
         ]
         # Only add the rolling calculations if there are a sufficient number of points
-        if len(raw_df['x']) >= self.count_rolling:
-            rolling_mean = bottleneck.move_mean(raw_df['y'], self.count_rolling)
-            rolling_std = bottleneck.move_std(raw_df['y'], self.count_rolling)
+        if len(df_raw['x']) >= self.count_rolling:
+            rolling_mean = bottleneck.move_mean(df_raw['y'], self.count_rolling)
+            rolling_std = bottleneck.move_std(df_raw['y'], self.count_rolling)
             chart_data.extend([
                 go.Scatter(
                     fill='toself',
                     hoverinfo='skip',
                     name=f'{self.count_std}x STD Range',
                     opacity=0.5,
-                    x=list(raw_df['x']) + list(raw_df['x'])[::-1],
+                    x=list(df_raw['x']) + list(df_raw['x'])[::-1],
                     y=list(np.add(rolling_mean, np.multiply(self.count_std, rolling_std))) + list(
                         np.subtract(rolling_mean, np.multiply(self.count_std, rolling_std)))[::-1],
                 ),
@@ -77,7 +77,7 @@ class RollingChart(CustomChart):
                     mode='lines',
                     name='Rolling Mean',
                     opacity=0.9,
-                    x=raw_df['x'],
+                    x=df_raw['x'],
                     y=rolling_mean,
                 ),
             ])

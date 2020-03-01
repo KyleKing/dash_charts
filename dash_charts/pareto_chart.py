@@ -40,22 +40,22 @@ class ParetoChart(CustomChart):
         # Assign new pareto_colors
         self._pareto_colors = pareto_colors
 
-    def tidy_pareto_data(self, raw_df):
+    def tidy_pareto_data(self, df_raw):
         """Return compressed Pareto dataframe of only the unique values.
 
         Args:
-            raw_df: pandas dataframe with at minimum the two columns `category: str` and `value: float`
+            df_raw: pandas dataframe with at minimum the two columns `category: str` and `value: float`
 
         Returns:
             dataframe: pandas dataframe with columns `(value, label, counts, cum_per)`
 
         """
         df_p = None
-        for cat in raw_df['category'].unique():
+        for cat in df_raw['category'].unique():
             df_row = pd.DataFrame(data={
                 'label': [cat],
-                'value': [raw_df.loc[raw_df['category'] == cat]['value'].sum()],
-                'counts': raw_df['category'].value_counts()[cat],
+                'value': [df_raw.loc[df_raw['category'] == cat]['value'].sum()],
+                'counts': df_raw['category'].value_counts()[cat],
             })
             df_p = df_row if df_p is None else df_p.append(df_row)
         # Sort and calculate percentage
@@ -65,29 +65,29 @@ class ParetoChart(CustomChart):
         df_p['cum_per'] = df_p['value'].divide(df_p['value'].sum()).cumsum()
         return df_p
 
-    def create_traces(self, raw_df):
+    def create_traces(self, df_raw):
         """Return traces for plotly chart.
 
         Args:
-            raw_df: pandas dataframe with at minimum the two columns `category: str` and `value: float`
+            df_raw: pandas dataframe with at minimum the two columns `category: str` and `value: float`
 
         Returns:
             list: Dash chart traces
 
         Raises:
-            RuntimeError: if the `raw_df` is missing any necessary columns
+            RuntimeError: if the `df_raw` is missing any necessary columns
 
         """
         # Verify data format
         min_keys = ['category', 'value']
-        all_keys = raw_df.keys()
+        all_keys = df_raw.keys()
         if len([_k for _k in min_keys if _k in all_keys]) != len(min_keys):
-            raise RuntimeError(f'`raw_df` must have keys {min_keys}. Found: {all_keys}')
-        elif not pd.api.types.is_string_dtype(raw_df['category']):
-            raise RuntimeError(f"category column must be string, but found {raw_df['category'].dtype}")
+            raise RuntimeError(f'`df_raw` must have keys {min_keys}. Found: {all_keys}')
+        elif not pd.api.types.is_string_dtype(df_raw['category']):
+            raise RuntimeError(f"category column must be string, but found {df_raw['category'].dtype}")
 
         # Create and return the traces and optionally add the count to the bar chart
-        df_p = self.tidy_pareto_data(raw_df)
+        df_p = self.tidy_pareto_data(df_raw)
         count_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if self.show_count else {}
         return [
             go.Bar(hoverinfo='y', yaxis='y1', name='Raw Value',

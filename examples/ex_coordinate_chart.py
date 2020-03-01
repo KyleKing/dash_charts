@@ -126,15 +126,15 @@ class CoordinateDemo(AppBase):
                 html.H4(children=self.name),
                 html.Div([min_graph(
                     id=self.ids[self.id_chart_years],
-                    figure=self.chart_years.create_figure(raw_df=self.data_raw_years),
+                    figure=self.chart_years.create_figure(df_raw=self.data_raw_years),
                 )]),
                 html.Div([min_graph(
                     id=self.ids[self.id_chart_months],
-                    figure=self.chart_months.create_figure(raw_df=self.data_raw_months),
+                    figure=self.chart_months.create_figure(df_raw=self.data_raw_months),
                 )]),
                 html.Div([min_graph(
                     id=self.ids[self.id_chart_circle],
-                    figure=self.chart_circle.create_figure(raw_df=self.data_raw_circle),
+                    figure=self.chart_circle.create_figure(df_raw=self.data_raw_circle),
                 )]),
             ],
         )
@@ -148,5 +148,5 @@ if __name__ == '__main__':
     port = parse_cli_port()
     CoordinateDemo().run(port=port, debug=True)
 else:
-    INSTANCE = CoordinateDemo()
-    FLASK_HANDLE = INSTANCE.get_server()
+    instance = CoordinateDemo()
+    FLASK_HANDLE = instance.get_server()

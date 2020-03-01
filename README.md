@@ -38,10 +38,10 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
         name = 'Car Share Pareto Demo'
         """Application name"""
 
-        raw_data = None
+        data_raw = None
         """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
 
-        main_chart = None
+        chart_main = None
         """Main chart (Pareto)."""
 
         id_chart = 'pareto'
@@ -51,13 +51,13 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
           """Initialize ids with `self.register_uniq_ids([...])` and application data."""
             self.register_uniq_ids([self.id_chart])
             # Format the car share data from plotly express for the Pareto
-            self.raw_data = (px.data.carshare()
+            self.data_raw = (px.data.carshare()
                             .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
-            self.raw_data['category'] = [f'H:{cat:02}' for cat in self.raw_data['category']]
+            self.data_raw['category'] = [f'H:{cat:02}' for cat in self.data_raw['category']]
 
         def create_charts(self):
             """Initialize charts."""
-            self.main_chart = ParetoChart(title='Car Share Pareto', xlabel='Peak Hours', ylabel='Car Hours')
+            self.chart_main = ParetoChart(title='Car Share Pareto', xlabel='Peak Hours', ylabel='Car Hours')
 
         def return_layout(self):
             """Return Dash application layout.
@@ -69,7 +69,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
             return html.Div([
                 html.Div([min_graph(
                     id=self.ids[self.id_chart],
-                    figure=self.main_chart.create_figure(raw_df=self.raw_data),
+                    figure=self.chart_main.create_figure(df_raw=self.data_raw),
                 )]),
             ])
 

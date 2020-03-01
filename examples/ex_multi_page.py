@@ -146,5 +146,5 @@ if __name__ == '__main__':
     port = parse_cli_port()
     MultiPageDemo().run(port=port, debug=True)
 else:
-    INSTANCE = MultiPageDemo()
-    FLASK_HANDLE = INSTANCE.get_server()
+    instance = MultiPageDemo()
+    FLASK_HANDLE = instance.get_server()

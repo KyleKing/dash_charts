@@ -157,7 +157,7 @@ class AppBase:
     def create_charts(self):
         """Register the initial charts.
 
-        Does not return a result. All charts should be initialized in this method (ex `self.main_chart = ParetoChart()`)
+        Does not return a result. All charts should be initialized in this method (ex `self.chart_main = ParetoChart()`)
 
         Raises:
             NotImplementedError: Child class must implement this method

@@ -50,9 +50,9 @@ def map_args(raw_args, inputs, states):
 
     ```python
     args_in, args_state = map_args(raw_args, inputs, states)
-    click_data = args_in[self.main_figure_id]['clickData']
-    n_clicks = args_in[self.randomize_button_id]['n_clicks']
-    data_cache = args_state[self.store_id]['data']
+    click_data = args_in[self.id_main_figure]['clickData']
+    n_clicks = args_in[self.id_randomize_button]['n_clicks']
+    data_cache = args_state[self.id_store]['data']
     ```
 
     Alternatively, for use cases that are unlikely to change the order of Inputs/State, unwrap positionally with:
@@ -172,11 +172,11 @@ class CustomChart:
         self.labels = {'x': xlabel, 'y': ylabel}
         self.layout_overrides = layout_overrides
 
-    def create_figure(self, raw_df, **kwargs_data):
+    def create_figure(self, df_raw, **kwargs_data):
         """Create the figure dictionary.
 
         Args:
-            raw_df: data to pass to formatter method
+            df_raw: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Returns:
@@ -184,17 +184,17 @@ class CustomChart:
 
         """
         return {
-            'data': self.create_traces(raw_df, **kwargs_data),
+            'data': self.create_traces(df_raw, **kwargs_data),
             'layout': go.Layout(self.apply_custom_layout(self.create_layout())),
         }
 
-    def create_traces(self, raw_df, **kwargs_data):
+    def create_traces(self, df_raw, **kwargs_data):
         """Return traces for plotly chart.
 
         Should return, list: trace data points. List may be empty
 
         Args:
-            raw_df: data to pass to formatter method
+            df_raw: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Raises:
@@ -257,11 +257,11 @@ class CustomChart:
 class MarginalChart(CustomChart):
     """Base Class for Custom Charts with Marginal X and Marginal Y Plots."""
 
-    def create_figure(self, raw_df, **kwargs_data):
+    def create_figure(self, df_raw, **kwargs_data):
         """Create the figure dictionary.
 
         Args:
-            raw_df: data to pass to formatter method
+            df_raw: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Returns:
@@ -282,7 +282,7 @@ class MarginalChart(CustomChart):
             (self.create_marg_right, 2, 2),
         ]
         for trace_func, row, col in traces:
-            for trace in trace_func(raw_df, **kwargs_data):
+            for trace in trace_func(df_raw, **kwargs_data):
                 fig.add_trace(trace, row, col)
         # Apply axis labels
         fig.update_xaxes(title_text=self.labels['x'], row=2, col=1)
@@ -293,13 +293,13 @@ class MarginalChart(CustomChart):
         fig['layout'].update(self.apply_custom_layout(self.create_layout()))
         return fig
 
-    def create_traces(self, raw_df, **kwargs_data):
+    def create_traces(self, df_raw, **kwargs_data):
         """Return traces for the main plotly chart.
 
         Should return, list: trace data points. List may be empty
 
         Args:
-            raw_df: data to pass to formatter method
+            df_raw: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Raises:
@@ -308,13 +308,13 @@ class MarginalChart(CustomChart):
         """
         raise NotImplementedError('create_traces must be implemented by child class')
 
-    def create_marg_top(self, raw_df, **kwargs_data):
+    def create_marg_top(self, df_raw, **kwargs_data):
         """Return traces for the top marginal chart.
 
         Should return, list: trace data points. List may be empty
 
         Args:
-            raw_df: data to pass to formatter method
+            df_raw: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Raises:
@@ -323,13 +323,13 @@ class MarginalChart(CustomChart):
         """
         raise NotImplementedError('create_marg_top must be implemented by child class')
 
-    def create_marg_right(self, raw_df, **kwargs_data):
+    def create_marg_right(self, df_raw, **kwargs_data):
         """Return traces for the right marginal chart.
 
         Should return, list: trace data points. List may be empty
 
         Args:
-            raw_df: data to pass to formatter method
+            df_raw: data to pass to formatter method
             kwargs_data: keyword arguments to pass to the data formatter method
 
         Raises:

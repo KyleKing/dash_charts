@@ -34,10 +34,10 @@ class ParetoDemo(AppBase):
     name = 'Example Pareto Chart'
     """Application name"""
 
-    raw_data = None
+    data_raw = None
     """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
 
-    main_chart = None
+    chart_main = None
     """Main chart (Pareto)."""
 
     id_chart = 'pareto'
@@ -47,12 +47,12 @@ class ParetoDemo(AppBase):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         self.register_uniq_ids([self.id_chart])
         # Format sample CSV data for the Pareto
-        self.raw_data = (pd.read_csv(StringIO(CSV_DATA))
+        self.data_raw = (pd.read_csv(StringIO(CSV_DATA))
                          .rename(columns={'events': 'value'}))
 
     def create_charts(self):
         """Initialize charts."""
-        self.main_chart = ParetoChart(
+        self.chart_main = ParetoChart(
             title='Made Up Categories vs. Made Up Counts',
             xlabel='Categories',
             ylabel='Count',
@@ -67,8 +67,8 @@ class ParetoDemo(AppBase):
             ),
         )
         # Override Pareto Parameters as needed
-        self.main_chart.show_count = True
-        self.main_chart.pareto_colors = {'bar': '#A5AFC8', 'line': '#391D2F'}
+        self.chart_main.show_count = True
+        self.chart_main.pareto_colors = {'bar': '#A5AFC8', 'line': '#391D2F'}
 
     def return_layout(self):
         """Return Dash application layout.
@@ -86,7 +86,7 @@ class ParetoDemo(AppBase):
                 html.H4(children=self.name),
                 html.Div([min_graph(
                     id=self.ids[self.id_chart],
-                    figure=self.main_chart.create_figure(raw_df=self.raw_data),
+                    figure=self.chart_main.create_figure(df_raw=self.data_raw),
                 )]),
             ],
         )
@@ -100,5 +100,5 @@ if __name__ == '__main__':
     port = parse_cli_port()
     ParetoDemo().run(port=port, debug=True)
 else:
-    INSTANCE = ParetoDemo()
-    FLASK_HANDLE = INSTANCE.get_server()
+    instance = ParetoDemo()
+    FLASK_HANDLE = instance.get_server()

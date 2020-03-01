@@ -15,10 +15,10 @@ class RollingDemo(AppBase):
     name = 'Example Rolling Chart'
     """Application name"""
 
-    raw_data = None
+    data_raw = None
     """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
 
-    main_chart = None
+    chart_main = None
     """Main chart (Rolling)."""
 
     id_chart = 'rolling'
@@ -37,7 +37,7 @@ class RollingDemo(AppBase):
 
     def create_charts(self):
         """Initialize charts."""
-        self.main_chart = RollingChart(
+        self.chart_main = RollingChart(
             title='Sample Timeseries Chart with Rolling Calculations',
             xlabel='Index',
             ylabel='Measured Value',
@@ -54,7 +54,7 @@ class RollingDemo(AppBase):
         y_vals = [samples[_i] + (-1 if _i > mid_count else 1) * _i / 10.0 for _i in range(count)]
 
         # Combine into a dataframe
-        self.raw_data = pd.DataFrame(data={
+        self.data_raw = pd.DataFrame(data={
             'x': range(count),
             'y': y_vals,
             'label': [f'Point {idx}' for idx in range(count)],
@@ -64,7 +64,7 @@ class RollingDemo(AppBase):
         ]
         indices = [20 + int(idx * count / len(colors)) for idx in range(len(colors))]
         self.annotations = [
-            (self.raw_data['x'][indices[idx]], self.raw_data['y'][indices[idx]], 'Additional Information', color)
+            (self.data_raw['x'][indices[idx]], self.data_raw['y'][indices[idx]], 'Additional Information', color)
             for idx, color in enumerate(colors)
         ]
 
@@ -84,8 +84,8 @@ class RollingDemo(AppBase):
                 html.H4(children=self.name),
                 html.Div([min_graph(
                     id=self.ids[self.id_chart],
-                    figure=self.main_chart.create_figure(
-                        raw_df=self.raw_data,
+                    figure=self.chart_main.create_figure(
+                        df_raw=self.data_raw,
                         # annotations=self.annotations,
                     ),
                 )]),
@@ -107,7 +107,7 @@ class RollingDemo(AppBase):
         #     a_in, a_states = map_args(args, inputs, states)  # noqa: E800
         #     ic(a_in[self.id_chart]['clickData'])  # noqa: E800
         #     # Example mapping output results  # noqa: E800
-        #     new_figure = self.main_chart.create_figure(raw_df=self.raw_data, show_count=True)  # noqa: E800
+        #     new_figure = self.chart_main.create_figure(df_raw=self.data_raw, show_count=True)  # noqa: E800
         #     return map_outputs(outputs, [(self.id_chart, 'figure', new_figure)])  # noqa: E800
 
 
@@ -115,5 +115,5 @@ if __name__ == '__main__':
     port = parse_cli_port()
     RollingDemo().run(port=port, debug=True)
 else:
-    INSTANCE = RollingDemo()
-    FLASK_HANDLE = INSTANCE.get_server()
+    instance = RollingDemo()
+    FLASK_HANDLE = instance.get_server()

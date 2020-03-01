@@ -5,6 +5,10 @@
 
 ### New
 
+* Initialize the coordinate chart and example. [Kyle King]
+
+* Cerberus property validation and tests. [Kyle King]
+
 * Default navbar for multipage applications. [Kyle King]
 
 * Added multi-page application base class. [Kyle King]
@@ -20,6 +24,8 @@
 * First refactored example with Pareto chart. [Kyle King]
 
 ### Changes
+
+* Group bar placeholder. [Kyle King]
 
 * Fix formatting of raw changelog. [Kyle King]
 
@@ -74,6 +80,8 @@
 * Improve documentation. [Kyle King]
 
 ### Fix
+
+* Pytest class warning. [Kyle King]
 
 * Pareto chart dataclass. [Kyle King]
 

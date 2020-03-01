@@ -362,5 +362,5 @@ if __name__ == '__main__':
     port = parse_cli_port()
     PXDemoApp().run(port=port, debug=True)
 else:
-    INSTANCE = PXDemoApp()
-    FLASK_HANDLE = INSTANCE.get_server()
+    instance = PXDemoApp()
+    FLASK_HANDLE = instance.get_server()

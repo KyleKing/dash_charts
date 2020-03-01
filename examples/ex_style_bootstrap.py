@@ -139,5 +139,5 @@ if __name__ == '__main__':
     port = parse_cli_port()
     BootstrapStylingDemo().run(port=port, debug=True)
 else:
-    INSTANCE = BootstrapStylingDemo()
-    FLASK_HANDLE = INSTANCE.get_server()
+    instance = BootstrapStylingDemo()
+    FLASK_HANDLE = instance.get_server()
