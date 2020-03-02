@@ -116,7 +116,7 @@ See sample code in [examples/ex_rolling_chart.py](examples/ex_rolling_chart.py).
 
 ### Coordinate Chart
 
-Chart a discrete data set on a 2D plane with color for intensity. Below examples show how to use the `CircleGrid()` and `MonthGrid()` classes
+Chart a discrete data set on a 2D plane with color for intensity. Below examples show how to use the `YearGrid()`, `MonthGrid()`, and `CircleGrid()` classes
 
 See sample code in [examples/ex_coordinate_chart.py](examples/ex_coordinate_chart.py). Screenshot below:
 
@@ -151,6 +151,8 @@ See sample code in [examples/ex_multi_page.py](examples/ex_multi_page.py). Scree
 ![ex_multi_page.png](.images/ex_multi_page.png)
 
 ## External Links
+
+[![codebeat badge](https://codebeat.co/badges/9d2b9a53-9203-4467-8cde-68f24e930389)](https://codebeat.co/projects/github-com-kyleking-dash_charts-master) [![Documentation Site Online Status Badge](https://img.shields.io/website?label=Doc%20Site&up_message=up&url=https%3A%2F%2Fgithub.com%2FKyleKing%2Fdash_charts%2F)](https://kyleking.me/dash_charts/) ![Commits Since last Release](https://img.shields.io/github/commits-since/KyleKing/dash_charts/latest) ![Last Commit Badge](https://img.shields.io/github/last-commit/kyleking/dash_charts)
 
 Useful Dash reference links
 
