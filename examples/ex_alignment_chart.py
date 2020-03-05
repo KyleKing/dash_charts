@@ -4,109 +4,111 @@ import dash_core_components as dcc
 import dash_html_components as html
 import numpy as np
 import pandas as pd
-from dash.dependencies import Input, Output
+from dash.exceptions import PreventUpdate
 from dash_charts.alignment_chart import AlignChart
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import init_app
+from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
 
 
-class AlignmentDemo:
-    """Demo Simple Rolling Mean Chart."""
+class AlignmentDemo(AppBase):
+    """Example creating an alignment chart."""
 
-    def __init__(self):
-        """Initialize app."""
-        self.app = init_app()
+    name = 'Example Alignment Chart'
+    """Application name"""
 
-    def run(self, *, debug=True, **kwargs):
-        """Run the application passing any kwargs to dash."""
-        self.exAlign = AlignChart(
+    data_raw = None
+    """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
+
+    chart_main = None
+    """Main chart (Alignment)."""
+
+    id_chart = 'alignment'
+    """Unique name for the main chart."""
+
+    id_slider = 'slider-input'
+    id_status = 'slider-status'
+    id_button = 'button-reset'
+
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        self.register_uniq_ids([self.id_chart, self.id_slider, self.id_status, self.id_button])
+
+        self._generate_data()
+
+    def create_charts(self):
+        """Initialize charts."""
+        self.chart_main = AlignChart(
             title='Positioning Error Analysis',
             xlabel='X-Axis Measurements (µm)',
             ylabel='Y-Axis Measurements (µm)',
             layout_overrides=(
-                ('height', None, 800),
-                ('width', None, 1000),
+                ('height', None, 600),
+                ('width', None, 800),
             ),
-            measLbl='Positioning Error',
-            idealLbl='Expected Position',
+            meas_lbl='Positioning Error',
+            ideal_lbl='Expected Position',
             pad=0.75,
         )
 
-        # Create sample data and application layout
-        self._generateData()
-        self._createLayout()
-
-        self._registerCallbacks()
-
-        self.app.run_server(debug=debug, **kwargs)
-
-    def _generateData(self):
-        """Create self.df_demo with sample data."""
+    def _generate_data(self):
+        """Create self.data_raw with sample data."""
         # Generate a grid of initial points
         dim = 5
         count = pow(dim, 2)
-        grid = np.meshgrid(*([np.linspace(1, dim, dim)] * 2))
+        grid = np.meshgrid(np.linspace(1, dim, dim), np.linspace(1, dim, dim))
 
         # Combine into a dataframe
-        self.df_demo = pd.DataFrame(data={
+        self.data_raw = pd.DataFrame(data={
             'x': grid[0].flatten(),
             'y': grid[1].flatten(),
             'x_delta': np.random.randn(count) / 12,
             'y_delta': np.random.randn(count) / 8,
-            'label': ['Point {}'.format(idx) for idx in range(count)],
+            'label': [f'Point {idx}' for idx in range(count)],
         })
 
-    def _createLayout(self):
-        """Create application layout."""
-        sTicks = range(0, 20 + 1, 2)
-        # Create centered, 2-column layout
-        self.app.layout = html.Div(className='columns', children=[
-            html.Div(className='column', children=[
-                html.Div([min_graph(id='alignment-chart')]),
-            ]),
-            html.Div(className='column', children=[
-                html.Div(style={
-                    'padding-top': '200px',
-                    'max-width': '250px',
-                }, children=[
-                    html.Div(style={
-                        'height': '400px',
-                        'margin': '25px 0 25px 50px',
-                    }, children=[
-                        dcc.Slider(
-                            id='stretch-input', step=0.1, vertical=True,
-                            min=min(sTicks), max=max(sTicks), marks={idx: '{}'.format(idx) for idx in sTicks},
-                        ),
-                    ]),
-                    html.Div(id='slider-output-container'),
-                    html.Button('Reset to 1', id='reset-button', className='button is-primary'),
-                ]),
-            ]),
-        ])
+    def return_layout(self):
+        """Return Dash application layout.
 
-    def _registerCallbacks(self):
+        Returns:
+            obj: Dash HTML object. Default is simple HTML text
+
+        """
+        s_ticks = range(0, 20 + 1, 2)  # TODO: no magic numbers
+        return html.Div(
+            style={
+                'max-width': '850px',
+                'margin-right': 'auto',
+                'margin-left': 'auto',
+            }, children=[
+                html.H4(children=self.name),
+                html.Div([min_graph(id=self.ids[self.id_chart], figure={})]),
+                html.Div(id=self.ids[self.id_status]),
+                dcc.Slider(
+                    id=self.ids[self.id_slider], step=0.1,  # vertical=True,
+                    min=min(s_ticks), max=max(s_ticks), marks={idx: f'{idx}' for idx in s_ticks},
+                ),
+                html.Button('Reset to 1', id=self.ids[self.id_button]),
+            ],
+        )
+
+    def create_callbacks(self):
         """Register callbacks to handle user interaction."""
-        @self.app.callback(
-            Output('alignment-chart', 'figure'),
-            [Input('stretch-input', 'value')])
-        def updateAlignChart(stretch):
-            """Create/update the alignment chart with the user-configurable stretch input."""
-            return self.exAlign.create_figure(df=self.df_demo, stretch=stretch)
+        @self.callback([(self.id_chart, 'figure')], [(self.id_slider, 'value')], [])
+        def update_alignment_chart(stretch):
+            # Create/update the alignment chart with the user-configurable stretch input
+            if stretch is None:
+                raise PreventUpdate
+            return [self.chart_main.create_figure(df_raw=self.data_raw, stretch=stretch)]
 
-        @self.app.callback(
-            Output('slider-output-container', 'children'),
-            [Input('stretch-input', 'value')])
-        def indicateSliderPos(stretch):
-            """Add text describing the current slider value."""
-            return 'Selected stretch factor: `{}`'.format(stretch)
+        @self.callback([(self.id_status, 'children')], [(self.id_slider, 'value')], [])
+        def indicate_slider_position(stretch):
+            # Add text describing the current slider value
+            return [f'Selected stretch factor: `{stretch}`']
 
-        @self.app.callback(
-            Output('stretch-input', 'value'),
-            [Input('reset-button', 'n_clicks')])
-        def resetstretch(n_clicks):
-            """Button to reset the stretch factor."""
-            return 1
+        @self.callback([(self.id_slider, 'value')], [(self.id_button, 'n_clicks')], [])
+        def reset_stretch(n_clicks):
+            return [1]  # Button to reset the stretch factor
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ from dash_charts.utils_fig import min_graph
 
 
 class RollingDemo(AppBase):
-    """Example creating a the rolling mean chart."""
+    """Example creating a rolling mean chart."""
 
     name = 'Example Rolling Chart'
     """Application name"""
@@ -24,16 +24,11 @@ class RollingDemo(AppBase):
     id_chart = 'rolling'
     """Unique name for the main chart."""
 
-    def __init__(self, **kwargs):
-        """Initialize app with custom stylesheets.
-
-        Args:
-            kwargs: keyword arguments passed to __init__
-
-        """
-        super().__init__(**kwargs)
-        self._generate_data()
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         self.register_uniq_ids([self.id_chart])
+
+        self._generate_data()
 
     def create_charts(self):
         """Initialize charts."""
@@ -86,7 +81,7 @@ class RollingDemo(AppBase):
                     id=self.ids[self.id_chart],
                     figure=self.chart_main.create_figure(
                         df_raw=self.data_raw,
-                        # annotations=self.annotations,
+                        # annotations=self.annotations,  # FIXME: Implement annotations
                     ),
                 )]),
             ],

@@ -18,14 +18,15 @@ class AlignChart(MarginalChart):
                  pad=0):
         """Initialize chart parameters.
 
-        title -- optional, string title for chart. Defaults to blank
-        xlabel/ylabel -- optional, X and Y Axis axis titles. Defaults to blank
-        layout_overrides -- Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
-        meas_lbl/ideal_lbl -- optional, legend names for the respective values
-        pad -- optional, internal padding within the chart. Defaults to 0
+        Args:
+            title: optional, string title for chart. Defaults to blank
+            xlabel/ylabel: optional, X and Y Axis axis titles. Defaults to blank
+            layout_overrides: Custom parameters in format (ParentKey, SubKey, and Value) to customize 'go.layout'
+            meas_lbl/ideal_lbl: optional, legend names for the respective values
+            pad: optional, internal padding within the chart. Defaults to 0
 
         """
-        super().__init__(title, xlabel, ylabel, layout_overrides)
+        super().__init__(title=title, xlabel=xlabel, ylabel=ylabel, layout_overrides=layout_overrides)
         # Store the additional kwargs as data members
         self.meas_lbl = meas_lbl
         self.ideal_lbl = ideal_lbl
@@ -34,8 +35,9 @@ class AlignChart(MarginalChart):
     def listify_data(self, df, stretch):
         """Convert the dataframe into a list for plotting.
 
-        df -- Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
-        stretch -- optional, float value to change the spacing between ideal and measured coordinates
+        Args:
+            df: Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
+            stretch: optional, float value to change the spacing between ideal and measured coordinates
 
         """
         meas_labels = []
@@ -60,9 +62,6 @@ class AlignChart(MarginalChart):
     def create_traces(self, df, stretch=1):
         """Return traces for plotly chart.
 
-        df -- Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
-        stretch -- optional, float value to change the spacing between ideal and measured coordinates
-
         ```python
         # Example dataframe
         df = pd.DataFrame(data={
@@ -73,6 +72,10 @@ class AlignChart(MarginalChart):
             'label': ['A', 'B', 'C', 'D'],
         })
         ```
+
+        Args:
+            df: Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
+            stretch: optional, float value to change the spacing between ideal and measured coordinates
 
         """
         # PLANNED: Handle multiple data sets/missing points? - use greyscale for ideal?
@@ -106,10 +109,12 @@ class AlignChart(MarginalChart):
     def create_marg_top(self, df, stretch=1):
         """Return traces for the top marginal chart.
 
-        df -- Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
-        stretch -- optional, float value to change the spacing between ideal and measured coordinates
+        Args:
+            df: Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
+            stretch: optional, float value to change the spacing between ideal and measured coordinates
 
         """
+        # TODO: Can all of the boxes be on the same line
         return [
             go.Box(
                 marker_color='royalblue',
@@ -123,8 +128,9 @@ class AlignChart(MarginalChart):
     def create_marg_right(self, df, stretch=1):
         """Return traces for the right marginal chart.
 
-        df -- Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
-        stretch -- optional, float value to change the spacing between ideal and measured coordinates
+        Args:
+            df: Pandas dataframe with columns names: ['x', 'y', 'x_delta', 'y_delta', 'label']
+            stretch: optional, float value to change the spacing between ideal and measured coordinates
 
         """
         df['yNew'] = df['y'] + df['y_delta'] * stretch

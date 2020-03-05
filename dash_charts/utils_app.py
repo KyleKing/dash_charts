@@ -16,7 +16,7 @@ ASSETS_DIR = Path(__file__).parent / 'assets'
 """Path to the static files directory."""
 
 COUNTER = count(start=0, step=1)
-"""Initialize iterator to provide set of unique integers when called with `next()`."""
+"""Initialize iterator to provide set of unique integers when called with `next(...)`."""
 
 STATIC_URLS = {
     'dash': {
