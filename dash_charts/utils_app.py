@@ -252,10 +252,7 @@ class AppWithNavigation(AppBase):
         self.verify_app_initialization()
         self.nav_layouts = {}
         for nav_name, nav in self.nav_lookup.items():
-            nav.verify_app_initialization()
-            nav.create_charts()
-            self.nav_layouts[nav_name] = nav.return_layout()
-            nav.create_callbacks()
+            self.nav_layouts[nav_name] = nav.app.layout
 
         # Create parent application layout and navigation
         self.app.layout = self.return_layout()

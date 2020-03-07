@@ -4,7 +4,7 @@ import bottleneck
 import numpy as np
 import plotly.graph_objects as go
 
-from .utils_fig import CustomChart
+from .utils_fig import CustomChart, check_raw_data
 
 
 class RollingChart(CustomChart):
@@ -32,9 +32,6 @@ class RollingChart(CustomChart):
         Returns:
             list: Dash chart traces
 
-        Raises:
-            RuntimeError: if the `df_raw` is missing any necessary columns
-
         """
         # # TODO: Implement annotations
         # if annotations is not None:
@@ -42,10 +39,7 @@ class RollingChart(CustomChart):
         #     self.create_annotations(annotations, y_range)
 
         # Verify data format
-        min_keys = ['x', 'y', 'label']
-        all_keys = df_raw.keys()
-        if len([_k for _k in min_keys if _k in all_keys]) != len(min_keys):
-            raise RuntimeError(f'`df_raw` must have keys {min_keys}. Found: {all_keys}')
+        check_raw_data(df_raw, ['x', 'y', 'label'])
 
         # Create and return the traces
         chart_data = [

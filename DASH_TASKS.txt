@@ -1,0 +1,26 @@
+Consolidated and Prioritized Task List
+
+- Update example charts
+	- Add more realistic example to alignment chart with string CSV data. Capture photo for README
+	- Add fitted chart to README. Also use more realistic data
+		- Add common fit equations to common_dash for this chart (linear, quadratic, etc.)
+	- Guidelines on TS from ESRI: https://doc.arcgis.com/en/operations-dashboard/help/serial-chart.htm
+		- Maybe update timeseries (rolling/fitted) with ESRI information?
+	- Implement SQL rather than CSV data stores
+	- Add sparklines to available charts
+		- Create a generic data exploration example? Maybe with general statistics of the dataset?
+			- Should also include a datatable once available
+			- Would be useful in the below PX demo concept
+	- Build indicator like in ESRI: https://doc.arcgis.com/en/operations-dashboard/help/indicator.htm
+	- Built ESRI Event list: https://doc.arcgis.com/en/operations-dashboard/help/list.htm
+- PX: data upload is in top bar where user can use dcc.upload to pick CSV, JSON, or SQL files - https://dash.plot.ly/dash-core-components/upload
+	- Maybe modal appears on load to select how to tidy data, how to load (is JSON in records or other format?) or which table from SQL to load
+	- Button to toggle back to the default data set per chart
+- Datatable
+	- Have click able icon in first column of table that triggers a dbc modal with additional information
+		- Would have layout determined in callback. Could be used to show a timeline, full traceback, or other long form data that can't be displayed in condensed table format
+		- dbc modal:  https://dash-bootstrap-components.opensource.faculty.ai/l/components/modal
+		- Would require wildcard props for each row:
+- Event Timeline/Gantt
+	- Goal would be to implement timevis from R in Plotly/Dash (R/TimeVis https://github.com/daattali/timevis)
+		- Online Gantt Demo: https://chart-studio.plot.ly/create/?fid=tmercieca:5#/

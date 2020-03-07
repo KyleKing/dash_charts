@@ -113,37 +113,41 @@ from dash_charts.utils_fig import map_args, map_outputs, min_graph
 class TabBase(AppBase):
     """Base tab class with helper methods."""
 
-    id_chart = 'chart'
-    id_func = 'func'
-    id_template = 'template'  # TODO: turn off template for the color swatch example
+    id_chart: str = 'chart'
+    id_func: str = 'func'
+    id_template: str = 'template'  # TODO: turn off template for the color swatch example
 
     takes_args: bool = True
-    templates = ['ggplot2', 'seaborn', 'simple_white', 'plotly',
-                 'plotly_white', 'plotly_dark', 'presentation', 'xgridoff',
-                 'ygridoff', 'gridon', 'none']  # import plotly.io as pio; pio.templates
+    # TODO: Document
+    templates: list = ['ggplot2', 'seaborn', 'simple_white', 'plotly',
+                       'plotly_white', 'plotly_dark', 'presentation', 'xgridoff',
+                       'ygridoff', 'gridon', 'none']
+    """List of templates from: `import plotly.io as pio; pio.templates`"""
 
     # Must override in child class
     name: str = None
+    # TODO: Document
     data: pd.DataFrame = None
+    # TODO: Document
     func_map: OrderedDict = None
+    # TODO: Document
     dims: tuple = ()  # FIXME: should be able to be None
+    # TODO: Document
     dims_dict: OrderedDict = OrderedDict([])  # FIXME: should be able to be None
+    # TODO: Document
 
-    def __init__(self, **kwargs):
-        """Resolve higher-order data members.
-
-        Args:
-            kwargs: keyword arguments passed to __init__
-
-        """
-        super().__init__(**kwargs)
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        self.input_ids = [self.id_func, self.id_template] + list(self.dims) + list(self.dims_dict.keys())
+        self.register_uniq_ids([self.id_chart] + self.input_ids)
 
         self.col_opts = [] if self.data is None else tuple(opts_dd(_c, _c) for _c in self.data.columns)
         self.func_opts = tuple(opts_dd(lbl, lbl) for lbl in self.func_map.keys())
         self.t_opts = tuple(opts_dd(template, template) for template in self.templates)
 
-        self.input_ids = [self.id_func, self.id_template] + list(self.dims) + list(self.dims_dict.keys())
-        self.register_uniq_ids([self.id_chart] + self.input_ids)
+    def create_charts(self):
+        """Initialize charts."""
+        pass
 
     def return_layout(self):
         """Return Dash application layout.
@@ -187,16 +191,12 @@ class TabBase(AppBase):
             min_graph(id=self.ids[self.id_chart], style={'width': '75%', 'display': 'inline-block'}),
         ], style={'padding': '15px'})
 
-    def create_charts(self):
-        """Register the initial charts."""
-        pass
-
     def create_callbacks(self):
         """Register callbacks necessary for this tab."""
         errors = []
         if not isinstance(self.takes_args, bool):
             errors.append(f'Expected self.takes_args="{self.takes_args}" to be bool')
-        if not isinstance(self.data, pd.DataFrame) or self.data is None:
+        if not (isinstance(self.data, pd.DataFrame) or self.data is None):
             errors.append(f'Expected self.data="{self.data}" to be pd.DataFrame or None')
         if not isinstance(self.func_map, OrderedDict):
             errors.append(f'Expected self.func_map="{self.func_map}" to be OrderedDict')
@@ -204,7 +204,7 @@ class TabBase(AppBase):
             formatted_errors = '\n' + '\n'.join(errors)
             raise RuntimeError(f'Found errors in data members:{formatted_errors}')
 
-        outputs = ((self.id_chart, 'figure'), )
+        outputs = [(self.id_chart, 'figure')]
         inputs = [(_id, 'value') for _id in self.input_ids]
         states = ()
         @self.callback(outputs, inputs, states)
@@ -329,7 +329,7 @@ class PXDemoApp(AppWithTabs):
     tabs_compact = False
     """Boolean setting to toggle between a padded tab layout if False and a minimal compact version if True."""
 
-    def define_tabs(self):
+    def define_nav_elements(self):
         """Return list of initialized tabs.
 
         Returns:
@@ -337,12 +337,12 @@ class PXDemoApp(AppWithTabs):
 
         """
         return [
-            TabTip(self.app),
-            TabIris(self.app),
-            TabGapminder(self.app),
-            TabTernary(self.app),
-            TabPolar(self.app),
-            TabColor(self.app),
+            TabTip(app=self.app),
+            TabIris(app=self.app),
+            TabGapminder(app=self.app),
+            TabTernary(app=self.app),
+            TabPolar(app=self.app),
+            TabColor(app=self.app),
         ]
 
     def return_layout(self):
