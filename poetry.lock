@@ -198,7 +198,7 @@ description = "DAQ components for Dash"
 name = "dash-daq"
 optional = false
 python-versions = "*"
-version = "0.3.3"
+version = "0.4.0"
 
 [package.dependencies]
 dash = ">=1.6.1"
@@ -325,7 +325,7 @@ description = "A linter for Python tests"
 name = "flake8-aaa"
 optional = false
 python-versions = ">=3.6, <4"
-version = "0.8.0"
+version = "0.8.1"
 
 [package.dependencies]
 asttokens = ">=2"
@@ -608,7 +608,7 @@ description = "The package provides base classes and utils for flake8 plugin wri
 name = "flake8-plugin-utils"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "1.1.0"
+version = "1.2.0"
 
 [[package]]
 category = "dev"
@@ -930,7 +930,7 @@ description = "A super-fast templating language that borrows the  best ideas fro
 name = "mako"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.1.1"
+version = "1.1.2"
 
 [package.dependencies]
 MarkupSafe = ">=0.9.2"
@@ -1005,7 +1005,7 @@ description = "Core utilities for Python packages"
 name = "packaging"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "20.1"
+version = "20.3"
 
 [package.dependencies]
 pyparsing = ">=2.0.2"
@@ -1076,7 +1076,7 @@ description = "An open-source, interactive graphing library for Python"
 name = "plotly"
 optional = false
 python-versions = "*"
-version = "4.5.2"
+version = "4.5.3"
 
 [package.dependencies]
 retrying = ">=1.3.3"
@@ -1447,7 +1447,7 @@ marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
-version = "3.0.0"
+version = "3.1.0"
 
 [package.extras]
 docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
@@ -1548,7 +1548,7 @@ dash-core-components = [
     {file = "dash_core_components-1.8.1.tar.gz", hash = "sha256:9a8901b67d3a1038fb79153c17234d5713c2d7cca0382718c6376c786b280e63"},
 ]
 dash-daq = [
-    {file = "dash_daq-0.3.3.tar.gz", hash = "sha256:8370e6624c2b2dd8c53ed8af9a5a376d4b4a8bb4eb4899b57ae8e55fdb8bad8f"},
+    {file = "dash_daq-0.4.0.tar.gz", hash = "sha256:051adb0ffc03e25f24bc031d40b858aa85bd3bae61450b150a24a5d13847d332"},
 ]
 dash-html-components = [
     {file = "dash_html_components-1.0.2.tar.gz", hash = "sha256:8992097a044f5add21f86ccbe0caef8c499394a04d5f2b6cc4458a42f37cca98"},
@@ -1588,8 +1588,8 @@ flake8-2020 = [
     {file = "flake8_2020-1.6.0.tar.gz", hash = "sha256:3e438d9d531577fbb9332bbd0bf394eca890f3b7a5311e2278fb3582381a2f13"},
 ]
 flake8-aaa = [
-    {file = "flake8-aaa-0.8.0.tar.gz", hash = "sha256:7d7f6bd4e228fe5703c29cd709ae143dbd40de1b1cfa08f7b7e120bba20f8655"},
-    {file = "flake8_aaa-0.8.0-py3-none-any.whl", hash = "sha256:8ea8f858f5920c72d39cf01e3036cbdc0b1a24df607a37f4913f99a3b7ae449e"},
+    {file = "flake8-aaa-0.8.1.tar.gz", hash = "sha256:f71c7e2dde533b492e66c66e4bdbe369ef7d39f91a62e5082717966f328cfc87"},
+    {file = "flake8_aaa-0.8.1-py3-none-any.whl", hash = "sha256:956193dd1343dc4a9c7a5cac5567898f62a7af4b9d0ba0f84d1b4bb0f8dbd5c0"},
 ]
 flake8-assertive = [
     {file = "flake8-assertive-1.2.1.tar.gz", hash = "sha256:1416eba73332437fdf918f05d3a94a17287d2062423e00ed76c4985b39db5938"},
@@ -1679,8 +1679,8 @@ flake8-plone-hasattr = [
     {file = "flake8_plone_hasattr-0.2.post0-py2.py3-none-any.whl", hash = "sha256:cfabd900e3ac68c47f46e4fa82e5db23463ceb954fc91e2a3b209f3c810e0c3f"},
 ]
 flake8-plugin-utils = [
-    {file = "flake8-plugin-utils-1.1.0.tar.gz", hash = "sha256:385f3cf3ffed5fe38a61645951ca7783b71912361601fba81427684cc8183c5f"},
-    {file = "flake8_plugin_utils-1.1.0-py3-none-any.whl", hash = "sha256:809b50396f1229acc043fe1fd805a7c2fc3dc254b814daeed3e45f2565f40c9b"},
+    {file = "flake8-plugin-utils-1.2.0.tar.gz", hash = "sha256:0ec78b72e48b2bdaf0037e97105f0770a2b59b0e7b2519aaec35993f3538073f"},
+    {file = "flake8_plugin_utils-1.2.0-py3-none-any.whl", hash = "sha256:94b04623082dd64e97b93177e53125d5d17657c9864a4d3a29ef31a9a6c39e15"},
 ]
 flake8-polyfill = [
     {file = "flake8-polyfill-1.0.2.tar.gz", hash = "sha256:e44b087597f6da52ec6393a709e7108b2905317d0c0b744cdca6208e670d8eda"},
@@ -1780,7 +1780,8 @@ macfsevents = [
     {file = "MacFSEvents-0.8.1.tar.gz", hash = "sha256:1324b66b356051de662ba87d84f73ada062acd42b047ed1246e60a449f833e10"},
 ]
 mako = [
-    {file = "Mako-1.1.1.tar.gz", hash = "sha256:2984a6733e1d472796ceef37ad48c26f4a984bb18119bb2dbc37a44d8f6e75a4"},
+    {file = "Mako-1.1.2-py2.py3-none-any.whl", hash = "sha256:8e8b53c71c7e59f3de716b6832c4e401d903af574f6962edbbbf6ecc2a5fe6c9"},
+    {file = "Mako-1.1.2.tar.gz", hash = "sha256:3139c5d64aa5d175dbafb95027057128b5fbd05a40c53999f3905ceb53366d9d"},
 ]
 mando = [
     {file = "mando-0.6.4-py2.py3-none-any.whl", hash = "sha256:4ce09faec7e5192ffc3c57830e26acba0fd6cd11e1ee81af0d4df0657463bd1c"},
@@ -1857,8 +1858,8 @@ numpy = [
     {file = "numpy-1.18.1.zip", hash = "sha256:b6ff59cee96b454516e47e7721098e6ceebef435e3e21ac2d6c3b8b02628eb77"},
 ]
 packaging = [
-    {file = "packaging-20.1-py2.py3-none-any.whl", hash = "sha256:170748228214b70b672c581a3dd610ee51f733018650740e98c7df862a583f73"},
-    {file = "packaging-20.1.tar.gz", hash = "sha256:e665345f9eef0c621aa0bf2f8d78cf6d21904eef16a93f020240b704a57f1334"},
+    {file = "packaging-20.3-py2.py3-none-any.whl", hash = "sha256:82f77b9bee21c1bafbf35a84905d604d5d1223801d639cf3ed140bd651c08752"},
+    {file = "packaging-20.3.tar.gz", hash = "sha256:3c292b474fda1671ec57d46d739d072bfd495a4f51ad01a055121d81e952b7a3"},
 ]
 pandas = [
     {file = "pandas-1.0.1-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:74a470d349d52b9d00a2ba192ae1ee22155bb0a300fd1ccb2961006c3fa98ed3"},
@@ -1892,8 +1893,8 @@ pep8-naming = [
     {file = "pep8_naming-0.9.1-py2.py3-none-any.whl", hash = "sha256:45f330db8fcfb0fba57458c77385e288e7a3be1d01e8ea4268263ef677ceea5f"},
 ]
 plotly = [
-    {file = "plotly-4.5.2-py2.py3-none-any.whl", hash = "sha256:9132cf7c0b0840653317b33f73cdb7d7f07e75cdf7456b5fceb5e4188f5805ad"},
-    {file = "plotly-4.5.2.tar.gz", hash = "sha256:742e2de326199dd704f8bb0c1cae96a5f75ff8f383c035bfb461f347612354a5"},
+    {file = "plotly-4.5.3-py2.py3-none-any.whl", hash = "sha256:51d65748bb3ccd09d7b5cb1d15996edd126df695cb236f92cc1aded06e7c1611"},
+    {file = "plotly-4.5.3.tar.gz", hash = "sha256:622acbdfbde222ad798eeaa91bf72584fe10833dfbea1afcc18e866b98000ae1"},
 ]
 pluggy = [
     {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},
@@ -2057,6 +2058,6 @@ werkzeug = [
     {file = "Werkzeug-1.0.0.tar.gz", hash = "sha256:169ba8a33788476292d04186ab33b01d6add475033dfc07215e6d219cc077096"},
 ]
 zipp = [
-    {file = "zipp-3.0.0-py3-none-any.whl", hash = "sha256:12248a63bbdf7548f89cb4c7cda4681e537031eda29c02ea29674bc6854460c2"},
-    {file = "zipp-3.0.0.tar.gz", hash = "sha256:7c0f8e91abc0dc07a5068f315c52cb30c66bfbc581e5b50704c8a2f6ebae794a"},
+    {file = "zipp-3.1.0-py3-none-any.whl", hash = "sha256:aa36550ff0c0b7ef7fa639055d797116ee891440eac1a56f378e2d3179e0320b"},
+    {file = "zipp-3.1.0.tar.gz", hash = "sha256:c599e4d75c98f6798c509911d08a22e6c021d074469042177c8c86fb92eefd96"},
 ]

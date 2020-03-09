@@ -11,7 +11,6 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
     - [Pareto Chart](#pareto-chart)
     - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
     - [Coordinate Chart](#coordinate-chart)
-    - [Alignment Chart](#alignment-chart)
   - [Applications](#applications)
     - [Tabbed Application](#tabbed-application)
     - [Multi-Page Application](#multi-page-application)
@@ -121,14 +120,6 @@ Chart a discrete data set on a 2D plane with color for intensity. Below examples
 See sample code in [examples/ex_coordinate_chart.py](examples/ex_coordinate_chart.py). Screenshot below:
 
 ![ex_coordinate_chart.png](.images/ex_coordinate_chart.png)
-
-### Alignment Chart
-
-Useful for visualizing misalignment between measured values and expected values. Accepts a `stretch` argument to visually increase the spacing between the measured and expected value.
-
-See sample code in [examples/ex_alignment_chart.py](examples/ex_alignment_chart.py). Screenshot below:
-
-![ex_alignment_chart.png](.images/ex_alignment_chart.png)
 
 ## Applications
 

@@ -5,6 +5,8 @@
 
 ### New
 
+* Fitted line chart. [Kyle King]
+
 * Initialize the coordinate chart and example. [Kyle King]
 
 * Cerberus property validation and tests. [Kyle King]
@@ -24,6 +26,10 @@
 * First refactored example with Pareto chart. [Kyle King]
 
 ### Changes
+
+* Badges! [Kyle King]
+
+* Remove make_colorbar and add coord_chart img. [Kyle King]
 
 * Refactor make_colorbar and remove log_fire. [Kyle King]
 
@@ -88,6 +94,10 @@
 * Improve documentation. [Kyle King]
 
 ### Fix
+
+* Update ex_px for app changes & add TODOs. [Kyle King]
+
+* Rolling & alignment charts, still work to do. [Kyle King]
 
 * Pytest class warning. [Kyle King]
 
