@@ -10,19 +10,19 @@ from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
 
 
-class LineDemo(AppBase):
-    """Example creating a Line chart."""
+class FittedDemo(AppBase):
+    """Example creating a Fitted chart."""
 
-    name = 'Example Line Chart'
+    name = 'Example Fitted Chart'
     """Application name"""
 
     data_raw = None
     """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
 
     chart_main = None
-    """Main chart (Line)."""
+    """Main chart (Fitted)."""
 
-    id_chart = 'line'
+    id_chart = 'fitted'
     """Unique name for the main chart."""
 
     def initialization(self):
@@ -82,9 +82,13 @@ class LineDemo(AppBase):
         pass  # No callbacks necessary for this simple example
 
 
+instance = FittedDemo
 if __name__ == '__main__':
     port = parse_cli_port()
-    LineDemo().run(port=port, debug=True)
+    app = instance()
+    app.create()
+    app.run(port=port, debug=True)
 else:
-    instance = LineDemo()
-    FLASK_HANDLE = instance.get_server()
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()

@@ -358,9 +358,13 @@ class PXDemoApp(AppWithTabs):
         ])
 
 
+instance = PXDemoApp
 if __name__ == '__main__':
     port = parse_cli_port()
-    PXDemoApp().run(port=port, debug=True)
+    app = instance()
+    app.create()
+    app.run(port=port, debug=True)
 else:
-    instance = PXDemoApp()
-    FLASK_HANDLE = instance.get_server()
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()

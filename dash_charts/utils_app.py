@@ -114,8 +114,6 @@ class AppBase:
 
         self.app = init_app(external_stylesheets=self.external_stylesheets) if app is None else app
 
-        self.create()
-
     def create(self):
         """Create the ids, app charts, layout, and callbacks. Called in `__init__`."""
         self.initialization()
@@ -252,7 +250,12 @@ class AppWithNavigation(AppBase):
         self.verify_app_initialization()
         self.nav_layouts = {}
         for nav_name, nav in self.nav_lookup.items():
-            self.nav_layouts[nav_name] = nav.app.layout
+            # Based on self.create() for each nav item
+            nav.initialization()
+            nav.create_charts()
+            self.nav_layouts[nav_name] = nav.return_layout()
+            nav.create_callbacks()
+            nav.verify_app_initialization()
 
         # Create parent application layout and navigation
         self.app.layout = self.return_layout()
@@ -465,8 +468,9 @@ class AppMultiPage(AppWithNavigation):
         inputs = [(self.id_url, 'pathname')]
 
         @self.callback(outputs, inputs, [])
-        def render_tab(pathname):
+        def render_page(pathname):
             try:
+                # TODO: Demo how pages could use parameters from pathname
                 return [self.nav_layouts[self.select_page_name(pathname)]]
             except Exception as err:
                 return [html.Div(children=[f'Error rendering "{pathname}":\n{err}'])]

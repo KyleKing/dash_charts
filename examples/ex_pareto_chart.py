@@ -96,9 +96,13 @@ class ParetoDemo(AppBase):
         pass  # No callbacks necessary for this simple example
 
 
+instance = ParetoDemo
 if __name__ == '__main__':
     port = parse_cli_port()
-    ParetoDemo().run(port=port, debug=True)
+    app = instance()
+    app.create()
+    app.run(port=port, debug=True)
 else:
-    instance = ParetoDemo()
-    FLASK_HANDLE = instance.get_server()
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()

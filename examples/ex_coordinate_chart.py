@@ -11,6 +11,8 @@ from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
 
+# TODO: Also set marker size based on value?
+
 
 class CoordinateDemo(AppBase):
     """Example creating basic Coordinate Charts."""
@@ -144,9 +146,13 @@ class CoordinateDemo(AppBase):
         pass  # No callbacks necessary for this simple example
 
 
+instance = CoordinateDemo
 if __name__ == '__main__':
     port = parse_cli_port()
-    CoordinateDemo().run(port=port, debug=True)
+    app = instance()
+    app.create()
+    app.run(port=port, debug=True)
 else:
-    instance = CoordinateDemo()
-    FLASK_HANDLE = instance.get_server()
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()

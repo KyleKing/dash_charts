@@ -106,9 +106,13 @@ class RollingDemo(AppBase):
         #     return map_outputs(outputs, [(self.id_chart, 'figure', new_figure)])  # noqa: E800
 
 
+instance = RollingDemo
 if __name__ == '__main__':
     port = parse_cli_port()
-    RollingDemo().run(port=port, debug=True)
+    app = instance()
+    app.create()
+    app.run(port=port, debug=True)
 else:
-    instance = RollingDemo()
-    FLASK_HANDLE = instance.get_server()
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()

@@ -142,9 +142,13 @@ class MultiPageDemo(AppMultiPage):
             return Page404.name
 
 
+instance = MultiPageDemo
 if __name__ == '__main__':
     port = parse_cli_port()
-    MultiPageDemo().run(port=port, debug=True)
+    app = instance()
+    app.create()
+    app.run(port=port, debug=True)
 else:
-    instance = MultiPageDemo()
-    FLASK_HANDLE = instance.get_server()
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()

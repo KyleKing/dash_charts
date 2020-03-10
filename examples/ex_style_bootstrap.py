@@ -135,9 +135,13 @@ class BootstrapStylingDemo(AppBase):
         pass  # No callbacks necessary for this simple example
 
 
+instance = BootstrapStylingDemo
 if __name__ == '__main__':
     port = parse_cli_port()
-    BootstrapStylingDemo().run(port=port, debug=True)
+    app = instance()
+    app.create()
+    app.run(port=port, debug=True)
 else:
-    instance = BootstrapStylingDemo()
-    FLASK_HANDLE = instance.get_server()
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()

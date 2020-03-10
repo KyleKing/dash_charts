@@ -43,6 +43,9 @@ class ParetoChart(CustomChart):
     show_count: bool = True
     """If True, will show numeric count on each bar. Default is True."""
 
+    percentage_label: str = 'Cumulative Percentage'
+    """Label for the yaxis 2 with the cumulative percentage."""
+
     _pareto_colors: dict = {'bar': '#4682b4', 'line': '#b44646'}
     _pareto_colors_schema = {
         'bar': {'required': True, 'type': 'string'},
@@ -89,11 +92,11 @@ class ParetoChart(CustomChart):
         df_p = tidy_pareto_data(df_raw, self.cap_categories)
         count_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if self.show_count else {}
         return [
-            go.Bar(hoverinfo='y', yaxis='y1', name='Raw Value',
+            go.Bar(hoverinfo='y', yaxis='y1', name=self.labels['y'],
                    marker={'color': self.pareto_colors['bar']},
                    x=df_p['label'], y=df_p['value'], **count_kwargs),
         ] + [
-            go.Scatter(hoverinfo='y', yaxis='y2', name='Cumulative Percentage',
+            go.Scatter(hoverinfo='y', yaxis='y2', name=self.percentage_label,
                        marker={'color': self.pareto_colors['line']}, mode='lines',
                        x=df_p['label'], y=df_p['cum_per']),
         ]
