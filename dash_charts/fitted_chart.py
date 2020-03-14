@@ -7,6 +7,16 @@ from scipy import optimize
 
 from .utils_fig import CustomChart, check_raw_data
 
+# TODO: Possible use random method from old line_chart example?
+# count = 10
+# self.df_demo = [
+#     pd.DataFrame(data={
+#         'x': [idx for idx in range(count)],
+#         'y': sorted([random.expovariate(0.2) for _i in range(count)], reverse=True),
+#         'labels': ['Index: {}'.format(idx) for idx in range(count)],
+#     }),
+# ]
+
 
 class FittedChart(CustomChart):
     """Scatter and Fitted Line Chart."""

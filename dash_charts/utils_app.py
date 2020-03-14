@@ -105,17 +105,19 @@ class AppBase:
         Args:
             app: Dash instance. If None, will create standalone app. Otherwise, will be part of existing app
 
-        Raises:
-            RuntimeError: if child class has not set a `self.name` data member
-
         """
-        if self.name is None:
-            raise RuntimeError('Child class must set `self.name` to a unique string for this app')
-
         self.app = init_app(external_stylesheets=self.external_stylesheets) if app is None else app
 
     def create(self):
-        """Create the ids, app charts, layout, and callbacks. Called in `__init__`."""
+        """Create the ids, app charts, layout, and callbacks. Called in `__init__`.
+
+        Raises:
+            NotImplementedError: if child class has not set a `self.name` data member
+
+        """
+        if self.name is None:
+            raise NotImplementedError('Child class must set `self.name` to a unique string for this app')
+
         self.initialization()
         self.create_charts()
         self.app.layout = self.return_layout()
