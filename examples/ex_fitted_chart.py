@@ -53,6 +53,15 @@ class FittedDemo(AppBase):
             'label': None,
         })
 
+        # colors = [
+        #     '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#e377c2', '#7f7f7f', '#17becf', None,
+        # ]
+        # indices = [20 + int(idx * count / len(colors)) for idx in range(len(colors))]
+        # self.annotations = [
+        #     (self.data_raw['x'][indices[idx]], self.data_raw['y'][indices[idx]], 'Additional Information', color)
+        #     for idx, color in enumerate(colors)
+        # ]
+
     def return_layout(self):
         """Return Dash application layout.
 

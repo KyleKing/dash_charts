@@ -4,6 +4,15 @@ import argparse
 
 from cerberus import Validator
 
+# Plotly Colors:
+# ['Blackbody', 'Blackbody_r', 'Bluered', 'Bluered_r', 'Blues', 'Blues_r', 'Cividis', 'Cividis_r', 'Earth', 'Earth_r',
+#  'Electric', 'Electric_r', 'Greens', 'Greens_r', 'Greys', 'Greys_r', 'Hot', 'Hot_r', 'Jet', 'Jet_r', 'Picnic',
+#  'Picnic_r', 'Portland', 'Portland_r', 'Rainbow', 'Rainbow_r', 'RdBu', 'RdBu_r', 'Reds', 'Reds_r', 'Viridis',
+#  'Viridis_r', 'YlGnBu', 'YlGnBu_r', 'YlOrRd', 'YlOrRd_r', 'scale_name', 'scale_name_r', 'scale_pairs',
+#  'scale_pairs_r', 'scale_sequence', 'scale_sequence_r']
+# >>> plotly.colors.plotlyjs.Hot
+# ['rgb(0,0,0)', 'rgb(230,0,0)', 'rgb(255,210,0)', 'rgb(255,255,255)']
+
 
 def validate(document, schema, **validator_kwargs):
     """Validate a data structure. Return errors if any found.
@@ -50,3 +59,5 @@ def parse_cli_port():
 #
 #     def write_df():
 #         return {}
+#
+# Maybe just methods for formatting df as records for JSON, then methods for loading back to df?
