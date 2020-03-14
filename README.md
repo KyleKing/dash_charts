@@ -135,7 +135,7 @@ See sample code in [examples/ex_tabs.py](examples/ex_tabs.py). Screenshot below:
 
 ### Multi-Page Application
 
-Use the `AppWithTabs()` base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.
+Use the `AppMultiPage()` base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.
 
 See sample code in [examples/ex_multi_page.py](examples/ex_multi_page.py). Screenshot below:
 

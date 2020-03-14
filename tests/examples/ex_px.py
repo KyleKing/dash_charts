@@ -14,7 +14,8 @@ import pandas as pd
 import plotly.express as px
 from dash_charts.components import dropdown_group
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import AppBase, AppWithTabs, opts_dd
+from dash_charts.utils_app import AppBase, opts_dd
+from dash_charts.utils_app_with_navigation import AppWithTabs
 from dash_charts.utils_fig import map_args, map_outputs, min_graph
 
 # FIXME: Implement ability for user to select JSON or CSV data and graph interactively!
