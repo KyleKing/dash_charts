@@ -27,6 +27,12 @@
 
 ### Changes
 
+* Add example cool hexagonal charts to WIP/ [Kyle King]
+
+  With minor modifications to [original author](https://towardsdatascience.com/interactive-basketball-data-visualizations-with-plotly-8c6916aaa59e) and [Gitlab Repository](https://gitlab.com/jphwang/online_articles)
+
+* Removed alignment chart. [Kyle King]
+
 * Badges! [Kyle King]
 
 * Remove make_colorbar and add coord_chart img. [Kyle King]
@@ -94,6 +100,10 @@
 * Improve documentation. [Kyle King]
 
 ### Fix
+
+* Improve dropdown_group and add examples to px. [Kyle King]
+
+* Rendering tabs. Move create() out of init() [Kyle King]
 
 * Update ex_px for app changes & add TODOs. [Kyle King]
 

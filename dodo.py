@@ -31,6 +31,7 @@ DOIT_CONFIG = {
 GIT_DIR = Path(__file__).parent
 DOC_DIR = GIT_DIR / 'docs'
 STAGING_DIR = DOC_DIR / PKG_NAME
+SRC_EXAMPLES_DIR = GIT_DIR / 'tests/examples'
 TMP_EXAMPLES_DIR = GIT_DIR / f'{PKG_NAME}/0EX'
 
 GH_PAGES_DIR = Path(__file__).parents[1] / 'Dash_Charts_gh-pages'
@@ -197,7 +198,7 @@ def stage_examples():
     """Format the code examples as docstrings to be loaded into the documentation."""
     TMP_EXAMPLES_DIR.mkdir(exist_ok=False)
     (TMP_EXAMPLES_DIR / '__init__.py').write_text('"""Code Examples (documentation-only, not in package)."""')
-    for file_path in (GIT_DIR / 'examples').glob('*.py'):
+    for file_path in SRC_EXAMPLES_DIR.glob('*.py'):
         content = file_path.read_text().replace('"', r'\"')  # read and escape quotes
         dest_fn = TMP_EXAMPLES_DIR / file_path.name
         docstring = f'From file: `{file_path.relative_to(GIT_DIR.parent)}`'
