@@ -3,24 +3,26 @@
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 
-# TODO: Sliding filter panel like in OmniScope projects?
 
-
-def dropdown_group(name, _id, options, def_idx, persist=False):
+def dropdown_group(name, _id, options, form_style=None, **dropdown_kwargs):
     """Return a Form Group with label and dropdown.
+
+    Dropdown documentation: https://dash.plot.ly/dash-core-components/dropdown
 
     Args:
         name: label name of dropdown
         _id: element id
         options: list of dicts with keys `(value, label)`
-        def_idx: index of initially selected option
-        persist: if True, state of dropdown will be preserved on refresh. Defaults is False
+        form_style: style keyword argument for dbc.FormGroup(). Default is None
+        dropdown_kwargs: key word arguments for dropdown. Could be: `(persistence, multi, searchable, etc.)`
 
     Returns:
         FormGroup: dbc form group of label and dropdown
 
     """
+    if form_style is None:
+        form_style = {}
     return dbc.FormGroup([
         dbc.Label(name),
-        dcc.Dropdown(id=_id, options=options, value=options[def_idx]['value'], persistence=persist),
-    ])
+        dcc.Dropdown(id=_id, options=options, **dropdown_kwargs),
+    ], style=form_style)

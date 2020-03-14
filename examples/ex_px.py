@@ -8,10 +8,11 @@ Docs: https://www.plotly.express/plotly_express/
 from collections import OrderedDict
 
 import dash
-import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
+from dash_charts.components import dropdown_group
 from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.utils_app import AppBase, AppWithTabs, opts_dd
 from dash_charts.utils_fig import map_args, map_outputs, min_graph
@@ -113,6 +114,8 @@ from dash_charts.utils_fig import map_args, map_outputs, min_graph
 class TabBase(AppBase):
     """Base tab class with helper methods."""
 
+    external_stylesheets = [dbc.themes.FLATLY]
+
     id_chart: str = 'chart'
     id_func: str = 'func'
     id_template: str = 'template'  # TODO: turn off template for the color swatch example
@@ -172,20 +175,13 @@ class TabBase(AppBase):
 
         return html.Div([
             html.Div([
-                html.P([
-                    'Plot Type:',
-                    dcc.Dropdown(id=self.ids[self.id_func], options=self.func_opts, value=self.func_opts[0]['label']),
-                ]),
+                dropdown_group('Plot Type:', self.ids[self.id_func], self.func_opts, value=self.func_opts[0]['label']),
+                dropdown_group('Template:', self.ids[self.id_template], self.t_opts, value=self.t_opts[0]['label']),
             ] + [
-                html.P([
-                    'Template:',
-                    dcc.Dropdown(id=self.ids[self.id_template], options=self.t_opts, value=self.t_opts[0]['label']),
-                ]),
-            ] + [
-                html.P([dim + ':', dcc.Dropdown(id=self.ids[dim], options=self.col_opts)])
+                dropdown_group(f'{dim}:', self.ids[dim], self.col_opts)
                 for dim in self.dims
             ] + [
-                html.P([dim + ':', dcc.Dropdown(id=self.ids[dim], options=[opts_dd(item, item) for item in items])])
+                dropdown_group(f'{dim}:', self.ids[dim], [opts_dd(item, item) for item in items])
                 for dim, items in self.dims_dict.items()
             ], style={'width': '25%', 'float': 'left'}),
             min_graph(id=self.ids[self.id_chart], style={'width': '75%', 'display': 'inline-block'}),
