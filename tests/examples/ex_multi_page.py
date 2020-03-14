@@ -22,6 +22,7 @@ class StaticPage(AppBase):
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        super().initialization()
         self.register_uniq_ids(['N/A'])
 
     def create_charts(self):

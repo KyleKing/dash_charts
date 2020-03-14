@@ -45,6 +45,7 @@ class ParetoDemo(AppBase):
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        super().initialization()
         self.register_uniq_ids([self.id_chart])
         # Format sample CSV data for the Pareto
         self.data_raw = (pd.read_csv(StringIO(CSV_DATA))

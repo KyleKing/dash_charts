@@ -94,6 +94,15 @@ class AppBase:
     external_stylesheets = [STATIC_URLS['dash']]
     """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
 
+    modules: list = []
+    """Initialized modules for GUI set in `self.initialization()`. Leave as an empty list if no modules are needed.
+
+    If list contains modules, in self.create(), each module's `*.create_charts` / `*.create_callbacks` will be called
+
+    Child class must call `*.return_layout(ids)` to render each module's layout in `self.return_layout()` method
+
+    """
+
     # In child class, declare the rest of the static data members here
 
     def __init__(self, app=None):
@@ -105,21 +114,45 @@ class AppBase:
         """
         self.app = init_app(external_stylesheets=self.external_stylesheets) if app is None else app
 
-    def create(self):
-        """Create the ids, app charts, layout, and callbacks. Called in `__init__`.
+    def create(self, assign_layout=True):
+        """Create the ids, app charts, layout, callbacks, and optional modules.
+
+        Args:
+            assign_layout: if True, will assign `self.app.layout`. If False, must call `self.return_layout` separately.
+                Default is True
 
         Raises:
-            NotImplementedError: if child class has not set a `self.name` data member
+            NotImplementedError: if child class has not set the `self.name` data member
 
         """
         if self.name is None:
             raise NotImplementedError('Child class must set `self.name` to a unique string for this app')
 
+        # Initialize app and each module
         self.initialization()
+        for mod in self.modules:
+            self.register_uniq_ids(mod.all_ids)
+        self.override_module_defaults()  # Call optional override method
+
+        # Create charts for app and each module
         self.create_charts()
-        self.app.layout = self.return_layout()
+        for mod in self.modules:
+            mod.create_charts(self.ids)
+
+        # Create app layout. User must call the return_layout method from each module within own return_layout method
+        if assign_layout:
+            self.app.layout = self.return_layout()
+
+        # Create callbacks for app and each module
         self.create_callbacks()
+        for mod in self.modules:
+            mod.create_callbacks(self.ids)
+
         self.verify_app_initialization()
+
+    def override_module_defaults(self):
+        """Override default values from modules."""
+        pass
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""

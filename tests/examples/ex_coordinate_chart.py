@@ -42,6 +42,7 @@ class CoordinateDemo(AppBase):
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        super().initialization()
         self.register_uniq_ids([self.id_chart_years, self.id_chart_months, self.id_chart_circle])
 
         day, month, year = (20, 11, 2020)  # Alteratively use `now = datetime.datetime.now()`` and `now.day` etc.

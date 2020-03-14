@@ -34,26 +34,32 @@ class AppWithNavigation(AppBase):
         raise NotImplementedError('define_nav_elements must be implemented by child class')
 
     def create(self):
-        """Override base class to create each navigation component's elements. Called in `__init__`."""
+        """Create each navigation componet, storing the layout. Then parent class to create application."""
         # Suppress callback verification as tab content is rendered later
         self.app.config['suppress_callback_exceptions'] = True
-        # Register all unique element ids
-        self.register_uniq_ids(self.app_ids)
+
         # Initialize the lookup for each tab then configure each tab
         self.nav_lookup = OrderedDict([(tab.name, tab) for tab in self.define_nav_elements()])
-        self.verify_app_initialization()
         self.nav_layouts = {}
         for nav_name, nav in self.nav_lookup.items():
-            # Based on self.create() for each nav item
-            nav.initialization()
-            nav.create_charts()
+            nav.create(assign_layout=False)
             self.nav_layouts[nav_name] = nav.return_layout()
-            nav.create_callbacks()
-            nav.verify_app_initialization()
 
-        # Create parent application layout and navigation
-        self.app.layout = self.return_layout()
-        self.create_callbacks()
+        # Initialize parent application that handles navigation
+        super().create()
+
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        super().initialization()
+        self.register_uniq_ids(self.app_ids)
+
+    def create_charts(self):
+        """Override method as not needed at navigation-level."""
+        pass
+
+    def create_callbacks(self):
+        """Override method as not needed at navigation-level."""
+        pass
 
 
 class AppWithTabs(AppWithNavigation):

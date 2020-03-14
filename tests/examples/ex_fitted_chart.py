@@ -27,6 +27,7 @@ class FittedDemo(AppBase):
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        super().initialization()
         self.register_uniq_ids([self.id_chart])
 
         self._generate_data()

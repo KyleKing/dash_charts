@@ -28,6 +28,7 @@ class BulmaStylingDemo(AppBase):
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        super().initialization()
         self.register_uniq_ids(['---'])
 
     def create_charts(self):

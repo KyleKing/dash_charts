@@ -48,6 +48,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
         def initialization(self):
           """Initialize ids with `self.register_uniq_ids([...])` and application data."""
+            super().initialization()
             self.register_uniq_ids([self.id_chart])
             # Format the car share data from plotly express for the Pareto
             self.data_raw = (px.data.carshare()

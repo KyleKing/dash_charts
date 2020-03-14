@@ -142,6 +142,7 @@ class TabBase(AppBase):
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        super().initialization()
         self.input_ids = [self.id_func, self.id_template] + list(self.dims) + list(self.dims_dict.keys())
         self.register_uniq_ids([self.id_chart] + self.input_ids)
 
