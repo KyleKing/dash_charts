@@ -7,10 +7,11 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 - [Dash_Charts](#dash_charts)
   - [Quick Start](#quick-start)
   - [Local Development](#local-development)
-  - [Example Charts](#example-charts)
+  - [Example Charts and Tables](#example-charts-and-tables)
     - [Pareto Chart](#pareto-chart)
     - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
     - [Coordinate Chart](#coordinate-chart)
+    - [Data Table](#data-table)
   - [Applications](#applications)
     - [Tabbed Application](#tabbed-application)
     - [Multi-Page Application](#multi-page-application)
@@ -94,9 +95,9 @@ poetry shell
 python examples/ex_px.py
 ```
 
-## Example Charts
+## Example Charts and Tables
 
-Below are screenshots and links to the example code for each chart included in dash_charts
+Below are screenshots and links to the example code for each chart or table included in dash_charts
 
 ### Pareto Chart
 
@@ -121,6 +122,14 @@ Chart a discrete data set on a 2D plane with color for intensity. Below examples
 See sample code in [examples/ex_coordinate_chart.py](examples/ex_coordinate_chart.py). Screenshot below:
 
 ![ex_coordinate_chart.png](.images/ex_coordinate_chart.png)
+
+### Data Table
+
+Display Dash data table from dataframe
+
+See sample code in [examples/ex_datatable.py](examples/ex_datatable.py). Screenshot below:
+
+![ex_datatable.png](.images/ex_datatable.png)
 
 ## Applications
 

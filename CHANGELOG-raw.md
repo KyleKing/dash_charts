@@ -5,6 +5,14 @@
 
 ### New
 
+* Initialize “modules” [Kyle King]
+
+  - Need to add examples and documentation on the concept @wip
+
+* Move AppMultiPage and AppWithTabs to new file. [Kyle King]
+
+* Move examples to test/ and init dash.testing. [Kyle King]
+
 * Fitted line chart. [Kyle King]
 
 * Initialize the coordinate chart and example. [Kyle King]
@@ -26,6 +34,14 @@
 * First refactored example with Pareto chart. [Kyle King]
 
 ### Changes
+
+* Rename create_traces() to _create_traces() [Kyle King]
+
+* Rename create_charts() to create_elements() [Kyle King]
+
+* Expand tests and coverage. [Kyle King]
+
+* Minor refactor for pareto and AppBase. [Kyle King]
 
 * Add example cool hexagonal charts to WIP/ [Kyle King]
 
@@ -100,6 +116,8 @@
 * Improve documentation. [Kyle King]
 
 ### Fix
+
+* Set css styles to React format (not dashed) [Kyle King]
 
 * Improve dropdown_group and add examples to px. [Kyle King]
 
