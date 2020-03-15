@@ -1,5 +1,7 @@
 """DoIt Script. Run all tasks with `poetry run doit` or single task with `poetry run doit run update_cl`."""
 
+import json
+import re
 import shutil
 import tempfile
 import webbrowser
@@ -7,6 +9,7 @@ from pathlib import Path
 
 import toml
 from icecream import ic
+from transitions import Machine
 
 TOML_PTH = Path(__file__).parent / 'pyproject.toml'
 """Path to `pyproject.toml` file."""
@@ -18,10 +21,11 @@ PKG_NAME = toml.load(TOML_PTH)['tool']['poetry']['name']
 DOIT_CONFIG = {
     'action_string_formatting': 'old',  # Required for keyword-based tasks
     'default_tasks': [
-        'export_req', 'check_req', 'update_cl', 'document',  # Comment on/off as needed
-        'open_docs',  # Comment on/off as needed
+        'export_req', 'check_req', 'update_cl',  # Comment on/off as needed
         'coverage',  # Comment on/off as needed
         'open_test_docs',  # Comment on/off as needed
+        'document',  # Comment on/off as needed
+        'open_docs',  # Comment on/off as needed
         'commit_docs',  # Comment on/off as needed
     ],
 }
@@ -210,6 +214,78 @@ def clear_examples():
     shutil.rmtree(TMP_EXAMPLES_DIR)
 
 
+class ReadMeMachine:
+    """State machine to replace commented sections of readme with new text."""
+
+    states = ['readme', 'new']
+
+    transitions = [
+        {'trigger': 'start_new', 'source': 'readme', 'dest': 'new'},
+        {'trigger': 'end', 'source': 'new', 'dest': 'readme'},
+    ]
+
+    readme_lines: list = None
+
+    def __init__(self):
+        """Initialize state machine."""
+        self.machine = Machine(model=self, states=ReadMeMachine.states, initial='readme',
+                               transitions=ReadMeMachine.transitions)
+
+    def parse(self, lines, comment_pattern, replacement):
+        """Parse lines and insert replacement.
+
+        Args:
+            lines: list of text files
+            comment_pattern: comment pattern to match (ex: ``)
+            replacement: dictionary with comment string as key
+
+        Returns:
+            list: list of strings for README
+
+        """
+        self.readme_lines = []
+        for line in lines:
+            if comment_pattern.match(line):
+                self.readme_lines.append(line)
+                if line.strip().startswith('<!-- /'):
+                    self.end()
+                else:
+                    self.readme_lines.extend(replacement[comment_pattern.match(line).group(1)])
+                    self.start_new()
+            elif self.state == 'readme':
+                self.readme_lines.append(line)
+
+        return self.readme_lines
+
+
+def write_code_to_readme():
+    """Replace commented sections in README with linked file contents."""
+    return True  # PLANNED: write readme.py to readme.md
+
+
+def write_coverage_to_readme():
+    """Read the coverage.json file and write a Markdown table to the README file."""
+    # Read coverage information from json file
+    coverage = json.loads((GIT_DIR / 'coverage.json').read_text())
+    # Collect raw data
+    legend = ['Statements', 'Missing', 'Excluded', 'Coverage', 'File']
+    int_keys = ['num_statements', 'missing_lines', 'excluded_lines']
+    rows = [legend, ['--:'] * len(legend)]
+    for file_path, file_obj in coverage['files'].items():
+        rows.append([file_path.replace('dash_charts/', '')]
+                    + [file_obj['summary'][key] for key in int_keys]
+                    + [round(file_obj['summary']['percent_covered'], 1)])
+    # Format table for Github Markdown
+    table_lines = [f"| {' | '.join([str(value) for value in row])} |" for row in rows]
+    table_lines.extend(['', f"Generated on: {coverage['meta']['timestamp']}"])
+    # Replace coverage section in README
+    readme_path = GIT_DIR / 'README.md'
+    lines = readme_path.read_text().split('\n')
+    comment_pattern = re.compile(r'<!-- /?(COVERAGE) -->')
+    readme_lines = ReadMeMachine().parse(lines, comment_pattern, {'COVERAGE': table_lines})
+    readme_path.write_text('\n'.join(readme_lines))
+
+
 def task_document():
     """Build the HTML documentation and push to gh-pages branch.
 
@@ -222,6 +298,9 @@ def task_document():
     return debug_action([
         (clear_docs, ()),
         (stage_examples, ()),
+        (write_code_to_readme, ()),
+        'coverage json',  # creates 'coverage.json' file
+        (write_coverage_to_readme, ()),
         f'poetry run pdoc3 {args}',
         (clear_examples, ()),
         (stage_documentation, ()),

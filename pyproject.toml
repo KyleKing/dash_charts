@@ -83,6 +83,7 @@ pyupgrade = "*"
 radon = "*"
 toml = "*"
 tqdm = "*"
+transitions = "*"
 vulture = "*"
 
 [build-system]

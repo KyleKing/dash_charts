@@ -1659,6 +1659,21 @@ version = "4.43.0"
 dev = ["py-make (>=0.1.0)", "twine", "argopt", "pydoc-markdown"]
 
 [[package]]
+category = "main"
+description = "A lightweight, object-oriented Python state machine implementation."
+name = "transitions"
+optional = false
+python-versions = "*"
+version = "0.7.2"
+
+[package.dependencies]
+six = "*"
+
+[package.extras]
+diagrams = ["pygraphviz"]
+test = ["pytest"]
+
+[[package]]
 category = "dev"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 name = "urllib3"
@@ -1714,7 +1729,6 @@ watchdog = ["watchdog"]
 [[package]]
 category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
@@ -1725,7 +1739,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "b888c9a4eaf0fbccfe991f804e26017272f0a4d67aee4f9d760626c35f86358a"
+content-hash = "28566da2c6d9a5365e8c5810891942db6c73b6055d66820248e2ca57e4cef9f6"
 python-versions = "^3.7, !=3.8"
 
 [metadata.files]
@@ -2453,6 +2467,10 @@ toml = [
 tqdm = [
     {file = "tqdm-4.43.0-py2.py3-none-any.whl", hash = "sha256:0d8b5afb66e23d80433102e9bd8b5c8b65d34c2a2255b2de58d97bd2ea8170fd"},
     {file = "tqdm-4.43.0.tar.gz", hash = "sha256:f35fb121bafa030bd94e74fcfd44f3c2830039a2ddef7fc87ef1c2d205237b24"},
+]
+transitions = [
+    {file = "transitions-0.7.2-py2.py3-none-any.whl", hash = "sha256:011afaefa1244177cad3d960d836c0c4a201403252371bd4c555cf8c17ce7d3c"},
+    {file = "transitions-0.7.2.tar.gz", hash = "sha256:5566c9d32e438ee9eb1f046e3ac1a0b2689f32807b47859210162084d4c84ab7"},
 ]
 urllib3 = [
     {file = "urllib3-1.25.8-py2.py3-none-any.whl", hash = "sha256:2f3db8b19923a873b3e5256dc9c2dedfa883e33d87c690d9c7913e1f40673cdc"},

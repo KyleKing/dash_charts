@@ -5,6 +5,10 @@
 
 ### New
 
+* Add example for marginal chart. [Kyle King]
+
+* BaseDataTable class and example. [Kyle King]
+
 * Initialize “modules” [Kyle King]
 
   - Need to add examples and documentation on the concept @wip
@@ -34,6 +38,8 @@
 * First refactored example with Pareto chart. [Kyle King]
 
 ### Changes
+
+* Rename _create_traces back to create_traces() [Kyle King]
 
 * Rename create_traces() to _create_traces() [Kyle King]
 

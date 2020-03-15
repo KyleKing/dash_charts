@@ -111,6 +111,7 @@ venv.bak/
 .vscode/*
 *.sqlite
 
+coverage.json
 docs/dash_charts/*
 docs/coverage_html/*
 docs/test_report.html

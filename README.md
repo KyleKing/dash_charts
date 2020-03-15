@@ -16,6 +16,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
   - [Applications](#applications)
     - [Tabbed Application](#tabbed-application)
     - [Multi-Page Application](#multi-page-application)
+  - [Coverage](#coverage)
   - [External Links](#external-links)
 
 <!-- /TOC -->
@@ -25,6 +26,8 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 1. Install `dash_charts` from Github with: `pip install git+https://github.com/KyleKing/dash_charts.git` (or in a Poetry project with `pip install dash_charts --git https://github.com/KyleKing/dash_charts.git`)
 1. Minimum example:
 
+<!-- TODO: in dodo, "<!-- /?CODE:", Path(str.rstrip('->').strip()).read_content() + spaces? -->
+<!-- CODE:tests/examples/readme.py -->
     ```py
     import dash_html_components as html
     import plotly.express as px
@@ -49,7 +52,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
         """Unique name for the main chart."""
 
         def initialization(self):
-          """Initialize ids with `self.register_uniq_ids([...])` and application data."""
+            """Initialize ids with `self.register_uniq_ids([...])` and application data."""
             super().initialization()
             self.register_uniq_ids([self.id_chart])
             # Format the car share data from plotly express for the Pareto
@@ -76,11 +79,16 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
             ])
 
         def create_callbacks(self):
+            """Register the callbacks."""
             pass  # Override base class. Not necessary for this example
 
 
-    ParetoDemo().run(debug=True)
+    if __name__ == '__main__':
+        app = ParetoDemo()
+        app.create()
+        app.run(debug=True)
     ```
+<!-- /CODE:tests/examples/readme.py -->
 
 1. Resulting Pareto Chart
 
@@ -93,7 +101,7 @@ git clone https://github.com/KyleKing/dash_charts.git
 cd dash_charts
 poetry install
 poetry shell
-python examples/ex_px.py
+python tests/examples/ex_px.py
 ```
 
 ## Example Charts and Tables
@@ -104,7 +112,7 @@ Below are screenshots and links to the example code for each chart or table incl
 
 Create a Pareto chart in Dash. Handles ordering the category, calculating the cumulative percentage, and configuring both YAxis.
 
-See sample code in [examples/ex_pareto_chart.py](examples/ex_pareto_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_pareto_chart.py](tests/examples/ex_pareto_chart.py). Screenshot below:
 
 ![ex_pareto_chart.png](.images/ex_pareto_chart.png)
 
@@ -112,7 +120,7 @@ See sample code in [examples/ex_pareto_chart.py](examples/ex_pareto_chart.py). S
 
 Easily chart the rolling mean and standard deviation for a given scatter data set.
 
-See sample code in [examples/ex_rolling_chart.py](examples/ex_rolling_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_rolling_chart.py](tests/examples/ex_rolling_chart.py). Screenshot below:
 
 ![ex_rolling_chart-annotated.png](.images/ex_rolling_chart-annotated.png)
 
@@ -120,7 +128,7 @@ See sample code in [examples/ex_rolling_chart.py](examples/ex_rolling_chart.py).
 
 Chart a discrete data set on a 2D plane with color for intensity. Below examples show how to use the `YearGrid()`, `MonthGrid()`, and `CircleGrid()` classes
 
-See sample code in [examples/ex_coordinate_chart.py](examples/ex_coordinate_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_coordinate_chart.py](tests/examples/ex_coordinate_chart.py). Screenshot below:
 
 ![ex_coordinate_chart.png](.images/ex_coordinate_chart.png)
 
@@ -128,7 +136,7 @@ See sample code in [examples/ex_coordinate_chart.py](examples/ex_coordinate_char
 
 Example creating a new chart from utils_fig.MarginalChart
 
-See sample code in [examples/ex_marginal_chart.py](examples/ex_marginal_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_marginal_chart.py](tests/examples/ex_marginal_chart.py). Screenshot below:
 
 ![ex_marginal_chart.png](.images/ex_marginal_chart.png)
 
@@ -136,7 +144,7 @@ See sample code in [examples/ex_marginal_chart.py](examples/ex_marginal_chart.py
 
 Display Dash data table from dataframe
 
-See sample code in [examples/ex_datatable.py](examples/ex_datatable.py). Screenshot below:
+See sample code in [tests/examples/ex_datatable.py](tests/examples/ex_datatable.py). Screenshot below:
 
 ![ex_datatable.png](.images/ex_datatable.png)
 
@@ -148,7 +156,7 @@ Every app derives from `AppBase()` so that each tab or page can be run independe
 
 Use the `AppWithTabs()` base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.
 
-See sample code in [examples/ex_tabs.py](examples/ex_tabs.py). Screenshot below:
+See sample code in [tests/examples/ex_tabs.py](tests/examples/ex_tabs.py). Screenshot below:
 
 ![ex_tabs.png](.images/ex_tabs.png)
 
@@ -156,9 +164,36 @@ See sample code in [examples/ex_tabs.py](examples/ex_tabs.py). Screenshot below:
 
 Use the `AppMultiPage()` base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.
 
-See sample code in [examples/ex_multi_page.py](examples/ex_multi_page.py). Screenshot below:
+See sample code in [tests/examples/ex_multi_page.py](tests/examples/ex_multi_page.py). Screenshot below:
 
 ![ex_multi_page.png](.images/ex_multi_page.png)
+
+## Coverage
+
+Latest coverage table
+
+<!-- COVERAGE -->
+| Statements | Missing | Excluded | Coverage | File |
+| --: | --: | --: | --: | --: |
+| __init__.py | 1 | 0 | 0 | 100.0 |
+| components.py | 6 | 0 | 0 | 100.0 |
+| coordinate_chart.py | 105 | 1 | 6 | 99.0 |
+| custom_colorscales.py | 4 | 0 | 0 | 100.0 |
+| dash_helpers.py | 6 | 0 | 6 | 100.0 |
+| datatable.py | 30 | 1 | 0 | 96.7 |
+| equations.py | 11 | 0 | 0 | 100.0 |
+| fitted_chart.py | 37 | 1 | 5 | 97.3 |
+| grouped_bar.py | 0 | 0 | 0 | 100.0 |
+| pareto_chart.py | 39 | 0 | 2 | 100.0 |
+| rolling_chart.py | 23 | 1 | 0 | 95.7 |
+| time_vis.py | 0 | 0 | 0 | 100.0 |
+| utils_app.py | 57 | 4 | 8 | 93.0 |
+| utils_app_modules.py | 15 | 15 | 2 | 0.0 |
+| utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
+| utils_fig.py | 88 | 3 | 4 | 96.6 |
+
+Generated on: 2020-03-15T19:04:45.492938
+<!-- /COVERAGE -->
 
 ## External Links
 
