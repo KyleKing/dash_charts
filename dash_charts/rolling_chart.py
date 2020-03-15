@@ -22,7 +22,7 @@ class RollingChart(CustomChart):
     annotations = []
     """FIXME: DOCUMENT"""
 
-    def _create_traces(self, df_raw, *, annotations=None):
+    def create_traces(self, df_raw, *, annotations=None):
         """Return traces for plotly chart.
 
         Args:
