@@ -250,7 +250,8 @@ class ReadMeMachine:
                 if line.strip().startswith('<!-- /'):
                     self.end()
                 else:
-                    self.readme_lines.extend(new_text[comment_pattern.match(line).group(1)])
+                    key = comment_pattern.match(line).group(1)
+                    self.readme_lines.extend(['', *new_text[key], ''])
                     self.start_new()
             elif self.state == 'readme':
                 self.readme_lines.append(line)
@@ -274,7 +275,7 @@ def write_to_readme(comment_pattern, new_text):
 
 def write_code_to_readme():
     """Replace commented sections in README with linked file contents."""
-    comment_pattern = re.compile(r'<!-- /?(CODE:.*) -->')
+    comment_pattern = re.compile(r'\s*<!-- /?(CODE:.*) -->')
     fn = 'tests/examples/readme.py'
     source_code = ['```py', *(GIT_DIR / fn).read_text().split('\n'), '```']
     new_text = {f'CODE:{fn}': [f'    {line}'.rstrip() for line in source_code]}
@@ -286,7 +287,7 @@ def write_coverage_to_readme():
     # Read coverage information from json file
     coverage = json.loads((GIT_DIR / 'coverage.json').read_text())
     # Collect raw data
-    legend = ['Statements', 'Missing', 'Excluded', 'Coverage', 'File']
+    legend = ['File', 'Statements', 'Missing', 'Excluded', 'Coverage']
     int_keys = ['num_statements', 'missing_lines', 'excluded_lines']
     rows = [legend, ['--:'] * len(legend)]
     for file_path, file_obj in coverage['files'].items():

@@ -26,8 +26,8 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 1. Install `dash_charts` from Github with: `pip install git+https://github.com/KyleKing/dash_charts.git` (or in a Poetry project with `pip install dash_charts --git https://github.com/KyleKing/dash_charts.git`)
 1. Minimum example:
 
-<!-- TODO: in dodo, "<!-- /?CODE:", Path(str.rstrip('->').strip()).read_content() + spaces? -->
-<!-- CODE:tests/examples/readme.py -->
+    <!-- CODE:tests/examples/readme.py -->
+
     ```py
     import dash_html_components as html
     import plotly.express as px
@@ -89,7 +89,8 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
         app.run(debug=True)
 
     ```
-<!-- /CODE:tests/examples/readme.py -->
+
+    <!-- /CODE:tests/examples/readme.py -->
 
 1. Resulting Pareto Chart
 
@@ -174,7 +175,8 @@ See sample code in [tests/examples/ex_multi_page.py](tests/examples/ex_multi_pag
 Latest coverage table
 
 <!-- COVERAGE -->
-| Statements | Missing | Excluded | Coverage | File |
+
+| File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
 | __init__.py | 1 | 0 | 0 | 100.0 |
 | components.py | 6 | 0 | 0 | 100.0 |
@@ -193,7 +195,8 @@ Latest coverage table
 | utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
 | utils_fig.py | 88 | 3 | 4 | 96.6 |
 
-Generated on: 2020-03-15T19:22:28.270510
+Generated on: 2020-03-15T19:37:26.334293
+
 <!-- /COVERAGE -->
 
 ## External Links
