@@ -57,7 +57,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
             self.register_uniq_ids([self.id_chart])
             # Format the car share data from plotly express for the Pareto
             self.data_raw = (px.data.carshare()
-                            .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
+                             .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
             self.data_raw['category'] = [f'H:{cat:02}' for cat in self.data_raw['category']]
 
         def create_elements(self):
@@ -87,6 +87,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
         app = ParetoDemo()
         app.create()
         app.run(debug=True)
+
     ```
 <!-- /CODE:tests/examples/readme.py -->
 
@@ -192,7 +193,7 @@ Latest coverage table
 | utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
 | utils_fig.py | 88 | 3 | 4 | 96.6 |
 
-Generated on: 2020-03-15T19:04:45.492938
+Generated on: 2020-03-15T19:22:28.270510
 <!-- /COVERAGE -->
 
 ## External Links

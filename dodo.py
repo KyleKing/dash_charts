@@ -231,13 +231,13 @@ class ReadMeMachine:
         self.machine = Machine(model=self, states=ReadMeMachine.states, initial='readme',
                                transitions=ReadMeMachine.transitions)
 
-    def parse(self, lines, comment_pattern, replacement):
-        """Parse lines and insert replacement.
+    def parse(self, lines, comment_pattern, new_text):
+        """Parse lines and insert new_text.
 
         Args:
             lines: list of text files
             comment_pattern: comment pattern to match (ex: ``)
-            replacement: dictionary with comment string as key
+            new_text: dictionary with comment string as key
 
         Returns:
             list: list of strings for README
@@ -250,7 +250,7 @@ class ReadMeMachine:
                 if line.strip().startswith('<!-- /'):
                     self.end()
                 else:
-                    self.readme_lines.extend(replacement[comment_pattern.match(line).group(1)])
+                    self.readme_lines.extend(new_text[comment_pattern.match(line).group(1)])
                     self.start_new()
             elif self.state == 'readme':
                 self.readme_lines.append(line)
@@ -258,9 +258,27 @@ class ReadMeMachine:
         return self.readme_lines
 
 
+def write_to_readme(comment_pattern, new_text):
+    """Wrapper method for ReadMeMachine. Handles reading then writing changes to the README.
+
+    Args:
+        comment_pattern: comment pattern to match (ex: ``)
+        new_text: dictionary with comment string as key
+
+    """
+    readme_path = GIT_DIR / 'README.md'
+    lines = readme_path.read_text().split('\n')
+    readme_lines = ReadMeMachine().parse(lines, comment_pattern, new_text)
+    readme_path.write_text('\n'.join(readme_lines))
+
+
 def write_code_to_readme():
     """Replace commented sections in README with linked file contents."""
-    return True  # PLANNED: write readme.py to readme.md
+    comment_pattern = re.compile(r'<!-- /?(CODE:.*) -->')
+    fn = 'tests/examples/readme.py'
+    source_code = ['```py', *(GIT_DIR / fn).read_text().split('\n'), '```']
+    new_text = {f'CODE:{fn}': [f'    {line}'.rstrip() for line in source_code]}
+    write_to_readme(comment_pattern, new_text)
 
 
 def write_coverage_to_readme():
@@ -279,11 +297,8 @@ def write_coverage_to_readme():
     table_lines = [f"| {' | '.join([str(value) for value in row])} |" for row in rows]
     table_lines.extend(['', f"Generated on: {coverage['meta']['timestamp']}"])
     # Replace coverage section in README
-    readme_path = GIT_DIR / 'README.md'
-    lines = readme_path.read_text().split('\n')
     comment_pattern = re.compile(r'<!-- /?(COVERAGE) -->')
-    readme_lines = ReadMeMachine().parse(lines, comment_pattern, {'COVERAGE': table_lines})
-    readme_path.write_text('\n'.join(readme_lines))
+    write_to_readme(comment_pattern, {'COVERAGE': table_lines})
 
 
 def task_document():
