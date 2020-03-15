@@ -11,6 +11,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
     - [Pareto Chart](#pareto-chart)
     - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
     - [Coordinate Chart](#coordinate-chart)
+    - [Marginal Chart](#marginal-chart)
     - [Data Table](#data-table)
   - [Applications](#applications)
     - [Tabbed Application](#tabbed-application)
@@ -122,6 +123,14 @@ Chart a discrete data set on a 2D plane with color for intensity. Below examples
 See sample code in [examples/ex_coordinate_chart.py](examples/ex_coordinate_chart.py). Screenshot below:
 
 ![ex_coordinate_chart.png](.images/ex_coordinate_chart.png)
+
+### Marginal Chart
+
+Example creating a new chart from utils_fig.MarginalChart
+
+See sample code in [examples/ex_marginal_chart.py](examples/ex_marginal_chart.py). Screenshot below:
+
+![ex_marginal_chart.png](.images/ex_marginal_chart.png)
 
 ### Data Table
 
