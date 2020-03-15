@@ -38,7 +38,7 @@ app.layout = html.Div([html.Div([
         ),
     ],
     className="row",
-    style={"display": "block", "width": "60%", "margin-left": "auto", "margin-right": "auto"}),
+    style={"display": "block", "width": "60%", "marginLeft": "auto", "marginRight": "auto"}),
     html.Div([min_graph(id="my-graph")]),
     html.Div([
         dcc.RangeSlider(

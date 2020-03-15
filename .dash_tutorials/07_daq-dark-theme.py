@@ -31,7 +31,7 @@ app.layout = html.Div(
         html.Div(
             id='dial-component',
             children=[],
-            style={'display': 'block', 'margin-left': 'calc(50% - 110px)'},
+            style={'display': 'block', 'marginLeft': 'calc(50% - 110px)'},
         ),
     ],
 )

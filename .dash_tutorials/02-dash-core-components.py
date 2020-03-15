@@ -38,9 +38,9 @@ app.layout = html.Div([
     html.Div(
         className='section',
         style={
-            'max-width': '1100px',
-            'margin-left': 'auto',
-            'margin-right': 'auto',
+            'maxWidth': '1100px',
+            'marginLeft': 'auto',
+            'marginRight': 'auto',
         },
         children=[
             html.H4(children='(Most of) Dash HTML Elements'),

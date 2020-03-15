@@ -20,9 +20,9 @@ app.layout = html.Div([
     html.Div(
         className='section',
         style={
-            'max-width': '1100px',
-            'margin-left': 'auto',
-            'margin-right': 'auto',
+            'maxWidth': '1100px',
+            'marginLeft': 'auto',
+            'marginRight': 'auto',
         },
         children=[
             dash_table.DataTable(

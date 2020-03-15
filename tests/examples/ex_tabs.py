@@ -13,10 +13,10 @@ class StaticTab(AppBase):
     """Simple App without charts or callbacks."""
 
     basic_style = {
-        'margin-left': 'auto',
-        'margin-right': 'auto',
-        'max-width': '1000px',
-        'padding-top': '10px',
+        'marginLeft': 'auto',
+        'marginRight': 'auto',
+        'maxWidth': '1000px',
+        'paddingTop': '10px',
     }
 
     def initialization(self):

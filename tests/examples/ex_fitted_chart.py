@@ -72,9 +72,9 @@ class FittedDemo(AppBase):
         """
         return html.Div(
             style={
-                'max-width': '1000px',
-                'margin-right': 'auto',
-                'margin-left': 'auto',
+                'maxWidth': '1000px',
+                'marginRight': 'auto',
+                'marginLeft': 'auto',
             }, children=[
                 html.H4(children=self.name),
                 html.Div([min_graph(

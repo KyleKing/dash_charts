@@ -126,11 +126,11 @@ class AppWithTabs(AppWithNavigation):
         selected_style = copy.deepcopy(tab_style)
         opposite_lookup = {'top': 'bottom', 'bottom': 'top', 'left': 'right', 'right': 'left'}
         tabs_style = {
-            'background-color': '#F9F9F9',
+            'backgroundColor': '#F9F9F9',
             'padding': tabs_padding,
             'position': 'fixed',
-            'z-index': '999',
-            f'border-{opposite_lookup[self.tabs_location]}': '1px solid #d6d6d6',
+            'zIndex': '999',
+            f'border{opposite_lookup[self.tabs_location].title()}': '1px solid #d6d6d6',
             self.tabs_location: '0',
         }
         if self.tabs_location in ['left', 'right']:

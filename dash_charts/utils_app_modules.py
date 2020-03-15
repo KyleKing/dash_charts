@@ -17,7 +17,7 @@ class ModuleBase:
         if self.all_ids is None:
             raise NotImplementedError('Child class must create list of `self.all_ids`')  # pragma: no cover
 
-    def create_charts(self, ids):
+    def create_elements(self, ids):
         """Register the callback for creating the main chart.
 
         Args:

@@ -1,17 +1,70 @@
 """Plotly Express Examples."""
 
-# TODO: Migrate to ex_px.py
+# TODO: Migrate this sample code to ex_px.py
 
 import plotly.express as px
 
 print(px.__version__)
 
 tips = px.data.tips()
+#      total_bill   tip     sex smoker   day    time  size
+# 0         16.99  1.01  Female     No   Sun  Dinner     2
+# 1         10.34  1.66    Male     No   Sun  Dinner     3
+# ..          ...   ...     ...    ...   ...     ...   ...
+# 242       17.82  1.75    Male     No   Sat  Dinner     2
+# 243       18.78  3.00  Female     No  Thur  Dinner     2
+
+# [244 rows x 7 columns]
+
 iris = px.data.iris()
+#      sepal_length  sepal_width  petal_length  petal_width    species  species_id
+# 0             5.1          3.5           1.4          0.2     setosa           1
+# 1             4.9          3.0           1.4          0.2     setosa           1
+# ..            ...          ...           ...          ...        ...         ...
+# 148           6.2          3.4           5.4          2.3  virginica           3
+# 149           5.9          3.0           5.1          1.8  virginica           3
+
+# [150 rows x 6 columns]
+
 gapminder = px.data.gapminder()
+#           country continent  year  lifeExp       pop   gdpPercap iso_alpha  iso_num
+# 0     Afghanistan      Asia  1952   28.801   8425333  779.445314       AFG        4
+# 1     Afghanistan      Asia  1957   30.332   9240934  820.853030       AFG        4
+# ...           ...       ...   ...      ...       ...         ...       ...      ...
+# 1702     Zimbabwe    Africa  2002   39.989  11926563  672.038623       ZWE      716
+# 1703     Zimbabwe    Africa  2007   43.487  12311143  469.709298       ZWE      716
+
+# [1704 rows x 8 columns]
+
 election = px.data.election()
+#                     district  Coderre  Bergeron  Joly  total    winner     result  district_id
+# 0         101-Bois-de-Liesse     2481      1829  3024   7334      Joly  plurality          101
+# 1      102-Cap-Saint-Jacques     2525      1163  2675   6363      Joly  plurality          102
+# ...                      ...      ...       ...   ...    ...       ...        ...          ...
+# 56        93-Robert-Bourassa      446       465   419   1330  Bergeron  plurality           93
+# 57           94-Jeanne-Sauvé      491       698   489   1678  Bergeron  plurality           94
+# # [58 rows x 8 columns]
+
 wind = px.data.wind()
+#     direction strength  frequency
+# 0           N      0-1        0.5
+# 1         NNE      0-1        0.6
+# ..        ...      ...        ...
+# 126        NW       6+        1.5
+# 127       NNW       6+        0.2
+
+# [128 rows x 3 columns]
+
 carshare = px.data.carshare()
+#      centroid_lat  centroid_lon    car_hours  peak_hour
+# 0       45.471549    -73.588684  1772.750000          2
+# 1       45.543865    -73.562456   986.333333         23
+# ..            ...           ...          ...        ...
+# 247     45.521199    -73.581789  1044.833333         17
+# 248     45.532564    -73.567535   694.916667          5
+
+# [249 rows x 4 columns]
+
 # See explanation with: `print(px.data.iris.__doc__)`
 
 # Possible argument combinations

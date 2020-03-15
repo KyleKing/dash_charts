@@ -123,7 +123,7 @@ class BootstrapStylingDemo(AppBase):
                             html.P(children='An Image'),
                             html.Img(
                                 src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif',
-                                style={'max-width': '100%'},
+                                style={'maxWidth': '100%'},
                             ),
                         ]),
                     ], sm=12, md=3),
