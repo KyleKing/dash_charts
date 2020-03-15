@@ -1,6 +1,7 @@
 """PLANNED: Implement tests for dash_charts. Examples from tests for plotly/dash."""
 
 import dash_html_components as html
+import pytest
 from dash_charts.components import dropdown_group
 from dash_charts.utils_app import AppBase, opts_dd
 
@@ -58,14 +59,12 @@ class ComponentDemo(AppBase):
         pass  # No callbacks necessary for this simple example
 
 
+@pytest.mark.CHROME
 def test_inin001_simple_callback(dash_duo):
     app = ComponentDemo()
     app.create()
 
     dash_duo.start_server(app.app)
-
-    import time
-    time.sleep(2)
 
     # dash_duo.wait_for_text_to_equal("#output-1", "initial value")
     # dash_duo.percy_snapshot(name="simple-callback-1")

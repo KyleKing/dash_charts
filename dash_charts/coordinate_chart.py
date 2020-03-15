@@ -311,7 +311,7 @@ class YearGrid(GridClass):
             RuntimeError: if error in the grid dimensions
 
         """
-        if grid_dims[0] * grid_dims[1] != 12:
+        if grid_dims[0] * grid_dims[1] != 12:  # pragma: no cover
             raise RuntimeError('Calendar must show all 12 months Expected (12,1), (6,2), (4,3), (1,12), etc.')
         if titles is None:
             titles = calendar.month_name[1:]
@@ -359,9 +359,9 @@ class MonthGrid(GridClass):
             RuntimeError: if error in the grid dimensions or titles
 
         """
-        if grid_dims != (1, 1):
+        if grid_dims != (1, 1):  # pragma: no cover
             raise RuntimeError('Day grid can only show one month, expected (1, 1)')
-        if titles is not None and len(titles) != 1:
+        if titles is not None and len(titles) != 1:  # pragma: no cover
             raise RuntimeError(f'Only one title is allowed for the MonthGrid. Received: {titles}')
 
         super().__init__(grid_dims=grid_dims, titles=titles)

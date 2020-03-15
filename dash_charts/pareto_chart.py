@@ -85,7 +85,7 @@ class ParetoChart(CustomChart):
         """
         # Check that the raw data frame is properly formatted
         check_raw_data(df_raw, min_keys=['category', 'value'])
-        if not pd.api.types.is_string_dtype(df_raw['category']):
+        if not pd.api.types.is_string_dtype(df_raw['category']):  # pragma: no cover
             raise RuntimeError(f"category column must be string, but found {df_raw['category'].dtype}")
 
         # Create and return the traces and optionally add the count to the bar chart

@@ -125,7 +125,7 @@ class AppBase:
             NotImplementedError: if child class has not set the `self.name` data member
 
         """
-        if self.name is None:
+        if self.name is None:  # pragma: no cover
             raise NotImplementedError('Child class must set `self.name` to a unique string for this app')
 
         # Initialize app and each module
@@ -181,7 +181,7 @@ class AppBase:
             RuntimeError: if child class has not called `self.register_uniq_ids`
 
         """
-        if not self.ids.keys():
+        if not self.ids.keys():  # pragma: no cover
             raise RuntimeError('Child class must first call `self.register_uniq_ids(__)` before self.run()')
 
     def create_charts(self):
@@ -193,7 +193,7 @@ class AppBase:
             NotImplementedError: Child class must implement this method
 
         """
-        raise NotImplementedError('create_charts must be implemented by child class')
+        raise NotImplementedError('create_charts must be implemented by child class')  # pragma: no cover
 
     def return_layout(self):
         """Return Dash application layout.
@@ -202,7 +202,7 @@ class AppBase:
             obj: Dash HTML object. Default is simple HTML text
 
         """
-        return html.Div(children=['Welcome to the BaseApp! Override return_layout() in child class.'])
+        return html.Div(['Welcome to the BaseApp! Override return_layout() in child class.'])  # pragma: no cover
 
     def callback(self, outputs, inputs, states):
         """Return app callback decorator based on provided components.
@@ -227,7 +227,7 @@ class AppBase:
             NotImplementedError: Child class must implement this method
 
         """
-        raise NotImplementedError('create_callbacks must be implemented by child class')
+        raise NotImplementedError('create_callbacks must be implemented by child class')  # pragma: no cover
 
     def run(self, **dash_kwargs):
         """Launch the Dash server instance.
@@ -236,7 +236,7 @@ class AppBase:
             **dash_kwargs: keyword arguments for `Dash.run_server()`
 
         """
-        self.app.run_server(**dash_kwargs)
+        self.app.run_server(**dash_kwargs)  # pragma: no cover
 
     def get_server(self):
         """Retrieve server from app instance for production hosting with green unicorn, waitress, IIS, etc.

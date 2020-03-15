@@ -96,7 +96,7 @@ class FittedChart(CustomChart):
                 x=points_x,
                 y=fit_equation(points_x, *popt),
             )]
-        except (RuntimeError, ValueError) as err:
+        except (RuntimeError, ValueError) as err:  # pragma: no cover
             if self.suppress_fit_errors:
                 ic(err, name)
             else:

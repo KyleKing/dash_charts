@@ -31,7 +31,7 @@ class AppWithNavigation(AppBase):
             NotImplementedError: Child class must implement this method
 
         """
-        raise NotImplementedError('define_nav_elements must be implemented by child class')
+        raise NotImplementedError('define_nav_elements must be implemented by child class')  # pragma: no cover
 
     def create(self):
         """Create each navigation componet, storing the layout. Then parent class to create application."""
@@ -55,11 +55,11 @@ class AppWithNavigation(AppBase):
 
     def create_charts(self):
         """Override method as not needed at navigation-level."""
-        pass
+        pass  # pragma: no cover
 
     def create_callbacks(self):
         """Override method as not needed at navigation-level."""
-        pass
+        pass  # pragma: no cover
 
 
 class AppWithTabs(AppWithNavigation):
@@ -90,7 +90,7 @@ class AppWithTabs(AppWithNavigation):
         """
         super().verify_app_initialization()
         allowed_locations = ('left', 'top', 'bottom', 'right')
-        if self.tabs_location not in allowed_locations:
+        if self.tabs_location not in allowed_locations:  # pragma: no cover
             raise RuntimeError(f'`self.tabs_location = {self.tabs_location}` is not in {allowed_locations}')
 
     def return_layout(self):
@@ -294,4 +294,4 @@ class AppMultiPage(AppWithNavigation):
             NotImplementedError: Child class must implement this method
 
         """
-        raise NotImplementedError('nav_bar must be implemented by child class')
+        raise NotImplementedError('nav_bar must be implemented by child class')  # pragma: no cover

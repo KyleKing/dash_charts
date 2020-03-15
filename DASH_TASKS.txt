@@ -1,5 +1,6 @@
 Consolidated and Prioritized Task List
 
+- Add MarginalChart example
 - Update example charts
 	- Add fitted chart to README. Also use more realistic data
 		- Add common fit equations to common_dash for this chart (linear, quadratic, etc.)

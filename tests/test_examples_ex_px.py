@@ -1,12 +1,15 @@
 """Test the file examples/ex_px.py."""
 
+import pytest
+
 from .examples import ex_px
 
 
-def test_inin001_simple_callback(dash_duo):
+@pytest.mark.CHROME
+def test_smoke_test_ex_px(dash_duo):
     dash_duo.start_server(ex_px.app.app)
 
     import time
-    time.sleep(2)
+    time.sleep(1)
 
     assert not dash_duo.get_logs()

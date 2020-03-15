@@ -67,7 +67,7 @@ def power(x_values, factor_a, factor_b):
     return np.multiply(
         factor_a,
         np.power(
-            np.array(x_values.as_type(float)),
+            np.array(x_values).astype(float),
             factor_b,
         ),
     )

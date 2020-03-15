@@ -33,7 +33,7 @@ def validate(document, schema, **validator_kwargs):
     return validator.errors
 
 
-def parse_cli_port():
+def parse_cli_port():  # pragma: no cover
     """Configure the CLI options for Dash applications.
 
     Returns:

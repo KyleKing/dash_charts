@@ -15,7 +15,7 @@ class ModuleBase:
 
         """
         if self.all_ids is None:
-            raise NotImplementedError('Child class must create list of `self.all_ids`')
+            raise NotImplementedError('Child class must create list of `self.all_ids`')  # pragma: no cover
 
     def create_charts(self, ids):
         """Register the callback for creating the main chart.
@@ -36,7 +36,7 @@ class ModuleBase:
             NotImplementedError: Dash HTML object. Default is simple HTML text
 
         """
-        raise NotImplementedError('Must be implemented')
+        raise NotImplementedError('Must be implemented')  # pragma: no cover
 
     def create_callbacks(self, ids):
         """Register callbacks to handle user interaction.
