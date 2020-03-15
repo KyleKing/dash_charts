@@ -36,7 +36,7 @@ class FittedChart(CustomChart):
     annotations = []
     """FIXME: DOCUMENT"""
 
-    def create_traces(self, df_raw, *, annotations=None):
+    def _create_traces(self, df_raw, *, annotations=None):
         """Return traces for plotly chart.
 
         Args:

@@ -135,7 +135,7 @@ class CoordinateChart(CustomChart):
                 for idx, title in enumerate(titles) if title is not None
             ]
 
-    def create_traces(self, df_raw):
+    def _create_traces(self, df_raw):
         """Return traces for plotly chart.
 
         Args:

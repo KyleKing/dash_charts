@@ -70,7 +70,7 @@ class ParetoChart(CustomChart):
         # Assign new pareto_colors
         self._pareto_colors = pareto_colors
 
-    def create_traces(self, df_raw):
+    def _create_traces(self, df_raw):
         """Return traces for plotly chart.
 
         Args:
