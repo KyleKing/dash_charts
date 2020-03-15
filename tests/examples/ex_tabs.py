@@ -24,8 +24,8 @@ class StaticTab(AppBase):
         super().initialization()
         self.register_uniq_ids(['N/A'])
 
-    def create_charts(self):
-        """Register the initial charts."""
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements.."""
         pass
 
     def create_callbacks(self):

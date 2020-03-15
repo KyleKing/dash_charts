@@ -51,8 +51,8 @@ class ParetoDemo(AppBase):
         self.data_raw = (pd.read_csv(StringIO(CSV_DATA))
                          .rename(columns={'events': 'value'}))
 
-    def create_charts(self):
-        """Initialize charts."""
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = ParetoChart(
             title='Made Up Categories vs. Made Up Counts',
             xlabel='Categories',
@@ -93,7 +93,7 @@ class ParetoDemo(AppBase):
         )
 
     def create_callbacks(self):
-        """Register the chart callbacks.."""
+        """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 
 

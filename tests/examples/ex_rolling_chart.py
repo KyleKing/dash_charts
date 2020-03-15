@@ -31,8 +31,8 @@ class RollingDemo(AppBase):
 
         self._generate_data()
 
-    def create_charts(self):
-        """Initialize charts."""
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = RollingChart(
             title='Sample Timeseries Chart with Rolling Calculations',
             xlabel='Index',
@@ -89,7 +89,7 @@ class RollingDemo(AppBase):
         )
 
     def create_callbacks(self):
-        """Register the chart callbacks.."""
+        """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 
         # # TODO: Implement SQL parser to load data in real time!

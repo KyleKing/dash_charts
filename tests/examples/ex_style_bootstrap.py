@@ -32,8 +32,8 @@ class BootstrapStylingDemo(AppBase):
         super().initialization()
         self.register_uniq_ids(['placeholder'])
 
-    def create_charts(self):
-        """Initialize charts."""
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements."""
         pass
 
     def return_navbar(self):
@@ -132,7 +132,7 @@ class BootstrapStylingDemo(AppBase):
         ])
 
     def create_callbacks(self):
-        """Register the chart callbacks.."""
+        """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 
 

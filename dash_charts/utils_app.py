@@ -97,7 +97,7 @@ class AppBase:
     modules: list = []
     """Initialized modules for GUI set in `self.initialization()`. Leave as an empty list if no modules are needed.
 
-    If list contains modules, in self.create(), each module's `*.create_charts` / `*.create_callbacks` will be called
+    If list contains modules, in self.create(), each module's `*.create_elements` / `*.create_callbacks` will be called
 
     Child class must call `*.return_layout(ids)` to render each module's layout in `self.return_layout()` method
 
@@ -135,9 +135,9 @@ class AppBase:
         self.override_module_defaults()  # Call optional override method
 
         # Create charts for app and each module
-        self.create_charts()
+        self.create_elements()
         for mod in self.modules:
-            mod.create_charts(self.ids)
+            mod.create_elements(self.ids)
 
         # Create app layout. User must call the return_layout method from each module within own return_layout method
         if assign_layout:
@@ -184,8 +184,8 @@ class AppBase:
         if not self.ids.keys():  # pragma: no cover
             raise RuntimeError('Child class must first call `self.register_uniq_ids(__)` before self.run()')
 
-    def create_charts(self):
-        """Register the initial charts.
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements..
 
         Does not return a result. All charts should be initialized in this method (ex `self.chart_main = ParetoChart()`)
 
@@ -193,7 +193,7 @@ class AppBase:
             NotImplementedError: Child class must implement this method
 
         """
-        raise NotImplementedError('create_charts must be implemented by child class')  # pragma: no cover
+        raise NotImplementedError('create_elements must be implemented by child class')  # pragma: no cover
 
     def return_layout(self):
         """Return Dash application layout.

@@ -32,8 +32,8 @@ class FittedDemo(AppBase):
 
         self._generate_data()
 
-    def create_charts(self):
-        """Initialize charts."""
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = FittedChart(
             title='Sample Fitted Scatter Data',
             xlabel='Index',
@@ -88,7 +88,7 @@ class FittedDemo(AppBase):
         )
 
     def create_callbacks(self):
-        """Register the chart callbacks.."""
+        """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 
 

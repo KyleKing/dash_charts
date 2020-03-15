@@ -55,8 +55,8 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
                             .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
             self.data_raw['category'] = [f'H:{cat:02}' for cat in self.data_raw['category']]
 
-        def create_charts(self):
-            """Initialize charts."""
+        def create_elements(self):
+            """Initialize the charts, tables, and other Dash elements."""
             self.chart_main = ParetoChart(title='Car Share Pareto', xlabel='Peak Hours', ylabel='Car Hours')
 
         def return_layout(self):

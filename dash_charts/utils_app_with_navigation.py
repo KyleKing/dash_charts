@@ -53,7 +53,7 @@ class AppWithNavigation(AppBase):
         super().initialization()
         self.register_uniq_ids(self.app_ids)
 
-    def create_charts(self):
+    def create_elements(self):
         """Override method as not needed at navigation-level."""
         pass  # pragma: no cover
 

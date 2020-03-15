@@ -69,8 +69,8 @@ class CoordinateDemo(AppBase):
         for idx in list(set(np.random.randint(len(values), size=remove_count * 2)))[:remove_count]:
             self.data_raw_circle['values'][idx] = None
 
-    def create_charts(self):
-        """Initialize charts."""
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements."""
         self.chart_years = CoordinateChart(
             title='Example Year Grid',
             grid_dims=self.grid_years.grid_dims,
@@ -143,7 +143,7 @@ class CoordinateDemo(AppBase):
         )
 
     def create_callbacks(self):
-        """Register the chart callbacks.."""
+        """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 
 

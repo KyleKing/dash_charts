@@ -150,8 +150,8 @@ class TabBase(AppBase):
         self.func_opts = tuple(opts_dd(lbl, lbl) for lbl in self.func_map.keys())
         self.t_opts = tuple(opts_dd(template, template) for template in self.templates)
 
-    def create_charts(self):
-        """Initialize charts."""
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements."""
         pass
 
     def return_layout(self):
