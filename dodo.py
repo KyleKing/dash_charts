@@ -22,6 +22,7 @@ DOIT_CONFIG = {
     'action_string_formatting': 'old',  # Required for keyword-based tasks
     'default_tasks': [
         'export_req', 'check_req', 'update_cl',  # Comment on/off as needed
+        'lint',  # Comment on/off as needed
         'coverage',  # Comment on/off as needed
         'open_test_docs',  # Comment on/off as needed
         'document',  # Comment on/off as needed
@@ -31,12 +32,13 @@ DOIT_CONFIG = {
 }
 """DoIt Configuration Settings. Run with `poetry run doit`."""
 
-# Set documentation paths
-GIT_DIR = Path(__file__).parent
-DOC_DIR = GIT_DIR / 'docs'
+# Set global paths
+CWD = Path(__file__).parent
+FLAKE8_PATH = CWD / '.flake8'
+DOC_DIR = CWD / 'docs'
 STAGING_DIR = DOC_DIR / PKG_NAME
-SRC_EXAMPLES_DIR = GIT_DIR / 'tests/examples'
-TMP_EXAMPLES_DIR = GIT_DIR / f'{PKG_NAME}/0EX'
+SRC_EXAMPLES_DIR = CWD / 'tests/examples'
+TMP_EXAMPLES_DIR = CWD / f'{PKG_NAME}/0EX'
 
 GH_PAGES_DIR = Path(__file__).parents[1] / 'Dash_Charts_gh-pages'
 if not GH_PAGES_DIR.is_dir():
@@ -88,6 +90,16 @@ def open_in_browser(file_path):
     webbrowser.open(Path(file_path).as_uri())
 
 
+def if_found_unlink(file_path):
+    """Remove file if it exists. Function is intended to a DoIt action.
+
+    Args:
+        file_path: Path to file to remove
+
+    """
+    if file_path.is_file():
+        file_path.unlink()
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Manage Requirements
 
@@ -128,6 +140,57 @@ def task_check_req():
         (Path(pur_path).unlink, ),
     ])
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Linting
+
+
+def check_linting_errors(flake8_log_path):
+    """Check for errors reported in flake8 log file. Removes log file if no errors detected.
+
+    Args:
+        flake8_log_path: path to flake8 log file created with flag: `--output-file=flake8_log_path`
+
+    Raises:
+        RuntimeError: if flake8 log file contains any text results
+
+    """
+    if len(flake8_log_path.read_text().strip()) > 0:
+        raise RuntimeError(f'Found Linting Errors. Review: {flake8_log_path}')
+    if_found_unlink(flake8_log_path)
+
+
+def lint(path_list, flake8_path=FLAKE8_PATH):
+    """Lint specified files creating summary log file of errors.
+
+    Args:
+        path_list: list of file paths to lint
+        flake8_path: path to flake8 configuration file. Default is `FLAKE8_PATH`
+
+    Returns:
+        dict: DoIt task
+
+    """
+    flake8_log_path = CWD / 'flake8.log'
+    flags = f'--config={flake8_path}  --output-file={flake8_log_path} --exit-zero'
+    return debug_action([
+        (if_found_unlink, (flake8_log_path, )),
+        *[f'poetry run flake8 "{fn}" {flags}' for fn in path_list],
+        (check_linting_errors, (flake8_log_path, )),
+    ])
+
+
+def task_lint():
+    """Configure linting as a task.
+
+    Returns:
+        dict: DoIt task
+
+    """
+    path_list = [*CWD.glob('*.py')]
+    for base_path in [CWD / PKG_NAME, CWD / 'tests']:
+        path_list.extend([*base_path.glob('**/*.py')])
+    ic(path_list)
+    return lint(path_list)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Manage Changelog
@@ -205,7 +268,7 @@ def stage_examples():
     for file_path in SRC_EXAMPLES_DIR.glob('*.py'):
         content = file_path.read_text().replace('"', r'\"')  # read and escape quotes
         dest_fn = TMP_EXAMPLES_DIR / file_path.name
-        docstring = f'From file: `{file_path.relative_to(GIT_DIR.parent)}`'
+        docstring = f'From file: `{file_path.relative_to(CWD.parent)}`'
         dest_fn.write_text(f'"""{docstring}\n```\n{content}\n```\n"""')
 
 
@@ -267,7 +330,7 @@ def write_to_readme(comment_pattern, new_text):
         new_text: dictionary with comment string as key
 
     """
-    readme_path = GIT_DIR / 'README.md'
+    readme_path = CWD / 'README.md'
     lines = readme_path.read_text().split('\n')
     readme_lines = ReadMeMachine().parse(lines, comment_pattern, new_text)
     readme_path.write_text('\n'.join(readme_lines))
@@ -277,7 +340,7 @@ def write_code_to_readme():
     """Replace commented sections in README with linked file contents."""
     comment_pattern = re.compile(r'\s*<!-- /?(CODE:.*) -->')
     fn = 'tests/examples/readme.py'
-    source_code = ['```py', *(GIT_DIR / fn).read_text().split('\n'), '```']
+    source_code = ['```py', *(CWD / fn).read_text().split('\n'), '```']
     new_text = {f'CODE:{fn}': [f'    {line}'.rstrip() for line in source_code]}
     write_to_readme(comment_pattern, new_text)
 
@@ -285,7 +348,7 @@ def write_code_to_readme():
 def write_coverage_to_readme():
     """Read the coverage.json file and write a Markdown table to the README file."""
     # Read coverage information from json file
-    coverage = json.loads((GIT_DIR / 'coverage.json').read_text())
+    coverage = json.loads((CWD / 'coverage.json').read_text())
     # Collect raw data
     legend = ['File', 'Statements', 'Missing', 'Excluded', 'Coverage']
     int_keys = ['num_statements', 'missing_lines', 'excluded_lines']
@@ -359,7 +422,7 @@ def task_test():
 
     """
     return debug_action([
-        f'poetry run pytest "{GIT_DIR}" -x -l --ff -v',
+        f'poetry run pytest "{CWD}" -x -l --ff -v',
     ], verbosity=2)
 
 
@@ -373,7 +436,7 @@ def task_coverage():
     coverage_dir = DOC_DIR / 'coverage_html'
     test_report_path = DOC_DIR / 'test_report.html'
     return debug_action([
-        (f'poetry run pytest "{GIT_DIR}" -x -l --ff -v --cov-report=html:"{coverage_dir}" --cov={PKG_NAME}'
+        (f'poetry run pytest "{CWD}" -x -l --ff -v --cov-report=html:"{coverage_dir}" --cov={PKG_NAME}'
          f' --html="{test_report_path}" --self-contained-html'),
     ], verbosity=2)
 
@@ -401,7 +464,7 @@ def task_test_marker():
 
     """
     return {
-        'actions': [f'poetry run pytest "{GIT_DIR}" -x -l --ff -v -m "%(marker)s"'],
+        'actions': [f'poetry run pytest "{CWD}" -x -l --ff -v -m "%(marker)s"'],
         'params': [{
             'name': 'marker', 'short': 'm', 'long': 'marker', 'default': '',
             'help': ('Runs test with specified marker logic\nSee: '
@@ -421,7 +484,7 @@ def task_test_keyword():
 
     """
     return {
-        'actions': [f'poetry run pytest "{GIT_DIR}" -x -l --ff -v -k "%(keyword)s"'],
+        'actions': [f'poetry run pytest "{CWD}" -x -l --ff -v -k "%(keyword)s"'],
         'params': [{
             'name': 'keyword', 'short': 'k', 'long': 'keyword', 'default': '',
             'help': ('Runs only tests that match the string pattern\nSee: '

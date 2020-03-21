@@ -1,6 +1,5 @@
 Consolidated and Prioritized Task List
 
-- Add lint all files in dodo
 - Round up latest TODOs/FIXMEs from source code
 - Update example charts
 	- Add fitted chart to README. Also use more realistic data
