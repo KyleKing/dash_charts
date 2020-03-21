@@ -195,7 +195,7 @@ Latest coverage table
 | coordinate_chart.py | 105 | 1 | 6 | 99.0 |
 | custom_colorscales.py | 4 | 0 | 0 | 100.0 |
 | dash_helpers.py | 6 | 0 | 6 | 100.0 |
-| datatable.py | 30 | 1 | 0 | 96.7 |
+| datatable.py | 47 | 0 | 0 | 100.0 |
 | equations.py | 11 | 0 | 0 | 100.0 |
 | fitted_chart.py | 37 | 1 | 5 | 97.3 |
 | grouped_bar.py | 0 | 0 | 0 | 100.0 |
@@ -207,7 +207,7 @@ Latest coverage table
 | utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
 | utils_fig.py | 88 | 3 | 4 | 96.6 |
 
-Generated on: 2020-03-15T19:37:26.334293
+Generated on: 2020-03-21T11:38:05.796697
 
 <!-- /COVERAGE -->
 

@@ -5,6 +5,12 @@
 
 ### New
 
+* Add design principles to README. [Kyle King]
+
+* Add linting to DoIt. [Kyle King]
+
+* Doit methods for placing content into README. [Kyle King]
+
 * Add example for marginal chart. [Kyle King]
 
 * BaseDataTable class and example. [Kyle King]
@@ -38,6 +44,10 @@
 * First refactored example with Pareto chart. [Kyle King]
 
 ### Changes
+
+* Refactor datatable for mutables and update ex. [Kyle King]
+
+* Add method to write sample code into README. [Kyle King]
 
 * Rename _create_traces back to create_traces() [Kyle King]
 
@@ -122,6 +132,8 @@
 * Improve documentation. [Kyle King]
 
 ### Fix
+
+* Missing example image & README indentation. [Kyle King]
 
 * Set css styles to React format (not dashed) [Kyle King]
 

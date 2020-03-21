@@ -1,6 +1,7 @@
 """DataTable Base Classes."""
 
 import dash_table
+
 # TODO: Create a simpler datatable?
 # self..filter_action = 'none'
 # self..row_selectable = False
@@ -106,8 +107,19 @@ Press enter of tab to apply the filter"""
         """Initialize the mutable data members to prevent modifying one attribute and impacting all instances."""
         self.style_table = {'overflowX': 'scroll'}
         self.css = [
+            # Fix width when overflow is True and using dash_bootstrap_components
             {'selector': '.row', 'rule': 'margin: 0'},
-            {'selector': 'tr:hover', 'rule': 'backgroundColor: pink'},  # highlight filter icons on hover
+
+            # Based on: https://community.plot.ly/t/dash-table-datatable-styling-examples/15594/
+            # Highlight filter icons on hover anywhere in the header cell
+            {'selector': 'tr:hover', 'rule': 'backgroundColor: pink'},
+            # Align the select icon to the left and the sort icon to the right
+            {'selector': 'th.dash-header div', 'rule': 'display:flex;'},
+            {'selector': 'th.dash-header div span.column-header--select',
+             'rule': 'order: 1; width: 100%; text-align: left'},
+            {'selector': 'th.dash-header div span.column-header-name', 'rule': 'order: 2'},
+            {'selector': 'th.dash-header div span.column-header--sort',
+             'rule': 'order: 3; width: 100%; text-align: right'},
         ]
         self.style_cell = {}
         self.style_cell_conditional = []

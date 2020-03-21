@@ -30,8 +30,6 @@ STATIC_URLS = {
     'bulmaswatch-flatly': {
         'href': 'https://jenil.github.io/bulmaswatch/flatly/bulmaswatch.min.css',
         'rel': 'stylesheet',
-        'integrity': 'sha384-grOdOgbiGLquXGKNXkKpsnbx1eEGLCSnYloh9JKQdX31HHHQiQFf3uz8hhuIzUy8',
-        'crossorigin': 'anonymous',
     },
     'normalize': {
         'href': 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
