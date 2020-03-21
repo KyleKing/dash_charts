@@ -3,52 +3,38 @@
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
+import pandas as pd
 import plotly.express as px
 from dash.exceptions import PreventUpdate
 from dash_charts.components import dropdown_group
 from dash_charts.dash_helpers import parse_cli_port
 from dash_charts.datatable import BaseDataTable
 from dash_charts.utils_app import AppBase, opts_dd
+from dash_charts.utils_app_modules import ModuleBase
 from dash_charts.utils_fig import map_args, map_outputs
+from icecream import ic
 
 
-class DataTableDemo(AppBase):
-    """Example creating a DataTable."""
+class ModuleDataTable(ModuleBase):
+    """Modular Dash data table."""
 
-    name = 'Example DataTable'
-    """Application name"""
+    id_table_parent = 'datatable-module-parent'
+    id_table = 'datatable-module'
 
-    external_stylesheets = [dbc.themes.FLATLY]  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
-    """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
+    table = None
 
-    data_raw = None
-    """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
+    all_ids = [id_table_parent, id_table]
 
-    table_main = None
-    """Main table (DataTable)."""
+    def create_elements(self, ids):
+        """Register the callback for creating the main chart.
 
-    id_table = 'datatable'
-    """Unique name for the main table parent."""
+        Args:
+            ids: requires `self.ids` from base application
 
-    id_table_actual = 'datatable-actual'
-    """Unique name for the main table."""
-
-    id_column_select = 'main-dropdown'
-    """Unique name for the dropdown."""
-
-    def initialization(self):
-        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
-        super().initialization()
-        self.register_uniq_ids([self.id_table, self.id_table_actual, self.id_column_select])
-
-        # Load sample plotly express data to populate the datatable
-        self.data_raw = px.data.gapminder()
-
-    def create_elements(self):
-        """Initialize charts and tables."""
-        self.table_main = BaseDataTable()
+        """
+        self.table = BaseDataTable()
         # Extend or modify DataTable parameters as needed
-        self.table_main.style_data_conditional.extend([
+        self.table.style_data_conditional.extend([
             {'if': {'row_index': 2}, 'backgroundColor': '#3D9970', 'color': 'white'},
             {'if': {'column_id': 'pop'}, 'backgroundColor': '#3D9970', 'color': 'white'},
             {
@@ -69,6 +55,67 @@ class DataTableDemo(AppBase):
             },
         ])
 
+    def return_layout(self, ids):
+        """Return Dash application layout.
+
+        Args:
+            ids: requires `self.ids` from base application
+
+        Returns:
+            dict: Dash HTML object. Default is simple HTML text
+
+        """
+        placeholder = pd.DataFrame.from_records([['body']], columns=['header'])
+        return html.Div([
+            self.table.create_table(placeholder, None, id=ids[self.get(self.id_table)]),
+        ], id=ids[self.get(self.id_table_parent)])
+
+    def create_callbacks(self, ids):
+        """Register callbacks to handle user interaction.
+
+        Args:
+            ids: requires `self.ids` from base application
+
+        """
+        pass
+
+
+class DataTableDemo(AppBase):
+    """Example creating a DataTable."""
+
+    name = 'Example DataTable'
+    """Application name"""
+
+    external_stylesheets = [dbc.themes.FLATLY]  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
+    """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
+
+    data_raw = None
+    """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
+
+    mod_table = None
+    """Main table (DataTable)."""
+
+    id_column_select = 'main-dropdown'
+    """Unique name for the dropdown."""
+
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        super().initialization()
+        self.register_uniq_ids([self.id_column_select])
+
+        # Load sample plotly express data to populate the datatable
+        self.data_raw = px.data.gapminder()
+
+        # Register modules
+        self.mod_table = ModuleDataTable('main_table')
+        self.modules = [
+            self.mod_table,
+        ]
+
+    def create_elements(self):
+        """Initialize charts and tables."""
+        pass
+
     def return_layout(self):
         """Return Dash application layout.
 
@@ -79,20 +126,20 @@ class DataTableDemo(AppBase):
         options = [opts_dd(column, column) for column in self.data_raw.columns]
         return dbc.Container([
             dbc.Col([
-                dcc.Markdown(self.table_main.filter_summary),
+                dcc.Markdown(self.mod_table.table.filter_summary),
                 html.Br(),
                 dropdown_group('Select DataFrame Columns', self.ids[self.id_column_select],
                                options, multi=True, persistence=True, value=self.data_raw.columns),
-                html.Div([
-                    self.table_main.create_table(self.data_raw, None, id=self.ids[self.id_table_actual]),
-                ], id=self.ids[self.id_table]),
+                self.mod_table.return_layout(self.ids),
             ]),
         ])
 
     def create_callbacks(self):
         """Create Dash callbacks."""
-        outputs = [(self.id_table, 'children')]
-        inputs = [(self.id_column_select, 'value')]
+        outputs = [(self.mod_table.get(self.mod_table.id_table_parent), 'children')]
+        inputs = [
+            (self.id_column_select, 'value'),
+        ]
         states = []
 
         @self.callback(outputs, inputs, states)
@@ -101,8 +148,8 @@ class DataTableDemo(AppBase):
             columns = a_in[self.id_column_select]['value']
             if len(columns) == 0:
                 raise PreventUpdate
-            datatable = self.table_main.create_table(self.data_raw, columns, id=self.ids[self.id_table_actual])
-            return map_outputs(outputs, [(self.id_table, 'children', datatable)])
+            datatable = self.mod_table.table.create_table(self.data_raw, columns, id=self.ids[self.mod_table.get(self.mod_table.id_table)])
+            return map_outputs(outputs, [(self.mod_table.get(self.mod_table.id_table_parent), 'children', datatable)])
 
 
 instance = DataTableDemo

@@ -187,6 +187,11 @@ class CustomChart:
         self.title = title
         self.labels = {'x': xlabel, 'y': ylabel}
         self.layout_overrides = layout_overrides
+        self.initialize_mutables()
+
+    def initialize_mutables(self):
+        """Initialize the mutable data members to prevent modifying one attribute and impacting all instances."""
+        pass
 
     def create_figure(self, df_raw, **kwargs_data):
         """Create the figure dictionary.
