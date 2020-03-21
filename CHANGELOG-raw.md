@@ -5,6 +5,8 @@
 
 ### New
 
+* Migrate to dash_dev. [Kyle King]
+
 * Remove files moved to dash_dev. [Kyle King]
 
 * Add design principles to README. [Kyle King]
