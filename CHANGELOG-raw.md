@@ -5,6 +5,8 @@
 
 ### New
 
+* Remove files moved to dash_dev. [Kyle King]
+
 * Add design principles to README. [Kyle King]
 
 * Add linting to DoIt. [Kyle King]

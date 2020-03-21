@@ -313,6 +313,89 @@ version = "0.4.0"
 dash = ">=1.6.1"
 
 [[package]]
+category = "dev"
+description = ""
+name = "dash-dev"
+optional = false
+python-versions = "^3.7"
+version = "0.0.1"
+
+[package.dependencies]
+add-trailing-comma = "*"
+autopep8 = "*"
+beautifulsoup4 = "*"
+cohesion = "*"
+darglint = "*"
+dash-bootstrap-components = "*"
+dash_daq = "*"
+diff-cover = "*"
+dlint = "*"
+doit = "*"
+flake8 = "*"
+flake8-2020 = "*"
+flake8-aaa = "*"
+flake8-assertive = "*"
+flake8-bandit = "*"
+flake8-blind-except = "*"
+flake8-breakpoint = "*"
+flake8-broken-line = "*"
+flake8-bugbear = "*"
+flake8-builtins = "*"
+flake8-cognitive-complexity = "*"
+flake8-commas = "*"
+flake8-comprehensions = "*"
+flake8-debugger = "*"
+flake8-deprecated = "*"
+flake8-docstrings = "*"
+flake8-eradicate = "*"
+flake8-fixme = "*"
+flake8-functions = "*"
+flake8-isort = "*"
+flake8-logging-format = "*"
+flake8-markdown = "*"
+flake8-mock = "*"
+flake8-mutable = "*"
+flake8-pep3101 = "*"
+flake8-plone-hasattr = "*"
+flake8-print = "*"
+flake8-printf-formatting = "*"
+flake8-pytest-style = "*"
+flake8-quotes = "*"
+flake8-return = "*"
+flake8-spellcheck = "*"
+flake8-sql = "*"
+flake8-string-format = "*"
+flake8-tuple = "*"
+flake8-variables-names = "*"
+gitchangelog = "*"
+icecream = "*"
+iniparse = "*"
+isort = "*"
+pandas-vet = "*"
+pdoc3 = "*"
+pep8-naming = "*"
+proselint = "*"
+pur = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-html = "*"
+pyupgrade = "*"
+radon = "*"
+rope = "*"
+toml = "*"
+tqdm = "*"
+transitions = "*"
+vulture = "*"
+
+[package.dependencies.dash]
+extras = ["testing"]
+version = "^1.9"
+
+[package.source]
+reference = "deeefbfd305f8bc95abeabd5db8e5b45bb1dccc5"
+type = "git"
+url = "https://github.com/KyleKing/dash_dev.git"
+[[package]]
 category = "main"
 description = "Vanilla HTML components for Dash"
 name = "dash-html-components"
@@ -761,7 +844,7 @@ description = "A flake8 plugin checking common style issues or inconsistencies w
 name = "flake8-pytest-style"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "0.5.0"
+version = "0.6.0"
 
 [package.dependencies]
 flake8-plugin-utils = ">=1.2.0,<2.0.0"
@@ -1740,6 +1823,7 @@ watchdog = ["watchdog"]
 [[package]]
 category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
+marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
@@ -1750,7 +1834,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "62ea3740ea772b5ba025a2bd54fe612e6266c602ca6e0db478f61922b8ad47f4"
+content-hash = "29ca9282391c8d87fc21d4d8be0e2e5d88d3ac7d19663295b416fcd36a71bb71"
 python-versions = "^3.7, !=3.8"
 
 [metadata.files]
@@ -1916,6 +2000,7 @@ dash-core-components = [
 dash-daq = [
     {file = "dash_daq-0.4.0.tar.gz", hash = "sha256:051adb0ffc03e25f24bc031d40b858aa85bd3bae61450b150a24a5d13847d332"},
 ]
+dash-dev = []
 dash-html-components = [
     {file = "dash_html_components-1.0.2.tar.gz", hash = "sha256:8992097a044f5add21f86ccbe0caef8c499394a04d5f2b6cc4458a42f37cca98"},
 ]
@@ -2060,8 +2145,8 @@ flake8-printf-formatting = [
     {file = "flake8_printf_formatting-1.1.0-py2.py3-none-any.whl", hash = "sha256:8a07bebb8a93828cc5730be6d0e355776f1d38caf91aa7691c1585f94878f99c"},
 ]
 flake8-pytest-style = [
-    {file = "flake8-pytest-style-0.5.0.tar.gz", hash = "sha256:37ff18c8146c36050d1505f6f879c8a8baad8a39f6fe6a71267e5a0e148ba6ee"},
-    {file = "flake8_pytest_style-0.5.0-py3-none-any.whl", hash = "sha256:c775f7286ac4727da0ae900fa800294e7500bbc220794e2b0043d9ef352f3145"},
+    {file = "flake8-pytest-style-0.6.0.tar.gz", hash = "sha256:381c5791507db8e5be47b9117529a3157a339f2dd27f0728d60e6f14e629d327"},
+    {file = "flake8_pytest_style-0.6.0-py3-none-any.whl", hash = "sha256:1314b3995d9aff89038a8860f487671fb835269f9486368478dbb1267f05868a"},
 ]
 flake8-quotes = [
     {file = "flake8-quotes-2.1.1.tar.gz", hash = "sha256:11a15d30c92ca5f04c2791bd7019cf62b6f9d3053eb050d02a135557eb118bfc"},
