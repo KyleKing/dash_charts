@@ -45,6 +45,8 @@
 
 ### Changes
 
+* Style sort and select in table & update docs. [Kyle King]
+
 * Refactor datatable for mutables and update ex. [Kyle King]
 
 * Add method to write sample code into README. [Kyle King]
