@@ -47,7 +47,7 @@ class ModuleBase:  # noqa: H601
         """Register the callback for creating the main chart.
 
         Args:
-            ids: requires `self.ids` from base application
+            ids: `self.ids` from base application
 
         """
         pass
@@ -56,7 +56,7 @@ class ModuleBase:  # noqa: H601
         """Return Dash application layout.
 
         Args:
-            ids: requires `self.ids` from base application
+            ids: `self.ids` from base application
 
         Raises:
             NotImplementedError: Dash HTML object. Default is simple HTML text
@@ -64,11 +64,11 @@ class ModuleBase:  # noqa: H601
         """
         raise NotImplementedError('Must be implemented')  # pragma: no cover
 
-    def create_callbacks(self, ids):
+    def create_callbacks(self, parent):
         """Register callbacks to handle user interaction.
 
         Args:
-            ids: requires `self.ids` from base application
+            parent: parent instance (ex: `self`)
 
         """
         pass

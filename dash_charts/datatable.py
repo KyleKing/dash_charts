@@ -69,7 +69,7 @@ Press enter of tab to apply the filter"""
     style_filter_conditional = None
     """DataTable.style_filter_conditional list. Default is empty list. Set in `initialize_mutables`."""
 
-    column_selectable = 'single'
+    column_selectable = None
     """DataTable.column_selectable. Default is `'single'`."""
 
     column_kwarg_lookup = None
@@ -87,7 +87,7 @@ Press enter of tab to apply the filter"""
     page_size = 25
     """DataTable.page_size. Default is `'25'`."""
 
-    row_selectable = 'single'
+    row_selectable = None
     """DataTable.row_selectable. Default is `'single'`."""
 
     style_as_list_view = False
@@ -98,6 +98,20 @@ Press enter of tab to apply the filter"""
 
     sort_mode = 'single'
     """DataTable.sort_mode. Default is `'single'`."""
+
+    # CSS Variables
+
+    text_color = '#333333'
+    """Default text color."""
+
+    background_color = '#ffffff'
+    """Default background color."""
+
+    zebra_color = '#f9f9f9'
+    """Default background color for odd rows (zebra-stripe)."""
+
+    selected_cell_color = '#eaeaea'
+    """Default color for selected cells."""
 
     def __init__(self):
         """Initialize class."""
@@ -111,28 +125,40 @@ Press enter of tab to apply the filter"""
             {'selector': '.row', 'rule': 'margin: 0'},
 
             # Based on: https://community.plot.ly/t/dash-table-datatable-styling-examples/15594/
-            # Highlight filter icons on hover anywhere in the header cell
-            {'selector': 'tr:hover', 'rule': 'backgroundColor: pink'},
             # Align the select icon to the left and the sort icon to the right
-            {'selector': 'th.dash-header div', 'rule': 'display:flex;'},
+            {'selector': 'th.dash-header div',
+             'rule': 'display: flex; align-items: center;'},
             {'selector': 'th.dash-header div span.column-header--select',
-             'rule': 'order: 1; width: 100%; text-align: left'},
-            {'selector': 'th.dash-header div span.column-header-name', 'rule': 'order: 2'},
+             'rule': 'order: 1; flex-shrink: 5; text-align: left;'},
+            {'selector': 'th.dash-header div span.column-header-name',
+             'rule': 'order: 2; flex-grow: 5; text-align: center;'},
             {'selector': 'th.dash-header div span.column-header--sort',
-             'rule': 'order: 3; width: 100%; text-align: right'},
+             'rule': 'order: 3; flex-shrink: 5; text-align: right;'},
+
+            # Remove excess borders to better match JQuery DataTables styling
+            # (Some border styles don't appear to work from `self.style_header`)
+            {'selector': 'th.dash-filter', 'rule': 'border-bottom-color: rgb(17, 17, 17) !important;'},
         ]
-        self.style_cell = {}
+        self.style_cell = {
+            'backgroundColor': self.background_color,
+            'borderStyle': f'1px solid {self.zebra_color}',
+            'color': self.text_color,
+        }
         self.style_cell_conditional = []
         self.style_data = {}
         self.style_data_conditional = [
-            {'if': {'row_index': 'odd'}, 'backgroundColor': 'rgb(248, 248, 248)'},
+            {'if': {'row_index': 'even'}, 'backgroundColor': self.zebra_color},
         ]
         self.style_header = {
-            'backgroundColor': 'rgb(230, 230, 230)',
+            'borderLeft': 'none',
+            'borderRight': 'none',
+            'borderTop': 'none',
             'fontWeight': 'bold',
         }
         self.style_header_conditional = []
-        self.style_filter = {}
+        self.style_filter = {
+            'borderBottomColor': 'rgb(17, 17, 17)',
+        }
         self.style_filter_conditional = []
 
         self.initialize_column_kwarg_lookup()  # Must be called last

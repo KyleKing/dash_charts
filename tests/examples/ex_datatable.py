@@ -29,37 +29,16 @@ class ModuleDataTable(ModuleBase):
         """Register the callback for creating the main chart.
 
         Args:
-            ids: requires `self.ids` from base application
+            ids: `self.ids` from base application
 
         """
         self.table = BaseDataTable()
-        # Extend or modify DataTable parameters as needed
-        self.table.style_data_conditional.extend([
-            {'if': {'row_index': 2}, 'backgroundColor': '#3D9970', 'color': 'white'},
-            {'if': {'column_id': 'pop'}, 'backgroundColor': '#3D9970', 'color': 'white'},
-            {
-                'if': {
-                    'column_id': 'year',
-                    'filter_query': '{year} le "1975"',
-                },
-                'backgroundColor': '#3D4999',
-                'color': 'white',
-            },
-            {
-                'if': {
-                    'column_id': 'gdpPerCap',
-                    'row_index': 5,
-                },
-                'backgroundColor': '#3D4999',
-                'color': 'white',
-            },
-        ])
 
     def return_layout(self, ids):
         """Return Dash application layout.
 
         Args:
-            ids: requires `self.ids` from base application
+            ids: `self.ids` from base application
 
         Returns:
             dict: Dash HTML object. Default is simple HTML text
@@ -70,14 +49,70 @@ class ModuleDataTable(ModuleBase):
             self.table.create_table(placeholder, None, id=ids[self.get(self.id_table)]),
         ], id=ids[self.get(self.id_table_parent)])
 
-    def create_callbacks(self, ids):
+    def return_table_map(self, ids, df_table, columns=None):
+        """Return list of tuples for `map_outputs` that includes the new datatable.
+
+        Args:
+            ids: `self.ids` from base application
+            df_table: dataframe to show in table
+            columns: list of columns to show. Default is None, which will show all columns
+
+        Returns:
+            list: list of tuples for `map_outputs`
+
+        """
+        datatable = self.table.create_table(df_table, columns, id=ids[self.get(self.id_table)])
+        return [(self.get(self.id_table_parent), 'children', datatable)]
+
+    def create_callbacks(self, parent):
         """Register callbacks to handle user interaction.
 
         Args:
-            ids: requires `self.ids` from base application
+            parent: parent instance (ex: `self`)
 
         """
-        pass
+        self.register_highlight_sort_column(parent)
+
+    def register_highlight_sort_column(self, parent):
+        """Register callbacks to handle user interaction.
+
+        Args:
+            parent: parent instance (ex: `self`)
+
+        """
+        outputs = [(self.get(self.id_table), 'style_data_conditional')]
+        inputs = [(self.get(self.id_table), 'sort_by')]
+        states = []
+
+        @parent.callback(outputs, inputs, states)
+        def highlight_sort_column(*args):
+            a_in, a_states = map_args(args, inputs, states)
+            sort_by = a_in[self.get(self.id_table)]['sort_by']
+            if sort_by is None:
+                raise PreventUpdate
+
+            sorted_columns_style = []
+            for sort in sort_by:
+                sorted_columns_style.extend([
+                    {'if': {'column_id': sort['column_id'], 'row_index': 'odd'},
+                     'color': self.table.text_color, 'background-color': self.table.zebra_color},
+                    {'if': {'column_id': sort['column_id'], 'row_index': 'even'},
+                     'color': self.table.text_color, 'background-color': self.table.selected_cell_color},
+                ])
+
+            style_data_conditional = [*self.table.style_data_conditional, *sorted_columns_style]
+            return map_outputs(outputs, [(self.get(self.id_table), 'style_data_conditional', style_data_conditional)])
+
+        # # Experiment with different table properties
+        # table_keys = ['is_focused', 'selected_cells', 'selected_rows',
+        #               'selected_columns', 'selected_row_ids', 'sort_action', 'sort_mode', 'sort_by']
+        # inputs = [(self.get(self.id_table), key) for key in table_keys]
+
+        #     for key in table_keys:
+        #         key_padded = ''.join((key + ' ' * 20)[:20])
+        #         value = f'{key_padded}:{a_in[self.get(self.id_table)][key]}'
+        #         ic(value)
+        #     ic('\n' * 5)
 
 
 class DataTableDemo(AppBase):
@@ -128,6 +163,7 @@ class DataTableDemo(AppBase):
             dbc.Col([
                 dcc.Markdown(self.mod_table.table.filter_summary),
                 html.Br(),
+                html.H1(self.name),
                 dropdown_group('Select DataFrame Columns', self.ids[self.id_column_select],
                                options, multi=True, persistence=True, value=self.data_raw.columns),
                 self.mod_table.return_layout(self.ids),
@@ -137,9 +173,7 @@ class DataTableDemo(AppBase):
     def create_callbacks(self):
         """Create Dash callbacks."""
         outputs = [(self.mod_table.get(self.mod_table.id_table_parent), 'children')]
-        inputs = [
-            (self.id_column_select, 'value'),
-        ]
+        inputs = [(self.id_column_select, 'value')]
         states = []
 
         @self.callback(outputs, inputs, states)
@@ -148,8 +182,7 @@ class DataTableDemo(AppBase):
             columns = a_in[self.id_column_select]['value']
             if len(columns) == 0:
                 raise PreventUpdate
-            datatable = self.mod_table.table.create_table(self.data_raw, columns, id=self.ids[self.mod_table.get(self.mod_table.id_table)])
-            return map_outputs(outputs, [(self.mod_table.get(self.mod_table.id_table_parent), 'children', datatable)])
+            return map_outputs(outputs, self.mod_table.return_table_map(self.ids, self.data_raw, columns))
 
 
 instance = DataTableDemo

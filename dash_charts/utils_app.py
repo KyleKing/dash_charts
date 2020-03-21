@@ -144,7 +144,7 @@ class AppBase:
         # Create callbacks for app and each module
         self.create_callbacks()
         for mod in self.modules:
-            mod.create_callbacks(self.ids)
+            mod.create_callbacks(self)
 
         self.verify_app_initialization()
 
