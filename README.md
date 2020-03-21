@@ -6,6 +6,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
 - [Dash_Charts](#dash_charts)
   - [Quick Start](#quick-start)
+  - [Design Principles](#design-principles)
   - [Local Development](#local-development)
   - [Example Charts and Tables](#example-charts-and-tables)
     - [Pareto Chart](#pareto-chart)
@@ -95,6 +96,17 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 1. Resulting Pareto Chart
 
     ![MinimumExampleScreenCapture](.images/pareto_readme.png)
+
+## Design Principles
+
+I wanted to show that an object oriented programming approach to Dash projects could be really powerful for improving code reuse and improving readability in large projects. Below are a couple of design principles to keep that I try to keep in mind when implementing this package.
+
+- Try to encapsulate all application logic (callbacks, ids, etc.) in application classes or modules
+- For components that are reused between application, create a `module`. The layout, state, and callbacks can all be delegated to the module rather than cluttering the main application's class and allowing for better code reuse
+- Move any methods that don't require state (`self`) into standalone functions
+- If you can separate Dash (ids/layout/Callbacks) and Plotly (figures/tables) code, you can generate static HTML or PNGs more easily. Sometimes static output is useful when programmatically generating views rather than tweaking the interactive inputs each time.
+
+Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input
 
 ## Local Development
 
