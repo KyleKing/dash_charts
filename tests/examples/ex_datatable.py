@@ -28,6 +28,9 @@ class DataTableDemo(AppBase):
     """Main table (DataTable)."""
 
     id_table = 'datatable'
+    """Unique name for the main table parent."""
+
+    id_table_actual = 'datatable-actual'
     """Unique name for the main table."""
 
     id_column_select = 'main-dropdown'
@@ -36,14 +39,15 @@ class DataTableDemo(AppBase):
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
-        self.register_uniq_ids([self.id_table, self.id_column_select])
+        self.register_uniq_ids([self.id_table, self.id_table_actual, self.id_column_select])
+
         # Load sample plotly express data to populate the datatable
         self.data_raw = px.data.gapminder()
 
     def create_elements(self):
         """Initialize charts and tables."""
         self.table_main = BaseDataTable()
-        # Extend DataTable Parameters as needed
+        # Extend or modify DataTable parameters as needed
         self.table_main.style_data_conditional.extend([
             {'if': {'row_index': 2}, 'backgroundColor': '#3D9970', 'color': 'white'},
             {'if': {'column_id': 'pop'}, 'backgroundColor': '#3D9970', 'color': 'white'},
@@ -79,7 +83,9 @@ class DataTableDemo(AppBase):
                 html.Br(),
                 dropdown_group('Select DataFrame Columns', self.ids[self.id_column_select],
                                options, multi=True, persistence=True, value=self.data_raw.columns),
-                html.Div([], id=self.ids[self.id_table]),
+                html.Div([
+                    self.table_main.create_table(self.data_raw, None, id=self.ids[self.id_table_actual]),
+                ], id=self.ids[self.id_table]),
             ]),
         ])
 
@@ -95,7 +101,7 @@ class DataTableDemo(AppBase):
             columns = a_in[self.id_column_select]['value']
             if len(columns) == 0:
                 raise PreventUpdate
-            datatable = self.table_main.create_table(self.data_raw, columns)
+            datatable = self.table_main.create_table(self.data_raw, columns, id=self.ids[self.id_table_actual])
             return map_outputs(outputs, [(self.id_table, 'children', datatable)])
 
 

@@ -1,6 +1,11 @@
 """DataTable Base Classes."""
 
 import dash_table
+# TODO: Create a simpler datatable?
+# self..filter_action = 'none'
+# self..row_selectable = False
+# # self..style_as_list_view = True
+# self.sort_action = 'none'
 
 
 class BaseDataTable:
@@ -22,52 +27,52 @@ Press enter of tab to apply the filter"""
 
     # dash_table.DataTable Parameters. Documentation: https://dash.plot.ly/datatable/reference
 
-    style_table = {
-        'overflowX': 'scroll',
-    }
-    """DataTable.style_table dictionary. Default enables overflowX scroll."""
+    style_table = None
+    """DataTable.style_table dictionary. Default enables overflowX scroll. Set in `initialize_mutables`."""
 
-    css = [
-        {'selector': '.row', 'rule': 'margin: 0'},
-    ]
-    """DataTable.css list. Use the style_* properties first.
+    css = None
+    """DataTable.css list. Use the style_* properties first.  Set in `initialize_mutables`.
 
     Default sets row margin to zero to fix a negative margin issue when using dash_table and Bootstrap
     See: https://github.com/facultyai/dash-bootstrap-components/issues/334
 
+    Also sets other various style tweaks to highlight the filter icons on hover, etc.
+
     """
 
-    style_cell = {}
-    """DataTable.style_cell dictionary. Default is empty dictionary."""
+    style_cell = None
+    """DataTable.style_cell dictionary. Default is empty dictionary. Set in `initialize_mutables`."""
 
-    style_cell_conditional = []
-    """DataTable.style_cell_conditional list. Default is empty list."""
+    style_cell_conditional = None
+    """DataTable.style_cell_conditional list. Default is empty list. Set in `initialize_mutables`."""
 
-    style_data = {}
-    """DataTable.style_data dictionary. Default is empty dictionary."""
+    style_data = None
+    """DataTable.style_data dictionary. Default is empty dictionary. Set in `initialize_mutables`."""
 
-    style_data_conditional = [
-        {'if': {'row_index': 'odd'}, 'backgroundColor': 'rgb(248, 248, 248)'},
-    ]
-    """DataTable.style_data_conditional list. Default is for odd rows to have an off-white background (zebra stripe)."""
+    style_data_conditional = None
+    """DataTable.style_data_conditional list. Default is for odd rows to have an off-white background (zebra stripe).
 
-    style_header = {
-        'backgroundColor': 'rgb(230, 230, 230)',
-        'fontWeight': 'bold',
-    }
-    """DataTable.style_header dictionary. Default is bold and off-white background."""
+    Set in `initialize_mutables`
 
-    style_header_conditional = []
-    """DataTable.style_header_conditional list. Default is empty list."""
+    """
 
-    style_filter = {}
-    """DataTable.style_filter dictionary. Default is empty dictionary."""
+    style_header = None
+    """DataTable.style_header dictionary. Default is bold and off-white background. Set in `initialize_mutables`."""
 
-    style_filter_conditional = []
-    """DataTable.style_filter_conditional list. Default is empty list."""
+    style_header_conditional = None
+    """DataTable.style_header_conditional list. Default is empty list. Set in `initialize_mutables`."""
+
+    style_filter = None
+    """DataTable.style_filter dictionary. Default is empty dictionary. Set in `initialize_mutables`."""
+
+    style_filter_conditional = None
+    """DataTable.style_filter_conditional list. Default is empty list. Set in `initialize_mutables`."""
 
     column_selectable = 'single'
     """DataTable.column_selectable. Default is `'single'`."""
+
+    column_kwarg_lookup = None
+    """Lookup for keyword arguments for each column allowing deletable, selectable, etc. to be set per column."""
 
     export_format = 'none'
     """DataTable.export_format. Default is `'none'`. Could be one of `(csv, xlsx)`."""
@@ -90,12 +95,51 @@ Press enter of tab to apply the filter"""
     sort_action = 'native'
     """DataTable.sort_action. Default is `'native'`."""
 
-    sort_mode = 'multi'
-    """DataTable.sort_mode. Default is `'multi'`."""
+    sort_mode = 'single'
+    """DataTable.sort_mode. Default is `'single'`."""
 
     def __init__(self):
         """Initialize class."""
-        pass
+        self.initialize_mutables()
+
+    def initialize_mutables(self):
+        """Initialize the mutable data members to prevent modifying one attribute and impacting all instances."""
+        self.style_table = {'overflowX': 'scroll'}
+        self.css = [
+            {'selector': '.row', 'rule': 'margin: 0'},
+            {'selector': 'tr:hover', 'rule': 'backgroundColor: pink'},  # highlight filter icons on hover
+        ]
+        self.style_cell = {}
+        self.style_cell_conditional = []
+        self.style_data = {}
+        self.style_data_conditional = [
+            {'if': {'row_index': 'odd'}, 'backgroundColor': 'rgb(248, 248, 248)'},
+        ]
+        self.style_header = {
+            'backgroundColor': 'rgb(230, 230, 230)',
+            'fontWeight': 'bold',
+        }
+        self.style_header_conditional = []
+        self.style_filter = {}
+        self.style_filter_conditional = []
+
+        self.initialize_column_kwarg_lookup()  # Must be called last
+
+    def initialize_column_kwarg_lookup(self):
+        """Initialize the column lookup based on the other mutables.
+
+        Documentation: https://dash.plot.ly/datatable/reference
+
+        Additional kwargs not set in default lookup:
+            - clearable, deletable, editable, hideable, renamable, format, presentation, on_change, sort_as_null,
+                validation, type
+
+        """
+        self.column_kwarg_lookup = {
+            'default_kwargs': {
+                'selectable': (self.column_selectable is not None),
+            },
+        }
 
     def create_table(self, df_raw, columns=None, **kwargs_datatable):
         """Create the dash_table.DataTable.
@@ -113,21 +157,37 @@ Press enter of tab to apply the filter"""
             columns = df_raw.columns
         return dash_table.DataTable(**self._create_datatable(df_raw, columns), **kwargs_datatable)
 
-    def _create_datatable(self, df_raw, columns):
+    def format_datatable_columns(self, df_raw, columns):
+        """Return a list of column names formatted for a dash_table. Uses `self.self.column_name_kwarg_lookup`.
+
+        Args:
+            df_raw: data to pass to datatable
+            columns: list of strings or None
+
+        Returns:
+            list: of dict with keys `(name, id, deleteable, selectable)` in order of df_raw columns
+
+        """
+        return [
+            {'name': col, 'id': col, **self.column_kwarg_lookup.get(col, self.column_kwarg_lookup['default_kwargs'])}
+            for col in df_raw.columns if (columns is None or col in columns)
+        ]
+
+    def _create_datatable(self, df_raw, columns, **table_kwargs):
         """Return dictionary of keyword arguments for datatable.
 
         Args:
             df_raw: data to pass to datatable
-            columns: list of column names to display
+            columns: will auto format list of string column names to display or use list of dicts
+            table_kwargs: additional keyword arguments to pass to datatable, such as id
 
         Returns:
             dict: keys include `(columns, data)` and all data members
 
         """
         return {
-            # Preserve order of columns from original dataframe
-            'columns': [{'name': column, 'id': column} for column in df_raw.columns if column in columns],
-            'data': df_raw.loc[:, columns].to_dict('records'),
+            'columns': self.format_datatable_columns(df_raw, columns) if isinstance(columns[0], str) else columns,
+            'data': (df_raw.loc[:, columns] if columns is not None else df_raw).to_dict('records'),
 
             # Add all datamembers
             'css': self.css,

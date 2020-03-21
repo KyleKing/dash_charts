@@ -49,10 +49,10 @@ def map_args(raw_args, inputs, states):
     For situations where the order of inputs and states may change, use this function to verbosely define the inputs:
 
     ```python
-    args_in, args_state = map_args(raw_args, inputs, states)
-    click_data = args_in[self.id_main_figure]['clickData']
-    n_clicks = args_in[self.id_randomize_button]['n_clicks']
-    data_cache = args_state[self.id_store]['data']
+    a_in, a_state = map_args(raw_args, inputs, states)
+    click_data = a_in[self.id_main_figure]['clickData']
+    n_clicks = a_in[self.id_randomize_button]['n_clicks']
+    data_cache = a_state[self.id_store]['data']
     ```
 
     Alternatively, for use cases that are unlikely to change the order of Inputs/State, unwrap positionally with:
@@ -68,16 +68,16 @@ def map_args(raw_args, inputs, states):
         states: list of state components. May be empty list
 
     Returns:
-        dict: with keys of the app_id, property, and arg value (`args_in[key][arg_type]`)
+        dict: with keys of the app_id, property, and arg value (`a_in[key][arg_type]`)
 
     """
     # Split args into groups of inputs/states
-    args_in = raw_args[:len(inputs)]
-    args_state = raw_args[len(inputs):]
+    a_in = raw_args[:len(inputs)]
+    a_state = raw_args[len(inputs):]
 
     # Map args into dictionaries
     arg_map = [{app_id: [] for app_id in {items[0] for items in group}} for group in [inputs, states]]
-    for group_idx, (groups, args) in enumerate([(inputs, args_in), (states, args_state)]):
+    for group_idx, (groups, args) in enumerate([(inputs, a_in), (states, a_state)]):
         # Assign the arg to the appropriate dictionary in arg_map
         for arg_idx, (app_id, prop) in enumerate(groups):
             arg_map[group_idx][app_id].append((prop, args[arg_idx]))
