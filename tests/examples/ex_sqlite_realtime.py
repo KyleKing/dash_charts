@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from dash.exceptions import PreventUpdate
-from dash_charts.dash_helpers import SQLConnection, parse_cli_port
+from dash_charts.dash_helpers import SQLConnection, parse_dash_cli_args
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_callbacks import map_outputs
 from dash_charts.utils_fig import min_graph
@@ -208,10 +208,9 @@ class RealTimeSQLDemo(AppBase):
 
 instance = RealTimeSQLDemo
 if __name__ == '__main__':
-    port = parse_cli_port()
     app = instance()
     app.create()
-    app.run(port=port, debug=False)  # TODO: Pass as CLI arguments
+    app.run(**parse_dash_cli_args())
 else:
     app = instance()
     app.create()

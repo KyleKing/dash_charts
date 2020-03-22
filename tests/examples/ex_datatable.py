@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
-from dash_charts.dash_helpers import parse_cli_port
+from dash_charts.dash_helpers import parse_dash_cli_args
 from dash_charts.modules_datatable import ModuleFilteredTable
 from dash_charts.utils_app import AppBase
 
@@ -63,10 +63,9 @@ class DataTableDemo(AppBase):
 
 instance = DataTableDemo
 if __name__ == '__main__':
-    port = parse_cli_port()
     app = instance()
     app.create()
-    app.run(port=port, debug=True)
+    app.run(**parse_dash_cli_args())
 else:
     app = instance()
     app.create()

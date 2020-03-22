@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash_charts.dash_helpers import parse_cli_port
+from dash_charts.dash_helpers import parse_dash_cli_args
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import MarginalChart, check_raw_data, min_graph
 
@@ -155,10 +155,9 @@ class SampleMarginalChartDemo(AppBase):
 
 instance = SampleMarginalChartDemo
 if __name__ == '__main__':
-    port = parse_cli_port()
     app = instance()
     app.create()
-    app.run(port=port, debug=True)
+    app.run(**parse_dash_cli_args())
 else:
     app = instance()
     app.create()

@@ -36,18 +36,20 @@ def validate(document, schema, **validator_kwargs):
     return validator.errors
 
 
-def parse_cli_port():  # pragma: no cover
+def parse_dash_cli_args():  # pragma: no cover
     """Configure the CLI options for Dash applications.
 
     Returns:
-        int: port number
+        dict: keyword arguments for Dash
 
     """
     parser = argparse.ArgumentParser(description='Process Dash Parameters.')
     parser.add_argument('--port', type=int, default=8050,
                         help='Pass port number to Dash server. Default is 8050')
+    parser.add_argument('--nodebug', action='store_true', default=False,
+                        help='If set, will disable debug mode. Default is to set `debug=True`')
     args = parser.parse_args()
-    return args.port
+    return {'port': args.port, 'debug': not args.nodebug}
 
 
 class SQLConnection(ContextDecorator):
