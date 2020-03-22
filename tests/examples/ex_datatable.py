@@ -5,7 +5,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.modules import ModuleFilteredTable
+from dash_charts.modules_datatable import ModuleFilteredTable
 from dash_charts.utils_app import AppBase
 
 
@@ -49,8 +49,8 @@ class DataTableDemo(AppBase):
         """
         return dbc.Container([
             dbc.Col([
-                # dcc.Markdown(self.mod_table.table.filter_summary),
-                # html.Br(),
+                dcc.Markdown(self.mod_table.table.filter_summary),
+                html.Br(),
                 html.H1(self.name),
                 self.mod_table.return_layout(self.ids, self.data_raw),
             ]),

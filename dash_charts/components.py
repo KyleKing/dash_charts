@@ -4,6 +4,20 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 
 
+def opts_dd(lbl, value):
+    """Format an individual item in a Dash dcc dropdown list.
+
+    Args:
+        lbl: Dropdown label
+        value: Dropdown value
+
+    Returns:
+        dict: keys `label` and `value` for dcc.dropdown()
+
+    """
+    return {'label': str(lbl), 'value': value}
+
+
 def dropdown_group(name, _id, options, form_style=None, **dropdown_kwargs):
     """Return a Form Group with label and dropdown.
 

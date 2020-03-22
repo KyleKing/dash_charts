@@ -21,7 +21,7 @@ DOIT_CONFIG = {
         'coverage',  # Comment on/off as needed
         'open_test_docs',  # Comment on/off as needed
         'document',  # Comment on/off as needed
-        'open_docs',  # Comment on/off as needed
+        # 'open_docs',  # Comment on/off as needed
         # 'commit_docs',  # Comment on/off as needed
     ],
 }

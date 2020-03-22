@@ -1,6 +1,4 @@
-"""Dash Modules."""
-
-# TODO: Rename File to modules_datatable.py
+"""Dash Modules for Data Tables."""
 
 import json
 
@@ -10,11 +8,10 @@ import dash_html_components as html
 import pandas as pd
 from dash.exceptions import PreventUpdate
 
-from .components import dropdown_group
+from .components import dropdown_group, opts_dd
 from .datatable import BaseDataTable
-from .utils_app import opts_dd
 from .utils_app_modules import ModuleBase
-from .utils_fig import map_args, map_outputs
+from .utils_callbacks import map_args, map_outputs
 
 
 class ModuleDataTable(ModuleBase):

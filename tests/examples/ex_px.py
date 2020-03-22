@@ -12,11 +12,12 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
-from dash_charts.components import dropdown_group
+from dash_charts.components import dropdown_group, opts_dd
 from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import AppBase, opts_dd
+from dash_charts.utils_app import AppBase
 from dash_charts.utils_app_with_navigation import AppWithTabs
-from dash_charts.utils_fig import map_args, map_outputs, min_graph
+from dash_charts.utils_callbacks import map_args, map_outputs
+from dash_charts.utils_fig import min_graph
 
 # FIXME: Implement ability for user to select JSON or CSV data and graph interactively!
 #   Require user to submit "Tidy" data with non-value headers

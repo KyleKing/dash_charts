@@ -49,6 +49,8 @@
 
 ### Changes
 
+* Add filter inputs to datatable example. [Kyle King]
+
 * Move module to dash_charts. [Kyle King]
 
 * Improve datatable styling and module. [Kyle King]

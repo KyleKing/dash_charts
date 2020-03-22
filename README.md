@@ -191,7 +191,7 @@ Latest coverage table
 | File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
 | __init__.py | 1 | 0 | 0 | 100.0 |
-| components.py | 6 | 0 | 0 | 100.0 |
+| components.py | 8 | 0 | 0 | 100.0 |
 | coordinate_chart.py | 105 | 1 | 6 | 99.0 |
 | custom_colorscales.py | 4 | 0 | 0 | 100.0 |
 | dash_helpers.py | 6 | 0 | 6 | 100.0 |
@@ -199,16 +199,17 @@ Latest coverage table
 | equations.py | 11 | 0 | 0 | 100.0 |
 | fitted_chart.py | 37 | 1 | 5 | 97.3 |
 | grouped_bar.py | 0 | 0 | 0 | 100.0 |
-| modules.py | 98 | 48 | 0 | 51.0 |
+| modules_datatable.py | 97 | 11 | 0 | 88.7 |
 | pareto_chart.py | 39 | 0 | 2 | 100.0 |
 | rolling_chart.py | 23 | 1 | 0 | 95.7 |
 | time_vis.py | 0 | 0 | 0 | 100.0 |
-| utils_app.py | 57 | 1 | 8 | 98.2 |
+| utils_app.py | 55 | 1 | 8 | 98.2 |
 | utils_app_modules.py | 17 | 2 | 2 | 88.2 |
 | utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
-| utils_fig.py | 91 | 3 | 4 | 96.7 |
+| utils_callbacks.py | 25 | 1 | 0 | 96.0 |
+| utils_fig.py | 66 | 2 | 4 | 97.0 |
 
-Generated on: 2020-03-22T08:26:13.084703
+Generated on: 2020-03-22T08:45:05.985693
 
 <!-- /COVERAGE -->
 

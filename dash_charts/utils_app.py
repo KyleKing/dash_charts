@@ -7,7 +7,7 @@ from pathlib import Path
 import dash
 import dash_html_components as html
 
-from .utils_fig import format_app_callback
+from .utils_callbacks import format_app_callback
 
 ASSETS_DIR = Path(__file__).parent / 'assets'
 """Path to the static files directory."""
@@ -64,20 +64,6 @@ def init_app(**app_kwargs):
     if 'meta_tags' not in app_kwargs:
         app_kwargs['meta_tags'] = [{'name': 'viewport', 'content': 'width=device-width, initial-scale=1'}]
     return dash.Dash(__name__, **app_kwargs)
-
-
-def opts_dd(lbl, value):
-    """Format an individual item in a Dash dcc dropdown list.
-
-    Args:
-        lbl: Dropdown label
-        value: Dropdown value
-
-    Returns:
-        dict: keys `label` and `value` for dcc.dropdown()
-
-    """
-    return {'label': str(lbl), 'value': value}
 
 
 class AppBase:  # noqa: H601
