@@ -187,7 +187,7 @@ class AppBase:  # noqa: H601
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object. Default is simple HTML text
 
         """
         return html.Div(['Welcome to the BaseApp! Override return_layout() in child class.'])  # pragma: no cover
@@ -230,7 +230,7 @@ class AppBase:  # noqa: H601
         """Retrieve server from app instance for production hosting with green unicorn, waitress, IIS, etc.
 
         Returns:
-            obj: the Flask `server` component of the Dash app
+            dict: the Flask `server` component of the Dash app
 
         """
         return self.app.server

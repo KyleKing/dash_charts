@@ -70,7 +70,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
             """Return Dash application layout.
 
             Returns:
-                obj: Dash HTML object. Default is simple HTML text
+                dict: Dash HTML object
 
             """
             return html.Div([

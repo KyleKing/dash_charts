@@ -45,7 +45,7 @@ class ModuleDataTable(ModuleBase):
             ids: `self.ids` from base application
 
         Returns:
-            dict: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         placeholder = pd.DataFrame.from_records([['body']], columns=['header'])
@@ -144,7 +144,7 @@ class ModuleFilteredTable(ModuleDataTable):
             mod_df: dataframe for
 
         Returns:
-            dict: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         self.mod_df = mod_df

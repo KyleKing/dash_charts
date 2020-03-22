@@ -159,7 +159,7 @@ class TabBase(AppBase):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         Raises:
             RuntimeError: if any class data member is not the expected type
@@ -348,7 +348,7 @@ class InteractivePXApp(AppWithTabs):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div([

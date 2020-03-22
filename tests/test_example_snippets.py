@@ -36,7 +36,7 @@ class ComponentDemo(AppBase):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div([

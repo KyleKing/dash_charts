@@ -40,7 +40,7 @@ class RollingDemo(AppBase):
         )
 
     def _generate_data(self):
-        """Create self.df_demo with sample data."""
+        """Create self.data_raw with sample data."""
         # Generate random data points
         count = 1000
         mu, sigma = (15, 10)  # mean and standard deviation
@@ -68,7 +68,7 @@ class RollingDemo(AppBase):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(

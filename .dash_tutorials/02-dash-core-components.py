@@ -130,7 +130,7 @@ app.layout = html.Div([
             ),
 
             # ==========
-            # Select (Radio/Checkbox)
+            # Select Radio and Checkbox
             # ==========
 
             html.Label('Radio Items'),
@@ -141,7 +141,6 @@ app.layout = html.Div([
                     {'label': 'San Francisco', 'value': 'SF'},
                 ],
                 value='MTL',
-                # labelStyle={'display': 'inline-block'},
             ),
             html.Label('Checkboxes'),
             dcc.Checklist(
@@ -233,7 +232,7 @@ app.layout = html.Div([
     [dash.dependencies.State('input-box', 'value')])
 def update_output(n_clicks, value):
     """Indicate button-click event."""
-    return 'The input value was "{}" and the button has been clicked {} times'.format(value, n_clicks)
+    return f'The input value was "{value}" and the button has been clicked {n_clicks} times'  # noqa: DAR101, DAR201
 
 
 if __name__ == '__main__':

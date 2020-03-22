@@ -102,7 +102,7 @@ class AppWithTabs(AppWithNavigation):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(children=[
@@ -117,7 +117,7 @@ class AppWithTabs(AppWithNavigation):
         """Return the HTML elements for the tab menu.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         # Unselected tab style
@@ -201,7 +201,7 @@ class AppMultiPage(AppWithNavigation):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(children=[
@@ -214,7 +214,7 @@ class AppMultiPage(AppWithNavigation):
         """Return the HTML elements for the navigation menu.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         # Create brand icon and name where icon in optional

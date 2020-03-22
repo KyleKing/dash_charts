@@ -43,7 +43,7 @@ class FittedDemo(AppBase):
         self.chart_main.fit_eqs = [('quadratic', equations.quadratic)]
 
     def _generate_data(self):
-        """Create self.df_demo with sample data."""
+        """Create self.data_raw with sample data."""
         # Create dataframe based on px sample dataset
         iris = px.data.iris()
         # count = len(iris['petal_width'])
@@ -67,7 +67,7 @@ class FittedDemo(AppBase):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(

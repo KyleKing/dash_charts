@@ -45,7 +45,7 @@ class TabZero(StaticTab):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(style=self.basic_style, children=(
@@ -63,7 +63,7 @@ class TabOne(StaticTab):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(style=self.basic_style, children=[
@@ -81,7 +81,7 @@ class TabTwo(StaticTab):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(style=self.basic_style, children=[
@@ -104,7 +104,7 @@ class TabThree(StaticTab):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(style=self.basic_style, children=[

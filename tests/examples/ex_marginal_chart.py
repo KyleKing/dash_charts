@@ -115,7 +115,7 @@ class SampleMarginalChartDemo(AppBase):
         )
 
     def _generate_data(self):
-        """Create self.df_demo with sample data."""
+        """Create self.data_raw with sample data."""
         # Create dataframe based on px sample dataset
         iris = px.data.iris()
         self.data_raw = pd.DataFrame(data={
@@ -129,7 +129,7 @@ class SampleMarginalChartDemo(AppBase):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(

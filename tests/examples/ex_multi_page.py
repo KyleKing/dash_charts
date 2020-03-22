@@ -43,7 +43,7 @@ class PageText(StaticPage):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(style=self.basic_style, children=(
@@ -61,7 +61,7 @@ class PageChart(StaticPage):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(style=self.basic_style, children=[
@@ -84,7 +84,7 @@ class Page404(StaticPage):
         """Return Dash application layout.
 
         Returns:
-            obj: Dash HTML object. Default is simple HTML text
+            dict: Dash HTML object
 
         """
         return html.Div(style=self.basic_style, children=[
