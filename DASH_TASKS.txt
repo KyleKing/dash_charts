@@ -12,7 +12,6 @@ Consolidated and Prioritized Task List
 - Rolling chart
 	- Make module for filtering timeseries data. Base on the .dash_tutorials/SanFran_Weather...
 
-- Add example SQLite/live reloading app (status: example available in .dash_tutorials/sqlite-demo)
 - New: sparklines (status: nothing)
 	- create new sparklines figures
 - New: time vis (status: some sample code in placeholder file)

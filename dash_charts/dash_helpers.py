@@ -1,6 +1,9 @@
 """Helpers for building Dash applications."""
 
 import argparse
+import sqlite3
+import time
+from contextlib import ContextDecorator
 
 from cerberus import Validator
 
@@ -45,3 +48,41 @@ def parse_cli_port():  # pragma: no cover
                         help='Pass port number to Dash server. Default is 8050')
     args = parser.parse_args()
     return args.port
+
+
+class SQLConnection(ContextDecorator):
+    """Ensure the SQLite connection is properly opened and closed."""
+
+    def __init__(self, db_file):
+        """Initialize context wrapper.
+
+        Args:
+            db_file: Path to SQLite file
+
+        """
+        self.conn = None
+        self.db_file = db_file
+
+    def __enter__(self):
+        """Connect to the database and return connection reference.
+
+        Returns:
+            dict: connection to sqlite database
+
+        """
+        self.conn = sqlite3.connect(self.db_file)
+        return self.conn
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        """Close connection."""  # noqa: DAR101
+        self.conn.close()
+
+
+def uniq_table_id():
+    """Return a unique table ID based on the current time in ms.
+
+    Returns:
+        str: in format `U<timestamp_ns>`
+
+    """
+    return f'U{time.time_ns()}'
