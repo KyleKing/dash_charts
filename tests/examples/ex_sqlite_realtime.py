@@ -13,21 +13,17 @@ import multiprocessing
 import time
 from pathlib import Path
 
-import bottleneck
 import dash_core_components as dcc
 import dash_html_components as html
 import numpy as np
 import pandas as pd
-import plotly.graph_objects as go
 from dash.exceptions import PreventUpdate
 from dash_charts.dash_helpers import SQLConnection, parse_dash_cli_args
+from dash_charts.rolling_chart import RollingChart
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_callbacks import map_outputs
 from dash_charts.utils_fig import min_graph
-from icecream import ic
 from tqdm import tqdm
-
-# from dash_charts.rolling_chart import RollingChart
 
 
 def use_flag_file(callback, *args, **kwargs):
@@ -45,7 +41,7 @@ def use_flag_file(callback, *args, **kwargs):
         initial = int(flag_file.read_text())
         time.sleep(2)
         if flag_file.is_file() and int(flag_file.read_text()) > initial:
-            return None  # The thread is currently writing to the flag file
+            return  # The thread is currently writing to the flag file
 
     # Otherwise, create the flag file and run the script
     flag_file.write_text('')
@@ -120,16 +116,15 @@ class RealTimeSQLDemo(AppBase):
 
     def create_elements(self):
         """Initialize the charts, tables, and other Dash elements."""
-        # self.chart_main = RollingChart(
-        #     title='Sample Timeseries Chart with Rolling Calculations',
-        #     xlabel='Index',
-        #     ylabel='Measured Value',
-        # )
-        pass  # FIXME: Implement
+        self.chart_main = RollingChart(
+            title='Live-Updating Scatter Plot',
+            xlabel='Index',
+            ylabel='Value',
+        )
+        self.chart_main.count_rolling = 20
 
     def _generate_data(self):
         """Start the realtime updates of the database. Function could be run from separate process."""
-        ic(self.db_file)
         db_file = self.db_file
         process = multiprocessing.Process(
             target=use_flag_file, args=[simulate_db_population, db_file], kwargs={'points': 1000, 'delay': 0.05},
@@ -171,65 +166,13 @@ class RealTimeSQLDemo(AppBase):
             if count_points < moving_window:
                 raise PreventUpdate
 
-            # Demo fitting wth a polynomial (not that useful)
-            fit = np.poly1d(np.polyfit(df_events['id'], df_events['value'], moving_window))
-            # Demo using a moving mean/std
-            rolling_mean = bottleneck.move_mean(df_events['value'], moving_window)
-            rolling_std = bottleneck.move_std(df_events['value'], moving_window)
-            new_figure = {
-                'data': [
-                    go.Scatter(
-                        mode='markers',
-                        name='scatter',
-                        text=df_events['label'],
-                        x=df_events['id'],
-                        y=df_events['value'],
-                        opacity=0.3,
-                    ),
-                    go.Scatter(
-                        name='2x STD',
-                        fill='toself',
-                        x=df_events['id'].tolist() + df_events['id'].tolist()[::-1],
-                        y=(np.add(rolling_mean, np.multiply(2, rolling_std)).tolist()
-                           + np.subtract(rolling_mean, np.multiply(2, rolling_std)).tolist()[::-1]),
-                        opacity=0.5,
-                    ),
-                    go.Scatter(
-                        mode='lines',
-                        name='fit',
-                        x=df_events['id'],
-                        y=fit(df_events['id']),
-                        opacity=0.7,
-                    ),
-                    go.Scatter(
-                        mode='lines',
-                        name='move_mean',
-                        x=df_events['id'],
-                        y=rolling_mean,
-                        opacity=0.9,
-                    ),
-                ],
-                'layout': go.Layout(
-                    title=go.layout.Title(text='Live-Updating Plot'),
-                    xaxis={
-                        'automargin': True,
-                        'range': [np.max([0, count_points - 500]), count_points],
-                        'showgrid': True,
-                        'title': 'Index',
-                    },
-                    yaxis={
-                        'automargin': True,
-                        'zeroline': True,
-                        'autorange': True,
-                        'showgrid': True,
-                        'title': 'value',
-                    },
-                    legend={'orientation': 'h'},
-                    hovermode='closest',
-                ),
+            for new_key, old_key in [('x', 'id'), ('y', 'value')]:
+                df_events[new_key] = df_events[old_key]
+            self.chart_main.axis_range = {
+                'x': [float(np.max([0, count_points - 500])), count_points],
             }
+            new_figure = self.chart_main.create_figure(df_raw=df_events)
 
-            # new_figure = self.chart_main.create_figure(df_raw=df_events, show_count=True)
             return map_outputs(outputs, [(self.id_chart, 'figure', new_figure)])
 
 

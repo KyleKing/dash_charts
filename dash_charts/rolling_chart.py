@@ -20,7 +20,7 @@ class RollingChart(CustomChart):
     """Label for the scatter data. Default is 'Data'."""
 
     annotations = []
-    """FIXME: DOCUMENT"""
+    """ FIXME: DOCUMENT. """
 
     def create_traces(self, df_raw, *, annotations=None):
         """Return traces for plotly chart.
@@ -62,9 +62,9 @@ class RollingChart(CustomChart):
                     hoverinfo='skip',
                     name=f'{self.count_std}x STD Range',
                     opacity=0.5,
-                    x=list(df_raw['x']) + list(df_raw['x'])[::-1],
-                    y=list(np.add(rolling_mean, np.multiply(self.count_std, rolling_std))) + list(
-                        np.subtract(rolling_mean, np.multiply(self.count_std, rolling_std)))[::-1],
+                    x=(df_raw['id'].tolist() + df_raw['id'].tolist()[::-1]),
+                    y=(np.add(rolling_mean, np.multiply(2, rolling_std)).tolist()
+                       + np.subtract(rolling_mean, np.multiply(2, rolling_std)).tolist()[::-1]),
                 ),
                 go.Scatter(
                     hoverinfo='skip',

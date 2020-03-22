@@ -11,6 +11,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
   - [Example Charts and Tables](#example-charts-and-tables)
     - [Pareto Chart](#pareto-chart)
     - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
+    - [Real Time SQL Demo](#real-time-sql-demo)
     - [Coordinate Chart](#coordinate-chart)
     - [Marginal Chart](#marginal-chart)
     - [Data Table](#data-table)
@@ -133,11 +134,19 @@ See sample code in [tests/examples/ex_pareto_chart.py](tests/examples/ex_pareto_
 
 ### Rolling Mean and STD Chart
 
-Easily chart the rolling mean and standard deviation for a given scatter data set.
+Easily chart the rolling mean and standard deviation for a given scatter data set. Demonstrates using chart annotations.
 
 See sample code in [tests/examples/ex_rolling_chart.py](tests/examples/ex_rolling_chart.py). Screenshot below:
 
-![ex_rolling_chart-annotated.png](.images/ex_rolling_chart-annotated.png)
+![ex_rolling_chart.png](.images/ex_rolling_chart.png)
+
+### Real Time SQL Demo
+
+Example using a Rolling Chart to show real time data from a SQLite database. For the demo, a background thread populates the database as the Dash app runs in a separate thread.
+
+See sample code in [tests/examples/ex_sqlite_realtime.py](tests/examples/ex_sqlite_realtime.py). Screenshot below:
+
+![ex_sqlite_realtime.gif](.images/ex_sqlite_realtime.gif)
 
 ### Coordinate Chart
 

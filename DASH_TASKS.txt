@@ -1,16 +1,15 @@
 Consolidated and Prioritized Task List
 
+- NEXT: Implement annotations
+
 - Data table
 	- Show using the column lookup for markdown formatting, number of decimal places, etc.
 	- Implement modal that can open on button click
-
-- Implement annotations
 - Fitted chart
 	- Use more realistic data (use px data?)
 	- Add to README
-
 - Rolling chart
-	- Make module for filtering timeseries data. Base on the .dash_tutorials/SanFran_Weather...
+	- Make module for filtering time series data. See: `.dash_tutorials/SanFran_Weather...`
 
 - New: sparklines (status: nothing)
 	- create new sparklines figures
