@@ -1,4 +1,4 @@
-"""Example using Plotly Express with tabbed interface.
+"""Generic Plotly Express Data Analysis App(s).
 
 Examples: https://www.plotly.express/
 Docs: https://www.plotly.express/plotly_express/
@@ -12,12 +12,12 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
-from dash_charts.components import dropdown_group, opts_dd
-from dash_charts.dash_helpers import parse_cli_port
-from dash_charts.utils_app import AppBase
-from dash_charts.utils_app_with_navigation import AppWithTabs
-from dash_charts.utils_callbacks import map_args, map_outputs
-from dash_charts.utils_fig import min_graph
+
+from .components import dropdown_group, opts_dd
+from .utils_app import AppBase
+from .utils_app_with_navigation import AppWithTabs
+from .utils_callbacks import map_args, map_outputs
+from .utils_fig import min_graph
 
 # FIXME: Implement ability for user to select JSON or CSV data and graph interactively!
 #   Require user to submit "Tidy" data with non-value headers
@@ -314,7 +314,7 @@ class TabColor(TabBase):
 # Create class for application to control manage variable scopes
 
 
-class PXDemoApp(AppWithTabs):
+class InteractivePXApp(AppWithTabs):
     """Plotly Express Demo application."""
 
     name = 'TabAppDemo'
@@ -355,15 +355,3 @@ class PXDemoApp(AppWithTabs):
             html.H1('Dash/Plotly Express Data Exploration Demo', style={'padding': '15px 0 0 15px'}),
             super().return_layout(),
         ])
-
-
-instance = PXDemoApp
-if __name__ == '__main__':
-    port = parse_cli_port()
-    app = instance()
-    app.create()
-    app.run(port=port, debug=True)
-else:
-    app = instance()
-    app.create()
-    FLASK_HANDLE = app.get_server()
