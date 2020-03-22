@@ -125,16 +125,3 @@ class FittedChart(CustomChart):
             )
             for idx, (x, y, label, color) in enumerate(annotations)
         ]
-
-    def create_layout(self):
-        """Extend the standard layout.
-
-        Returns:
-            dict: layout for Dash figure
-
-        """
-        layout = super().create_layout()
-
-
-        # FIXME: Add legend
-        return layout

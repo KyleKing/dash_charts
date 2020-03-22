@@ -1,10 +1,4 @@
-"""Custom Plotly Colorscales.
-
-Gradients genrated with: http://herethere.net/~samson/php/color_gradient/
-
-"""
-
-import numpy as np
+"""Custom Plotly Colorscales."""
 
 DEFAULT_PLOTLY_COLORS = [
     '#1f77b4',  # muted blue
@@ -33,3 +27,5 @@ DEFAULT_PLOTLY_COLORS_RGB = [
     'rgb(23,190,207)',   # 9
 ]
 """List of default Plotly colors in RGB strings."""
+
+# From SF Example: (#fdae61, #abd9e9, #2c7bb6)

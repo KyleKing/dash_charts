@@ -149,7 +149,7 @@ class CustomChart:  # noqa: H601
                 'title': self.labels['y'],
                 'zeroline': True,
             },
-            'legend': {'orientation': 'h'},
+            'legend': {'orientation': 'h', 'y': -0.25},  # below XAxis label
             'hovermode': 'closest',
         }
 

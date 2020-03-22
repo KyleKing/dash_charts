@@ -1,11 +1,13 @@
 """Example Rolling Mean and Filled Standard Deviation Chart."""
 
+import dash_core_components as dcc
 import dash_html_components as html
 import numpy as np
 import pandas as pd
 from dash_charts.dash_helpers import parse_dash_cli_args
 from dash_charts.rolling_chart import RollingChart
 from dash_charts.utils_app import AppBase
+from dash_charts.utils_callbacks import map_args, map_outputs
 from dash_charts.utils_fig import min_graph
 
 
@@ -21,13 +23,16 @@ class RollingDemo(AppBase):
     chart_main = None
     """Main chart (Rolling)."""
 
+    id_slider = 'slider'
+    """Slider ID."""
+
     id_chart = 'rolling'
     """Unique name for the main chart."""
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
-        self.register_uniq_ids([self.id_chart])
+        self.register_uniq_ids([self.id_slider, self.id_chart])
 
         self._generate_data()
 
@@ -73,6 +78,8 @@ class RollingDemo(AppBase):
             dict: Dash HTML object
 
         """
+        step = 50
+        slider_max = 1000
         return html.Div(
             style={
                 'maxWidth': '1000px',
@@ -80,16 +87,28 @@ class RollingDemo(AppBase):
                 'marginLeft': 'auto',
             }, children=[
                 html.H4(children=self.name),
-                html.Div([min_graph(
-                    id=self.ids[self.id_chart],
-                    figure=self.chart_main.create_figure(df_raw=self.data_raw),
-                )]),
+                min_graph(id=self.ids[self.id_chart], figure={}),
+                dcc.RangeSlider(
+                    id=self.ids[self.id_slider], min=0, max=slider_max, step=step / 5, value=[150, 825],
+                    marks={str(idx * step): str(idx * step) for idx in range(int(slider_max / step))},
+                ),
             ],
         )
 
     def create_callbacks(self):
         """Create Dash callbacks."""
-        pass  # No callbacks necessary for this simple example
+        outputs = [(self.id_chart, 'figure')]
+        inputs = [(self.id_slider, 'value')]
+        states = []
+
+        @self.callback(outputs, inputs, states)
+        def update_chart(*raw_args):
+            a_in, a_states = map_args(raw_args, inputs, states)
+            slider = a_in[self.id_slider]['value']
+            df_filtered = self.data_raw[(self.data_raw['x'] >= slider[0]) & (self.data_raw['x'] <= slider[1])]
+            self.chart_main.axis_range = {'x': slider}
+            new_figure = self.chart_main.create_figure(df_raw=df_filtered)
+            return map_outputs(outputs, [(self.id_chart, 'figure', new_figure)])
 
 
 instance = RollingDemo
