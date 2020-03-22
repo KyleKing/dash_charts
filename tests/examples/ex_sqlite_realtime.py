@@ -30,7 +30,32 @@ from tqdm import tqdm
 # from dash_charts.rolling_chart import RollingChart
 
 
-def simulate_db_population(db_file, points=1000, delay=0.1):
+def use_flag_file(callback, *args, **kwargs):
+    """Use a flag file to determine if the callback is to be run.
+
+    Args:
+        callback: path to SQLite file
+        args: arguments to pass to callback
+        kwargs: keyword arguments to pass to callback
+
+    """
+    # Use a file to indicate if the function is currently writing to the database
+    flag_file = Path(__file__).parent / 'flag-tempfile.txt'
+    if flag_file.is_file():
+        initial = int(flag_file.read_text())
+        time.sleep(2)
+        if flag_file.is_file() and int(flag_file.read_text()) > initial:
+            return None  # The thread is currently writing to the flag file
+
+    # Otherwise, create the flag file and run the script
+    flag_file.write_text('')
+    try:
+        callback(*args, flag_file=flag_file, **kwargs)
+    finally:
+        flag_file.unlink()
+
+
+def simulate_db_population(db_file, points=1000, delay=0.1, flag_file=None):
     """Populate a SQL database in real time so that the changes can be visualized in a chart.
 
     Args:
@@ -61,8 +86,10 @@ def simulate_db_population(db_file, points=1000, delay=0.1):
         for idx in tqdm(range(points)):
             value = (-1 if idx > 500 else 1) * idx / 10.0  # Introduce variability
             cursor.execute('INSERT INTO EVENTS (id, label, value) VALUES'  # noqa: S608
-                           f' ({idx}, "idx-{idx}", {samples[idx] + value})')
+                        f' ({idx}, "idx-{idx}", {samples[idx] + value})')
             conn.commit()
+            if flag_file is not None:
+                flag_file.write_text(str(idx))
             time.sleep(delay)
 
 
@@ -105,7 +132,7 @@ class RealTimeSQLDemo(AppBase):
         ic(self.db_file)
         db_file = self.db_file
         process = multiprocessing.Process(
-            target=simulate_db_population, args=[db_file], kwargs={'points': 400, 'delay': 0.1},
+            target=use_flag_file, args=[simulate_db_population, db_file], kwargs={'points': 1000, 'delay': 0.05},
         )
         process.start()
 
@@ -186,7 +213,7 @@ class RealTimeSQLDemo(AppBase):
                     title=go.layout.Title(text='Live-Updating Plot'),
                     xaxis={
                         'automargin': True,
-                        'range': [0, count_points],
+                        'range': [np.max([0, count_points - 500]), count_points],
                         'showgrid': True,
                         'title': 'Index',
                     },
