@@ -6,8 +6,6 @@ from plotly.subplots import make_subplots
 
 from .dash_helpers import validate
 
-# TODO: Methods for making charts/callbacks that update when data changes in a SQL database?
-
 
 def min_graph(**kwargs):
     """Return dcc.Graph element with Plotly overlay removed.
@@ -40,8 +38,15 @@ def check_raw_data(df_raw, min_keys):
         raise RuntimeError(f'`df_raw` must have keys {min_keys}. Found: {all_keys}')
 
 
-class CustomChart:
+class CustomChart:  # noqa: H601
     """Base Class for Custom Charts."""
+
+    annotations = []
+    """Store annotations. Default is an empty list.
+
+    See documentation: https://plot.ly/python/reference/#layout-annotations
+
+    """
 
     _axis_range = {}
     _axis_range_schema = {
@@ -133,6 +138,7 @@ class CustomChart:
 
         """
         layout = {
+            'annotations': self.annotations,
             'title': go.layout.Title(text=self.title),
             'xaxis': {
                 'automargin': True,
@@ -176,7 +182,7 @@ class CustomChart:
         return layout
 
 
-class MarginalChart(CustomChart):
+class MarginalChart(CustomChart):  # noqa: H601
     """Base Class for Custom Charts with Marginal X and Marginal Y Plots."""
 
     def create_figure(self, df_raw, **kwargs_data):

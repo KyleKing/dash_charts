@@ -18,6 +18,7 @@ from .utils_fig import CustomChart, check_raw_data
 # ]
 
 
+# FIXME: Should share functionality with rolling chart (annotations, etc.)!
 class FittedChart(CustomChart):
     """Scatter and Fitted Line Chart."""
 
@@ -33,25 +34,16 @@ class FittedChart(CustomChart):
     suppress_fit_errors = False
     """If True, bury errors from scipy fit and will print message to console. Default is True."""
 
-    annotations = []
-    """FIXME: DOCUMENT"""
-
-    def create_traces(self, df_raw, *, annotations=None):
+    def create_traces(self, df_raw):
         """Return traces for plotly chart.
 
         Args:
             df_raw: pandas dataframe with columns `name: str`, `x: float`, `y: float` and `label: str`
-            annotations: list of tuples with values `(x, y, label)`. Default is None
 
         Returns:
             list: Dash chart traces
 
         """
-        # # TODO: Implement annotations
-        # if annotations is not None:
-        #     y_range = [-100, 200]  # PLANNED: Use calculation
-        #     self.create_annotations(annotations, y_range)
-
         # Verify data format
         check_raw_data(df_raw, ['name', 'x', 'y', 'label'])
 
@@ -142,6 +134,7 @@ class FittedChart(CustomChart):
 
         """
         layout = super().create_layout()
-        layout['annotations'] = self.annotations
+
+
         # FIXME: Add legend
         return layout

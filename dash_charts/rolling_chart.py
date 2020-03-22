@@ -19,25 +19,16 @@ class RollingChart(CustomChart):
     label_data = 'Data'
     """Label for the scatter data. Default is 'Data'."""
 
-    annotations = []
-    """ FIXME: DOCUMENT. """
-
-    def create_traces(self, df_raw, *, annotations=None):
+    def create_traces(self, df_raw):
         """Return traces for plotly chart.
 
         Args:
             df_raw: pandas dataframe with columns `x: float`, `y: float` and `label: str`
-            annotations: list of tuples with values `(x, y, label)`. Default is None
 
         Returns:
             list: Dash chart traces
 
         """
-        # # TODO: Implement annotations
-        # if annotations is not None:
-        #     y_range = [-100, 200]  # PLANNED: Use calculation
-        #     self.create_annotations(annotations, y_range)
-
         # Verify data format
         check_raw_data(df_raw, ['x', 'y', 'label'])
 
@@ -77,11 +68,12 @@ class RollingChart(CustomChart):
             ])
         return chart_data
 
-    def create_annotations(self, annotations, y_range):
+    def create_annotations(self, annotations, y_max):
         """Create the annotations. May be overridden when inherited to customize annotation styling and positioning.
 
-        annotations -- list of tuples with values (x,y,label,color). Color may be None
-        y_range -- PLANNED: Document
+        Args:
+            annotations: list of tuples with values (x,y,label,color). Color may be None
+            y_range: PLANNED: Document
 
         """
         self.annotations = [
@@ -90,7 +82,7 @@ class RollingChart(CustomChart):
                 arrowhead=7,
                 arrowsize=0.3,
                 arrowwidth=1.5,
-                ax=x, ay=y + np.amax([(y_range[1] - y) * 0.3, 10]),
+                ax=x, ay=y + np.amax([(y_max - y) * 0.3, 10]),
                 bgcolor='black' if color is None else color,
                 bordercolor='black' if color is None else color,
                 borderpad=2,
@@ -115,5 +107,4 @@ class RollingChart(CustomChart):
 
         """
         layout = super().create_layout()
-        layout['annotations'] = self.annotations
         return layout

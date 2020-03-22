@@ -14,7 +14,6 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 
-from . import custom_colorscales
 from .utils_fig import CustomChart, check_raw_data
 
 # TODO: subplots for multiple years of calendar charts (Subplot title is year)
@@ -211,7 +210,6 @@ class CoordinateChart(CustomChart):
 
         """
         layout = super().create_layout()
-        layout['annotations'] = self.annotations
         for axis in ['xaxis', 'yaxis']:
             layout[axis]['showgrid'] = False
             layout[axis]['showticklabels'] = False

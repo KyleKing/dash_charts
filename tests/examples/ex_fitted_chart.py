@@ -46,22 +46,12 @@ class FittedDemo(AppBase):
         """Create self.data_raw with sample data."""
         # Create dataframe based on px sample dataset
         iris = px.data.iris()
-        # count = len(iris['petal_width'])
         self.data_raw = pd.DataFrame(data={
             'name': iris['species'],
             'x': iris['petal_width'],
             'y': iris['petal_length'],
             'label': None,
         })
-
-        # colors = [
-        #     '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#e377c2', '#7f7f7f', '#17becf', None,
-        # ]
-        # indices = [20 + int(idx * count / len(colors)) for idx in range(len(colors))]
-        # self.annotations = [
-        #     (self.data_raw['x'][indices[idx]], self.data_raw['y'][indices[idx]], 'Additional Information', color)
-        #     for idx, color in enumerate(colors)
-        # ]
 
     def return_layout(self):
         """Return Dash application layout.
@@ -79,10 +69,7 @@ class FittedDemo(AppBase):
                 html.H4(children=self.name),
                 html.Div([min_graph(
                     id=self.ids[self.id_chart],
-                    figure=self.chart_main.create_figure(
-                        df_raw=self.data_raw,
-                        # annotations=self.annotations,  # FIXME: Implement annotations
-                    ),
+                    figure=self.chart_main.create_figure(df_raw=self.data_raw),
                 )]),
             ],
         )

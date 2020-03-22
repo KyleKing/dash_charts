@@ -6,7 +6,6 @@ Consolidated and Prioritized Task List
 	- Show using the column lookup for markdown formatting, number of decimal places, etc.
 	- Implement modal that can open on button click
 - Fitted chart
-	- Use more realistic data (use px data?)
 	- Add to README
 - Rolling chart
 	- Make module for filtering time series data. See: `.dash_tutorials/SanFran_Weather...`
