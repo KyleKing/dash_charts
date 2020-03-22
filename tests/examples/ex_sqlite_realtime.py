@@ -36,7 +36,7 @@ def use_flag_file(callback, *args, **kwargs):
 
     """
     # Use a file to indicate if the function is currently writing to the database
-    flag_file = Path(__file__).parent / 'flag-tempfile.txt'
+    flag_file = Path(__file__).parent / 'flag-tempfile.log'
     if flag_file.is_file():
         initial = int(flag_file.read_text())
         time.sleep(2)

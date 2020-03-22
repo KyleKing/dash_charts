@@ -62,7 +62,7 @@ class RollingChart(CustomChart):
                     hoverinfo='skip',
                     name=f'{self.count_std}x STD Range',
                     opacity=0.5,
-                    x=(df_raw['id'].tolist() + df_raw['id'].tolist()[::-1]),
+                    x=(df_raw['x'].tolist() + df_raw['x'].tolist()[::-1]),
                     y=(np.add(rolling_mean, np.multiply(2, rolling_std)).tolist()
                        + np.subtract(rolling_mean, np.multiply(2, rolling_std)).tolist()[::-1]),
                 ),

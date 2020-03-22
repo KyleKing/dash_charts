@@ -5,6 +5,8 @@
 
 ### New
 
+* DataCache and general updates. [Kyle King]
+
 * Migrate to dash_dev. [Kyle King]
 
 * Remove files moved to dash_dev. [Kyle King]
@@ -48,6 +50,14 @@
 * First refactored example with Pareto chart. [Kyle King]
 
 ### Changes
+
+* Use RollingChart for SQL demo and capture gif. [Kyle King]
+
+* Set debug by CLI argument. [Kyle King]
+
+* Refactor to use dict instead of obj & use data_raw. [Kyle King]
+
+* Move some dash tutorials into tasks/package. [Kyle King]
 
 * Move px app into package. [Kyle King]
 
@@ -150,6 +160,10 @@
 * Improve documentation. [Kyle King]
 
 ### Fix
+
+* Sqlite demo spawning duplicate processes. [Kyle King]
+
+* References to app_px. [Kyle King]
 
 * Finish migration to dash_dev. [Kyle King]
 
