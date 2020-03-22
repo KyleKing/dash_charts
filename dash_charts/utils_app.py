@@ -140,6 +140,10 @@ class AppBase:  # noqa: H601
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        self.generate_data()
+
+    def generate_data(self):
+        """Recommended method for generating data stored in memory. Called in initialization."""
         pass
 
     def register_uniq_ids(self, app_ids):

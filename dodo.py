@@ -18,11 +18,11 @@ DOIT_CONFIG = {
     'default_tasks': [
         'export_req', 'check_req', 'update_cl',  # Comment on/off as needed
         # 'lint',  # Comment on/off as needed
-        # 'coverage',  # Comment on/off as needed
+        'coverage',  # Comment on/off as needed
         # 'open_test_docs',  # Comment on/off as needed
         'document',  # Comment on/off as needed
         # 'open_docs',  # Comment on/off as needed
-        'commit_docs',  # Comment on/off as needed
+        # 'commit_docs',  # Comment on/off as needed  # FIXME: Not changing directory!
     ],
 }
 """DoIt Configuration Settings. Run with `poetry run doit`."""

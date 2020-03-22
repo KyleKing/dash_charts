@@ -1,5 +1,8 @@
 """Utilities to build modules (delegated layout & callback methods) for Dash apps."""
 
+import dash_core_components as dcc
+import pandas as pd
+
 
 class ModuleBase:  # noqa: H601
     """Base class for building a modular component for use in a Dash application."""
@@ -72,3 +75,51 @@ class ModuleBase:  # noqa: H601
 
         """
         pass
+
+
+class DataCache(ModuleBase):
+    """Module to store data in UI and later loaded as needed."""
+
+    id_cache = 'cache'
+    """Session ID."""
+
+    all_ids = [id_cache]
+    """List of ids to register for this module."""
+
+    def return_layout(self, ids, storage_type='memory', **store_kwargs):
+        """Return Dash application layout.
+
+        Args:
+            ids: `self.ids` from base application
+            storage_type: `dcc.Store` storage type. Default is memory to clear on refresh
+            store_kwargs: additional keyword arguments to pass to `dcc.Store`
+
+        Returns:
+            dict: Dash HTML object.
+
+        """
+        return dcc.Store(id=ids[self.get(self.id_cache)], storage_type=storage_type, **store_kwargs)
+
+    def return_write_df_map(self, df_table):
+        """Return list of tuples for `map_outputs` that includes the new data cache JSON.
+
+        Args:
+            df_table: dataframe to show in table
+
+        Returns:
+            list: list of tuples for `map_outputs`
+
+        """
+        return [(self.get(self.id_cache), 'data', df_table.to_json())]
+
+    def read_df(self, args):
+        """Return list of tuples for `map_outputs` that includes the new data cache JSON.
+
+        Args:
+            args: either `a_in` or `a_state`, whichever has the id_cache-data
+
+        Returns:
+            dataframe: returns dataframe read from `dcc.Store`
+
+        """
+        return pd.read_json(args[self.get(self.id_cache)]['data'])

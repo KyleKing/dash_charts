@@ -112,10 +112,13 @@ class ParetoChart(CustomChart):
         layout['legend'] = {}
         layout['showlegend'] = False
 
+        layout['margin'] = {'l': 75, 'b': 100, 't': 50, 'r': 125}
+
         # Update YAxis configuration
+        layout['yaxis']['dtick'] = 10
         layout['yaxis']['mirror'] = 'ticks'
         layout['yaxis']['showline'] = True
-        layout['yaxis']['tickformat'] = '.1f'
+        layout['yaxis']['tickformat'] = '.0f'
 
         # See multiple axis: https://plot.ly/python/multiple-axes/
         layout['yaxis2'] = {

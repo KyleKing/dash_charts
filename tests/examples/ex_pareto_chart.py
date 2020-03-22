@@ -58,9 +58,6 @@ class ParetoDemo(AppBase):
             xlabel='Categories',
             ylabel='Count',
             layout_overrides=(
-                ('yaxis', 'dtick', 10),
-                ('yaxis', 'tickformat', '.0f'),
-                ('margin', None, {'l': 75, 'b': 100, 't': 50, 'r': 125}),
                 ('height', None, 500),
                 ('width', None, 750),
                 ('showlegend', None, True),

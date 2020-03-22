@@ -200,8 +200,8 @@ class MarginalChart(CustomChart):
         # Populate the traces of each subplot
         traces = [
             (self.create_traces, 2, 1),
-            (self._create_marg_top, 1, 1),
-            (self._create_marg_right, 2, 2),
+            (self.create_marg_top, 1, 1),
+            (self.create_marg_right, 2, 2),
         ]
         for trace_func, row, col in traces:
             for trace in trace_func(df_raw, **kwargs_data):
@@ -230,7 +230,7 @@ class MarginalChart(CustomChart):
         """
         raise NotImplementedError('create_traces must be implemented by child class')  # pragma: no cover
 
-    def _create_marg_top(self, df_raw, **kwargs_data):
+    def create_marg_top(self, df_raw, **kwargs_data):
         """Return traces for the top marginal chart.
 
         Should return, list: trace data points. List may be empty
@@ -243,9 +243,9 @@ class MarginalChart(CustomChart):
             NotImplementedError: Must be overridden by child class
 
         """
-        raise NotImplementedError('_create_marg_top must be implemented by child class')  # pragma: no cover
+        raise NotImplementedError('create_marg_top must be implemented by child class')  # pragma: no cover
 
-    def _create_marg_right(self, df_raw, **kwargs_data):
+    def create_marg_right(self, df_raw, **kwargs_data):
         """Return traces for the right marginal chart.
 
         Should return, list: trace data points. List may be empty
@@ -258,7 +258,7 @@ class MarginalChart(CustomChart):
             NotImplementedError: Must be overridden by child class
 
         """
-        raise NotImplementedError('_create_marg_right must be implemented by child class')  # pragma: no cover
+        raise NotImplementedError('create_marg_right must be implemented by child class')  # pragma: no cover
 
     def create_layout(self, *, bg_color='#F0F0F0'):
         """Remove axis lables from base layout as they would be applied to (row=1,col=1).

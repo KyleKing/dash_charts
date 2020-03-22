@@ -33,8 +33,13 @@ class AppWithNavigation(AppBase):
         """
         raise NotImplementedError('define_nav_elements must be implemented by child class')  # pragma: no cover
 
-    def create(self):
-        """Create each navigation componet, storing the layout. Then parent class to create application."""
+    def create(self, **kwargs):
+        """Create each navigation componet, storing the layout. Then parent class to create application.
+
+        Args:
+            kwargs: keyword arguments passed to `self.create`
+
+        """
         # Suppress callback verification as tab content is rendered later
         self.app.config['suppress_callback_exceptions'] = True
 
@@ -46,7 +51,7 @@ class AppWithNavigation(AppBase):
             self.nav_layouts[nav_name] = nav.return_layout()
 
         # Initialize parent application that handles navigation
-        super().create()
+        super().create(**kwargs)
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""

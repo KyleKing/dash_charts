@@ -35,7 +35,7 @@ class SampleMarginalChart(MarginalChart):
             ),
         ]
 
-    def _create_marg_top(self, df_raw):
+    def create_marg_top(self, df_raw):
         """Return traces for the top marginal chart.
 
         Args:
@@ -52,7 +52,7 @@ class SampleMarginalChart(MarginalChart):
             )
         ]
 
-    def _create_marg_right(self, df_raw):
+    def create_marg_right(self, df_raw):
         """Return traces for the top marginal chart.
 
         Args:
