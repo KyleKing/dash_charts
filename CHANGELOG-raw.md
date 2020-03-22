@@ -49,6 +49,10 @@
 
 ### Changes
 
+* Move px app into package. [Kyle King]
+
+* Reorganize some functions. [Kyle King]
+
 * Add filter inputs to datatable example. [Kyle King]
 
 * Move module to dash_charts. [Kyle King]

@@ -1,6 +1,6 @@
 """Plotly Express Examples."""
 
-# TODO: Migrate this sample code to ex_px.py
+# TODO: Migrate this sample code to ex_app_px.py
 
 import plotly.express as px
 

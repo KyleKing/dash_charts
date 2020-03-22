@@ -17,6 +17,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
   - [Applications](#applications)
     - [Tabbed Application](#tabbed-application)
     - [Multi-Page Application](#multi-page-application)
+    - [PX Generic Application](#px-generic-application)
   - [Coverage](#coverage)
   - [External Links](#external-links)
 
@@ -115,7 +116,7 @@ git clone https://github.com/KyleKing/dash_charts.git
 cd dash_charts
 poetry install
 poetry shell
-python tests/examples/ex_px.py
+python tests/examples/ex_app_px.py
 ```
 
 ## Example Charts and Tables
@@ -182,6 +183,14 @@ See sample code in [tests/examples/ex_multi_page.py](tests/examples/ex_multi_pag
 
 ![ex_multi_page.png](.images/ex_multi_page.png)
 
+### PX Generic Application
+
+To facilitate general data analysis from a JSON, CSV, or SQLite file, dash_charts includes apps for each px plot type and a tabbed app to bring them all together.
+
+See sample code in [tests/examples/ex_app_px.py](tests/examples/ex_app_px.py). Screenshot below:
+
+![ex_app_px.png](.images/ex_app_px.png)
+
 ## Coverage
 
 Latest coverage table
@@ -191,6 +200,7 @@ Latest coverage table
 | File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
 | __init__.py | 1 | 0 | 0 | 100.0 |
+| app_px.py | 108 | 11 | 0 | 89.8 |
 | components.py | 8 | 0 | 0 | 100.0 |
 | coordinate_chart.py | 105 | 1 | 6 | 99.0 |
 | custom_colorscales.py | 4 | 0 | 0 | 100.0 |
@@ -209,7 +219,7 @@ Latest coverage table
 | utils_callbacks.py | 25 | 1 | 0 | 96.0 |
 | utils_fig.py | 66 | 2 | 4 | 97.0 |
 
-Generated on: 2020-03-22T08:45:05.985693
+Generated on: 2020-03-22T09:07:25.271839
 
 <!-- /COVERAGE -->
 
