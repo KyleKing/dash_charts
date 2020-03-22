@@ -80,7 +80,7 @@ def opts_dd(lbl, value):
     return {'label': str(lbl), 'value': value}
 
 
-class AppBase:
+class AppBase:  # noqa: H601
     """Base class for building Dash Applications."""
 
     name = None

@@ -206,8 +206,8 @@ class TabBase(AppBase):
         inputs = [(_id, 'value') for _id in self.input_ids]
         states = ()
         @self.callback(outputs, inputs, states)
-        def update_chart(*args):
-            a_in, _a_states = map_args(args, inputs, states)
+        def update_chart(*raw_args):
+            a_in, _a_states = map_args(raw_args, inputs, states)
             name_func = a_in[self.id_func]['value']
 
             properties = [trigger['prop_id'] for trigger in dash.callback_context.triggered]

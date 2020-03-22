@@ -195,19 +195,20 @@ Latest coverage table
 | coordinate_chart.py | 105 | 1 | 6 | 99.0 |
 | custom_colorscales.py | 4 | 0 | 0 | 100.0 |
 | dash_helpers.py | 6 | 0 | 6 | 100.0 |
-| datatable.py | 47 | 0 | 0 | 100.0 |
+| datatable.py | 51 | 0 | 0 | 100.0 |
 | equations.py | 11 | 0 | 0 | 100.0 |
 | fitted_chart.py | 37 | 1 | 5 | 97.3 |
 | grouped_bar.py | 0 | 0 | 0 | 100.0 |
+| modules.py | 98 | 48 | 0 | 51.0 |
 | pareto_chart.py | 39 | 0 | 2 | 100.0 |
 | rolling_chart.py | 23 | 1 | 0 | 95.7 |
 | time_vis.py | 0 | 0 | 0 | 100.0 |
-| utils_app.py | 57 | 4 | 8 | 93.0 |
-| utils_app_modules.py | 15 | 15 | 2 | 0.0 |
+| utils_app.py | 57 | 1 | 8 | 98.2 |
+| utils_app_modules.py | 17 | 2 | 2 | 88.2 |
 | utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
-| utils_fig.py | 88 | 3 | 4 | 96.6 |
+| utils_fig.py | 91 | 3 | 4 | 96.7 |
 
-Generated on: 2020-03-21T11:38:05.796697
+Generated on: 2020-03-22T08:26:13.084703
 
 <!-- /COVERAGE -->
 

@@ -2,12 +2,6 @@
 
 import dash_table
 
-# TODO: Create a simpler datatable?
-# self..filter_action = 'none'
-# self..row_selectable = False
-# # self..style_as_list_view = True
-# self.sort_action = 'none'
-
 
 class BaseDataTable:
     """Base Class for Data Tables."""

@@ -49,6 +49,12 @@
 
 ### Changes
 
+* Move module to dash_charts. [Kyle King]
+
+* Improve datatable styling and module. [Kyle King]
+
+* Create initial module for datatable. [Kyle King]
+
 * Style sort and select in table & update docs. [Kyle King]
 
 * Refactor datatable for mutables and update ex. [Kyle King]
@@ -138,6 +144,8 @@
 * Improve documentation. [Kyle King]
 
 ### Fix
+
+* Finish migration to dash_dev. [Kyle King]
 
 * Missing example image & README indentation. [Kyle King]
 

@@ -98,9 +98,9 @@ class RollingDemo(AppBase):
         # inputs = ((self.id_chart, 'clickData'), )  # noqa: E800
         # states = ()  # noqa: E800
         # @self.callback(outputs, inputs, states)  # noqa: E800
-        # def update_chart(*args):  # noqa: E800
+        # def update_chart(*raw_args):  # noqa: E800
         #     # Example handling input arguments  # noqa: E800
-        #     a_in, a_states = map_args(args, inputs, states)  # noqa: E800
+        #     a_in, a_states = map_args(raw_args, inputs, states)  # noqa: E800
         #     ic(a_in[self.id_chart]['clickData'])  # noqa: E800
         #     # Example mapping output results  # noqa: E800
         #     new_figure = self.chart_main.create_figure(df_raw=self.data_raw, show_count=True)  # noqa: E800
