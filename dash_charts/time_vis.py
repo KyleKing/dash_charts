@@ -1,4 +1,10 @@
-"""PLANNED: Sample scripts for TimeVis-like horizontal bar chart with annotations."""
+"""PLANNED: Sample scripts for TimeVis-like horizontal bar chart with annotations.
+
+Goal would be to implement timevis from R in Plotly/Dash (R/TimeVis https://github.com/daattali/timevis)
+
+Online Gantt Demo: https://chart-studio.plot.ly/create/?fid=tmercieca:5#/
+
+"""
 
 # from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 # import plotly.figure_factory as ff

@@ -1,26 +1,44 @@
 Consolidated and Prioritized Task List
 
-- Round up latest TODOs/FIXMEs from source code
-- Update example charts
-	- Add fitted chart to README. Also use more realistic data
-		- Add common fit equations to common_dash for this chart (linear, quadratic, etc.)
-	- Guidelines on TS from ESRI: https://doc.arcgis.com/en/operations-dashboard/help/serial-chart.htm
-		- Maybe update timeseries (rolling/fitted) with ESRI information?
-	- Implement SQL rather than CSV data stores
-	- Add sparklines to available charts
-		- Create a generic data exploration example? Maybe with general statistics of the dataset?
-			- Should also include a datatable once available
-			- Would be useful in the below PX demo concept
-	- Build indicator like in ESRI: https://doc.arcgis.com/en/operations-dashboard/help/indicator.htm
-	- Built ESRI Event list: https://doc.arcgis.com/en/operations-dashboard/help/list.htm
-- PX: data upload is in top bar where user can use dcc.upload to pick CSV, JSON, or SQLite files - https://dash.plot.ly/dash-core-components/upload
-	- Maybe modal appears on load to select how to tidy data, how to load (is JSON in records or other format?) or which table from SQL to load
-	- Button to toggle back to the default data set per chart
-- Datatable
-	- Have click able icon in first column of table that triggers a dbc modal with additional information
-		- Would have layout determined in callback. Could be used to show a timeline, full traceback, or other long form data that can't be displayed in condensed table format
-		- dbc modal:  https://dash-bootstrap-components.opensource.faculty.ai/l/components/modal
-		- Would require wildcard props for each row: https://github.com/plotly/dash/issues/475
-- Event Timeline/Gantt
-	- Goal would be to implement timevis from R in Plotly/Dash (R/TimeVis https://github.com/daattali/timevis)
-		- Online Gantt Demo: https://chart-studio.plot.ly/create/?fid=tmercieca:5#/
+- Data table
+	- Show using the column lookup for markdown formatting, number of decimal places, etc.
+	- Implement modal that can open on button click
+
+- Implement annotations
+- Fitted chart
+	- Use more realistic data (use px data?)
+	- Add to README
+
+- Rolling chart
+	- Make module for filtering timeseries data. Base on the .dash_tutorials/SanFran_Weather...
+
+- Add example SQLite/live reloading app (status: example available in .dash_tutorials/sqlite-demo)
+- New: sparklines (status: nothing)
+	- create new sparklines figures
+- New: time vis (status: some sample code in placeholder file)
+	- Create timevis charts for viewing gantt-like event data
+- New: grouped_bar (status: placeholder file)
+	- create chart for showing grouped bar data
+
+- SQL Table Module
+	- Add datatable module for selecting table in SQL for data exploration (probably extend the filter table module)
+		- Will need to be able to reload the dropdown for table names in SQL in case database changes
+		- Maybe store value and options, then regenerate options (list of tables) and see if value is still in options
+- app_px
+	- Make sure all charts and examples are show
+	- Add tab to view preview of all data frames found in px
+	- Add ability to select data source (CSV, JSON, SQlite, etc.)
+		- data upload is in top bar where user can use dcc.upload to pick the file - https://dash.plot.ly/dash-core-components/upload
+		- Maybe modal appears on load to select how to tidy data, how to load (is JSON in records or other format?) or which table from SQL to load
+		- Button to toggle back to the default data set per chart
+	- Add SQL Table Module
+	- Show general data statistics from pandas describe
+
+- Round up other TODOs/FIXMEs from source code
+
+- Implement hexagonal chart from basketball/wip example
+
+- View guidelines on TS from ESRI: https://doc.arcgis.com/en/operations-dashboard/help/serial-chart.htm
+	- Maybe update rolling chart to use recommendations from ESRI?
+- Build indicator like in ESRI: https://doc.arcgis.com/en/operations-dashboard/help/indicator.htm
+- Built ESRI Event list: https://doc.arcgis.com/en/operations-dashboard/help/list.htm

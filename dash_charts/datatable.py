@@ -2,6 +2,82 @@
 
 import dash_table
 
+# PLANNED: These methods may be replaced in a future version of Dash
+# Currently, edge case when column is string, but filter could be a number
+# See: https://dash.plot.ly/datatable/callbacks & https://github.com/plotly/dash-table/issues/441
+
+OPERATORS = [['ge ', '>='],
+             ['le ', '<='],
+             ['lt ', '<'],
+             ['gt ', '>'],
+             ['ne ', '!='],
+             ['eq ', '='],
+             ['contains '],
+             ['datestartswith ']]
+"""List of lists containing each possible filter string."""
+
+
+def split_filter_part(filter_part):
+    """Split the filter into `(name, operator, value)` components.
+
+    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks
+
+    Args:
+        filter_part: string filter query
+
+    Returns:
+        tuple: `(name, operator, value)` which could be all None if no match was found
+
+    """
+    for operator_type in OPERATORS:
+        for operator in operator_type:
+            if operator in filter_part:
+                name_part, value_part = filter_part.split(operator, 1)
+                name = name_part[name_part.find('{') + 1: name_part.rfind('}')]
+
+                value_part = value_part.strip()
+                v0 = value_part[0]
+                if (v0 == value_part[-1] and v0 in ("'", '"', '`')):
+                    value = value_part[1: -1].replace('\\' + v0, v0)
+                else:
+                    try:
+                        value = float(value_part)
+                    except ValueError:
+                        value = value_part
+
+                # Word operators need spaces after them in the filter string, but we don't want these later
+                return (name, operator_type[0].strip(), value)
+
+    return [None, None, None]
+
+
+def apply_datatable_filters(df_table, filter_query):
+    """Filter a dataframe based on Dash datatable filterquery
+
+    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks
+
+    Args:
+        df_table: pandas dataframe to filter
+        filter: Dash datatable string filter query
+
+    Returns:
+        dataframe: filtered dataframe
+
+    """
+    filtering_expressions = filter_query.split(' && ')
+    for filter_part in filtering_expressions:
+        col_name, operator, filter_value = split_filter_part(filter_part)
+        if operator in ('eq', 'ne', 'lt', 'le', 'gt', 'ge'):
+            # these operators match pandas series operator method names
+            df_table = df_table.loc[getattr(df_table[col_name], operator)(filter_value)]
+        elif operator == 'contains':
+            df_table = df_table.loc[df_table[col_name].str.contains(filter_value)]
+        elif operator == 'datestartswith':
+            # this is a simplification of the front-end filtering logic,
+            # only works with complete fields in standard format
+            df_table = df_table.loc[df_table[col_name].str.startswith(filter_value)]
+    return df_table
+
 
 class BaseDataTable:
     """Base Class for Data Tables."""

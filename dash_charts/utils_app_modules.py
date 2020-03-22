@@ -77,6 +77,7 @@ class ModuleBase:  # noqa: H601
         pass
 
 
+# TODO: Add example and tests for this module
 class DataCache(ModuleBase):
     """Module to store data in UI and later loaded as needed."""
 

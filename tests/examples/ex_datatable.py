@@ -72,6 +72,14 @@ else:
     app.create()
     FLASK_HANDLE = app.get_server()
 
+# TODO: CLICKABLE POPUPS
+# - Datatable
+# 	- Have click able icon in first column of table that triggers a dbc modal with additional information
+# 		- Would have layout determined in callback. Could be used to show a timeline, full traceback, or other long
+#           form data that can't be displayed in condensed table format
+# 		- dbc modal:  https://dash-bootstrap-components.opensource.faculty.ai/l/components/modal
+# 		- Would require wildcard props for each row: https://github.com/plotly/dash/issues/475
+
 # # TODO: See: https://dash.plot.ly/datatable/interactivity
 # ('datatable-id...', 'derived_virtual_row_ids'),
 # ('datatable-id...', 'selected_row_ids'),
