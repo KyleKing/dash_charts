@@ -211,24 +211,24 @@ Latest coverage table
 | __init__.py | 1 | 0 | 0 | 100.0 |
 | app_px.py | 108 | 11 | 0 | 89.8 |
 | components.py | 8 | 0 | 0 | 100.0 |
-| coordinate_chart.py | 105 | 1 | 6 | 99.0 |
-| custom_colorscales.py | 4 | 0 | 0 | 100.0 |
+| coordinate_chart.py | 103 | 1 | 6 | 99.0 |
+| custom_colorscales.py | 3 | 3 | 0 | 0.0 |
 | dash_helpers.py | 20 | 1 | 7 | 95.0 |
 | datatable.py | 79 | 25 | 0 | 68.4 |
 | equations.py | 11 | 0 | 0 | 100.0 |
-| fitted_chart.py | 37 | 1 | 5 | 97.3 |
+| fitted_chart.py | 32 | 1 | 5 | 96.9 |
 | grouped_bar.py | 0 | 0 | 0 | 100.0 |
 | modules_datatable.py | 97 | 11 | 0 | 88.7 |
 | pareto_chart.py | 41 | 0 | 2 | 100.0 |
-| rolling_chart.py | 23 | 1 | 0 | 95.7 |
+| rolling_chart.py | 21 | 0 | 0 | 100.0 |
 | time_vis.py | 0 | 0 | 0 | 100.0 |
 | utils_app.py | 57 | 1 | 8 | 98.2 |
 | utils_app_modules.py | 28 | 5 | 2 | 82.1 |
 | utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
 | utils_callbacks.py | 25 | 1 | 0 | 96.0 |
-| utils_fig.py | 66 | 2 | 4 | 97.0 |
+| utils_fig.py | 67 | 2 | 4 | 97.0 |
 
-Generated on: 2020-03-22T13:38:12.375748
+Generated on: 2020-03-23T20:59:20.800249
 
 <!-- /COVERAGE -->
 

@@ -5,6 +5,8 @@
 
 ### New
 
+* Add slider to the rolling chart. [Kyle King]
+
 * DataCache and general updates. [Kyle King]
 
 * Migrate to dash_dev. [Kyle King]
@@ -50,6 +52,8 @@
 * First refactored example with Pareto chart. [Kyle King]
 
 ### Changes
+
+* Slightly improve annotations. [Kyle King]
 
 * Use RollingChart for SQL demo and capture gif. [Kyle King]
 
@@ -160,6 +164,8 @@
 * Improve documentation. [Kyle King]
 
 ### Fix
+
+* Add test for ex_sqlite. [Kyle King]
 
 * Sqlite demo spawning duplicate processes. [Kyle King]
 

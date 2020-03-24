@@ -280,7 +280,7 @@ dev = ["dash_flow_example (0.0.5)", "dash-dangerously-set-inner-html", "mock", "
 testing = ["pytest", "pytest-sugar", "pytest-mock", "lxml", "selenium (>=3.141.0)", "percy", "requests", "beautifulsoup4", "waitress"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Bootstrap themed components for use in Plotly Dash"
 name = "dash-bootstrap-components"
 optional = false
@@ -303,17 +303,6 @@ version = "1.8.1"
 
 [[package]]
 category = "dev"
-description = "DAQ components for Dash"
-name = "dash-daq"
-optional = false
-python-versions = "*"
-version = "0.4.0"
-
-[package.dependencies]
-dash = ">=1.6.1"
-
-[[package]]
-category = "dev"
 description = ""
 name = "dash-dev"
 optional = false
@@ -326,8 +315,6 @@ autopep8 = "*"
 beautifulsoup4 = "*"
 cohesion = "*"
 darglint = "*"
-dash-bootstrap-components = "*"
-dash_daq = "*"
 diff-cover = "*"
 dlint = "*"
 doit = "*"
@@ -389,10 +376,10 @@ vulture = "*"
 
 [package.dependencies.dash]
 extras = ["testing"]
-version = "^1.9"
+version = "*, ^1.9"
 
 [package.source]
-reference = "deeefbfd305f8bc95abeabd5db8e5b45bb1dccc5"
+reference = "9b89336eef89aa1baa029dd8b270de3070e6e2f3"
 type = "git"
 url = "https://github.com/KyleKing/dash_dev.git"
 [[package]]
@@ -1834,7 +1821,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "29ca9282391c8d87fc21d4d8be0e2e5d88d3ac7d19663295b416fcd36a71bb71"
+content-hash = "ae709c7a00f20bf955324809a1d2165b407058439990635bd10bb264960c5cc9"
 python-versions = "^3.7, !=3.8"
 
 [metadata.files]
@@ -1996,9 +1983,6 @@ dash-bootstrap-components = [
 ]
 dash-core-components = [
     {file = "dash_core_components-1.8.1.tar.gz", hash = "sha256:9a8901b67d3a1038fb79153c17234d5713c2d7cca0382718c6376c786b280e63"},
-]
-dash-daq = [
-    {file = "dash_daq-0.4.0.tar.gz", hash = "sha256:051adb0ffc03e25f24bc031d40b858aa85bd3bae61450b150a24a5d13847d332"},
 ]
 dash-dev = []
 dash-html-components = [
