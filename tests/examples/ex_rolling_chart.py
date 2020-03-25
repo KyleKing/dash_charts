@@ -34,8 +34,6 @@ class RollingDemo(AppBase):
         super().initialization()
         self.register_uniq_ids([self.id_slider, self.id_chart])
 
-        self._generate_data()
-
     def create_elements(self):
         """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = RollingChart(
@@ -54,7 +52,7 @@ class RollingDemo(AppBase):
             for idx, color in enumerate(colors)
         ], 200)
 
-    def _generate_data(self):
+    def generate_data(self):
         """Create self.data_raw with sample data."""
         # Generate random data points
         count = 1000

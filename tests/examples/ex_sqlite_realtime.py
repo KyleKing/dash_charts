@@ -112,8 +112,6 @@ class RealTimeSQLDemo(AppBase):
         super().initialization()
         self.register_uniq_ids([self.id_chart, self.id_interval])
 
-        self._generate_data()
-
     def create_elements(self):
         """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = RollingChart(
@@ -123,7 +121,7 @@ class RealTimeSQLDemo(AppBase):
         )
         self.chart_main.count_rolling = 20
 
-    def _generate_data(self):
+    def generate_data(self):
         """Start the realtime updates of the database. Function could be run from separate process."""
         db_file = self.db_file
         process = multiprocessing.Process(

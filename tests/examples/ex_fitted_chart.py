@@ -30,8 +30,6 @@ class FittedDemo(AppBase):
         super().initialization()
         self.register_uniq_ids([self.id_chart])
 
-        self._generate_data()
-
     def create_elements(self):
         """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = FittedChart(
@@ -42,7 +40,7 @@ class FittedDemo(AppBase):
         # Set fit equations
         self.chart_main.fit_eqs = [('quadratic', equations.quadratic)]
 
-    def _generate_data(self):
+    def generate_data(self):
         """Create self.data_raw with sample data."""
         # Create dataframe based on px sample dataset
         iris = px.data.iris()

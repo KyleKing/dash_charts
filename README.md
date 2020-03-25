@@ -227,8 +227,9 @@ Latest coverage table
 | utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
 | utils_callbacks.py | 25 | 1 | 0 | 96.0 |
 | utils_fig.py | 67 | 2 | 4 | 97.0 |
+| utils_static.py | 43 | 2 | 0 | 95.3 |
 
-Generated on: 2020-03-23T20:59:20.800249
+Generated on: 2020-03-23T21:18:05.931168
 
 <!-- /COVERAGE -->
 

@@ -5,6 +5,8 @@
 
 ### New
 
+* Initialize module for writing static HTML. [Kyle King]
+
 * Add slider to the rolling chart. [Kyle King]
 
 * DataCache and general updates. [Kyle King]
