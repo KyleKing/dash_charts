@@ -7,18 +7,49 @@ from scipy import optimize
 
 from .utils_fig import CustomChart, check_raw_data
 
-# TODO: Possible use random method from old line_chart example?
-# count = 10
-# self.data_raw = [
-#     pd.DataFrame(data={
-#         'x': [idx for idx in range(count)],
-#         'y': sorted([random.expovariate(0.2) for _i in range(count)], reverse=True),
-#         'labels': ['Index: {}'.format(idx) for idx in range(count)],
-#     }),
-# ]
+
+def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):
+    """Create traces for specified equation.
+
+    Args:
+        df_raw: pandas dataframe with columns `name: str`, `x: float`, `y: float` and `label: str`
+        name: unique name for trace
+        fit_equation: equation used
+        suppress_fit_errors: If True, bury errors from scipy fit. Default is False.
+
+    Returns:
+        list: of Scatter traces for fitted equation
+
+    """
+    fitted_data = []
+    try:
+        popt, pcov = optimize.curve_fit(fit_equation, xdata=df_raw['x'], ydata=df_raw['y'], method='lm')
+        # Calculate representative x values for plotting fit
+        x_min = np.min(df_raw['x'])
+        x_max = np.max(df_raw['x'])
+        x_range = x_max - x_min
+        x_values = sorted([
+            x_min - 0.05 * x_range,
+            *np.divide(range(int(x_min * 10), int(x_max * 10)), 10),
+            x_max + 0.05 * x_range,
+        ])
+        fitted_data = [go.Scatter(
+            mode='lines+markers',
+            name=name,
+            opacity=0.9,
+            text=f'popt:{[round(param, 3) for param in popt]}',
+            x=x_values,
+            y=fit_equation(x_values, *popt),
+        )]
+    except (RuntimeError, ValueError) as err:  # pragma: no cover
+        if suppress_fit_errors:
+            ic(err, name)
+        else:
+            raise
+
+    return fitted_data  # noqa: R504
 
 
-# FIXME: Should share functionality with rolling chart (annotations, etc.)!
 class FittedChart(CustomChart):
     """Scatter and Fitted Line Chart."""
 
@@ -49,7 +80,7 @@ class FittedChart(CustomChart):
 
         # Separate raw tidy dataframe into separate scatter plots
         scatter_data = []
-        fit_data = []
+        fit_traces = []
         for name in set(df_raw['name']):
             df_name = df_raw[df_raw['name'] == name]
             scatter_data.append(go.Scatter(
@@ -64,64 +95,8 @@ class FittedChart(CustomChart):
 
             if len(df_name['x']) > self.min_scatter_for_fit:
                 for fit_name, fit_equation in self.fit_eqs:
-                    fit_data += self.fit_data(name, df_name, fit_name, fit_equation)
+                    fit_traces.extend(
+                        create_fit_traces(df_name, f'{name}-{fit_name}', fit_equation, self.suppress_fit_errors),
+                    )
 
-        return scatter_data + fit_data
-
-    def fit_data(self, name, df_name, fit_name, fit_equation):
-        # FIXME: Document
-        fitted_data = []
-        try:
-            popt, pcov = optimize.curve_fit(fit_equation, xdata=df_name['x'], ydata=df_name['y'], method='lm')
-            min_x, max_x = np.min(df_name['x']), np.max(df_name['x'])
-            range_x = max_x - min_x
-            points_x = sorted([
-                min_x - 0.05 * range_x,
-                *np.divide(range(int(min_x * 10), int(max_x * 10)), 10),
-                max_x + 0.05 * range_x,
-            ])
-            fitted_data = [go.Scatter(
-                hoverinfo='skip',
-                mode='lines+markers',
-                name=f'{name}-{fit_name}',
-                opacity=0.9,
-                x=points_x,
-                y=fit_equation(points_x, *popt),
-            )]
-        except (RuntimeError, ValueError) as err:  # pragma: no cover
-            if self.suppress_fit_errors:
-                ic(err, name)
-            else:
-                raise
-
-        return fitted_data
-
-    def create_annotations(self, annotations, y_range):
-        """Create the annotations. May be overridden when inherited to customize annotation styling and positioning.
-
-        annotations -- list of tuples with values (x,y,label,color). Color may be None
-        y_range -- PLANNED: Document
-
-        """
-        self.annotations = [
-            go.layout.Annotation(
-                arrowcolor='black' if color is None else color,
-                arrowhead=7,
-                arrowsize=0.3,
-                arrowwidth=1.5,
-                ax=x, ay=y + np.amax([(y_range[1] - y) * 0.3, 10]),
-                bgcolor='black' if color is None else color,
-                bordercolor='black' if color is None else color,
-                borderpad=2,
-                borderwidth=1,
-                font={'color': '#ffffff'},
-                # hoverlabel={bgcolor, bordercolor, font},
-                hovertext=label,
-                opacity=0.8,
-                showarrow=True,
-                text=str(idx + 1),
-                x=x, y=y,
-                xref='x', yref='y', axref='x', ayref='y',
-            )
-            for idx, (x, y, label, color) in enumerate(annotations)
-        ]
+        return scatter_data + fit_traces

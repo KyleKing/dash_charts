@@ -7,6 +7,41 @@ import plotly.graph_objects as go
 from .utils_fig import CustomChart, check_raw_data
 
 
+def create_rolling_traces(df_raw, count_rolling, count_std):
+    """Calculate traces for rolling average and standard deviation.
+
+    Args:
+        df_raw: pandas dataframe with columns `x: float`, `y: float` and `label: str`
+        count_rolling: number of points to use for the rolling calculation
+        count_std: number of standard deviations to use for the standard deviation
+
+    Returns:
+        list: of Scatter traces for rolling mean and std
+
+    """
+    rolling_mean = bottleneck.move_mean(df_raw['y'], count_rolling)
+    rolling_std = bottleneck.move_std(df_raw['y'], count_rolling)
+    return [
+        go.Scatter(
+            fill='toself',
+            hoverinfo='skip',
+            name=f'{count_std}x STD Range',
+            opacity=0.5,
+            x=(df_raw['x'].tolist() + df_raw['x'].tolist()[::-1]),
+            y=(np.add(rolling_mean, np.multiply(count_std, rolling_std)).tolist()
+                + np.subtract(rolling_mean, np.multiply(count_std, rolling_std)).tolist()[::-1]),
+        ),
+        go.Scatter(
+            hoverinfo='skip',
+            mode='lines',
+            name='Rolling Mean',
+            opacity=0.9,
+            x=df_raw['x'],
+            y=rolling_mean,
+        ),
+    ]
+
+
 class RollingChart(CustomChart):
     """Rolling Mean and Filled Standard Deviation Chart for monitoring trends."""
 
@@ -45,66 +80,8 @@ class RollingChart(CustomChart):
         ]
         # Only add the rolling calculations if there are a sufficient number of points
         if len(df_raw['x']) >= self.count_rolling:
-            rolling_mean = bottleneck.move_mean(df_raw['y'], self.count_rolling)
-            rolling_std = bottleneck.move_std(df_raw['y'], self.count_rolling)
-            chart_data.extend([
-                go.Scatter(
-                    fill='toself',
-                    hoverinfo='skip',
-                    name=f'{self.count_std}x STD Range',
-                    opacity=0.5,
-                    x=(df_raw['x'].tolist() + df_raw['x'].tolist()[::-1]),
-                    y=(np.add(rolling_mean, np.multiply(2, rolling_std)).tolist()
-                       + np.subtract(rolling_mean, np.multiply(2, rolling_std)).tolist()[::-1]),
-                ),
-                go.Scatter(
-                    hoverinfo='skip',
-                    mode='lines',
-                    name='Rolling Mean',
-                    opacity=0.9,
-                    x=df_raw['x'],
-                    y=rolling_mean,
-                ),
-            ])
-        return chart_data
-
-    def create_annotations(self, annotations, y_max):
-        """Create the annotations. May be overridden when inherited to customize annotation styling and positioning.
-
-        Args:
-            annotations: list of tuples with values (x,y,label,color). Color may be None
-            y_range: PLANNED: Document
-
-        """
-        self.annotations = [
-            go.layout.Annotation(
-                arrowcolor='black' if color is None else color,
-                arrowhead=7,
-                arrowsize=0.3,
-                arrowwidth=1.5,
-                ax=x, ay=y + np.amax([(y_max - y) * 0.3, 10]),
-                bgcolor='black' if color is None else color,
-                bordercolor='black' if color is None else color,
-                borderpad=2,
-                borderwidth=1,
-                font={'color': '#ffffff'},
-                # hoverlabel={bgcolor, bordercolor, font},
-                hovertext=label,
-                opacity=0.8,
-                showarrow=True,
-                text=str(idx + 1),
-                x=x, y=y,
-                xref='x', yref='y', axref='x', ayref='y',
+            chart_data.extend(
+                create_rolling_traces(df_raw, self.count_rolling, self.count_std),
             )
-            for idx, (x, y, label, color) in enumerate(annotations)
-        ]
 
-    def create_layout(self):
-        """Extend the standard layout.
-
-        Returns:
-            dict: layout for Dash figure
-
-        """
-        layout = super().create_layout()
-        return layout
+        return chart_data

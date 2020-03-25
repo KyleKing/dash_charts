@@ -4,11 +4,12 @@ import dash_core_components as dcc
 import dash_html_components as html
 import numpy as np
 import pandas as pd
+import plotly.graph_objects as go
 from dash_charts.dash_helpers import parse_dash_cli_args
 from dash_charts.rolling_chart import RollingChart
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_callbacks import map_args, map_outputs
-from dash_charts.utils_fig import min_graph
+from dash_charts.utils_fig import make_dict_an, min_graph
 
 
 class RollingDemo(AppBase):
@@ -34,24 +35,6 @@ class RollingDemo(AppBase):
         super().initialization()
         self.register_uniq_ids([self.id_slider, self.id_chart])
 
-    def create_elements(self):
-        """Initialize the charts, tables, and other Dash elements."""
-        self.chart_main = RollingChart(
-            title='Sample Timeseries Chart with Rolling Calculations',
-            xlabel='Index',
-            ylabel='Measured Value',
-        )
-
-        count = 1000
-        colors = [
-            '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#e377c2', '#7f7f7f', '#17becf', None,
-        ]
-        indices = [20 + int(idx * count / len(colors)) for idx in range(len(colors))]
-        self.chart_main.create_annotations([
-            (self.data_raw['x'][indices[idx]], self.data_raw['y'][indices[idx]], 'Additional Information', color)
-            for idx, color in enumerate(colors)
-        ], 200)
-
     def generate_data(self):
         """Create self.data_raw with sample data."""
         # Generate random data points
@@ -68,6 +51,24 @@ class RollingDemo(AppBase):
             'y': y_vals,
             'label': [f'Point {idx}' for idx in range(count)],
         })
+
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements."""
+        self.chart_main = RollingChart(
+            title='Sample Timeseries Chart with Rolling Calculations',
+            xlabel='Index',
+            ylabel='Measured Value',
+        )
+        # Add some example annotations
+        colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#e377c2', '#7f7f7f', '#17becf', None]
+        count = 1000
+        y_offset = np.mean(self.data_raw['y']) - np.amin(self.data_raw['y'])
+        for idx, color in enumerate(colors):
+            label = f'Additional Information for index {idx + 1} and color {color}'
+            coord = [self.data_raw[ax][20 + int(idx * count / len(colors))] for ax in ['x', 'y']]
+            self.chart_main.annotations.append(go.layout.Annotation(
+                **make_dict_an(coord, str(idx + 1), label, color, y_offset),
+            ))
 
     def return_layout(self):
         """Return Dash application layout.

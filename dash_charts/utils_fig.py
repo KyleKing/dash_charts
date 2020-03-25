@@ -1,6 +1,7 @@
 """Utilities for custom Dash figures."""
 
 import dash_core_components as dcc
+import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
@@ -36,6 +37,46 @@ def check_raw_data(df_raw, min_keys):
     all_keys = df_raw.keys()
     if len([_k for _k in min_keys if _k in all_keys]) != len(min_keys):
         raise RuntimeError(f'`df_raw` must have keys {min_keys}. Found: {all_keys}')
+
+
+def make_dict_an(coord, text, label=None, color=None, y_offset=10):
+    """Create stylized chart annotation.
+
+    Args:
+        coord: tuple of x and y coordinate
+        text: string text for annotation
+        label: string label shown on hover
+        color: string color. If None (default), will revert to black
+        y_max: used to calculate vertical offset. Default is +10 y units
+
+    Returns:
+        dict: keyword arguments for `go.layout.Annotation`
+
+    """
+    return {
+        'arrowcolor': 'black' if color is None else color,
+        'arrowhead': 7,
+        'arrowsize': 0.3,
+        'arrowwidth': 1.5,
+        'ax': coord[0],
+        'axref': 'x',
+        'ay': coord[1] + y_offset,
+        'ayref': 'y',
+        'bgcolor': 'black' if color is None else color,
+        'bordercolor': 'black' if color is None else color,
+        'borderpad': 2,
+        'borderwidth': 1,
+        'font': {'color': '#ffffff'},
+        # 'hoverlabel': {bgcolor, bordercolor, font},
+        'hovertext': label,
+        'opacity': 0.8,
+        'showarrow': True,
+        'text': text,
+        'x': coord[0],
+        'xref': 'x',
+        'y': coord[1],
+        'yref': 'y',
+    }
 
 
 class CustomChart:  # noqa: H601

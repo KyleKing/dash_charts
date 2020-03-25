@@ -8,11 +8,7 @@
 - Data table
 	- Show using the column lookup for markdown formatting, number of decimal places, etc.
 	- Implement modal that can open on button click
-- Fitted chart
-	- Add to README
 
-- Make annotations more generic and hoist to base fig
-	- Combine Fitted/Rolling charts
 - New: sparklines (status: nothing)
 	- create new sparklines figures
 - New: time vis (status: some sample code in placeholder file)

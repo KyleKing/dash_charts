@@ -55,6 +55,8 @@
 
 ### Changes
 
+* Use generate_data instead of _generate_data. [Kyle King]
+
 * Slightly improve annotations. [Kyle King]
 
 * Use RollingChart for SQL demo and capture gif. [Kyle King]

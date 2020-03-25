@@ -50,6 +50,7 @@ class FittedDemo(AppBase):
             'y': iris['petal_length'],
             'label': None,
         })
+        # Alternatively, use `[random.expovariate(0.2) for _i in range(count)]`
 
     def return_layout(self):
         """Return Dash application layout.

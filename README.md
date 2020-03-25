@@ -11,6 +11,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
   - [Example Charts and Tables](#example-charts-and-tables)
     - [Pareto Chart](#pareto-chart)
     - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
+    - [Fitted Chart](#fitted-chart)
     - [Real Time SQL Demo](#real-time-sql-demo)
     - [Coordinate Chart](#coordinate-chart)
     - [Marginal Chart](#marginal-chart)
@@ -140,6 +141,14 @@ See sample code in [tests/examples/ex_rolling_chart.py](tests/examples/ex_rollin
 
 ![ex_rolling_chart.png](.images/ex_rolling_chart.png)
 
+### Fitted Chart
+
+Fit arbitrary scatter data with a specified equation. On hover will show the rounded fit parameters. Useful for experimenting with new data.
+
+See sample code in [tests/examples/ex_fitted_chart.py](tests/examples/ex_fitted_chart.py). Screenshot below:
+
+![ex_fitted_chart.png](.images/ex_fitted_chart.png)
+
 ### Real Time SQL Demo
 
 Example using a Rolling Chart to show real time data from a SQLite database. For the demo, a background thread populates the database as the Dash app runs in a separate thread.
@@ -216,20 +225,20 @@ Latest coverage table
 | dash_helpers.py | 20 | 1 | 7 | 95.0 |
 | datatable.py | 79 | 25 | 0 | 68.4 |
 | equations.py | 11 | 0 | 0 | 100.0 |
-| fitted_chart.py | 32 | 1 | 5 | 96.9 |
+| fitted_chart.py | 31 | 0 | 5 | 100.0 |
 | grouped_bar.py | 0 | 0 | 0 | 100.0 |
 | modules_datatable.py | 97 | 11 | 0 | 88.7 |
 | pareto_chart.py | 41 | 0 | 2 | 100.0 |
-| rolling_chart.py | 21 | 0 | 0 | 100.0 |
+| rolling_chart.py | 18 | 0 | 0 | 100.0 |
 | time_vis.py | 0 | 0 | 0 | 100.0 |
 | utils_app.py | 57 | 1 | 8 | 98.2 |
 | utils_app_modules.py | 28 | 5 | 2 | 82.1 |
 | utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
 | utils_callbacks.py | 25 | 1 | 0 | 96.0 |
-| utils_fig.py | 67 | 2 | 4 | 97.0 |
+| utils_fig.py | 70 | 2 | 4 | 97.1 |
 | utils_static.py | 43 | 2 | 0 | 95.3 |
 
-Generated on: 2020-03-23T21:18:05.931168
+Generated on: 2020-03-24T21:04:18.094072
 
 <!-- /COVERAGE -->
 
