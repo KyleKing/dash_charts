@@ -5,6 +5,8 @@
 
 ### New
 
+* Add utils_static function tag_markdown. [Kyle King]
+
 * Improve utils_static with dominate. [Kyle King]
 
 * Refactor fitted and rolling figures. [Kyle King]
@@ -175,6 +177,8 @@
 * Improve documentation. [Kyle King]
 
 ### Fix
+
+* Fix error in path for task commit_docs. [Kyle King]
 
 * Add test for ex_sqlite. [Kyle King]
 

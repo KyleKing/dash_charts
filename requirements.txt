@@ -21,7 +21,7 @@ darglint==1.2.0
 dash==1.9.1
 dash-bootstrap-components==0.9.1
 dash-core-components==1.8.1
--e git+https://github.com/KyleKing/dash_dev.git@62d6a01e2ebbf4969c9b18c7334bfd587e7ee5f1#egg=dash-dev
+-e git+https://github.com/KyleKing/dash_dev.git@2da303ceeb9e381b70f6d1e5452409a9dc18dd8e#egg=dash-dev
 dash-html-components==1.0.2
 dash-renderer==1.2.4
 dash-table==4.6.1

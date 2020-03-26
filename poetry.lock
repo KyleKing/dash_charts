@@ -382,7 +382,7 @@ extras = ["testing"]
 version = "*, ^1.9"
 
 [package.source]
-reference = "8c64d9b8548b3fb65235d99a0dd85432baf4c9db"
+reference = "2da303ceeb9e381b70f6d1e5452409a9dc18dd8e"
 type = "git"
 url = "https://github.com/KyleKing/dash_dev.git"
 [[package]]
