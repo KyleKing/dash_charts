@@ -20,6 +20,7 @@ dominate = "*"
 icecream = "*"
 markdown = "*"
 pandas = "*"
+py-gfm = "*"
 scipy = "*"
 
 [tool.poetry.dev-dependencies]

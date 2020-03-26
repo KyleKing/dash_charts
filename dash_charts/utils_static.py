@@ -8,6 +8,7 @@ import markdown
 import plotly.io
 from bs4 import BeautifulSoup
 from dominate import tags, util
+from mdx_gfm import GithubFlavoredMarkdownExtension
 
 
 def write_div(figure, path_or_file_object, is_div=True, **html_kwargs):
@@ -125,7 +126,6 @@ def create_dbc_doc(theme=dbc.themes.BOOTSTRAP, custom_styles='', **doc_kwargs):
 
     doc = format_plotly_boilerplate(**doc_kwargs)
     with doc.head:
-        dbc.themes.BOOTSTRAP
         tags.meta(charset='utf-8')
         tags.meta(name='viewport', content='width=device-width, initial-scale=1')
         for sheet_kwargs in stylesheets:
@@ -156,7 +156,9 @@ def tag_markdown(text):
         text: markdown string
 
     """
-    util.raw(markdown.markdown(text))
+    util.raw(markdown.markdown(
+        text, extensions=[GithubFlavoredMarkdownExtension()],
+    ))
 
 
 def tag_table(df_table, table_class=None):
@@ -183,3 +185,80 @@ def tag_table(df_table, table_class=None):
                 with tags.tr():
                     for value in row[1:]:
                         tags.td(str(value))
+
+
+def write_lookup(key, function_lookup):
+    """Determine the lookup result and add to the file.
+
+    Args:
+        key: string key for function lookup
+        function_lookup: dictionary with either the string result or equation and arguments
+
+    Raises:
+        RuntimeError: if error in lookup dictionary
+
+    """
+    try:
+        match = function_lookup[key]
+    except KeyError:
+        raise RuntimeError(f'Could not find "{key}" in {function_lookup}')
+
+    if isinstance(match, str):
+        util.raw(match)
+    elif len(match) == 2:
+        fun, args = match
+        result = fun(*args)
+        if isinstance(result, str):
+            util.raw(result)
+    else:
+        raise RuntimeError(f'Match failed for "{key}". Returned: {match} from {function_lookup}')
+
+
+def markdown_machine(lines, function_lookup):  # noqa: CCR001
+    """Convert markdown text file into Plotly-HTML and write to doc context.
+
+    Note: you will need a document with necessary boilerplate and call this within a `with doc:` dominate context
+    Multiple Markdown files can then be put into a single HTML output file by calling this function with new lines
+    and function lookup arguments
+
+    Args:
+        lines: list of text file lines
+        function_lookup: dictionary with either the string result or equation and arguments
+            Will be inserted into file where `>>lookup:function_name` assuming key of `function_name`
+
+    """
+    markdown_lines = []
+    for line in lines:
+        if line.startswith('>>lookup:'):
+            # Write stored markdown and clear list. Then write the matched lookup
+            tag_markdown('\n'.join(markdown_lines))
+            markdown_lines = []
+            write_lookup(line.split('>>lookup:')[1], function_lookup)
+        else:
+            markdown_lines.append(line)
+    if len(markdown_lines) > 0:
+        tag_markdown('\n'.join(markdown_lines))
+
+
+def write_from_markdown(filename, function_lookup, **dbc_kwargs):
+    """Wrap markdown_machine to convert markdown to Bootstrap HTML.
+
+    Args:
+        filename: path to markdown file
+        function_lookup: dictionary with either the string result or equation and arguments
+            Will be inserted into file where `>>lookup:function_name` assuming key of `function_name`
+        dbc_kwargs: keyword arguments to pass to `create_dbc_doc`
+
+    Returns:
+        Path: created HTML filename
+
+    """
+    lines = filename.read_text().split('\n')
+    html_filename = filename.parent / f'{filename.stem}.html'
+    doc = create_dbc_doc(**dbc_kwargs)
+    with doc:
+        with tags.div(_class='container').add(tags.div(_class='col')):
+            markdown_machine(lines, function_lookup)
+
+    html_filename.write_text(str(doc))
+    return html_filename

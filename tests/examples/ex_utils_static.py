@@ -10,7 +10,7 @@ import pandas as pd
 import plotly.express as px
 from dash_charts import equations
 from dash_charts.fitted_chart import FittedChart
-from dash_charts.utils_static import create_dbc_doc, make_div, tag_code, tag_markdown, tag_table
+from dash_charts.utils_static import create_dbc_doc, make_div, tag_code, tag_markdown, tag_table, write_from_markdown
 from dominate import tags, util
 
 
@@ -18,7 +18,7 @@ def create_sample_custom_chart_figure():
     """Return figure dictionary using CustomChart classes.
 
     Returns:
-        TODO
+        dict: chart figure
 
     """
     chart_main = FittedChart(
@@ -87,7 +87,28 @@ def write_sample_html(filename):
     filename.write_text(str(doc))
 
 
+def example_write_from_markdown():
+    """Demonstrate the write_from_markdown function.
+
+    Returns:
+        Path: path to created HTMl file
+
+    """
+    filename = Path(__file__).parent / 'example_write_from_markdown.md'
+    figure_px = px.scatter(x=range(10), y=range(10))
+    function_lookup = {
+        'make_div(figure_px)': (make_div, [figure_px]),
+        'table(iris_data)': (tag_table, [px.data.iris().head(10)]),
+    }
+    return write_from_markdown(filename, function_lookup)
+
+
 if __name__ == '__main__':
+    # Create all HTML content in Python
     filename = Path(__file__).parent / 'tmp.html'
     write_sample_html(filename)
     webbrowser.open(filename.resolve().as_uri())
+
+    # Alternatively, read from a Markdown file (note: both methods can be combined)
+    filename_from_md = example_write_from_markdown()
+    webbrowser.open(filename_from_md.resolve().as_uri())

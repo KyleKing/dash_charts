@@ -64,6 +64,10 @@
 
 ### Changes
 
+* Add ex_utils_static to README. [Kyle King]
+
+* Update dash_dev for docs fixes. [Kyle King]
+
 * Use generate_data instead of _generate_data. [Kyle King]
 
 * Slightly improve annotations. [Kyle King]
