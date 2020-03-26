@@ -20,6 +20,8 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
     - [Tabbed Application](#tabbed-application)
     - [Multi-Page Application](#multi-page-application)
     - [PX Generic Application](#px-generic-application)
+  - [Other](#other)
+    - [Static HTML Generation](#static-html-generation)
   - [Coverage](#coverage)
   - [External Links](#external-links)
 
@@ -218,6 +220,18 @@ To facilitate general data analysis from a JSON, CSV, or SQLite file, dash_chart
 See sample code in [tests/examples/ex_app_px.py](tests/examples/ex_app_px.py). Screenshot below:
 
 ![ex_app_px.png](.images/ex_app_px.png)
+
+## Other
+
+Other notable components in `dash_charts`
+
+### Static HTML Generation
+
+utilities for creating static HTML output with all of the CustomCharts above or user-created. Also includes utilities for writing tables, code, markdown, and more to be added.
+
+See sample code in [tests/examples/ex_utils_static.py](tests/examples/ex_utils_static.py). Screenshot below:
+
+![ex_utils_static.png](.images/ex_utils_static.png)
 
 ## Coverage
 

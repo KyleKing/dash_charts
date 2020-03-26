@@ -16,6 +16,7 @@
 		- Will need to be able to reload the dropdown for table names in SQL in case database changes
 		- Maybe store value and options, then regenerate options (list of tables) and see if value is still in options
 - app_px
+	- Add to README
 	- Make sure all charts and examples are show
 	- Add tab to view preview of all data frames found in px
 	- Add ability to select data source (CSV, JSON, SQlite, etc.)
