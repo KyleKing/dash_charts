@@ -4,6 +4,7 @@ import io
 
 import dash_bootstrap_components as dbc
 import dominate
+import markdown
 import plotly.io
 from bs4 import BeautifulSoup
 from dominate import tags, util
@@ -146,6 +147,16 @@ def tag_code(text, language=''):
 
     """
     tags.pre().add(tags.code(text, _class=f'{language} hljs'))
+
+
+def tag_markdown(text):
+    """Format markdown text as HTML.
+
+    Args:
+        text: markdown string
+
+    """
+    util.raw(markdown.markdown(text))
 
 
 def tag_table(df_table, table_class=None):

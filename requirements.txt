@@ -21,7 +21,7 @@ darglint==1.2.0
 dash==1.9.1
 dash-bootstrap-components==0.9.1
 dash-core-components==1.8.1
--e git+https://github.com/KyleKing/dash_dev.git@d71818e03ce6e3dde8a9e3760fd8214398a35795#egg=dash-dev
+-e git+https://github.com/KyleKing/dash_dev.git@62d6a01e2ebbf4969c9b18c7334bfd587e7ee5f1#egg=dash-dev
 dash-html-components==1.0.2
 dash-renderer==1.2.4
 dash-table==4.6.1
@@ -154,4 +154,4 @@ waitress==1.4.3
 watchdog==0.10.2
 wcwidth==0.1.9
 werkzeug==1.0.0
-zipp==3.1.0
+zipp==3.1.0; python_version < "3.8"

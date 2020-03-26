@@ -18,6 +18,7 @@ dash = "*, ^1.9"
 dash-bootstrap-components = "*"
 dominate = "*"
 icecream = "*"
+markdown = "*"
 pandas = "*"
 scipy = "*"
 

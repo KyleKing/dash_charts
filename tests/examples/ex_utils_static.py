@@ -10,7 +10,7 @@ import pandas as pd
 import plotly.express as px
 from dash_charts import equations
 from dash_charts.fitted_chart import FittedChart
-from dash_charts.utils_static import create_dbc_doc, make_div, tag_code, tag_table
+from dash_charts.utils_static import create_dbc_doc, make_div, tag_code, tag_markdown, tag_table
 from dominate import tags, util
 
 
@@ -67,12 +67,21 @@ def write_sample_html(filename):
 
             tags.hr()
             tags.h1('Example Code')
-            tag_code('# Hello Markdown!\n\n[HLJS Demo](https://highlightjs.org/static/demo/)', language='language-md')
             tag_code((Path(__file__).parent / 'readme.py').read_text(), language='language-py')
+
+            tags.hr()
+            tags.h1('Markdown Examples')
+            md_string = '# Hello Markdown!\n\n[HLJS Demo](https://highlightjs.org/static/demo/)'
+            tags.p('Shown as raw code below')
+            tag_code(md_string, language='language-md')
+            tags.p('Shown as formatted HTML')
+            tag_markdown(md_string)
 
             tags.hr()
             tags.h1('Another Chart For Good Measure')
             util.raw(make_div(px_figure))
+            tags.br()
+            tags.p('JSON representation of the px_figure layout')
             tag_code(json.dumps(json.loads(px_figure_json), indent=4), language='language-json')
 
     filename.write_text(str(doc))

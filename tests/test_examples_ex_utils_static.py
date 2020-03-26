@@ -13,4 +13,4 @@ def test_smoke_test_write_plotly_html():
         ex_utils_static.write_sample_html(filename)
         content = filename.read_text()
 
-    assert len(content.split('\n')) == 99659
+    assert len(content.split('\n')) == 99665

@@ -37,5 +37,5 @@ def task_commit_docs():
 
     """
     return debug_action([
-        f'cd {DIG.gh_pages_dir}; git add .; git commit -m "Chg: update pdoc files',  # ; git push',
+        f'cd {DIG.gh_pages_dir}; git add .; git commit -m "Chg: update pdoc files"; git push',
     ])

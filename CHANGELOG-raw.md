@@ -5,6 +5,8 @@
 
 ### New
 
+* Improve utils_static with dominate. [Kyle King]
+
 * Refactor fitted and rolling figures. [Kyle King]
 
   - combined annotations function in utils_fig
