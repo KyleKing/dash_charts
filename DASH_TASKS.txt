@@ -1,10 +1,5 @@
 # Consolidated and Prioritized Task List
 
-- [TBR-Removed] Add method for comparing complex forms for changes to see if full redraw is needed or if data has already been filtered
-	- Useful when looking at large data sets (e.g. US Weather Data) and user selects a state, then later only changes the time period rather than a new state
-	- Compare before/after object. Specify list of keys that wouldn't require full redraw
-	- Actually, probably not the recommended approach
-
 - Data table
 	- Show using the column lookup for markdown formatting, number of decimal places, etc.
 	- Implement modal that can open on button click

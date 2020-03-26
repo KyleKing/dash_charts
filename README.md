@@ -113,12 +113,22 @@ Overall, I find that this package really improves my Dash code and I hope others
 
 ## Local Development
 
+Initial commands to clone code from Github, create Python virtual environment, and run first example application
+
 ```sh
 git clone https://github.com/KyleKing/dash_charts.git
 cd dash_charts
 poetry install
 poetry shell
 python tests/examples/ex_app_px.py
+```
+
+Other useful scripts for testing, documentation, and more:
+
+```sh
+poetry run ptw -- -m "not CHROME"
+poetry run doit run test
+poetry run doit
 ```
 
 ## Example Charts and Tables
@@ -236,9 +246,9 @@ Latest coverage table
 | utils_app_with_navigation.py | 97 | 9 | 6 | 90.7 |
 | utils_callbacks.py | 25 | 1 | 0 | 96.0 |
 | utils_fig.py | 70 | 2 | 4 | 97.1 |
-| utils_static.py | 43 | 2 | 0 | 95.3 |
+| utils_static.py | 62 | 1 | 0 | 98.4 |
 
-Generated on: 2020-03-24T21:04:18.094072
+Generated on: 2020-03-25T21:45:15.397269
 
 <!-- /COVERAGE -->
 

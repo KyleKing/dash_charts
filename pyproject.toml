@@ -13,17 +13,18 @@ repository = "https://github.com/kyleking/dash_charts"
 [tool.poetry.dependencies]
 python = "^3.7, !=3.8"
 bottleneck = "*"
-cerberus = "^1.3.2"
+cerberus = "*"
 dash = "*, ^1.9"
 dash-bootstrap-components = "*"
+dominate = "*"
 icecream = "*"
 pandas = "*"
-pystache = "^0.5.4"
 scipy = "*"
 
 [tool.poetry.dev-dependencies]
 dash = {extras = ["testing"], version = "*, ^1.9"}
 dash_dev = {git = "https://github.com/KyleKing/dash_dev.git"}
+jsonpickle = "*"
 
 [build-system]
 requires = ["poetry>=1.0"]

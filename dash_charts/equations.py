@@ -6,7 +6,7 @@ import numpy as np
 def linear(x_values, factor_a, factor_b):
     """Return result(s) of linear equation with factors of a and b.
 
-    y = a * x + b
+    `y = a * x + b`
 
     Args:
         x_values: single number of list of numbers
@@ -26,7 +26,7 @@ def linear(x_values, factor_a, factor_b):
 def quadratic(x_values, factor_a, factor_b, factor_c):
     """Return result(s) of quadratic equation with factors of a, b, and c.
 
-    y = a * x^2 + b * x + c
+    `y = a * x^2 + b * x + c`
 
     Args:
         x_values: single number of list of numbers
@@ -53,7 +53,7 @@ def quadratic(x_values, factor_a, factor_b, factor_c):
 def power(x_values, factor_a, factor_b):
     """Return result(s) of quadratic equation with factors of a and b.
 
-    y = a * x^b
+    `y = a * x^b`
 
     Args:
         x_values: single number of list of numbers
@@ -76,7 +76,7 @@ def power(x_values, factor_a, factor_b):
 def exponential(x_values, factor_a, factor_b):
     """Return result(s) of exponential equation with factors of a and b.
 
-    y = a * e^(b * x)
+    `y = a * e^(b * x)`
 
     Args:
         x_values: single number of list of numbers
@@ -98,7 +98,7 @@ def exponential(x_values, factor_a, factor_b):
 def double_exponential(x_values, factor_a, factor_b, factor_c, factor_d):
     """Return result(s) of a double exponential equation with factors of a, b, c, and d.
 
-    y = a * e^(b * x) - c * e^(d * x)
+    `y = a * e^(b * x) - c * e^(d * x)`
 
     Args:
         x_values: single number of list of numbers

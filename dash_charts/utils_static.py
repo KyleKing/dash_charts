@@ -1,13 +1,12 @@
-"""Generate static HTML reports."""
+"""Utilities for generating static HTML reports."""
 
 import io
-import re
-from pathlib import Path
 
+import dash_bootstrap_components as dbc
+import dominate
 import plotly.io
 from bs4 import BeautifulSoup
-
-# TODO: Add BootStrap CDN and methods for creating rows/columns
+from dominate import tags, util
 
 
 def write_div(figure, path_or_file_object, is_div=True, **html_kwargs):
@@ -17,7 +16,7 @@ def write_div(figure, path_or_file_object, is_div=True, **html_kwargs):
         figure: Plotly figure (can be from `create_figure` for custom charts)
         path_or_file_object: *string* path or file object
         is_div: if True (default) will override html_kwargs to only write the minimum HTML needed
-        html_kwargs: additional keyword arguments pass to output
+        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`
 
     """
     for key in ['include_plotlyjs', 'full_html']:
@@ -27,6 +26,22 @@ def write_div(figure, path_or_file_object, is_div=True, **html_kwargs):
     plotly.io.write_html(fig=figure, file=path_or_file_object, **html_kwargs)
 
 
+def make_div(figure, **html_kwargs):
+    """Write Plotly figure as HTML to specified file.
+
+    Args:
+        figure: Plotly figure (can be from `create_figure` for custom charts)
+        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`
+
+    Returns:
+        str: HTML div
+
+    """
+    with io.StringIO() as output:
+        write_div(figure, output, is_div=True, **html_kwargs)
+        return output.getvalue()
+
+
 def write_image(figure, path_or_file_object, image_format, **img_kwargs):
     """Write Plotly figure as an image to specified file.
 
@@ -34,30 +49,23 @@ def write_image(figure, path_or_file_object, image_format, **img_kwargs):
         figure: Plotly figure (can be from `create_figure` for custom charts)
         path_or_file_object: *string* path or file object
         image_format: one of `(png, jpg, jpeg, webp, svg, pdf)`
-        img_kwargs: additional keyword arguments pass to output
+        img_kwargs: additional keyword arguments passed to `plotly.io.write_image()`
 
     """
     plotly.io.write_image(fig=figure, file=path_or_file_object, format=image_format, **img_kwargs)
 
 
-def format_boilerplate(external_stylesheets=None):
-    """Return the boilerplate HTML for creating a static HTML file with Plotly figures and other HTML elements.
-
-    Args:
-        external_stylesheets: list of external stylesheets
+def capture_plotly_body():
+    """Return HTML body that includes necessary scripts for Plotly and MathJax.
 
     Returns:
         tuple: of the top and the bottom HTML content
 
     """
-    if external_stylesheets is None:
-        external_stylesheets = []
     # Capture necessary Plotly boilerplate HTML
     with io.StringIO() as output:
         write_div({}, output, is_div=False, include_mathjax='.js', validate=False)
         blank_plotly = BeautifulSoup(output.getvalue(), features='lxml')
-    # Add the stylesheets to header
-
     # Remove the empty figure div and corresponding script
     plot_div = blank_plotly.find('div', attrs={'class': 'plotly-graph-div'})
     for script in blank_plotly.find_all('script')[::-1]:
@@ -66,48 +74,101 @@ def format_boilerplate(external_stylesheets=None):
             script.decompose()
             break
     plot_div.decompose()
-    # Remove the trailing elements
-    bot_html_str = '\n</body>\n</html>'
-    bot_html_re = r'<\/body>\s*<\/html>\s*$'
-    return (re.sub(bot_html_re, '', blank_plotly.prettify(), count=1), bot_html_str)
+    return blank_plotly.body.prettify()
 
 
-class WritePlotlyHTML(io.StringIO):
-    """Context manager for creating a static HTML file with Plotly figures and other HTML elements."""
+def format_plotly_boilerplate(**doc_kwargs):
+    """Initialize a boilerplate dominate document for creating static Plotly HTML files.
 
-    def __init__(self, filename, stylesheets=None):
-        """Return the boilerplate HTML for creating a static HTML file with Plotly figures and other HTML elements.
+    See dominate documentation: https://pypi.org/project/dominate/
 
-        Args:
-            filename: string or Path to the destination file
-            stylesheets: list of external stylesheets
+    Args:
+        doc_kwargs: keyword arguments for `dominate.document()`
 
-        """
-        super().__init__()
-        self.filename = Path(filename)
-        self.stylesheets = stylesheets
+    Returns:
+        dict: dominate document instance
 
-    def __enter__(self):
-        """Initialize the StringIO output with the initial HTML.
+    """
+    doc = dominate.document(**doc_kwargs)
+    with doc:
+        util.raw(capture_plotly_body())
+    return doc
 
-        Returns:
-            dict: connection to sqlite database
 
-        """
-        self.output = super().__enter__()
-        top_html, bot_html = format_boilerplate(external_stylesheets=self.stylesheets)
-        self.bot_html = bot_html
-        self.output.write(top_html)
-        return self.output
+def create_dbc_doc(theme=dbc.themes.BOOTSTRAP, custom_styles='', **doc_kwargs):
+    """Create boilerplate dominate document with Bootstrap and Plotly for static HTML.
 
-    def __exit__(self, *args):
-        """Close the HTML tags and write to the text file.
+    Based on: https://github.com/facultyai/dash-bootstrap-components/tree/master/docs/templates/partials
 
-        Args:
-            args: arguments passed to base class
+    See dominate documentation: https://pypi.org/project/dominate/
 
-        """
-        self.output.write(self.bot_html)
-        html_content = BeautifulSoup(self.output.getvalue(), features='lxml').prettify()
-        self.filename.write_text(html_content)
-        super().__exit__(*args)
+    Args:
+        theme: string URL to CSS for theming Bootstrap. Default is `dbc.themes.BOOTSTRAP`
+        custom_styles: optional custom CSS to add to file. Default is blank (`''`)
+        doc_kwargs: keyword arguments for `dominate.document()`
+
+    Returns:
+        dict: dominate document instance
+
+    """
+    stylesheets = [
+        {'href': 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/a11y-light.min.css'},
+        {'href': theme},
+    ]
+    scripts = [
+        {'src': 'https://code.jquery.com/jquery-3.4.1.slim.min.js'},
+        {'src': 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'},
+        {'src': 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'},
+        {'src': 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/highlight.min.js'},
+    ]
+
+    doc = format_plotly_boilerplate(**doc_kwargs)
+    with doc.head:
+        dbc.themes.BOOTSTRAP
+        tags.meta(charset='utf-8')
+        tags.meta(name='viewport', content='width=device-width, initial-scale=1')
+        for sheet_kwargs in stylesheets:
+            tags.link(rel='stylesheet', **sheet_kwargs)
+        util.raw(f'<style>{custom_styles}</style>')
+        for script_kwargs in scripts:
+            tags.script(**script_kwargs)
+        util.raw('<script>hljs.initHighlightingOnLoad();</script>')
+
+    return doc
+
+
+def tag_code(text, language=''):
+    """Format HTML for a `pre.code` block with specified `hljs` language.
+
+    Args:
+        text: string to show in code block
+        language: `hljs` language (ex: `'language-json'`). Default is `''`.
+
+    """
+    tags.pre().add(tags.code(text, _class=f'{language} hljs'))
+
+
+def tag_table(df_table, table_class=None):
+    """Format HTML for a responsive Bootstrap table.
+
+    See Bootstrap documentation at: https://getbootstrap.com/docs/4.4/content/tables/#tables
+
+    Args:
+        df_table: pandas dataframe to show in table
+        table_class: string classes to add to table. If None, will use default string
+
+    """
+    if table_class is None:
+        table_class = 'table table-bordered table-striped table-hover'
+
+    with tags.div(_class='table-responsive').add(tags.table(_class=table_class)):
+        # Create header row
+        with tags.thead().add(tags.tr()):
+            for col in df_table.columns:
+                tags.th(col)
+        # Create body rows
+        with tags.tbody():
+            for row in df_table.itertuples():
+                with tags.tr():
+                    for value in row[1:]:
+                        tags.td(str(value))

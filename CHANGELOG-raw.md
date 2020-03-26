@@ -5,6 +5,11 @@
 
 ### New
 
+* Refactor fitted and rolling figures. [Kyle King]
+
+  - combined annotations function in utils_fig
+  - simplified create traces for both figures
+
 * Initialize module for writing static HTML. [Kyle King]
 
 * Add slider to the rolling chart. [Kyle King]
