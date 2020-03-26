@@ -2,9 +2,9 @@
 
 from pathlib import Path
 
-from dash_dev.doit_base import DIG, debug_action, task_check_req, task_export_req  # noqa: F401
-from dash_dev.doit_doc import (task_create_tag, task_document, task_open_docs, task_remove_tag,  # noqa: F401
-                               task_update_cl)
+from dash_dev.doit_base import DIG, task_check_req, task_export_req  # noqa: F401
+from dash_dev.doit_doc import (task_commit_docs, task_create_tag, task_document, task_open_docs,  # noqa: F401
+                               task_remove_tag, task_update_cl)
 from dash_dev.doit_lint import task_lint  # noqa: F401
 from dash_dev.doit_test import (task_coverage, task_open_test_docs, task_test, task_test_keyword,  # noqa: F401
                                 task_test_marker)
@@ -26,16 +26,3 @@ DOIT_CONFIG = {
     ],
 }
 """DoIt Configuration Settings. Run with `poetry run doit`."""
-
-
-# PLANNED: import from dash_dev once the function has been fixed
-def task_commit_docs():
-    """Commit the documentation to gh-pages.
-
-    Returns:
-        dict: DoIt task
-
-    """
-    return debug_action([
-        f'cd {DIG.gh_pages_dir}; git add .; git commit -m "Chg: update pdoc files"; git push',
-    ])
