@@ -8,7 +8,6 @@ import markdown
 import plotly.io
 from bs4 import BeautifulSoup
 from dominate import tags, util
-from mdx_gfm import GithubFlavoredMarkdownExtension
 
 
 def write_div(figure, path_or_file_object, is_div=True, **html_kwargs):
@@ -149,16 +148,15 @@ def tag_code(text, language=''):
     tags.pre().add(tags.code(text, _class=f'{language} hljs'))
 
 
-def tag_markdown(text):
+def tag_markdown(text, **markdown_kwargs):
     """Format markdown text as HTML.
 
     Args:
         text: markdown string
+        markdown_kwargs: additional keyword arguments for `markdown.markdown`, such as `extensions`
 
     """
-    util.raw(markdown.markdown(
-        text, extensions=[GithubFlavoredMarkdownExtension()],
-    ))
+    util.raw(markdown.markdown(text, **markdown_kwargs))
 
 
 def tag_table(df_table, table_class=None):

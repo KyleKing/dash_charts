@@ -260,9 +260,9 @@ Latest coverage table
 | `dash_charts/utils_app_with_navigation.py` | 97 | 9 | 6 | 90.7 |
 | `dash_charts/utils_callbacks.py` | 25 | 1 | 0 | 96.0 |
 | `dash_charts/utils_fig.py` | 70 | 2 | 4 | 97.1 |
-| `dash_charts/utils_static.py` | 97 | 23 | 0 | 76.3 |
+| `dash_charts/utils_static.py` | 96 | 5 | 0 | 94.8 |
 
-Generated on: 2020-03-26T19:29:05.982535
+Generated on: 2020-03-26T20:26:30.271534
 
 <!-- /COVERAGE -->
 

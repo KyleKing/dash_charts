@@ -1186,8 +1186,14 @@ category = "main"
 description = "Python implementation of Markdown."
 name = "markdown"
 optional = false
-python-versions = "*"
-version = "2.6.11"
+python-versions = ">=3.5"
+version = "3.2.1"
+
+[package.dependencies]
+setuptools = ">=36"
+
+[package.extras]
+testing = ["coverage", "pyyaml"]
 
 [[package]]
 category = "main"
@@ -1283,11 +1289,11 @@ description = "Auto-generate API documentation for Python projects."
 name = "pdoc3"
 optional = false
 python-versions = ">= 3.5"
-version = "0.5.0"
+version = "0.7.5"
 
 [package.dependencies]
 mako = "*"
-markdown = "*"
+markdown = ">=3.0"
 
 [[package]]
 category = "dev"
@@ -1370,18 +1376,6 @@ name = "py"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.8.1"
-
-[[package]]
-category = "main"
-description = "An implementation of Github-Flavored Markdown written as an extension to the Python Markdown library."
-name = "py-gfm"
-optional = false
-python-versions = "*"
-version = "0.1.4"
-
-[package.dependencies]
-markdown = "<3.0"
-setuptools = "*"
 
 [[package]]
 category = "dev"
@@ -1902,7 +1896,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "c7422916c5aadd68fa33d2ef01c7cfc736857f1295acd47e86189bed79b2ce37"
+content-hash = "9210895a6568f8c03e1454cbd930649b7f1dd9c04bfe868413baa5234e7bdf2a"
 python-versions = "^3.7, !=3.8"
 
 [metadata.files]
@@ -2348,8 +2342,8 @@ mando = [
     {file = "mando-0.6.4.tar.gz", hash = "sha256:79feb19dc0f097daa64a1243db578e7674909b75f88ac2220f1c065c10a0d960"},
 ]
 markdown = [
-    {file = "Markdown-2.6.11-py2.py3-none-any.whl", hash = "sha256:9ba587db9daee7ec761cfc656272be6aabe2ed300fece21208e4aab2e457bc8f"},
-    {file = "Markdown-2.6.11.tar.gz", hash = "sha256:a856869c7ff079ad84a3e19cd87a64998350c2b94e9e08e44270faef33400f81"},
+    {file = "Markdown-3.2.1-py2.py3-none-any.whl", hash = "sha256:e4795399163109457d4c5af2183fbe6b60326c17cfdf25ce6e7474c6624f725d"},
+    {file = "Markdown-3.2.1.tar.gz", hash = "sha256:90fee683eeabe1a92e149f7ba74e5ccdc81cd397bd6c516d93a8da0ef90b6902"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},
@@ -2451,7 +2445,7 @@ pbr = [
     {file = "pbr-5.4.4.tar.gz", hash = "sha256:139d2625547dbfa5fb0b81daebb39601c478c21956dc57e2e07b74450a8c506b"},
 ]
 pdoc3 = [
-    {file = "pdoc3-0.5.0.tar.gz", hash = "sha256:d98bcb5f7edf35e7d92bf7ca9b4886df4e766c78c3596f2939180a9ef913b11a"},
+    {file = "pdoc3-0.7.5.tar.gz", hash = "sha256:ebca75b7fcf23f3b4320abe23339834d3f08c28517718e9d29e555fc38eeb33c"},
 ]
 pep8-naming = [
     {file = "pep8-naming-0.10.0.tar.gz", hash = "sha256:f3b4a5f9dd72b991bf7d8e2a341d2e1aa3a884a769b5aaac4f56825c1763bf3a"},
@@ -2479,10 +2473,6 @@ pur = [
 py = [
     {file = "py-1.8.1-py2.py3-none-any.whl", hash = "sha256:c20fdd83a5dbc0af9efd622bee9a5564e278f6380fffcacc43ba6f43db2813b0"},
     {file = "py-1.8.1.tar.gz", hash = "sha256:5e27081401262157467ad6e7f851b7aa402c5852dbcb3dae06768434de5752aa"},
-]
-py-gfm = [
-    {file = "py-gfm-0.1.4.tar.gz", hash = "sha256:ef6750c579d26651cfd23968258b604228fd71b2a4e1f71dea3bea289e01377e"},
-    {file = "py_gfm-0.1.4-py2.py3-none-any.whl", hash = "sha256:d873541bcae194cc3b5053858719668834d3f1829342f0566ab3a48d0d744d58"},
 ]
 pycodestyle = [
     {file = "pycodestyle-2.5.0-py2.py3-none-any.whl", hash = "sha256:95a2219d12372f05704562a14ec30bc76b05a5b297b21a5dfe3f6fac3491ae56"},

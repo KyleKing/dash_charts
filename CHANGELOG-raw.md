@@ -5,6 +5,8 @@
 
 ### New
 
+* Ability to create Plotly HTML from markdown. [Kyle King]
+
 * Add utils_static function tag_markdown. [Kyle King]
 
 * Improve utils_static with dominate. [Kyle King]
