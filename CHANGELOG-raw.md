@@ -184,6 +184,8 @@
 
 ### Fix
 
+* Remove mdx_gfm (doesn’t work with markdown 3) [Kyle King]
+
 * Fix error in path for task commit_docs. [Kyle King]
 
 * Add test for ex_sqlite. [Kyle King]

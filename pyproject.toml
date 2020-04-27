@@ -1,20 +1,15 @@
-[tool.isort]
-line_length = 120
-length_sort = false
-default_section = "THIRDPARTY"
-
 [tool.poetry]
 name = "dash_charts"
 version = "0.0.4"
 description = "Python package for OOP of Plotly/Dash apps and custom templates"
-authors = ["Kyle King <KyleKing@users.noreply.github.com>"]
+authors = ["Kyle King <https://github.com/KyleKing>"]
 repository = "https://github.com/kyleking/dash_charts"
 
 [tool.poetry.dependencies]
 python = "^3.7, !=3.8"
 bottleneck = "*"
 cerberus = "*"
-dash = "*, ^1.9"
+dash = "*"
 dash-bootstrap-components = "*"
 dominate = "*"
 icecream = "*"
@@ -23,7 +18,7 @@ pandas = "*"
 scipy = "*"
 
 [tool.poetry.dev-dependencies]
-dash = {extras = ["testing"], version = "*, ^1.9"}
+dash = {extras = ["testing"], version = "*, ^1.11"}
 dash_dev = {git = "https://github.com/KyleKing/dash_dev.git"}
 jsonpickle = "*"
 

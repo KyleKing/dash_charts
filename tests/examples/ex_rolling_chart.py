@@ -107,6 +107,9 @@ class RollingDemo(AppBase):
             df_filtered = self.data_raw[(self.data_raw['x'] >= slider[0]) & (self.data_raw['x'] <= slider[1])]
             self.chart_main.axis_range = {'x': slider}
             new_figure = self.chart_main.create_figure(df_raw=df_filtered)
+
+            # See: https://plot.ly/python/range-slider/
+            new_figure['layout']['xaxis']['rangeslider'] = {'visible': True}
             return map_outputs(outputs, [(self.id_chart, 'figure', new_figure)])
 
 

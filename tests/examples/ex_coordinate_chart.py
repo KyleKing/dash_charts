@@ -2,6 +2,7 @@
 
 import calendar
 
+import dash_bootstrap_components as dbc
 import dash_html_components as html
 import numpy as np
 import pandas as pd
@@ -12,6 +13,8 @@ from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
 
 # TODO: Also set marker size based on value?
+# TODO: Re-align alignment charts into line and update screenshot
+# TODO: Maybe green heat map like Github? For one year?
 
 
 class CoordinateDemo(AppBase):
@@ -19,6 +22,8 @@ class CoordinateDemo(AppBase):
 
     name = 'Example Coordinate Charts'
     """Application name"""
+
+    external_stylesheets = [dbc.themes.FLATLY]
 
     data_raw_years = None
     data_raw_months = None
@@ -78,7 +83,7 @@ class CoordinateDemo(AppBase):
             titles=self.grid_years.titles,
             layout_overrides=(
                 ('height', None, 700),
-                ('width', None, 550),
+                ('width', None, 500),
             ),
         )
         # Override Coordinate Parameters as needed
@@ -91,8 +96,8 @@ class CoordinateDemo(AppBase):
             corners=self.grid_months.corners,
             titles=self.grid_months.titles,
             layout_overrides=(
-                ('height', None, 600),
-                ('width', None, 600),
+                ('height', None, 400),
+                ('width', None, 400),
             ),
         )
         # Override Coordinate Parameters as needed
@@ -106,7 +111,7 @@ class CoordinateDemo(AppBase):
             titles=self.grid_circle.titles,
             layout_overrides=(
                 ('height', None, 750),
-                ('width', None, 600),
+                ('width', None, 650),
             ),
         )
         # Override Coordinate Parameters as needed
@@ -120,27 +125,27 @@ class CoordinateDemo(AppBase):
             dict: Dash HTML object
 
         """
-        return html.Div(
-            style={
-                'maxWidth': '1000px',
-                'marginRight': 'auto',
-                'marginLeft': 'auto',
-            }, children=[
+        return dbc.Container([
+            dbc.Row([
                 html.H4(children=self.name),
-                html.Div([min_graph(
-                    id=self.ids[self.id_chart_years],
-                    figure=self.chart_years.create_figure(df_raw=self.data_raw_years),
-                )]),
-                html.Div([min_graph(
+            ]),
+            dbc.Row([
+                dbc.Col([min_graph(
                     id=self.ids[self.id_chart_months],
                     figure=self.chart_months.create_figure(df_raw=self.data_raw_months),
-                )]),
-                html.Div([min_graph(
+                )], width=4),
+            ]),
+            dbc.Row([
+                dbc.Col([min_graph(
+                    id=self.ids[self.id_chart_years],
+                    figure=self.chart_years.create_figure(df_raw=self.data_raw_years),
+                )], width=5),
+                dbc.Col([min_graph(
                     id=self.ids[self.id_chart_circle],
                     figure=self.chart_circle.create_figure(df_raw=self.data_raw_circle),
-                )]),
-            ],
-        )
+                )], width=5),
+            ]),
+        ])
 
     def create_callbacks(self):
         """Create Dash callbacks."""
