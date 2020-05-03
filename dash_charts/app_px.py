@@ -15,7 +15,7 @@ import plotly.express as px
 
 from .components import dropdown_group, opts_dd
 from .utils_app import AppBase
-from .utils_app_with_navigation import AppWithTabs
+from .utils_app_with_navigation import FullScreenAppWithTabs
 from .utils_callbacks import map_args, map_outputs
 from .utils_fig import min_graph
 
@@ -314,7 +314,7 @@ class TabColor(TabBase):
 # Create class for application to control manage variable scopes
 
 
-class InteractivePXApp(AppWithTabs):
+class InteractivePXApp(FullScreenAppWithTabs):
     """Plotly Express Demo application."""
 
     name = 'TabAppDemo'

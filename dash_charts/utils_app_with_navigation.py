@@ -10,7 +10,7 @@ import dash_html_components as html
 from .utils_app import AppBase
 
 
-class AppWithNavigation(AppBase):
+class AppWithNavigation(AppBase):  # noqa: H601
     """Base class for building Dash Application with tabs or URL routing."""
 
     app = None
@@ -70,6 +70,43 @@ class AppWithNavigation(AppBase):
 class AppWithTabs(AppWithNavigation):
     """Base class for building Dash Application with tabs."""
 
+    # App ids
+    id_tabs_content = 'tabs-wrapper'
+    id_tabs_select = 'tabs-content'
+
+    app_ids = [id_tabs_content, id_tabs_select]
+    """List of all ids for the top-level tab view. Will be mapped to `self.ids` for globally unique ids."""
+
+    def return_layout(self):
+        """Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        """
+        tabs = [dcc.Tab(label=name, value=name) for name, tab in self.nav_lookup.items()]
+        return html.Div(children=[
+            dcc.Tabs(
+                id=self.ids[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
+                children=tabs,
+            ),
+            html.Div(id=self.ids[self.id_tabs_content]),
+        ])
+
+    def create_callbacks(self):
+        """Register the navigation callback."""
+        outputs = [(self.id_tabs_content, 'children')]
+        inputs = [(self.id_tabs_select, 'value')]
+
+        @self.callback(outputs, inputs, [])
+        def render_tab(tab_name):
+            return [self.nav_layouts[tab_name]]
+
+
+# > PLANNED: Make the tabs and chart compact as well when the compact argument is set to True
+class FullScreenAppWithTabs(AppWithTabs):
+    """Base class for building Dash Application with tabs that uses the full window."""
+
     tabs_location = 'left'
     """Tab orientation setting. One of `(left, top, bottom, right)`."""
 
@@ -78,13 +115,6 @@ class AppWithTabs(AppWithNavigation):
 
     tabs_compact = False
     """Boolean setting to toggle between a padded tab layout if False and a minimal compact version if True."""
-
-    # App ids
-    id_tabs_content = 'tabs-wrapper'
-    id_tabs_select = 'tabs-content'
-
-    app_ids = [id_tabs_content, id_tabs_select]
-    """List of all ids for the top-level tab view. Will be mapped to `self.ids` for globally unique ids."""
 
     def verify_app_initialization(self):
         """Check that the app was properly initialized.
@@ -113,11 +143,14 @@ class AppWithTabs(AppWithNavigation):
             ),
         ])
 
-    def tab_menu(self):
-        """Return the HTML elements for the tab menu.
+    def generate_tab_kwargs(self):
+        """Create the tab keyword arguments. Intended to be modified through inheritance.
 
         Returns:
-            dict: Dash HTML object
+            tuple: keyword arguments and styling for the dcc.Tab elements
+                - tab_kwargs: with at minimum keys `(style, selected_style)` for dcc.Tab
+                - tabs_kwargs: to be passed to dcc.Tabs
+                - tabs_style: style for the dcc.Tabs HTML element
 
         """
         # Unselected tab style
@@ -156,8 +189,18 @@ class AppWithTabs(AppWithNavigation):
             tabs_style['height'] = 'auto'
             tabs_style['right'] = '0'
             tabs_style['left'] = '0'
-        # Create the tab menu
+
         tab_kwargs = {'style': tab_style, 'selected_style': selected_style}
+        return (tab_kwargs, tabs_kwargs, tabs_style)
+
+    def tab_menu(self):
+        """Return the HTML elements for the tab menu.
+
+        Returns:
+            dict: Dash HTML object
+
+        """
+        tab_kwargs, tabs_kwargs, tabs_style = self.generate_tab_kwargs()
         tabs = [dcc.Tab(label=name, value=name, **tab_kwargs) for name, tab in self.nav_lookup.items()]
         return html.Div(children=[
             dcc.Tabs(
@@ -165,15 +208,6 @@ class AppWithTabs(AppWithNavigation):
                 children=tabs, **tabs_kwargs,
             ),
         ], style=tabs_style)
-
-    def create_callbacks(self):
-        """Register the navigation callback."""
-        outputs = [(self.id_tabs_content, 'children')]
-        inputs = [(self.id_tabs_select, 'value')]
-
-        @self.callback(outputs, inputs, [])
-        def render_tab(tab_name):
-            return [self.nav_layouts[tab_name]]
 
 
 class AppMultiPage(AppWithNavigation):
