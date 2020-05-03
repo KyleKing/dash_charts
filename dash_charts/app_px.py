@@ -21,8 +21,16 @@ from .utils_fig import min_graph
 
 # FIXME: Implement ability for user to select JSON or CSV data and graph interactively!
 #   Require user to submit "Tidy" data with non-value headers
+# > Implementation Notes:
+#   > Along bottom of screen - file select - give keyword name to select from dropdowns for each px app/tab
+#     > This way multiple data sets can be loaded in PD DataFrames
+#   > In dropdown option of default or loaded data
+#   > Data should be tidy, then regular dropdown can be used
+#   > Should show table with data below input
 
-# # TODO: Show all data in code output
+# ------------------------------------------------------------------------------------------------
+
+# # TODO: Show raw data in <pre> block or table in each tab. Maybe show all the possible datasets
 # px.data.election_geojson()  # Dict
 # px.data.carshare().head()
 # px.data.election().head()
@@ -113,17 +121,19 @@ from .utils_fig import min_graph
 # >> Demo uses sample data. User could replace with data loaded from a static CSV file, TinyDB, SQLite, etc.
 
 
-class TabBase(AppBase):
+class TabBase(AppBase):  # noqa: H601
     """Base tab class with helper methods."""
 
     external_stylesheets = [dbc.themes.FLATLY]
 
+    # ID Elements for UI
     id_chart: str = 'chart'
     id_func: str = 'func'
-    id_template: str = 'template'  # TODO: turn off template for the color swatch example
+    id_template: str = 'template'  # PLANNED: template should be able to be None
 
     takes_args: bool = True
-    # TODO: Document
+    """If True, will pass arguments from UI to function."""
+
     templates: list = ['ggplot2', 'seaborn', 'simple_white', 'plotly',
                        'plotly_white', 'plotly_dark', 'presentation', 'xgridoff',
                        'ygridoff', 'gridon', 'none']
@@ -131,22 +141,27 @@ class TabBase(AppBase):
 
     # Must override in child class
     name: str = None
-    # TODO: Document
+    """Unique tab component name. Must be overridden in child class."""
     data: pd.DataFrame = None
-    # TODO: Document
+    """Dataframe. Must be overridden in child class."""
     func_map: OrderedDict = None
-    # TODO: Document
-    dims: tuple = ()  # FIXME: should be able to be None
-    # TODO: Document
-    dims_dict: OrderedDict = OrderedDict([])  # FIXME: should be able to be None
-    # TODO: Document
+    """Map of functions to keywords. Must be overridden in child class."""
+
+    # PLANNED: below items should be able to be None
+    dims: tuple = ()
+    """Keyword from function for dropdowns with column names as options. Must be overridden in child class."""
+    dims_dict: OrderedDict = OrderedDict([])
+    """OrderedDict of keyword from function to allowed values. Must be overridden in child class."""
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
-        self.input_ids = [self.id_func, self.id_template] + list(self.dims) + list(self.dims_dict.keys())
+
+        # Register the the unique element IDs
+        self.input_ids = [self.id_func, self.id_template] + [*self.dims] + [*self.dims_dict.keys()]
         self.register_uniq_ids([self.id_chart] + self.input_ids)
 
+        # Configure the options for the various dropdowns
         self.col_opts = [] if self.data is None else tuple(opts_dd(_c, _c) for _c in self.data.columns)
         self.func_opts = tuple(opts_dd(lbl, lbl) for lbl in self.func_map.keys())
         self.t_opts = tuple(opts_dd(template, template) for template in self.templates)
@@ -155,14 +170,11 @@ class TabBase(AppBase):
         """Initialize the charts, tables, and other Dash elements."""
         pass
 
-    def return_layout(self):
-        """Return Dash application layout.
-
-        Returns:
-            dict: Dash HTML object
+    def verify_types_for_layout(self):
+        """Verify data types of data members necessary for the layout of this tab.
 
         Raises:
-            RuntimeError: if any class data member is not the expected type
+            RuntimeError: if any relevant data members are of the wrong type
 
         """
         errors = []
@@ -175,6 +187,33 @@ class TabBase(AppBase):
         if len(errors):
             formatted_errors = '\n' + '\n'.join(errors)
             raise RuntimeError(f'Found errors in data members:{formatted_errors}')
+
+    def verify_types_for_callbacks(self):
+        """Verify data types of data members necessary for the callbacks of this tab.
+
+        Raises:
+            RuntimeError: if any relevant data members are of the wrong type
+
+        """
+        errors = []
+        if not isinstance(self.takes_args, bool):
+            errors.append(f'Expected self.takes_args="{self.takes_args}" to be bool')
+        if not (isinstance(self.data, pd.DataFrame) or self.data is None):
+            errors.append(f'Expected self.data="{self.data}" to be pd.DataFrame or None')
+        if not isinstance(self.func_map, OrderedDict):
+            errors.append(f'Expected self.func_map="{self.func_map}" to be OrderedDict')
+        if len(errors):
+            formatted_errors = '\n' + '\n'.join(errors)
+            raise RuntimeError(f'Found errors in data members:{formatted_errors}')
+
+    def return_layout(self):
+        """Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        """
+        self.verify_types_for_layout()
 
         return html.Div([
             html.Div([
@@ -192,17 +231,12 @@ class TabBase(AppBase):
 
     def create_callbacks(self):
         """Register callbacks necessary for this tab."""
-        errors = []
-        if not isinstance(self.takes_args, bool):
-            errors.append(f'Expected self.takes_args="{self.takes_args}" to be bool')
-        if not (isinstance(self.data, pd.DataFrame) or self.data is None):
-            errors.append(f'Expected self.data="{self.data}" to be pd.DataFrame or None')
-        if not isinstance(self.func_map, OrderedDict):
-            errors.append(f'Expected self.func_map="{self.func_map}" to be OrderedDict')
-        if len(errors):
-            formatted_errors = '\n' + '\n'.join(errors)
-            raise RuntimeError(f'Found errors in data members:{formatted_errors}')
+        self.verify_types_for_callbacks()
 
+        self.register_update_chart()
+
+    def register_update_chart(self):
+        """Register the update_chart callback."""
         outputs = [(self.id_chart, 'figure')]
         inputs = [(_id, 'value') for _id in self.input_ids]
         states = ()
@@ -214,7 +248,7 @@ class TabBase(AppBase):
             properties = [trigger['prop_id'] for trigger in dash.callback_context.triggered]
             new_chart = {}
             # If event is not a tab change, return the updated chart
-            if 'tabs-select.value' not in properties:  # FIXME: replace tabs-select with actual keyname
+            if 'tabs-select.value' not in properties:  # FIXME: replace tabs-select with actual keyname (?)
                 if self.takes_args:
                     # Parse the arguments to generate a new plot
                     kwargs = {key: a_in[key]['value'] for key in self.input_ids[1:]}
@@ -225,7 +259,7 @@ class TabBase(AppBase):
             return map_outputs(outputs, [(self.id_chart, 'figure', new_chart)])
 
 
-class TabTip(TabBase):
+class TabTip(TabBase):  # noqa: H601
     """TabTip properties."""
 
     name = 'Tip Data'
@@ -244,7 +278,7 @@ class TabTip(TabBase):
     ])
 
 
-class TabIris(TabBase):
+class TabIris(TabBase):  # noqa: H601
     """TabIris properties."""
 
     name = 'Iris Data'
@@ -260,7 +294,7 @@ class TabIris(TabBase):
     dims = ('x', 'y', 'color', 'facet_col', 'facet_row')
 
 
-class TabGapminder(TabBase):
+class TabGapminder(TabBase):  # noqa: H601
     """TabGapminder properties."""
 
     name = 'Gapminder Data'
@@ -271,7 +305,7 @@ class TabGapminder(TabBase):
     dims = ('x', 'y', 'color', 'line_group', 'facet_row', 'facet_col')
 
 
-class TabTernary(TabBase):
+class TabTernary(TabBase):  # noqa: H601
     """TabTernary properties."""
 
     name = 'Ternary'
@@ -283,7 +317,7 @@ class TabTernary(TabBase):
     dims = ('a', 'b', 'c', 'color', 'size')
 
 
-class TabPolar(TabBase):
+class TabPolar(TabBase):  # noqa: H601
     """TabPolar properties."""
 
     name = 'Polar'
@@ -295,7 +329,7 @@ class TabPolar(TabBase):
     dims = ('r', 'theta', 'color')
 
 
-class TabColor(TabBase):
+class TabColor(TabBase):  # noqa: H601
     """TabColor properties."""
 
     name = 'Color Swatches'
@@ -314,7 +348,7 @@ class TabColor(TabBase):
 # Create class for application to control manage variable scopes
 
 
-class InteractivePXApp(FullScreenAppWithTabs):
+class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
     """Plotly Express Demo application."""
 
     name = 'TabAppDemo'

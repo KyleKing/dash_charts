@@ -2,6 +2,11 @@
 
 import dash_table
 
+# TODO: See pattern mathing callbacks for adding buttons (to show modal) to datatables
+#   https://dash.plotly.com/pattern-matching-callbacks
+
+# PLANNED: see conditional formatting: https://dash.plotly.com/datatable/conditional-formatting
+
 # PLANNED: These methods may be replaced in a future version of Dash
 # Currently, edge case when column is string, but filter could be a number
 # See: https://dash.plot.ly/datatable/callbacks & https://github.com/plotly/dash-table/issues/441

@@ -1,10 +1,14 @@
 """Helpers for building Dash applications."""
 
 import argparse
+import csv
+import json
 import sqlite3
 import time
 from contextlib import ContextDecorator
+from pathlib import Path
 
+import dataset
 from cerberus import Validator
 
 # Plotly Colors:
@@ -13,8 +17,7 @@ from cerberus import Validator
 #  'Picnic_r', 'Portland', 'Portland_r', 'Rainbow', 'Rainbow_r', 'RdBu', 'RdBu_r', 'Reds', 'Reds_r', 'Viridis',
 #  'Viridis_r', 'YlGnBu', 'YlGnBu_r', 'YlOrRd', 'YlOrRd_r', 'scale_name', 'scale_name_r', 'scale_pairs',
 #  'scale_pairs_r', 'scale_sequence', 'scale_sequence_r']
-# >>> plotly.colors.plotlyjs.Hot
-# ['rgb(0,0,0)', 'rgb(230,0,0)', 'rgb(255,210,0)', 'rgb(255,255,255)']
+# plotly.colors.plotlyjs.Hot / `[rgb(0,0,0), rgb(230,0,0), rgb(255,210,0), rgb(255,255,255)]`
 
 
 def validate(document, schema, **validator_kwargs):
@@ -52,6 +55,44 @@ def parse_dash_cli_args():  # pragma: no cover
     return {'port': args.port, 'debug': not args.nodebug}
 
 
+def json_dumps_compact(data):
+    """Format provided dictionary into compact JSON. Lists will be in one line rather than split on new lines.
+
+    Args:
+        data: JSON-serializable dictionary
+
+    Returns:
+        str: JSON-formatted string with lists compacted into a single line
+
+    """
+    clean_data = {}
+    # Check each key/value pair to determine if any intermediary strings are needed for later formatting
+    for key, raw in data.items():
+        if isinstance(raw, list):
+            values = [f'``{value}``' if isinstance(value, str) else value for value in raw]
+            clean_data[key] = '[' + ','.join(map(str, values)) + ']'
+        else:
+            clean_data[key] = raw
+    # Format the dictionary into JSON and replace the special characters used as intermediaries
+    raw_json = json.dumps(clean_data, indent=4, separators=(',', ': '), sort_keys=True)
+    return (raw_json
+            .replace(': "[', ': [')
+            .replace(']"', ']')
+            .replace('``', '"')
+            .replace("'", '"'))
+
+
+def write_pretty_json(filename, obj):
+    """Write indented JSON file.
+
+    Args:
+        filename: Path or plain string filename to write (should end with `.json`)
+        obj: JSON object to write
+
+    """
+    Path(filename).write_text(json.dumps(obj, indent=4, separators=(',', ': ')))
+
+
 class SQLConnection(ContextDecorator):
     """Ensure the SQLite connection is properly opened and closed."""
 
@@ -80,6 +121,42 @@ class SQLConnection(ContextDecorator):
         self.conn.close()
 
 
+class DBConnect:
+    """Manage database connection since closing connection isn't possible."""
+
+    database_path = None
+    """Path to the local storage SQLite database file. Initialize in `__init__()`."""
+
+    _db = None
+
+    @property
+    def db(self):
+        """Return connection to database. Will create new connection if one does not exist already.
+
+        Returns:
+            dict: `dataset` database instance
+
+        """
+        if self._db is None:
+            self._db = dataset.connect(f'sqlite:///{self.database_path}')
+        return self._db
+
+    def __init__(self, database_path):
+        """Store the database path and ensure the parent directory exists.
+
+        Args:
+            database_path: path to the SQLite file
+
+        """
+        self.database_path = database_path.resolve()
+        self.database_path.parent.mkdir(exist_ok=True)
+
+
+def rm_brs(line):
+    """Replace all whitespace (line breaks, etc) with spaces."""  # noqa: DAR101,DAR201
+    return ' '.join(line.split())
+
+
 def uniq_table_id():
     """Return a unique table ID based on the current time in ms.
 
@@ -88,3 +165,38 @@ def uniq_table_id():
 
     """
     return f'U{time.time_ns()}'
+
+
+def export_table_as_csv(csv_filename, table):
+    """Create a CSV file summarizing a table of a dataset database.
+
+    Args:
+        csv_filename: Path to csv file
+        table: table from dataset database
+
+    """
+    with open(csv_filename, 'w', newline='\n', encoding='utf-8') as csv_file:
+        writer = csv.writer(csv_file, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(table.columns)
+        for row in table:
+            writer.writerow([*row.values()])
+
+
+def graph_return(resp, keys):
+    """Based on concepts of GraphQL, return specified subset of response.
+
+    Args:
+        resp: dictionary with values from function
+        keys: list of keynames from the resp dictionary
+
+    Returns:
+        the `resp` dictionary with only the keys specified in the `keys` list
+
+    Raises:
+        RuntimeError: if `keys` is not a list or tuple
+
+    """
+    if not (len(keys) and isinstance(keys, (list, tuple))):
+        raise RuntimeError(f'Expected list of keys for: `{resp.items()}`, but received `{keys}`')
+    ordered_responses = [resp.get(key, None) for key in keys]
+    return ordered_responses if len(ordered_responses) > 1 else ordered_responses[0]

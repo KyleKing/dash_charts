@@ -67,6 +67,30 @@ class AppWithNavigation(AppBase):  # noqa: H601
         pass  # pragma: no cover
 
 
+class StaticTab(AppBase):  # noqa: H601
+    """Simple App without charts or callbacks."""
+
+    basic_style = {
+        'marginLeft': 'auto',
+        'marginRight': 'auto',
+        'maxWidth': '1000px',
+        'paddingTop': '10px',
+    }
+
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        super().initialization()
+        self.register_uniq_ids(['N/A'])
+
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements.."""
+        pass
+
+    def create_callbacks(self):
+        """Register callbacks necessary for this tab."""
+        pass
+
+
 class AppWithTabs(AppWithNavigation):
     """Base class for building Dash Application with tabs."""
 

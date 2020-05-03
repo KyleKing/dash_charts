@@ -1,6 +1,10 @@
 """Utilities for better Dash callbacks."""
 
+import re
+
+import dash
 from dash.dependencies import Input, Output, State
+from dash.exceptions import PreventUpdate
 
 
 def format_app_callback(lookup, outputs, inputs, states):
@@ -99,3 +103,23 @@ def map_outputs(outputs, element_info):
     for app_id, prop in outputs:
         results.append(lookup[app_id][prop])
     return results
+
+
+def get_triggered_id():
+    """Use Dash context to get the id of the input element that triggered the callback.
+
+    See advanced callbacks: https://dash.plotly.com/advanced-callbacks
+
+    Returns:
+        str: id of the input that triggered the callback
+
+    Raises:
+        PreventUpdate: if callback was fired without an input
+
+    """
+    ctx = dash.callback_context
+    if not ctx.triggered:
+        raise PreventUpdate
+
+    prop_id = ctx.triggered[0]['prop_id']  # in format: `id.key` where we only want the `id`
+    return re.search(r'(^.+)\.[^\.]+$', prop_id).group(1)

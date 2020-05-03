@@ -242,27 +242,28 @@ Latest coverage table
 | File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
 | `dash_charts/__init__.py` | 1 | 0 | 0 | 100.0 |
-| `dash_charts/app_px.py` | 108 | 11 | 0 | 89.8 |
+| `dash_charts/app_px.py` | 114 | 47 | 0 | 58.8 |
 | `dash_charts/components.py` | 8 | 0 | 0 | 100.0 |
 | `dash_charts/coordinate_chart.py` | 103 | 1 | 6 | 99.0 |
 | `dash_charts/custom_colorscales.py` | 3 | 3 | 0 | 0.0 |
-| `dash_charts/dash_helpers.py` | 20 | 1 | 7 | 95.0 |
-| `dash_charts/datatable.py` | 79 | 25 | 0 | 68.4 |
+| `dash_charts/dash_helpers.py` | 58 | 25 | 7 | 56.9 |
+| `dash_charts/datatable.py` | 79 | 62 | 0 | 21.5 |
 | `dash_charts/equations.py` | 11 | 0 | 0 | 100.0 |
 | `dash_charts/grouped_bar.py` | 0 | 0 | 0 | 100.0 |
 | `dash_charts/modules_datatable.py` | 97 | 11 | 0 | 88.7 |
-| `dash_charts/modules_upload.py` | 0 | 0 | 0 | 100.0 |
+| `dash_charts/modules_upload.py` | 133 | 133 | 0 | 0.0 |
 | `dash_charts/pareto_chart.py` | 41 | 0 | 2 | 100.0 |
 | `dash_charts/scatter_line_charts.py` | 47 | 0 | 5 | 100.0 |
 | `dash_charts/time_vis.py` | 0 | 0 | 0 | 100.0 |
 | `dash_charts/utils_app.py` | 57 | 1 | 8 | 98.2 |
 | `dash_charts/utils_app_modules.py` | 28 | 5 | 2 | 82.1 |
-| `dash_charts/utils_app_with_navigation.py` | 104 | 7 | 6 | 93.3 |
-| `dash_charts/utils_callbacks.py` | 25 | 1 | 0 | 96.0 |
+| `dash_charts/utils_app_with_navigation.py` | 113 | 7 | 6 | 93.8 |
+| `dash_charts/utils_cache.py` | 27 | 27 | 0 | 0.0 |
+| `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4 |
 | `dash_charts/utils_fig.py` | 70 | 2 | 4 | 97.1 |
 | `dash_charts/utils_static.py` | 96 | 5 | 0 | 94.8 |
 
-Generated on: 2020-05-03T10:51:28.482273
+Generated on: 2020-05-03T13:30:15.873397
 
 <!-- /COVERAGE -->
 

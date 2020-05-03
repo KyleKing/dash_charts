@@ -4,36 +4,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 from dash_charts.dash_helpers import parse_dash_cli_args
-from dash_charts.utils_app import AppBase
-from dash_charts.utils_app_with_navigation import AppWithTabs
+from dash_charts.utils_app_with_navigation import AppWithTabs, StaticTab
 from dash_charts.utils_fig import min_graph
-
-
-class StaticTab(AppBase):
-    """Simple App without charts or callbacks."""
-
-    basic_style = {
-        'marginLeft': 'auto',
-        'marginRight': 'auto',
-        'maxWidth': '1000px',
-        'paddingTop': '10px',
-    }
-
-    def initialization(self):
-        """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
-        super().initialization()
-        self.register_uniq_ids(['N/A'])
-
-    def create_elements(self):
-        """Initialize the charts, tables, and other Dash elements.."""
-        pass
-
-    def create_callbacks(self):
-        """Register callbacks necessary for this tab."""
-        pass
-
-
-# ----------------------------------------------------------------------------------------------------------------------
 
 
 class TabZero(StaticTab):
@@ -145,6 +117,25 @@ class TabAppDemo(AppWithTabs):
             TabTwo(app=self.app),
             TabThree(app=self.app),
         ]
+
+    def return_layout(self):
+        """Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        """
+        side_padding = {'padding': '10px 0 0 10px'}
+        return html.Div([
+            html.H3('Application with Tabbed Content Demo', style=side_padding),
+            html.P('AppWithTabs is rendered inline, while FullScreenAppWithTabs has a navigation element fixed to the'
+                   'viewport. See the px app for an example with full screen and below for an example with'
+                   'AppWithTabs.', style=side_padding),
+            html.Hr(),
+            super().return_layout(),
+            html.Hr(),
+            html.P('Additional content, like tables, upload module, etc. could go here', style=side_padding),
+        ])
 
 
 instance = TabAppDemo
