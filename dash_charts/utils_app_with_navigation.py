@@ -148,6 +148,7 @@ class FullScreenAppWithTabs(AppWithTabs):
 
         Returns:
             tuple: keyword arguments and styling for the dcc.Tab elements
+
                 - tab_kwargs: with at minimum keys `(style, selected_style)` for dcc.Tab
                 - tabs_kwargs: to be passed to dcc.Tabs
                 - tabs_style: style for the dcc.Tabs HTML element

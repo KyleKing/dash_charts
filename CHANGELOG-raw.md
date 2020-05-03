@@ -66,6 +66,10 @@
 
 ### Changes
 
+* Split AppWithTabs into inline and FullScreen. [Kyle King]
+
+* Update images and dependencies. [Kyle King]
+
 * Add ex_utils_static to README. [Kyle King]
 
 * Update dash_dev for docs fixes. [Kyle King]

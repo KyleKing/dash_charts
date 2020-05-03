@@ -257,12 +257,12 @@ Latest coverage table
 | `dash_charts/time_vis.py` | 0 | 0 | 0 | 100.0 |
 | `dash_charts/utils_app.py` | 57 | 1 | 8 | 98.2 |
 | `dash_charts/utils_app_modules.py` | 28 | 5 | 2 | 82.1 |
-| `dash_charts/utils_app_with_navigation.py` | 97 | 7 | 6 | 92.8 |
+| `dash_charts/utils_app_with_navigation.py` | 104 | 7 | 6 | 93.3 |
 | `dash_charts/utils_callbacks.py` | 25 | 1 | 0 | 96.0 |
 | `dash_charts/utils_fig.py` | 70 | 2 | 4 | 97.1 |
 | `dash_charts/utils_static.py` | 96 | 5 | 0 | 94.8 |
 
-Generated on: 2020-04-27T07:36:47.964208
+Generated on: 2020-05-03T09:13:47.500514
 
 <!-- /COVERAGE -->
 
