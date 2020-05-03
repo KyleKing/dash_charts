@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dash_charts"
-version = "0.0.4"
+version = "0.0.5"
 description = "Python package for OOP of Plotly/Dash apps and custom templates"
 authors = ["Kyle King <https://github.com/KyleKing>"]
 repository = "https://github.com/kyleking/dash_charts"

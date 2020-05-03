@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from dash_charts.dash_helpers import parse_dash_cli_args
-from dash_charts.rolling_chart import RollingChart
+from dash_charts.scatter_line_charts import RollingChart
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_callbacks import map_args, map_outputs
 from dash_charts.utils_fig import make_dict_an, min_graph

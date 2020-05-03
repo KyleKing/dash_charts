@@ -9,7 +9,7 @@ import jsonpickle
 import pandas as pd
 import plotly.express as px
 from dash_charts import equations
-from dash_charts.fitted_chart import FittedChart
+from dash_charts.scatter_line_charts import FittedChart
 from dash_charts.utils_static import create_dbc_doc, make_div, tag_code, tag_markdown, tag_table, write_from_markdown
 from dominate import tags, util
 
