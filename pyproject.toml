@@ -25,6 +25,7 @@ scipy = "*"
 
 [tool.poetry.dev-dependencies]
 jsonpickle = "*"
+isort = "^4.0.0"  # FIXME: Temporary until flake8-isort finishes isort 5.0.X migration
 
 [tool.poetry.dev-dependencies.dash]
 extras = [ "testing",]
