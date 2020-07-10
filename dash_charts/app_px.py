@@ -152,6 +152,8 @@ class TabBase(AppBase):  # noqa: H601
     """Keyword from function for dropdowns with column names as options. Must be overridden in child class."""
     dims_dict: OrderedDict = OrderedDict([])
     """OrderedDict of keyword from function to allowed values. Must be overridden in child class."""
+    default_dim_name = {}
+    """Lookup for dim:column name to use as default in dropdown."""
 
     def initialization(self):
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
@@ -220,7 +222,7 @@ class TabBase(AppBase):  # noqa: H601
                 dropdown_group('Plot Type:', self.ids[self.id_func], self.func_opts, value=self.func_opts[0]['label']),
                 dropdown_group('Template:', self.ids[self.id_template], self.t_opts, value=self.t_opts[0]['label']),
             ] + [
-                dropdown_group(f'{dim}:', self.ids[dim], self.col_opts)
+                dropdown_group(f'{dim}:', self.ids[dim], self.col_opts, value=self.default_dim_name.get(dim, None))
                 for dim in self.dims
             ] + [
                 dropdown_group(f'{dim}:', self.ids[dim], [opts_dd(item, item) for item in items])
@@ -262,8 +264,9 @@ class TabBase(AppBase):  # noqa: H601
 class TabTip(TabBase):  # noqa: H601
     """TabTip properties."""
 
-    name = 'Tip Data'
-    data = px.data.tips()
+    name = 'Tip Data (Iris)'  # FIXME: tips has non-numeric types
+    data = px.data.iris()  # https://plotly.com/python/plotly-express/
+    # data = px.data.tips()
     func_map = OrderedDict([
         ('scatter', px.scatter),
         ('density_contour', px.density_contour),
@@ -276,6 +279,11 @@ class TabTip(TabBase):  # noqa: H601
         # Consider: 'log_y'/'log_x' > daq.BooleanSwitch(id='{}-bool', on=False)
         # Won't work: error_x..., animation_frame/animation_group, category_orders, labels, etc.
     ])
+    default_dim_name = {
+        'x': 'sepal_width',
+        'y': 'sepal_length',
+    }
+    """Lookup for dim:column name to use as default in dropdown."""
 
 
 class TabIris(TabBase):  # noqa: H601
