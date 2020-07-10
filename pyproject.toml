@@ -1,8 +1,12 @@
+[build-system]
+requires = [ "poetry>=1.0",]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "dash_charts"
 version = "0.0.5"
 description = "Python package for OOP of Plotly/Dash apps and custom templates"
-authors = ["Kyle King <https://github.com/KyleKing>"]
+authors = [ "Kyle King <https://github.com/KyleKing>",]
 repository = "https://github.com/kyleking/dash_charts"
 
 [tool.poetry.dependencies]
@@ -16,13 +20,15 @@ dominate = "*"
 icecream = "*"
 markdown = "*"
 pandas = "*"
+psutil = "*"
 scipy = "*"
 
 [tool.poetry.dev-dependencies]
-dash = {extras = ["testing"], version = "*, ^1.11"}
-dash_dev = {git = "https://github.com/KyleKing/dash_dev.git"}
 jsonpickle = "*"
 
-[build-system]
-requires = ["poetry>=1.0"]
-build-backend = "poetry.masonry.api"
+[tool.poetry.dev-dependencies.dash]
+extras = [ "testing",]
+version = "*, ^1.11"
+
+[tool.poetry.dev-dependencies.dash_dev]
+git = "https://github.com/KyleKing/dash_dev.git"

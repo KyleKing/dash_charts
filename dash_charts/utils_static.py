@@ -1,5 +1,6 @@
 """Utilities for generating static HTML reports."""
 
+from base64 import b64encode
 import io
 
 import dash_bootstrap_components as dbc
@@ -43,7 +44,43 @@ def make_div(figure, **html_kwargs):
         return output.getvalue()
 
 
-def write_image(figure, path_or_file_object, image_format, **img_kwargs):
+def add_image(image_path, alt_text=None):
+    """Write base64 image to HTML.
+
+    Args:
+        image_path: Path to image file and format will be read from file suffix.
+        alt_text: alternate text. If None, will show the image filename
+
+    Returns:
+        str: HTML
+
+    """
+    with open(image_path, 'rb') as video_file:
+        encoded_image = b64encode(video_file.read()).decode()
+    image_uri = f'data:image/{image_path.suffix[1:]};base64,{encoded_image}'
+    return f'<img src="{image_uri}" alt="{image_path.name if alt_text is None else alt_text}"/>'
+
+
+def add_video(video_path, alt_text=None):
+    """Write base64 video to HTML.
+
+    Video formats can easily be converted with ffmpeg: `ffmpeg -i video_filename.mov video_filename.webm`
+
+    Args:
+        video_path: Path to video file and format will be read from file suffix. Video should be in webm format
+        alt_text: alternate text. If None, will show the video filename
+
+    Returns:
+        str: HTML video tag
+
+    """
+    with open(video_path, 'rb') as video_file:
+        encoded_video = b64encode(video_file.read()).decode()
+    video_uri = f'data:video/{video_path.suffix[1:]};base64,{encoded_video}'
+    return f'<video src="{video_uri}" controls>{video_path.name if alt_text is None else alt_text}</video>'
+
+
+def write_image_file(figure, path_or_file_object, image_format, **img_kwargs):
     """Write Plotly figure as an image to specified file.
 
     Args:
@@ -53,7 +90,7 @@ def write_image(figure, path_or_file_object, image_format, **img_kwargs):
         img_kwargs: additional keyword arguments passed to `plotly.io.write_image()`
 
     """
-    plotly.io.write_image(fig=figure, file=path_or_file_object, format=image_format, **img_kwargs)
+    plotly.io.write_image(fig=figure, file=str(path_or_file_object), format=image_format, **img_kwargs)
 
 
 def capture_plotly_body():

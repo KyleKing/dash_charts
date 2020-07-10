@@ -410,7 +410,7 @@ class UploadModule(ModuleBase):
             try:
                 if b64_file is not None:
                     df_upload = parse_uploaded_df(b64_file, filename, timestamp)
-                    df_upload = df_upload.dropna(axis='columns')  # FIXME: Need to better handle NaN values
+                    df_upload = df_upload.dropna(axis='columns')  # FIXME: (Really) Need to better handle NaN values
                     self.add_user(username)
                     self.upload_data(username, filename, df_upload)
 

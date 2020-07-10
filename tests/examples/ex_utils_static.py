@@ -9,9 +9,20 @@ import jsonpickle
 import pandas as pd
 import plotly.express as px
 from dash_charts import equations
+from dash_charts.dash_helpers import json_dumps_compact
 from dash_charts.scatter_line_charts import FittedChart
-from dash_charts.utils_static import create_dbc_doc, make_div, tag_code, tag_markdown, tag_table, write_from_markdown
+from dash_charts.utils_static import (add_image, add_video, create_dbc_doc, make_div, tag_code, tag_markdown, tag_table,
+                                      write_from_markdown, write_image_file, write_lookup)
 from dominate import tags, util
+
+
+def test_write_image_file(image_path, figure):
+    """Test writing an image file."""
+    if image_path.is_file():
+        image_path.unlink()
+    write_image_file(figure, image_path, image_path.suffix[1:])
+    assert image_path.is_file()
+    image_path.unlink()
 
 
 def create_sample_custom_chart_figure():
@@ -45,6 +56,10 @@ def write_sample_html(filename):
         filename: path to write the HTML file
 
     """
+    image_path = Path(__file__).parent / 'test_write_image_file.png'
+    figure = px.scatter(x=range(10), y=range(10))
+    test_write_image_file(image_path, figure)
+
     # Configure dark theme
     custom_styles = 'pre {max-height: 400px;}'
     doc = create_dbc_doc(dbc.themes.DARKLY, custom_styles, title='Example Static File')
@@ -78,11 +93,16 @@ def write_sample_html(filename):
             tag_markdown(md_string)
 
             tags.hr()
+            tags.h1('Example image')
+            util.raw(add_image(image_path))
+            # util.raw(add_video(video_path))
+
+            tags.hr()
             tags.h1('Another Chart For Good Measure')
             util.raw(make_div(px_figure))
             tags.br()
             tags.p('JSON representation of the px_figure layout')
-            tag_code(json.dumps(json.loads(px_figure_json), indent=4), language='language-json')
+            tag_code(json_dumps_compact(json.loads(px_figure_json)), language='language-json')
 
     filename.write_text(str(doc))
 

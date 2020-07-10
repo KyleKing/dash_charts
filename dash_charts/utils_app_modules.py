@@ -53,7 +53,7 @@ class ModuleBase:  # noqa: H601
             ids: `self.ids` from base application
 
         """
-        pass
+        pass  # pragma: no cover
 
     def return_layout(self, ids):
         """Return Dash application layout.
@@ -74,10 +74,9 @@ class ModuleBase:  # noqa: H601
             parent: parent instance (ex: `self`)
 
         """
-        pass
+        pass  # pragma: no cover
 
 
-# TODO: Add example and tests for this module
 class DataCache(ModuleBase):
     """Module to store data in UI and later loaded as needed."""
 
