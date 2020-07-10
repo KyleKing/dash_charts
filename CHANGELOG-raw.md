@@ -3,6 +3,19 @@
 
 ## (unreleased)
 
+### Changes
+
+* Set default dropdown values in child class. [Kyle King]
+
+* Add additional tests. [Kyle King]
+
+* Merge untested code from kitsu project. [Kyle King]
+
+* Merge rolling and fitted charts (inc: 0.0.5) [Kyle King]
+
+
+## 0.0.4 (2020-05-03)
+
 ### New
 
 * Ability to create Plotly HTML from markdown. [Kyle King]
@@ -65,6 +78,8 @@
 * First refactored example with Pareto chart. [Kyle King]
 
 ### Changes
+
+* Update documentation. [Kyle King]
 
 * Split AppWithTabs into inline and FullScreen. [Kyle King]
 
