@@ -33,45 +33,28 @@ Examples
 
 """
 
+from datetime import datetime
 import plotly.graph_objects as go
+from icecream import ic
 
 from .dash_helpers import validate
 from .utils_fig import CustomChart, check_raw_data
 
 
+def get_unix(str_ts, date_format):
+    return datetime.strptime(str_ts, date_format).timestamp()
+
+
 class GanttChart(CustomChart):  # noqa: H601
     """Gantt Chart: event and resource timeline."""
 
-    axis_range = {'x': ('2015-01-01', '2015-06-20'), 'y': (-5, 5)}
-
-    def add_annotations(self):
-        """Calculate coordinate chart layout. Called by __init__, but can be called later to update the chart."""
-        self.annotations.extend([
-            {
-                'showarrow': False,
-                'text': 'Your text here',
-                'align': 'right',
-                'x': '2015-02-03',
-                'xanchor': 'right',
-                'y': 1,
-                'yanchor': 'bottom',
-            },
-            {
-                'showarrow': False,
-                'text': 'Your second text here',
-                'align': 'right',
-                'x': '2015-05-03',
-                'xanchor': 'right',
-                'y': 5,
-                'yanchor': 'bottom',
-            },
-        ])
+    # # See `wesanderson::wes_palette` for R, such as Darjeeling1
 
     def create_traces(self, df_raw):
         """Return traces for plotly chart.
 
         Args:
-            df_raw: pandas dataframe with at minimum the two columns `category: str` and `value: float`
+            df_raw: pandas dataframe with columns: `(category, label, start, end, progress)`
 
         Returns:
             list: Dash chart traces
@@ -80,24 +63,65 @@ class GanttChart(CustomChart):  # noqa: H601
             RuntimeError: if the `df_raw` is missing any necessary columns
 
         """
-        # # Check that the raw data frame is properly formatted
-        # check_raw_data(df_raw, min_keys=['category', 'value'])
-        # if not pd.api.types.is_string_dtype(df_raw['category']):  # pragma: no cover
-        #     raise RuntimeError(f"category column must be string, but found {df_raw['category'].dtype}")
-
-        # # Create and return the traces and optionally add the count to the bar chart
-        # df_p = tidy_pareto_data(df_raw, self.cap_categories)
-        # count_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if self.show_count else {}
-
-        self.add_annotations()
-
-        return [
-            go.Scatter(
-                x=['2015-02-01'],
-                y=[-14],
+        events = []
+        self.shapes = []
+        self.annotations = []
+        # FIXME: Replace start==None, with end value! Will fix sort and simplify some logic below
+        df_raw = (df_raw
+                  .sort_values(by=['category', 'start'], ascending=False)
+                  .sort_values(by=['end'], ascending=False)
+                  .reset_index(drop=True))
+        dates = sorted(set(filter(None, df_raw['start'].to_list() + df_raw['end'].to_list())))
+        self.axis_range = {'x': [dates[0], dates[-1]]}
+        for event in df_raw.itertuples():
+            start = event.start if event.start else event.end
+            date_range = (f'{event.start}-' if event.start else '') + event.end
+            y_pos = event.Index
+            events.append(go.Scatter(
+                # fillcolor=self.colors[event.category],
+                # legendgroup=self.colors[event.category],
+                # marker={'color': self.colors[event.category]},
                 mode='lines',
-            ),
-        ]
+                text=f'<b>{event.category}</b><br>{event.label} ({int(event.progress * 100)}%)<br>{date_range}',
+                x=[start, event.end, event.end, start, start],
+                y=[y_pos, y_pos, y_pos - 1, y_pos - 1, y_pos],
+                showlegend=False,  # FIXME: On first use of the legend group, give name set this to True
+            ))
+            # Add progress overlay and task label
+            if event.progress > 0:
+                self._add_progress_shape(event, y_pos)
+            self._add_annotation(event, y_pos)
+        return events
+
+    def _add_annotation(self, event, y_pos):
+        self.annotations.append({
+            'showarrow': False,
+            'text': event.label,
+            'align': 'right',
+            'x': event.end,
+            'xanchor': 'left',
+            'y': y_pos - 0.5,
+            'yanchor': 'middle',
+        })
+
+    def _add_progress_shape(self, event, y_pos):
+        """Add white overlay to indicate task progress."""
+        start = event.start if event.start else event.end
+        unix_start = get_unix(start, self.date_format)
+        unix_progress = (get_unix(event.end, self.date_format) - unix_start) * event.progress + unix_start
+        self.shapes.append(go.layout.Shape(
+            fillcolor='white',
+            layer='above',
+            line_width=0,
+            opacity=0.5,
+            type='rect',
+            x0=start,
+            x1=datetime.fromtimestamp(unix_progress).strftime(self.date_format),
+            xref='x',
+            y0=y_pos,
+            y1=y_pos - 1,
+            yref='y',
+        ))
 
     def create_layout(self):
         """Extend the standard layout.
@@ -107,20 +131,10 @@ class GanttChart(CustomChart):  # noqa: H601
 
         """
         layout = super().create_layout()
-
-        layout['shapes'] = [
-            go.layout.Shape(
-                type='rect',
-                xref='x', yref='y',
-                # x0=1, x1=3,
-                # y0=1, y1=2,
-                x0='2015-02-01', x1='2015-06-01',
-                y0=-2, y1=2,
-                line_width=0,  # line=dict(color='LightSkyBlue'),
-                opacity=0.5,
-                layer='below',
-                fillcolor='LightSkyBlue',
-            ),
-        ]
-
+        # Suppress Y axis ticks/grid
+        layout['yaxis']['showgrid'] = False
+        layout['yaxis']['showticklabels'] = False
+        layout['yaxis']['zeroline'] = False
+        # Add shapes
+        layout['shapes'] = self.shapes
         return layout

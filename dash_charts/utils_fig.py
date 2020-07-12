@@ -93,7 +93,7 @@ class CustomChart:  # noqa: H601
     _axis_range = {}
     _axis_range_schema = {
         'x': {
-            'items': [{'type': ['integer', 'float', 'str']}, {'type': ['integer', 'float', 'str']}],
+            'items': [{'type': ['integer', 'float', 'string']}, {'type': ['integer', 'float', 'string']}],
             'required': False,
             'type': 'list',
         },

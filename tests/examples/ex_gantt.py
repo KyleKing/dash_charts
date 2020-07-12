@@ -5,26 +5,27 @@ Based on D3 demo from: https://github.com/alampros/Gantt-Chart#creating-a-simple
 """
 
 import dash_html_components as html
+import pandas as pd
 from dash_charts.dash_helpers import parse_dash_cli_args
 from dash_charts.gantt import GanttChart
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
 
 
-class GanttDemo(AppBase):
+class GanttDemo(AppBase):  # noqa: H601
     """Example creating a Gantt chart."""
 
     name = 'Example Gantt Chart'
     """Application name"""
 
-    data_raw = [
-        {'category': 'Project A', 'label': 'task1', 'start': '2014-02-01', 'end': '01/05/2014', 'progress': 0.15},
-        {'category': 'Project A', 'label': 'task1.1', 'start': '2014-03-01', 'end': '01/05/2014'},
-        {'category': 'Project A', 'label': 'task2', 'start': '2014-04-01', 'end': '01/08/2014', 'progress': 0.35},
-        {'category': 'Project A', 'label': 'deployment 1', 'start': '2014-07-01'},
-        {'category': 'Project A', 'label': 'task2.1', 'start': '2014-07-01', 'end': '01/08/2014', 'progress': 0.75},
-        {'category': 'Project B', 'label': 'task3', 'start': '2014-10-01', 'end': '01/12/2014', 'progress': 0.6},
-        {'category': 'Project B', 'label': 'deployment 2', 'start': '2014-03-01'},
+    tmp_raw = [
+        {'category': 'Project A', 'label': 'task1', 'start': '2014-02-01', 'end': '2014-05-01', 'progress': 0.15},
+        {'category': 'Project A', 'label': 'task1.1', 'start': '2014-03-01', 'end': '2014-05-01', 'progress': 0},
+        {'category': 'Project A', 'label': 'task2', 'start': '2014-04-01', 'end': '2014-08-01', 'progress': 0.75},
+        {'category': 'Project A', 'label': 'deployment 1', 'start': None, 'end': '2014-08-01', 'progress': 0},
+        {'category': 'Project A', 'label': 'task2.1', 'start': '2014-07-01', 'end': '2014-08-01', 'progress': 0.2},
+        {'category': 'Project B', 'label': 'task3', 'start': '2014-08-10', 'end': '2014-10-01', 'progress': 0.2},
+        {'category': 'Project B', 'label': 'deployment 2', 'start': None, 'end': '2014-10-01', 'progress': 0},
     ]
     """All in-memory tasks and milestones referenced by callbacks and plotted. If modified, will impact all viewers."""
 
@@ -49,7 +50,7 @@ class GanttDemo(AppBase):
 
     def generate_data(self):
         """Create self.data_raw with sample data."""
-        pass
+        self.data_raw = pd.DataFrame.from_dict(self.tmp_raw)
 
     def return_layout(self):
         """Return Dash application layout.
