@@ -6,6 +6,8 @@ Online Gantt Demo: https://chart-studio.plot.ly/create/?fid=tmercieca:5#/
 
 """
 
+# TODO: See the Gantt chart implementation
+
 # from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 # import plotly.figure_factory as ff
 # import plotly.graph_objs as go

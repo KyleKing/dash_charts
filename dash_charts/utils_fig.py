@@ -1,26 +1,28 @@
 """Utilities for custom Dash figures."""
 
 import dash_core_components as dcc
-import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 from .dash_helpers import validate
 
 
-def min_graph(**kwargs):
+def min_graph(config=None, **kwargs):
     """Return dcc.Graph element with Plotly overlay removed.
 
     See: https://community.plot.ly/t/is-it-possible-to-hide-the-floating-toolbar/4911/7
 
     Args:
+        config: dictionary passed to `dcc.Graph`. Default is to disable the `displayModeBar`
         kwargs: any kwargs to pass to the dash initializer other than `assets_folder`
 
     Returns:
         dict: Dash `dcc.Graph` object
 
     """
-    return dcc.Graph(config={'displayModeBar': False}, **kwargs)
+    if config is None:
+        config = {'displayModeBar': False}
+    return dcc.Graph(config=config, **kwargs)
 
 
 def check_raw_data(df_raw, min_keys):
@@ -47,7 +49,7 @@ def make_dict_an(coord, text, label=None, color=None, y_offset=10):
         text: string text for annotation
         label: string label shown on hover
         color: string color. If None (default), will revert to black
-        y_max: used to calculate vertical offset. Default is +10 y units
+        y_offset: offset in yaxis for annotation
 
     Returns:
         dict: keyword arguments for `go.layout.Annotation`
@@ -67,7 +69,6 @@ def make_dict_an(coord, text, label=None, color=None, y_offset=10):
         'borderpad': 2,
         'borderwidth': 1,
         'font': {'color': '#ffffff'},
-        # 'hoverlabel': {bgcolor, bordercolor, font},
         'hovertext': label,
         'opacity': 0.8,
         'showarrow': True,
@@ -92,7 +93,7 @@ class CustomChart:  # noqa: H601
     _axis_range = {}
     _axis_range_schema = {
         'x': {
-            'items': [{'type': ['integer', 'float']}, {'type': ['integer', 'float']}],
+            'items': [{'type': ['integer', 'float', 'str']}, {'type': ['integer', 'float', 'str']}],
             'required': False,
             'type': 'list',
         },
