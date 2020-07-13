@@ -2,10 +2,10 @@
 
 # TODO:
 
-- Refactor and cleanup documentation
-- Fix hover on deployment
-- Review below examples
-- Fix color generation for multiple projects
+- Fix hover on milestones (see note in `self._create_annotation()`)
+- Review below inspiration
+    - How are resources and dependencies shown?
+    - Are relative dates used? Or should this be up to the source file/spreadsheet when user-submitted?
 
 # Inspiration
 
@@ -13,13 +13,6 @@
 - http://guypursey.com/blog/201605302300-d3-timescale-visualisation
 - https://shybovycha.github.io/2017/04/09/gantt-chart-with-d3.html
 - https://github.com/dk8996/Gantt-Chart
-
-# Other Ideas
-
-- Consider how to display task dependencies
-- Consider adding dependencies (end date = start date) where vertical line could connect them?
-- Consider relative dates
-- -Consider assigning resources with some sort of indicator-
 
 # Removed COde
 
@@ -33,7 +26,7 @@ self.axis_range = {'x': [dates[0], dates[-1]]}
 from datetime import datetime
 
 import plotly.graph_objects as go
-from icecream import ic
+# from icecream import ic  # noqa: E800
 from palettable.tableau import TableauMedium_10
 
 from .utils_fig import CustomChart
@@ -86,9 +79,6 @@ class GanttChart(CustomChart):  # noqa: H601
             list: Dash chart traces
 
         """
-        tasks = []
-        self.shapes = []
-        self.annotations = []
         # If start is None, assign end to start, ort dataframe, and create color lookup
         start_index = df_raw.columns.get_loc('start')
         end_index = df_raw.columns.get_loc('end')
@@ -100,67 +90,74 @@ class GanttChart(CustomChart):  # noqa: H601
                   .sort_values(by=['category', 'start'], ascending=False)
                   .sort_values(by=['end'], ascending=False)
                   .reset_index(drop=True))
-        ic(df_raw)
+        # Create color lookup using categories in sorted order
         categories = set(df_raw['category'])
         self.color_lookup = {cat: self.pallette[idx] for idx, cat in enumerate(categories)}
-        groups = []
-        # Add all tasks as horizontal bars with progress overlay and text label
+        # Track which categories have been plotted
+        plotted_categories = []
+        # Create the Gantt traces
+        traces = []
         for task in df_raw.itertuples():
-            color = self.color_lookup[task.category]
-            dates = [format_unix(get_unix(str_ts, self.date_format), '%a, %d%b%Y') for str_ts in [task.start, task.end]]
-            if task.start != task.end:
-                date_range = f'<br><b>Start</b>: {dates[0]}<br><b>End</b>: {dates[1]}'
-            else:
-                date_range = f'<br><b>Milestone</b>: {dates[1]}'
             y_pos = task.Index
-            is_first = task.category not in groups
-            groups.append(task.category)
-            scatter_kwargs = dict(
-                fill='toself',
-                fillcolor=color,
-                hoverlabel={'bgcolor': 'white', 'font_size': 12, 'namelength': 0},
-                legendgroup=color,
-                line={'width': 1},
-                marker={'color': color},
-                mode='lines',
-                showlegend=is_first,
-                text=f'<b>{task.category}</b><br>{task.label} ({int(task.progress * 100)}%)<br>{date_range}',
-                x=[task.start, task.end, task.end, task.start, task.start],
-                y=[y_pos, y_pos, y_pos - 1, y_pos - 1, y_pos],
-            )
-            if is_first:
-                scatter_kwargs['name'] = task.category
-            tasks.append(go.Scatter(**scatter_kwargs))
-            # Add progress overlay and task label
+            is_first = task.category not in plotted_categories
+            plotted_categories.append(task.category)
+            traces.extend([
+                self._create_task_shape(task, y_pos, is_first),
+                self._create_annotation(task, y_pos),
+            ])
             if task.progress > 0:
-                tasks.append(self._add_progress_shape(task, y_pos))
-            tasks.append(self._add_annotation(task, y_pos))
-        return tasks
+                task.append(self._create_progress_shape(task, y_pos))
+        return traces
 
-    def _add_annotation(self, task, y_pos):
-        """Add task progress to `self.annotations` at y_pos.
+    def _get_hover_text(self, task):
+        """Return hover text for given trace.
+
+        Args:
+            task: row tuple from df_raw with: `(category, label, start, end, progress)`
+
+        Returns:
+            string: HTML-formatted hover text
+
+        """
+        dates = [format_unix(get_unix(str_ts, self.date_format), '%a, %d%b%Y') for str_ts in [task.start, task.end]]
+        if task.start != task.end:
+            date_range = f'<br><b>Start</b>: {dates[0]}<br><b>End</b>: {dates[1]}'
+        else:
+            date_range = f'<br><b>Milestone</b>: {dates[1]}'
+        return f'<b>{task.category}</b><br>{task.label} ({int(task.progress * 100)}%)<br>{date_range}'
+
+    def _create_task_shape(self, task, y_pos, is_first):
+        """Create colored task scatter rectangle.
 
         Args:
             task: row tuple from df_raw with: `(category, label, start, end, progress)`
             y_pos: top y-coordinate of task
+            is_first: if True, this is the first time a task of this category will be plotted
 
         Returns:
             trace: single Dash chart Scatter trace
 
         """
-        return go.Scatter(
-            hoverinfo='skip',
-            legendgroup=self.color_lookup[task.category],
-            mode='text',
-            showlegend=False,
-            text=task.label,
-            textposition='middle left',
-            x=[task.end],
-            y=[y_pos - 0.5],
+        color = self.color_lookup[task.category]
+        scatter_kwargs = dict(
+            fill='toself',
+            fillcolor=color,
+            hoverlabel={'bgcolor': 'white', 'font_size': 12, 'namelength': 0},
+            legendgroup=color,
+            line={'width': 1},
+            marker={'color': color},
+            mode='lines',
+            showlegend=is_first,
+            text=self.get_hover_text(task),
+            x=[task.start, task.end, task.end, task.start, task.start],
+            y=[y_pos, y_pos, y_pos - 1, y_pos - 1, y_pos],
         )
+        if is_first:
+            scatter_kwargs['name'] = task.category
+        return go.Scatter(**scatter_kwargs)
 
-    def _add_progress_shape(self, task, y_pos):
-        """Add semi-transparent white overlay `self.shapes` to indicate task progress.
+    def _create_progress_shape(self, task, y_pos):
+        """Create semi-transparent white overlay `self.shapes` to indicate task progress.
 
         Args:
             task: row tuple from df_raw with: `(category, label, start, end, progress)`
@@ -186,6 +183,30 @@ class GanttChart(CustomChart):  # noqa: H601
             showlegend=False,
             x=[task.start, end, end, task.start, task.start],
             y=[y_pos, y_pos, y_pos - 1, y_pos - 1, y_pos],
+        )
+
+    def _create_annotation(self, task, y_pos):
+        """Create task progress to `self.annotations` at y_pos.
+
+        Args:
+            task: row tuple from df_raw with: `(category, label, start, end, progress)`
+            y_pos: top y-coordinate of task
+
+        Returns:
+            trace: single Dash chart Scatter trace
+
+        """
+        # FIXME: add either a shape in the background (`below`) or find out if I can add `hovertext` for milestones
+        #   since the current hover-able area is so thin
+        return go.Scatter(
+            hoverinfo='skip',
+            legendgroup=self.color_lookup[task.category],
+            mode='text',
+            showlegend=False,
+            text=task.label,
+            textposition='middle left',
+            x=[task.end],
+            y=[y_pos - 0.5],
         )
 
     def create_layout(self):
