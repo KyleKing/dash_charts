@@ -1,56 +1,22 @@
 """Gantt Chart.
 
-# TODO:
+Note: does not support resources nor task dependencies; however those could be added by extending this base class.
 
-- Fix hover on milestones (see note in `self._create_annotation()`)
-- Review below inspiration
-    - How are resources and dependencies shown?
-    - Are relative dates used? Or should this be up to the source file/spreadsheet when user-submitted?
-
-# Removed COde
+# Removed Code
 
 ```py
+# Just snippets of Python code that may be useful in the future
 dates = sorted(set(filter(None, df_raw['start'].to_list() + df_raw['end'].to_list())))
 self.axis_range = {'x': [dates[0], dates[-1]]}
 ```
 
 """
 
-from datetime import datetime
-
 import plotly.graph_objects as go
-from icecream import ic  # noqa: E800
 from palettable.tableau import TableauMedium_10
 
+from .dash_helpers import format_unix, get_unix
 from .utils_fig import CustomChart
-
-
-def get_unix(str_ts, date_format):
-    """Get unix timestamp from a string timestamp in date_format.
-
-    Args:
-        str_ts: string timestamp in `date_format`
-        date_format: datetime time stamp format
-
-    Returns:
-        int: unix timestamp
-
-    """
-    return datetime.strptime(str_ts, date_format).timestamp()
-
-
-def format_unix(unix_ts, date_format):
-    """Format unix timestamp as a string timestamp in date_format.
-
-    Args:
-        unix_ts: unix timestamp
-        date_format: datetime time stamp format
-
-    Returns:
-        string: formatted timestamp in `date_format`
-
-    """
-    return datetime.fromtimestamp(unix_ts).strftime(date_format)
 
 
 class GanttChart(CustomChart):  # noqa: H601
@@ -79,7 +45,7 @@ class GanttChart(CustomChart):  # noqa: H601
             # TODO: Why can't I assign all at once?
             #   Should be able to: `df_raw.iloc[df_raw['start'].isna(), start_index] = [...]`
             df_raw.iloc[index, start_index] = df_raw.iloc[index, end_index]
-        ic(df_raw)
+        df_raw['progress'] = df_raw['progress'].fillna(0)  # Fill possibly missing progress values for milestones
         df_raw = (df_raw
                   .sort_values(by=['category', 'start'], ascending=False)
                   .sort_values(by=['end'], ascending=False)
@@ -95,12 +61,10 @@ class GanttChart(CustomChart):  # noqa: H601
             y_pos = task.Index
             is_first = task.category not in plotted_categories
             plotted_categories.append(task.category)
-            traces.extend([
-                self._create_task_shape(task, y_pos, is_first),
-                self._create_annotation(task, y_pos),
-            ])
+            traces.append(self._create_task_shape(task, y_pos, is_first))
             if task.progress > 0:
                 traces.append(self._create_progress_shape(task, y_pos))
+            traces.append(self._create_annotation(task, y_pos))
         return traces
 
     def _create_hover_text(self, task):

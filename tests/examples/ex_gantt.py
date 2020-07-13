@@ -4,12 +4,15 @@ Based on D3 demo from: https://github.com/alampros/Gantt-Chart#creating-a-simple
 
 """
 
+from pathlib import Path
+
 import dash_html_components as html
 import pandas as pd
 from dash_charts.dash_helpers import parse_dash_cli_args
 from dash_charts.gantt import GanttChart
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_fig import min_graph
+from palettable.wesanderson import FantasticFox2_5
 
 
 class GanttDemo(AppBase):  # noqa: H601
@@ -17,17 +20,6 @@ class GanttDemo(AppBase):  # noqa: H601
 
     name = 'Example Gantt Chart'
     """Application name"""
-
-    tmp_raw = [
-        {'category': 'Project A', 'label': 'task1', 'start': '2014-02-01', 'end': '2014-05-01', 'progress': 0.15},
-        {'category': 'Project A', 'label': 'task1.1', 'start': '2014-03-01', 'end': '2014-05-01', 'progress': 0},
-        {'category': 'Project A', 'label': 'task2', 'start': '2014-04-01', 'end': '2014-08-01', 'progress': 0.75},
-        {'category': 'Project A', 'label': 'deployment 1', 'start': None, 'end': '2014-08-01', 'progress': 0},
-        {'category': 'Project A', 'label': 'task2.1', 'start': '2014-07-01', 'end': '2014-08-01', 'progress': 0.2},
-        {'category': 'Project B', 'label': 'task3', 'start': '2014-08-10', 'end': '2014-10-01', 'progress': 0.2},
-        {'category': 'Project B', 'label': 'deployment 2', 'start': None, 'end': '2014-10-01', 'progress': 0},
-    ]
-    """All in-memory tasks and milestones referenced by callbacks and plotted. If modified, will impact all viewers."""
 
     chart_main = None
     """Main chart (Gantt)."""
@@ -47,10 +39,12 @@ class GanttDemo(AppBase):  # noqa: H601
             xlabel=None,
             ylabel=None,
         )
+        self.chart_main.pallette = FantasticFox2_5.hex_colors
 
     def generate_data(self):
         """Create self.data_raw with sample data."""
-        self.data_raw = pd.DataFrame.from_dict(self.tmp_raw)
+        csv_filename = Path(__file__).parent / 'ex_gantt_data.csv'
+        self.data_raw = pd.read_csv(csv_filename)
 
     def return_layout(self):
         """Return Dash application layout.

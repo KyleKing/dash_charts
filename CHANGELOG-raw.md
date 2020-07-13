@@ -27,6 +27,8 @@
 
 ### Fix
 
+* Tests and add ex_gantt test. [Kyle King]
+
 * Gantt sort and date range. [Kyle King]
 
 

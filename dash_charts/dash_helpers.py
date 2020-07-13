@@ -6,18 +6,11 @@ import json
 import sqlite3
 import time
 from contextlib import ContextDecorator
+from datetime import datetime
 from pathlib import Path
 
 import dataset
 from cerberus import Validator
-
-# Plotly Colors:
-# ['Blackbody', 'Blackbody_r', 'Bluered', 'Bluered_r', 'Blues', 'Blues_r', 'Cividis', 'Cividis_r', 'Earth', 'Earth_r',
-#  'Electric', 'Electric_r', 'Greens', 'Greens_r', 'Greys', 'Greys_r', 'Hot', 'Hot_r', 'Jet', 'Jet_r', 'Picnic',
-#  'Picnic_r', 'Portland', 'Portland_r', 'Rainbow', 'Rainbow_r', 'RdBu', 'RdBu_r', 'Reds', 'Reds_r', 'Viridis',
-#  'Viridis_r', 'YlGnBu', 'YlGnBu_r', 'YlOrRd', 'YlOrRd_r', 'scale_name', 'scale_name_r', 'scale_pairs',
-#  'scale_pairs_r', 'scale_sequence', 'scale_sequence_r']
-# plotly.colors.plotlyjs.Hot / `[rgb(0,0,0), rgb(230,0,0), rgb(255,210,0), rgb(255,255,255)]`
 
 
 def validate(document, schema, **validator_kwargs):
@@ -200,3 +193,32 @@ def graph_return(resp, keys):
         raise RuntimeError(f'Expected list of keys for: `{resp.items()}`, but received `{keys}`')
     ordered_responses = [resp.get(key, None) for key in keys]
     return ordered_responses if len(ordered_responses) > 1 else ordered_responses[0]
+
+
+
+def get_unix(str_ts, date_format):
+    """Get unix timestamp from a string timestamp in date_format.
+
+    Args:
+        str_ts: string timestamp in `date_format`
+        date_format: datetime time stamp format
+
+    Returns:
+        int: unix timestamp
+
+    """
+    return datetime.strptime(str_ts, date_format).timestamp()
+
+
+def format_unix(unix_ts, date_format):
+    """Format unix timestamp as a string timestamp in date_format.
+
+    Args:
+        unix_ts: unix timestamp
+        date_format: datetime time stamp format
+
+    Returns:
+        string: formatted timestamp in `date_format`
+
+    """
+    return datetime.fromtimestamp(unix_ts).strftime(date_format)
