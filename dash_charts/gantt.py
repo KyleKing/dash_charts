@@ -33,13 +33,38 @@ self.axis_range = {'x': [dates[0], dates[-1]]}
 from datetime import datetime
 
 import plotly.graph_objects as go
+from icecream import ic
+from palettable.tableau import TableauMedium_10
 
 from .utils_fig import CustomChart
 
 
 def get_unix(str_ts, date_format):
+    """Get unix timestamp from a string timestamp in date_format.
 
+    Args:
+        str_ts: string timestamp in `date_format`
+        date_format: datetime time stamp format
+
+    Returns:
+        int: unix timestamp
+
+    """
     return datetime.strptime(str_ts, date_format).timestamp()
+
+
+def format_unix(unix_ts, date_format):
+    """Format unix timestamp as a string timestamp in date_format.
+
+    Args:
+        unix_ts: unix timestamp
+        date_format: datetime time stamp format
+
+    Returns:
+        string: formatted timestamp in `date_format`
+
+    """
+    return datetime.fromtimestamp(unix_ts).strftime(date_format)
 
 
 class GanttChart(CustomChart):  # noqa: H601
@@ -47,6 +72,9 @@ class GanttChart(CustomChart):  # noqa: H601
 
     date_format = '%Y-%m-%d'
     """Date format for bar chart."""
+
+    pallette = TableauMedium_10.hex_colors
+    """Default color pallette for project colors."""
 
     def create_traces(self, df_raw):
         """Return traces for plotly chart.
@@ -61,21 +89,29 @@ class GanttChart(CustomChart):  # noqa: H601
         tasks = []
         self.shapes = []
         self.annotations = []
-        # Sort dataframe and create color lookup
+        # If start is None, assign end to start, ort dataframe, and create color lookup
+        start_index = df_raw.columns.get_loc('start')
+        end_index = df_raw.columns.get_loc('end')
+        for index in [idx for idx, is_na in enumerate(df_raw['start'].isna()) if is_na]:
+            # TODO: Why can't I assign all at once?
+            #   Should be able to: `df_raw.iloc[df_raw['start'].isna(), start_index] = [...]`
+            df_raw.iloc[index, start_index] = df_raw.iloc[index, end_index]
         df_raw = (df_raw
                   .sort_values(by=['category', 'start'], ascending=False)
                   .sort_values(by=['end'], ascending=False)
                   .reset_index(drop=True))
+        ic(df_raw)
         categories = set(df_raw['category'])
-        colors = ('#D5D5D3', '#CEAB07')
-        self.color_lookup = {cat: colors[idx] for idx, cat in enumerate(categories)}
+        self.color_lookup = {cat: self.pallette[idx] for idx, cat in enumerate(categories)}
         groups = []
         # Add all tasks as horizontal bars with progress overlay and text label
         for task in df_raw.itertuples():
             color = self.color_lookup[task.category]
-            start = task.start if task.start else task.end
-            # FIXME: make this two lines and format as XXMMMYYYY in GDP format
-            date_range = (f'{task.start} to ' if task.start else '') + task.end
+            dates = [format_unix(get_unix(str_ts, self.date_format), '%a, %d%b%Y') for str_ts in [task.start, task.end]]
+            if task.start != task.end:
+                date_range = f'<br><b>Start</b>: {dates[0]}<br><b>End</b>: {dates[1]}'
+            else:
+                date_range = f'<br><b>Milestone</b>: {dates[1]}'
             y_pos = task.Index
             is_first = task.category not in groups
             groups.append(task.category)
@@ -89,7 +125,7 @@ class GanttChart(CustomChart):  # noqa: H601
                 mode='lines',
                 showlegend=is_first,
                 text=f'<b>{task.category}</b><br>{task.label} ({int(task.progress * 100)}%)<br>{date_range}',
-                x=[start, task.end, task.end, start, start],
+                x=[task.start, task.end, task.end, task.start, task.start],
                 y=[y_pos, y_pos, y_pos - 1, y_pos - 1, y_pos],
             )
             if is_first:
@@ -107,6 +143,9 @@ class GanttChart(CustomChart):  # noqa: H601
         Args:
             task: row tuple from df_raw with: `(category, label, start, end, progress)`
             y_pos: top y-coordinate of task
+
+        Returns:
+            trace: single Dash chart Scatter trace
 
         """
         return go.Scatter(
@@ -127,11 +166,13 @@ class GanttChart(CustomChart):  # noqa: H601
             task: row tuple from df_raw with: `(category, label, start, end, progress)`
             y_pos: top y-coordinate of task
 
+        Returns:
+            trace: single Dash chart Scatter trace
+
         """
-        start = task.start if task.start else task.end
-        unix_start = get_unix(start, self.date_format)
+        unix_start = get_unix(task.start, self.date_format)
         unix_progress = (get_unix(task.end, self.date_format) - unix_start) * task.progress + unix_start
-        end = datetime.fromtimestamp(unix_progress).strftime(self.date_format)
+        end = format_unix(unix_progress, self.date_format)
         return go.Scatter(
             fill='toself',
             fillcolor='white',
@@ -143,7 +184,7 @@ class GanttChart(CustomChart):  # noqa: H601
             mode='lines',
             opacity=0.5,
             showlegend=False,
-            x=[start, end, end, start, start],
+            x=[task.start, end, end, task.start, task.start],
             y=[y_pos, y_pos, y_pos - 1, y_pos - 1, y_pos],
         )
 
