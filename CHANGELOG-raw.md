@@ -5,6 +5,18 @@
 
 ### Changes
 
+* Cleanup and refactor. [Kyle King]
+
+* Create legendgroups to toggle projects. [Kyle King]
+
+* Chg: sort and show Gantt tasks using Scatter @WIP. [Kyle King]
+
+* Chg: initialize Gantt with plotly shapes @WIP. [Kyle King]
+
+* Cleanup px app. [Kyle King]
+
+* Update requirements and changelog. [Kyle King]
+
 * Set default dropdown values in child class. [Kyle King]
 
 * Add additional tests. [Kyle King]
@@ -12,6 +24,10 @@
 * Merge untested code from kitsu project. [Kyle King]
 
 * Merge rolling and fitted charts (inc: 0.0.5) [Kyle King]
+
+### Fix
+
+* Gantt sort and date range. [Kyle King]
 
 
 ## 0.0.4 (2020-05-03)

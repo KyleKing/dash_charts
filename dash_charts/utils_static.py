@@ -55,8 +55,8 @@ def add_image(image_path, alt_text=None):
         str: HTML
 
     """
-    with open(image_path, 'rb') as video_file:
-        encoded_image = b64encode(video_file.read()).decode()
+    with open(image_path, 'rb') as image_file:
+        encoded_image = b64encode(image_file.read()).decode()
     image_uri = f'data:image/{image_path.suffix[1:]};base64,{encoded_image}'
     return f'<img src="{image_uri}" alt="{image_path.name if alt_text is None else alt_text}"/>'
 

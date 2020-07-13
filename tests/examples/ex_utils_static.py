@@ -11,9 +11,11 @@ import plotly.express as px
 from dash_charts import equations
 from dash_charts.dash_helpers import json_dumps_compact
 from dash_charts.scatter_line_charts import FittedChart
-from dash_charts.utils_static import (add_image, add_video, create_dbc_doc, make_div, tag_code, tag_markdown, tag_table,
-                                      write_from_markdown, write_image_file, write_lookup)
+from dash_charts.utils_static import (add_image, create_dbc_doc, make_div, tag_code, tag_markdown, tag_table,
+                                      write_from_markdown, write_image_file)
 from dominate import tags, util
+
+# TODO: Add tests for: utils_static.add_video and utils_static.write_lookup
 
 
 def test_write_image_file(image_path, figure):
@@ -22,7 +24,6 @@ def test_write_image_file(image_path, figure):
         image_path.unlink()
     write_image_file(figure, image_path, image_path.suffix[1:])
     assert image_path.is_file()
-    image_path.unlink()
 
 
 def create_sample_custom_chart_figure():

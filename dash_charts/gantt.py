@@ -7,13 +7,6 @@
     - How are resources and dependencies shown?
     - Are relative dates used? Or should this be up to the source file/spreadsheet when user-submitted?
 
-# Inspiration
-
-- https://github.com/alampros/Gantt-Chart/blob/master/gantt-chart-d3.js
-- http://guypursey.com/blog/201605302300-d3-timescale-visualisation
-- https://shybovycha.github.io/2017/04/09/gantt-chart-with-d3.html
-- https://github.com/dk8996/Gantt-Chart
-
 # Removed COde
 
 ```py
@@ -26,7 +19,7 @@ self.axis_range = {'x': [dates[0], dates[-1]]}
 from datetime import datetime
 
 import plotly.graph_objects as go
-# from icecream import ic  # noqa: E800
+from icecream import ic  # noqa: E800
 from palettable.tableau import TableauMedium_10
 
 from .utils_fig import CustomChart
@@ -86,6 +79,7 @@ class GanttChart(CustomChart):  # noqa: H601
             # TODO: Why can't I assign all at once?
             #   Should be able to: `df_raw.iloc[df_raw['start'].isna(), start_index] = [...]`
             df_raw.iloc[index, start_index] = df_raw.iloc[index, end_index]
+        ic(df_raw)
         df_raw = (df_raw
                   .sort_values(by=['category', 'start'], ascending=False)
                   .sort_values(by=['end'], ascending=False)
@@ -106,10 +100,10 @@ class GanttChart(CustomChart):  # noqa: H601
                 self._create_annotation(task, y_pos),
             ])
             if task.progress > 0:
-                task.append(self._create_progress_shape(task, y_pos))
+                traces.append(self._create_progress_shape(task, y_pos))
         return traces
 
-    def _get_hover_text(self, task):
+    def _create_hover_text(self, task):
         """Return hover text for given trace.
 
         Args:
@@ -148,7 +142,7 @@ class GanttChart(CustomChart):  # noqa: H601
             marker={'color': color},
             mode='lines',
             showlegend=is_first,
-            text=self.get_hover_text(task),
+            text=self._create_hover_text(task),
             x=[task.start, task.end, task.end, task.start, task.start],
             y=[y_pos, y_pos, y_pos - 1, y_pos - 1, y_pos],
         )
@@ -221,6 +215,4 @@ class GanttChart(CustomChart):  # noqa: H601
         layout['yaxis']['showgrid'] = False
         layout['yaxis']['showticklabels'] = False
         layout['yaxis']['zeroline'] = False
-        # Add shapes
-        layout['shapes'] = self.shapes
         return layout
