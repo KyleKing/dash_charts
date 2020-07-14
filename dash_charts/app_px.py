@@ -1,7 +1,35 @@
 """Generic Plotly Express Data Analysis App(s).
 
 Examples: https://www.plotly.express/
+
 Docs: https://www.plotly.express/plotly_express/
+
+# (Currently) Unsupported plotly express types
+
+```py
+px.parallel_coordinates(px.data.iris(), color="species_id",
+                        dimensions=['sepal_width', 'sepal_length', 'petal_width', 'petal_length'])
+px.treemap(px.data.tips(), path=['day', 'time', 'sex'], values='total_bill')
+px.sunburst(px.data.tips(), path=['day', 'time', 'sex'], values='total_bill)
+```
+
+Other charts that could be useful (but won't work with simple dropdowns)
+
+- scatter_matrix([data_frame, dimensions, …])
+    - In a scatter plot matrix (or SPLOM), each row of data_frame is
+    - https://plotly.com/python/splom/
+- parallel_coordinates([data_frame, …])
+    - In a parallel coordinates plot, each row of data_frame is represented
+    - https://plotly.com/python-api-reference/generated/plotly.express.parallel_coordinates.html
+- parallel_categories([data_frame, …])
+    - In a parallel categories (or parallel sets) plot, each row of
+    - https://plotly.com/python-api-reference/generated/plotly.express.parallel_categories.html
+- density_heatmap([data_frame, x, y, z, …])
+    - In a density heatmap, rows of data_frame are grouped together into
+    - https://plotly.com/python-api-reference/generated/plotly.express.density_heatmap.html
+- imshow(img[, zmin, zmax, origin, …])
+    - Display an image, i.e.
+    - https://plotly.com/python/imshow/
 
 """
 
@@ -18,34 +46,6 @@ from .utils_app import AppBase
 from .utils_app_with_navigation import FullScreenAppWithTabs
 from .utils_callbacks import map_args, map_outputs
 from .utils_fig import min_graph
-
-# FIXME: Implement ability for user to select JSON or CSV data and graph interactively!
-#   Require user to submit "Tidy" data with non-value headers
-# > Implementation Notes:
-#   > Along bottom of screen - file select - give keyword name to select from dropdowns for each px app/tab
-#     > This way multiple data sets can be loaded in PD DataFrames
-#   > In dropdown option of default or loaded data
-#   > Data should be tidy, then regular dropdown can be used
-#   > Should show table with data below input
-
-# ------------------------------------------------------------------------------------------------
-
-# Other charts that could be useful (but won't work with simple dropdowns)
-# scatter_matrix([data_frame, dimensions, …])
-#    In a scatter plot matrix (or SPLOM), each row of data_frame is
-#    https://plotly.com/python/splom/
-# parallel_coordinates([data_frame, …])
-#    In a parallel coordinates plot, each row of data_frame is represented
-#    https://plotly.com/python-api-reference/generated/plotly.express.parallel_coordinates.html
-# parallel_categories([data_frame, …])
-#    In a parallel categories (or parallel sets) plot, each row of
-#    https://plotly.com/python-api-reference/generated/plotly.express.parallel_categories.html
-# density_heatmap([data_frame, x, y, z, …])
-#    In a density heatmap, rows of data_frame are grouped together into
-#    https://plotly.com/python-api-reference/generated/plotly.express.density_heatmap.html
-# imshow(img[, zmin, zmax, origin, …])
-#    Display an image, i.e.
-#    https://plotly.com/python/imshow/
 
 # ======================================================================================================================
 # Create classes to manage tabs state. Easy to scale up or down
@@ -221,13 +221,10 @@ class TabIris(TabBase):  # noqa: H601
     data = px.data.iris()
     func_map = OrderedDict([
         ('histogram', px.histogram),
-        ('parallel_coordinates', px.parallel_coordinates),
-        ('box', px.box),
-        ('density_contour', px.density_contour),
-        ('strip', px.strip),
         ('bar', px.bar),
+        ('strip', px.strip),
+        ('box', px.box),
         ('violin', px.violin),
-        ('scatter', px.scatter),
     ])
     dims = ('x', 'y', 'color', 'facet_row', 'facet_col')
     default_dim_name = {
@@ -244,8 +241,6 @@ class TabGapminder(TabBase):  # noqa: H601
     func_map = OrderedDict([
         ('area', px.area),
         ('line', px.line),
-        ('treemap', px.treemap),
-        ('sunburst', px.sunburst),
     ])
     dims = ('x', 'y', 'color', 'line_group', 'facet_row', 'facet_col')
     default_dim_name = {
@@ -265,13 +260,12 @@ class TabTernary(TabBase):  # noqa: H601
         ('scatter_ternary', px.scatter_ternary),
         ('line_ternary', px.line_ternary),
     ])
-    dims = ('a', 'b', 'c', 'color', 'size', 'hover_name')
+    dims = ('a', 'b', 'c', 'color', 'hover_name')  # size - only for scatter
     default_dim_name = {
         'a': 'Joly',
         'b': 'Coderre',
         'c': 'Bergeron',
         'color': 'winner',
-        'size': 'total',
         'hover_name': 'district',
     }
 

@@ -11,17 +11,20 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
   - [Example Charts and Tables](#example-charts-and-tables)
     - [Pareto Chart](#pareto-chart)
     - [Gantt Chart](#gantt-chart)
+    - [Time Vis Chart](#time-vis-chart)
     - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
     - [Fitted Chart](#fitted-chart)
     - [Real Time SQL Demo](#real-time-sql-demo)
     - [Coordinate Chart](#coordinate-chart)
     - [Marginal Chart](#marginal-chart)
-    - [Data Table](#data-table)
+    - [Data Table Module](#data-table-module)
+    - [Upload Module](#upload-module)
   - [Applications](#applications)
     - [Tabbed Application](#tabbed-application)
     - [Multi-Page Application](#multi-page-application)
     - [PX Generic Application](#px-generic-application)
   - [Other](#other)
+    - [Cache](#cache)
     - [Static HTML Generation](#static-html-generation)
   - [Coverage](#coverage)
   - [External Links](#external-links)
@@ -140,7 +143,7 @@ Below are screenshots and links to the example code for each chart or table incl
 
 ### Pareto Chart
 
-Create a Pareto chart in Dash. Handles ordering the category, calculating the cumulative percentage, and configuring both YAxis.
+Create Pareto charts in Dash. Handles ordering the category, calculating the cumulative percentage, and configuring both YAxis.
 
 See sample code in [tests/examples/ex_pareto_chart.py](tests/examples/ex_pareto_chart.py). Screenshot below:
 
@@ -153,6 +156,14 @@ Create simple Gantt charts in Dash. Doesn't support more advanced features such 
 See sample code in [tests/examples/ex_gantt_chart.py](tests/examples/ex_gantt_chart.py). Screenshot below:
 
 ![ex_gantt_chart.png](.images/ex_gantt_chart.png)
+
+### Time Vis Chart
+
+Create a TimeVis chart to plot general time visualizations (based on [daattali/timevis](https://github.com/daattali/timevis) from R). This chart differs from a Gantt chart by showing events that repeat in the same row. Annotations can be added for specific events or bars will show extended events
+
+See sample code in [tests/examples/ex_time_vis_chart.py](tests/examples/ex_time_vis_chart.py). Screenshot below:
+
+![ex_time_vis_chart.png](.images/ex_time_vis_chart.png)  # TODO: Implement
 
 ### Rolling Mean and STD Chart
 
@@ -194,13 +205,21 @@ See sample code in [tests/examples/ex_marginal_chart.py](tests/examples/ex_margi
 
 ![ex_marginal_chart.png](.images/ex_marginal_chart.png)
 
-### Data Table
+### Data Table Module
 
 Display Dash data table from dataframe
 
 See sample code in [tests/examples/ex_datatable.py](tests/examples/ex_datatable.py). Screenshot below:
 
 ![ex_datatable.png](.images/ex_datatable.png)
+
+### Upload Module
+
+Upload module for user-selected CSV, JSON, or SQLite files.
+
+See sample code in [tests/examples/ex_upload.py](tests/examples/ex_upload.py). Screenshot below:
+
+![ex_upload.png](.images/ex_upload.png)  # TODO: Implement
 
 ## Applications
 
@@ -233,6 +252,12 @@ See sample code in [tests/examples/ex_app_px.py](tests/examples/ex_app_px.py). S
 ## Other
 
 Other notable components in `dash_charts`
+
+### Cache
+
+Utilities for utilizing cache memory for data storage and retrieval
+
+See sample code in [tests/examples/ex_utils_cache.py](tests/examples/ex_utils_cache.py)  # TODO: Implement
 
 ### Static HTML Generation
 
