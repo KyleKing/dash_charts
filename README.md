@@ -150,9 +150,9 @@ See sample code in [tests/examples/ex_pareto_chart.py](tests/examples/ex_pareto_
 
 Create simple Gantt charts in Dash. Doesn't support more advanced features such as dependencies and resource assignment, but effectively shows tasks, progress, and projects in a clear way. You can toggle the different projects on/off and use zoom like a normal Plotly chart.
 
-See sample code in [tests/examples/ex_gantt.py](tests/examples/ex_gantt.py). Screenshot below:
+See sample code in [tests/examples/ex_gantt_chart.py](tests/examples/ex_gantt_chart.py). Screenshot below:
 
-![ex_gantt.png](.images/ex_gantt.png)
+![ex_gantt_chart.png](.images/ex_gantt_chart.png)
 
 ### Rolling Mean and STD Chart
 

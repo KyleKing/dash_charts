@@ -28,6 +28,9 @@ class GanttChart(CustomChart):  # noqa: H601
     pallette = TableauMedium_10.hex_colors
     """Default color pallette for project colors."""
 
+    hover_label_settings = {'bgcolor': 'white', 'font_size': 12, 'namelength': 0}
+    """Plotly hover label settings."""
+
     def create_traces(self, df_raw):
         """Return traces for plotly chart.
 
@@ -38,12 +41,10 @@ class GanttChart(CustomChart):  # noqa: H601
             list: Dash chart traces
 
         """
-        # If start is None, assign end to start, ort dataframe, and create color lookup
+        # If start is None, assign end to start so that the sort is correct
         start_index = df_raw.columns.get_loc('start')
         end_index = df_raw.columns.get_loc('end')
         for index in [idx for idx, is_na in enumerate(df_raw['start'].isna()) if is_na]:
-            # TODO: Why can't I assign all at once?
-            #   Should be able to: `df_raw.iloc[df_raw['start'].isna(), start_index] = [...]`
             df_raw.iloc[index, start_index] = df_raw.iloc[index, end_index]
         df_raw['progress'] = df_raw['progress'].fillna(0)  # Fill possibly missing progress values for milestones
         df_raw = (df_raw
@@ -100,7 +101,7 @@ class GanttChart(CustomChart):  # noqa: H601
         scatter_kwargs = dict(
             fill='toself',
             fillcolor=color,
-            hoverlabel={'bgcolor': 'white', 'font_size': 12, 'namelength': 0},
+            hoverlabel=self.hover_label_settings,
             legendgroup=color,
             line={'width': 1},
             marker={'color': color},
@@ -154,10 +155,12 @@ class GanttChart(CustomChart):  # noqa: H601
             trace: single Dash chart Scatter trace
 
         """
-        # FIXME: add either a shape in the background (`below`) or find out if I can add `hovertext` for milestones
-        #   since the current hover-able area is so thin
+        # For milestones with narrow fill, hover can be tricky, so intended to make the whole length of the text
+        #   hoverable, but only the x/y point appears to be hoverable although it makes a larger hover zone at least
         return go.Scatter(
-            hoverinfo='skip',
+            hoverlabel=self.hover_label_settings,
+            hovertemplate=f'{self._create_hover_text(task)}<extra></extra>',
+            hovertext=self._create_hover_text(task),
             legendgroup=self.color_lookup[task.category],
             mode='text',
             showlegend=False,
