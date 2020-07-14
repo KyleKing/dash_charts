@@ -195,7 +195,6 @@ def graph_return(resp, keys):
     return ordered_responses if len(ordered_responses) > 1 else ordered_responses[0]
 
 
-
 def get_unix(str_ts, date_format):
     """Get unix timestamp from a string timestamp in date_format.
 

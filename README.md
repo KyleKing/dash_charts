@@ -150,9 +150,9 @@ See sample code in [tests/examples/ex_pareto_chart.py](tests/examples/ex_pareto_
 
 Create simple Gantt charts in Dash. Doesn't support more advanced features such as dependencies and resource assignment, but effectively shows tasks, progress, and projects in a clear way. You can toggle the different projects on/off and use zoom like a normal Plotly chart.
 
-See sample code in [tests/examples/ex_gantt_chart.py](tests/examples/ex_gantt_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_gantt.py](tests/examples/ex_gantt.py). Screenshot below:
 
-![ex_gantt_chart.png](.images/ex_gantt_chart.png)
+![ex_gantt.png](.images/ex_gantt.png)
 
 ### Rolling Mean and STD Chart
 
@@ -254,8 +254,8 @@ Latest coverage table
 | `dash_charts/app_px.py` | 121 | 11 | 0 | 90.9 |
 | `dash_charts/components.py` | 8 | 0 | 0 | 100.0 |
 | `dash_charts/coordinate_chart.py` | 103 | 1 | 6 | 99.0 |
-| `dash_charts/custom_colorscales.py` | 3 | 3 | 0 | 0.0 |
-| `dash_charts/dash_helpers.py` | 63 | 15 | 7 | 76.2 |
+| `dash_charts/custom_colorscales.py` | 3 | 0 | 0 | 100.0 |
+| `dash_charts/dash_helpers.py` | 63 | 1 | 7 | 98.4 |
 | `dash_charts/datatable.py` | 79 | 25 | 0 | 68.4 |
 | `dash_charts/equations.py` | 11 | 0 | 0 | 100.0 |
 | `dash_charts/gantt.py` | 52 | 0 | 0 | 100.0 |
@@ -268,12 +268,12 @@ Latest coverage table
 | `dash_charts/utils_app.py` | 57 | 1 | 8 | 98.2 |
 | `dash_charts/utils_app_modules.py` | 26 | 3 | 4 | 88.5 |
 | `dash_charts/utils_app_with_navigation.py` | 113 | 7 | 6 | 93.8 |
-| `dash_charts/utils_cache.py` | 27 | 16 | 0 | 40.7 |
+| `dash_charts/utils_cache.py` | 24 | 15 | 0 | 37.5 |
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4 |
 | `dash_charts/utils_fig.py` | 71 | 2 | 4 | 97.2 |
 | `dash_charts/utils_static.py` | 107 | 8 | 0 | 92.5 |
 
-Generated on: 2020-07-13T14:32:03.659488
+Generated on: 2020-07-13T21:51:15.164028
 
 <!-- /COVERAGE -->
 

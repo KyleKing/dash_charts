@@ -5,6 +5,8 @@
 
 ### Changes
 
+* Move source data to CSV and add to README. [Kyle King]
+
 * Cleanup and refactor. [Kyle King]
 
 * Create legendgroups to toggle projects. [Kyle King]

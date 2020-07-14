@@ -1,4 +1,8 @@
-"""Example DataTable."""
+"""Example DataTable.
+
+TODO: See todo list at bottom!!
+
+"""
 
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc

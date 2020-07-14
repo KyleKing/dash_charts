@@ -2,28 +2,16 @@
 
 """Helpers for managing the JSON response cache to reduce load on API."""
 
-import json
 import time
 from pathlib import Path
 
-from .dash_helpers import DBConnect, uniq_table_id
+from .dash_helpers import DBConnect, uniq_table_id, write_pretty_json
 
 CACHE_DIR = Path(__file__).parent / 'local_cache'
 """Path to folder with all downloaded responses from Kitsu API."""
 
 FILE_DATA = DBConnect(CACHE_DIR / '_file_lookup_database.db')
 """Global instance of the DBConnect() for the file lookup database."""
-
-
-def pretty_dump_json(filename, obj):
-    """Write indented JSON file.
-
-    Args:
-        filename: Path or plain string filename to write (should end with `.json`)
-        obj: JSON object to write
-
-    """
-    Path(filename).write_text(json.dumps(obj, indent=4, separators=(',', ': ')))
 
 
 def initialize_cache():
@@ -72,4 +60,4 @@ def store_response(prefix, url, obj):
         raise RuntimeError(f'Already have an entry for this URL (`{url}`): {matches}')
     # Update the database and store the file
     FILE_DATA.db.load_table('files').insert(new_row)
-    pretty_dump_json(filename, obj)
+    write_pretty_json(filename, obj)
