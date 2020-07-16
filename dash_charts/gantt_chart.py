@@ -20,7 +20,7 @@ from .utils_fig import CustomChart
 
 
 class GanttChart(CustomChart):  # noqa: H601
-    """Gantt Chart: event and resource timeline."""
+    """Gantt Chart: task and milestone timeline."""
 
     date_format = '%Y-%m-%d'
     """Date format for bar chart."""
@@ -30,6 +30,9 @@ class GanttChart(CustomChart):  # noqa: H601
 
     hover_label_settings = {'bgcolor': 'white', 'font_size': 12, 'namelength': 0}
     """Plotly hover label settings."""
+
+    rh = 1
+    """Height of each rectangular task."""
 
     def create_traces(self, df_raw):
         """Return traces for plotly chart.
@@ -109,7 +112,7 @@ class GanttChart(CustomChart):  # noqa: H601
             showlegend=is_first,
             text=self._create_hover_text(task),
             x=[task.start, task.end, task.end, task.start, task.start],
-            y=[y_pos, y_pos, y_pos - 1, y_pos - 1, y_pos],
+            y=[y_pos, y_pos, y_pos - self.rh, y_pos - self.rh, y_pos],
         )
         if is_first:
             scatter_kwargs['name'] = task.category
@@ -134,14 +137,13 @@ class GanttChart(CustomChart):  # noqa: H601
             fillcolor='white',
             hoverinfo='skip',
             legendgroup=self.color_lookup[task.category],
-            line_width=0,
             line={'width': 1},
             marker={'color': 'white'},
             mode='lines',
             opacity=0.5,
             showlegend=False,
             x=[task.start, end, end, task.start, task.start],
-            y=[y_pos, y_pos, y_pos - 1, y_pos - 1, y_pos],
+            y=[y_pos, y_pos, y_pos - self.rh, y_pos - self.rh, y_pos],
         )
 
     def _create_annotation(self, task, y_pos):
@@ -159,7 +161,7 @@ class GanttChart(CustomChart):  # noqa: H601
         #   hoverable, but only the x/y point appears to be hoverable although it makes a larger hover zone at least
         return go.Scatter(
             hoverlabel=self.hover_label_settings,
-            hovertemplate=f'{self._create_hover_text(task)}<extra></extra>',
+            hovertemplate=self._create_hover_text(task) + '<extra></extra>',
             hovertext=self._create_hover_text(task),
             legendgroup=self.color_lookup[task.category],
             mode='text',
@@ -167,7 +169,7 @@ class GanttChart(CustomChart):  # noqa: H601
             text=task.label,
             textposition='middle left',
             x=[task.end],
-            y=[y_pos - 0.5],
+            y=[y_pos - self.rh / 2],
         )
 
     def create_layout(self):

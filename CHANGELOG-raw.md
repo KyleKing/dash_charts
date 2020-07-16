@@ -5,6 +5,12 @@
 
 ### Changes
 
+* Compress task list and add app_px image. [Kyle King]
+
+* Rename gantt.py to gantt_chart.py. [Kyle King]
+
+* Expand testing for dash helpers. [Kyle King]
+
 * Move source data to CSV and add to README. [Kyle King]
 
 * Cleanup and refactor. [Kyle King]
@@ -28,6 +34,8 @@
 * Merge rolling and fitted charts (inc: 0.0.5) [Kyle King]
 
 ### Fix
+
+* Gantt chart image name… [Kyle King]
 
 * Tests and add ex_gantt test. [Kyle King]
 

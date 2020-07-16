@@ -1,8 +1,4 @@
-"""Example Gantt Chart.
-
-Based on D3 demo from: https://github.com/alampros/Gantt-Chart#creating-a-simple-gantt-chart
-
-"""
+"""Example Gantt Chart."""
 
 from pathlib import Path
 
