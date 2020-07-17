@@ -12,7 +12,7 @@ from dash_charts.utils_callbacks import map_args, map_outputs
 from dash_charts.utils_fig import make_dict_an, min_graph
 
 
-class RollingDemo(AppBase):
+class RollingDemo(AppBase):  # noqa: H601
     """Example creating a rolling mean chart."""
 
     name = 'Example Rolling Chart'
@@ -86,7 +86,7 @@ class RollingDemo(AppBase):
                 'marginLeft': 'auto',
             }, children=[
                 html.H4(children=self.name),
-                min_graph(id=self.ids[self.id_chart], figure={}),
+                min_graph(id=self.ids[self.id_chart], figure={}),  # TODO: This might be causing the tests to fail
                 dcc.RangeSlider(
                     id=self.ids[self.id_slider], min=0, max=slider_max, step=step / 5, value=[150, 825],
                     marks={str(idx * step): str(idx * step) for idx in range(int(slider_max / step))},

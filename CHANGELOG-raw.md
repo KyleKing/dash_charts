@@ -9,6 +9,8 @@
 
 ### Changes
 
+* Refactor and cleanup of time vis and add img. [Kyle King]
+
 * Initialize new highlighted time section. [Kyle King]
 
 * Add events to time vis. [Kyle King]
