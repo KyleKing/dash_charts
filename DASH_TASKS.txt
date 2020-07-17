@@ -7,9 +7,6 @@
 		- Add cache to README!
 		- Test utils_app_modules.utils_cache()?
 
-- TODO: Build TimeVis!
-	- Add time_vis to README (TBD)
-
 - TODO: Implement TODO feature list for the datatable with Kitsu exploratory app!
 	- Data table
 		- Show using the column lookup for markdown formatting, number of decimal places, etc.
@@ -23,7 +20,7 @@
 		- Button to toggle back to the default data set per chart
 	- Show general data statistics from pandas describe!
 
-- PLANNED: sparklines (status: nothing)
+- PLANNED: sparklines (status: nothing right now)
 	- create new sparklines figures
 
 - Test datatable (All)

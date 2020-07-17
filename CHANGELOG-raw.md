@@ -3,7 +3,15 @@
 
 ## (unreleased)
 
+### New
+
+* Time Vis chart. [Kyle King]
+
 ### Changes
+
+* Initialize new highlighted time section. [Kyle King]
+
+* Add events to time vis. [Kyle King]
 
 * Compress task list and add app_px image. [Kyle King]
 

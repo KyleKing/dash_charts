@@ -159,11 +159,11 @@ See sample code in [tests/examples/ex_gantt_chart.py](tests/examples/ex_gantt_ch
 
 ### Time Vis Chart
 
-Create a TimeVis chart to plot general time visualizations (based on [daattali/timevis](https://github.com/daattali/timevis) from R). This chart differs from a Gantt chart by showing events that repeat in the same row. Annotations can be added for specific events or bars will show extended events
+Create a TimeVis chart to plot general time visualizations (based on [daattali/timevis](https://github.com/daattali/timevis) from R). This chart differs from a Gantt chart by showing events that repeat in the same row.
 
 See sample code in [tests/examples/ex_time_vis_chart.py](tests/examples/ex_time_vis_chart.py). Screenshot below:
 
-![ex_time_vis_chart.png](.images/ex_time_vis_chart.png)  # TODO: Implement
+![ex_time_vis_chart.png](.images/ex_time_vis_chart.png)
 
 ### Rolling Mean and STD Chart
 

@@ -52,7 +52,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
 
         """
         # Get all unique category names and create lookup for y positions
-        self.categories = sorted([cat for cat in set(df_raw['category'].tolist()) if cat])
+        self.categories = sorted(cat for cat in set(df_raw['category'].tolist()) if cat)
         y_pos_lookup = {cat: self.y_space * idx for idx, cat in enumerate(self.categories)}
         # Create the Time Vis traces
         traces = []
@@ -69,8 +69,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
                     traces.append(self._create_event(vis, y_pos))
             else:
                 y_pos = 0
-                self._create_area(vis, y_pos)  # TODO: TBD if should be annotation or scatter-text
-                # traces.append(self._create_area(vis, y_pos))
+                traces.append(self._create_non_cat_shape(vis, y_pos))
         return traces
 
     def _create_hover_text(self, vis):
@@ -92,8 +91,10 @@ class TimeVisChart(CustomChart):  # noqa: H601
             date_range = f'<b>Event</b>: {start_date}'
         return f'<b>{vis.category}</b><br>{vis.label}<br>{date_range}'
 
-    def _create_area(self, vis, y_pos):
-        """Create area TODO: Need to rename this
+    def _create_non_cat_shape(self, vis, y_pos):
+        """Create non-category time visualization (vertical across all categories).
+
+        Note: background shape is set below a transparent trace so that hover works
 
         Args:
             vis: row tuple from df_raw with: `(category, label, start, end)`
@@ -104,38 +105,29 @@ class TimeVisChart(CustomChart):  # noqa: H601
 
         """
         bot_y = self.y_space * len(self.categories)
-        # self._annotations.append({
-        #     'align': 'left',
-        #     'showarrow': False,
-        #     'text': vis.label,
-        #     'x': vis.start,
-        #     'xanchor': 'left',
-        #     'y': y_pos - self.rh / 2,
-        #     'yanchor': 'middle',
-        # })
         self._shapes.append(go.layout.Shape(
             fillcolor=self.fillcolor,
             layer='below',
             line={'width': 0},
-            opacity=0.6,
+            opacity=0.4,
             type='rect',
             x0=vis.start,
             x1=vis.end,
             xref='x',
             y0=bot_y,
-            y1=y_pos - self.rh / 2,
+            y1=y_pos,
             yref='y',
         ))
         return go.Scatter(
+            fill='toself',
+            opacity=0,
             hoverlabel=self.hover_label_settings,
-            hovertemplate=self._create_hover_text(vis) + '<extra></extra>',
-            hovertext=self._create_hover_text(vis),
-            mode='text',
-            text=vis.label,
-            textposition='middle right',
-            x=[vis.start],
-            y=[y_pos - self.rh / 2],
-        )  # TODO: TBD if should be annotation or scatter-text or text at all?
+            line={'width': 0},
+            mode='lines',
+            text=self._create_hover_text(vis),
+            x=[vis.start, vis.end, vis.end, vis.start, vis.start],
+            y=[y_pos, y_pos, bot_y, bot_y, y_pos],
+        )
 
     def _create_time_vis_shape(self, vis, y_pos):
         """Create filled rectangle for time visualization.
