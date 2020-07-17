@@ -36,9 +36,16 @@ class TimeVisDemo(AppBase):  # noqa: H601
 
     def generate_data(self):
         """Create self.data_raw with sample data."""
-        # Note: Plotly-supported time formats https://plotly.com/chart-studio-help/date-format-and-time-series/
-        # TODO: "All Category" (vertical background shape with no category, but label)
-        data = []
+        data = [
+            {'category': '', 'label': 'Closed',
+             'start': '2020-07-01 19:30:00', 'end': '2020-07-02 07:00:00'},
+            {'category': '', 'label': 'Closed',
+             'start': '2020-07-02 19:30:00', 'end': '2020-07-03 07:00:00'},
+            {'category': '', 'label': 'Closed',
+             'start': '2020-07-03 19:30:00', 'end': '2020-07-04 08:00:00'},
+            {'category': '', 'label': 'Closed',
+             'start': '2020-07-04 20:00:00', 'end': '2020-07-05 08:00:00'},
+        ]
         for day in [1, 2, 3]:
             data.extend([
                 {'category': 'Events', 'label': 'Pool Opens to Public',
@@ -58,10 +65,10 @@ class TimeVisDemo(AppBase):  # noqa: H601
             ])
         for weekend in [4, 5]:
             data.extend([
-                # {'category': 'Events', 'label': 'Pool Opens to Public',
-                #  'start': f'2020-07-0{weekend} 08:00:00', 'end': None},
-                # {'category': 'Events', 'label': 'Closes',
-                #  'start': f'2020-07-0{weekend} 20:00:00', 'end': None},
+                {'category': 'Events', 'label': 'Pool Opens to Public',
+                 'start': f'2020-07-0{weekend} 08:00:00', 'end': None},
+                {'category': 'Events', 'label': 'Closes',
+                 'start': f'2020-07-0{weekend} 20:00:00', 'end': None},
                 {'category': 'Open Swim', 'label': 'Weekend Open Swim',
                  'start': f'2020-07-0{weekend} 08:00:00', 'end': f'2020-07-0{weekend} 20:00:00'},
             ])

@@ -38,7 +38,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
     categories = None
     """List of string category names set in self.create_traces()."""
 
-    shapes = []
+    _shapes = []
     """List of shapes for plotly layout."""
 
     def create_traces(self, df_raw):
@@ -52,22 +52,25 @@ class TimeVisChart(CustomChart):  # noqa: H601
 
         """
         # Get all unique category names and create lookup for y positions
-        self.categories = sorted([*set(df_raw['category'].tolist())])
+        self.categories = sorted([cat for cat in set(df_raw['category'].tolist()) if cat])
         y_pos_lookup = {cat: self.y_space * idx for idx, cat in enumerate(self.categories)}
-        # Sort for the events to be first so that the vertical line is in the background
-        df_raw = df_raw.sort_values(by=['end'], ascending=False)
         # Create the Time Vis traces
         traces = []
-        self.shapes = []
-        self.annotations = []
+        self._shapes = []
+        self._annotations = []
         for vis in df_raw.itertuples():
-            y_pos = y_pos_lookup[vis.category]
-            if vis.end:
-                traces.append(self._create_time_vis_shape(vis, y_pos))
-                if vis.label:
-                    traces.append(self._create_annotation(vis, y_pos))
+            if vis.category in y_pos_lookup:
+                y_pos = y_pos_lookup[vis.category]
+                if vis.end:
+                    traces.append(self._create_time_vis_shape(vis, y_pos))
+                    if vis.label:
+                        traces.append(self._create_annotation(vis, y_pos))
+                else:
+                    traces.append(self._create_event(vis, y_pos))
             else:
-                traces.append(self._create_event(vis, y_pos))
+                y_pos = 0
+                self._create_area(vis, y_pos)  # TODO: TBD if should be annotation or scatter-text
+                # traces.append(self._create_area(vis, y_pos))
         return traces
 
     def _create_hover_text(self, vis):
@@ -88,6 +91,51 @@ class TimeVisChart(CustomChart):  # noqa: H601
         else:
             date_range = f'<b>Event</b>: {start_date}'
         return f'<b>{vis.category}</b><br>{vis.label}<br>{date_range}'
+
+    def _create_area(self, vis, y_pos):
+        """Create area TODO: Need to rename this
+
+        Args:
+            vis: row tuple from df_raw with: `(category, label, start, end)`
+            y_pos: top y-coordinate of vis
+
+        Returns:
+            trace: single Dash chart Scatter trace
+
+        """
+        bot_y = self.y_space * len(self.categories)
+        # self._annotations.append({
+        #     'align': 'left',
+        #     'showarrow': False,
+        #     'text': vis.label,
+        #     'x': vis.start,
+        #     'xanchor': 'left',
+        #     'y': y_pos - self.rh / 2,
+        #     'yanchor': 'middle',
+        # })
+        self._shapes.append(go.layout.Shape(
+            fillcolor=self.fillcolor,
+            layer='below',
+            line={'width': 0},
+            opacity=0.6,
+            type='rect',
+            x0=vis.start,
+            x1=vis.end,
+            xref='x',
+            y0=bot_y,
+            y1=y_pos - self.rh / 2,
+            yref='y',
+        ))
+        return go.Scatter(
+            hoverlabel=self.hover_label_settings,
+            hovertemplate=self._create_hover_text(vis) + '<extra></extra>',
+            hovertext=self._create_hover_text(vis),
+            mode='text',
+            text=vis.label,
+            textposition='middle right',
+            x=[vis.start],
+            y=[y_pos - self.rh / 2],
+        )  # TODO: TBD if should be annotation or scatter-text or text at all?
 
     def _create_time_vis_shape(self, vis, y_pos):
         """Create filled rectangle for time visualization.
@@ -147,7 +195,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
 
         """
         if len(vis.label) > 10:
-            self.annotations.append({
+            self._annotations.append({
                 'align': 'right',
                 'arrowcolor': self.fillcolor,
                 'showarrow': True,
@@ -158,7 +206,8 @@ class TimeVisChart(CustomChart):  # noqa: H601
                 'y': y_pos - self.rh / 2,
                 'yanchor': 'middle',
             })
-        self.shapes.append(go.layout.Shape(
+        self._shapes.append(go.layout.Shape(
+            layer='below',
             line={
                 'color': self.fillcolor,
                 'dash': 'longdashdot',
@@ -206,6 +255,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
         # Hide legend
         layout['legend'] = {}
         layout['showlegend'] = False
-        # Add shapes
-        layout['shapes'] = self.shapes
+        # Add shapes and append new annotations
+        layout['shapes'] = self._shapes
+        layout['annotations'] += self._annotations
         return layout
