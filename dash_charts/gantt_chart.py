@@ -147,7 +147,7 @@ class GanttChart(CustomChart):  # noqa: H601
         )
 
     def _create_annotation(self, task, y_pos):
-        """Create task progress to `self.annotations` at y_pos.
+        """Add task label to chart as text overlay.
 
         Args:
             task: row tuple from df_raw with: `(category, label, start, end, progress)`

@@ -38,43 +38,33 @@ class TimeVisDemo(AppBase):  # noqa: H601
         """Create self.data_raw with sample data."""
         # Note: Plotly-supported time formats https://plotly.com/chart-studio-help/date-format-and-time-series/
         # TODO: "All Category" (vertical background shape with no category, but label)
-        # TODO: Event (no end date, so vertical line to YAxis)
-        data = [
-            {'category': 'Restricted Swim Hours', 'label': 'Adult Swim',
-             'start': '2020-07-01 16:00:00', 'end': '2020-07-01 19:30:00'},
-            {'category': 'Restricted Swim Hours', 'label': 'Adult Swim',
-             'start': '2020-07-02 16:00:00', 'end': '2020-07-02 19:30:00'},
-            {'category': 'Restricted Swim Hours', 'label': 'Adult Swim',
-             'start': '2020-07-03 16:00:00', 'end': '2020-07-03 19:30:00'},
-            {'category': 'Open Swim', 'label': 'Open',
-             'start': '2020-07-01 09:00:00', 'end': '2020-07-01 15:50:00'},
-            {'category': 'Open Swim', 'label': 'Open',
-             'start': '2020-07-02 09:00:00', 'end': '2020-07-02 15:50:00'},
-            {'category': 'Open Swim', 'label': 'Open',
-             'start': '2020-07-03 09:00:00', 'end': '2020-07-03 15:50:00'},
-            {'category': 'Restricted Swim Hours', 'label': 'Lap',
-             'start': '2020-07-01 07:00:00', 'end': '2020-07-01 08:30:00'},
-            {'category': 'Restricted Swim Hours', 'label': 'Lap',
-             'start': '2020-07-02 07:00:00', 'end': '2020-07-02 08:30:00'},
-            {'category': 'Restricted Swim Hours', 'label': 'Lap',
-             'start': '2020-07-03 07:00:00', 'end': '2020-07-03 08:30:00'},
-            {'category': 'Swim Team', 'label': 'P-A',
-             'start': '2020-07-01 08:00:00', 'end': '2020-07-01 09:00:00'},
-            {'category': 'Swim Team', 'label': 'P-A',
-             'start': '2020-07-02 08:00:00', 'end': '2020-07-02 09:00:00'},
-            {'category': 'Swim Team', 'label': 'P-A',
-             'start': '2020-07-03 08:00:00', 'end': '2020-07-03 09:00:00'},
-            {'category': 'Swim Team', 'label': 'P-B',
-             'start': '2020-07-01 14:00:00', 'end': '2020-07-01 15:00:00'},
-            {'category': 'Swim Team', 'label': 'P-B',
-             'start': '2020-07-02 14:00:00', 'end': '2020-07-02 15:00:00'},
-            {'category': 'Swim Team', 'label': 'P-B',
-             'start': '2020-07-03 14:00:00', 'end': '2020-07-03 15:00:00'},
-            {'category': 'Open Swim', 'label': 'Weekend Open Swim',
-             'start': '2020-07-04 08:00:00', 'end': '2020-07-04 20:00:00'},
-            {'category': 'Open Swim', 'label': 'Weekend Open Swim',
-             'start': '2020-07-05 08:00:00', 'end': '2020-07-05 20:00:00'},
-        ]
+        data = []
+        for day in [1, 2, 3]:
+            data.extend([
+                {'category': 'Events', 'label': 'Pool Opens to Public',
+                 'start': f'2020-07-0{day} 07:00:00', 'end': None},
+                {'category': 'Events', 'label': 'Closes',
+                 'start': f'2020-07-0{day} 19:30:00', 'end': None},
+                {'category': 'Restricted Swim Hours', 'label': 'Adult Swim',
+                 'start': f'2020-07-0{day} 16:00:00', 'end': f'2020-07-0{day} 19:30:00'},
+                {'category': 'Open Swim', 'label': 'Open',
+                 'start': f'2020-07-0{day} 09:00:00', 'end': f'2020-07-0{day} 15:50:00'},
+                {'category': 'Restricted Swim Hours', 'label': 'Lap',
+                 'start': f'2020-07-0{day} 07:00:00', 'end': f'2020-07-0{day} 08:30:00'},
+                {'category': 'Swim Team', 'label': 'P-A',
+                 'start': f'2020-07-0{day} 08:00:00', 'end': f'2020-07-0{day} 09:00:00'},
+                {'category': 'Swim Team', 'label': 'P-B',
+                 'start': f'2020-07-0{day} 14:00:00', 'end': f'2020-07-0{day} 15:00:00'},
+            ])
+        for weekend in [4, 5]:
+            data.extend([
+                # {'category': 'Events', 'label': 'Pool Opens to Public',
+                #  'start': f'2020-07-0{weekend} 08:00:00', 'end': None},
+                # {'category': 'Events', 'label': 'Closes',
+                #  'start': f'2020-07-0{weekend} 20:00:00', 'end': None},
+                {'category': 'Open Swim', 'label': 'Weekend Open Swim',
+                 'start': f'2020-07-0{weekend} 08:00:00', 'end': f'2020-07-0{weekend} 20:00:00'},
+            ])
         self.data_raw = pd.DataFrame.from_dict(data)
 
     def return_layout(self):
