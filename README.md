@@ -255,9 +255,9 @@ Other notable components in `dash_charts`
 
 ### Cache
 
-Utilities for utilizing cache memory for data storage and retrieval
+Utilities for utilizing a local cache file system for storing JSON data. Particularly useful if scraping or making many API calls to cache the responses locally.
 
-See sample code in [tests/examples/ex_utils_cache.py](tests/examples/ex_utils_cache.py)  # TODO: Implement
+See sample code in the relevant test file [tests/test_utils_cache.py](tests/test_utils_cache.py)
 
 ### Static HTML Generation
 

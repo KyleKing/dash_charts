@@ -1,7 +1,7 @@
 """Utilities for generating static HTML reports."""
 
-from base64 import b64encode
 import io
+from base64 import b64encode
 
 import dash_bootstrap_components as dbc
 import dominate
