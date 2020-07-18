@@ -114,3 +114,6 @@ venv.bak/
 
 coverage.json
 docs/*
+
+# Upload Module Database Directory
+**/local_cache/*

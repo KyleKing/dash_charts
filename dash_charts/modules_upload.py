@@ -240,9 +240,9 @@ class UploadModule(ModuleBase):
     def __init__(self, *args, **kwargs):
         """Initialize module."""  # noqa: DAR101
         super().__init__(*args, **kwargs)
-        self.initialize_database()
+        self._initialize_database()
 
-    def initialize_database(self):
+    def _initialize_database(self):
         """Create data members `self.database` and `self.user_table`."""
         self.database = DBConnect(CACHE_DIR / f'_placeholder_app-{self.name}.db')
         self.user_table = self.database.db.create_table(
@@ -325,8 +325,8 @@ class UploadModule(ModuleBase):
         """
         self.database.db.load_table(table_name).drop()
 
-    def return_layout(self, ids):
-        """Return Dash application layout.
+    def return_drop_to_upload(self, ids):
+        """Return Dash application layout for only the Drop-to-Upload element.
 
         Args:
             ids: `self.ids` from base application
@@ -339,7 +339,35 @@ class UploadModule(ModuleBase):
             html.H2('File Upload'),
             html.P('Upload Tidy Data in CSV, Excel, or JSON format'),
             drop_to_upload(id=ids[self.get(self.id_upload)]),
+        ])
+
+    def return_uploaded_table_view(self, ids):
+        """Return Dash application layout for only the Drop-to-Upload element.
+
+        Args:
+            ids: `self.ids` from base application
+
+        Returns:
+            dict: Dash HTML object.
+
+        """
+        return html.Div([
             dcc.Loading(html.Div('PLACEHOLDER', id=ids[self.get(self.id_upload_output)]), type='circle'),
+        ])
+
+    def return_layout(self, ids):
+        """Return Dash application layout.
+
+        Args:
+            ids: `self.ids` from base application
+
+        Returns:
+            dict: Dash HTML object.
+
+        """
+        return html.Div([
+            self.return_drop_to_upload(self.ids),
+            self.return_uploaded_table_view(self.ids),
         ])
 
     def create_callbacks(self, parent):
@@ -352,7 +380,7 @@ class UploadModule(ModuleBase):
         super().create_callbacks(parent)
         self.register_upload_handler(parent)
 
-    def show_data(self, username):
+    def _show_data(self, username):
         """Create Dash HTML to show the raw data loaded for the specified user.
 
         Args:
@@ -420,6 +448,6 @@ class UploadModule(ModuleBase):
                     dcc.Markdown(f'### Upload Error\n\n{type(error)}\n\n```\n{error}\n```'),
                 ])
 
-            child_output.append(self.show_data(username))
+            child_output.append(self._show_data(username))
 
             return map_outputs(outputs, [(self.get(self.id_upload_output), 'children', html.Div(child_output))])
