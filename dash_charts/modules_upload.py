@@ -22,7 +22,7 @@ import plotly.express as px
 
 from .dash_helpers import DBConnect
 from .utils_app_modules import ModuleBase
-from .utils_cache import CACHE_DIR
+from .utils_json_cache import CACHE_DIR
 from .utils_callbacks import map_args, map_outputs
 
 

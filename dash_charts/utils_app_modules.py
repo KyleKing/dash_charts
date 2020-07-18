@@ -89,6 +89,8 @@ class DataCache(ModuleBase):
     def return_layout(self, ids, storage_type='memory', **store_kwargs):
         """Return Dash application layout.
 
+        `dcc.Store` documentation: https://dash.plotly.com/dash-core-components/store
+
         Args:
             ids: `self.ids` from base application
             storage_type: `dcc.Store` storage type. Default is memory to clear on refresh

@@ -1,12 +1,12 @@
-"""Test utils_cache."""
+"""Test utils_json_cache."""
 
 from dash_charts.dash_helpers import DBConnect
-from dash_charts.utils_cache import (CACHE_DIR, get_files_table, initialize_cache, retrieve_cache_object,
-                                     store_cache_object)
+from dash_charts.utils_json_cache import (CACHE_DIR, get_files_table, initialize_cache, retrieve_cache_object,
+                                          store_cache_object)
 
 
-def test_utils_cache():
-    """Test the utils_cache helper methods."""
+def test_utils_json_cache():
+    """Test the utils_json_cache helper methods."""
     # Initialize and clear cache for the expected identifier
     test_db = DBConnect(CACHE_DIR / '_test_lookup.db')
     initialize_cache(test_db)

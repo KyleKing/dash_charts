@@ -38,7 +38,7 @@ FILE_DATA = DBConnect(CACHE_DIR / '_file_lookup_database.db')
 """Global instance of the DBConnect() for the file lookup database."""
 
 
-def get_files_table(db_instance=FILE_DATA):
+def get_files_table(db_instance):
     """Retrieved stored object from cache database.
 
     Args:
@@ -51,7 +51,7 @@ def get_files_table(db_instance=FILE_DATA):
     return db_instance.db.load_table('files')
 
 
-def initialize_cache(db_instance=FILE_DATA):
+def initialize_cache(db_instance):
     """Ensure that the directory and database exist. Remove files from database if manually removed.
 
     Args:
@@ -69,7 +69,7 @@ def initialize_cache(db_instance=FILE_DATA):
         table.delete(filename=filename)
 
 
-def match_identifier_in_cache(identifier, db_instance=FILE_DATA):
+def match_identifier_in_cache(identifier, db_instance):
     """Return list of matches for the given identifier in the file database.
 
     Args:
@@ -83,7 +83,7 @@ def match_identifier_in_cache(identifier, db_instance=FILE_DATA):
     return [*get_files_table(db_instance).find(identifier=identifier)]
 
 
-def store_cache_object(prefix, identifier, obj, db_instance=FILE_DATA):
+def store_cache_object(prefix, identifier, obj, db_instance):
     """Store the object as a JSON file and track in a SQLite database to prevent duplicates.
 
     Args:
@@ -107,7 +107,7 @@ def store_cache_object(prefix, identifier, obj, db_instance=FILE_DATA):
     write_pretty_json(filename, obj)
 
 
-def retrieve_cache_object(identifier, db_instance=FILE_DATA):
+def retrieve_cache_object(identifier, db_instance):
     """Retrieved stored object from cache database.
 
     Args:
