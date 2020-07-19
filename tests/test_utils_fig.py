@@ -1,7 +1,39 @@
 """Test utils_fig."""
 
+import math
+
+import numpy as np
 import pytest
 from dash_charts import utils_fig
+from matplotlib import pyplot as plt
+
+
+def test_convert_matplolib():
+    """Test convert_matplolib."""
+    # Create figure with example code from plotly.py tests
+    fig = plt.figure()
+    x = [10, 20, 30]
+    y = [100, 200, 300]
+    plt.plot(x, y)
+
+    result = utils_fig.convert_matplolib(fig)  # Convert to Plotly
+
+    assert result
+
+
+def test_convert_matplolib_docs():
+    """Test convert_matplolib."""
+    # Create Example Plot of a Sine Wave
+    x_coords = np.arange(0, math.pi * 2, 0.05)
+    plt.plot(x_coords, np.sin(x_coords))
+    plt.xlabel('Angle')
+    plt.ylabel('Sine')
+    plt.title('Sine Wave')
+    fig = plt.gcf()
+
+    result = utils_fig.convert_matplolib(fig)  # Convert to Plotly
+
+    assert result
 
 
 class TestChart(utils_fig.CustomChart):  # noqa: H601
