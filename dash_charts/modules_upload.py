@@ -18,12 +18,11 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_table
 import pandas as pd
-import plotly.express as px
 
 from .dash_helpers import DBConnect
 from .utils_app_modules import ModuleBase
-from .utils_json_cache import CACHE_DIR
 from .utils_callbacks import map_args, map_outputs
+from .utils_json_cache import CACHE_DIR
 
 
 def split_b64_file(b64_file):
@@ -225,8 +224,12 @@ def drop_to_upload(**upload_kwargs):
     )
 
 
-class UploadModule(ModuleBase):
-    """Module for user data upload."""
+class UploadModule(ModuleBase):  # noqa: H601
+    """Module for user data upload.
+
+    Note: this is not intended to be secure
+
+    """
 
     id_upload = 'upload-drop-area'
     """Unique name for the upload component."""
@@ -234,7 +237,10 @@ class UploadModule(ModuleBase):
     id_upload_output = 'upload-output'
     """Unique name for the div to contain output of the parse-upload."""
 
-    all_ids = [id_upload, id_upload_output]
+    id_username_cache = 'username-cache'
+    """Unique name for the dcc.Store element to store the current username."""
+
+    all_ids = [id_upload, id_upload_output, id_username_cache]
     """List of ids to register for this module."""
 
     def __init__(self, *args, **kwargs):
@@ -243,16 +249,12 @@ class UploadModule(ModuleBase):
         self._initialize_database()
 
     def _initialize_database(self):
-        """Create data members `self.database` and `self.user_table`."""
+        """Create data members `(self.database, self.user_table, self.inventory_table)`."""
         self.database = DBConnect(CACHE_DIR / f'_placeholder_app-{self.name}.db')
         self.user_table = self.database.db.create_table(
             'users', primary_id='username', primary_type=self.database.db.types.text)
         self.inventory_table = self.database.db.create_table(
             'inventory', primary_id='table_name', primary_type=self.database.db.types.text)
-        # Add default data to be used if user hasn't uploaded any test data
-        self.default_table = self.database.db.create_table('default')
-        if self.default_table.count() == 0:
-            self.default_table.insert_many(px.data.tips().to_dict(orient='records'))
 
     def find_user(self, username):
         """Return the database row for the specified user.
@@ -325,8 +327,8 @@ class UploadModule(ModuleBase):
         """
         self.database.db.load_table(table_name).drop()
 
-    def return_drop_to_upload(self, ids):
-        """Return Dash application layout for only the Drop-to-Upload element.
+    def return_layout(self, ids):
+        """Return the Upload module application layout.
 
         Args:
             ids: `self.ids` from base application
@@ -336,38 +338,11 @@ class UploadModule(ModuleBase):
 
         """
         return html.Div([
+            dcc.Store(id=ids[self.get(self.id_username_cache)], storage_type='session'),
             html.H2('File Upload'),
             html.P('Upload Tidy Data in CSV, Excel, or JSON format'),
             drop_to_upload(id=ids[self.get(self.id_upload)]),
-        ])
-
-    def return_uploaded_table_view(self, ids):
-        """Return Dash application layout for only the Drop-to-Upload element.
-
-        Args:
-            ids: `self.ids` from base application
-
-        Returns:
-            dict: Dash HTML object.
-
-        """
-        return html.Div([
-            dcc.Loading(html.Div('PLACEHOLDER', id=ids[self.get(self.id_upload_output)]), type='circle'),
-        ])
-
-    def return_layout(self, ids):
-        """Return Dash application layout.
-
-        Args:
-            ids: `self.ids` from base application
-
-        Returns:
-            dict: Dash HTML object.
-
-        """
-        return html.Div([
-            self.return_drop_to_upload(self.ids),
-            self.return_uploaded_table_view(self.ids),
+            dcc.Loading(html.Div('', id=ids[self.get(self.id_upload_output)]), type='circle'),
         ])
 
     def create_callbacks(self, parent):
@@ -390,10 +365,13 @@ class UploadModule(ModuleBase):
             dict: Dash HTML object
 
         """
+        # TODO: Add delete button for each table - need pattern matching callback:
+        #   https://dash.plotly.com/pattern-matching-callbacks
         def format_table(df_name, username, creation, raw_df):
+            user_str = f'by "{username}" ' if username else ''
             return [
                 html.H4(df_name),
-                html.P(f'Uploaded by "{username}" on {datetime.fromtimestamp(creation)}'),
+                html.P(f'Uploaded {user_str}on {datetime.fromtimestamp(creation)} (Note: only first 10 rows & 10 col)'),
                 dash_table.DataTable(
                     data=raw_df[:10].to_dict('records'),
                     columns=[{'name': i, 'id': i} for i in raw_df.columns[:10]],
@@ -411,8 +389,6 @@ class UploadModule(ModuleBase):
         for row in sorted(rows, key=lambda _row: _row['creation'], reverse=True):
             df_upload = self.get_data(row['table_name'])
             children.extend(format_table(row['df_name'], row['username'], row['creation'], df_upload))
-        children.extend(
-            format_table('Default', 'N/A', time.time(), pd.DataFrame.from_records(self.default_table.all())))
         return html.Div(children)
 
     def register_upload_handler(self, parent):
@@ -423,22 +399,22 @@ class UploadModule(ModuleBase):
 
         """
         outputs = [(self.get(self.id_upload_output), 'children')]
-        inputs = [(self.get(self.id_upload), 'contents')]
+        inputs = [(self.get(self.id_upload), 'contents'), (self.get(self.id_username_cache), 'data')]
         states = [(self.get(self.id_upload), 'filename'), (self.get(self.id_upload), 'last_modified')]
 
-        @parent.callback(outputs, inputs, states)
+        @parent.callback(outputs, inputs, states, pic=True)
         def upload_handler(*raw_args):
             a_in, a_state = map_args(raw_args, inputs, states)
             b64_file = a_in[self.get(self.id_upload)]['contents']
+            username = a_in[self.get(self.id_username_cache)]['data']
             filename = a_state[self.get(self.id_upload)]['filename']
             timestamp = a_state[self.get(self.id_upload)]['last_modified']
-            username = 'username'  # TODO: IMPLEMENT
 
             child_output = []
             try:
                 if b64_file is not None:
                     df_upload = parse_uploaded_df(b64_file, filename, timestamp)
-                    df_upload = df_upload.dropna(axis='columns')  # FIXME: (Really) Need to better handle NaN values
+                    df_upload = df_upload.dropna(axis='columns')  # FIXME: Better handle NaN values...
                     self.add_user(username)
                     self.upload_data(username, filename, df_upload)
 

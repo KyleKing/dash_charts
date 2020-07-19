@@ -40,3 +40,51 @@ def dropdown_group(name, _id, options, form_style=None, **dropdown_kwargs):
         dbc.Label(name),
         dcc.Dropdown(id=_id, options=options, **dropdown_kwargs),
     ], style=form_style)
+
+
+def format_email_pass_id(submit_id):
+    """Return tuple of the formatted email and password IDs based on the base submit_id value.
+
+    Args:
+        submit_id: id used to create unique element IDs
+
+    Returns:
+        tuple: formatted IDs: `(email_id, pass_id)`
+
+    """
+    return [f'{submit_id}-{key}' for key in ['email', 'password']]
+
+
+def login_form(submit_id):
+    """Return dbcForm with email and password inputs and submit button.
+
+    Based on: https://dash-bootstrap-components.opensource.faculty.ai/docs/components/form/
+
+    Args:
+        submit_id: id used to create unique element IDs
+
+    Returns:
+        form: dbc.Form with email and password inputs and submit button
+
+    """
+    email_id, pass_id = format_email_pass_id(submit_id)
+    return dbc.Form(
+        [
+            dbc.FormGroup(
+                [
+                    dbc.Label('Email', className='mr-2'),
+                    dbc.Input(type='email', placeholder='Enter email', id=email_id),
+                ],
+                className='mr-3',
+            ),
+            dbc.FormGroup(
+                [
+                    dbc.Label('Password', className='mr-2'),
+                    dbc.Input(type='password', placeholder='Enter password', id=pass_id),
+                ],
+                className='mr-3',
+            ),
+            dbc.Button('Submit', color='primary', id=submit_id),
+        ],
+        inline=True,
+    )
