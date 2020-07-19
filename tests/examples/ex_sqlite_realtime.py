@@ -144,7 +144,7 @@ class RealTimeSQLDemo(AppBase):
             },
             children=[
                 html.H4(children=self.name),
-                min_graph(id=self.ids[self.id_chart], animate=True, figure={}),  # TODO: Might be root for test failure?
+                min_graph(id=self.ids[self.id_chart], animate=True),
                 dcc.Interval(id=self.ids[self.id_interval], interval=1000, n_intervals=0),
             ],
         )
@@ -155,7 +155,7 @@ class RealTimeSQLDemo(AppBase):
         inputs = [(self.id_interval, 'n_intervals')]
         states = []
 
-        @self.callback(outputs, inputs, states)
+        @self.callback(outputs, inputs, states, pic=True)
         def update_chart(*raw_args):
             with SQLConnection(self.db_file) as conn:
                 df_events = pd.read_sql_query('SELECT id, label, value FROM EVENTS', conn)

@@ -6,14 +6,18 @@ from plotly.subplots import make_subplots
 
 from .dash_helpers import validate
 
+FIGURE_PLACEHOLDER = {'data': [], 'layout': {}, 'frames': []}
+"""Figure placeholder."""
 
-def min_graph(config=None, **kwargs):
+
+def min_graph(config=None, figure=FIGURE_PLACEHOLDER, **kwargs):
     """Return dcc.Graph element with Plotly overlay removed.
 
     See: https://community.plot.ly/t/is-it-possible-to-hide-the-floating-toolbar/4911/7
 
     Args:
         config: dictionary passed to `dcc.Graph`. Default is to disable the `displayModeBar`
+        figure: figure argument. Default is an empty placeholder (`FIGURE_PLACEHOLDER`)
         kwargs: any kwargs to pass to the dash initializer other than `assets_folder`
 
     Returns:
@@ -22,7 +26,7 @@ def min_graph(config=None, **kwargs):
     """
     if config is None:
         config = {'displayModeBar': False}
-    return dcc.Graph(config=config, **kwargs)
+    return dcc.Graph(config=config, figure=figure, **kwargs)
 
 
 def check_raw_data(df_raw, min_keys):

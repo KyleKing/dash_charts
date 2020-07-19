@@ -192,19 +192,25 @@ class AppBase:  # noqa: H601
         """
         return html.Div(['Welcome to the BaseApp! Override return_layout() in child class.'])  # pragma: no cover
 
-    def callback(self, outputs, inputs, states):
+    def callback(self, outputs, inputs, states, pic=False, **kwargs):
         """Return app callback decorator based on provided components.
 
         Args:
             outputs: list of tuples with app_id and property name
             inputs: list of tuples with app_id and property name
             states: list of tuples with app_id and property name
+            pic: If True, prevent call on page load (`prevent_initial_call`). Default is False
+            **kwargs: any additional keyword arguments for `self.app.callback`
 
         Returns:
             dict: result of `self.app.callback()`
 
         """
-        return self.app.callback(*format_app_callback(self.ids, outputs, inputs, states))
+        return self.app.callback(
+            *format_app_callback(self.ids, outputs, inputs, states),
+            prevent_initial_call=pic,
+            **kwargs,
+        )
 
     def create_callbacks(self):
         """Register the chart callbacks.

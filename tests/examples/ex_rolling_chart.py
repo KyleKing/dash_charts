@@ -86,7 +86,7 @@ class RollingDemo(AppBase):  # noqa: H601
                 'marginLeft': 'auto',
             }, children=[
                 html.H4(children=self.name),
-                min_graph(id=self.ids[self.id_chart], figure={}),  # TODO: This might be causing the tests to fail
+                min_graph(id=self.ids[self.id_chart], figure=self.chart_main.create_figure(self.data_raw)),
                 dcc.RangeSlider(
                     id=self.ids[self.id_slider], min=0, max=slider_max, step=step / 5, value=[150, 825],
                     marks={str(idx * step): str(idx * step) for idx in range(int(slider_max / step))},
@@ -100,7 +100,7 @@ class RollingDemo(AppBase):  # noqa: H601
         inputs = [(self.id_slider, 'value')]
         states = []
 
-        @self.callback(outputs, inputs, states)
+        @self.callback(outputs, inputs, states, pic=True)
         def update_chart(*raw_args):
             a_in, a_states = map_args(raw_args, inputs, states)
             slider = a_in[self.id_slider]['value']
