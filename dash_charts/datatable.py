@@ -22,7 +22,7 @@ OPERATORS = [['ge ', '>='],
 """List of lists containing each possible filter string."""
 
 
-def split_filter_part(filter_part):
+def split_filter_part(filter_part):  # noqa: CCR001
     """Split the filter into `(name, operator, value)` components.
 
     Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks
@@ -57,13 +57,13 @@ def split_filter_part(filter_part):
 
 
 def apply_datatable_filters(df_table, filter_query):
-    """Filter a dataframe based on Dash datatable filterquery
+    """Filter a dataframe based on Dash datatable filterquery.
 
     Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks
 
     Args:
         df_table: pandas dataframe to filter
-        filter: Dash datatable string filter query
+        filter_query: Dash datatable string filter query
 
     Returns:
         dataframe: filtered dataframe
@@ -84,7 +84,7 @@ def apply_datatable_filters(df_table, filter_query):
     return df_table
 
 
-class BaseDataTable:
+class BaseDataTable:  # noqa: H601
     """Base Class for Data Tables."""
 
     filter_summary = """Table Filter Syntax:

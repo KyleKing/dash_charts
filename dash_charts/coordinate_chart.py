@@ -16,7 +16,7 @@ import plotly.graph_objects as go
 
 from .utils_fig import CustomChart, check_raw_data
 
-# TODO: subplots for multiple years of calendar charts (Subplot title is year)
+# PLANNED: subplots for multiple years of calendar charts (Subplot title is year)
 
 
 def calculate_grid(grid_dims, corners, width, height):
@@ -68,7 +68,7 @@ def calculate_border(grid_dims, width, height):
     ]
 
 
-class CoordinateChart(CustomChart):
+class CoordinateChart(CustomChart):  # noqa: H601
     """Coordinate Chart."""
 
     border_opacity: float = 0.2
@@ -193,14 +193,13 @@ class CoordinateChart(CustomChart):
             dict: the chart marker shape, symbol, color, etc.
 
         """
-        marker = {
+        return {
             'color': df_grid['values'],
             'colorscale': colorscale,
             'showscale': True,
             'size': size,
             'symbol': symbol,
         }
-        return marker
 
     def create_layout(self):
         """Extend the standard layout.
@@ -241,7 +240,7 @@ class GridClass:
         self.titles = titles
 
 
-class CircleGrid(GridClass):
+class CircleGrid(GridClass):  # noqa: H601
     """Grid of circular coordinates."""
 
     marker_kwargs = {'size': 10}
@@ -292,7 +291,7 @@ def calculate_calendar_grid_corners(margin, days_in_week=7, max_weeks_in_month=6
     }
 
 
-class YearGrid(GridClass):
+class YearGrid(GridClass):  # noqa: H601
     """Coordinates of days within a grid of months in one year."""
 
     marker_kwargs = {'size': 10, 'symbol': 'square'}
@@ -340,7 +339,7 @@ class YearGrid(GridClass):
         return values
 
 
-class MonthGrid(GridClass):
+class MonthGrid(GridClass):  # noqa: H601
     """Coordinates of days within a single month."""
 
     marker_kwargs = {'size': 35, 'symbol': 'square'}

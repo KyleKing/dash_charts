@@ -10,13 +10,14 @@ body {
     max-width: 95%;
 }
 
-/* PLANNED: Add a class specifically for sliders that need additional height */
+/* Add a class specifically for sliders that need additional height */
 .rc-slider-with-legend {
     min-height: 45px;
 }
 
-/* PLANNED: Implement user-customizable styles, but for now manually add this */
-/* Will probably move all assets to a temporary directory, then add the user's specified files. Will need to cleanup dir */
+/* FIXME: Implement user-customizable styles
+    User specifies directory with assets, then the files are copied to the Dash asset dir
+    as user.js, user.css, etc. */
 iframe#plaid-link-iframe-1 {
     height: 100vh;
 }

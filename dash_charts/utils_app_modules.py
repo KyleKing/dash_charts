@@ -77,7 +77,7 @@ class ModuleBase:  # noqa: H601
         pass  # pragma: no cover
 
 
-class DataCache(ModuleBase):
+class DataCache(ModuleBase):  # noqa: H601
     """Module to store data in UI and later loaded as needed."""
 
     id_cache = 'cache'

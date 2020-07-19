@@ -18,12 +18,12 @@ from dominate import tags, util
 # TODO: Add tests for: utils_static.add_video and utils_static.write_lookup
 
 
-def test_write_image_file(image_path, figure):
-    """Test writing an image file."""
+def toggle_written_image_file(image_path, figure):
+    """Test writing an image file."""  # noqa: DAR101
     if image_path.is_file():
         image_path.unlink()
     write_image_file(figure, image_path, image_path.suffix[1:])
-    assert image_path.is_file()
+    assert image_path.is_file()  # noqa: S101
 
 
 def create_sample_custom_chart_figure():
@@ -59,7 +59,7 @@ def write_sample_html(filename):
     """
     image_path = Path(__file__).parent / 'test_write_image_file.png'
     figure = px.scatter(x=range(10), y=range(10))
-    test_write_image_file(image_path, figure)
+    toggle_written_image_file(image_path, figure)
 
     # Configure dark theme
     custom_styles = 'pre {max-height: 400px;}'
@@ -96,7 +96,7 @@ def write_sample_html(filename):
             tags.hr()
             tags.h1('Example image')
             util.raw(add_image(image_path))
-            # util.raw(add_video(video_path))
+            # util.raw(add_video(video_path))  # TODO: Implement
 
             tags.hr()
             tags.h1('Another Chart For Good Measure')

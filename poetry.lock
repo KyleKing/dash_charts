@@ -40,7 +40,6 @@ test = ["astroid", "pytest"]
 [[package]]
 category = "dev"
 description = "Atomic file writes."
-marker = "python_version >= \"3.0\" and sys_platform == \"win32\" or sys_platform == \"win32\""
 name = "atomicwrites"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -83,9 +82,9 @@ version = "1.6.2"
 [package.dependencies]
 GitPython = ">=1.0.1"
 PyYAML = ">=3.13"
-colorama = ">=0.3.9"
 six = ">=1.10.0"
 stevedore = ">=1.20.0"
+colorama = {version = ">=0.3.9", markers = "platform_system == \"Windows\""}
 
 [[package]]
 category = "dev"
@@ -131,9 +130,6 @@ name = "cerberus"
 optional = false
 python-versions = ">=2.7"
 version = "1.3.2"
-
-[package.dependencies]
-setuptools = "*"
 
 [[package]]
 category = "dev"
@@ -185,9 +181,6 @@ name = "cognitive-complexity"
 optional = false
 python-versions = ">=3.6"
 version = "1.1.0"
-
-[package.dependencies]
-setuptools = "*"
 
 [[package]]
 category = "dev"
@@ -260,44 +253,15 @@ dash_renderer = "1.5.1"
 flask-compress = "*"
 future = "*"
 plotly = "*"
-
-[package.dependencies.beautifulsoup4]
-optional = true
-version = "4.8.2"
-
-[package.dependencies.lxml]
-optional = true
-version = "4.5.0"
-
-[package.dependencies.percy]
-optional = true
-version = "2.0.2"
-
-[package.dependencies.pytest]
-optional = true
-python = ">=3.0"
-version = "5.3.5"
-
-[package.dependencies.pytest-mock]
-optional = true
-version = "2.0.0"
-
-[package.dependencies.pytest-sugar]
-optional = true
-version = "0.9.2"
-
-[package.dependencies.requests]
-extras = ["security"]
-optional = true
-version = "2.21.0"
-
-[package.dependencies.selenium]
-optional = true
-version = "3.141.0"
-
-[package.dependencies.waitress]
-optional = true
-version = "1.4.3"
+beautifulsoup4 = {version = "4.8.2", optional = true, markers = "extra == \"testing\""}
+lxml = {version = "4.5.0", optional = true, markers = "extra == \"testing\""}
+percy = {version = "2.0.2", optional = true, markers = "extra == \"testing\""}
+pytest = {version = "5.3.5", optional = true, markers = "python_version >= \"3.0\" and extra == \"testing\""}
+pytest-mock = {version = "2.0.0", optional = true, markers = "extra == \"testing\""}
+pytest-sugar = {version = "0.9.2", optional = true, markers = "extra == \"testing\""}
+requests = {version = "2.21.0", extras = ["security"], optional = true, markers = "extra == \"testing\""}
+selenium = {version = "3.141.0", optional = true, markers = "extra == \"testing\""}
+waitress = {version = "1.4.3", optional = true, markers = "extra == \"testing\""}
 
 [package.extras]
 dev = ["dash_flow_example (0.0.5)", "dash-dangerously-set-inner-html", "flake8 (3.7.9)", "PyYAML (5.3)", "fire (0.2.1)", "coloredlogs (14.0)", "pylint (1.9.4)", "mock (3.0.5)", "virtualenv (20.0.10)", "pylint (2.3.1)", "astroid (2.2.5)", "mock (4.0.1)", "black (19.10b0)"]
@@ -327,7 +291,7 @@ version = "1.10.1"
 
 [[package]]
 category = "dev"
-description = ""
+description = "Development package for development of Plotly/Dash applications"
 name = "dash-dev"
 optional = false
 python-versions = "^3.7"
@@ -400,10 +364,7 @@ toml = "*"
 tqdm = "*"
 transitions = "*"
 vulture = "*"
-
-[package.dependencies.dash]
-extras = ["testing"]
-version = "*, ^1.9"
+dash = {version = ">=1.9,<2.0", extras = ["testing"]}
 
 [package.source]
 reference = "f08d507da6a7fd8756a86ad1fcfdd0f5547b648f"
@@ -493,8 +454,8 @@ version = "0.32.0"
 
 [package.dependencies]
 cloudpickle = "*"
-macfsevents = "*"
-pyinotify = "*"
+macfsevents = {version = "*", markers = "sys_platform == \"darwin\""}
+pyinotify = {version = "*", markers = "sys_platform == \"linux\""}
 
 [[package]]
 category = "main"
@@ -532,10 +493,7 @@ version = "3.8.3"
 mccabe = ">=0.6.0,<0.7.0"
 pycodestyle = ">=2.6.0a1,<2.7.0"
 pyflakes = ">=2.2.0,<2.3.0"
-
-[package.dependencies.importlib-metadata]
-python = "<3.8"
-version = "*"
+importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [[package]]
 category = "dev"
@@ -547,10 +505,7 @@ version = "1.6.0"
 
 [package.dependencies]
 flake8 = ">=3.7"
-
-[package.dependencies.importlib-metadata]
-python = "<3.8"
-version = ">=0.9"
+importlib-metadata = {version = ">=0.9", markers = "python_version < \"3.8\""}
 
 [[package]]
 category = "dev"
@@ -595,9 +550,6 @@ name = "flake8-blind-except"
 optional = false
 python-versions = "*"
 version = "0.1.1"
-
-[package.dependencies]
-setuptools = "*"
 
 [[package]]
 category = "dev"
@@ -657,7 +609,6 @@ version = "0.0.2"
 
 [package.dependencies]
 cognitive_complexity = "*"
-setuptools = "*"
 
 [[package]]
 category = "dev"
@@ -680,10 +631,7 @@ version = "3.2.3"
 
 [package.dependencies]
 flake8 = ">=3.0,<3.2.0 || >3.2.0,<4"
-
-[package.dependencies.importlib-metadata]
-python = "<3.8"
-version = "*"
+importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [[package]]
 category = "dev"
@@ -751,7 +699,6 @@ version = "0.0.4"
 
 [package.dependencies]
 pytest = "*"
-setuptools = "*"
 
 [[package]]
 category = "dev"
@@ -764,10 +711,7 @@ version = "3.0.1"
 [package.dependencies]
 flake8 = ">=3.2.1,<4"
 testfixtures = ">=6.8.0,<7"
-
-[package.dependencies.isort]
-extras = ["pyproject"]
-version = ">=4.3.5,<5"
+isort = {version = ">=4.3.5,<5", extras = ["pyproject"]}
 
 [package.extras]
 test = ["pytest (>=4.0.2,<6)"]
@@ -933,7 +877,6 @@ version = "0.4.1"
 
 [package.dependencies]
 flake8 = "*"
-setuptools = "*"
 sqlparse = "*"
 
 [[package]]
@@ -966,9 +909,6 @@ name = "flake8-variables-names"
 optional = false
 python-versions = "*"
 version = "0.0.3"
-
-[package.dependencies]
-setuptools = "*"
 
 [[package]]
 category = "main"
@@ -1090,9 +1030,7 @@ python-versions = ">=3.6"
 version = "4.1.0"
 
 [package.dependencies]
-[package.dependencies.importlib-metadata]
-python = "<3.8"
-version = "*"
+importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [package.extras]
 docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
@@ -1190,7 +1128,6 @@ source = ["Cython (>=0.29.7)"]
 [[package]]
 category = "dev"
 description = "Thread-based interface to file system observation primitives."
-marker = "sys_platform == \"darwin\""
 name = "macfsevents"
 optional = false
 python-versions = "*"
@@ -1234,9 +1171,7 @@ python-versions = ">=3.5"
 version = "3.2.2"
 
 [package.dependencies]
-[package.dependencies.importlib-metadata]
-python = "<3.8"
-version = "*"
+importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [package.extras]
 testing = ["coverage", "pyyaml"]
@@ -1392,9 +1327,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.13.1"
 
 [package.dependencies]
-[package.dependencies.importlib-metadata]
-python = "<3.8"
-version = ">=0.12"
+importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 
 [package.extras]
 dev = ["pre-commit", "tox"]
@@ -1488,7 +1421,6 @@ version = "2.6.1"
 [[package]]
 category = "dev"
 description = "Linux filesystem events monitoring"
-marker = "sys_platform == \"linux\""
 name = "pyinotify"
 optional = false
 python-versions = "*"
@@ -1535,18 +1467,15 @@ python-versions = ">=3.5"
 version = "5.3.5"
 
 [package.dependencies]
-atomicwrites = ">=1.0"
 attrs = ">=17.4.0"
-colorama = "*"
 more-itertools = ">=4.0.0"
 packaging = "*"
 pluggy = ">=0.12,<1.0"
 py = ">=1.5.0"
 wcwidth = "*"
-
-[package.dependencies.importlib-metadata]
-python = "<3.8"
-version = ">=0.12"
+atomicwrites = {version = ">=1.0", markers = "sys_platform == \"win32\""}
+colorama = {version = "*", markers = "sys_platform == \"win32\""}
+importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 
 [package.extras]
 checkqa-mypy = ["mypy (v0.761)"]
@@ -1715,21 +1644,16 @@ version = "2.21.0"
 certifi = ">=2017.4.17"
 chardet = ">=3.0.2,<3.1.0"
 urllib3 = ">=1.21.1,<1.25"
+cryptography = {version = ">=1.3.4", optional = true, markers = "extra == \"security\""}
+pyOpenSSL = {version = ">=0.14", optional = true, markers = "extra == \"security\""}
 
 [[package.dependencies.idna]]
 version = ">=2.5,<2.9"
 
 [[package.dependencies.idna]]
+markers = "extra == \"security\""
 optional = true
 version = ">=2.0.0"
-
-[package.dependencies.cryptography]
-optional = true
-version = ">=1.3.4"
-
-[package.dependencies.pyOpenSSL]
-optional = true
-version = ">=0.14"
 
 [package.extras]
 security = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)"]
@@ -1849,10 +1773,7 @@ version = "3.2.0"
 
 [package.dependencies]
 pbr = ">=2.0.0,<2.1.0 || >2.1.0"
-
-[package.dependencies.importlib-metadata]
-python = "<3.8"
-version = ">=1.7.0"
+importlib-metadata = {version = ">=1.7.0", markers = "python_version < \"3.8\""}
 
 [[package]]
 category = "dev"
