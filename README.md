@@ -295,9 +295,9 @@ Latest coverage table
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4 |
 | `dash_charts/utils_fig.py` | 72 | 2 | 4 | 97.2 |
 | `dash_charts/utils_json_cache.py` | 31 | 4 | 0 | 87.1 |
-| `dash_charts/utils_static.py` | 107 | 8 | 0 | 92.5 |
+| `dash_charts/utils_static.py` | 107 | 4 | 0 | 96.3 |
 
-Generated on: 2020-07-19T07:18:52.028314
+Generated on: 2020-07-19T08:18:26.526548
 
 <!-- /COVERAGE -->
 

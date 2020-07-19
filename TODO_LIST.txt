@@ -1,0 +1,27 @@
+- Add DataCache to the README (and implement an example)
+
+- TODO: Implement TODO feature list for the datatable with Kitsu exploratory app!
+	- Data table
+		- Show using the column lookup for markdown formatting, number of decimal places, etc.
+		- Implement modal that can open on button click
+
+- TODO: app_px
+	- Add tab to view preview of all data frames found in px
+	- Add ability to select data source (CSV, JSON, SQlite, etc.) with upload module
+		- data upload is in top bar where user can use dcc.upload to pick the file - https://dash.plot.ly/dash-core-components/upload
+		- Maybe modal appears on load to select how to tidy data, how to load (is JSON in records or other format?) or which table from SQL to load
+		- Button to toggle back to the default data set per chart
+	- Show general data statistics from pandas describe!
+
+- PLANNED: sparklines (status: nothing right now)
+	- create new sparklines figures
+
+- Test datatable (All)
+- test utils_callbacks.get_triggered_id() > put in a demo app?
+- Round up other TODOs/FIXMEs from source code
+
+- TODO: ESRI Inspiration:
+	- View guidelines on TS from ESRI: https://doc.arcgis.com/en/operations-dashboard/help/serial-chart.htm
+		- Maybe update rolling chart to use recommendations from ESRI?
+	- Build indicator like in ESRI: https://doc.arcgis.com/en/operations-dashboard/help/indicator.htm
+	- Built ESRI Event list: https://doc.arcgis.com/en/operations-dashboard/help/list.htm

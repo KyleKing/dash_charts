@@ -5,9 +5,19 @@
 
 ### New
 
+* Refactor and add test for utils_cache. [Kyle King]
+
 * Time Vis chart. [Kyle King]
 
 ### Changes
+
+* Cleanup TODO items & fix some linting errors. [Kyle King]
+
+* Rename utils cache to json_cache. [Kyle King]
+
+* Initialize upload module example. [Kyle King]
+
+* Tests are failing for rolling chart. [Kyle King]
 
 * Refactor and cleanup of time vis and add img. [Kyle King]
 
@@ -44,6 +54,8 @@
 * Merge rolling and fitted charts (inc: 0.0.5) [Kyle King]
 
 ### Fix
+
+* Chart load errors. Resolves #1. [Kyle King]
 
 * Gantt chart image name… [Kyle King]
 
