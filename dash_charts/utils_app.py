@@ -1,11 +1,12 @@
 """Utility functions and classes for building applications."""
 
-import copy
+from copy import deepcopy
 from itertools import count
 from pathlib import Path
 
 import dash
 import dash_html_components as html
+from icecream import ic
 
 from .utils_callbacks import format_app_callback
 
@@ -87,6 +88,9 @@ class AppBase:  # noqa: H601
 
     """
 
+    validation_layout = None
+    """Validation layout used for callback validation. If None, will use the default layout for callback exceptions."""
+
     # In child class, declare the rest of the static data members here
 
     def __init__(self, app=None):
@@ -126,6 +130,10 @@ class AppBase:  # noqa: H601
         # Create app layout. User must call the return_layout method from each module within own return_layout method
         if assign_layout:
             self.app.layout = self.return_layout()
+        if assign_layout and self.validation_layout:
+            self.app.validation_layout = [deepcopy(self.app.layout)] + self.validation_layout
+            ic('\n\nValidationLayout?')
+            ic(self.app.validation_layout)
 
         # Create callbacks for app and each module
         self.create_callbacks()
@@ -158,7 +166,7 @@ class AppBase:  # noqa: H601
             app_ids: list of strings that are unique within this App
 
         """
-        self.ids = copy.deepcopy(self.ids)
+        self.ids = deepcopy(self.ids)
         for app_id in app_ids:
             self.ids[app_id] = f'{self.name}-{app_id}'.replace(' ', '-')
 

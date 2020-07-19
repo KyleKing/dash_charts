@@ -277,7 +277,7 @@ Latest coverage table
 | --: | --: | --: | --: | --: |
 | `dash_charts/__init__.py` | 1 | 0 | 0 | 100.0 |
 | `dash_charts/app_px.py` | 121 | 11 | 0 | 90.9 |
-| `dash_charts/components.py` | 10 | 0 | 0 | 100.0 |
+| `dash_charts/components.py` | 13 | 0 | 0 | 100.0 |
 | `dash_charts/coordinate_chart.py` | 102 | 1 | 6 | 99.0 |
 | `dash_charts/custom_colorscales.py` | 3 | 0 | 0 | 100.0 |
 | `dash_charts/dash_helpers.py` | 63 | 1 | 7 | 98.4 |
@@ -289,15 +289,15 @@ Latest coverage table
 | `dash_charts/pareto_chart.py` | 41 | 0 | 2 | 100.0 |
 | `dash_charts/scatter_line_charts.py` | 47 | 0 | 5 | 100.0 |
 | `dash_charts/time_vis_chart.py` | 61 | 0 | 0 | 100.0 |
-| `dash_charts/utils_app.py` | 57 | 1 | 8 | 98.2 |
+| `dash_charts/utils_app.py` | 63 | 1 | 8 | 98.4 |
 | `dash_charts/utils_app_modules.py` | 26 | 3 | 4 | 88.5 |
-| `dash_charts/utils_app_with_navigation.py` | 116 | 8 | 6 | 93.1 |
+| `dash_charts/utils_app_with_navigation.py` | 113 | 7 | 6 | 93.8 |
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4 |
-| `dash_charts/utils_fig.py` | 72 | 2 | 4 | 97.2 |
+| `dash_charts/utils_fig.py` | 75 | 2 | 4 | 97.3 |
 | `dash_charts/utils_json_cache.py` | 31 | 4 | 0 | 87.1 |
 | `dash_charts/utils_static.py` | 107 | 4 | 0 | 96.3 |
 
-Generated on: 2020-07-19T08:18:26.526548
+Generated on: 2020-07-19T09:47:32.865470
 
 <!-- /COVERAGE -->
 

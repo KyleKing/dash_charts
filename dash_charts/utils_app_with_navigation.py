@@ -1,7 +1,7 @@
 """Classes for more complex applications that have tabbed or paged navigation."""
 
-import copy
 from collections import OrderedDict
+from copy import deepcopy
 
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -40,15 +40,15 @@ class AppWithNavigation(AppBase):  # noqa: H601
             kwargs: keyword arguments passed to `self.create`
 
         """
-        # Suppress callback verification as tab content is rendered later
-        self.app.config['suppress_callback_exceptions'] = True
-
         # Initialize the lookup for each tab then configure each tab
         self.nav_lookup = OrderedDict([(tab.name, tab) for tab in self.define_nav_elements()])
         self.nav_layouts = {}
         for nav_name, nav in self.nav_lookup.items():
             nav.create(assign_layout=False)
             self.nav_layouts[nav_name] = nav.return_layout()
+
+        # Store validation_layout that is later used for callback verification in base class
+        self.validation_layout = [*map(deepcopy, self.nav_layouts.values())]
 
         # Initialize parent application that handles navigation
         super().create(**kwargs)
@@ -128,7 +128,7 @@ class AppWithTabs(AppWithNavigation):
 
 
 # > PLANNED: Make the tabs and chart compact as well when the compact argument is set to True
-class FullScreenAppWithTabs(AppWithTabs):
+class FullScreenAppWithTabs(AppWithTabs):  # noqa: H601
     """Base class for building Dash Application with tabs that uses the full window."""
 
     tabs_location = 'left'
@@ -186,7 +186,7 @@ class FullScreenAppWithTabs(AppWithTabs):
             tab_style = {'padding': '10px 20px 10px 20px'}
             tabs_padding = '15px 0 0 5px'
         # Extend tab style for selected case
-        selected_style = copy.deepcopy(tab_style)
+        selected_style = deepcopy(tab_style)
         opposite_lookup = {'top': 'bottom', 'bottom': 'top', 'left': 'right', 'right': 'left'}
         tabs_style = {
             'backgroundColor': '#F9F9F9',
@@ -235,7 +235,7 @@ class FullScreenAppWithTabs(AppWithTabs):
         ], style=tabs_style)
 
 
-class AppMultiPage(AppWithNavigation):
+class AppMultiPage(AppWithNavigation):  # noqa: H601
     """Base class for building Dash Application with multiple pages."""
 
     navbar_links = None

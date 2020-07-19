@@ -1,4 +1,4 @@
-- Add DataCache to the README (and implement an example)
+- FIXME: Add DataCache to the README (and implement an example)
 
 - TODO: Implement TODO feature list for the datatable with Kitsu exploratory app!
 	- Data table

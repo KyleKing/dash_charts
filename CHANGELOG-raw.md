@@ -5,11 +5,17 @@
 
 ### New
 
+* Add matplotlib conversion convenience method. [Kyle King]
+
 * Refactor and add test for utils_cache. [Kyle King]
 
 * Time Vis chart. [Kyle King]
 
 ### Changes
+
+* Add username control for upload module. [Kyle King]
+
+* Add video for testing utils_static. [Kyle King]
 
 * Cleanup TODO items & fix some linting errors. [Kyle King]
 
