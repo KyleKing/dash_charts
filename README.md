@@ -219,7 +219,7 @@ Upload module for user-selected CSV, JSON, or SQLite files.
 
 See sample code in [tests/examples/ex_upload.py](tests/examples/ex_upload.py). Screenshot below:
 
-![ex_upload.png](.images/ex_upload.png)  # TODO: Implement
+![ex_upload.png](.images/ex_upload.png)
 
 ## Applications
 

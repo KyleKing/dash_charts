@@ -60,6 +60,7 @@ class UploadModuleDemo(AppBase):  # noqa: H601
         return dbc.Container([
             dbc.Col([
                 html.H1(self.name),
+                html.Hr(),
                 dbc.Row([
                     dbc.Col([
                         login_form(self.ids[self.submit_id]),
@@ -68,6 +69,7 @@ class UploadModuleDemo(AppBase):  # noqa: H601
                         html.Div([self._show_current_user(None)], id=self.ids[self.user_info]),
                     ]),
                 ]),
+                html.Hr(),
                 self.mod_upload.return_layout(self.ids),
             ]),
         ])
