@@ -28,6 +28,7 @@ scipy = "*"
 isort = "^4.0.0"  # PLANNED: Temporary until flake8-isort finishes isort 5.0.X migration
 jsonpickle = "*"
 matplotlib = "~3.2.0"
+snoop = "*"
 
 [tool.poetry.dev-dependencies.dash]
 extras = [ "testing",]

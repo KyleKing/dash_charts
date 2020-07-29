@@ -144,6 +144,11 @@ class DBConnect:
         self.database_path = database_path.resolve()
         self.database_path.parent.mkdir(exist_ok=True)
 
+    def close(self):
+        """Safely disconnect and release the SQLite file."""
+        self.db.executable.close()
+        self._db = None
+
 
 def rm_brs(line):
     """Replace all whitespace (line breaks, etc) with spaces."""  # noqa: DAR101,DAR201

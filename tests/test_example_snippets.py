@@ -1,9 +1,11 @@
-"""PLANNED: Implement tests for dash_charts. Examples from tests for plotly/dash."""
+"""PLANNED: Improve tests for `dash_charts`. Examples from tests for plotly/dash."""
 
 import dash_html_components as html
 import pytest
 from dash_charts.components import dropdown_group, opts_dd
 from dash_charts.utils_app import AppBase
+
+from .configuration import no_log_errors
 
 
 class ComponentDemo(AppBase):
@@ -80,7 +82,7 @@ def test_inin001_simple_callback(dash_duo):
     # # and one for each hello world character
     # assert call_count.value == 2 + len("hello world")
 
-    assert not dash_duo.get_logs()
+    assert no_log_errors(dash_duo)
 
 
 # ======================================================================================================================
@@ -172,7 +174,7 @@ def test_inin001_simple_callback(dash_duo):
 #     # and one for each hello world character
 #     assert call_count.value == 2 + len("hello world")
 
-#     assert not dash_duo.get_logs()
+#     assert no_log_errors(dash_duo)
 
 
 # def test_inin002_wildcard_callback(dash_duo):
@@ -227,7 +229,7 @@ def test_inin001_simple_callback(dash_duo):
 #     # and one for each hello world character
 #     assert input_call_count.value == 2 + len("hello world")
 
-#     assert not dash_duo.get_logs()
+#     assert no_log_errors(dash_duo)
 
 
 # def test_inin003_aborted_callback(dash_duo):
@@ -284,7 +286,7 @@ def test_inin001_simple_callback(dash_duo):
 #     assert dash_duo.find_element("#output1").text == initial_output
 #     assert dash_duo.find_element("#output2").text == initial_output
 
-#     assert not dash_duo.get_logs()
+#     assert no_log_errors(dash_duo)
 
 #     dash_duo.percy_snapshot(name="aborted")
 
@@ -320,7 +322,7 @@ def test_inin001_simple_callback(dash_duo):
 
 #     assert actual == expected, "all attrs are included except None values"
 
-#     assert not dash_duo.get_logs()
+#     assert no_log_errors(dash_duo)
 
 
 # def test_inin005_no_props_component(dash_duo):
@@ -337,7 +339,7 @@ def test_inin001_simple_callback(dash_duo):
 
 #     dash_duo.start_server(app)
 
-#     assert not dash_duo.get_logs()
+#     assert no_log_errors(dash_duo)
 #     dash_duo.percy_snapshot(name="no-props-component")
 
 
@@ -852,7 +854,7 @@ def test_inin001_simple_callback(dash_duo):
 #     # cookie gets json encoded
 #     assert cookie["value"] == '"abcd - cookie"'
 
-#     assert not dash_duo.get_logs()
+#     assert no_log_errors(dash_duo)
 
 
 # def test_inin017_late_component_register(dash_duo):

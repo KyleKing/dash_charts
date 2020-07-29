@@ -2,6 +2,7 @@
 
 import pytest
 
+from .configuration import no_log_errors
 from .examples import ex_tabs
 
 
@@ -12,4 +13,4 @@ def test_smoke_test_ex_tabs(dash_duo):
     import time
     time.sleep(1)
 
-    assert not dash_duo.get_logs()
+    assert no_log_errors(dash_duo)

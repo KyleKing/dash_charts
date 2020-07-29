@@ -66,11 +66,13 @@ def test_write_pretty_json():
 def test_db_connect():
     """Test DBConnect."""
     with tempfile.TemporaryDirectory() as tmp_dir:
-        database = dash_helpers.DBConnect(Path(tmp_dir) / 'tmp.db')
+        tmp_dir = Path(tmp_dir)
+        database = dash_helpers.DBConnect(tmp_dir / 'tmp.db')
         table = database.db.create_table('test')
-        csv_filename = Path(tmp_dir) / 'tmp.csv'
+        csv_filename = tmp_dir / 'tmp.csv'
         table.insert({'username': 'username', 'value': 1})
         dash_helpers.export_table_as_csv(csv_filename, table)
+        database.close()
 
         result = csv_filename.read_text()
 
