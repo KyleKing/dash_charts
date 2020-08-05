@@ -112,7 +112,7 @@ I wanted to show that an object oriented programming approach to Dash projects c
 
 - Try to encapsulate all application logic (callbacks, ids, etc.) in application classes or modules
 - For components that are reused between application, create a `module`. The layout, state, and callbacks can all be delegated to the module rather than cluttering the main application's class and allowing for better code reuse
-- Move any methods that don't require state (`self`) into standalone functions
+- Move any methods that do not require state (`self`) into standalone functions
 - If you can separate Dash (ids/layout/Callbacks) and Plotly (figures/tables) code, you can generate static HTML or PNGs more easily. Sometimes static output is useful when programmatically generating views rather than tweaking the interactive inputs each time.
 
 Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input
@@ -280,16 +280,16 @@ Latest coverage table
 | `dash_charts/components.py` | 13 | 0 | 0 | 100.0 |
 | `dash_charts/coordinate_chart.py` | 102 | 1 | 6 | 99.0 |
 | `dash_charts/custom_colorscales.py` | 3 | 0 | 0 | 100.0 |
-| `dash_charts/dash_helpers.py` | 63 | 1 | 7 | 98.4 |
+| `dash_charts/dash_helpers.py` | 66 | 1 | 7 | 98.5 |
 | `dash_charts/datatable.py` | 79 | 25 | 0 | 68.4 |
 | `dash_charts/equations.py` | 11 | 0 | 0 | 100.0 |
 | `dash_charts/gantt_chart.py` | 54 | 0 | 0 | 100.0 |
 | `dash_charts/modules_datatable.py` | 97 | 11 | 0 | 88.7 |
-| `dash_charts/modules_upload.py` | 130 | 60 | 0 | 53.8 |
+| `dash_charts/modules_upload.py` | 131 | 60 | 0 | 54.2 |
 | `dash_charts/pareto_chart.py` | 41 | 0 | 2 | 100.0 |
 | `dash_charts/scatter_line_charts.py` | 47 | 0 | 5 | 100.0 |
 | `dash_charts/time_vis_chart.py` | 61 | 0 | 0 | 100.0 |
-| `dash_charts/utils_app.py` | 63 | 1 | 8 | 98.4 |
+| `dash_charts/utils_app.py` | 65 | 1 | 8 | 98.5 |
 | `dash_charts/utils_app_modules.py` | 26 | 3 | 4 | 88.5 |
 | `dash_charts/utils_app_with_navigation.py` | 113 | 7 | 6 | 93.8 |
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4 |
@@ -297,7 +297,7 @@ Latest coverage table
 | `dash_charts/utils_json_cache.py` | 31 | 4 | 0 | 87.1 |
 | `dash_charts/utils_static.py` | 107 | 4 | 0 | 96.3 |
 
-Generated on: 2020-07-19T09:47:32.865470
+Generated on: 2020-08-05T06:25:12.903900
 
 <!-- /COVERAGE -->
 

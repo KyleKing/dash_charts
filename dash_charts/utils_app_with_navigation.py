@@ -9,6 +9,24 @@ import dash_html_components as html
 
 from .utils_app import AppBase
 
+# TODO: Create clientside callbacks dynamically to update the title on navigation
+# See: http://dash.plotly.com/external-resources
+# ```py
+# app.clientside_callback(
+#     """
+#     function(tab_value) {
+#         if (tab_value === 'tab-1') {
+#             document.title = 'Tab 1'
+#         } else if (tab_value === 'tab-2') {
+#             document.title = 'Tab 2'
+#         }
+#     }
+#     """,
+#     Output('blank-output', 'children'),
+#     [Input('tabs-example', 'value')]
+# )
+# ```
+
 
 class AppWithNavigation(AppBase):  # noqa: H601
     """Base class for building Dash Application with tabs or URL routing."""

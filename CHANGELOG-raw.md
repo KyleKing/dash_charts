@@ -13,6 +13,10 @@
 
 ### Changes
 
+* Add upload image to README. [Kyle King]
+
+* Implement validation layout. Closes #2. [Kyle King]
+
 * Add username control for upload module. [Kyle King]
 
 * Add video for testing utils_static. [Kyle King]
@@ -60,6 +64,8 @@
 * Merge rolling and fitted charts (inc: 0.0.5) [Kyle King]
 
 ### Fix
+
+* Test errors and standardize log checks. [Kyle King]
 
 * Chart load errors. Resolves #1. [Kyle King]
 

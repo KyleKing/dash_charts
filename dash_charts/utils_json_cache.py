@@ -83,7 +83,7 @@ def match_identifier_in_cache(identifier, db_instance):
     return [*get_files_table(db_instance).find(identifier=identifier)]
 
 
-def store_cache_object(prefix, identifier, obj, db_instance):
+def store_cache_object(prefix, identifier, obj, db_instance, cache_dir=CACHE_DIR):
     """Store the object as a JSON file and track in a SQLite database to prevent duplicates.
 
     Args:
@@ -91,6 +91,7 @@ def store_cache_object(prefix, identifier, obj, db_instance):
         identifier: identifier to use as a reference if the corresponding data is already cached
         obj: JSON object to write
         db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        cache_dir: path to the directory to store the file. Default is `CACHE_DIR
 
     Raises:
         RuntimeError: if duplicate match found when storing
@@ -101,7 +102,7 @@ def store_cache_object(prefix, identifier, obj, db_instance):
     if len(matches) > 0:
         raise RuntimeError(f'Already have an entry for this identifier (`{identifier}`): {matches}')
     # Update the database and store the file
-    filename = CACHE_DIR / f'{prefix}_{uniq_table_id()}.json'
+    filename = cache_dir / f'{prefix}_{uniq_table_id()}.json'
     new_row = {'filename': str(filename), 'identifier': identifier, 'timestamp': time.time()}
     get_files_table(db_instance).insert(new_row)
     write_pretty_json(filename, obj)

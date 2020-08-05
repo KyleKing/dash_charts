@@ -91,6 +91,9 @@ class AppBase:  # noqa: H601
     validation_layout = None
     """Validation layout used for callback validation. If None, will use the default layout for callback exceptions."""
 
+    init_app_kwargs = {'external_stylesheets': external_stylesheets}
+    """Additional keyword arguments passed to `init_app()`."""
+
     # In child class, declare the rest of the static data members here
 
     def __init__(self, app=None):
@@ -100,7 +103,8 @@ class AppBase:  # noqa: H601
             app: Dash instance. If None, will create standalone app. Otherwise, will be part of existing app
 
         """
-        self.app = init_app(external_stylesheets=self.external_stylesheets) if app is None else app
+        self.init_app_kwargs['title'] = self.name
+        self.app = init_app(**self.init_app_kwargs) if app is None else app
 
     def create(self, assign_layout=True):
         """Create the ids, app charts, layout, callbacks, and optional modules.

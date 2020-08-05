@@ -27,12 +27,12 @@ scipy = "*"
 [tool.poetry.dev-dependencies]
 isort = "^4.0.0"  # PLANNED: Temporary until flake8-isort finishes isort 5.0.X migration
 jsonpickle = "*"
-matplotlib = "~3.2.0"
+matplotlib = "~3.2.0"  # See: https://github.com/plotly/plotly.py/issues/1568#issuecomment-653764327
 snoop = "*"
 
 [tool.poetry.dev-dependencies.dash]
 extras = [ "testing",]
-version = "*, ^1.11"
+version = "^1.14"
 
 [tool.poetry.dev-dependencies.dash_dev]
 git = "https://github.com/KyleKing/dash_dev.git"

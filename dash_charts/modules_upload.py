@@ -243,6 +243,9 @@ class UploadModule(ModuleBase):  # noqa: H601
     all_ids = [id_upload, id_upload_output, id_username_cache]
     """List of ids to register for this module."""
 
+    cache_dir = CACHE_DIR
+    """Path to the directory to use for caching files."""
+
     def __init__(self, *args, **kwargs):
         """Initialize module."""  # noqa: DAR101
         super().__init__(*args, **kwargs)
@@ -250,7 +253,7 @@ class UploadModule(ModuleBase):  # noqa: H601
 
     def _initialize_database(self):
         """Create data members `(self.database, self.user_table, self.inventory_table)`."""
-        self.database = DBConnect(CACHE_DIR / f'_placeholder_app-{self.name}.db')
+        self.database = DBConnect(self.cache_dir / f'_placeholder_app-{self.name}.db')
         self.user_table = self.database.db.create_table(
             'users', primary_id='username', primary_type=self.database.db.types.text)
         self.inventory_table = self.database.db.create_table(
