@@ -37,7 +37,7 @@ scipy = "*"
 
 [tool.poetry.dev-dependencies]
 jsonpickle = "*"
-matplotlib = "~3.2.0"  # See: https://github.com/plotly/plotly.py/issues/1568#issuecomment-653764327
+matplotlib = "~3.1"  # See: https://github.com/plotly/plotly.py/issues/1568#issuecomment-653764327
 
 [tool.poetry.dev-dependencies.dash]
 extras = [ "testing",]
