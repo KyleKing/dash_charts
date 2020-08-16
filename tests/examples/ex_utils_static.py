@@ -10,7 +10,7 @@ import pandas as pd
 import plotly.express as px
 from dash_charts import equations
 from dash_charts.scatter_line_charts import FittedChart
-from dash_charts.utils_dash import json_dumps_compact
+from dash_charts.utils_data import json_dumps_compact
 from dash_charts.utils_static import (
     add_image, add_video, create_dbc_doc, make_div, tag_code, tag_markdown, tag_table, write_from_markdown,
     write_image_file)

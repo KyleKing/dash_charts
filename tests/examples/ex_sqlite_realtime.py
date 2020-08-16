@@ -21,8 +21,9 @@ from dash.exceptions import PreventUpdate
 from dash_charts.scatter_line_charts import RollingChart
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_callbacks import map_outputs
-from dash_charts.utils_dash import SQLConnection, parse_dash_cli_args
+from dash_charts.utils_data import SQLConnection
 from dash_charts.utils_fig import min_graph
+from dash_charts.utils_helpers import parse_dash_cli_args
 from tqdm import tqdm
 
 

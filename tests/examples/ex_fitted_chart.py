@@ -6,7 +6,7 @@ import plotly.express as px
 from dash_charts import equations
 from dash_charts.scatter_line_charts import FittedChart
 from dash_charts.utils_app import AppBase
-from dash_charts.utils_dash import parse_dash_cli_args
+from dash_charts.utils_helpers import parse_dash_cli_args
 from dash_charts.utils_fig import min_graph
 
 

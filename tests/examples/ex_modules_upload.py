@@ -6,7 +6,7 @@ from dash_charts.components import format_email_pass_id, login_form
 from dash_charts.modules_upload import UploadModule
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_callbacks import map_args, map_outputs
-from dash_charts.utils_dash import parse_dash_cli_args
+from dash_charts.utils_helpers import parse_dash_cli_args
 
 
 class UploadModuleDemo(AppBase):  # noqa: H601

@@ -10,7 +10,7 @@ import dash_html_components as html
 import plotly.express as px
 from dash_charts.modules_datatable import ModuleFilteredTable
 from dash_charts.utils_app import AppBase
-from dash_charts.utils_dash import parse_dash_cli_args
+from dash_charts.utils_helpers import parse_dash_cli_args
 
 
 class DataTableDemo(AppBase):  # noqa: H601

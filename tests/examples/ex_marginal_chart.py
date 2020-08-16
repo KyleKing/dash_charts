@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from dash_charts.utils_app import AppBase
-from dash_charts.utils_dash import parse_dash_cli_args
+from dash_charts.utils_helpers import parse_dash_cli_args
 from dash_charts.utils_fig import MarginalChart, check_raw_data, min_graph
 
 
