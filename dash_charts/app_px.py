@@ -173,6 +173,7 @@ class TabBase(AppBase):  # noqa: H601
         outputs = [(self.id_chart, 'figure')]
         inputs = [(_id, 'value') for _id in self.input_ids]
         states = ()
+
         @self.callback(outputs, inputs, states)
         def update_chart(*raw_args):
             a_in, _a_states = map_args(raw_args, inputs, states)

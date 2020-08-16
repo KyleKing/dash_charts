@@ -15,7 +15,7 @@ self.axis_range = {'x': [dates[0], dates[-1]]}
 import plotly.graph_objects as go
 from palettable.tableau import TableauMedium_10
 
-from .dash_helpers import format_unix, get_unix
+from .utils_dash import format_unix, get_unix
 from .utils_fig import CustomChart
 
 

@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import plotly.tools as tls
 from plotly.subplots import make_subplots
 
-from .dash_helpers import validate
+from .utils_dash import validate
 
 FIGURE_PLACEHOLDER = {'data': [], 'layout': {}, 'frames': []}
 """Figure placeholder."""

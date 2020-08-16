@@ -78,10 +78,9 @@ def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):
             y=fit_equation(x_values, *popt),
         )]
     except (RuntimeError, ValueError) as err:  # pragma: no cover
-        if suppress_fit_errors:
-            ic(err, name)
-        else:
+        if not suppress_fit_errors:
             raise
+        ic(err, name)
 
     return fitted_data  # noqa: R504
 

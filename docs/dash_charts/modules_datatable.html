@@ -152,6 +152,9 @@ class ModuleDataTable(ModuleBase):
         Args:
             parent: parent instance (ex: `self`)
 
+        Raises:
+            PreventUpdate: if sort_by is not set
+
         &#34;&#34;&#34;
         outputs = [(self.get(self.id_table), &#39;style_data_conditional&#39;)]
         inputs = [(self.get(self.id_table), &#39;sort_by&#39;)]
@@ -432,6 +435,9 @@ class ModuleFilteredTable(ModuleDataTable):
         Args:
             parent: parent instance (ex: `self`)
 
+        Raises:
+            PreventUpdate: if sort_by is not set
+
         &#34;&#34;&#34;
         outputs = [(self.get(self.id_table), &#39;style_data_conditional&#39;)]
         inputs = [(self.get(self.id_table), &#39;sort_by&#39;)]
@@ -565,6 +571,11 @@ the callback for creating the main chart …</p></div>
 <dl>
 <dt><strong><code>parent</code></strong></dt>
 <dd>parent instance (ex: <code>self</code>)</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>PreventUpdate</code></dt>
+<dd>if sort_by is not set</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -575,6 +586,9 @@ the callback for creating the main chart …</p></div>
 
     Args:
         parent: parent instance (ex: `self`)
+
+    Raises:
+        PreventUpdate: if sort_by is not set
 
     &#34;&#34;&#34;
     outputs = [(self.get(self.id_table), &#39;style_data_conditional&#39;)]

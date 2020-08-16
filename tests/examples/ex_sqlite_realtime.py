@@ -18,10 +18,10 @@ import dash_html_components as html
 import numpy as np
 import pandas as pd
 from dash.exceptions import PreventUpdate
-from dash_charts.dash_helpers import SQLConnection, parse_dash_cli_args
 from dash_charts.scatter_line_charts import RollingChart
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_callbacks import map_outputs
+from dash_charts.utils_dash import SQLConnection, parse_dash_cli_args
 from dash_charts.utils_fig import min_graph
 from tqdm import tqdm
 

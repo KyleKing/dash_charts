@@ -14,6 +14,72 @@ import pandas as pd
 from cerberus import Validator
 
 
+def rm_brs(line):
+    """Replace all whitespace (line breaks, etc) with spaces."""  # noqa: DAR101,DAR201
+    return ' '.join(line.split())
+
+
+def uniq_table_id():
+    """Return a unique table ID based on the current time in ms.
+
+    Returns:
+        str: in format `U<timestamp_ns>`
+
+    """
+    return f'U{time.time_ns()}'
+
+
+def parse_dash_cli_args():  # pragma: no cover
+    """Configure the CLI options for Dash applications.
+
+    Returns:
+        dict: keyword arguments for Dash
+
+    """
+    parser = argparse.ArgumentParser(description='Process Dash Parameters.')
+    parser.add_argument('--port', type=int, default=8050,
+                        help='Pass port number to Dash server. Default is 8050')
+    parser.add_argument('--nodebug', action='store_true', default=False,
+                        help='If set, will disable debug mode. Default is to set `debug=True`')
+    args = parser.parse_args()
+    return {'port': args.port, 'debug': not args.nodebug}
+
+
+def graph_return(resp, keys):
+    """Based on concepts of GraphQL, return specified subset of response.
+
+    Args:
+        resp: dictionary with values from function
+        keys: list of keynames from the resp dictionary
+
+    Returns:
+        the `resp` dictionary with only the keys specified in the `keys` list
+
+    Raises:
+        RuntimeError: if `keys` is not a list or tuple
+
+    """
+    if not (len(keys) and isinstance(keys, (list, tuple))):
+        raise RuntimeError(f'Expected list of keys for: `{resp.items()}`, but received `{keys}`')
+    ordered_responses = [resp.get(key, None) for key in keys]
+    return ordered_responses if len(ordered_responses) > 1 else ordered_responses[0]
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# For Working with Data
+
+
+def enable_verbose_pandas():
+    """Update global pandas configuration for printed dataframes."""
+    # Enable all columns to be displayed at once (or tweak to set a new limit)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', None)
+    pd.set_option('display.max_colwidth', None)
+
+    # Optionally modify number of rows shown
+    pd.set_option('display.max_rows', None)
+
+
 def validate(document, schema, **validator_kwargs):
     """Validate a data structure. Return errors if any found.
 
@@ -31,22 +97,6 @@ def validate(document, schema, **validator_kwargs):
     validator = Validator(schema, **validator_kwargs)
     validator.validate(document)
     return validator.errors
-
-
-def parse_dash_cli_args():  # pragma: no cover
-    """Configure the CLI options for Dash applications.
-
-    Returns:
-        dict: keyword arguments for Dash
-
-    """
-    parser = argparse.ArgumentParser(description='Process Dash Parameters.')
-    parser.add_argument('--port', type=int, default=8050,
-                        help='Pass port number to Dash server. Default is 8050')
-    parser.add_argument('--nodebug', action='store_true', default=False,
-                        help='If set, will disable debug mode. Default is to set `debug=True`')
-    args = parser.parse_args()
-    return {'port': args.port, 'debug': not args.nodebug}
 
 
 def json_dumps_compact(data):
@@ -87,6 +137,52 @@ def write_pretty_json(filename, obj):
     Path(filename).write_text(json.dumps(obj, indent=4, separators=(',', ': ')))
 
 
+def write_csv(csv_path, rows):
+    """Write a csv file with appropriate line terminator and encoding.
+
+    Args:
+        csv_path: path to CSV file
+        rows: list of lists to write to CSV file
+
+    """
+    with open(csv_path, 'w', newline='\n', encoding='utf-8') as csv_file:
+        writer = csv.writer(csv_file, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        for row in rows:
+            writer.writerow(row)
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Time Helpers
+
+
+def get_unix(str_ts, date_format):
+    """Get unix timestamp from a string timestamp in date_format.
+
+    Args:
+        str_ts: string timestamp in `date_format`
+        date_format: datetime time stamp format
+
+    Returns:
+        int: unix timestamp
+
+    """
+    return datetime.strptime(str_ts, date_format).timestamp()
+
+
+def format_unix(unix_ts, date_format):
+    """Format unix timestamp as a string timestamp in date_format.
+
+    Args:
+        unix_ts: unix timestamp
+        date_format: datetime time stamp format
+
+    Returns:
+        string: formatted timestamp in `date_format`
+
+    """
+    return datetime.fromtimestamp(unix_ts).strftime(date_format)
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # sqlite3
 
@@ -102,7 +198,7 @@ class SQLConnection(ContextDecorator):
 
         """
         self.conn = None
-        self.database_path = db_file
+        self.db_path = db_file
 
     def __enter__(self):
         """Connect to the database and return connection reference.
@@ -111,7 +207,7 @@ class SQLConnection(ContextDecorator):
             dict: connection to sqlite database
 
         """
-        self.conn = sqlite3.connect(self.database_path)
+        self.conn = sqlite3.connect(self.db_path)
         return self.conn
 
     def __exit__(self, exc_type, exc_value, traceback):
@@ -145,7 +241,7 @@ META_TABLE_NAME = 'meta'
 class DBConnect:
     """Manage database connection since closing connection isn't possible."""
 
-    database_path = None
+    db_path = None
     """Path to the local storage SQLite database file. Initialize in `__init__()`."""
 
     _db = None
@@ -159,18 +255,18 @@ class DBConnect:
 
         """
         if self._db is None:
-            self._db = dataset.connect(f'sqlite:///{self.database_path}')
+            self._db = dataset.connect(f'sqlite:///{self.db_path}')
         return self._db
 
-    def __init__(self, database_path):
+    def __init__(self, db_path):
         """Store the database path and ensure the parent directory exists.
 
         Args:
-            database_path: Path to the SQLite file
+            db_path: Path to the SQLite file
 
         """
-        self.database_path = database_path.resolve()
-        self.database_path.parent.mkdir(exist_ok=True)
+        self.db_path = db_path.resolve()
+        self.db_path.parent.mkdir(exist_ok=True)
 
     def new_table(self, table_name):
         """Create a table. Drop a table if one existed before.
@@ -203,7 +299,7 @@ class DBConnection(ContextDecorator):
 
         """
         self.conn = None
-        self.database_path = db_file
+        self.db_path = db_file
 
     def __enter__(self):
         """Connect to the database and return connection reference.
@@ -212,41 +308,12 @@ class DBConnection(ContextDecorator):
             dict: connection to sqlite database
 
         """
-        self.conn = DBConnect(self.database_path)
+        self.conn = DBConnect(self.db_path)
         return self.conn
 
     def __exit__(self, exc_type, exc_value, traceback):
         """Close connection."""  # noqa: DAR101
         self.conn.close()
-
-
-def rm_brs(line):
-    """Replace all whitespace (line breaks, etc) with spaces."""  # noqa: DAR101,DAR201
-    return ' '.join(line.split())
-
-
-def uniq_table_id():
-    """Return a unique table ID based on the current time in ms.
-
-    Returns:
-        str: in format `U<timestamp_ns>`
-
-    """
-    return f'U{time.time_ns()}'
-
-
-def write_csv(csv_path, rows):
-    """Write a csv file with appropriate line terminator and encoding.
-
-    Args:
-        csv_path: path to CSV file
-        rows: list of lists to write to CSV file
-
-    """
-    with open(csv_path, 'w', newline='\n', encoding='utf-8') as csv_file:
-        writer = csv.writer(csv_file, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-        for row in rows:
-            writer.writerow(row)
 
 
 def export_table_as_csv(csv_filename, table):
@@ -329,66 +396,3 @@ def get_table(db_file, table_name, drop_id_col=True):
     if drop_id_col:
         df_table = df_table.drop(['id'], axis=1)
     return df_table  # noqa: R504
-
-
-# ----------------------------------------------------------------------------------------------------------------------
-# General Helpers
-
-
-def enable_verbose_pandas():
-    """Update global pandas configuration for printed dataframes."""
-    # Enable all columns to be displayed at once (or tweak to set a new limit)
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.width', None)
-    pd.set_option('display.max_colwidth', None)
-
-    # Optionally modify number of rows shown
-    pd.set_option('display.max_rows', None)
-
-
-def graph_return(resp, keys):
-    """Based on concepts of GraphQL, return specified subset of response.
-
-    Args:
-        resp: dictionary with values from function
-        keys: list of keynames from the resp dictionary
-
-    Returns:
-        the `resp` dictionary with only the keys specified in the `keys` list
-
-    Raises:
-        RuntimeError: if `keys` is not a list or tuple
-
-    """
-    if not (len(keys) and isinstance(keys, (list, tuple))):
-        raise RuntimeError(f'Expected list of keys for: `{resp.items()}`, but received `{keys}`')
-    ordered_responses = [resp.get(key, None) for key in keys]
-    return ordered_responses if len(ordered_responses) > 1 else ordered_responses[0]
-
-
-def get_unix(str_ts, date_format):
-    """Get unix timestamp from a string timestamp in date_format.
-
-    Args:
-        str_ts: string timestamp in `date_format`
-        date_format: datetime time stamp format
-
-    Returns:
-        int: unix timestamp
-
-    """
-    return datetime.strptime(str_ts, date_format).timestamp()
-
-
-def format_unix(unix_ts, date_format):
-    """Format unix timestamp as a string timestamp in date_format.
-
-    Args:
-        unix_ts: unix timestamp
-        date_format: datetime time stamp format
-
-    Returns:
-        string: formatted timestamp in `date_format`
-
-    """
-    return datetime.fromtimestamp(unix_ts).strftime(date_format)

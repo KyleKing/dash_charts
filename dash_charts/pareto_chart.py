@@ -3,7 +3,7 @@
 import pandas as pd
 import plotly.graph_objects as go
 
-from .dash_helpers import validate
+from .utils_dash import validate
 from .utils_fig import CustomChart, check_raw_data
 
 

@@ -73,7 +73,7 @@ import json
 import time
 from pathlib import Path
 
-from dash_charts.dash_helpers import DBConnect, uniq_table_id, write_pretty_json
+from dash_charts.utils_dash import DBConnect, uniq_table_id, write_pretty_json
 
 CACHE_DIR = Path(__file__).parent / &#39;local_cache&#39;
 &#34;&#34;&#34;Path to folder with all downloaded responses from Kitsu API.&#34;&#34;&#34;
@@ -83,10 +83,10 @@ FILE_DATA = DBConnect(CACHE_DIR / &#39;_file_lookup_database.db&#39;)
 
 
 def get_files_table(db_instance):
-    &#34;&#34;&#34;Retrieved stored object from cache database.
+    &#34;&#34;&#34;Retrieve stored object from cache database.
 
     Args:
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     Returns:
         table: Dataset table for the files lookup
@@ -99,7 +99,7 @@ def initialize_cache(db_instance):
     &#34;&#34;&#34;Ensure that the directory and database exist. Remove files from database if manually removed.
 
     Args:
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     &#34;&#34;&#34;
     table = db_instance.db.create_table(&#39;files&#39;)
@@ -118,7 +118,7 @@ def match_identifier_in_cache(identifier, db_instance):
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     Returns:
         list: list of match object with keys of the SQL table
@@ -133,7 +133,7 @@ def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR):
     Args:
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
 
     Returns:
@@ -161,11 +161,11 @@ def store_cache_object(prefix, identifier, obj, db_instance, cache_dir=CACHE_DIR
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
         obj: JSON object to write
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
 
     Raises:
-        RuntimeError: if duplicate match found when storing
+        Exception: if duplicate match found when storing
 
     &#34;&#34;&#34;
     filename = store_cache_as_file(prefix, identifier, db_instance, cache_dir)
@@ -178,11 +178,11 @@ def store_cache_object(prefix, identifier, obj, db_instance, cache_dir=CACHE_DIR
 
 
 def retrieve_cache_fn(identifier, db_instance):
-    &#34;&#34;&#34;Retrieved stored object from cache database.
+    &#34;&#34;&#34;Retrieve stored object from cache database.
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     Returns:
         Path: to the cached file. Caller needs to read the file
@@ -198,14 +198,14 @@ def retrieve_cache_fn(identifier, db_instance):
 
 
 def retrieve_cache_object(identifier, db_instance):
-    &#34;&#34;&#34;Retrieved stored object from cache database.
+    &#34;&#34;&#34;Retrieve stored object from cache database.
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
-    Raises:
-        RuntimeError: if not exactly one match found
+    Returns:
+        dict: object stored in the cache
 
     &#34;&#34;&#34;
     filename = retrieve_cache_fn(identifier, db_instance)
@@ -234,11 +234,11 @@ def retrieve_cache_object(identifier, db_instance):
 <span>def <span class="ident">get_files_table</span></span>(<span>db_instance)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Retrieved stored object from cache database.</p>
+<div class="desc"><p>Retrieve stored object from cache database.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>dash_helpers.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>utils_dash.DBConnect()</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -250,10 +250,10 @@ def retrieve_cache_object(identifier, db_instance):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_files_table(db_instance):
-    &#34;&#34;&#34;Retrieved stored object from cache database.
+    &#34;&#34;&#34;Retrieve stored object from cache database.
 
     Args:
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     Returns:
         table: Dataset table for the files lookup
@@ -270,7 +270,7 @@ def retrieve_cache_object(identifier, db_instance):
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>dash_helpers.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>utils_dash.DBConnect()</code>.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -280,7 +280,7 @@ def retrieve_cache_object(identifier, db_instance):
     &#34;&#34;&#34;Ensure that the directory and database exist. Remove files from database if manually removed.
 
     Args:
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     &#34;&#34;&#34;
     table = db_instance.db.create_table(&#39;files&#39;)
@@ -304,7 +304,7 @@ def retrieve_cache_object(identifier, db_instance):
 <dt><strong><code>identifier</code></strong></dt>
 <dd>identifier to use as a reference if the corresponding data is already cached</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>dash_helpers.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>utils_dash.DBConnect()</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -320,7 +320,7 @@ def retrieve_cache_object(identifier, db_instance):
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     Returns:
         list: list of match object with keys of the SQL table
@@ -333,13 +333,13 @@ def retrieve_cache_object(identifier, db_instance):
 <span>def <span class="ident">retrieve_cache_fn</span></span>(<span>identifier, db_instance)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Retrieved stored object from cache database.</p>
+<div class="desc"><p>Retrieve stored object from cache database.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>identifier</code></strong></dt>
 <dd>identifier to use as a reference if the corresponding data is already cached</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>dash_helpers.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>utils_dash.DBConnect()</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -356,11 +356,11 @@ def retrieve_cache_object(identifier, db_instance):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def retrieve_cache_fn(identifier, db_instance):
-    &#34;&#34;&#34;Retrieved stored object from cache database.
+    &#34;&#34;&#34;Retrieve stored object from cache database.
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     Returns:
         Path: to the cached file. Caller needs to read the file
@@ -379,32 +379,32 @@ def retrieve_cache_object(identifier, db_instance):
 <span>def <span class="ident">retrieve_cache_object</span></span>(<span>identifier, db_instance)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Retrieved stored object from cache database.</p>
+<div class="desc"><p>Retrieve stored object from cache database.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>identifier</code></strong></dt>
 <dd>identifier to use as a reference if the corresponding data is already cached</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>dash_helpers.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>utils_dash.DBConnect()</code>.</dd>
 </dl>
-<h2 id="raises">Raises</h2>
+<h2 id="returns">Returns</h2>
 <dl>
-<dt><code>RuntimeError</code></dt>
-<dd>if not exactly one match found</dd>
+<dt><code>dict</code></dt>
+<dd>object stored in the cache</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def retrieve_cache_object(identifier, db_instance):
-    &#34;&#34;&#34;Retrieved stored object from cache database.
+    &#34;&#34;&#34;Retrieve stored object from cache database.
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
-    Raises:
-        RuntimeError: if not exactly one match found
+    Returns:
+        dict: object stored in the cache
 
     &#34;&#34;&#34;
     filename = retrieve_cache_fn(identifier, db_instance)
@@ -423,7 +423,7 @@ def retrieve_cache_object(identifier, db_instance):
 <dt><strong><code>identifier</code></strong></dt>
 <dd>identifier to use as a reference if the corresponding data is already cached</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>dash_helpers.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>utils_dash.DBConnect()</code>.</dd>
 <dt><strong><code>cache_dir</code></strong></dt>
 <dd>path to the directory to store the file. Default is `CACHE_DIR</dd>
 </dl>
@@ -447,7 +447,7 @@ def retrieve_cache_object(identifier, db_instance):
     Args:
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
 
     Returns:
@@ -482,13 +482,13 @@ def retrieve_cache_object(identifier, db_instance):
 <dt><strong><code>obj</code></strong></dt>
 <dd>JSON object to write</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>dash_helpers.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>utils_dash.DBConnect()</code>.</dd>
 <dt><strong><code>cache_dir</code></strong></dt>
 <dd>path to the directory to store the file. Default is `CACHE_DIR</dd>
 </dl>
 <h2 id="raises">Raises</h2>
 <dl>
-<dt><code>RuntimeError</code></dt>
+<dt><code>Exception</code></dt>
 <dd>if duplicate match found when storing</dd>
 </dl></div>
 <details class="source">
@@ -502,11 +502,11 @@ def retrieve_cache_object(identifier, db_instance):
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
         obj: JSON object to write
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
 
     Raises:
-        RuntimeError: if duplicate match found when storing
+        Exception: if duplicate match found when storing
 
     &#34;&#34;&#34;
     filename = store_cache_as_file(prefix, identifier, db_instance, cache_dir)

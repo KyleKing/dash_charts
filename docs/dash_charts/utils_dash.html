@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.4" />
-<title>dash_charts.dash_helpers API documentation</title>
+<title>dash_charts.utils_dash API documentation</title>
 <meta name="description" content="Helpers for building Dash applications." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -59,7 +59,7 @@ padding: 0 5px;
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>dash_charts.dash_helpers</code></h1>
+<h1 class="title">Module <code>dash_charts.utils_dash</code></h1>
 </header>
 <section id="section-intro">
 <p>Helpers for building Dash applications.</p>
@@ -83,6 +83,72 @@ import pandas as pd
 from cerberus import Validator
 
 
+def rm_brs(line):
+    &#34;&#34;&#34;Replace all whitespace (line breaks, etc) with spaces.&#34;&#34;&#34;  # noqa: DAR101,DAR201
+    return &#39; &#39;.join(line.split())
+
+
+def uniq_table_id():
+    &#34;&#34;&#34;Return a unique table ID based on the current time in ms.
+
+    Returns:
+        str: in format `U&lt;timestamp_ns&gt;`
+
+    &#34;&#34;&#34;
+    return f&#39;U{time.time_ns()}&#39;
+
+
+def parse_dash_cli_args():  # pragma: no cover
+    &#34;&#34;&#34;Configure the CLI options for Dash applications.
+
+    Returns:
+        dict: keyword arguments for Dash
+
+    &#34;&#34;&#34;
+    parser = argparse.ArgumentParser(description=&#39;Process Dash Parameters.&#39;)
+    parser.add_argument(&#39;--port&#39;, type=int, default=8050,
+                        help=&#39;Pass port number to Dash server. Default is 8050&#39;)
+    parser.add_argument(&#39;--nodebug&#39;, action=&#39;store_true&#39;, default=False,
+                        help=&#39;If set, will disable debug mode. Default is to set `debug=True`&#39;)
+    args = parser.parse_args()
+    return {&#39;port&#39;: args.port, &#39;debug&#39;: not args.nodebug}
+
+
+def graph_return(resp, keys):
+    &#34;&#34;&#34;Based on concepts of GraphQL, return specified subset of response.
+
+    Args:
+        resp: dictionary with values from function
+        keys: list of keynames from the resp dictionary
+
+    Returns:
+        the `resp` dictionary with only the keys specified in the `keys` list
+
+    Raises:
+        RuntimeError: if `keys` is not a list or tuple
+
+    &#34;&#34;&#34;
+    if not (len(keys) and isinstance(keys, (list, tuple))):
+        raise RuntimeError(f&#39;Expected list of keys for: `{resp.items()}`, but received `{keys}`&#39;)
+    ordered_responses = [resp.get(key, None) for key in keys]
+    return ordered_responses if len(ordered_responses) &gt; 1 else ordered_responses[0]
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# For Working with Data
+
+
+def enable_verbose_pandas():
+    &#34;&#34;&#34;Update global pandas configuration for printed dataframes.&#34;&#34;&#34;
+    # Enable all columns to be displayed at once (or tweak to set a new limit)
+    pd.set_option(&#39;display.max_columns&#39;, None)
+    pd.set_option(&#39;display.width&#39;, None)
+    pd.set_option(&#39;display.max_colwidth&#39;, None)
+
+    # Optionally modify number of rows shown
+    pd.set_option(&#39;display.max_rows&#39;, None)
+
+
 def validate(document, schema, **validator_kwargs):
     &#34;&#34;&#34;Validate a data structure. Return errors if any found.
 
@@ -100,22 +166,6 @@ def validate(document, schema, **validator_kwargs):
     validator = Validator(schema, **validator_kwargs)
     validator.validate(document)
     return validator.errors
-
-
-def parse_dash_cli_args():  # pragma: no cover
-    &#34;&#34;&#34;Configure the CLI options for Dash applications.
-
-    Returns:
-        dict: keyword arguments for Dash
-
-    &#34;&#34;&#34;
-    parser = argparse.ArgumentParser(description=&#39;Process Dash Parameters.&#39;)
-    parser.add_argument(&#39;--port&#39;, type=int, default=8050,
-                        help=&#39;Pass port number to Dash server. Default is 8050&#39;)
-    parser.add_argument(&#39;--nodebug&#39;, action=&#39;store_true&#39;, default=False,
-                        help=&#39;If set, will disable debug mode. Default is to set `debug=True`&#39;)
-    args = parser.parse_args()
-    return {&#39;port&#39;: args.port, &#39;debug&#39;: not args.nodebug}
 
 
 def json_dumps_compact(data):
@@ -156,6 +206,52 @@ def write_pretty_json(filename, obj):
     Path(filename).write_text(json.dumps(obj, indent=4, separators=(&#39;,&#39;, &#39;: &#39;)))
 
 
+def write_csv(csv_path, rows):
+    &#34;&#34;&#34;Write a csv file with appropriate line terminator and encoding.
+
+    Args:
+        csv_path: path to CSV file
+        rows: list of lists to write to CSV file
+
+    &#34;&#34;&#34;
+    with open(csv_path, &#39;w&#39;, newline=&#39;\n&#39;, encoding=&#39;utf-8&#39;) as csv_file:
+        writer = csv.writer(csv_file, delimiter=&#39;,&#39;, quoting=csv.QUOTE_MINIMAL)
+        for row in rows:
+            writer.writerow(row)
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Time Helpers
+
+
+def get_unix(str_ts, date_format):
+    &#34;&#34;&#34;Get unix timestamp from a string timestamp in date_format.
+
+    Args:
+        str_ts: string timestamp in `date_format`
+        date_format: datetime time stamp format
+
+    Returns:
+        int: unix timestamp
+
+    &#34;&#34;&#34;
+    return datetime.strptime(str_ts, date_format).timestamp()
+
+
+def format_unix(unix_ts, date_format):
+    &#34;&#34;&#34;Format unix timestamp as a string timestamp in date_format.
+
+    Args:
+        unix_ts: unix timestamp
+        date_format: datetime time stamp format
+
+    Returns:
+        string: formatted timestamp in `date_format`
+
+    &#34;&#34;&#34;
+    return datetime.fromtimestamp(unix_ts).strftime(date_format)
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # sqlite3
 
@@ -171,7 +267,7 @@ class SQLConnection(ContextDecorator):
 
         &#34;&#34;&#34;
         self.conn = None
-        self.database_path = db_file
+        self.db_path = db_file
 
     def __enter__(self):
         &#34;&#34;&#34;Connect to the database and return connection reference.
@@ -180,7 +276,7 @@ class SQLConnection(ContextDecorator):
             dict: connection to sqlite database
 
         &#34;&#34;&#34;
-        self.conn = sqlite3.connect(self.database_path)
+        self.conn = sqlite3.connect(self.db_path)
         return self.conn
 
     def __exit__(self, exc_type, exc_value, traceback):
@@ -214,7 +310,7 @@ META_TABLE_NAME = &#39;meta&#39;
 class DBConnect:
     &#34;&#34;&#34;Manage database connection since closing connection isn&#39;t possible.&#34;&#34;&#34;
 
-    database_path = None
+    db_path = None
     &#34;&#34;&#34;Path to the local storage SQLite database file. Initialize in `__init__()`.&#34;&#34;&#34;
 
     _db = None
@@ -228,18 +324,18 @@ class DBConnect:
 
         &#34;&#34;&#34;
         if self._db is None:
-            self._db = dataset.connect(f&#39;sqlite:///{self.database_path}&#39;)
+            self._db = dataset.connect(f&#39;sqlite:///{self.db_path}&#39;)
         return self._db
 
-    def __init__(self, database_path):
+    def __init__(self, db_path):
         &#34;&#34;&#34;Store the database path and ensure the parent directory exists.
 
         Args:
-            database_path: Path to the SQLite file
+            db_path: Path to the SQLite file
 
         &#34;&#34;&#34;
-        self.database_path = database_path.resolve()
-        self.database_path.parent.mkdir(exist_ok=True)
+        self.db_path = db_path.resolve()
+        self.db_path.parent.mkdir(exist_ok=True)
 
     def new_table(self, table_name):
         &#34;&#34;&#34;Create a table. Drop a table if one existed before.
@@ -272,7 +368,7 @@ class DBConnection(ContextDecorator):
 
         &#34;&#34;&#34;
         self.conn = None
-        self.database_path = db_file
+        self.db_path = db_file
 
     def __enter__(self):
         &#34;&#34;&#34;Connect to the database and return connection reference.
@@ -281,41 +377,12 @@ class DBConnection(ContextDecorator):
             dict: connection to sqlite database
 
         &#34;&#34;&#34;
-        self.conn = DBConnect(self.database_path)
+        self.conn = DBConnect(self.db_path)
         return self.conn
 
     def __exit__(self, exc_type, exc_value, traceback):
         &#34;&#34;&#34;Close connection.&#34;&#34;&#34;  # noqa: DAR101
         self.conn.close()
-
-
-def rm_brs(line):
-    &#34;&#34;&#34;Replace all whitespace (line breaks, etc) with spaces.&#34;&#34;&#34;  # noqa: DAR101,DAR201
-    return &#39; &#39;.join(line.split())
-
-
-def uniq_table_id():
-    &#34;&#34;&#34;Return a unique table ID based on the current time in ms.
-
-    Returns:
-        str: in format `U&lt;timestamp_ns&gt;`
-
-    &#34;&#34;&#34;
-    return f&#39;U{time.time_ns()}&#39;
-
-
-def write_csv(csv_path, rows):
-    &#34;&#34;&#34;Write a csv file with appropriate line terminator and encoding.
-
-    Args:
-        csv_path: path to CSV file
-        rows: list of lists to write to CSV file
-
-    &#34;&#34;&#34;
-    with open(csv_path, &#39;w&#39;, newline=&#39;\n&#39;, encoding=&#39;utf-8&#39;) as csv_file:
-        writer = csv.writer(csv_file, delimiter=&#39;,&#39;, quoting=csv.QUOTE_MINIMAL)
-        for row in rows:
-            writer.writerow(row)
 
 
 def export_table_as_csv(csv_filename, table):
@@ -397,70 +464,7 @@ def get_table(db_file, table_name, drop_id_col=True):
     # Optionally remove the &#39;id&#39; column added in the SQL database
     if drop_id_col:
         df_table = df_table.drop([&#39;id&#39;], axis=1)
-    return df_table  # noqa: R504
-
-
-# ----------------------------------------------------------------------------------------------------------------------
-# General Helpers
-
-
-def enable_verbose_pandas():
-    &#34;&#34;&#34;Update global pandas configuration for printed dataframes.&#34;&#34;&#34;
-    # Enable all columns to be displayed at once (or tweak to set a new limit)
-    pd.set_option(&#39;display.max_columns&#39;, None)
-    pd.set_option(&#39;display.width&#39;, None)
-    pd.set_option(&#39;display.max_colwidth&#39;, None)
-
-    # Optionally modify number of rows shown
-    pd.set_option(&#39;display.max_rows&#39;, None)
-
-
-def graph_return(resp, keys):
-    &#34;&#34;&#34;Based on concepts of GraphQL, return specified subset of response.
-
-    Args:
-        resp: dictionary with values from function
-        keys: list of keynames from the resp dictionary
-
-    Returns:
-        the `resp` dictionary with only the keys specified in the `keys` list
-
-    Raises:
-        RuntimeError: if `keys` is not a list or tuple
-
-    &#34;&#34;&#34;
-    if not (len(keys) and isinstance(keys, (list, tuple))):
-        raise RuntimeError(f&#39;Expected list of keys for: `{resp.items()}`, but received `{keys}`&#39;)
-    ordered_responses = [resp.get(key, None) for key in keys]
-    return ordered_responses if len(ordered_responses) &gt; 1 else ordered_responses[0]
-
-
-def get_unix(str_ts, date_format):
-    &#34;&#34;&#34;Get unix timestamp from a string timestamp in date_format.
-
-    Args:
-        str_ts: string timestamp in `date_format`
-        date_format: datetime time stamp format
-
-    Returns:
-        int: unix timestamp
-
-    &#34;&#34;&#34;
-    return datetime.strptime(str_ts, date_format).timestamp()
-
-
-def format_unix(unix_ts, date_format):
-    &#34;&#34;&#34;Format unix timestamp as a string timestamp in date_format.
-
-    Args:
-        unix_ts: unix timestamp
-        date_format: datetime time stamp format
-
-    Returns:
-        string: formatted timestamp in `date_format`
-
-    &#34;&#34;&#34;
-    return datetime.fromtimestamp(unix_ts).strftime(date_format)</code></pre>
+    return df_table  # noqa: R504</code></pre>
 </details>
 </section>
 <section>
@@ -468,7 +472,7 @@ def format_unix(unix_ts, date_format):
 <section>
 <h2 class="section-title" id="header-variables">Global variables</h2>
 <dl>
-<dt id="dash_charts.dash_helpers.META_TABLE_NAME"><code class="name">var <span class="ident">META_TABLE_NAME</span></code></dt>
+<dt id="dash_charts.utils_dash.META_TABLE_NAME"><code class="name">var <span class="ident">META_TABLE_NAME</span></code></dt>
 <dd>
 <div class="desc"><p>Name of the Meta-Data table in a typical SQLite database.</p></div>
 </dd>
@@ -477,7 +481,7 @@ def format_unix(unix_ts, date_format):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="dash_charts.dash_helpers.enable_verbose_pandas"><code class="name flex">
+<dt id="dash_charts.utils_dash.enable_verbose_pandas"><code class="name flex">
 <span>def <span class="ident">enable_verbose_pandas</span></span>(<span>)</span>
 </code></dt>
 <dd>
@@ -497,7 +501,7 @@ def format_unix(unix_ts, date_format):
     pd.set_option(&#39;display.max_rows&#39;, None)</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.export_table_as_csv"><code class="name flex">
+<dt id="dash_charts.utils_dash.export_table_as_csv"><code class="name flex">
 <span>def <span class="ident">export_table_as_csv</span></span>(<span>csv_filename, table)</span>
 </code></dt>
 <dd>
@@ -527,7 +531,7 @@ def format_unix(unix_ts, date_format):
     write_csv(csv_filename, rows)</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.format_unix"><code class="name flex">
+<dt id="dash_charts.utils_dash.format_unix"><code class="name flex">
 <span>def <span class="ident">format_unix</span></span>(<span>unix_ts, date_format)</span>
 </code></dt>
 <dd>
@@ -562,7 +566,7 @@ def format_unix(unix_ts, date_format):
     return datetime.fromtimestamp(unix_ts).strftime(date_format)</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.get_table"><code class="name flex">
+<dt id="dash_charts.utils_dash.get_table"><code class="name flex">
 <span>def <span class="ident">get_table</span></span>(<span>db_file, table_name, drop_id_col=True)</span>
 </code></dt>
 <dd>
@@ -605,7 +609,7 @@ def format_unix(unix_ts, date_format):
     return df_table  # noqa: R504</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.get_unix"><code class="name flex">
+<dt id="dash_charts.utils_dash.get_unix"><code class="name flex">
 <span>def <span class="ident">get_unix</span></span>(<span>str_ts, date_format)</span>
 </code></dt>
 <dd>
@@ -640,7 +644,7 @@ def format_unix(unix_ts, date_format):
     return datetime.strptime(str_ts, date_format).timestamp()</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.graph_return"><code class="name flex">
+<dt id="dash_charts.utils_dash.graph_return"><code class="name flex">
 <span>def <span class="ident">graph_return</span></span>(<span>resp, keys)</span>
 </code></dt>
 <dd>
@@ -683,7 +687,7 @@ def format_unix(unix_ts, date_format):
     return ordered_responses if len(ordered_responses) &gt; 1 else ordered_responses[0]</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.json_dumps_compact"><code class="name flex">
+<dt id="dash_charts.utils_dash.json_dumps_compact"><code class="name flex">
 <span>def <span class="ident">json_dumps_compact</span></span>(<span>data)</span>
 </code></dt>
 <dd>
@@ -729,7 +733,7 @@ def format_unix(unix_ts, date_format):
             .replace(&#34;&#39;&#34;, &#39;&#34;&#39;))</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.list_sql_tables"><code class="name flex">
+<dt id="dash_charts.utils_dash.list_sql_tables"><code class="name flex">
 <span>def <span class="ident">list_sql_tables</span></span>(<span>db_file)</span>
 </code></dt>
 <dd>
@@ -764,7 +768,7 @@ def format_unix(unix_ts, date_format):
         return [names[0] for names in cursor.fetchall()]</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.parse_dash_cli_args"><code class="name flex">
+<dt id="dash_charts.utils_dash.parse_dash_cli_args"><code class="name flex">
 <span>def <span class="ident">parse_dash_cli_args</span></span>(<span>)</span>
 </code></dt>
 <dd>
@@ -794,7 +798,7 @@ def format_unix(unix_ts, date_format):
     return {&#39;port&#39;: args.port, &#39;debug&#39;: not args.nodebug}</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.rm_brs"><code class="name flex">
+<dt id="dash_charts.utils_dash.rm_brs"><code class="name flex">
 <span>def <span class="ident">rm_brs</span></span>(<span>line)</span>
 </code></dt>
 <dd>
@@ -808,7 +812,7 @@ def format_unix(unix_ts, date_format):
     return &#39; &#39;.join(line.split())</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.safe_col_name"><code class="name flex">
+<dt id="dash_charts.utils_dash.safe_col_name"><code class="name flex">
 <span>def <span class="ident">safe_col_name</span></span>(<span>args_pair)</span>
 </code></dt>
 <dd>
@@ -845,7 +849,7 @@ def format_unix(unix_ts, date_format):
     return str(idx) if col == &#39;&#39; else col</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.store_reference_tables"><code class="name flex">
+<dt id="dash_charts.utils_dash.store_reference_tables"><code class="name flex">
 <span>def <span class="ident">store_reference_tables</span></span>(<span>db_file, data_dicts, meta_table_name='meta')</span>
 </code></dt>
 <dd>
@@ -858,7 +862,7 @@ def format_unix(unix_ts, date_format):
 <dt><strong><code>data_dicts</code></strong></dt>
 <dd>all data to be stored in SQLite. Can contain Pandas dataframes</dd>
 <dt><strong><code>meta_table_name</code></strong></dt>
-<dd>optional name of the main SQLite table. Default is <code><a title="dash_charts.dash_helpers.META_TABLE_NAME" href="#dash_charts.dash_helpers.META_TABLE_NAME">META_TABLE_NAME</a></code></dd>
+<dd>optional name of the main SQLite table. Default is <code><a title="dash_charts.utils_dash.META_TABLE_NAME" href="#dash_charts.utils_dash.META_TABLE_NAME">META_TABLE_NAME</a></code></dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -895,7 +899,7 @@ def format_unix(unix_ts, date_format):
         table_main.insert_many(meta_table)</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.uniq_table_id"><code class="name flex">
+<dt id="dash_charts.utils_dash.uniq_table_id"><code class="name flex">
 <span>def <span class="ident">uniq_table_id</span></span>(<span>)</span>
 </code></dt>
 <dd>
@@ -919,7 +923,7 @@ def format_unix(unix_ts, date_format):
     return f&#39;U{time.time_ns()}&#39;</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.validate"><code class="name flex">
+<dt id="dash_charts.utils_dash.validate"><code class="name flex">
 <span>def <span class="ident">validate</span></span>(<span>document, schema, **validator_kwargs)</span>
 </code></dt>
 <dd>
@@ -962,7 +966,7 @@ def format_unix(unix_ts, date_format):
     return validator.errors</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.write_csv"><code class="name flex">
+<dt id="dash_charts.utils_dash.write_csv"><code class="name flex">
 <span>def <span class="ident">write_csv</span></span>(<span>csv_path, rows)</span>
 </code></dt>
 <dd>
@@ -992,7 +996,7 @@ def format_unix(unix_ts, date_format):
             writer.writerow(row)</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.write_pretty_json"><code class="name flex">
+<dt id="dash_charts.utils_dash.write_pretty_json"><code class="name flex">
 <span>def <span class="ident">write_pretty_json</span></span>(<span>filename, obj)</span>
 </code></dt>
 <dd>
@@ -1024,16 +1028,16 @@ def format_unix(unix_ts, date_format):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="dash_charts.dash_helpers.DBConnect"><code class="flex name class">
+<dt id="dash_charts.utils_dash.DBConnect"><code class="flex name class">
 <span>class <span class="ident">DBConnect</span></span>
-<span>(</span><span>database_path)</span>
+<span>(</span><span>db_path)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Manage database connection since closing connection isn't possible.</p>
 <p>Store the database path and ensure the parent directory exists.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>database_path</code></strong></dt>
+<dt><strong><code>db_path</code></strong></dt>
 <dd>Path to the SQLite file</dd>
 </dl></div>
 <details class="source">
@@ -1043,7 +1047,7 @@ def format_unix(unix_ts, date_format):
 <pre><code class="python">class DBConnect:
     &#34;&#34;&#34;Manage database connection since closing connection isn&#39;t possible.&#34;&#34;&#34;
 
-    database_path = None
+    db_path = None
     &#34;&#34;&#34;Path to the local storage SQLite database file. Initialize in `__init__()`.&#34;&#34;&#34;
 
     _db = None
@@ -1057,18 +1061,18 @@ def format_unix(unix_ts, date_format):
 
         &#34;&#34;&#34;
         if self._db is None:
-            self._db = dataset.connect(f&#39;sqlite:///{self.database_path}&#39;)
+            self._db = dataset.connect(f&#39;sqlite:///{self.db_path}&#39;)
         return self._db
 
-    def __init__(self, database_path):
+    def __init__(self, db_path):
         &#34;&#34;&#34;Store the database path and ensure the parent directory exists.
 
         Args:
-            database_path: Path to the SQLite file
+            db_path: Path to the SQLite file
 
         &#34;&#34;&#34;
-        self.database_path = database_path.resolve()
-        self.database_path.parent.mkdir(exist_ok=True)
+        self.db_path = db_path.resolve()
+        self.db_path.parent.mkdir(exist_ok=True)
 
     def new_table(self, table_name):
         &#34;&#34;&#34;Create a table. Drop a table if one existed before.
@@ -1091,14 +1095,14 @@ def format_unix(unix_ts, date_format):
 </details>
 <h3>Class variables</h3>
 <dl>
-<dt id="dash_charts.dash_helpers.DBConnect.database_path"><code class="name">var <span class="ident">database_path</span></code></dt>
+<dt id="dash_charts.utils_dash.DBConnect.db_path"><code class="name">var <span class="ident">db_path</span></code></dt>
 <dd>
 <div class="desc"><p>Path to the local storage SQLite database file. Initialize in <code>__init__()</code>.</p></div>
 </dd>
 </dl>
 <h3>Instance variables</h3>
 <dl>
-<dt id="dash_charts.dash_helpers.DBConnect.db"><code class="name">var <span class="ident">db</span></code></dt>
+<dt id="dash_charts.utils_dash.DBConnect.db"><code class="name">var <span class="ident">db</span></code></dt>
 <dd>
 <div class="desc"><p>Return connection to database. Will create new connection if one does not exist already.</p>
 <h2 id="returns">Returns</h2>
@@ -1119,14 +1123,14 @@ def db(self):
 
     &#34;&#34;&#34;
     if self._db is None:
-        self._db = dataset.connect(f&#39;sqlite:///{self.database_path}&#39;)
+        self._db = dataset.connect(f&#39;sqlite:///{self.db_path}&#39;)
     return self._db</code></pre>
 </details>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="dash_charts.dash_helpers.DBConnect.close"><code class="name flex">
+<dt id="dash_charts.utils_dash.DBConnect.close"><code class="name flex">
 <span>def <span class="ident">close</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -1141,7 +1145,7 @@ def db(self):
     self._db = None</code></pre>
 </details>
 </dd>
-<dt id="dash_charts.dash_helpers.DBConnect.new_table"><code class="name flex">
+<dt id="dash_charts.utils_dash.DBConnect.new_table"><code class="name flex">
 <span>def <span class="ident">new_table</span></span>(<span>self, table_name)</span>
 </code></dt>
 <dd>
@@ -1177,7 +1181,7 @@ def db(self):
 </dd>
 </dl>
 </dd>
-<dt id="dash_charts.dash_helpers.DBConnection"><code class="flex name class">
+<dt id="dash_charts.utils_dash.DBConnection"><code class="flex name class">
 <span>class <span class="ident">DBConnection</span></span>
 <span>(</span><span>db_file)</span>
 </code></dt>
@@ -1204,7 +1208,7 @@ def db(self):
 
         &#34;&#34;&#34;
         self.conn = None
-        self.database_path = db_file
+        self.db_path = db_file
 
     def __enter__(self):
         &#34;&#34;&#34;Connect to the database and return connection reference.
@@ -1213,7 +1217,7 @@ def db(self):
             dict: connection to sqlite database
 
         &#34;&#34;&#34;
-        self.conn = DBConnect(self.database_path)
+        self.conn = DBConnect(self.db_path)
         return self.conn
 
     def __exit__(self, exc_type, exc_value, traceback):
@@ -1225,7 +1229,7 @@ def db(self):
 <li>contextlib.ContextDecorator</li>
 </ul>
 </dd>
-<dt id="dash_charts.dash_helpers.SQLConnection"><code class="flex name class">
+<dt id="dash_charts.utils_dash.SQLConnection"><code class="flex name class">
 <span>class <span class="ident">SQLConnection</span></span>
 <span>(</span><span>db_file)</span>
 </code></dt>
@@ -1252,7 +1256,7 @@ def db(self):
 
         &#34;&#34;&#34;
         self.conn = None
-        self.database_path = db_file
+        self.db_path = db_file
 
     def __enter__(self):
         &#34;&#34;&#34;Connect to the database and return connection reference.
@@ -1261,7 +1265,7 @@ def db(self):
             dict: connection to sqlite database
 
         &#34;&#34;&#34;
-        self.conn = sqlite3.connect(self.database_path)
+        self.conn = sqlite3.connect(self.db_path)
         return self.conn
 
     def __exit__(self, exc_type, exc_value, traceback):
@@ -1289,45 +1293,45 @@ def db(self):
 </li>
 <li><h3><a href="#header-variables">Global variables</a></h3>
 <ul class="">
-<li><code><a title="dash_charts.dash_helpers.META_TABLE_NAME" href="#dash_charts.dash_helpers.META_TABLE_NAME">META_TABLE_NAME</a></code></li>
+<li><code><a title="dash_charts.utils_dash.META_TABLE_NAME" href="#dash_charts.utils_dash.META_TABLE_NAME">META_TABLE_NAME</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="dash_charts.dash_helpers.enable_verbose_pandas" href="#dash_charts.dash_helpers.enable_verbose_pandas">enable_verbose_pandas</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.export_table_as_csv" href="#dash_charts.dash_helpers.export_table_as_csv">export_table_as_csv</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.format_unix" href="#dash_charts.dash_helpers.format_unix">format_unix</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.get_table" href="#dash_charts.dash_helpers.get_table">get_table</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.get_unix" href="#dash_charts.dash_helpers.get_unix">get_unix</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.graph_return" href="#dash_charts.dash_helpers.graph_return">graph_return</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.json_dumps_compact" href="#dash_charts.dash_helpers.json_dumps_compact">json_dumps_compact</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.list_sql_tables" href="#dash_charts.dash_helpers.list_sql_tables">list_sql_tables</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.parse_dash_cli_args" href="#dash_charts.dash_helpers.parse_dash_cli_args">parse_dash_cli_args</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.rm_brs" href="#dash_charts.dash_helpers.rm_brs">rm_brs</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.safe_col_name" href="#dash_charts.dash_helpers.safe_col_name">safe_col_name</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.store_reference_tables" href="#dash_charts.dash_helpers.store_reference_tables">store_reference_tables</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.uniq_table_id" href="#dash_charts.dash_helpers.uniq_table_id">uniq_table_id</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.validate" href="#dash_charts.dash_helpers.validate">validate</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.write_csv" href="#dash_charts.dash_helpers.write_csv">write_csv</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.write_pretty_json" href="#dash_charts.dash_helpers.write_pretty_json">write_pretty_json</a></code></li>
+<li><code><a title="dash_charts.utils_dash.enable_verbose_pandas" href="#dash_charts.utils_dash.enable_verbose_pandas">enable_verbose_pandas</a></code></li>
+<li><code><a title="dash_charts.utils_dash.export_table_as_csv" href="#dash_charts.utils_dash.export_table_as_csv">export_table_as_csv</a></code></li>
+<li><code><a title="dash_charts.utils_dash.format_unix" href="#dash_charts.utils_dash.format_unix">format_unix</a></code></li>
+<li><code><a title="dash_charts.utils_dash.get_table" href="#dash_charts.utils_dash.get_table">get_table</a></code></li>
+<li><code><a title="dash_charts.utils_dash.get_unix" href="#dash_charts.utils_dash.get_unix">get_unix</a></code></li>
+<li><code><a title="dash_charts.utils_dash.graph_return" href="#dash_charts.utils_dash.graph_return">graph_return</a></code></li>
+<li><code><a title="dash_charts.utils_dash.json_dumps_compact" href="#dash_charts.utils_dash.json_dumps_compact">json_dumps_compact</a></code></li>
+<li><code><a title="dash_charts.utils_dash.list_sql_tables" href="#dash_charts.utils_dash.list_sql_tables">list_sql_tables</a></code></li>
+<li><code><a title="dash_charts.utils_dash.parse_dash_cli_args" href="#dash_charts.utils_dash.parse_dash_cli_args">parse_dash_cli_args</a></code></li>
+<li><code><a title="dash_charts.utils_dash.rm_brs" href="#dash_charts.utils_dash.rm_brs">rm_brs</a></code></li>
+<li><code><a title="dash_charts.utils_dash.safe_col_name" href="#dash_charts.utils_dash.safe_col_name">safe_col_name</a></code></li>
+<li><code><a title="dash_charts.utils_dash.store_reference_tables" href="#dash_charts.utils_dash.store_reference_tables">store_reference_tables</a></code></li>
+<li><code><a title="dash_charts.utils_dash.uniq_table_id" href="#dash_charts.utils_dash.uniq_table_id">uniq_table_id</a></code></li>
+<li><code><a title="dash_charts.utils_dash.validate" href="#dash_charts.utils_dash.validate">validate</a></code></li>
+<li><code><a title="dash_charts.utils_dash.write_csv" href="#dash_charts.utils_dash.write_csv">write_csv</a></code></li>
+<li><code><a title="dash_charts.utils_dash.write_pretty_json" href="#dash_charts.utils_dash.write_pretty_json">write_pretty_json</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="dash_charts.dash_helpers.DBConnect" href="#dash_charts.dash_helpers.DBConnect">DBConnect</a></code></h4>
+<h4><code><a title="dash_charts.utils_dash.DBConnect" href="#dash_charts.utils_dash.DBConnect">DBConnect</a></code></h4>
 <ul class="">
-<li><code><a title="dash_charts.dash_helpers.DBConnect.close" href="#dash_charts.dash_helpers.DBConnect.close">close</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.DBConnect.database_path" href="#dash_charts.dash_helpers.DBConnect.database_path">database_path</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.DBConnect.db" href="#dash_charts.dash_helpers.DBConnect.db">db</a></code></li>
-<li><code><a title="dash_charts.dash_helpers.DBConnect.new_table" href="#dash_charts.dash_helpers.DBConnect.new_table">new_table</a></code></li>
+<li><code><a title="dash_charts.utils_dash.DBConnect.close" href="#dash_charts.utils_dash.DBConnect.close">close</a></code></li>
+<li><code><a title="dash_charts.utils_dash.DBConnect.db" href="#dash_charts.utils_dash.DBConnect.db">db</a></code></li>
+<li><code><a title="dash_charts.utils_dash.DBConnect.db_path" href="#dash_charts.utils_dash.DBConnect.db_path">db_path</a></code></li>
+<li><code><a title="dash_charts.utils_dash.DBConnect.new_table" href="#dash_charts.utils_dash.DBConnect.new_table">new_table</a></code></li>
 </ul>
 </li>
 <li>
-<h4><code><a title="dash_charts.dash_helpers.DBConnection" href="#dash_charts.dash_helpers.DBConnection">DBConnection</a></code></h4>
+<h4><code><a title="dash_charts.utils_dash.DBConnection" href="#dash_charts.utils_dash.DBConnection">DBConnection</a></code></h4>
 </li>
 <li>
-<h4><code><a title="dash_charts.dash_helpers.SQLConnection" href="#dash_charts.dash_helpers.SQLConnection">SQLConnection</a></code></h4>
+<h4><code><a title="dash_charts.utils_dash.SQLConnection" href="#dash_charts.utils_dash.SQLConnection">SQLConnection</a></code></h4>
 </li>
 </ul>
 </li>

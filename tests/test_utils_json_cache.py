@@ -2,7 +2,7 @@
 
 import shutil
 
-from dash_charts.dash_helpers import DBConnect
+from dash_charts.utils_dash import DBConnect
 from dash_charts.utils_json_cache import (CACHE_DIR, get_files_table, initialize_cache, retrieve_cache_object,
                                           store_cache_object)
 

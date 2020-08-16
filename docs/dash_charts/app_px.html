@@ -278,6 +278,7 @@ class TabBase(AppBase):  # noqa: H601
         outputs = [(self.id_chart, &#39;figure&#39;)]
         inputs = [(_id, &#39;value&#39;) for _id in self.input_ids]
         states = ()
+
         @self.callback(outputs, inputs, states)
         def update_chart(*raw_args):
             a_in, _a_states = map_args(raw_args, inputs, states)
@@ -969,6 +970,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
         outputs = [(self.id_chart, &#39;figure&#39;)]
         inputs = [(_id, &#39;value&#39;) for _id in self.input_ids]
         states = ()
+
         @self.callback(outputs, inputs, states)
         def update_chart(*raw_args):
             a_in, _a_states = map_args(raw_args, inputs, states)
@@ -1224,6 +1226,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
     outputs = [(self.id_chart, &#39;figure&#39;)]
     inputs = [(_id, &#39;value&#39;) for _id in self.input_ids]
     states = ()
+
     @self.callback(outputs, inputs, states)
     def update_chart(*raw_args):
         a_in, _a_states = map_args(raw_args, inputs, states)

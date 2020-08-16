@@ -83,6 +83,9 @@ class ModuleDataTable(ModuleBase):
         Args:
             parent: parent instance (ex: `self`)
 
+        Raises:
+            PreventUpdate: if sort_by is not set
+
         """
         outputs = [(self.get(self.id_table), 'style_data_conditional')]
         inputs = [(self.get(self.id_table), 'sort_by')]

@@ -1,7 +1,7 @@
 """Launch app_px."""
 
 from dash_charts.app_px import InteractivePXApp
-from dash_charts.dash_helpers import parse_dash_cli_args
+from dash_charts.utils_dash import parse_dash_cli_args
 
 instance = InteractivePXApp
 if __name__ == '__main__':

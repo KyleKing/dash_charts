@@ -13,6 +13,8 @@
 
 ### Changes
 
+* Sync local changes for database & cache. [Kyle King]
+
 * Add upload image to README. [Kyle King]
 
 * Implement validation layout. Closes #2. [Kyle King]

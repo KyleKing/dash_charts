@@ -19,9 +19,9 @@ import dash_html_components as html
 import dash_table
 import pandas as pd
 
-from .dash_helpers import DBConnect
 from .utils_app_modules import ModuleBase
 from .utils_callbacks import map_args, map_outputs
+from .utils_dash import DBConnect
 from .utils_json_cache import CACHE_DIR
 
 

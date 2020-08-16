@@ -78,23 +78,25 @@ import dash_html_components as html
 
 from .utils_app import AppBase
 
-# TODO: Create clientside callbacks dynamically to update the title on navigation
-# See: http://dash.plotly.com/external-resources
-# ```py
-# app.clientside_callback(
-#     &#34;&#34;&#34;
-#     function(tab_value) {
-#         if (tab_value === &#39;tab-1&#39;) {
-#             document.title = &#39;Tab 1&#39;
-#         } else if (tab_value === &#39;tab-2&#39;) {
-#             document.title = &#39;Tab 2&#39;
-#         }
-#     }
-#     &#34;&#34;&#34;,
-#     Output(&#39;blank-output&#39;, &#39;children&#39;),
-#     [Input(&#39;tabs-example&#39;, &#39;value&#39;)]
-# )
-# ```
+TODO_CLIENT_CALLBACK = &#39;&#39;&#39;
+TODO: Create clientside callbacks dynamically to update the title on navigation
+See: http://dash.plotly.com/external-resources
+```py
+app.clientside_callback(
+    &#34;&#34;&#34;
+    function(tab_value) {
+        if (tab_value === &#39;tab-1&#39;) {
+            document.title = &#39;Tab 1&#39;
+        } else if (tab_value === &#39;tab-2&#39;) {
+            document.title = &#39;Tab 2&#39;
+        }
+    }
+    &#34;&#34;&#34;,
+    Output(&#39;blank-output&#39;, &#39;children&#39;),
+    [Input(&#39;tabs-example&#39;, &#39;value&#39;)]
+)
+```
+&#39;&#39;&#39;
 
 
 class AppWithNavigation(AppBase):  # noqa: H601

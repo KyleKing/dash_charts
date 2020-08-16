@@ -4,7 +4,7 @@ import json
 import time
 from pathlib import Path
 
-from dash_charts.dash_helpers import DBConnect, uniq_table_id, write_pretty_json
+from dash_charts.utils_dash import DBConnect, uniq_table_id, write_pretty_json
 
 CACHE_DIR = Path(__file__).parent / 'local_cache'
 """Path to folder with all downloaded responses from Kitsu API."""
@@ -14,10 +14,10 @@ FILE_DATA = DBConnect(CACHE_DIR / '_file_lookup_database.db')
 
 
 def get_files_table(db_instance):
-    """Retrieved stored object from cache database.
+    """Retrieve stored object from cache database.
 
     Args:
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     Returns:
         table: Dataset table for the files lookup
@@ -30,7 +30,7 @@ def initialize_cache(db_instance):
     """Ensure that the directory and database exist. Remove files from database if manually removed.
 
     Args:
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     """
     table = db_instance.db.create_table('files')
@@ -49,7 +49,7 @@ def match_identifier_in_cache(identifier, db_instance):
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     Returns:
         list: list of match object with keys of the SQL table
@@ -64,7 +64,7 @@ def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR):
     Args:
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
 
     Returns:
@@ -92,11 +92,11 @@ def store_cache_object(prefix, identifier, obj, db_instance, cache_dir=CACHE_DIR
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
         obj: JSON object to write
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
 
     Raises:
-        RuntimeError: if duplicate match found when storing
+        Exception: if duplicate match found when storing
 
     """
     filename = store_cache_as_file(prefix, identifier, db_instance, cache_dir)
@@ -109,11 +109,11 @@ def store_cache_object(prefix, identifier, obj, db_instance, cache_dir=CACHE_DIR
 
 
 def retrieve_cache_fn(identifier, db_instance):
-    """Retrieved stored object from cache database.
+    """Retrieve stored object from cache database.
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
     Returns:
         Path: to the cached file. Caller needs to read the file
@@ -129,14 +129,14 @@ def retrieve_cache_fn(identifier, db_instance):
 
 
 def retrieve_cache_object(identifier, db_instance):
-    """Retrieved stored object from cache database.
+    """Retrieve stored object from cache database.
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        db_instance: Connected Database file with `utils_dash.DBConnect()`.
 
-    Raises:
-        RuntimeError: if not exactly one match found
+    Returns:
+        dict: object stored in the cache
 
     """
     filename = retrieve_cache_fn(identifier, db_instance)
