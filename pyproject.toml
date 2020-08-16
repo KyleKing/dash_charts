@@ -2,22 +2,33 @@
 requires = [ "poetry>=1.0",]
 build-backend = "poetry.core.masonry.api"
 
+[tool.isort]
+line_length = 120
+length_sort = false
+default_section = "THIRDPARTY"
+
 [tool.poetry]
 name = "dash_charts"
 version = "0.0.5"
 description = "Python package for OOP of Plotly/Dash apps and custom templates"
+license = "MIT"
 authors = [ "Kyle King <https://github.com/KyleKing>",]
+maintainers = []
+readme = "README.md"
 repository = "https://github.com/kyleking/dash_charts"
+documentation = "https://kyleking.me/dash_charts/"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/kyleking/dash_charts/issues"
 
 [tool.poetry.dependencies]
-python = "^3.7, !=3.8"
+python = "^3.7"
 bottleneck = "*"
 cerberus = "*"
 dash = "*"
 dash-bootstrap-components = "*"
 dataset = "*"
 dominate = "*"
-icecream = "*"
 markdown = "*"
 Palettable = "*"
 pandas = "*"
@@ -25,10 +36,8 @@ psutil = "*"
 scipy = "*"
 
 [tool.poetry.dev-dependencies]
-isort = "~4"  # PLANNED: Temporary until flake8-isort finishes isort 5.0.X migration
 jsonpickle = "*"
 matplotlib = "~3.2.0"  # See: https://github.com/plotly/plotly.py/issues/1568#issuecomment-653764327
-snoop = "*"
 
 [tool.poetry.dev-dependencies.dash]
 extras = [ "testing",]
@@ -36,3 +45,4 @@ version = "^1.14"
 
 [tool.poetry.dev-dependencies.dash_dev]
 git = "https://github.com/KyleKing/dash_dev.git"
+rev = "366ad98"

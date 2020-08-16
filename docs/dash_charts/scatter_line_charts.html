@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>dash_charts.scatter_line_charts API documentation</title>
+<meta name="description" content="Charts for plotting scatter or fitted data." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>
+a {
+text-decoration: underline;
+}
+h1,h2,h3,h4 {
+font-weight: 400;
+}
+h2 {
+margin: 0.50em 0 .25em 0;
+}
+dd p {
+margin: 5px 0;
+}
+dl dl:last-child {
+margin-bottom: 2.5em;
+}
+main {
+margin-bottom: 80vh;
+}
+#content {
+max-width: 1100px;
+}
+.source summary {
+background-color: #fafafa; /* match HLJS background */
+padding: 1px 5px;
+}
+.source summary:focus {
+outline: none !important;
+}
+.source pre {
+background-color: #fafafa; /* match HLJS background */
+}
+.source pre code {
+padding-bottom: 1em;
+}
+table, th, td {
+border: 1px solid #d4d4d4;
+padding: 0 5px;
+}
+</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dash_charts.scatter_line_charts</code></h1>
+</header>
+<section id="section-intro">
+<p>Charts for plotting scatter or fitted data.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Charts for plotting scatter or fitted data.&#34;&#34;&#34;
+
+import bottleneck
+import numpy as np
+import plotly.graph_objects as go
+from icecream import ic
+from scipy import optimize
+
+from .utils_fig import CustomChart, check_raw_data
+
+
+def create_rolling_traces(df_raw, count_rolling, count_std):
+    &#34;&#34;&#34;Calculate traces for rolling average and standard deviation.
+
+    Args:
+        df_raw: pandas dataframe with columns `x: float`, `y: float` and `label: str`
+        count_rolling: number of points to use for the rolling calculation
+        count_std: number of standard deviations to use for the standard deviation
+
+    Returns:
+        list: of Scatter traces for rolling mean and std
+
+    &#34;&#34;&#34;
+    rolling_mean = bottleneck.move_mean(df_raw[&#39;y&#39;], count_rolling)
+    rolling_std = bottleneck.move_std(df_raw[&#39;y&#39;], count_rolling)
+    return [
+        go.Scatter(
+            fill=&#39;toself&#39;,
+            hoverinfo=&#39;skip&#39;,
+            name=f&#39;{count_std}x STD Range&#39;,
+            opacity=0.5,
+            x=(df_raw[&#39;x&#39;].tolist() + df_raw[&#39;x&#39;].tolist()[::-1]),
+            y=(np.add(rolling_mean, np.multiply(count_std, rolling_std)).tolist()
+                + np.subtract(rolling_mean, np.multiply(count_std, rolling_std)).tolist()[::-1]),
+        ),
+        go.Scatter(
+            hoverinfo=&#39;skip&#39;,
+            mode=&#39;lines&#39;,
+            name=&#39;Rolling Mean&#39;,
+            opacity=0.9,
+            x=df_raw[&#39;x&#39;],
+            y=rolling_mean,
+        ),
+    ]
+
+
+def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):
+    &#34;&#34;&#34;Create traces for specified equation.
+
+    Args:
+        df_raw: pandas dataframe with columns `name: str`, `x: float`, `y: float` and `label: str`
+        name: unique name for trace
+        fit_equation: equation used
+        suppress_fit_errors: If True, bury errors from scipy fit. Default is False.
+
+    Returns:
+        list: of Scatter traces for fitted equation
+
+    &#34;&#34;&#34;
+    fitted_data = []
+    try:
+        popt, pcov = optimize.curve_fit(fit_equation, xdata=df_raw[&#39;x&#39;], ydata=df_raw[&#39;y&#39;], method=&#39;lm&#39;)
+        # Calculate representative x values for plotting fit
+        x_min = np.min(df_raw[&#39;x&#39;])
+        x_max = np.max(df_raw[&#39;x&#39;])
+        x_range = x_max - x_min
+        x_values = sorted([
+            x_min - 0.05 * x_range,
+            *np.divide(range(int(x_min * 10), int(x_max * 10)), 10),
+            x_max + 0.05 * x_range,
+        ])
+        fitted_data = [go.Scatter(
+            mode=&#39;lines+markers&#39;,
+            name=name,
+            opacity=0.9,
+            text=f&#39;popt:{[round(param, 3) for param in popt]}&#39;,
+            x=x_values,
+            y=fit_equation(x_values, *popt),
+        )]
+    except (RuntimeError, ValueError) as err:  # pragma: no cover
+        if suppress_fit_errors:
+            ic(err, name)
+        else:
+            raise
+
+    return fitted_data  # noqa: R504
+
+
+class RollingChart(CustomChart):
+    &#34;&#34;&#34;Rolling Mean and Filled Standard Deviation Chart for monitoring trends.&#34;&#34;&#34;
+
+    count_std = 2
+    &#34;&#34;&#34;Count of STD deviations to display. Default 2.&#34;&#34;&#34;
+
+    count_rolling = 5
+    &#34;&#34;&#34;Count of items to use for rolling calculations. Default 5.&#34;&#34;&#34;
+
+    label_data = &#39;Data&#39;
+    &#34;&#34;&#34;Label for the scatter data. Default is &#39;Data&#39;.&#34;&#34;&#34;
+
+    def create_traces(self, df_raw):
+        &#34;&#34;&#34;Return traces for plotly chart.
+
+        Args:
+            df_raw: pandas dataframe with columns `x: float`, `y: float` and `label: str`
+
+        Returns:
+            list: Dash chart traces
+
+        &#34;&#34;&#34;
+        # Verify data format
+        check_raw_data(df_raw, [&#39;x&#39;, &#39;y&#39;, &#39;label&#39;])
+
+        # Create and return the traces
+        chart_data = [
+            go.Scatter(
+                mode=&#39;markers&#39;,
+                name=self.label_data,
+                opacity=0.5,
+                text=df_raw[&#39;label&#39;],
+                x=df_raw[&#39;x&#39;],
+                y=df_raw[&#39;y&#39;],
+            ),
+        ]
+        # Only add the rolling calculations if there are a sufficient number of points
+        if len(df_raw[&#39;x&#39;]) &gt;= self.count_rolling:
+            chart_data.extend(
+                create_rolling_traces(df_raw, self.count_rolling, self.count_std),
+            )
+
+        return chart_data
+
+
+class FittedChart(CustomChart):
+    &#34;&#34;&#34;Scatter Chart with optional Fitted Lines.&#34;&#34;&#34;
+
+    label_data = &#39;Data&#39;
+    &#34;&#34;&#34;Label for the scatter data. Default is &#39;Data&#39;.&#34;&#34;&#34;
+
+    fit_eqs = []
+    &#34;&#34;&#34;List of fit equations.&#34;&#34;&#34;
+
+    fallback_mode = &#39;lines+markers&#39;
+    &#34;&#34;&#34;If not fit_eqs are specified, will fallback to `lines+markers`. Can be set to `markers`.&#34;&#34;&#34;
+
+    min_scatter_for_fit = 0
+    &#34;&#34;&#34;List of fit equations.&#34;&#34;&#34;
+
+    suppress_fit_errors = False
+    &#34;&#34;&#34;If True, bury errors from scipy fit and will print message to console. Default is True.&#34;&#34;&#34;
+
+    def create_traces(self, df_raw):
+        &#34;&#34;&#34;Return traces for plotly chart.
+
+        Args:
+            df_raw: pandas dataframe with columns `name: str`, `x: float`, `y: float` and `label: str`
+
+        Returns:
+            list: Dash chart traces
+
+        &#34;&#34;&#34;
+        # Verify data format
+        check_raw_data(df_raw, [&#39;name&#39;, &#39;x&#39;, &#39;y&#39;, &#39;label&#39;])
+
+        # Separate raw tidy dataframe into separate scatter plots
+        scatter_data = []
+        fit_traces = []
+        for name in set(df_raw[&#39;name&#39;]):
+            df_name = df_raw[df_raw[&#39;name&#39;] == name]
+            scatter_data.append(go.Scatter(
+                customdata=[name],
+                mode=&#39;markers&#39; if len(self.fit_eqs) else self.fallback_mode,
+                name=name,
+                opacity=0.5,
+                text=df_name[&#39;label&#39;],
+                x=df_name[&#39;x&#39;],
+                y=df_name[&#39;y&#39;],
+            ))
+
+            if len(df_name[&#39;x&#39;]) &gt; self.min_scatter_for_fit:
+                for fit_name, fit_equation in self.fit_eqs:
+                    fit_traces.extend(
+                        create_fit_traces(df_name, f&#39;{name}-{fit_name}&#39;, fit_equation, self.suppress_fit_errors),
+                    )
+
+        return scatter_data + fit_traces</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="dash_charts.scatter_line_charts.create_fit_traces"><code class="name flex">
+<span>def <span class="ident">create_fit_traces</span></span>(<span>df_raw, name, fit_equation, suppress_fit_errors=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create traces for specified equation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_raw</code></strong></dt>
+<dd>pandas dataframe with columns <code>name: str</code>, <code>x: float</code>, <code>y: float</code> and <code>label: str</code></dd>
+<dt><strong><code>name</code></strong></dt>
+<dd>unique name for trace</dd>
+<dt><strong><code>fit_equation</code></strong></dt>
+<dd>equation used</dd>
+<dt><strong><code>suppress_fit_errors</code></strong></dt>
+<dd>If True, bury errors from scipy fit. Default is False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>of Scatter traces for fitted equation</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):
+    &#34;&#34;&#34;Create traces for specified equation.
+
+    Args:
+        df_raw: pandas dataframe with columns `name: str`, `x: float`, `y: float` and `label: str`
+        name: unique name for trace
+        fit_equation: equation used
+        suppress_fit_errors: If True, bury errors from scipy fit. Default is False.
+
+    Returns:
+        list: of Scatter traces for fitted equation
+
+    &#34;&#34;&#34;
+    fitted_data = []
+    try:
+        popt, pcov = optimize.curve_fit(fit_equation, xdata=df_raw[&#39;x&#39;], ydata=df_raw[&#39;y&#39;], method=&#39;lm&#39;)
+        # Calculate representative x values for plotting fit
+        x_min = np.min(df_raw[&#39;x&#39;])
+        x_max = np.max(df_raw[&#39;x&#39;])
+        x_range = x_max - x_min
+        x_values = sorted([
+            x_min - 0.05 * x_range,
+            *np.divide(range(int(x_min * 10), int(x_max * 10)), 10),
+            x_max + 0.05 * x_range,
+        ])
+        fitted_data = [go.Scatter(
+            mode=&#39;lines+markers&#39;,
+            name=name,
+            opacity=0.9,
+            text=f&#39;popt:{[round(param, 3) for param in popt]}&#39;,
+            x=x_values,
+            y=fit_equation(x_values, *popt),
+        )]
+    except (RuntimeError, ValueError) as err:  # pragma: no cover
+        if suppress_fit_errors:
+            ic(err, name)
+        else:
+            raise
+
+    return fitted_data  # noqa: R504</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.scatter_line_charts.create_rolling_traces"><code class="name flex">
+<span>def <span class="ident">create_rolling_traces</span></span>(<span>df_raw, count_rolling, count_std)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate traces for rolling average and standard deviation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_raw</code></strong></dt>
+<dd>pandas dataframe with columns <code>x: float</code>, <code>y: float</code> and <code>label: str</code></dd>
+<dt><strong><code>count_rolling</code></strong></dt>
+<dd>number of points to use for the rolling calculation</dd>
+<dt><strong><code>count_std</code></strong></dt>
+<dd>number of standard deviations to use for the standard deviation</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>of Scatter traces for rolling mean and std</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_rolling_traces(df_raw, count_rolling, count_std):
+    &#34;&#34;&#34;Calculate traces for rolling average and standard deviation.
+
+    Args:
+        df_raw: pandas dataframe with columns `x: float`, `y: float` and `label: str`
+        count_rolling: number of points to use for the rolling calculation
+        count_std: number of standard deviations to use for the standard deviation
+
+    Returns:
+        list: of Scatter traces for rolling mean and std
+
+    &#34;&#34;&#34;
+    rolling_mean = bottleneck.move_mean(df_raw[&#39;y&#39;], count_rolling)
+    rolling_std = bottleneck.move_std(df_raw[&#39;y&#39;], count_rolling)
+    return [
+        go.Scatter(
+            fill=&#39;toself&#39;,
+            hoverinfo=&#39;skip&#39;,
+            name=f&#39;{count_std}x STD Range&#39;,
+            opacity=0.5,
+            x=(df_raw[&#39;x&#39;].tolist() + df_raw[&#39;x&#39;].tolist()[::-1]),
+            y=(np.add(rolling_mean, np.multiply(count_std, rolling_std)).tolist()
+                + np.subtract(rolling_mean, np.multiply(count_std, rolling_std)).tolist()[::-1]),
+        ),
+        go.Scatter(
+            hoverinfo=&#39;skip&#39;,
+            mode=&#39;lines&#39;,
+            name=&#39;Rolling Mean&#39;,
+            opacity=0.9,
+            x=df_raw[&#39;x&#39;],
+            y=rolling_mean,
+        ),
+    ]</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="dash_charts.scatter_line_charts.FittedChart"><code class="flex name class">
+<span>class <span class="ident">FittedChart</span></span>
+<span>(</span><span>*, title, xlabel, ylabel, layout_overrides=())</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Scatter Chart with optional Fitted Lines.</p>
+<p>Initialize Custom Dash Chart and store parameters as data members.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>title</code></strong></dt>
+<dd>String title for chart (can be an empty string for blank)</dd>
+<dt><strong><code>xlabel</code></strong></dt>
+<dd>XAxis string label (can be an empty string for blank)</dd>
+<dt><strong><code>ylabel</code></strong></dt>
+<dd>YAxis string label (can be an empty string for blank)</dd>
+<dt><strong><code>layout_overrides</code></strong></dt>
+<dd>Custom parameters in format [ParentKey, SubKey, Value] to customize 'go.layout'</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FittedChart(CustomChart):
+    &#34;&#34;&#34;Scatter Chart with optional Fitted Lines.&#34;&#34;&#34;
+
+    label_data = &#39;Data&#39;
+    &#34;&#34;&#34;Label for the scatter data. Default is &#39;Data&#39;.&#34;&#34;&#34;
+
+    fit_eqs = []
+    &#34;&#34;&#34;List of fit equations.&#34;&#34;&#34;
+
+    fallback_mode = &#39;lines+markers&#39;
+    &#34;&#34;&#34;If not fit_eqs are specified, will fallback to `lines+markers`. Can be set to `markers`.&#34;&#34;&#34;
+
+    min_scatter_for_fit = 0
+    &#34;&#34;&#34;List of fit equations.&#34;&#34;&#34;
+
+    suppress_fit_errors = False
+    &#34;&#34;&#34;If True, bury errors from scipy fit and will print message to console. Default is True.&#34;&#34;&#34;
+
+    def create_traces(self, df_raw):
+        &#34;&#34;&#34;Return traces for plotly chart.
+
+        Args:
+            df_raw: pandas dataframe with columns `name: str`, `x: float`, `y: float` and `label: str`
+
+        Returns:
+            list: Dash chart traces
+
+        &#34;&#34;&#34;
+        # Verify data format
+        check_raw_data(df_raw, [&#39;name&#39;, &#39;x&#39;, &#39;y&#39;, &#39;label&#39;])
+
+        # Separate raw tidy dataframe into separate scatter plots
+        scatter_data = []
+        fit_traces = []
+        for name in set(df_raw[&#39;name&#39;]):
+            df_name = df_raw[df_raw[&#39;name&#39;] == name]
+            scatter_data.append(go.Scatter(
+                customdata=[name],
+                mode=&#39;markers&#39; if len(self.fit_eqs) else self.fallback_mode,
+                name=name,
+                opacity=0.5,
+                text=df_name[&#39;label&#39;],
+                x=df_name[&#39;x&#39;],
+                y=df_name[&#39;y&#39;],
+            ))
+
+            if len(df_name[&#39;x&#39;]) &gt; self.min_scatter_for_fit:
+                for fit_name, fit_equation in self.fit_eqs:
+                    fit_traces.extend(
+                        create_fit_traces(df_name, f&#39;{name}-{fit_name}&#39;, fit_equation, self.suppress_fit_errors),
+                    )
+
+        return scatter_data + fit_traces</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="dash_charts.scatter_line_charts.FittedChart.annotations"><code class="name">var <span class="ident">annotations</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.annotations" href="utils_fig.html#dash_charts.utils_fig.CustomChart.annotations">annotations</a></code>
+</p>
+<div class="desc inherited"><p>Store annotations. Default is an empty list …</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.FittedChart.fallback_mode"><code class="name">var <span class="ident">fallback_mode</span></code></dt>
+<dd>
+<div class="desc"><p>If not fit_eqs are specified, will fallback to <code>lines+markers</code>. Can be set to <code>markers</code>.</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.FittedChart.fit_eqs"><code class="name">var <span class="ident">fit_eqs</span></code></dt>
+<dd>
+<div class="desc"><p>List of fit equations.</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.FittedChart.label_data"><code class="name">var <span class="ident">label_data</span></code></dt>
+<dd>
+<div class="desc"><p>Label for the scatter data. Default is 'Data'.</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.FittedChart.min_scatter_for_fit"><code class="name">var <span class="ident">min_scatter_for_fit</span></code></dt>
+<dd>
+<div class="desc"><p>List of fit equations.</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.FittedChart.suppress_fit_errors"><code class="name">var <span class="ident">suppress_fit_errors</span></code></dt>
+<dd>
+<div class="desc"><p>If True, bury errors from scipy fit and will print message to console. Default is True.</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="dash_charts.scatter_line_charts.FittedChart.axis_range"><code class="name">var <span class="ident">axis_range</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.axis_range" href="utils_fig.html#dash_charts.utils_fig.CustomChart.axis_range">axis_range</a></code>
+</p>
+<div class="desc inherited"><p>Specify x/y axis range or leave as empty dictionary for autorange …</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="dash_charts.scatter_line_charts.FittedChart.apply_custom_layout"><code class="name flex">
+<span>def <span class="ident">apply_custom_layout</span></span>(<span>self, layout)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.apply_custom_layout" href="utils_fig.html#dash_charts.utils_fig.CustomChart.apply_custom_layout">apply_custom_layout</a></code>
+</p>
+<div class="desc inherited"><p>Extend and/or override layout with custom settings …</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.FittedChart.create_figure"><code class="name flex">
+<span>def <span class="ident">create_figure</span></span>(<span>self, df_raw, **kwargs_data)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.create_figure" href="utils_fig.html#dash_charts.utils_fig.CustomChart.create_figure">create_figure</a></code>
+</p>
+<div class="desc inherited"><p>Create the figure dictionary …</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.FittedChart.create_layout"><code class="name flex">
+<span>def <span class="ident">create_layout</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.create_layout" href="utils_fig.html#dash_charts.utils_fig.CustomChart.create_layout">create_layout</a></code>
+</p>
+<div class="desc inherited"><p>Return the standard layout. Can be overridden and modified when inherited …</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.FittedChart.create_traces"><code class="name flex">
+<span>def <span class="ident">create_traces</span></span>(<span>self, df_raw)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return traces for plotly chart.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_raw</code></strong></dt>
+<dd>pandas dataframe with columns <code>name: str</code>, <code>x: float</code>, <code>y: float</code> and <code>label: str</code></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Dash chart traces</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_traces(self, df_raw):
+    &#34;&#34;&#34;Return traces for plotly chart.
+
+    Args:
+        df_raw: pandas dataframe with columns `name: str`, `x: float`, `y: float` and `label: str`
+
+    Returns:
+        list: Dash chart traces
+
+    &#34;&#34;&#34;
+    # Verify data format
+    check_raw_data(df_raw, [&#39;name&#39;, &#39;x&#39;, &#39;y&#39;, &#39;label&#39;])
+
+    # Separate raw tidy dataframe into separate scatter plots
+    scatter_data = []
+    fit_traces = []
+    for name in set(df_raw[&#39;name&#39;]):
+        df_name = df_raw[df_raw[&#39;name&#39;] == name]
+        scatter_data.append(go.Scatter(
+            customdata=[name],
+            mode=&#39;markers&#39; if len(self.fit_eqs) else self.fallback_mode,
+            name=name,
+            opacity=0.5,
+            text=df_name[&#39;label&#39;],
+            x=df_name[&#39;x&#39;],
+            y=df_name[&#39;y&#39;],
+        ))
+
+        if len(df_name[&#39;x&#39;]) &gt; self.min_scatter_for_fit:
+            for fit_name, fit_equation in self.fit_eqs:
+                fit_traces.extend(
+                    create_fit_traces(df_name, f&#39;{name}-{fit_name}&#39;, fit_equation, self.suppress_fit_errors),
+                )
+
+    return scatter_data + fit_traces</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.scatter_line_charts.FittedChart.initialize_mutables"><code class="name flex">
+<span>def <span class="ident">initialize_mutables</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.initialize_mutables" href="utils_fig.html#dash_charts.utils_fig.CustomChart.initialize_mutables">initialize_mutables</a></code>
+</p>
+<div class="desc inherited"><p>Initialize the mutable data members to prevent modifying one attribute and impacting all instances.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="dash_charts.scatter_line_charts.RollingChart"><code class="flex name class">
+<span>class <span class="ident">RollingChart</span></span>
+<span>(</span><span>*, title, xlabel, ylabel, layout_overrides=())</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Rolling Mean and Filled Standard Deviation Chart for monitoring trends.</p>
+<p>Initialize Custom Dash Chart and store parameters as data members.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>title</code></strong></dt>
+<dd>String title for chart (can be an empty string for blank)</dd>
+<dt><strong><code>xlabel</code></strong></dt>
+<dd>XAxis string label (can be an empty string for blank)</dd>
+<dt><strong><code>ylabel</code></strong></dt>
+<dd>YAxis string label (can be an empty string for blank)</dd>
+<dt><strong><code>layout_overrides</code></strong></dt>
+<dd>Custom parameters in format [ParentKey, SubKey, Value] to customize 'go.layout'</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RollingChart(CustomChart):
+    &#34;&#34;&#34;Rolling Mean and Filled Standard Deviation Chart for monitoring trends.&#34;&#34;&#34;
+
+    count_std = 2
+    &#34;&#34;&#34;Count of STD deviations to display. Default 2.&#34;&#34;&#34;
+
+    count_rolling = 5
+    &#34;&#34;&#34;Count of items to use for rolling calculations. Default 5.&#34;&#34;&#34;
+
+    label_data = &#39;Data&#39;
+    &#34;&#34;&#34;Label for the scatter data. Default is &#39;Data&#39;.&#34;&#34;&#34;
+
+    def create_traces(self, df_raw):
+        &#34;&#34;&#34;Return traces for plotly chart.
+
+        Args:
+            df_raw: pandas dataframe with columns `x: float`, `y: float` and `label: str`
+
+        Returns:
+            list: Dash chart traces
+
+        &#34;&#34;&#34;
+        # Verify data format
+        check_raw_data(df_raw, [&#39;x&#39;, &#39;y&#39;, &#39;label&#39;])
+
+        # Create and return the traces
+        chart_data = [
+            go.Scatter(
+                mode=&#39;markers&#39;,
+                name=self.label_data,
+                opacity=0.5,
+                text=df_raw[&#39;label&#39;],
+                x=df_raw[&#39;x&#39;],
+                y=df_raw[&#39;y&#39;],
+            ),
+        ]
+        # Only add the rolling calculations if there are a sufficient number of points
+        if len(df_raw[&#39;x&#39;]) &gt;= self.count_rolling:
+            chart_data.extend(
+                create_rolling_traces(df_raw, self.count_rolling, self.count_std),
+            )
+
+        return chart_data</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="dash_charts.scatter_line_charts.RollingChart.annotations"><code class="name">var <span class="ident">annotations</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.annotations" href="utils_fig.html#dash_charts.utils_fig.CustomChart.annotations">annotations</a></code>
+</p>
+<div class="desc inherited"><p>Store annotations. Default is an empty list …</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.RollingChart.count_rolling"><code class="name">var <span class="ident">count_rolling</span></code></dt>
+<dd>
+<div class="desc"><p>Count of items to use for rolling calculations. Default 5.</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.RollingChart.count_std"><code class="name">var <span class="ident">count_std</span></code></dt>
+<dd>
+<div class="desc"><p>Count of STD deviations to display. Default 2.</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.RollingChart.label_data"><code class="name">var <span class="ident">label_data</span></code></dt>
+<dd>
+<div class="desc"><p>Label for the scatter data. Default is 'Data'.</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="dash_charts.scatter_line_charts.RollingChart.axis_range"><code class="name">var <span class="ident">axis_range</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.axis_range" href="utils_fig.html#dash_charts.utils_fig.CustomChart.axis_range">axis_range</a></code>
+</p>
+<div class="desc inherited"><p>Specify x/y axis range or leave as empty dictionary for autorange …</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="dash_charts.scatter_line_charts.RollingChart.apply_custom_layout"><code class="name flex">
+<span>def <span class="ident">apply_custom_layout</span></span>(<span>self, layout)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.apply_custom_layout" href="utils_fig.html#dash_charts.utils_fig.CustomChart.apply_custom_layout">apply_custom_layout</a></code>
+</p>
+<div class="desc inherited"><p>Extend and/or override layout with custom settings …</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.RollingChart.create_figure"><code class="name flex">
+<span>def <span class="ident">create_figure</span></span>(<span>self, df_raw, **kwargs_data)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.create_figure" href="utils_fig.html#dash_charts.utils_fig.CustomChart.create_figure">create_figure</a></code>
+</p>
+<div class="desc inherited"><p>Create the figure dictionary …</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.RollingChart.create_layout"><code class="name flex">
+<span>def <span class="ident">create_layout</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.create_layout" href="utils_fig.html#dash_charts.utils_fig.CustomChart.create_layout">create_layout</a></code>
+</p>
+<div class="desc inherited"><p>Return the standard layout. Can be overridden and modified when inherited …</p></div>
+</dd>
+<dt id="dash_charts.scatter_line_charts.RollingChart.create_traces"><code class="name flex">
+<span>def <span class="ident">create_traces</span></span>(<span>self, df_raw)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return traces for plotly chart.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_raw</code></strong></dt>
+<dd>pandas dataframe with columns <code>x: float</code>, <code>y: float</code> and <code>label: str</code></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Dash chart traces</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_traces(self, df_raw):
+    &#34;&#34;&#34;Return traces for plotly chart.
+
+    Args:
+        df_raw: pandas dataframe with columns `x: float`, `y: float` and `label: str`
+
+    Returns:
+        list: Dash chart traces
+
+    &#34;&#34;&#34;
+    # Verify data format
+    check_raw_data(df_raw, [&#39;x&#39;, &#39;y&#39;, &#39;label&#39;])
+
+    # Create and return the traces
+    chart_data = [
+        go.Scatter(
+            mode=&#39;markers&#39;,
+            name=self.label_data,
+            opacity=0.5,
+            text=df_raw[&#39;label&#39;],
+            x=df_raw[&#39;x&#39;],
+            y=df_raw[&#39;y&#39;],
+        ),
+    ]
+    # Only add the rolling calculations if there are a sufficient number of points
+    if len(df_raw[&#39;x&#39;]) &gt;= self.count_rolling:
+        chart_data.extend(
+            create_rolling_traces(df_raw, self.count_rolling, self.count_std),
+        )
+
+    return chart_data</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.scatter_line_charts.RollingChart.initialize_mutables"><code class="name flex">
+<span>def <span class="ident">initialize_mutables</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.initialize_mutables" href="utils_fig.html#dash_charts.utils_fig.CustomChart.initialize_mutables">initialize_mutables</a></code>
+</p>
+<div class="desc inherited"><p>Initialize the mutable data members to prevent modifying one attribute and impacting all instances.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dash_charts" href="index.html">dash_charts</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="dash_charts.scatter_line_charts.create_fit_traces" href="#dash_charts.scatter_line_charts.create_fit_traces">create_fit_traces</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.create_rolling_traces" href="#dash_charts.scatter_line_charts.create_rolling_traces">create_rolling_traces</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="dash_charts.scatter_line_charts.FittedChart" href="#dash_charts.scatter_line_charts.FittedChart">FittedChart</a></code></h4>
+<ul class="two-column">
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.annotations" href="utils_fig.html#dash_charts.scatter_line_charts.FittedChart.annotations">annotations</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.apply_custom_layout" href="utils_fig.html#dash_charts.scatter_line_charts.FittedChart.apply_custom_layout">apply_custom_layout</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.axis_range" href="utils_fig.html#dash_charts.scatter_line_charts.FittedChart.axis_range">axis_range</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.create_figure" href="utils_fig.html#dash_charts.scatter_line_charts.FittedChart.create_figure">create_figure</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.create_layout" href="utils_fig.html#dash_charts.scatter_line_charts.FittedChart.create_layout">create_layout</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.create_traces" href="#dash_charts.scatter_line_charts.FittedChart.create_traces">create_traces</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.fallback_mode" href="#dash_charts.scatter_line_charts.FittedChart.fallback_mode">fallback_mode</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.fit_eqs" href="#dash_charts.scatter_line_charts.FittedChart.fit_eqs">fit_eqs</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.initialize_mutables" href="utils_fig.html#dash_charts.scatter_line_charts.FittedChart.initialize_mutables">initialize_mutables</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.label_data" href="#dash_charts.scatter_line_charts.FittedChart.label_data">label_data</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.min_scatter_for_fit" href="#dash_charts.scatter_line_charts.FittedChart.min_scatter_for_fit">min_scatter_for_fit</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.FittedChart.suppress_fit_errors" href="#dash_charts.scatter_line_charts.FittedChart.suppress_fit_errors">suppress_fit_errors</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="dash_charts.scatter_line_charts.RollingChart" href="#dash_charts.scatter_line_charts.RollingChart">RollingChart</a></code></h4>
+<ul class="two-column">
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.annotations" href="utils_fig.html#dash_charts.scatter_line_charts.RollingChart.annotations">annotations</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.apply_custom_layout" href="utils_fig.html#dash_charts.scatter_line_charts.RollingChart.apply_custom_layout">apply_custom_layout</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.axis_range" href="utils_fig.html#dash_charts.scatter_line_charts.RollingChart.axis_range">axis_range</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.count_rolling" href="#dash_charts.scatter_line_charts.RollingChart.count_rolling">count_rolling</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.count_std" href="#dash_charts.scatter_line_charts.RollingChart.count_std">count_std</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.create_figure" href="utils_fig.html#dash_charts.scatter_line_charts.RollingChart.create_figure">create_figure</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.create_layout" href="utils_fig.html#dash_charts.scatter_line_charts.RollingChart.create_layout">create_layout</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.create_traces" href="#dash_charts.scatter_line_charts.RollingChart.create_traces">create_traces</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.initialize_mutables" href="utils_fig.html#dash_charts.scatter_line_charts.RollingChart.initialize_mutables">initialize_mutables</a></code></li>
+<li><code><a title="dash_charts.scatter_line_charts.RollingChart.label_data" href="#dash_charts.scatter_line_charts.RollingChart.label_data">label_data</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>

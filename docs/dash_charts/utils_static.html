@@ -1,0 +1,984 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>dash_charts.utils_static API documentation</title>
+<meta name="description" content="Utilities for generating static HTML reports." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>
+a {
+text-decoration: underline;
+}
+h1,h2,h3,h4 {
+font-weight: 400;
+}
+h2 {
+margin: 0.50em 0 .25em 0;
+}
+dd p {
+margin: 5px 0;
+}
+dl dl:last-child {
+margin-bottom: 2.5em;
+}
+main {
+margin-bottom: 80vh;
+}
+#content {
+max-width: 1100px;
+}
+.source summary {
+background-color: #fafafa; /* match HLJS background */
+padding: 1px 5px;
+}
+.source summary:focus {
+outline: none !important;
+}
+.source pre {
+background-color: #fafafa; /* match HLJS background */
+}
+.source pre code {
+padding-bottom: 1em;
+}
+table, th, td {
+border: 1px solid #d4d4d4;
+padding: 0 5px;
+}
+</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dash_charts.utils_static</code></h1>
+</header>
+<section id="section-intro">
+<p>Utilities for generating static HTML reports.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Utilities for generating static HTML reports.&#34;&#34;&#34;
+
+import io
+from base64 import b64encode
+
+import dash_bootstrap_components as dbc
+import dominate
+import markdown
+import plotly.io
+from bs4 import BeautifulSoup
+from dominate import tags, util
+
+
+def write_div(figure, path_or_file_object, is_div=True, **html_kwargs):
+    &#34;&#34;&#34;Write Plotly figure as HTML to specified file.
+
+    Args:
+        figure: Plotly figure (can be from `create_figure` for custom charts)
+        path_or_file_object: *string* path or file object
+        is_div: if True (default) will override html_kwargs to only write the minimum HTML needed
+        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`
+
+    &#34;&#34;&#34;
+    for key in [&#39;include_plotlyjs&#39;, &#39;full_html&#39;]:
+        if key not in html_kwargs and is_div:
+            html_kwargs[key] = False
+
+    plotly.io.write_html(fig=figure, file=path_or_file_object, **html_kwargs)
+
+
+def make_div(figure, **html_kwargs):
+    &#34;&#34;&#34;Write Plotly figure as HTML to specified file.
+
+    Args:
+        figure: Plotly figure (can be from `create_figure` for custom charts)
+        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`
+
+    Returns:
+        str: HTML div
+
+    &#34;&#34;&#34;
+    with io.StringIO() as output:
+        write_div(figure, output, is_div=True, **html_kwargs)
+        return output.getvalue()
+
+
+def add_image(image_path, alt_text=None):
+    &#34;&#34;&#34;Write base64 image to HTML.
+
+    Args:
+        image_path: Path to image file and format will be read from file suffix.
+        alt_text: alternate text. If None, will show the image filename
+
+    Returns:
+        str: HTML
+
+    &#34;&#34;&#34;
+    with open(image_path, &#39;rb&#39;) as image_file:
+        encoded_image = b64encode(image_file.read()).decode()
+    image_uri = f&#39;data:image/{image_path.suffix[1:]};base64,{encoded_image}&#39;
+    return f&#39;&lt;img src=&#34;{image_uri}&#34; alt=&#34;{image_path.name if alt_text is None else alt_text}&#34;/&gt;&#39;
+
+
+def add_video(video_path, alt_text=None):
+    &#34;&#34;&#34;Write base64 video to HTML.
+
+    Video formats can easily be converted with ffmpeg: `ffmpeg -i video_filename.mov video_filename.webm`
+
+    Args:
+        video_path: Path to video file and format will be read from file suffix. Video should be in webm format
+        alt_text: alternate text. If None, will show the video filename
+
+    Returns:
+        str: HTML video tag
+
+    &#34;&#34;&#34;
+    with open(video_path, &#39;rb&#39;) as video_file:
+        encoded_video = b64encode(video_file.read()).decode()
+    video_uri = f&#39;data:video/{video_path.suffix[1:]};base64,{encoded_video}&#39;
+    return f&#39;&lt;video src=&#34;{video_uri}&#34; controls&gt;{video_path.name if alt_text is None else alt_text}&lt;/video&gt;&#39;
+
+
+def write_image_file(figure, path_or_file_object, image_format, **img_kwargs):
+    &#34;&#34;&#34;Write Plotly figure as an image to specified file.
+
+    Args:
+        figure: Plotly figure (can be from `create_figure` for custom charts)
+        path_or_file_object: *string* path or file object
+        image_format: one of `(png, jpg, jpeg, webp, svg, pdf)`
+        img_kwargs: additional keyword arguments passed to `plotly.io.write_image()`
+
+    &#34;&#34;&#34;
+    plotly.io.write_image(fig=figure, file=str(path_or_file_object), format=image_format, **img_kwargs)
+
+
+def capture_plotly_body():
+    &#34;&#34;&#34;Return HTML body that includes necessary scripts for Plotly and MathJax.
+
+    Returns:
+        tuple: of the top and the bottom HTML content
+
+    &#34;&#34;&#34;
+    # Capture necessary Plotly boilerplate HTML
+    with io.StringIO() as output:
+        write_div({}, output, is_div=False, include_mathjax=&#39;.js&#39;, validate=False)
+        blank_plotly = BeautifulSoup(output.getvalue(), features=&#39;lxml&#39;)
+    # Remove the empty figure div and corresponding script
+    plot_div = blank_plotly.find(&#39;div&#39;, attrs={&#39;class&#39;: &#39;plotly-graph-div&#39;})
+    for script in blank_plotly.find_all(&#39;script&#39;)[::-1]:
+        # Use the ID from the plot to identify which script needs to be removed
+        if plot_div.attrs[&#39;id&#39;] in script.prettify():
+            script.decompose()
+            break
+    plot_div.decompose()
+    return blank_plotly.body.prettify()
+
+
+def format_plotly_boilerplate(**doc_kwargs):
+    &#34;&#34;&#34;Initialize a boilerplate dominate document for creating static Plotly HTML files.
+
+    See dominate documentation: https://pypi.org/project/dominate/
+
+    Args:
+        doc_kwargs: keyword arguments for `dominate.document()`
+
+    Returns:
+        dict: dominate document instance
+
+    &#34;&#34;&#34;
+    doc = dominate.document(**doc_kwargs)
+    with doc:
+        util.raw(capture_plotly_body())
+    return doc
+
+
+def create_dbc_doc(theme=dbc.themes.BOOTSTRAP, custom_styles=&#39;&#39;, **doc_kwargs):
+    &#34;&#34;&#34;Create boilerplate dominate document with Bootstrap and Plotly for static HTML.
+
+    Based on: https://github.com/facultyai/dash-bootstrap-components/tree/master/docs/templates/partials
+
+    See dominate documentation: https://pypi.org/project/dominate/
+
+    Args:
+        theme: string URL to CSS for theming Bootstrap. Default is `dbc.themes.BOOTSTRAP`
+        custom_styles: optional custom CSS to add to file. Default is blank (`&#39;&#39;`)
+        doc_kwargs: keyword arguments for `dominate.document()`
+
+    Returns:
+        dict: dominate document instance
+
+    &#34;&#34;&#34;
+    stylesheets = [
+        {&#39;href&#39;: &#39;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/a11y-light.min.css&#39;},
+        {&#39;href&#39;: theme},
+    ]
+    scripts = [
+        {&#39;src&#39;: &#39;https://code.jquery.com/jquery-3.4.1.slim.min.js&#39;},
+        {&#39;src&#39;: &#39;https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js&#39;},
+        {&#39;src&#39;: &#39;https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js&#39;},
+        {&#39;src&#39;: &#39;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/highlight.min.js&#39;},
+    ]
+
+    doc = format_plotly_boilerplate(**doc_kwargs)
+    with doc.head:
+        tags.meta(charset=&#39;utf-8&#39;)
+        tags.meta(name=&#39;viewport&#39;, content=&#39;width=device-width, initial-scale=1&#39;)
+        for sheet_kwargs in stylesheets:
+            tags.link(rel=&#39;stylesheet&#39;, **sheet_kwargs)
+        util.raw(f&#39;&lt;style&gt;{custom_styles}&lt;/style&gt;&#39;)
+        for script_kwargs in scripts:
+            tags.script(**script_kwargs)
+        util.raw(&#39;&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;&#39;)
+
+    return doc
+
+
+def tag_code(text, language=&#39;&#39;):
+    &#34;&#34;&#34;Format HTML for a `pre.code` block with specified `hljs` language.
+
+    Args:
+        text: string to show in code block
+        language: `hljs` language (ex: `&#39;language-json&#39;`). Default is `&#39;&#39;`.
+
+    &#34;&#34;&#34;
+    tags.pre().add(tags.code(text, _class=f&#39;{language} hljs&#39;))
+
+
+def tag_markdown(text, **markdown_kwargs):
+    &#34;&#34;&#34;Format markdown text as HTML.
+
+    Args:
+        text: markdown string
+        markdown_kwargs: additional keyword arguments for `markdown.markdown`, such as `extensions`
+
+    &#34;&#34;&#34;
+    util.raw(markdown.markdown(text, **markdown_kwargs))
+
+
+def tag_table(df_table, table_class=None):
+    &#34;&#34;&#34;Format HTML for a responsive Bootstrap table.
+
+    See Bootstrap documentation at: https://getbootstrap.com/docs/4.4/content/tables/#tables
+
+    Args:
+        df_table: pandas dataframe to show in table
+        table_class: string classes to add to table. If None, will use default string
+
+    &#34;&#34;&#34;
+    if table_class is None:
+        table_class = &#39;table table-bordered table-striped table-hover&#39;
+
+    with tags.div(_class=&#39;table-responsive&#39;).add(tags.table(_class=table_class)):
+        # Create header row
+        with tags.thead().add(tags.tr()):
+            for col in df_table.columns:
+                tags.th(col)
+        # Create body rows
+        with tags.tbody():
+            for row in df_table.itertuples():
+                with tags.tr():
+                    for value in row[1:]:
+                        tags.td(str(value))
+
+
+def write_lookup(key, function_lookup):
+    &#34;&#34;&#34;Determine the lookup result and add to the file.
+
+    Args:
+        key: string key for function lookup
+        function_lookup: dictionary with either the string result or equation and arguments
+
+    Raises:
+        RuntimeError: if error in lookup dictionary
+
+    &#34;&#34;&#34;
+    try:
+        match = function_lookup[key]
+    except KeyError:
+        raise RuntimeError(f&#39;Could not find &#34;{key}&#34; in {function_lookup}&#39;)
+
+    if isinstance(match, str):
+        util.raw(match)
+    elif len(match) == 2:
+        fun, args = match
+        result = fun(*args)
+        if isinstance(result, str):
+            util.raw(result)
+    else:
+        raise RuntimeError(f&#39;Match failed for &#34;{key}&#34;. Returned: {match} from {function_lookup}&#39;)
+
+
+def markdown_machine(lines, function_lookup):  # noqa: CCR001
+    &#34;&#34;&#34;Convert markdown text file into Plotly-HTML and write to doc context.
+
+    Note: you will need a document with necessary boilerplate and call this within a `with doc:` dominate context
+    Multiple Markdown files can then be put into a single HTML output file by calling this function with new lines
+    and function lookup arguments
+
+    Args:
+        lines: list of text file lines
+        function_lookup: dictionary with either the string result or equation and arguments
+            Will be inserted into file where `&gt;&gt;lookup:function_name` assuming key of `function_name`
+
+    &#34;&#34;&#34;
+    markdown_lines = []
+    for line in lines:
+        if line.startswith(&#39;&gt;&gt;lookup:&#39;):
+            # Write stored markdown and clear list. Then write the matched lookup
+            tag_markdown(&#39;\n&#39;.join(markdown_lines))
+            markdown_lines = []
+            write_lookup(line.split(&#39;&gt;&gt;lookup:&#39;)[1], function_lookup)
+        else:
+            markdown_lines.append(line)
+    if len(markdown_lines) &gt; 0:
+        tag_markdown(&#39;\n&#39;.join(markdown_lines))
+
+
+def write_from_markdown(filename, function_lookup, **dbc_kwargs):
+    &#34;&#34;&#34;Wrap markdown_machine to convert markdown to Bootstrap HTML.
+
+    Args:
+        filename: path to markdown file
+        function_lookup: dictionary with either the string result or equation and arguments
+            Will be inserted into file where `&gt;&gt;lookup:function_name` assuming key of `function_name`
+        dbc_kwargs: keyword arguments to pass to `create_dbc_doc`
+
+    Returns:
+        Path: created HTML filename
+
+    &#34;&#34;&#34;
+    lines = filename.read_text().split(&#39;\n&#39;)
+    html_filename = filename.parent / f&#39;{filename.stem}.html&#39;
+    doc = create_dbc_doc(**dbc_kwargs)
+    with doc:
+        with tags.div(_class=&#39;container&#39;).add(tags.div(_class=&#39;col&#39;)):
+            markdown_machine(lines, function_lookup)
+
+    html_filename.write_text(str(doc))
+    return html_filename</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="dash_charts.utils_static.add_image"><code class="name flex">
+<span>def <span class="ident">add_image</span></span>(<span>image_path, alt_text=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write base64 image to HTML.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>image_path</code></strong></dt>
+<dd>Path to image file and format will be read from file suffix.</dd>
+<dt><strong><code>alt_text</code></strong></dt>
+<dd>alternate text. If None, will show the image filename</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>HTML</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_image(image_path, alt_text=None):
+    &#34;&#34;&#34;Write base64 image to HTML.
+
+    Args:
+        image_path: Path to image file and format will be read from file suffix.
+        alt_text: alternate text. If None, will show the image filename
+
+    Returns:
+        str: HTML
+
+    &#34;&#34;&#34;
+    with open(image_path, &#39;rb&#39;) as image_file:
+        encoded_image = b64encode(image_file.read()).decode()
+    image_uri = f&#39;data:image/{image_path.suffix[1:]};base64,{encoded_image}&#39;
+    return f&#39;&lt;img src=&#34;{image_uri}&#34; alt=&#34;{image_path.name if alt_text is None else alt_text}&#34;/&gt;&#39;</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.add_video"><code class="name flex">
+<span>def <span class="ident">add_video</span></span>(<span>video_path, alt_text=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write base64 video to HTML.</p>
+<p>Video formats can easily be converted with ffmpeg: <code>ffmpeg -i video_filename.mov video_filename.webm</code></p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>video_path</code></strong></dt>
+<dd>Path to video file and format will be read from file suffix. Video should be in webm format</dd>
+<dt><strong><code>alt_text</code></strong></dt>
+<dd>alternate text. If None, will show the video filename</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>HTML video tag</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_video(video_path, alt_text=None):
+    &#34;&#34;&#34;Write base64 video to HTML.
+
+    Video formats can easily be converted with ffmpeg: `ffmpeg -i video_filename.mov video_filename.webm`
+
+    Args:
+        video_path: Path to video file and format will be read from file suffix. Video should be in webm format
+        alt_text: alternate text. If None, will show the video filename
+
+    Returns:
+        str: HTML video tag
+
+    &#34;&#34;&#34;
+    with open(video_path, &#39;rb&#39;) as video_file:
+        encoded_video = b64encode(video_file.read()).decode()
+    video_uri = f&#39;data:video/{video_path.suffix[1:]};base64,{encoded_video}&#39;
+    return f&#39;&lt;video src=&#34;{video_uri}&#34; controls&gt;{video_path.name if alt_text is None else alt_text}&lt;/video&gt;&#39;</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.capture_plotly_body"><code class="name flex">
+<span>def <span class="ident">capture_plotly_body</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return HTML body that includes necessary scripts for Plotly and MathJax.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>of the top and the bottom HTML content</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def capture_plotly_body():
+    &#34;&#34;&#34;Return HTML body that includes necessary scripts for Plotly and MathJax.
+
+    Returns:
+        tuple: of the top and the bottom HTML content
+
+    &#34;&#34;&#34;
+    # Capture necessary Plotly boilerplate HTML
+    with io.StringIO() as output:
+        write_div({}, output, is_div=False, include_mathjax=&#39;.js&#39;, validate=False)
+        blank_plotly = BeautifulSoup(output.getvalue(), features=&#39;lxml&#39;)
+    # Remove the empty figure div and corresponding script
+    plot_div = blank_plotly.find(&#39;div&#39;, attrs={&#39;class&#39;: &#39;plotly-graph-div&#39;})
+    for script in blank_plotly.find_all(&#39;script&#39;)[::-1]:
+        # Use the ID from the plot to identify which script needs to be removed
+        if plot_div.attrs[&#39;id&#39;] in script.prettify():
+            script.decompose()
+            break
+    plot_div.decompose()
+    return blank_plotly.body.prettify()</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.create_dbc_doc"><code class="name flex">
+<span>def <span class="ident">create_dbc_doc</span></span>(<span>theme='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css', custom_styles='', **doc_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create boilerplate dominate document with Bootstrap and Plotly for static HTML.</p>
+<p>Based on: <a href="https://github.com/facultyai/dash-bootstrap-components/tree/master/docs/templates/partials">https://github.com/facultyai/dash-bootstrap-components/tree/master/docs/templates/partials</a></p>
+<p>See dominate documentation: <a href="https://pypi.org/project/dominate/">https://pypi.org/project/dominate/</a></p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>theme</code></strong></dt>
+<dd>string URL to CSS for theming Bootstrap. Default is <code>dbc.themes.BOOTSTRAP</code></dd>
+<dt><strong><code>custom_styles</code></strong></dt>
+<dd>optional custom CSS to add to file. Default is blank (<code>''</code>)</dd>
+<dt><strong><code>doc_kwargs</code></strong></dt>
+<dd>keyword arguments for <code>dominate.document()</code></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>dominate document instance</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_dbc_doc(theme=dbc.themes.BOOTSTRAP, custom_styles=&#39;&#39;, **doc_kwargs):
+    &#34;&#34;&#34;Create boilerplate dominate document with Bootstrap and Plotly for static HTML.
+
+    Based on: https://github.com/facultyai/dash-bootstrap-components/tree/master/docs/templates/partials
+
+    See dominate documentation: https://pypi.org/project/dominate/
+
+    Args:
+        theme: string URL to CSS for theming Bootstrap. Default is `dbc.themes.BOOTSTRAP`
+        custom_styles: optional custom CSS to add to file. Default is blank (`&#39;&#39;`)
+        doc_kwargs: keyword arguments for `dominate.document()`
+
+    Returns:
+        dict: dominate document instance
+
+    &#34;&#34;&#34;
+    stylesheets = [
+        {&#39;href&#39;: &#39;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/a11y-light.min.css&#39;},
+        {&#39;href&#39;: theme},
+    ]
+    scripts = [
+        {&#39;src&#39;: &#39;https://code.jquery.com/jquery-3.4.1.slim.min.js&#39;},
+        {&#39;src&#39;: &#39;https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js&#39;},
+        {&#39;src&#39;: &#39;https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js&#39;},
+        {&#39;src&#39;: &#39;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/highlight.min.js&#39;},
+    ]
+
+    doc = format_plotly_boilerplate(**doc_kwargs)
+    with doc.head:
+        tags.meta(charset=&#39;utf-8&#39;)
+        tags.meta(name=&#39;viewport&#39;, content=&#39;width=device-width, initial-scale=1&#39;)
+        for sheet_kwargs in stylesheets:
+            tags.link(rel=&#39;stylesheet&#39;, **sheet_kwargs)
+        util.raw(f&#39;&lt;style&gt;{custom_styles}&lt;/style&gt;&#39;)
+        for script_kwargs in scripts:
+            tags.script(**script_kwargs)
+        util.raw(&#39;&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;&#39;)
+
+    return doc</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.format_plotly_boilerplate"><code class="name flex">
+<span>def <span class="ident">format_plotly_boilerplate</span></span>(<span>**doc_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialize a boilerplate dominate document for creating static Plotly HTML files.</p>
+<p>See dominate documentation: <a href="https://pypi.org/project/dominate/">https://pypi.org/project/dominate/</a></p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>doc_kwargs</code></strong></dt>
+<dd>keyword arguments for <code>dominate.document()</code></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>dominate document instance</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def format_plotly_boilerplate(**doc_kwargs):
+    &#34;&#34;&#34;Initialize a boilerplate dominate document for creating static Plotly HTML files.
+
+    See dominate documentation: https://pypi.org/project/dominate/
+
+    Args:
+        doc_kwargs: keyword arguments for `dominate.document()`
+
+    Returns:
+        dict: dominate document instance
+
+    &#34;&#34;&#34;
+    doc = dominate.document(**doc_kwargs)
+    with doc:
+        util.raw(capture_plotly_body())
+    return doc</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.make_div"><code class="name flex">
+<span>def <span class="ident">make_div</span></span>(<span>figure, **html_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write Plotly figure as HTML to specified file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>figure</code></strong></dt>
+<dd>Plotly figure (can be from <code>create_figure</code> for custom charts)</dd>
+<dt><strong><code>html_kwargs</code></strong></dt>
+<dd>additional keyword arguments passed to <code>plotly.io.write_html()</code></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>HTML div</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_div(figure, **html_kwargs):
+    &#34;&#34;&#34;Write Plotly figure as HTML to specified file.
+
+    Args:
+        figure: Plotly figure (can be from `create_figure` for custom charts)
+        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`
+
+    Returns:
+        str: HTML div
+
+    &#34;&#34;&#34;
+    with io.StringIO() as output:
+        write_div(figure, output, is_div=True, **html_kwargs)
+        return output.getvalue()</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.markdown_machine"><code class="name flex">
+<span>def <span class="ident">markdown_machine</span></span>(<span>lines, function_lookup)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert markdown text file into Plotly-HTML and write to doc context.</p>
+<p>Note: you will need a document with necessary boilerplate and call this within a <code>with doc:</code> dominate context
+Multiple Markdown files can then be put into a single HTML output file by calling this function with new lines
+and function lookup arguments</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>lines</code></strong></dt>
+<dd>list of text file lines</dd>
+<dt><strong><code>function_lookup</code></strong></dt>
+<dd>dictionary with either the string result or equation and arguments
+Will be inserted into file where <code>&gt;&gt;lookup:function_name</code> assuming key of <code>function_name</code></dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def markdown_machine(lines, function_lookup):  # noqa: CCR001
+    &#34;&#34;&#34;Convert markdown text file into Plotly-HTML and write to doc context.
+
+    Note: you will need a document with necessary boilerplate and call this within a `with doc:` dominate context
+    Multiple Markdown files can then be put into a single HTML output file by calling this function with new lines
+    and function lookup arguments
+
+    Args:
+        lines: list of text file lines
+        function_lookup: dictionary with either the string result or equation and arguments
+            Will be inserted into file where `&gt;&gt;lookup:function_name` assuming key of `function_name`
+
+    &#34;&#34;&#34;
+    markdown_lines = []
+    for line in lines:
+        if line.startswith(&#39;&gt;&gt;lookup:&#39;):
+            # Write stored markdown and clear list. Then write the matched lookup
+            tag_markdown(&#39;\n&#39;.join(markdown_lines))
+            markdown_lines = []
+            write_lookup(line.split(&#39;&gt;&gt;lookup:&#39;)[1], function_lookup)
+        else:
+            markdown_lines.append(line)
+    if len(markdown_lines) &gt; 0:
+        tag_markdown(&#39;\n&#39;.join(markdown_lines))</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.tag_code"><code class="name flex">
+<span>def <span class="ident">tag_code</span></span>(<span>text, language='')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Format HTML for a <code>pre.code</code> block with specified <code>hljs</code> language.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong></dt>
+<dd>string to show in code block</dd>
+<dt><strong><code>language</code></strong></dt>
+<dd><code>hljs</code> language (ex: <code>'language-json'</code>). Default is <code>''</code>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tag_code(text, language=&#39;&#39;):
+    &#34;&#34;&#34;Format HTML for a `pre.code` block with specified `hljs` language.
+
+    Args:
+        text: string to show in code block
+        language: `hljs` language (ex: `&#39;language-json&#39;`). Default is `&#39;&#39;`.
+
+    &#34;&#34;&#34;
+    tags.pre().add(tags.code(text, _class=f&#39;{language} hljs&#39;))</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.tag_markdown"><code class="name flex">
+<span>def <span class="ident">tag_markdown</span></span>(<span>text, **markdown_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Format markdown text as HTML.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong></dt>
+<dd>markdown string</dd>
+<dt><strong><code>markdown_kwargs</code></strong></dt>
+<dd>additional keyword arguments for <code>markdown.markdown</code>, such as <code>extensions</code></dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tag_markdown(text, **markdown_kwargs):
+    &#34;&#34;&#34;Format markdown text as HTML.
+
+    Args:
+        text: markdown string
+        markdown_kwargs: additional keyword arguments for `markdown.markdown`, such as `extensions`
+
+    &#34;&#34;&#34;
+    util.raw(markdown.markdown(text, **markdown_kwargs))</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.tag_table"><code class="name flex">
+<span>def <span class="ident">tag_table</span></span>(<span>df_table, table_class=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Format HTML for a responsive Bootstrap table.</p>
+<p>See Bootstrap documentation at: <a href="https://getbootstrap.com/docs/4.4/content/tables/#tables">https://getbootstrap.com/docs/4.4/content/tables/#tables</a></p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_table</code></strong></dt>
+<dd>pandas dataframe to show in table</dd>
+<dt><strong><code>table_class</code></strong></dt>
+<dd>string classes to add to table. If None, will use default string</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tag_table(df_table, table_class=None):
+    &#34;&#34;&#34;Format HTML for a responsive Bootstrap table.
+
+    See Bootstrap documentation at: https://getbootstrap.com/docs/4.4/content/tables/#tables
+
+    Args:
+        df_table: pandas dataframe to show in table
+        table_class: string classes to add to table. If None, will use default string
+
+    &#34;&#34;&#34;
+    if table_class is None:
+        table_class = &#39;table table-bordered table-striped table-hover&#39;
+
+    with tags.div(_class=&#39;table-responsive&#39;).add(tags.table(_class=table_class)):
+        # Create header row
+        with tags.thead().add(tags.tr()):
+            for col in df_table.columns:
+                tags.th(col)
+        # Create body rows
+        with tags.tbody():
+            for row in df_table.itertuples():
+                with tags.tr():
+                    for value in row[1:]:
+                        tags.td(str(value))</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.write_div"><code class="name flex">
+<span>def <span class="ident">write_div</span></span>(<span>figure, path_or_file_object, is_div=True, **html_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write Plotly figure as HTML to specified file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>figure</code></strong></dt>
+<dd>Plotly figure (can be from <code>create_figure</code> for custom charts)</dd>
+<dt><strong><code>path_or_file_object</code></strong></dt>
+<dd><em>string</em> path or file object</dd>
+<dt><strong><code>is_div</code></strong></dt>
+<dd>if True (default) will override html_kwargs to only write the minimum HTML needed</dd>
+<dt><strong><code>html_kwargs</code></strong></dt>
+<dd>additional keyword arguments passed to <code>plotly.io.write_html()</code></dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_div(figure, path_or_file_object, is_div=True, **html_kwargs):
+    &#34;&#34;&#34;Write Plotly figure as HTML to specified file.
+
+    Args:
+        figure: Plotly figure (can be from `create_figure` for custom charts)
+        path_or_file_object: *string* path or file object
+        is_div: if True (default) will override html_kwargs to only write the minimum HTML needed
+        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`
+
+    &#34;&#34;&#34;
+    for key in [&#39;include_plotlyjs&#39;, &#39;full_html&#39;]:
+        if key not in html_kwargs and is_div:
+            html_kwargs[key] = False
+
+    plotly.io.write_html(fig=figure, file=path_or_file_object, **html_kwargs)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.write_from_markdown"><code class="name flex">
+<span>def <span class="ident">write_from_markdown</span></span>(<span>filename, function_lookup, **dbc_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wrap markdown_machine to convert markdown to Bootstrap HTML.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filename</code></strong></dt>
+<dd>path to markdown file</dd>
+<dt><strong><code>function_lookup</code></strong></dt>
+<dd>dictionary with either the string result or equation and arguments
+Will be inserted into file where <code>&gt;&gt;lookup:function_name</code> assuming key of <code>function_name</code></dd>
+<dt><strong><code>dbc_kwargs</code></strong></dt>
+<dd>keyword arguments to pass to <code><a title="dash_charts.utils_static.create_dbc_doc" href="#dash_charts.utils_static.create_dbc_doc">create_dbc_doc()</a></code></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Path</code></dt>
+<dd>created HTML filename</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_from_markdown(filename, function_lookup, **dbc_kwargs):
+    &#34;&#34;&#34;Wrap markdown_machine to convert markdown to Bootstrap HTML.
+
+    Args:
+        filename: path to markdown file
+        function_lookup: dictionary with either the string result or equation and arguments
+            Will be inserted into file where `&gt;&gt;lookup:function_name` assuming key of `function_name`
+        dbc_kwargs: keyword arguments to pass to `create_dbc_doc`
+
+    Returns:
+        Path: created HTML filename
+
+    &#34;&#34;&#34;
+    lines = filename.read_text().split(&#39;\n&#39;)
+    html_filename = filename.parent / f&#39;{filename.stem}.html&#39;
+    doc = create_dbc_doc(**dbc_kwargs)
+    with doc:
+        with tags.div(_class=&#39;container&#39;).add(tags.div(_class=&#39;col&#39;)):
+            markdown_machine(lines, function_lookup)
+
+    html_filename.write_text(str(doc))
+    return html_filename</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.write_image_file"><code class="name flex">
+<span>def <span class="ident">write_image_file</span></span>(<span>figure, path_or_file_object, image_format, **img_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write Plotly figure as an image to specified file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>figure</code></strong></dt>
+<dd>Plotly figure (can be from <code>create_figure</code> for custom charts)</dd>
+<dt><strong><code>path_or_file_object</code></strong></dt>
+<dd><em>string</em> path or file object</dd>
+<dt><strong><code>image_format</code></strong></dt>
+<dd>one of <code>(png, jpg, jpeg, webp, svg, pdf)</code></dd>
+<dt><strong><code>img_kwargs</code></strong></dt>
+<dd>additional keyword arguments passed to <code>plotly.io.write_image()</code></dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_image_file(figure, path_or_file_object, image_format, **img_kwargs):
+    &#34;&#34;&#34;Write Plotly figure as an image to specified file.
+
+    Args:
+        figure: Plotly figure (can be from `create_figure` for custom charts)
+        path_or_file_object: *string* path or file object
+        image_format: one of `(png, jpg, jpeg, webp, svg, pdf)`
+        img_kwargs: additional keyword arguments passed to `plotly.io.write_image()`
+
+    &#34;&#34;&#34;
+    plotly.io.write_image(fig=figure, file=str(path_or_file_object), format=image_format, **img_kwargs)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_static.write_lookup"><code class="name flex">
+<span>def <span class="ident">write_lookup</span></span>(<span>key, function_lookup)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine the lookup result and add to the file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>key</code></strong></dt>
+<dd>string key for function lookup</dd>
+<dt><strong><code>function_lookup</code></strong></dt>
+<dd>dictionary with either the string result or equation and arguments</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>if error in lookup dictionary</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_lookup(key, function_lookup):
+    &#34;&#34;&#34;Determine the lookup result and add to the file.
+
+    Args:
+        key: string key for function lookup
+        function_lookup: dictionary with either the string result or equation and arguments
+
+    Raises:
+        RuntimeError: if error in lookup dictionary
+
+    &#34;&#34;&#34;
+    try:
+        match = function_lookup[key]
+    except KeyError:
+        raise RuntimeError(f&#39;Could not find &#34;{key}&#34; in {function_lookup}&#39;)
+
+    if isinstance(match, str):
+        util.raw(match)
+    elif len(match) == 2:
+        fun, args = match
+        result = fun(*args)
+        if isinstance(result, str):
+            util.raw(result)
+    else:
+        raise RuntimeError(f&#39;Match failed for &#34;{key}&#34;. Returned: {match} from {function_lookup}&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dash_charts" href="index.html">dash_charts</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="dash_charts.utils_static.add_image" href="#dash_charts.utils_static.add_image">add_image</a></code></li>
+<li><code><a title="dash_charts.utils_static.add_video" href="#dash_charts.utils_static.add_video">add_video</a></code></li>
+<li><code><a title="dash_charts.utils_static.capture_plotly_body" href="#dash_charts.utils_static.capture_plotly_body">capture_plotly_body</a></code></li>
+<li><code><a title="dash_charts.utils_static.create_dbc_doc" href="#dash_charts.utils_static.create_dbc_doc">create_dbc_doc</a></code></li>
+<li><code><a title="dash_charts.utils_static.format_plotly_boilerplate" href="#dash_charts.utils_static.format_plotly_boilerplate">format_plotly_boilerplate</a></code></li>
+<li><code><a title="dash_charts.utils_static.make_div" href="#dash_charts.utils_static.make_div">make_div</a></code></li>
+<li><code><a title="dash_charts.utils_static.markdown_machine" href="#dash_charts.utils_static.markdown_machine">markdown_machine</a></code></li>
+<li><code><a title="dash_charts.utils_static.tag_code" href="#dash_charts.utils_static.tag_code">tag_code</a></code></li>
+<li><code><a title="dash_charts.utils_static.tag_markdown" href="#dash_charts.utils_static.tag_markdown">tag_markdown</a></code></li>
+<li><code><a title="dash_charts.utils_static.tag_table" href="#dash_charts.utils_static.tag_table">tag_table</a></code></li>
+<li><code><a title="dash_charts.utils_static.write_div" href="#dash_charts.utils_static.write_div">write_div</a></code></li>
+<li><code><a title="dash_charts.utils_static.write_from_markdown" href="#dash_charts.utils_static.write_from_markdown">write_from_markdown</a></code></li>
+<li><code><a title="dash_charts.utils_static.write_image_file" href="#dash_charts.utils_static.write_image_file">write_image_file</a></code></li>
+<li><code><a title="dash_charts.utils_static.write_lookup" href="#dash_charts.utils_static.write_lookup">write_lookup</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>

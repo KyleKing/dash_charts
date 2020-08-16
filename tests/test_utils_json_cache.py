@@ -1,5 +1,7 @@
 """Test utils_json_cache."""
 
+import shutil
+
 from dash_charts.dash_helpers import DBConnect
 from dash_charts.utils_json_cache import (CACHE_DIR, get_files_table, initialize_cache, retrieve_cache_object,
                                           store_cache_object)
@@ -20,3 +22,5 @@ def test_utils_json_cache():
     result = retrieve_cache_object(identifier, test_db)
 
     assert result == obj
+    test_db.close()
+    shutil.rmtree(CACHE_DIR)

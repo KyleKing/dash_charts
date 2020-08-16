@@ -10,11 +10,12 @@ TEST_DIR = Path(__file__).parent
 TEST_DATA_DIR = TEST_DIR / 'data'
 """Path to subdirectory with test data within the Test Directory."""
 
-# PLANNED: Output the test name and other information to the test.log file. Currently only used in `no_log_errors`
 TEST_SNOOPER = snoop.Config(out=TEST_DIR / 'test.log', overwrite=True)
 """Snoop configuration for logging to a test.log file in the test directory."""
 
 
+# PLANNED: Output the test name and other information to the test.log file. Currently only used in `no_log_errors`
+# PLANNED: move to dash_dev
 def no_log_errors(dash_duo, suppressed_errors=None):
     """Return True if any unsuppressed errors found in console logs.
 

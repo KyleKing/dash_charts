@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>dash_charts.0EX.ex_multi_page API documentation</title>
+<meta name="description" content="From file: `dash_charts/tests/examples/ex_multi_page.py`
+```
+&#34;&#34;&#34;Example Multi Page Applet.&#34;&#34;&#34; …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>
+a {
+text-decoration: underline;
+}
+h1,h2,h3,h4 {
+font-weight: 400;
+}
+h2 {
+margin: 0.50em 0 .25em 0;
+}
+dd p {
+margin: 5px 0;
+}
+dl dl:last-child {
+margin-bottom: 2.5em;
+}
+main {
+margin-bottom: 80vh;
+}
+#content {
+max-width: 1100px;
+}
+.source summary {
+background-color: #fafafa; /* match HLJS background */
+padding: 1px 5px;
+}
+.source summary:focus {
+outline: none !important;
+}
+.source pre {
+background-color: #fafafa; /* match HLJS background */
+}
+.source pre code {
+padding-bottom: 1em;
+}
+table, th, td {
+border: 1px solid #d4d4d4;
+padding: 0 5px;
+}
+</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dash_charts.0EX.ex_multi_page</code></h1>
+</header>
+<section id="section-intro">
+<p>From file: <code>dash_charts/tests/examples/ex_multi_page.py</code></p>
+<pre><code>&quot;&quot;&quot;Example Multi Page Applet.&quot;&quot;&quot;
+
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
+import dash_html_components as html
+import plotly.express as px
+from dash_charts.dash_helpers import parse_dash_cli_args
+from dash_charts.utils_app import AppBase
+from dash_charts.utils_app_with_navigation import AppMultiPage
+from dash_charts.utils_fig import min_graph
+
+
+class StaticPage(AppBase):
+    &quot;&quot;&quot;Simple App without charts or callbacks.&quot;&quot;&quot;
+
+    basic_style = {
+        'marginLeft': 'auto',
+        'marginRight': 'auto',
+        'maxWidth': '1000px',
+        'paddingTop': '10px',
+    }
+
+    def initialization(self):
+        &quot;&quot;&quot;Initialize ids with `self.register_uniq_ids([...])` and other one-time actions.&quot;&quot;&quot;
+        super().initialization()
+        self.register_uniq_ids(['N/A'])
+
+    def create_elements(self):
+        &quot;&quot;&quot;Initialize the charts, tables, and other Dash elements..&quot;&quot;&quot;
+        pass
+
+    def create_callbacks(self):
+        &quot;&quot;&quot;Register callbacks necessary for this tab.&quot;&quot;&quot;
+        pass
+
+
+class PageText(StaticPage):
+    &quot;&quot;&quot;Text page.&quot;&quot;&quot;
+
+    name = 'Text Page'
+
+    def return_layout(self):
+        &quot;&quot;&quot;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        &quot;&quot;&quot;
+        return html.Div(style=self.basic_style, children=(
+            [html.H1(children=f'{self.name} Scrollable Content')]
+            + [html.P(children=[str(count) + '-word' * 10]) for count in range(100)]
+        ))
+
+
+class PageChart(StaticPage):
+    &quot;&quot;&quot;Chart page.&quot;&quot;&quot;
+
+    name = 'Chart Page'
+
+    def return_layout(self):
+        &quot;&quot;&quot;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        &quot;&quot;&quot;
+        return html.Div(style=self.basic_style, children=[
+            html.H1(children=self.name),
+            dcc.Loading(
+                type='circle',
+                children=[
+                    min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=500)),
+                ],
+            ),
+        ])
+
+
+class Page404(StaticPage):
+    &quot;&quot;&quot;404 page.&quot;&quot;&quot;
+
+    name = 'Page 404'
+
+    def return_layout(self):
+        &quot;&quot;&quot;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        &quot;&quot;&quot;
+        return html.Div(style=self.basic_style, children=[
+            html.H1(children=f'404: Path not found'),
+            html.Img(src='https://upload.wikimedia.org/wikipedia/commons/2/26/NL_Route_404.svg'),
+        ])
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+class MultiPageDemo(AppMultiPage):
+    &quot;&quot;&quot;Demo application.&quot;&quot;&quot;
+
+    name = 'MultiPageDemo'
+
+    navbar_links = [('Home', '/'), ('Chart', '/is-chart'), ('404', '/404')]
+    &quot;&quot;&quot;Base class must create list of tuples `[('Link Name', '/link'), ]` to use default `self.nav_bar()`.&quot;&quot;&quot;
+
+    dropdown_links = [('DBC', 'https://dash-bootstrap-components.opensource.faculty.ai/l/components/nav')]
+    &quot;&quot;&quot;Base class must create list of tuples `[('Link Name', '/link'), ]` to use default `self.nav_bar()`.&quot;&quot;&quot;
+
+    logo = 'https://images.plot.ly/logo/new-branding/plotly-logomark.png'
+    &quot;&quot;&quot;Optional path to logo. If None, no logo will be shown in navbar.&quot;&quot;&quot;
+
+    external_stylesheets = [dbc.themes.FLATLY]  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
+    &quot;&quot;&quot;List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided.&quot;&quot;&quot;
+
+    def define_nav_elements(self):
+        &quot;&quot;&quot;Return list of initialized tabs.
+
+        Returns:
+            list: each item is an initialized tab (ex `[AppBase(self.app)]` in the order each tab is rendered
+
+        &quot;&quot;&quot;
+        return [
+            PageText(app=self.app),
+            PageChart(app=self.app),
+            Page404(app=self.app),
+        ]
+
+    def select_page_name(self, pathname):
+        &quot;&quot;&quot;Return the page name determined based on the pathname.
+
+        Args:
+            pathname: relative pathname from URL
+
+        Returns:
+            str: page name
+
+        &quot;&quot;&quot;
+        if pathname == '/':
+            return PageText.name
+        elif 'chart' in pathname:
+            return PageChart.name
+        else:
+            return Page404.name
+
+
+instance = MultiPageDemo
+if __name__ == '__main__':
+    app = instance()
+    app.create()
+    app.run(**parse_dash_cli_args())
+else:
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()
+
+</code></pre>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;From file: `dash_charts/tests/examples/ex_multi_page.py`
+```
+\&#34;\&#34;\&#34;Example Multi Page Applet.\&#34;\&#34;\&#34;
+
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
+import dash_html_components as html
+import plotly.express as px
+from dash_charts.dash_helpers import parse_dash_cli_args
+from dash_charts.utils_app import AppBase
+from dash_charts.utils_app_with_navigation import AppMultiPage
+from dash_charts.utils_fig import min_graph
+
+
+class StaticPage(AppBase):
+    \&#34;\&#34;\&#34;Simple App without charts or callbacks.\&#34;\&#34;\&#34;
+
+    basic_style = {
+        &#39;marginLeft&#39;: &#39;auto&#39;,
+        &#39;marginRight&#39;: &#39;auto&#39;,
+        &#39;maxWidth&#39;: &#39;1000px&#39;,
+        &#39;paddingTop&#39;: &#39;10px&#39;,
+    }
+
+    def initialization(self):
+        \&#34;\&#34;\&#34;Initialize ids with `self.register_uniq_ids([...])` and other one-time actions.\&#34;\&#34;\&#34;
+        super().initialization()
+        self.register_uniq_ids([&#39;N/A&#39;])
+
+    def create_elements(self):
+        \&#34;\&#34;\&#34;Initialize the charts, tables, and other Dash elements..\&#34;\&#34;\&#34;
+        pass
+
+    def create_callbacks(self):
+        \&#34;\&#34;\&#34;Register callbacks necessary for this tab.\&#34;\&#34;\&#34;
+        pass
+
+
+class PageText(StaticPage):
+    \&#34;\&#34;\&#34;Text page.\&#34;\&#34;\&#34;
+
+    name = &#39;Text Page&#39;
+
+    def return_layout(self):
+        \&#34;\&#34;\&#34;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        \&#34;\&#34;\&#34;
+        return html.Div(style=self.basic_style, children=(
+            [html.H1(children=f&#39;{self.name} Scrollable Content&#39;)]
+            + [html.P(children=[str(count) + &#39;-word&#39; * 10]) for count in range(100)]
+        ))
+
+
+class PageChart(StaticPage):
+    \&#34;\&#34;\&#34;Chart page.\&#34;\&#34;\&#34;
+
+    name = &#39;Chart Page&#39;
+
+    def return_layout(self):
+        \&#34;\&#34;\&#34;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        \&#34;\&#34;\&#34;
+        return html.Div(style=self.basic_style, children=[
+            html.H1(children=self.name),
+            dcc.Loading(
+                type=&#39;circle&#39;,
+                children=[
+                    min_graph(figure=px.scatter(px.data.iris(), x=&#39;sepal_width&#39;, y=&#39;sepal_length&#39;, height=500)),
+                ],
+            ),
+        ])
+
+
+class Page404(StaticPage):
+    \&#34;\&#34;\&#34;404 page.\&#34;\&#34;\&#34;
+
+    name = &#39;Page 404&#39;
+
+    def return_layout(self):
+        \&#34;\&#34;\&#34;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        \&#34;\&#34;\&#34;
+        return html.Div(style=self.basic_style, children=[
+            html.H1(children=f&#39;404: Path not found&#39;),
+            html.Img(src=&#39;https://upload.wikimedia.org/wikipedia/commons/2/26/NL_Route_404.svg&#39;),
+        ])
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+class MultiPageDemo(AppMultiPage):
+    \&#34;\&#34;\&#34;Demo application.\&#34;\&#34;\&#34;
+
+    name = &#39;MultiPageDemo&#39;
+
+    navbar_links = [(&#39;Home&#39;, &#39;/&#39;), (&#39;Chart&#39;, &#39;/is-chart&#39;), (&#39;404&#39;, &#39;/404&#39;)]
+    \&#34;\&#34;\&#34;Base class must create list of tuples `[(&#39;Link Name&#39;, &#39;/link&#39;), ]` to use default `self.nav_bar()`.\&#34;\&#34;\&#34;
+
+    dropdown_links = [(&#39;DBC&#39;, &#39;https://dash-bootstrap-components.opensource.faculty.ai/l/components/nav&#39;)]
+    \&#34;\&#34;\&#34;Base class must create list of tuples `[(&#39;Link Name&#39;, &#39;/link&#39;), ]` to use default `self.nav_bar()`.\&#34;\&#34;\&#34;
+
+    logo = &#39;https://images.plot.ly/logo/new-branding/plotly-logomark.png&#39;
+    \&#34;\&#34;\&#34;Optional path to logo. If None, no logo will be shown in navbar.\&#34;\&#34;\&#34;
+
+    external_stylesheets = [dbc.themes.FLATLY]  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
+    \&#34;\&#34;\&#34;List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided.\&#34;\&#34;\&#34;
+
+    def define_nav_elements(self):
+        \&#34;\&#34;\&#34;Return list of initialized tabs.
+
+        Returns:
+            list: each item is an initialized tab (ex `[AppBase(self.app)]` in the order each tab is rendered
+
+        \&#34;\&#34;\&#34;
+        return [
+            PageText(app=self.app),
+            PageChart(app=self.app),
+            Page404(app=self.app),
+        ]
+
+    def select_page_name(self, pathname):
+        \&#34;\&#34;\&#34;Return the page name determined based on the pathname.
+
+        Args:
+            pathname: relative pathname from URL
+
+        Returns:
+            str: page name
+
+        \&#34;\&#34;\&#34;
+        if pathname == &#39;/&#39;:
+            return PageText.name
+        elif &#39;chart&#39; in pathname:
+            return PageChart.name
+        else:
+            return Page404.name
+
+
+instance = MultiPageDemo
+if __name__ == &#39;__main__&#39;:
+    app = instance()
+    app.create()
+    app.run(**parse_dash_cli_args())
+else:
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()
+
+```
+&#34;&#34;&#34;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dash_charts.0EX" href="index.html">dash_charts.0EX</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>

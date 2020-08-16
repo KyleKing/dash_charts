@@ -65,6 +65,10 @@
 
 ### Fix
 
+* Isort and dash testing requirements. [Kyle King]
+
+* Make cache_dir configurable. [Kyle King]
+
 * Test errors and standardize log checks. [Kyle King]
 
 * Chart load errors. Resolves #1. [Kyle King]

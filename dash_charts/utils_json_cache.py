@@ -1,35 +1,10 @@
-"""Helpers for managing a generic JSON data file cache. Could be used to reduce API calls, etc.
-
-Notes on `dataset`. Full documentation: https://dataset.readthedocs.io/en/latest/api.html
-
-```py
-db = FILE_DATA.db
-db.create_table('table_name', primary_id='slug', primary_type=db.types.text)
-db.load_table('table_name')  # Fails if table does not exist
-
-ic(db.tables, db['table_name'].columns, len(db['table_name']))
-ic([*db['table_name'].all()][:2])
-
-table = db['table_name']
-# # Below snippets from Kitsu-Library-Availability
-# ic([*table.find(id=[1, 3, 7])])
-# ic([*table.find_one(id=4)])
-# ic([*table.find(status='completed')])
-# ic([*table.find(status={'<>': 'dropped'}, averageRating={'between': [60, 80]})])
-# ic([*table.distinct('status')])
-# # gt, >; || lt, <; || gte, >=; || lte, <=; || !=, <>, not; || between, ..
-
-# Other:
-table.update(dict(name='John Doe', age=47), ['name'])
-```
-
-"""
+"""Helpers for managing a generic JSON data file cache. Could be used to reduce API calls, etc."""
 
 import json
 import time
 from pathlib import Path
 
-from .dash_helpers import DBConnect, uniq_table_id, write_pretty_json
+from dash_charts.dash_helpers import DBConnect, uniq_table_id, write_pretty_json
 
 CACHE_DIR = Path(__file__).parent / 'local_cache'
 """Path to folder with all downloaded responses from Kitsu API."""
@@ -83,6 +58,33 @@ def match_identifier_in_cache(identifier, db_instance):
     return [*get_files_table(db_instance).find(identifier=identifier)]
 
 
+def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR):
+    """Store the reference in the cache database and return the file so the user can handle saving the file.
+
+    Args:
+        prefix: string used to create more recognizable filenames
+        identifier: identifier to use as a reference if the corresponding data is already cached
+        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+        cache_dir: path to the directory to store the file. Default is `CACHE_DIR
+
+    Returns:
+        Path: to the cached file. Caller needs to write to the file
+
+    Raises:
+        RuntimeError: if duplicate match found when storing
+
+    """
+    # Check that the identifier isn't already in the database
+    matches = match_identifier_in_cache(identifier, db_instance)
+    if len(matches) > 0:
+        raise RuntimeError(f'Already have an entry for this identifier (`{identifier}`): {matches}')
+    # Update the database and store the file
+    filename = cache_dir / f'{prefix}_{uniq_table_id()}.json'
+    new_row = {'filename': str(filename), 'identifier': identifier, 'timestamp': time.time()}
+    get_files_table(db_instance).insert(new_row)
+    return filename
+
+
 def store_cache_object(prefix, identifier, obj, db_instance, cache_dir=CACHE_DIR):
     """Store the object as a JSON file and track in a SQLite database to prevent duplicates.
 
@@ -97,15 +99,33 @@ def store_cache_object(prefix, identifier, obj, db_instance, cache_dir=CACHE_DIR
         RuntimeError: if duplicate match found when storing
 
     """
-    # Check that the identifier isn't already in the database
+    filename = store_cache_as_file(prefix, identifier, db_instance, cache_dir)
+    try:
+        write_pretty_json(filename, obj)
+    except Exception:
+        # If writing the file fails, ensure that the record is removed from the database
+        get_files_table(db_instance).delete(filename=filename)
+        raise
+
+
+def retrieve_cache_fn(identifier, db_instance):
+    """Retrieved stored object from cache database.
+
+    Args:
+        identifier: identifier to use as a reference if the corresponding data is already cached
+        db_instance: Connected Database file with `dash_helpers.DBConnect()`.
+
+    Returns:
+        Path: to the cached file. Caller needs to read the file
+
+    Raises:
+        RuntimeError: if not exactly one match found
+
+    """
     matches = match_identifier_in_cache(identifier, db_instance)
-    if len(matches) > 0:
-        raise RuntimeError(f'Already have an entry for this identifier (`{identifier}`): {matches}')
-    # Update the database and store the file
-    filename = cache_dir / f'{prefix}_{uniq_table_id()}.json'
-    new_row = {'filename': str(filename), 'identifier': identifier, 'timestamp': time.time()}
-    get_files_table(db_instance).insert(new_row)
-    write_pretty_json(filename, obj)
+    if len(matches) != 1:
+        raise RuntimeError(f'Did not find exactly one entry for this identifier (`{identifier}`): {matches}')
+    return Path(matches[0]['filename'])
 
 
 def retrieve_cache_object(identifier, db_instance):
@@ -119,7 +139,5 @@ def retrieve_cache_object(identifier, db_instance):
         RuntimeError: if not exactly one match found
 
     """
-    matches = match_identifier_in_cache(identifier, db_instance)
-    if len(matches) != 1:
-        raise RuntimeError(f'Did not find exactly one entry for this identifier (`{identifier}`): {matches}')
-    return json.loads(Path(matches[0]['filename']).read_text())
+    filename = retrieve_cache_fn(identifier, db_instance)
+    return json.loads(filename.read_text())

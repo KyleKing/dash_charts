@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>dash_charts.0EX.ex_coordinate_chart API documentation</title>
+<meta name="description" content="From file: `dash_charts/tests/examples/ex_coordinate_chart.py`
+```
+&#34;&#34;&#34;Example Coordinate Chart.&#34;&#34;&#34; …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>
+a {
+text-decoration: underline;
+}
+h1,h2,h3,h4 {
+font-weight: 400;
+}
+h2 {
+margin: 0.50em 0 .25em 0;
+}
+dd p {
+margin: 5px 0;
+}
+dl dl:last-child {
+margin-bottom: 2.5em;
+}
+main {
+margin-bottom: 80vh;
+}
+#content {
+max-width: 1100px;
+}
+.source summary {
+background-color: #fafafa; /* match HLJS background */
+padding: 1px 5px;
+}
+.source summary:focus {
+outline: none !important;
+}
+.source pre {
+background-color: #fafafa; /* match HLJS background */
+}
+.source pre code {
+padding-bottom: 1em;
+}
+table, th, td {
+border: 1px solid #d4d4d4;
+padding: 0 5px;
+}
+</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dash_charts.0EX.ex_coordinate_chart</code></h1>
+</header>
+<section id="section-intro">
+<p>From file: <code>dash_charts/tests/examples/ex_coordinate_chart.py</code></p>
+<pre><code>&quot;&quot;&quot;Example Coordinate Chart.&quot;&quot;&quot;
+
+import calendar
+
+import dash_bootstrap_components as dbc
+import dash_html_components as html
+import numpy as np
+import pandas as pd
+from dash_charts import coordinate_chart
+from dash_charts.coordinate_chart import CoordinateChart
+from dash_charts.dash_helpers import parse_dash_cli_args
+from dash_charts.utils_app import AppBase
+from dash_charts.utils_fig import min_graph
+
+# TODO: Also set marker size based on value?
+# TODO: Re-align alignment charts into line and update screenshot
+# TODO: Maybe green heat map like Github? For one year?
+
+
+class CoordinateDemo(AppBase):
+    &quot;&quot;&quot;Example creating basic Coordinate Charts.&quot;&quot;&quot;
+
+    name = 'Example Coordinate Charts'
+    &quot;&quot;&quot;Application name&quot;&quot;&quot;
+
+    external_stylesheets = [dbc.themes.FLATLY]
+
+    data_raw_years = None
+    data_raw_months = None
+    data_raw_circle = None
+    &quot;&quot;&quot;In-memory data referenced by callbacks. If modified, will impact all viewers (Years/Months/Circle).&quot;&quot;&quot;
+
+    chart_years = None
+    chart_months = None
+    chart_circle = None
+    &quot;&quot;&quot;Main charts (Coordinate Year/Month/Circle).&quot;&quot;&quot;
+
+    id_chart_years = 'years-chart'
+    id_chart_months = 'months-chart'
+    id_chart_circle = 'circle-chart'
+    &quot;&quot;&quot;Unique name for each chart (Year/Month/Circle).&quot;&quot;&quot;
+
+    grid_years = coordinate_chart.YearGrid()
+    grid_months = coordinate_chart.MonthGrid(titles=[calendar.month_name[2]])  # uses Feb
+    grid_circle = coordinate_chart.CircleGrid(grid_dims=(5, 4))  # set grid to arbitrary 5x4
+    &quot;&quot;&quot;Coordinate chart grids (Year/Month/Circle).&quot;&quot;&quot;
+
+    def initialization(self):
+        &quot;&quot;&quot;Initialize ids with `self.register_uniq_ids([...])` and other one-time actions.&quot;&quot;&quot;
+        super().initialization()
+        self.register_uniq_ids([self.id_chart_years, self.id_chart_months, self.id_chart_circle])
+
+        day, month, year = (20, 11, 2020)  # Alteratively use `now = datetime.datetime.now()`` and `now.day` etc.
+
+        # Data for the Year Chart
+        month_list = [
+            np.random.randint(1e2, size=calendar.monthrange(year, month_idx)[1])
+            for month_idx in range(1, month + 1)
+        ]
+        # Remove all future data for the current month
+        month_list[month - 1] = month_list[month - 1][:(day - 1)]
+        self.data_raw_years = pd.DataFrame(data={'values': self.grid_years.format_data(month_list, year)})
+
+        # Data for the Month Chart
+        month_list = np.random.randint(1e4, size=calendar.monthrange(year, month)[1])
+        self.data_raw_months = pd.DataFrame(data={'values': self.grid_months.format_data(month_list, year, month)})
+
+        # Generated data for the Circle Chart
+        len_points = np.multiply(*self.grid_circle.grid_dims) * len(self.grid_circle.corners['x'])
+        values = np.random.randint(1e9, size=len_points)
+        self.data_raw_circle = pd.DataFrame(data={'values': values})
+        # Remove a known number of random values from the data set (for the circle Demo)
+        remove_count = 5
+        for idx in list(set(np.random.randint(len(values), size=remove_count * 2)))[:remove_count]:
+            self.data_raw_circle['values'][idx] = None
+
+    def create_elements(self):
+        &quot;&quot;&quot;Initialize the charts, tables, and other Dash elements.&quot;&quot;&quot;
+        self.chart_years = CoordinateChart(
+            title='Example Year Grid',
+            grid_dims=self.grid_years.grid_dims,
+            corners=self.grid_years.corners,
+            titles=self.grid_years.titles,
+            layout_overrides=(
+                ('height', None, 700),
+                ('width', None, 500),
+            ),
+        )
+        # Override Coordinate Parameters as needed
+        self.chart_years.marker_kwargs = self.grid_years.marker_kwargs
+        self.chart_years.border_opacity = 0
+
+        self.chart_months = CoordinateChart(
+            title='Example Month Grid',
+            grid_dims=self.grid_months.grid_dims,
+            corners=self.grid_months.corners,
+            titles=self.grid_months.titles,
+            layout_overrides=(
+                ('height', None, 400),
+                ('width', None, 400),
+            ),
+        )
+        # Override Coordinate Parameters as needed
+        self.chart_months.marker_kwargs = self.grid_months.marker_kwargs
+        self.chart_months.marker_kwargs['colorscale'] = 'Bluered'
+
+        self.chart_circle = CoordinateChart(
+            title='Example Circle Grid',
+            grid_dims=self.grid_circle.grid_dims,
+            corners=self.grid_circle.corners,
+            titles=self.grid_circle.titles,
+            layout_overrides=(
+                ('height', None, 750),
+                ('width', None, 650),
+            ),
+        )
+        # Override Coordinate Parameters as needed
+        self.chart_circle.marker_kwargs = self.grid_circle.marker_kwargs
+        self.chart_circle.marker_kwargs['colorscale'] = 'Cividis'
+
+    def return_layout(self):
+        &quot;&quot;&quot;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        &quot;&quot;&quot;
+        return dbc.Container([
+            dbc.Row([
+                html.H4(children=self.name),
+            ]),
+            dbc.Row([
+                dbc.Col([min_graph(
+                    id=self.ids[self.id_chart_months],
+                    figure=self.chart_months.create_figure(df_raw=self.data_raw_months),
+                )], width=4),
+            ]),
+            dbc.Row([
+                dbc.Col([min_graph(
+                    id=self.ids[self.id_chart_years],
+                    figure=self.chart_years.create_figure(df_raw=self.data_raw_years),
+                )], width=5),
+                dbc.Col([min_graph(
+                    id=self.ids[self.id_chart_circle],
+                    figure=self.chart_circle.create_figure(df_raw=self.data_raw_circle),
+                )], width=5),
+            ]),
+        ])
+
+    def create_callbacks(self):
+        &quot;&quot;&quot;Create Dash callbacks.&quot;&quot;&quot;
+        pass  # No callbacks necessary for this simple example
+
+
+instance = CoordinateDemo
+if __name__ == '__main__':
+    app = instance()
+    app.create()
+    app.run(**parse_dash_cli_args())
+else:
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()
+
+</code></pre>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;From file: `dash_charts/tests/examples/ex_coordinate_chart.py`
+```
+\&#34;\&#34;\&#34;Example Coordinate Chart.\&#34;\&#34;\&#34;
+
+import calendar
+
+import dash_bootstrap_components as dbc
+import dash_html_components as html
+import numpy as np
+import pandas as pd
+from dash_charts import coordinate_chart
+from dash_charts.coordinate_chart import CoordinateChart
+from dash_charts.dash_helpers import parse_dash_cli_args
+from dash_charts.utils_app import AppBase
+from dash_charts.utils_fig import min_graph
+
+# TODO: Also set marker size based on value?
+# TODO: Re-align alignment charts into line and update screenshot
+# TODO: Maybe green heat map like Github? For one year?
+
+
+class CoordinateDemo(AppBase):
+    \&#34;\&#34;\&#34;Example creating basic Coordinate Charts.\&#34;\&#34;\&#34;
+
+    name = &#39;Example Coordinate Charts&#39;
+    \&#34;\&#34;\&#34;Application name\&#34;\&#34;\&#34;
+
+    external_stylesheets = [dbc.themes.FLATLY]
+
+    data_raw_years = None
+    data_raw_months = None
+    data_raw_circle = None
+    \&#34;\&#34;\&#34;In-memory data referenced by callbacks. If modified, will impact all viewers (Years/Months/Circle).\&#34;\&#34;\&#34;
+
+    chart_years = None
+    chart_months = None
+    chart_circle = None
+    \&#34;\&#34;\&#34;Main charts (Coordinate Year/Month/Circle).\&#34;\&#34;\&#34;
+
+    id_chart_years = &#39;years-chart&#39;
+    id_chart_months = &#39;months-chart&#39;
+    id_chart_circle = &#39;circle-chart&#39;
+    \&#34;\&#34;\&#34;Unique name for each chart (Year/Month/Circle).\&#34;\&#34;\&#34;
+
+    grid_years = coordinate_chart.YearGrid()
+    grid_months = coordinate_chart.MonthGrid(titles=[calendar.month_name[2]])  # uses Feb
+    grid_circle = coordinate_chart.CircleGrid(grid_dims=(5, 4))  # set grid to arbitrary 5x4
+    \&#34;\&#34;\&#34;Coordinate chart grids (Year/Month/Circle).\&#34;\&#34;\&#34;
+
+    def initialization(self):
+        \&#34;\&#34;\&#34;Initialize ids with `self.register_uniq_ids([...])` and other one-time actions.\&#34;\&#34;\&#34;
+        super().initialization()
+        self.register_uniq_ids([self.id_chart_years, self.id_chart_months, self.id_chart_circle])
+
+        day, month, year = (20, 11, 2020)  # Alteratively use `now = datetime.datetime.now()`` and `now.day` etc.
+
+        # Data for the Year Chart
+        month_list = [
+            np.random.randint(1e2, size=calendar.monthrange(year, month_idx)[1])
+            for month_idx in range(1, month + 1)
+        ]
+        # Remove all future data for the current month
+        month_list[month - 1] = month_list[month - 1][:(day - 1)]
+        self.data_raw_years = pd.DataFrame(data={&#39;values&#39;: self.grid_years.format_data(month_list, year)})
+
+        # Data for the Month Chart
+        month_list = np.random.randint(1e4, size=calendar.monthrange(year, month)[1])
+        self.data_raw_months = pd.DataFrame(data={&#39;values&#39;: self.grid_months.format_data(month_list, year, month)})
+
+        # Generated data for the Circle Chart
+        len_points = np.multiply(*self.grid_circle.grid_dims) * len(self.grid_circle.corners[&#39;x&#39;])
+        values = np.random.randint(1e9, size=len_points)
+        self.data_raw_circle = pd.DataFrame(data={&#39;values&#39;: values})
+        # Remove a known number of random values from the data set (for the circle Demo)
+        remove_count = 5
+        for idx in list(set(np.random.randint(len(values), size=remove_count * 2)))[:remove_count]:
+            self.data_raw_circle[&#39;values&#39;][idx] = None
+
+    def create_elements(self):
+        \&#34;\&#34;\&#34;Initialize the charts, tables, and other Dash elements.\&#34;\&#34;\&#34;
+        self.chart_years = CoordinateChart(
+            title=&#39;Example Year Grid&#39;,
+            grid_dims=self.grid_years.grid_dims,
+            corners=self.grid_years.corners,
+            titles=self.grid_years.titles,
+            layout_overrides=(
+                (&#39;height&#39;, None, 700),
+                (&#39;width&#39;, None, 500),
+            ),
+        )
+        # Override Coordinate Parameters as needed
+        self.chart_years.marker_kwargs = self.grid_years.marker_kwargs
+        self.chart_years.border_opacity = 0
+
+        self.chart_months = CoordinateChart(
+            title=&#39;Example Month Grid&#39;,
+            grid_dims=self.grid_months.grid_dims,
+            corners=self.grid_months.corners,
+            titles=self.grid_months.titles,
+            layout_overrides=(
+                (&#39;height&#39;, None, 400),
+                (&#39;width&#39;, None, 400),
+            ),
+        )
+        # Override Coordinate Parameters as needed
+        self.chart_months.marker_kwargs = self.grid_months.marker_kwargs
+        self.chart_months.marker_kwargs[&#39;colorscale&#39;] = &#39;Bluered&#39;
+
+        self.chart_circle = CoordinateChart(
+            title=&#39;Example Circle Grid&#39;,
+            grid_dims=self.grid_circle.grid_dims,
+            corners=self.grid_circle.corners,
+            titles=self.grid_circle.titles,
+            layout_overrides=(
+                (&#39;height&#39;, None, 750),
+                (&#39;width&#39;, None, 650),
+            ),
+        )
+        # Override Coordinate Parameters as needed
+        self.chart_circle.marker_kwargs = self.grid_circle.marker_kwargs
+        self.chart_circle.marker_kwargs[&#39;colorscale&#39;] = &#39;Cividis&#39;
+
+    def return_layout(self):
+        \&#34;\&#34;\&#34;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        \&#34;\&#34;\&#34;
+        return dbc.Container([
+            dbc.Row([
+                html.H4(children=self.name),
+            ]),
+            dbc.Row([
+                dbc.Col([min_graph(
+                    id=self.ids[self.id_chart_months],
+                    figure=self.chart_months.create_figure(df_raw=self.data_raw_months),
+                )], width=4),
+            ]),
+            dbc.Row([
+                dbc.Col([min_graph(
+                    id=self.ids[self.id_chart_years],
+                    figure=self.chart_years.create_figure(df_raw=self.data_raw_years),
+                )], width=5),
+                dbc.Col([min_graph(
+                    id=self.ids[self.id_chart_circle],
+                    figure=self.chart_circle.create_figure(df_raw=self.data_raw_circle),
+                )], width=5),
+            ]),
+        ])
+
+    def create_callbacks(self):
+        \&#34;\&#34;\&#34;Create Dash callbacks.\&#34;\&#34;\&#34;
+        pass  # No callbacks necessary for this simple example
+
+
+instance = CoordinateDemo
+if __name__ == &#39;__main__&#39;:
+    app = instance()
+    app.create()
+    app.run(**parse_dash_cli_args())
+else:
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()
+
+```
+&#34;&#34;&#34;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dash_charts.0EX" href="index.html">dash_charts.0EX</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>

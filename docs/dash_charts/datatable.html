@@ -1,0 +1,1116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>dash_charts.datatable API documentation</title>
+<meta name="description" content="DataTable Base Classes." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>
+a {
+text-decoration: underline;
+}
+h1,h2,h3,h4 {
+font-weight: 400;
+}
+h2 {
+margin: 0.50em 0 .25em 0;
+}
+dd p {
+margin: 5px 0;
+}
+dl dl:last-child {
+margin-bottom: 2.5em;
+}
+main {
+margin-bottom: 80vh;
+}
+#content {
+max-width: 1100px;
+}
+.source summary {
+background-color: #fafafa; /* match HLJS background */
+padding: 1px 5px;
+}
+.source summary:focus {
+outline: none !important;
+}
+.source pre {
+background-color: #fafafa; /* match HLJS background */
+}
+.source pre code {
+padding-bottom: 1em;
+}
+table, th, td {
+border: 1px solid #d4d4d4;
+padding: 0 5px;
+}
+</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dash_charts.datatable</code></h1>
+</header>
+<section id="section-intro">
+<p>DataTable Base Classes.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;DataTable Base Classes.&#34;&#34;&#34;
+
+import dash_table
+
+# TODO: See pattern mathing callbacks for adding buttons (to show modal) to datatables
+#   https://dash.plotly.com/pattern-matching-callbacks
+
+# PLANNED: see conditional formatting: https://dash.plotly.com/datatable/conditional-formatting
+
+# PLANNED: These methods may be replaced in a future version of Dash
+# Currently, edge case when column is string, but filter could be a number
+# See: https://dash.plot.ly/datatable/callbacks &amp; https://github.com/plotly/dash-table/issues/441
+
+OPERATORS = [[&#39;ge &#39;, &#39;&gt;=&#39;],
+             [&#39;le &#39;, &#39;&lt;=&#39;],
+             [&#39;lt &#39;, &#39;&lt;&#39;],
+             [&#39;gt &#39;, &#39;&gt;&#39;],
+             [&#39;ne &#39;, &#39;!=&#39;],
+             [&#39;eq &#39;, &#39;=&#39;],
+             [&#39;contains &#39;],
+             [&#39;datestartswith &#39;]]
+&#34;&#34;&#34;List of lists containing each possible filter string.&#34;&#34;&#34;
+
+
+def split_filter_part(filter_part):  # noqa: CCR001
+    &#34;&#34;&#34;Split the filter into `(name, operator, value)` components.
+
+    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks
+
+    Args:
+        filter_part: string filter query
+
+    Returns:
+        tuple: `(name, operator, value)` which could be all None if no match was found
+
+    &#34;&#34;&#34;
+    for operator_type in OPERATORS:
+        for operator in operator_type:
+            if operator in filter_part:
+                name_part, value_part = filter_part.split(operator, 1)
+                name = name_part[name_part.find(&#39;{&#39;) + 1: name_part.rfind(&#39;}&#39;)]
+
+                value_part = value_part.strip()
+                v0 = value_part[0]
+                if (v0 == value_part[-1] and v0 in (&#34;&#39;&#34;, &#39;&#34;&#39;, &#39;`&#39;)):
+                    value = value_part[1: -1].replace(&#39;\\&#39; + v0, v0)
+                else:
+                    try:
+                        value = float(value_part)
+                    except ValueError:
+                        value = value_part
+
+                # Word operators need spaces after them in the filter string, but we don&#39;t want these later
+                return (name, operator_type[0].strip(), value)
+
+    return [None, None, None]
+
+
+def apply_datatable_filters(df_table, filter_query):
+    &#34;&#34;&#34;Filter a dataframe based on Dash datatable filterquery.
+
+    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks
+
+    Args:
+        df_table: pandas dataframe to filter
+        filter_query: Dash datatable string filter query
+
+    Returns:
+        dataframe: filtered dataframe
+
+    &#34;&#34;&#34;
+    filtering_expressions = filter_query.split(&#39; &amp;&amp; &#39;)
+    for filter_part in filtering_expressions:
+        col_name, operator, filter_value = split_filter_part(filter_part)
+        if operator in (&#39;eq&#39;, &#39;ne&#39;, &#39;lt&#39;, &#39;le&#39;, &#39;gt&#39;, &#39;ge&#39;):
+            # these operators match pandas series operator method names
+            df_table = df_table.loc[getattr(df_table[col_name], operator)(filter_value)]
+        elif operator == &#39;contains&#39;:
+            df_table = df_table.loc[df_table[col_name].str.contains(filter_value)]
+        elif operator == &#39;datestartswith&#39;:
+            # this is a simplification of the front-end filtering logic,
+            # only works with complete fields in standard format
+            df_table = df_table.loc[df_table[col_name].str.startswith(filter_value)]
+    return df_table
+
+
+class BaseDataTable:  # noqa: H601
+    &#34;&#34;&#34;Base Class for Data Tables.&#34;&#34;&#34;
+
+    filter_summary = &#34;&#34;&#34;Table Filter Syntax:
+
+Full documentation at: [https://dash.plot.ly/datatable/filtering](https://dash.plot.ly/datatable/filtering)
+
+- `eq`: exact match (applies to number columns and will try to convert string to number)
+- `contains`: search for exact (case-sensitive) substring in each cell
+- `datestartswith`: matches partial datetime. For example, datestartswith `2018-03-01` will match `2018-03-01 12:59`
+but not `2018-03`
+- `ne`, `gt`, `ge`, `lt`, `le`: comparison operators for not equal, greater than, greater or equal, less than, etc.
+Applies to numbers and string columns (uses numbers, symbols, uppercase letter, lowercase letters)
+
+Press enter of tab to apply the filter&#34;&#34;&#34;
+    &#34;&#34;&#34;Markdown text explaining dash_table.DataTable filtering rules with link to full documentation.&#34;&#34;&#34;
+
+    # dash_table.DataTable Parameters. Documentation: https://dash.plot.ly/datatable/reference
+
+    style_table = None
+    &#34;&#34;&#34;DataTable.style_table dictionary. Default enables overflowX scroll. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    css = None
+    &#34;&#34;&#34;DataTable.css list. Use the style_* properties first.  Set in `initialize_mutables`.
+
+    Default sets row margin to zero to fix a negative margin issue when using dash_table and Bootstrap
+    See: https://github.com/facultyai/dash-bootstrap-components/issues/334
+
+    Also sets other various style tweaks to highlight the filter icons on hover, etc.
+
+    &#34;&#34;&#34;
+
+    style_cell = None
+    &#34;&#34;&#34;DataTable.style_cell dictionary. Default is empty dictionary. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_cell_conditional = None
+    &#34;&#34;&#34;DataTable.style_cell_conditional list. Default is empty list. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_data = None
+    &#34;&#34;&#34;DataTable.style_data dictionary. Default is empty dictionary. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_data_conditional = None
+    &#34;&#34;&#34;DataTable.style_data_conditional list. Default is for odd rows to have an off-white background (zebra stripe).
+
+    Set in `initialize_mutables`
+
+    &#34;&#34;&#34;
+
+    style_header = None
+    &#34;&#34;&#34;DataTable.style_header dictionary. Default is bold and off-white background. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_header_conditional = None
+    &#34;&#34;&#34;DataTable.style_header_conditional list. Default is empty list. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_filter = None
+    &#34;&#34;&#34;DataTable.style_filter dictionary. Default is empty dictionary. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_filter_conditional = None
+    &#34;&#34;&#34;DataTable.style_filter_conditional list. Default is empty list. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    column_selectable = None
+    &#34;&#34;&#34;DataTable.column_selectable. Default is `&#39;single&#39;`.&#34;&#34;&#34;
+
+    column_kwarg_lookup = None
+    &#34;&#34;&#34;Lookup for keyword arguments for each column allowing deletable, selectable, etc. to be set per column.&#34;&#34;&#34;
+
+    export_format = &#39;none&#39;
+    &#34;&#34;&#34;DataTable.export_format. Default is `&#39;none&#39;`. Could be one of `(csv, xlsx)`.&#34;&#34;&#34;
+
+    export_headers = &#39;names&#39;
+    &#34;&#34;&#34;DataTable.export_headers. Default is `&#39;names&#39;`. See documentation.&#34;&#34;&#34;
+
+    filter_action = &#39;native&#39;
+    &#34;&#34;&#34;DataTable.filter_action. Default is `&#39;native&#39;`.&#34;&#34;&#34;
+
+    page_size = 25
+    &#34;&#34;&#34;DataTable.page_size. Default is `&#39;25&#39;`.&#34;&#34;&#34;
+
+    row_selectable = None
+    &#34;&#34;&#34;DataTable.row_selectable. Default is `&#39;single&#39;`.&#34;&#34;&#34;
+
+    style_as_list_view = False
+    &#34;&#34;&#34;DataTable.style_as_list_view. Default is False.&#34;&#34;&#34;
+
+    sort_action = &#39;native&#39;
+    &#34;&#34;&#34;DataTable.sort_action. Default is `&#39;native&#39;`.&#34;&#34;&#34;
+
+    sort_mode = &#39;single&#39;
+    &#34;&#34;&#34;DataTable.sort_mode. Default is `&#39;single&#39;`.&#34;&#34;&#34;
+
+    # CSS Variables
+
+    text_color = &#39;#333333&#39;
+    &#34;&#34;&#34;Default text color.&#34;&#34;&#34;
+
+    background_color = &#39;#ffffff&#39;
+    &#34;&#34;&#34;Default background color.&#34;&#34;&#34;
+
+    zebra_color = &#39;#f9f9f9&#39;
+    &#34;&#34;&#34;Default background color for odd rows (zebra-stripe).&#34;&#34;&#34;
+
+    selected_cell_color = &#39;#eaeaea&#39;
+    &#34;&#34;&#34;Default color for selected cells.&#34;&#34;&#34;
+
+    def __init__(self):
+        &#34;&#34;&#34;Initialize class.&#34;&#34;&#34;
+        self.initialize_mutables()
+
+    def initialize_mutables(self):
+        &#34;&#34;&#34;Initialize the mutable data members to prevent modifying one attribute and impacting all instances.&#34;&#34;&#34;
+        self.style_table = {&#39;overflowX&#39;: &#39;scroll&#39;}
+        self.css = [
+            # Fix width when overflow is True and using dash_bootstrap_components
+            {&#39;selector&#39;: &#39;.row&#39;, &#39;rule&#39;: &#39;margin: 0&#39;},
+
+            # Based on: https://community.plot.ly/t/dash-table-datatable-styling-examples/15594/
+            # Align the select icon to the left and the sort icon to the right
+            {&#39;selector&#39;: &#39;th.dash-header div&#39;,
+             &#39;rule&#39;: &#39;display: flex; align-items: center;&#39;},
+            {&#39;selector&#39;: &#39;th.dash-header div span.column-header--select&#39;,
+             &#39;rule&#39;: &#39;order: 1; flex-shrink: 5; text-align: left;&#39;},
+            {&#39;selector&#39;: &#39;th.dash-header div span.column-header-name&#39;,
+             &#39;rule&#39;: &#39;order: 2; flex-grow: 5; text-align: center;&#39;},
+            {&#39;selector&#39;: &#39;th.dash-header div span.column-header--sort&#39;,
+             &#39;rule&#39;: &#39;order: 3; flex-shrink: 5; text-align: right;&#39;},
+
+            # Remove excess borders to better match JQuery DataTables styling
+            # (Some border styles don&#39;t appear to work from `self.style_header`)
+            {&#39;selector&#39;: &#39;th.dash-filter&#39;, &#39;rule&#39;: &#39;border-bottom-color: rgb(17, 17, 17) !important;&#39;},
+        ]
+        self.style_cell = {
+            &#39;backgroundColor&#39;: self.background_color,
+            &#39;borderStyle&#39;: f&#39;1px solid {self.zebra_color}&#39;,
+            &#39;color&#39;: self.text_color,
+        }
+        self.style_cell_conditional = []
+        self.style_data = {}
+        self.style_data_conditional = [
+            {&#39;if&#39;: {&#39;row_index&#39;: &#39;even&#39;}, &#39;backgroundColor&#39;: self.zebra_color},
+        ]
+        self.style_header = {
+            &#39;borderLeft&#39;: &#39;none&#39;,
+            &#39;borderRight&#39;: &#39;none&#39;,
+            &#39;borderTop&#39;: &#39;none&#39;,
+            &#39;fontWeight&#39;: &#39;bold&#39;,
+        }
+        self.style_header_conditional = []
+        self.style_filter = {
+            &#39;borderBottomColor&#39;: &#39;rgb(17, 17, 17)&#39;,
+        }
+        self.style_filter_conditional = []
+
+        self.initialize_column_kwarg_lookup()  # Must be called last
+
+    def initialize_column_kwarg_lookup(self):
+        &#34;&#34;&#34;Initialize the column lookup based on the other mutables.
+
+        Documentation: https://dash.plot.ly/datatable/reference
+
+        Additional kwargs not set in default lookup:
+            - clearable, deletable, editable, hideable, renamable, format, presentation, on_change, sort_as_null,
+                validation, type
+
+        &#34;&#34;&#34;
+        self.column_kwarg_lookup = {
+            &#39;default_kwargs&#39;: {
+                &#39;selectable&#39;: (self.column_selectable is not None),
+            },
+        }
+
+    def create_table(self, df_raw, columns=None, **kwargs_datatable):
+        &#34;&#34;&#34;Create the dash_table.DataTable.
+
+        Args:
+            df_raw: data to pass to datatable
+            columns: list of column names to display. Default is None to use all columns from df_raw
+            kwargs_datatable: keyword arguments to pass to the datatable
+
+        Returns:
+            DataTable: returns dash_table.DataTable object
+
+        &#34;&#34;&#34;
+        if columns is None:
+            columns = df_raw.columns
+        return dash_table.DataTable(**self._create_datatable(df_raw, columns), **kwargs_datatable)
+
+    def format_datatable_columns(self, df_raw, columns):
+        &#34;&#34;&#34;Return a list of column names formatted for a dash_table. Uses `self.self.column_name_kwarg_lookup`.
+
+        Args:
+            df_raw: data to pass to datatable
+            columns: list of strings or None
+
+        Returns:
+            list: of dict with keys `(name, id, deleteable, selectable)` in order of df_raw columns
+
+        &#34;&#34;&#34;
+        return [
+            {&#39;name&#39;: col, &#39;id&#39;: col, **self.column_kwarg_lookup.get(col, self.column_kwarg_lookup[&#39;default_kwargs&#39;])}
+            for col in df_raw.columns if (columns is None or col in columns)
+        ]
+
+    def _create_datatable(self, df_raw, columns, **table_kwargs):
+        &#34;&#34;&#34;Return dictionary of keyword arguments for datatable.
+
+        Args:
+            df_raw: data to pass to datatable
+            columns: will auto format list of string column names to display or use list of dicts
+            table_kwargs: additional keyword arguments to pass to datatable, such as id
+
+        Returns:
+            dict: keys include `(columns, data)` and all data members
+
+        &#34;&#34;&#34;
+        return {
+            &#39;columns&#39;: self.format_datatable_columns(df_raw, columns) if isinstance(columns[0], str) else columns,
+            &#39;data&#39;: (df_raw.loc[:, columns] if columns is not None else df_raw).to_dict(&#39;records&#39;),
+
+            # Add all datamembers
+            &#39;css&#39;: self.css,
+            &#39;style_table&#39;: self.style_table,
+            &#39;style_cell&#39;: self.style_cell,
+            &#39;style_cell_conditional&#39;: self.style_cell_conditional,
+            &#39;style_data&#39;: self.style_data,
+            &#39;style_data_conditional&#39;: self.style_data_conditional,
+            &#39;style_header&#39;: self.style_header,
+            &#39;style_header_conditional&#39;: self.style_header_conditional,
+            &#39;style_filter&#39;: self.style_filter,
+            &#39;style_filter_conditional&#39;: self.style_filter_conditional,
+            &#39;column_selectable&#39;: self.column_selectable,
+            &#39;export_format&#39;: self.export_format,
+            &#39;export_headers&#39;: self.export_headers,
+            &#39;filter_action&#39;: self.filter_action,
+            &#39;page_size&#39;: self.page_size,
+            &#39;row_selectable&#39;: self.row_selectable,
+            &#39;style_as_list_view&#39;: self.style_as_list_view,
+            &#39;sort_action&#39;: self.sort_action,
+            &#39;sort_mode&#39;: self.sort_mode,
+        }</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-variables">Global variables</h2>
+<dl>
+<dt id="dash_charts.datatable.OPERATORS"><code class="name">var <span class="ident">OPERATORS</span></code></dt>
+<dd>
+<div class="desc"><p>List of lists containing each possible filter string.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="dash_charts.datatable.apply_datatable_filters"><code class="name flex">
+<span>def <span class="ident">apply_datatable_filters</span></span>(<span>df_table, filter_query)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Filter a dataframe based on Dash datatable filterquery.</p>
+<p>Based on <code>Backend Paging with Filtering</code>: <a href="https://dash.plot.ly/datatable/callbacks">https://dash.plot.ly/datatable/callbacks</a></p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_table</code></strong></dt>
+<dd>pandas dataframe to filter</dd>
+<dt><strong><code>filter_query</code></strong></dt>
+<dd>Dash datatable string filter query</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dataframe</code></dt>
+<dd>filtered dataframe</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_datatable_filters(df_table, filter_query):
+    &#34;&#34;&#34;Filter a dataframe based on Dash datatable filterquery.
+
+    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks
+
+    Args:
+        df_table: pandas dataframe to filter
+        filter_query: Dash datatable string filter query
+
+    Returns:
+        dataframe: filtered dataframe
+
+    &#34;&#34;&#34;
+    filtering_expressions = filter_query.split(&#39; &amp;&amp; &#39;)
+    for filter_part in filtering_expressions:
+        col_name, operator, filter_value = split_filter_part(filter_part)
+        if operator in (&#39;eq&#39;, &#39;ne&#39;, &#39;lt&#39;, &#39;le&#39;, &#39;gt&#39;, &#39;ge&#39;):
+            # these operators match pandas series operator method names
+            df_table = df_table.loc[getattr(df_table[col_name], operator)(filter_value)]
+        elif operator == &#39;contains&#39;:
+            df_table = df_table.loc[df_table[col_name].str.contains(filter_value)]
+        elif operator == &#39;datestartswith&#39;:
+            # this is a simplification of the front-end filtering logic,
+            # only works with complete fields in standard format
+            df_table = df_table.loc[df_table[col_name].str.startswith(filter_value)]
+    return df_table</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.datatable.split_filter_part"><code class="name flex">
+<span>def <span class="ident">split_filter_part</span></span>(<span>filter_part)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Split the filter into <code>(name, operator, value)</code> components.</p>
+<p>Based on <code>Backend Paging with Filtering</code>: <a href="https://dash.plot.ly/datatable/callbacks">https://dash.plot.ly/datatable/callbacks</a></p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filter_part</code></strong></dt>
+<dd>string filter query</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd><code>(name, operator, value)</code> which could be all None if no match was found</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def split_filter_part(filter_part):  # noqa: CCR001
+    &#34;&#34;&#34;Split the filter into `(name, operator, value)` components.
+
+    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks
+
+    Args:
+        filter_part: string filter query
+
+    Returns:
+        tuple: `(name, operator, value)` which could be all None if no match was found
+
+    &#34;&#34;&#34;
+    for operator_type in OPERATORS:
+        for operator in operator_type:
+            if operator in filter_part:
+                name_part, value_part = filter_part.split(operator, 1)
+                name = name_part[name_part.find(&#39;{&#39;) + 1: name_part.rfind(&#39;}&#39;)]
+
+                value_part = value_part.strip()
+                v0 = value_part[0]
+                if (v0 == value_part[-1] and v0 in (&#34;&#39;&#34;, &#39;&#34;&#39;, &#39;`&#39;)):
+                    value = value_part[1: -1].replace(&#39;\\&#39; + v0, v0)
+                else:
+                    try:
+                        value = float(value_part)
+                    except ValueError:
+                        value = value_part
+
+                # Word operators need spaces after them in the filter string, but we don&#39;t want these later
+                return (name, operator_type[0].strip(), value)
+
+    return [None, None, None]</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="dash_charts.datatable.BaseDataTable"><code class="flex name class">
+<span>class <span class="ident">BaseDataTable</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Base Class for Data Tables.</p>
+<p>Initialize class.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BaseDataTable:  # noqa: H601
+    &#34;&#34;&#34;Base Class for Data Tables.&#34;&#34;&#34;
+
+    filter_summary = &#34;&#34;&#34;Table Filter Syntax:
+
+Full documentation at: [https://dash.plot.ly/datatable/filtering](https://dash.plot.ly/datatable/filtering)
+
+- `eq`: exact match (applies to number columns and will try to convert string to number)
+- `contains`: search for exact (case-sensitive) substring in each cell
+- `datestartswith`: matches partial datetime. For example, datestartswith `2018-03-01` will match `2018-03-01 12:59`
+but not `2018-03`
+- `ne`, `gt`, `ge`, `lt`, `le`: comparison operators for not equal, greater than, greater or equal, less than, etc.
+Applies to numbers and string columns (uses numbers, symbols, uppercase letter, lowercase letters)
+
+Press enter of tab to apply the filter&#34;&#34;&#34;
+    &#34;&#34;&#34;Markdown text explaining dash_table.DataTable filtering rules with link to full documentation.&#34;&#34;&#34;
+
+    # dash_table.DataTable Parameters. Documentation: https://dash.plot.ly/datatable/reference
+
+    style_table = None
+    &#34;&#34;&#34;DataTable.style_table dictionary. Default enables overflowX scroll. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    css = None
+    &#34;&#34;&#34;DataTable.css list. Use the style_* properties first.  Set in `initialize_mutables`.
+
+    Default sets row margin to zero to fix a negative margin issue when using dash_table and Bootstrap
+    See: https://github.com/facultyai/dash-bootstrap-components/issues/334
+
+    Also sets other various style tweaks to highlight the filter icons on hover, etc.
+
+    &#34;&#34;&#34;
+
+    style_cell = None
+    &#34;&#34;&#34;DataTable.style_cell dictionary. Default is empty dictionary. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_cell_conditional = None
+    &#34;&#34;&#34;DataTable.style_cell_conditional list. Default is empty list. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_data = None
+    &#34;&#34;&#34;DataTable.style_data dictionary. Default is empty dictionary. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_data_conditional = None
+    &#34;&#34;&#34;DataTable.style_data_conditional list. Default is for odd rows to have an off-white background (zebra stripe).
+
+    Set in `initialize_mutables`
+
+    &#34;&#34;&#34;
+
+    style_header = None
+    &#34;&#34;&#34;DataTable.style_header dictionary. Default is bold and off-white background. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_header_conditional = None
+    &#34;&#34;&#34;DataTable.style_header_conditional list. Default is empty list. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_filter = None
+    &#34;&#34;&#34;DataTable.style_filter dictionary. Default is empty dictionary. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    style_filter_conditional = None
+    &#34;&#34;&#34;DataTable.style_filter_conditional list. Default is empty list. Set in `initialize_mutables`.&#34;&#34;&#34;
+
+    column_selectable = None
+    &#34;&#34;&#34;DataTable.column_selectable. Default is `&#39;single&#39;`.&#34;&#34;&#34;
+
+    column_kwarg_lookup = None
+    &#34;&#34;&#34;Lookup for keyword arguments for each column allowing deletable, selectable, etc. to be set per column.&#34;&#34;&#34;
+
+    export_format = &#39;none&#39;
+    &#34;&#34;&#34;DataTable.export_format. Default is `&#39;none&#39;`. Could be one of `(csv, xlsx)`.&#34;&#34;&#34;
+
+    export_headers = &#39;names&#39;
+    &#34;&#34;&#34;DataTable.export_headers. Default is `&#39;names&#39;`. See documentation.&#34;&#34;&#34;
+
+    filter_action = &#39;native&#39;
+    &#34;&#34;&#34;DataTable.filter_action. Default is `&#39;native&#39;`.&#34;&#34;&#34;
+
+    page_size = 25
+    &#34;&#34;&#34;DataTable.page_size. Default is `&#39;25&#39;`.&#34;&#34;&#34;
+
+    row_selectable = None
+    &#34;&#34;&#34;DataTable.row_selectable. Default is `&#39;single&#39;`.&#34;&#34;&#34;
+
+    style_as_list_view = False
+    &#34;&#34;&#34;DataTable.style_as_list_view. Default is False.&#34;&#34;&#34;
+
+    sort_action = &#39;native&#39;
+    &#34;&#34;&#34;DataTable.sort_action. Default is `&#39;native&#39;`.&#34;&#34;&#34;
+
+    sort_mode = &#39;single&#39;
+    &#34;&#34;&#34;DataTable.sort_mode. Default is `&#39;single&#39;`.&#34;&#34;&#34;
+
+    # CSS Variables
+
+    text_color = &#39;#333333&#39;
+    &#34;&#34;&#34;Default text color.&#34;&#34;&#34;
+
+    background_color = &#39;#ffffff&#39;
+    &#34;&#34;&#34;Default background color.&#34;&#34;&#34;
+
+    zebra_color = &#39;#f9f9f9&#39;
+    &#34;&#34;&#34;Default background color for odd rows (zebra-stripe).&#34;&#34;&#34;
+
+    selected_cell_color = &#39;#eaeaea&#39;
+    &#34;&#34;&#34;Default color for selected cells.&#34;&#34;&#34;
+
+    def __init__(self):
+        &#34;&#34;&#34;Initialize class.&#34;&#34;&#34;
+        self.initialize_mutables()
+
+    def initialize_mutables(self):
+        &#34;&#34;&#34;Initialize the mutable data members to prevent modifying one attribute and impacting all instances.&#34;&#34;&#34;
+        self.style_table = {&#39;overflowX&#39;: &#39;scroll&#39;}
+        self.css = [
+            # Fix width when overflow is True and using dash_bootstrap_components
+            {&#39;selector&#39;: &#39;.row&#39;, &#39;rule&#39;: &#39;margin: 0&#39;},
+
+            # Based on: https://community.plot.ly/t/dash-table-datatable-styling-examples/15594/
+            # Align the select icon to the left and the sort icon to the right
+            {&#39;selector&#39;: &#39;th.dash-header div&#39;,
+             &#39;rule&#39;: &#39;display: flex; align-items: center;&#39;},
+            {&#39;selector&#39;: &#39;th.dash-header div span.column-header--select&#39;,
+             &#39;rule&#39;: &#39;order: 1; flex-shrink: 5; text-align: left;&#39;},
+            {&#39;selector&#39;: &#39;th.dash-header div span.column-header-name&#39;,
+             &#39;rule&#39;: &#39;order: 2; flex-grow: 5; text-align: center;&#39;},
+            {&#39;selector&#39;: &#39;th.dash-header div span.column-header--sort&#39;,
+             &#39;rule&#39;: &#39;order: 3; flex-shrink: 5; text-align: right;&#39;},
+
+            # Remove excess borders to better match JQuery DataTables styling
+            # (Some border styles don&#39;t appear to work from `self.style_header`)
+            {&#39;selector&#39;: &#39;th.dash-filter&#39;, &#39;rule&#39;: &#39;border-bottom-color: rgb(17, 17, 17) !important;&#39;},
+        ]
+        self.style_cell = {
+            &#39;backgroundColor&#39;: self.background_color,
+            &#39;borderStyle&#39;: f&#39;1px solid {self.zebra_color}&#39;,
+            &#39;color&#39;: self.text_color,
+        }
+        self.style_cell_conditional = []
+        self.style_data = {}
+        self.style_data_conditional = [
+            {&#39;if&#39;: {&#39;row_index&#39;: &#39;even&#39;}, &#39;backgroundColor&#39;: self.zebra_color},
+        ]
+        self.style_header = {
+            &#39;borderLeft&#39;: &#39;none&#39;,
+            &#39;borderRight&#39;: &#39;none&#39;,
+            &#39;borderTop&#39;: &#39;none&#39;,
+            &#39;fontWeight&#39;: &#39;bold&#39;,
+        }
+        self.style_header_conditional = []
+        self.style_filter = {
+            &#39;borderBottomColor&#39;: &#39;rgb(17, 17, 17)&#39;,
+        }
+        self.style_filter_conditional = []
+
+        self.initialize_column_kwarg_lookup()  # Must be called last
+
+    def initialize_column_kwarg_lookup(self):
+        &#34;&#34;&#34;Initialize the column lookup based on the other mutables.
+
+        Documentation: https://dash.plot.ly/datatable/reference
+
+        Additional kwargs not set in default lookup:
+            - clearable, deletable, editable, hideable, renamable, format, presentation, on_change, sort_as_null,
+                validation, type
+
+        &#34;&#34;&#34;
+        self.column_kwarg_lookup = {
+            &#39;default_kwargs&#39;: {
+                &#39;selectable&#39;: (self.column_selectable is not None),
+            },
+        }
+
+    def create_table(self, df_raw, columns=None, **kwargs_datatable):
+        &#34;&#34;&#34;Create the dash_table.DataTable.
+
+        Args:
+            df_raw: data to pass to datatable
+            columns: list of column names to display. Default is None to use all columns from df_raw
+            kwargs_datatable: keyword arguments to pass to the datatable
+
+        Returns:
+            DataTable: returns dash_table.DataTable object
+
+        &#34;&#34;&#34;
+        if columns is None:
+            columns = df_raw.columns
+        return dash_table.DataTable(**self._create_datatable(df_raw, columns), **kwargs_datatable)
+
+    def format_datatable_columns(self, df_raw, columns):
+        &#34;&#34;&#34;Return a list of column names formatted for a dash_table. Uses `self.self.column_name_kwarg_lookup`.
+
+        Args:
+            df_raw: data to pass to datatable
+            columns: list of strings or None
+
+        Returns:
+            list: of dict with keys `(name, id, deleteable, selectable)` in order of df_raw columns
+
+        &#34;&#34;&#34;
+        return [
+            {&#39;name&#39;: col, &#39;id&#39;: col, **self.column_kwarg_lookup.get(col, self.column_kwarg_lookup[&#39;default_kwargs&#39;])}
+            for col in df_raw.columns if (columns is None or col in columns)
+        ]
+
+    def _create_datatable(self, df_raw, columns, **table_kwargs):
+        &#34;&#34;&#34;Return dictionary of keyword arguments for datatable.
+
+        Args:
+            df_raw: data to pass to datatable
+            columns: will auto format list of string column names to display or use list of dicts
+            table_kwargs: additional keyword arguments to pass to datatable, such as id
+
+        Returns:
+            dict: keys include `(columns, data)` and all data members
+
+        &#34;&#34;&#34;
+        return {
+            &#39;columns&#39;: self.format_datatable_columns(df_raw, columns) if isinstance(columns[0], str) else columns,
+            &#39;data&#39;: (df_raw.loc[:, columns] if columns is not None else df_raw).to_dict(&#39;records&#39;),
+
+            # Add all datamembers
+            &#39;css&#39;: self.css,
+            &#39;style_table&#39;: self.style_table,
+            &#39;style_cell&#39;: self.style_cell,
+            &#39;style_cell_conditional&#39;: self.style_cell_conditional,
+            &#39;style_data&#39;: self.style_data,
+            &#39;style_data_conditional&#39;: self.style_data_conditional,
+            &#39;style_header&#39;: self.style_header,
+            &#39;style_header_conditional&#39;: self.style_header_conditional,
+            &#39;style_filter&#39;: self.style_filter,
+            &#39;style_filter_conditional&#39;: self.style_filter_conditional,
+            &#39;column_selectable&#39;: self.column_selectable,
+            &#39;export_format&#39;: self.export_format,
+            &#39;export_headers&#39;: self.export_headers,
+            &#39;filter_action&#39;: self.filter_action,
+            &#39;page_size&#39;: self.page_size,
+            &#39;row_selectable&#39;: self.row_selectable,
+            &#39;style_as_list_view&#39;: self.style_as_list_view,
+            &#39;sort_action&#39;: self.sort_action,
+            &#39;sort_mode&#39;: self.sort_mode,
+        }</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="dash_charts.datatable.BaseDataTable.background_color"><code class="name">var <span class="ident">background_color</span></code></dt>
+<dd>
+<div class="desc"><p>Default background color.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.column_kwarg_lookup"><code class="name">var <span class="ident">column_kwarg_lookup</span></code></dt>
+<dd>
+<div class="desc"><p>Lookup for keyword arguments for each column allowing deletable, selectable, etc. to be set per column.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.column_selectable"><code class="name">var <span class="ident">column_selectable</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.column_selectable. Default is <code>'single'</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.css"><code class="name">var <span class="ident">css</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.css list. Use the style_* properties first.
+Set in <code>initialize_mutables</code>.</p>
+<p>Default sets row margin to zero to fix a negative margin issue when using dash_table and Bootstrap
+See: <a href="https://github.com/facultyai/dash-bootstrap-components/issues/334">https://github.com/facultyai/dash-bootstrap-components/issues/334</a></p>
+<p>Also sets other various style tweaks to highlight the filter icons on hover, etc.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.export_format"><code class="name">var <span class="ident">export_format</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.export_format. Default is <code>'none'</code>. Could be one of <code>(csv, xlsx)</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.export_headers"><code class="name">var <span class="ident">export_headers</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.export_headers. Default is <code>'names'</code>. See documentation.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.filter_action"><code class="name">var <span class="ident">filter_action</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.filter_action. Default is <code>'native'</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.filter_summary"><code class="name">var <span class="ident">filter_summary</span></code></dt>
+<dd>
+<div class="desc"><p>Markdown text explaining dash_table.DataTable filtering rules with link to full documentation.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.page_size"><code class="name">var <span class="ident">page_size</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.page_size. Default is <code>'25'</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.row_selectable"><code class="name">var <span class="ident">row_selectable</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.row_selectable. Default is <code>'single'</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.selected_cell_color"><code class="name">var <span class="ident">selected_cell_color</span></code></dt>
+<dd>
+<div class="desc"><p>Default color for selected cells.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.sort_action"><code class="name">var <span class="ident">sort_action</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.sort_action. Default is <code>'native'</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.sort_mode"><code class="name">var <span class="ident">sort_mode</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.sort_mode. Default is <code>'single'</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_as_list_view"><code class="name">var <span class="ident">style_as_list_view</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_as_list_view. Default is False.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_cell"><code class="name">var <span class="ident">style_cell</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_cell dictionary. Default is empty dictionary. Set in <code>initialize_mutables</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_cell_conditional"><code class="name">var <span class="ident">style_cell_conditional</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_cell_conditional list. Default is empty list. Set in <code>initialize_mutables</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_data"><code class="name">var <span class="ident">style_data</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_data dictionary. Default is empty dictionary. Set in <code>initialize_mutables</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_data_conditional"><code class="name">var <span class="ident">style_data_conditional</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_data_conditional list. Default is for odd rows to have an off-white background (zebra stripe).</p>
+<p>Set in <code>initialize_mutables</code></p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_filter"><code class="name">var <span class="ident">style_filter</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_filter dictionary. Default is empty dictionary. Set in <code>initialize_mutables</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_filter_conditional"><code class="name">var <span class="ident">style_filter_conditional</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_filter_conditional list. Default is empty list. Set in <code>initialize_mutables</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_header"><code class="name">var <span class="ident">style_header</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_header dictionary. Default is bold and off-white background. Set in <code>initialize_mutables</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_header_conditional"><code class="name">var <span class="ident">style_header_conditional</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_header_conditional list. Default is empty list. Set in <code>initialize_mutables</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.style_table"><code class="name">var <span class="ident">style_table</span></code></dt>
+<dd>
+<div class="desc"><p>DataTable.style_table dictionary. Default enables overflowX scroll. Set in <code>initialize_mutables</code>.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.text_color"><code class="name">var <span class="ident">text_color</span></code></dt>
+<dd>
+<div class="desc"><p>Default text color.</p></div>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.zebra_color"><code class="name">var <span class="ident">zebra_color</span></code></dt>
+<dd>
+<div class="desc"><p>Default background color for odd rows (zebra-stripe).</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="dash_charts.datatable.BaseDataTable.create_table"><code class="name flex">
+<span>def <span class="ident">create_table</span></span>(<span>self, df_raw, columns=None, **kwargs_datatable)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create the dash_table.DataTable.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_raw</code></strong></dt>
+<dd>data to pass to datatable</dd>
+<dt><strong><code>columns</code></strong></dt>
+<dd>list of column names to display. Default is None to use all columns from df_raw</dd>
+<dt><strong><code>kwargs_datatable</code></strong></dt>
+<dd>keyword arguments to pass to the datatable</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>DataTable</code></dt>
+<dd>returns dash_table.DataTable object</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_table(self, df_raw, columns=None, **kwargs_datatable):
+    &#34;&#34;&#34;Create the dash_table.DataTable.
+
+    Args:
+        df_raw: data to pass to datatable
+        columns: list of column names to display. Default is None to use all columns from df_raw
+        kwargs_datatable: keyword arguments to pass to the datatable
+
+    Returns:
+        DataTable: returns dash_table.DataTable object
+
+    &#34;&#34;&#34;
+    if columns is None:
+        columns = df_raw.columns
+    return dash_table.DataTable(**self._create_datatable(df_raw, columns), **kwargs_datatable)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.format_datatable_columns"><code class="name flex">
+<span>def <span class="ident">format_datatable_columns</span></span>(<span>self, df_raw, columns)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a list of column names formatted for a dash_table. Uses <code>self.self.column_name_kwarg_lookup</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_raw</code></strong></dt>
+<dd>data to pass to datatable</dd>
+<dt><strong><code>columns</code></strong></dt>
+<dd>list of strings or None</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>of dict with keys <code>(name, id, deleteable, selectable)</code> in order of df_raw columns</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def format_datatable_columns(self, df_raw, columns):
+    &#34;&#34;&#34;Return a list of column names formatted for a dash_table. Uses `self.self.column_name_kwarg_lookup`.
+
+    Args:
+        df_raw: data to pass to datatable
+        columns: list of strings or None
+
+    Returns:
+        list: of dict with keys `(name, id, deleteable, selectable)` in order of df_raw columns
+
+    &#34;&#34;&#34;
+    return [
+        {&#39;name&#39;: col, &#39;id&#39;: col, **self.column_kwarg_lookup.get(col, self.column_kwarg_lookup[&#39;default_kwargs&#39;])}
+        for col in df_raw.columns if (columns is None or col in columns)
+    ]</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.initialize_column_kwarg_lookup"><code class="name flex">
+<span>def <span class="ident">initialize_column_kwarg_lookup</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialize the column lookup based on the other mutables.</p>
+<p>Documentation: <a href="https://dash.plot.ly/datatable/reference">https://dash.plot.ly/datatable/reference</a></p>
+<p>Additional kwargs not set in default lookup:
+- clearable, deletable, editable, hideable, renamable, format, presentation, on_change, sort_as_null,
+validation, type</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initialize_column_kwarg_lookup(self):
+    &#34;&#34;&#34;Initialize the column lookup based on the other mutables.
+
+    Documentation: https://dash.plot.ly/datatable/reference
+
+    Additional kwargs not set in default lookup:
+        - clearable, deletable, editable, hideable, renamable, format, presentation, on_change, sort_as_null,
+            validation, type
+
+    &#34;&#34;&#34;
+    self.column_kwarg_lookup = {
+        &#39;default_kwargs&#39;: {
+            &#39;selectable&#39;: (self.column_selectable is not None),
+        },
+    }</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.datatable.BaseDataTable.initialize_mutables"><code class="name flex">
+<span>def <span class="ident">initialize_mutables</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialize the mutable data members to prevent modifying one attribute and impacting all instances.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initialize_mutables(self):
+    &#34;&#34;&#34;Initialize the mutable data members to prevent modifying one attribute and impacting all instances.&#34;&#34;&#34;
+    self.style_table = {&#39;overflowX&#39;: &#39;scroll&#39;}
+    self.css = [
+        # Fix width when overflow is True and using dash_bootstrap_components
+        {&#39;selector&#39;: &#39;.row&#39;, &#39;rule&#39;: &#39;margin: 0&#39;},
+
+        # Based on: https://community.plot.ly/t/dash-table-datatable-styling-examples/15594/
+        # Align the select icon to the left and the sort icon to the right
+        {&#39;selector&#39;: &#39;th.dash-header div&#39;,
+         &#39;rule&#39;: &#39;display: flex; align-items: center;&#39;},
+        {&#39;selector&#39;: &#39;th.dash-header div span.column-header--select&#39;,
+         &#39;rule&#39;: &#39;order: 1; flex-shrink: 5; text-align: left;&#39;},
+        {&#39;selector&#39;: &#39;th.dash-header div span.column-header-name&#39;,
+         &#39;rule&#39;: &#39;order: 2; flex-grow: 5; text-align: center;&#39;},
+        {&#39;selector&#39;: &#39;th.dash-header div span.column-header--sort&#39;,
+         &#39;rule&#39;: &#39;order: 3; flex-shrink: 5; text-align: right;&#39;},
+
+        # Remove excess borders to better match JQuery DataTables styling
+        # (Some border styles don&#39;t appear to work from `self.style_header`)
+        {&#39;selector&#39;: &#39;th.dash-filter&#39;, &#39;rule&#39;: &#39;border-bottom-color: rgb(17, 17, 17) !important;&#39;},
+    ]
+    self.style_cell = {
+        &#39;backgroundColor&#39;: self.background_color,
+        &#39;borderStyle&#39;: f&#39;1px solid {self.zebra_color}&#39;,
+        &#39;color&#39;: self.text_color,
+    }
+    self.style_cell_conditional = []
+    self.style_data = {}
+    self.style_data_conditional = [
+        {&#39;if&#39;: {&#39;row_index&#39;: &#39;even&#39;}, &#39;backgroundColor&#39;: self.zebra_color},
+    ]
+    self.style_header = {
+        &#39;borderLeft&#39;: &#39;none&#39;,
+        &#39;borderRight&#39;: &#39;none&#39;,
+        &#39;borderTop&#39;: &#39;none&#39;,
+        &#39;fontWeight&#39;: &#39;bold&#39;,
+    }
+    self.style_header_conditional = []
+    self.style_filter = {
+        &#39;borderBottomColor&#39;: &#39;rgb(17, 17, 17)&#39;,
+    }
+    self.style_filter_conditional = []
+
+    self.initialize_column_kwarg_lookup()  # Must be called last</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dash_charts" href="index.html">dash_charts</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-variables">Global variables</a></h3>
+<ul class="">
+<li><code><a title="dash_charts.datatable.OPERATORS" href="#dash_charts.datatable.OPERATORS">OPERATORS</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="dash_charts.datatable.apply_datatable_filters" href="#dash_charts.datatable.apply_datatable_filters">apply_datatable_filters</a></code></li>
+<li><code><a title="dash_charts.datatable.split_filter_part" href="#dash_charts.datatable.split_filter_part">split_filter_part</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="dash_charts.datatable.BaseDataTable" href="#dash_charts.datatable.BaseDataTable">BaseDataTable</a></code></h4>
+<ul class="">
+<li><code><a title="dash_charts.datatable.BaseDataTable.background_color" href="#dash_charts.datatable.BaseDataTable.background_color">background_color</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.column_kwarg_lookup" href="#dash_charts.datatable.BaseDataTable.column_kwarg_lookup">column_kwarg_lookup</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.column_selectable" href="#dash_charts.datatable.BaseDataTable.column_selectable">column_selectable</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.create_table" href="#dash_charts.datatable.BaseDataTable.create_table">create_table</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.css" href="#dash_charts.datatable.BaseDataTable.css">css</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.export_format" href="#dash_charts.datatable.BaseDataTable.export_format">export_format</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.export_headers" href="#dash_charts.datatable.BaseDataTable.export_headers">export_headers</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.filter_action" href="#dash_charts.datatable.BaseDataTable.filter_action">filter_action</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.filter_summary" href="#dash_charts.datatable.BaseDataTable.filter_summary">filter_summary</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.format_datatable_columns" href="#dash_charts.datatable.BaseDataTable.format_datatable_columns">format_datatable_columns</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.initialize_column_kwarg_lookup" href="#dash_charts.datatable.BaseDataTable.initialize_column_kwarg_lookup">initialize_column_kwarg_lookup</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.initialize_mutables" href="#dash_charts.datatable.BaseDataTable.initialize_mutables">initialize_mutables</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.page_size" href="#dash_charts.datatable.BaseDataTable.page_size">page_size</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.row_selectable" href="#dash_charts.datatable.BaseDataTable.row_selectable">row_selectable</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.selected_cell_color" href="#dash_charts.datatable.BaseDataTable.selected_cell_color">selected_cell_color</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.sort_action" href="#dash_charts.datatable.BaseDataTable.sort_action">sort_action</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.sort_mode" href="#dash_charts.datatable.BaseDataTable.sort_mode">sort_mode</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_as_list_view" href="#dash_charts.datatable.BaseDataTable.style_as_list_view">style_as_list_view</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_cell" href="#dash_charts.datatable.BaseDataTable.style_cell">style_cell</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_cell_conditional" href="#dash_charts.datatable.BaseDataTable.style_cell_conditional">style_cell_conditional</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_data" href="#dash_charts.datatable.BaseDataTable.style_data">style_data</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_data_conditional" href="#dash_charts.datatable.BaseDataTable.style_data_conditional">style_data_conditional</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_filter" href="#dash_charts.datatable.BaseDataTable.style_filter">style_filter</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_filter_conditional" href="#dash_charts.datatable.BaseDataTable.style_filter_conditional">style_filter_conditional</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_header" href="#dash_charts.datatable.BaseDataTable.style_header">style_header</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_header_conditional" href="#dash_charts.datatable.BaseDataTable.style_header_conditional">style_header_conditional</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.style_table" href="#dash_charts.datatable.BaseDataTable.style_table">style_table</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.text_color" href="#dash_charts.datatable.BaseDataTable.text_color">text_color</a></code></li>
+<li><code><a title="dash_charts.datatable.BaseDataTable.zebra_color" href="#dash_charts.datatable.BaseDataTable.zebra_color">zebra_color</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>

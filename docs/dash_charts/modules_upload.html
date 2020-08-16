@@ -1,0 +1,1567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>dash_charts.modules_upload API documentation</title>
+<meta name="description" content="Upload module and helpers for managing file upload and download …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>
+a {
+text-decoration: underline;
+}
+h1,h2,h3,h4 {
+font-weight: 400;
+}
+h2 {
+margin: 0.50em 0 .25em 0;
+}
+dd p {
+margin: 5px 0;
+}
+dl dl:last-child {
+margin-bottom: 2.5em;
+}
+main {
+margin-bottom: 80vh;
+}
+#content {
+max-width: 1100px;
+}
+.source summary {
+background-color: #fafafa; /* match HLJS background */
+padding: 1px 5px;
+}
+.source summary:focus {
+outline: none !important;
+}
+.source pre {
+background-color: #fafafa; /* match HLJS background */
+}
+.source pre code {
+padding-bottom: 1em;
+}
+table, th, td {
+border: 1px solid #d4d4d4;
+padding: 0 5px;
+}
+</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dash_charts.modules_upload</code></h1>
+</header>
+<section id="section-intro">
+<p>Upload module and helpers for managing file upload and download.</p>
+<p>Some functions based on code from:
+<a href="https://docs.faculty.ai/user-guide/apps/examples/dash_file_upload_download.html">https://docs.faculty.ai/user-guide/apps/examples/dash_file_upload_download.html</a></p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Upload module and helpers for managing file upload and download.
+
+Some functions based on code from:
+https://docs.faculty.ai/user-guide/apps/examples/dash_file_upload_download.html
+
+&#34;&#34;&#34;
+
+import base64
+import io
+import json
+import time
+from datetime import datetime
+from pathlib import Path
+from urllib.parse import quote as urlquote
+
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
+import dash_html_components as html
+import dash_table
+import pandas as pd
+
+from .dash_helpers import DBConnect
+from .utils_app_modules import ModuleBase
+from .utils_callbacks import map_args, map_outputs
+from .utils_json_cache import CACHE_DIR
+
+
+def split_b64_file(b64_file):
+    &#34;&#34;&#34;Separate the data type and data content from a b64-encoded string.
+
+    Args:
+        b64_file: file encoded in base64
+
+    Returns:
+        tuple: of strings `(content_type, data)`
+
+    &#34;&#34;&#34;
+    return b64_file.encode(&#39;utf8&#39;).split(b&#39;;base64,&#39;)
+
+
+def save_file(dest_path, b64_file):
+    &#34;&#34;&#34;Decode and store a file uploaded with Plotly Dash.
+
+    Args:
+        dest_path: Path on server filesystem to save the file
+        b64_file: file encoded in base64
+
+    &#34;&#34;&#34;
+    data = split_b64_file(b64_file)[1]
+    dest_path.write_text(base64.decodebytes(data))
+
+
+def uploaded_files(upload_dir):
+    &#34;&#34;&#34;List the files in the upload directory.
+
+    Args:
+        upload_dir: directory where files are uploadedfolder
+
+    Returns:
+        list: Paths of uploaded files
+
+    &#34;&#34;&#34;
+    return [*upload_dir.glob(&#39;*.*&#39;)]
+
+
+def file_download_link(filename):
+    &#34;&#34;&#34;Create a Plotly Dash &#39;A&#39; element that when clicked triggers a file downloaded.
+
+    Args:
+        filename: Path to local file to be available for user download
+
+    Returns:
+        html.A: clickable Dash link to trigger download
+
+    &#34;&#34;&#34;
+    # PLANNED: Revisit. Should filename be a name or the full path?
+    return html.A(filename, href=f&#39;/download/{urlquote(filename)}&#39;)
+
+
+def parse_uploaded_image(b64_file, filename, timestamp):
+    &#34;&#34;&#34;Create an HTML element to show an uploaded image.
+
+    Args:
+        b64_file: file encoded in base64
+        filename: filename of upload file. Name only
+        timestamp: upload timestamp
+
+    Returns:
+        html.Img: if image data type
+
+    Raises:
+        RuntimeError: if filetype is not a supported image type
+
+    &#34;&#34;&#34;
+    content_type, data = split_b64_file(b64_file)
+    if &#39;image&#39; not in content_type:
+        raise RuntimeError(f&#39;Not image type. Found: {content_type}&#39;)
+    return html.Img(src=b64_file)
+
+
+def parse_json(raw_json):
+    &#34;&#34;&#34;Return dataframe from JSON formatted in the &#39;records&#39; orientation.
+
+    Args:
+        raw_json: json string
+
+    Returns:
+        dataframe: uploaded dataframe parsed from JSON
+
+    Raises:
+        RuntimeError: if the JSON file can&#39;t be parsed
+
+    &#34;&#34;&#34;
+    dict_json = json.loads(raw_json)
+    keys = [*dict_json.keys()]
+    if len(keys) != 1:
+        raise RuntimeError(&#39;Expected JSON with format `{data: [...]}` where `data` could be any key.&#39;
+                           f&#39;However, more than one key was found: {keys}&#39;)
+    return pd.DataFrame.from_records(dict_json[keys[0]])
+
+
+def load_df(decoded, filename):
+    &#34;&#34;&#34;Identify file type and parse the uploaded content into a dataframe.
+
+    Args:
+        decoded: string contents/data of the file decoded from the full base64 file
+        filename: filename of upload file. Name only
+
+    Returns:
+        dataframe: uploaded dataframe parsed from source file
+
+    Raises:
+        RuntimeError: if file suffix suffix is unsupported
+
+    &#34;&#34;&#34;
+    suffix = Path(filename).suffix.lower()
+    if suffix == &#39;.csv&#39;:
+        df_upload = pd.read_csv(io.StringIO(decoded.decode(&#39;utf-8&#39;)))
+
+    elif suffix.startswith(&#39;.xl&#39;):
+        # xlsx will have &#39;spreadsheet&#39; in `content_type` but xls will not have anything
+        df_upload = pd.read_excel(io.BytesIO(decoded))
+
+    elif suffix == &#39;.json&#39;:
+        df_upload = parse_json(decoded.decode(&#39;utf-8&#39;))
+
+    else:
+        raise RuntimeError(f&#39;File type ({suffix}) is unsupported. Expected .csv, .xl*, or .json&#39;)
+
+    return df_upload  # noqa: R504
+
+
+def parse_uploaded_df(b64_file, filename, timestamp):
+    &#34;&#34;&#34;Decode base64 data and parse based on file type. Attempts to return the parsed data as a Pandas dataframe.
+
+    Args:
+        b64_file: file encoded in base64
+        filename: filename of upload file. Name only
+        timestamp: upload timestamp
+
+    Returns:
+        dataframe: pandas dataframe parsed from source file
+
+    Raises:
+        RuntimeError: if raw data could not be parsed
+
+    &#34;&#34;&#34;
+    content_type, data = split_b64_file(b64_file)
+    decoded = base64.b64decode(data)
+    try:
+        df_upload = load_df(decoded, filename)
+
+    except Exception as error:
+        raise RuntimeError(f&#39;Could not parse {filename} ({content_type})\nError: {error}&#39;)
+
+    return df_upload  # noqa: R504
+
+
+def show_toast(message, header, icon=&#39;warning&#39;, style=None, **toast_kwargs):
+    &#34;&#34;&#34;Create toast notification.
+
+    Args:
+        message: string body text
+        header: string notification header
+        icon: string name in `(primary,secondary,success,warning,danger,info,light,dark)`. Default is warning
+        style: style dictionary. Default is the top right
+        toast_kwargs: additional toast keyword arguments (such as `duration=5000`)
+
+    Returns:
+        dbc.Toast: toast notification from Dash Bootstrap Components library
+
+    &#34;&#34;&#34;
+    if style is None:
+        # Position in the top right (note: will occlude the tabs when open, could be moved elsewhere)
+        style = {&#39;position&#39;: &#39;fixed&#39;, &#39;top&#39;: 10, &#39;right&#39;: 10, &#39;width&#39;: 350, &#39;zIndex&#39;: 1900}
+    return dbc.Toast(message, header=header, icon=icon, style=style, dismissable=True, **toast_kwargs)
+
+
+def drop_to_upload(**upload_kwargs):
+    &#34;&#34;&#34;Create drop to upload element. Dashed box of the active area or a clickable link to use the file dialog.
+
+    Based on dash documentation from: https://dash.plotly.com/dash-core-components/upload
+
+    Args:
+        upload_kwargs: keyword arguments for th dcc.Upload element. Children and style are reserved
+
+    Returns:
+        dcc.Upload: Dash upload element
+
+    &#34;&#34;&#34;
+    return dcc.Upload(
+        children=html.Div([&#39;Drag and Drop or &#39;, html.A(&#39;Select a File&#39;)]),
+        style={
+            &#39;width&#39;: &#39;100%&#39;,
+            &#39;height&#39;: &#39;60px&#39;,
+            &#39;lineHeight&#39;: &#39;60px&#39;,
+            &#39;borderWidth&#39;: &#39;1px&#39;,
+            &#39;borderStyle&#39;: &#39;dashed&#39;,
+            &#39;borderRadius&#39;: &#39;5px&#39;,
+            &#39;textAlign&#39;: &#39;center&#39;,
+            &#39;margin&#39;: &#39;10px&#39;,
+        },
+        **upload_kwargs,
+    )
+
+
+class UploadModule(ModuleBase):  # noqa: H601
+    &#34;&#34;&#34;Module for user data upload.
+
+    Note: this is not intended to be secure
+
+    &#34;&#34;&#34;
+
+    id_upload = &#39;upload-drop-area&#39;
+    &#34;&#34;&#34;Unique name for the upload component.&#34;&#34;&#34;
+
+    id_upload_output = &#39;upload-output&#39;
+    &#34;&#34;&#34;Unique name for the div to contain output of the parse-upload.&#34;&#34;&#34;
+
+    id_username_cache = &#39;username-cache&#39;
+    &#34;&#34;&#34;Unique name for the dcc.Store element to store the current username.&#34;&#34;&#34;
+
+    all_ids = [id_upload, id_upload_output, id_username_cache]
+    &#34;&#34;&#34;List of ids to register for this module.&#34;&#34;&#34;
+
+    cache_dir = CACHE_DIR
+    &#34;&#34;&#34;Path to the directory to use for caching files.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        &#34;&#34;&#34;Initialize module.&#34;&#34;&#34;  # noqa: DAR101
+        super().__init__(*args, **kwargs)
+        self._initialize_database()
+
+    def _initialize_database(self):
+        &#34;&#34;&#34;Create data members `(self.database, self.user_table, self.inventory_table)`.&#34;&#34;&#34;
+        self.database = DBConnect(self.cache_dir / f&#39;_placeholder_app-{self.name}.db&#39;)
+        self.user_table = self.database.db.create_table(
+            &#39;users&#39;, primary_id=&#39;username&#39;, primary_type=self.database.db.types.text)
+        self.inventory_table = self.database.db.create_table(
+            &#39;inventory&#39;, primary_id=&#39;table_name&#39;, primary_type=self.database.db.types.text)
+
+    def find_user(self, username):
+        &#34;&#34;&#34;Return the database row for the specified user.
+
+        Args:
+            username: string username
+
+        Returns:
+            dict: for row from table or None if no match
+
+        &#34;&#34;&#34;
+        return self.user_table.find_one(username=username)
+
+    def add_user(self, username):
+        &#34;&#34;&#34;Add the user to the table or update the user&#39;s information if already registered.
+
+        Args:
+            username: string username
+
+        &#34;&#34;&#34;
+        now = time.time()
+        if self.find_user(username):
+            self.user_table.upsert({&#39;username&#39;: username, &#39;last_loaded&#39;: now}, [&#39;username&#39;])
+        else:
+            self.user_table.insert({&#39;username&#39;: username, &#39;creation&#39;: now, &#39;last_loaded&#39;: now})
+
+    def upload_data(self, username, df_name, df_upload):
+        &#34;&#34;&#34;Store dataframe in database for specified user.
+
+        Args:
+            username: string username
+            df_name: name of the stored dataframe
+            df_upload: pandas dataframe to store
+
+        Raises:
+            Exception: If upload fails, deletes the created table
+
+        &#34;&#34;&#34;
+        now = time.time()
+        table_name = f&#39;{username}-{df_name}-{int(now)}&#39;
+        table = self.database.db.create_table(table_name)
+        try:
+            table.insert_many(df_upload.to_dict(orient=&#39;records&#39;))
+        except Exception:
+            table.drop()  # Delete the table if upload fails
+            raise
+
+        self.inventory_table.insert({&#39;table_name&#39;: table_name, &#39;df_name&#39;: df_name, &#39;username&#39;: username,
+                                     &#39;creation&#39;: now})
+
+    def get_data(self, table_name):
+        &#34;&#34;&#34;Retrieve stored data for specified dataframe name.
+
+        Args:
+            table_name: unique name of the table to retrieve
+
+        Returns:
+            pd.DataFrame: pandas dataframe retrieved from the database
+
+        &#34;&#34;&#34;
+        table = self.database.db.load_table(table_name)
+        return pd.DataFrame.from_records(table.all())
+
+    def delete_data(self, table_name):
+        &#34;&#34;&#34;Remove specified data from the database.
+
+        Args:
+            table_name: unique name of the table to delete
+
+        &#34;&#34;&#34;
+        self.database.db.load_table(table_name).drop()
+
+    def return_layout(self, ids):
+        &#34;&#34;&#34;Return the Upload module application layout.
+
+        Args:
+            ids: `self.ids` from base application
+
+        Returns:
+            dict: Dash HTML object.
+
+        &#34;&#34;&#34;
+        return html.Div([
+            dcc.Store(id=ids[self.get(self.id_username_cache)], storage_type=&#39;session&#39;),
+            html.H2(&#39;File Upload&#39;),
+            html.P(&#39;Upload Tidy Data in CSV, Excel, or JSON format&#39;),
+            drop_to_upload(id=ids[self.get(self.id_upload)]),
+            dcc.Loading(html.Div(&#39;&#39;, id=ids[self.get(self.id_upload_output)]), type=&#39;circle&#39;),
+        ])
+
+    def create_callbacks(self, parent):
+        &#34;&#34;&#34;Register callbacks to handle user interaction.
+
+        Args:
+            parent: parent instance (ex: `self`)
+
+        &#34;&#34;&#34;
+        super().create_callbacks(parent)
+        self.register_upload_handler(parent)
+
+    def _show_data(self, username):
+        &#34;&#34;&#34;Create Dash HTML to show the raw data loaded for the specified user.
+
+        Args:
+            username: string username
+
+        Returns:
+            dict: Dash HTML object
+
+        &#34;&#34;&#34;
+        # TODO: Add delete button for each table - need pattern matching callback:
+        #   https://dash.plotly.com/pattern-matching-callbacks
+        def format_table(df_name, username, creation, raw_df):
+            user_str = f&#39;by &#34;{username}&#34; &#39; if username else &#39;&#39;
+            return [
+                html.H4(df_name),
+                html.P(f&#39;Uploaded {user_str}on {datetime.fromtimestamp(creation)} (Note: only first 10 rows &amp; 10 col)&#39;),
+                dash_table.DataTable(
+                    data=raw_df[:10].to_dict(&#39;records&#39;),
+                    columns=[{&#39;name&#39;: i, &#39;id&#39;: i} for i in raw_df.columns[:10]],
+                    style_cell={
+                        &#39;overflow&#39;: &#39;hidden&#39;,
+                        &#39;textOverflow&#39;: &#39;ellipsis&#39;,
+                        &#39;maxWidth&#39;: 0,
+                    },
+                ),
+                html.Hr(),
+            ]
+
+        children = [html.Hr()]
+        rows = self.inventory_table.find(username=username)
+        for row in sorted(rows, key=lambda _row: _row[&#39;creation&#39;], reverse=True):
+            df_upload = self.get_data(row[&#39;table_name&#39;])
+            children.extend(format_table(row[&#39;df_name&#39;], row[&#39;username&#39;], row[&#39;creation&#39;], df_upload))
+        return html.Div(children)
+
+    def register_upload_handler(self, parent):
+        &#34;&#34;&#34;Register callbacks to handle user interaction.
+
+        Args:
+            parent: parent instance (ex: `self`)
+
+        &#34;&#34;&#34;
+        outputs = [(self.get(self.id_upload_output), &#39;children&#39;)]
+        inputs = [(self.get(self.id_upload), &#39;contents&#39;), (self.get(self.id_username_cache), &#39;data&#39;)]
+        states = [(self.get(self.id_upload), &#39;filename&#39;), (self.get(self.id_upload), &#39;last_modified&#39;)]
+
+        @parent.callback(outputs, inputs, states, pic=True)
+        def upload_handler(*raw_args):
+            a_in, a_state = map_args(raw_args, inputs, states)
+            b64_file = a_in[self.get(self.id_upload)][&#39;contents&#39;]
+            username = a_in[self.get(self.id_username_cache)][&#39;data&#39;]
+            filename = a_state[self.get(self.id_upload)][&#39;filename&#39;]
+            timestamp = a_state[self.get(self.id_upload)][&#39;last_modified&#39;]
+
+            child_output = []
+            try:
+                if b64_file is not None:
+                    df_upload = parse_uploaded_df(b64_file, filename, timestamp)
+                    df_upload = df_upload.dropna(axis=&#39;columns&#39;)  # FIXME: Better handle NaN values...
+                    self.add_user(username)
+                    self.upload_data(username, filename, df_upload)
+
+            except Exception as error:
+                child_output.extend([
+                    show_toast(f&#39;{error}&#39;, &#39;Upload Error&#39;, icon=&#39;danger&#39;),
+                    dcc.Markdown(f&#39;### Upload Error\n\n{type(error)}\n\n```\n{error}\n```&#39;),
+                ])
+
+            child_output.append(self._show_data(username))
+
+            return map_outputs(outputs, [(self.get(self.id_upload_output), &#39;children&#39;, html.Div(child_output))])</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="dash_charts.modules_upload.drop_to_upload"><code class="name flex">
+<span>def <span class="ident">drop_to_upload</span></span>(<span>**upload_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create drop to upload element. Dashed box of the active area or a clickable link to use the file dialog.</p>
+<p>Based on dash documentation from: <a href="https://dash.plotly.com/dash-core-components/upload">https://dash.plotly.com/dash-core-components/upload</a></p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>upload_kwargs</code></strong></dt>
+<dd>keyword arguments for th dcc.Upload element. Children and style are reserved</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dcc.Upload</code></dt>
+<dd>Dash upload element</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def drop_to_upload(**upload_kwargs):
+    &#34;&#34;&#34;Create drop to upload element. Dashed box of the active area or a clickable link to use the file dialog.
+
+    Based on dash documentation from: https://dash.plotly.com/dash-core-components/upload
+
+    Args:
+        upload_kwargs: keyword arguments for th dcc.Upload element. Children and style are reserved
+
+    Returns:
+        dcc.Upload: Dash upload element
+
+    &#34;&#34;&#34;
+    return dcc.Upload(
+        children=html.Div([&#39;Drag and Drop or &#39;, html.A(&#39;Select a File&#39;)]),
+        style={
+            &#39;width&#39;: &#39;100%&#39;,
+            &#39;height&#39;: &#39;60px&#39;,
+            &#39;lineHeight&#39;: &#39;60px&#39;,
+            &#39;borderWidth&#39;: &#39;1px&#39;,
+            &#39;borderStyle&#39;: &#39;dashed&#39;,
+            &#39;borderRadius&#39;: &#39;5px&#39;,
+            &#39;textAlign&#39;: &#39;center&#39;,
+            &#39;margin&#39;: &#39;10px&#39;,
+        },
+        **upload_kwargs,
+    )</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.file_download_link"><code class="name flex">
+<span>def <span class="ident">file_download_link</span></span>(<span>filename)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a Plotly Dash 'A' element that when clicked triggers a file downloaded.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filename</code></strong></dt>
+<dd>Path to local file to be available for user download</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>html.A</code></dt>
+<dd>clickable Dash link to trigger download</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def file_download_link(filename):
+    &#34;&#34;&#34;Create a Plotly Dash &#39;A&#39; element that when clicked triggers a file downloaded.
+
+    Args:
+        filename: Path to local file to be available for user download
+
+    Returns:
+        html.A: clickable Dash link to trigger download
+
+    &#34;&#34;&#34;
+    # PLANNED: Revisit. Should filename be a name or the full path?
+    return html.A(filename, href=f&#39;/download/{urlquote(filename)}&#39;)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.load_df"><code class="name flex">
+<span>def <span class="ident">load_df</span></span>(<span>decoded, filename)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Identify file type and parse the uploaded content into a dataframe.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>decoded</code></strong></dt>
+<dd>string contents/data of the file decoded from the full base64 file</dd>
+<dt><strong><code>filename</code></strong></dt>
+<dd>filename of upload file. Name only</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dataframe</code></dt>
+<dd>uploaded dataframe parsed from source file</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>if file suffix suffix is unsupported</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_df(decoded, filename):
+    &#34;&#34;&#34;Identify file type and parse the uploaded content into a dataframe.
+
+    Args:
+        decoded: string contents/data of the file decoded from the full base64 file
+        filename: filename of upload file. Name only
+
+    Returns:
+        dataframe: uploaded dataframe parsed from source file
+
+    Raises:
+        RuntimeError: if file suffix suffix is unsupported
+
+    &#34;&#34;&#34;
+    suffix = Path(filename).suffix.lower()
+    if suffix == &#39;.csv&#39;:
+        df_upload = pd.read_csv(io.StringIO(decoded.decode(&#39;utf-8&#39;)))
+
+    elif suffix.startswith(&#39;.xl&#39;):
+        # xlsx will have &#39;spreadsheet&#39; in `content_type` but xls will not have anything
+        df_upload = pd.read_excel(io.BytesIO(decoded))
+
+    elif suffix == &#39;.json&#39;:
+        df_upload = parse_json(decoded.decode(&#39;utf-8&#39;))
+
+    else:
+        raise RuntimeError(f&#39;File type ({suffix}) is unsupported. Expected .csv, .xl*, or .json&#39;)
+
+    return df_upload  # noqa: R504</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.parse_json"><code class="name flex">
+<span>def <span class="ident">parse_json</span></span>(<span>raw_json)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return dataframe from JSON formatted in the 'records' orientation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>raw_json</code></strong></dt>
+<dd>json string</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dataframe</code></dt>
+<dd>uploaded dataframe parsed from JSON</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>if the JSON file can't be parsed</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def parse_json(raw_json):
+    &#34;&#34;&#34;Return dataframe from JSON formatted in the &#39;records&#39; orientation.
+
+    Args:
+        raw_json: json string
+
+    Returns:
+        dataframe: uploaded dataframe parsed from JSON
+
+    Raises:
+        RuntimeError: if the JSON file can&#39;t be parsed
+
+    &#34;&#34;&#34;
+    dict_json = json.loads(raw_json)
+    keys = [*dict_json.keys()]
+    if len(keys) != 1:
+        raise RuntimeError(&#39;Expected JSON with format `{data: [...]}` where `data` could be any key.&#39;
+                           f&#39;However, more than one key was found: {keys}&#39;)
+    return pd.DataFrame.from_records(dict_json[keys[0]])</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.parse_uploaded_df"><code class="name flex">
+<span>def <span class="ident">parse_uploaded_df</span></span>(<span>b64_file, filename, timestamp)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Decode base64 data and parse based on file type. Attempts to return the parsed data as a Pandas dataframe.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>b64_file</code></strong></dt>
+<dd>file encoded in base64</dd>
+<dt><strong><code>filename</code></strong></dt>
+<dd>filename of upload file. Name only</dd>
+<dt><strong><code>timestamp</code></strong></dt>
+<dd>upload timestamp</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dataframe</code></dt>
+<dd>pandas dataframe parsed from source file</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>if raw data could not be parsed</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def parse_uploaded_df(b64_file, filename, timestamp):
+    &#34;&#34;&#34;Decode base64 data and parse based on file type. Attempts to return the parsed data as a Pandas dataframe.
+
+    Args:
+        b64_file: file encoded in base64
+        filename: filename of upload file. Name only
+        timestamp: upload timestamp
+
+    Returns:
+        dataframe: pandas dataframe parsed from source file
+
+    Raises:
+        RuntimeError: if raw data could not be parsed
+
+    &#34;&#34;&#34;
+    content_type, data = split_b64_file(b64_file)
+    decoded = base64.b64decode(data)
+    try:
+        df_upload = load_df(decoded, filename)
+
+    except Exception as error:
+        raise RuntimeError(f&#39;Could not parse {filename} ({content_type})\nError: {error}&#39;)
+
+    return df_upload  # noqa: R504</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.parse_uploaded_image"><code class="name flex">
+<span>def <span class="ident">parse_uploaded_image</span></span>(<span>b64_file, filename, timestamp)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create an HTML element to show an uploaded image.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>b64_file</code></strong></dt>
+<dd>file encoded in base64</dd>
+<dt><strong><code>filename</code></strong></dt>
+<dd>filename of upload file. Name only</dd>
+<dt><strong><code>timestamp</code></strong></dt>
+<dd>upload timestamp</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>html.Img</code></dt>
+<dd>if image data type</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>if filetype is not a supported image type</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def parse_uploaded_image(b64_file, filename, timestamp):
+    &#34;&#34;&#34;Create an HTML element to show an uploaded image.
+
+    Args:
+        b64_file: file encoded in base64
+        filename: filename of upload file. Name only
+        timestamp: upload timestamp
+
+    Returns:
+        html.Img: if image data type
+
+    Raises:
+        RuntimeError: if filetype is not a supported image type
+
+    &#34;&#34;&#34;
+    content_type, data = split_b64_file(b64_file)
+    if &#39;image&#39; not in content_type:
+        raise RuntimeError(f&#39;Not image type. Found: {content_type}&#39;)
+    return html.Img(src=b64_file)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.save_file"><code class="name flex">
+<span>def <span class="ident">save_file</span></span>(<span>dest_path, b64_file)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Decode and store a file uploaded with Plotly Dash.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>dest_path</code></strong></dt>
+<dd>Path on server filesystem to save the file</dd>
+<dt><strong><code>b64_file</code></strong></dt>
+<dd>file encoded in base64</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_file(dest_path, b64_file):
+    &#34;&#34;&#34;Decode and store a file uploaded with Plotly Dash.
+
+    Args:
+        dest_path: Path on server filesystem to save the file
+        b64_file: file encoded in base64
+
+    &#34;&#34;&#34;
+    data = split_b64_file(b64_file)[1]
+    dest_path.write_text(base64.decodebytes(data))</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.show_toast"><code class="name flex">
+<span>def <span class="ident">show_toast</span></span>(<span>message, header, icon='warning', style=None, **toast_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create toast notification.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>message</code></strong></dt>
+<dd>string body text</dd>
+<dt><strong><code>header</code></strong></dt>
+<dd>string notification header</dd>
+<dt><strong><code>icon</code></strong></dt>
+<dd>string name in <code>(primary,secondary,success,warning,danger,info,light,dark)</code>. Default is warning</dd>
+<dt><strong><code>style</code></strong></dt>
+<dd>style dictionary. Default is the top right</dd>
+<dt><strong><code>toast_kwargs</code></strong></dt>
+<dd>additional toast keyword arguments (such as <code>duration=5000</code>)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dbc.Toast</code></dt>
+<dd>toast notification from Dash Bootstrap Components library</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_toast(message, header, icon=&#39;warning&#39;, style=None, **toast_kwargs):
+    &#34;&#34;&#34;Create toast notification.
+
+    Args:
+        message: string body text
+        header: string notification header
+        icon: string name in `(primary,secondary,success,warning,danger,info,light,dark)`. Default is warning
+        style: style dictionary. Default is the top right
+        toast_kwargs: additional toast keyword arguments (such as `duration=5000`)
+
+    Returns:
+        dbc.Toast: toast notification from Dash Bootstrap Components library
+
+    &#34;&#34;&#34;
+    if style is None:
+        # Position in the top right (note: will occlude the tabs when open, could be moved elsewhere)
+        style = {&#39;position&#39;: &#39;fixed&#39;, &#39;top&#39;: 10, &#39;right&#39;: 10, &#39;width&#39;: 350, &#39;zIndex&#39;: 1900}
+    return dbc.Toast(message, header=header, icon=icon, style=style, dismissable=True, **toast_kwargs)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.split_b64_file"><code class="name flex">
+<span>def <span class="ident">split_b64_file</span></span>(<span>b64_file)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Separate the data type and data content from a b64-encoded string.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>b64_file</code></strong></dt>
+<dd>file encoded in base64</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>of strings <code>(content_type, data)</code></dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def split_b64_file(b64_file):
+    &#34;&#34;&#34;Separate the data type and data content from a b64-encoded string.
+
+    Args:
+        b64_file: file encoded in base64
+
+    Returns:
+        tuple: of strings `(content_type, data)`
+
+    &#34;&#34;&#34;
+    return b64_file.encode(&#39;utf8&#39;).split(b&#39;;base64,&#39;)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.uploaded_files"><code class="name flex">
+<span>def <span class="ident">uploaded_files</span></span>(<span>upload_dir)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>List the files in the upload directory.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>upload_dir</code></strong></dt>
+<dd>directory where files are uploadedfolder</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Paths of uploaded files</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def uploaded_files(upload_dir):
+    &#34;&#34;&#34;List the files in the upload directory.
+
+    Args:
+        upload_dir: directory where files are uploadedfolder
+
+    Returns:
+        list: Paths of uploaded files
+
+    &#34;&#34;&#34;
+    return [*upload_dir.glob(&#39;*.*&#39;)]</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="dash_charts.modules_upload.UploadModule"><code class="flex name class">
+<span>class <span class="ident">UploadModule</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Module for user data upload.</p>
+<p>Note: this is not intended to be secure</p>
+<p>Initialize module.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class UploadModule(ModuleBase):  # noqa: H601
+    &#34;&#34;&#34;Module for user data upload.
+
+    Note: this is not intended to be secure
+
+    &#34;&#34;&#34;
+
+    id_upload = &#39;upload-drop-area&#39;
+    &#34;&#34;&#34;Unique name for the upload component.&#34;&#34;&#34;
+
+    id_upload_output = &#39;upload-output&#39;
+    &#34;&#34;&#34;Unique name for the div to contain output of the parse-upload.&#34;&#34;&#34;
+
+    id_username_cache = &#39;username-cache&#39;
+    &#34;&#34;&#34;Unique name for the dcc.Store element to store the current username.&#34;&#34;&#34;
+
+    all_ids = [id_upload, id_upload_output, id_username_cache]
+    &#34;&#34;&#34;List of ids to register for this module.&#34;&#34;&#34;
+
+    cache_dir = CACHE_DIR
+    &#34;&#34;&#34;Path to the directory to use for caching files.&#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        &#34;&#34;&#34;Initialize module.&#34;&#34;&#34;  # noqa: DAR101
+        super().__init__(*args, **kwargs)
+        self._initialize_database()
+
+    def _initialize_database(self):
+        &#34;&#34;&#34;Create data members `(self.database, self.user_table, self.inventory_table)`.&#34;&#34;&#34;
+        self.database = DBConnect(self.cache_dir / f&#39;_placeholder_app-{self.name}.db&#39;)
+        self.user_table = self.database.db.create_table(
+            &#39;users&#39;, primary_id=&#39;username&#39;, primary_type=self.database.db.types.text)
+        self.inventory_table = self.database.db.create_table(
+            &#39;inventory&#39;, primary_id=&#39;table_name&#39;, primary_type=self.database.db.types.text)
+
+    def find_user(self, username):
+        &#34;&#34;&#34;Return the database row for the specified user.
+
+        Args:
+            username: string username
+
+        Returns:
+            dict: for row from table or None if no match
+
+        &#34;&#34;&#34;
+        return self.user_table.find_one(username=username)
+
+    def add_user(self, username):
+        &#34;&#34;&#34;Add the user to the table or update the user&#39;s information if already registered.
+
+        Args:
+            username: string username
+
+        &#34;&#34;&#34;
+        now = time.time()
+        if self.find_user(username):
+            self.user_table.upsert({&#39;username&#39;: username, &#39;last_loaded&#39;: now}, [&#39;username&#39;])
+        else:
+            self.user_table.insert({&#39;username&#39;: username, &#39;creation&#39;: now, &#39;last_loaded&#39;: now})
+
+    def upload_data(self, username, df_name, df_upload):
+        &#34;&#34;&#34;Store dataframe in database for specified user.
+
+        Args:
+            username: string username
+            df_name: name of the stored dataframe
+            df_upload: pandas dataframe to store
+
+        Raises:
+            Exception: If upload fails, deletes the created table
+
+        &#34;&#34;&#34;
+        now = time.time()
+        table_name = f&#39;{username}-{df_name}-{int(now)}&#39;
+        table = self.database.db.create_table(table_name)
+        try:
+            table.insert_many(df_upload.to_dict(orient=&#39;records&#39;))
+        except Exception:
+            table.drop()  # Delete the table if upload fails
+            raise
+
+        self.inventory_table.insert({&#39;table_name&#39;: table_name, &#39;df_name&#39;: df_name, &#39;username&#39;: username,
+                                     &#39;creation&#39;: now})
+
+    def get_data(self, table_name):
+        &#34;&#34;&#34;Retrieve stored data for specified dataframe name.
+
+        Args:
+            table_name: unique name of the table to retrieve
+
+        Returns:
+            pd.DataFrame: pandas dataframe retrieved from the database
+
+        &#34;&#34;&#34;
+        table = self.database.db.load_table(table_name)
+        return pd.DataFrame.from_records(table.all())
+
+    def delete_data(self, table_name):
+        &#34;&#34;&#34;Remove specified data from the database.
+
+        Args:
+            table_name: unique name of the table to delete
+
+        &#34;&#34;&#34;
+        self.database.db.load_table(table_name).drop()
+
+    def return_layout(self, ids):
+        &#34;&#34;&#34;Return the Upload module application layout.
+
+        Args:
+            ids: `self.ids` from base application
+
+        Returns:
+            dict: Dash HTML object.
+
+        &#34;&#34;&#34;
+        return html.Div([
+            dcc.Store(id=ids[self.get(self.id_username_cache)], storage_type=&#39;session&#39;),
+            html.H2(&#39;File Upload&#39;),
+            html.P(&#39;Upload Tidy Data in CSV, Excel, or JSON format&#39;),
+            drop_to_upload(id=ids[self.get(self.id_upload)]),
+            dcc.Loading(html.Div(&#39;&#39;, id=ids[self.get(self.id_upload_output)]), type=&#39;circle&#39;),
+        ])
+
+    def create_callbacks(self, parent):
+        &#34;&#34;&#34;Register callbacks to handle user interaction.
+
+        Args:
+            parent: parent instance (ex: `self`)
+
+        &#34;&#34;&#34;
+        super().create_callbacks(parent)
+        self.register_upload_handler(parent)
+
+    def _show_data(self, username):
+        &#34;&#34;&#34;Create Dash HTML to show the raw data loaded for the specified user.
+
+        Args:
+            username: string username
+
+        Returns:
+            dict: Dash HTML object
+
+        &#34;&#34;&#34;
+        # TODO: Add delete button for each table - need pattern matching callback:
+        #   https://dash.plotly.com/pattern-matching-callbacks
+        def format_table(df_name, username, creation, raw_df):
+            user_str = f&#39;by &#34;{username}&#34; &#39; if username else &#39;&#39;
+            return [
+                html.H4(df_name),
+                html.P(f&#39;Uploaded {user_str}on {datetime.fromtimestamp(creation)} (Note: only first 10 rows &amp; 10 col)&#39;),
+                dash_table.DataTable(
+                    data=raw_df[:10].to_dict(&#39;records&#39;),
+                    columns=[{&#39;name&#39;: i, &#39;id&#39;: i} for i in raw_df.columns[:10]],
+                    style_cell={
+                        &#39;overflow&#39;: &#39;hidden&#39;,
+                        &#39;textOverflow&#39;: &#39;ellipsis&#39;,
+                        &#39;maxWidth&#39;: 0,
+                    },
+                ),
+                html.Hr(),
+            ]
+
+        children = [html.Hr()]
+        rows = self.inventory_table.find(username=username)
+        for row in sorted(rows, key=lambda _row: _row[&#39;creation&#39;], reverse=True):
+            df_upload = self.get_data(row[&#39;table_name&#39;])
+            children.extend(format_table(row[&#39;df_name&#39;], row[&#39;username&#39;], row[&#39;creation&#39;], df_upload))
+        return html.Div(children)
+
+    def register_upload_handler(self, parent):
+        &#34;&#34;&#34;Register callbacks to handle user interaction.
+
+        Args:
+            parent: parent instance (ex: `self`)
+
+        &#34;&#34;&#34;
+        outputs = [(self.get(self.id_upload_output), &#39;children&#39;)]
+        inputs = [(self.get(self.id_upload), &#39;contents&#39;), (self.get(self.id_username_cache), &#39;data&#39;)]
+        states = [(self.get(self.id_upload), &#39;filename&#39;), (self.get(self.id_upload), &#39;last_modified&#39;)]
+
+        @parent.callback(outputs, inputs, states, pic=True)
+        def upload_handler(*raw_args):
+            a_in, a_state = map_args(raw_args, inputs, states)
+            b64_file = a_in[self.get(self.id_upload)][&#39;contents&#39;]
+            username = a_in[self.get(self.id_username_cache)][&#39;data&#39;]
+            filename = a_state[self.get(self.id_upload)][&#39;filename&#39;]
+            timestamp = a_state[self.get(self.id_upload)][&#39;last_modified&#39;]
+
+            child_output = []
+            try:
+                if b64_file is not None:
+                    df_upload = parse_uploaded_df(b64_file, filename, timestamp)
+                    df_upload = df_upload.dropna(axis=&#39;columns&#39;)  # FIXME: Better handle NaN values...
+                    self.add_user(username)
+                    self.upload_data(username, filename, df_upload)
+
+            except Exception as error:
+                child_output.extend([
+                    show_toast(f&#39;{error}&#39;, &#39;Upload Error&#39;, icon=&#39;danger&#39;),
+                    dcc.Markdown(f&#39;### Upload Error\n\n{type(error)}\n\n```\n{error}\n```&#39;),
+                ])
+
+            child_output.append(self._show_data(username))
+
+            return map_outputs(outputs, [(self.get(self.id_upload_output), &#39;children&#39;, html.Div(child_output))])</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="dash_charts.utils_app_modules.ModuleBase" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase">ModuleBase</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="dash_charts.modules_upload.UploadModule.all_ids"><code class="name">var <span class="ident">all_ids</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_app_modules.ModuleBase" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase">ModuleBase</a></code>.<code><a title="dash_charts.utils_app_modules.ModuleBase.all_ids" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase.all_ids">all_ids</a></code>
+</p>
+<div class="desc inherited"><p>List of ids to register for this module.</p></div>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.cache_dir"><code class="name">var <span class="ident">cache_dir</span></code></dt>
+<dd>
+<div class="desc"><p>Path to the directory to use for caching files.</p></div>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.id_upload"><code class="name">var <span class="ident">id_upload</span></code></dt>
+<dd>
+<div class="desc"><p>Unique name for the upload component.</p></div>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.id_upload_output"><code class="name">var <span class="ident">id_upload_output</span></code></dt>
+<dd>
+<div class="desc"><p>Unique name for the div to contain output of the parse-upload.</p></div>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.id_username_cache"><code class="name">var <span class="ident">id_username_cache</span></code></dt>
+<dd>
+<div class="desc"><p>Unique name for the dcc.Store element to store the current username.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="dash_charts.modules_upload.UploadModule.add_user"><code class="name flex">
+<span>def <span class="ident">add_user</span></span>(<span>self, username)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Add the user to the table or update the user's information if already registered.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>username</code></strong></dt>
+<dd>string username</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_user(self, username):
+    &#34;&#34;&#34;Add the user to the table or update the user&#39;s information if already registered.
+
+    Args:
+        username: string username
+
+    &#34;&#34;&#34;
+    now = time.time()
+    if self.find_user(username):
+        self.user_table.upsert({&#39;username&#39;: username, &#39;last_loaded&#39;: now}, [&#39;username&#39;])
+    else:
+        self.user_table.insert({&#39;username&#39;: username, &#39;creation&#39;: now, &#39;last_loaded&#39;: now})</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.create_callbacks"><code class="name flex">
+<span>def <span class="ident">create_callbacks</span></span>(<span>self, parent)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_app_modules.ModuleBase" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase">ModuleBase</a></code>.<code><a title="dash_charts.utils_app_modules.ModuleBase.create_callbacks" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase.create_callbacks">create_callbacks</a></code>
+</p>
+<div class="desc inherited"><p>Register callbacks to handle user interaction …</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_callbacks(self, parent):
+    &#34;&#34;&#34;Register callbacks to handle user interaction.
+
+    Args:
+        parent: parent instance (ex: `self`)
+
+    &#34;&#34;&#34;
+    super().create_callbacks(parent)
+    self.register_upload_handler(parent)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.create_elements"><code class="name flex">
+<span>def <span class="ident">create_elements</span></span>(<span>self, ids)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_app_modules.ModuleBase" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase">ModuleBase</a></code>.<code><a title="dash_charts.utils_app_modules.ModuleBase.create_elements" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase.create_elements">create_elements</a></code>
+</p>
+<div class="desc inherited"><p>Register the callback for creating the main chart …</p></div>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.delete_data"><code class="name flex">
+<span>def <span class="ident">delete_data</span></span>(<span>self, table_name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Remove specified data from the database.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>table_name</code></strong></dt>
+<dd>unique name of the table to delete</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_data(self, table_name):
+    &#34;&#34;&#34;Remove specified data from the database.
+
+    Args:
+        table_name: unique name of the table to delete
+
+    &#34;&#34;&#34;
+    self.database.db.load_table(table_name).drop()</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.find_user"><code class="name flex">
+<span>def <span class="ident">find_user</span></span>(<span>self, username)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the database row for the specified user.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>username</code></strong></dt>
+<dd>string username</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>for row from table or None if no match</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_user(self, username):
+    &#34;&#34;&#34;Return the database row for the specified user.
+
+    Args:
+        username: string username
+
+    Returns:
+        dict: for row from table or None if no match
+
+    &#34;&#34;&#34;
+    return self.user_table.find_one(username=username)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.get"><code class="name flex">
+<span>def <span class="ident">get</span></span>(<span>self, _id)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_app_modules.ModuleBase" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase">ModuleBase</a></code>.<code><a title="dash_charts.utils_app_modules.ModuleBase.get" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase.get">get</a></code>
+</p>
+<div class="desc inherited"><p>Return the
+the callback for creating the main chart …</p></div>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.get_data"><code class="name flex">
+<span>def <span class="ident">get_data</span></span>(<span>self, table_name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieve stored data for specified dataframe name.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>table_name</code></strong></dt>
+<dd>unique name of the table to retrieve</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>pandas dataframe retrieved from the database</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_data(self, table_name):
+    &#34;&#34;&#34;Retrieve stored data for specified dataframe name.
+
+    Args:
+        table_name: unique name of the table to retrieve
+
+    Returns:
+        pd.DataFrame: pandas dataframe retrieved from the database
+
+    &#34;&#34;&#34;
+    table = self.database.db.load_table(table_name)
+    return pd.DataFrame.from_records(table.all())</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.initialize_mutables"><code class="name flex">
+<span>def <span class="ident">initialize_mutables</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_app_modules.ModuleBase" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase">ModuleBase</a></code>.<code><a title="dash_charts.utils_app_modules.ModuleBase.initialize_mutables" href="utils_app_modules.html#dash_charts.utils_app_modules.ModuleBase.initialize_mutables">initialize_mutables</a></code>
+</p>
+<div class="desc inherited"><p>Initialize the mutable data members to prevent modifying one attribute and impacting all instances.</p></div>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.register_upload_handler"><code class="name flex">
+<span>def <span class="ident">register_upload_handler</span></span>(<span>self, parent)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Register callbacks to handle user interaction.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>parent</code></strong></dt>
+<dd>parent instance (ex: <code>self</code>)</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def register_upload_handler(self, parent):
+    &#34;&#34;&#34;Register callbacks to handle user interaction.
+
+    Args:
+        parent: parent instance (ex: `self`)
+
+    &#34;&#34;&#34;
+    outputs = [(self.get(self.id_upload_output), &#39;children&#39;)]
+    inputs = [(self.get(self.id_upload), &#39;contents&#39;), (self.get(self.id_username_cache), &#39;data&#39;)]
+    states = [(self.get(self.id_upload), &#39;filename&#39;), (self.get(self.id_upload), &#39;last_modified&#39;)]
+
+    @parent.callback(outputs, inputs, states, pic=True)
+    def upload_handler(*raw_args):
+        a_in, a_state = map_args(raw_args, inputs, states)
+        b64_file = a_in[self.get(self.id_upload)][&#39;contents&#39;]
+        username = a_in[self.get(self.id_username_cache)][&#39;data&#39;]
+        filename = a_state[self.get(self.id_upload)][&#39;filename&#39;]
+        timestamp = a_state[self.get(self.id_upload)][&#39;last_modified&#39;]
+
+        child_output = []
+        try:
+            if b64_file is not None:
+                df_upload = parse_uploaded_df(b64_file, filename, timestamp)
+                df_upload = df_upload.dropna(axis=&#39;columns&#39;)  # FIXME: Better handle NaN values...
+                self.add_user(username)
+                self.upload_data(username, filename, df_upload)
+
+        except Exception as error:
+            child_output.extend([
+                show_toast(f&#39;{error}&#39;, &#39;Upload Error&#39;, icon=&#39;danger&#39;),
+                dcc.Markdown(f&#39;### Upload Error\n\n{type(error)}\n\n```\n{error}\n```&#39;),
+            ])
+
+        child_output.append(self._show_data(username))
+
+        return map_outputs(outputs, [(self.get(self.id_upload_output), &#39;children&#39;, html.Div(child_output))])</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.return_layout"><code class="name flex">
+<span>def <span class="ident">return_layout</span></span>(<span>self, ids)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the Upload module application layout.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>ids</code></strong></dt>
+<dd><code>self.ids</code> from base application</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Dash HTML object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def return_layout(self, ids):
+    &#34;&#34;&#34;Return the Upload module application layout.
+
+    Args:
+        ids: `self.ids` from base application
+
+    Returns:
+        dict: Dash HTML object.
+
+    &#34;&#34;&#34;
+    return html.Div([
+        dcc.Store(id=ids[self.get(self.id_username_cache)], storage_type=&#39;session&#39;),
+        html.H2(&#39;File Upload&#39;),
+        html.P(&#39;Upload Tidy Data in CSV, Excel, or JSON format&#39;),
+        drop_to_upload(id=ids[self.get(self.id_upload)]),
+        dcc.Loading(html.Div(&#39;&#39;, id=ids[self.get(self.id_upload_output)]), type=&#39;circle&#39;),
+    ])</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.modules_upload.UploadModule.upload_data"><code class="name flex">
+<span>def <span class="ident">upload_data</span></span>(<span>self, username, df_name, df_upload)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Store dataframe in database for specified user.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>username</code></strong></dt>
+<dd>string username</dd>
+<dt><strong><code>df_name</code></strong></dt>
+<dd>name of the stored dataframe</dd>
+<dt><strong><code>df_upload</code></strong></dt>
+<dd>pandas dataframe to store</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If upload fails, deletes the created table</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def upload_data(self, username, df_name, df_upload):
+    &#34;&#34;&#34;Store dataframe in database for specified user.
+
+    Args:
+        username: string username
+        df_name: name of the stored dataframe
+        df_upload: pandas dataframe to store
+
+    Raises:
+        Exception: If upload fails, deletes the created table
+
+    &#34;&#34;&#34;
+    now = time.time()
+    table_name = f&#39;{username}-{df_name}-{int(now)}&#39;
+    table = self.database.db.create_table(table_name)
+    try:
+        table.insert_many(df_upload.to_dict(orient=&#39;records&#39;))
+    except Exception:
+        table.drop()  # Delete the table if upload fails
+        raise
+
+    self.inventory_table.insert({&#39;table_name&#39;: table_name, &#39;df_name&#39;: df_name, &#39;username&#39;: username,
+                                 &#39;creation&#39;: now})</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dash_charts" href="index.html">dash_charts</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="dash_charts.modules_upload.drop_to_upload" href="#dash_charts.modules_upload.drop_to_upload">drop_to_upload</a></code></li>
+<li><code><a title="dash_charts.modules_upload.file_download_link" href="#dash_charts.modules_upload.file_download_link">file_download_link</a></code></li>
+<li><code><a title="dash_charts.modules_upload.load_df" href="#dash_charts.modules_upload.load_df">load_df</a></code></li>
+<li><code><a title="dash_charts.modules_upload.parse_json" href="#dash_charts.modules_upload.parse_json">parse_json</a></code></li>
+<li><code><a title="dash_charts.modules_upload.parse_uploaded_df" href="#dash_charts.modules_upload.parse_uploaded_df">parse_uploaded_df</a></code></li>
+<li><code><a title="dash_charts.modules_upload.parse_uploaded_image" href="#dash_charts.modules_upload.parse_uploaded_image">parse_uploaded_image</a></code></li>
+<li><code><a title="dash_charts.modules_upload.save_file" href="#dash_charts.modules_upload.save_file">save_file</a></code></li>
+<li><code><a title="dash_charts.modules_upload.show_toast" href="#dash_charts.modules_upload.show_toast">show_toast</a></code></li>
+<li><code><a title="dash_charts.modules_upload.split_b64_file" href="#dash_charts.modules_upload.split_b64_file">split_b64_file</a></code></li>
+<li><code><a title="dash_charts.modules_upload.uploaded_files" href="#dash_charts.modules_upload.uploaded_files">uploaded_files</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="dash_charts.modules_upload.UploadModule" href="#dash_charts.modules_upload.UploadModule">UploadModule</a></code></h4>
+<ul class="">
+<li><code><a title="dash_charts.modules_upload.UploadModule.add_user" href="#dash_charts.modules_upload.UploadModule.add_user">add_user</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.all_ids" href="#dash_charts.modules_upload.UploadModule.all_ids">all_ids</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.cache_dir" href="#dash_charts.modules_upload.UploadModule.cache_dir">cache_dir</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.create_callbacks" href="#dash_charts.modules_upload.UploadModule.create_callbacks">create_callbacks</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.create_elements" href="utils_app_modules.html#dash_charts.modules_upload.UploadModule.create_elements">create_elements</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.delete_data" href="#dash_charts.modules_upload.UploadModule.delete_data">delete_data</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.find_user" href="#dash_charts.modules_upload.UploadModule.find_user">find_user</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.get" href="utils_app_modules.html#dash_charts.modules_upload.UploadModule.get">get</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.get_data" href="#dash_charts.modules_upload.UploadModule.get_data">get_data</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.id_upload" href="#dash_charts.modules_upload.UploadModule.id_upload">id_upload</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.id_upload_output" href="#dash_charts.modules_upload.UploadModule.id_upload_output">id_upload_output</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.id_username_cache" href="#dash_charts.modules_upload.UploadModule.id_username_cache">id_username_cache</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.initialize_mutables" href="utils_app_modules.html#dash_charts.modules_upload.UploadModule.initialize_mutables">initialize_mutables</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.register_upload_handler" href="#dash_charts.modules_upload.UploadModule.register_upload_handler">register_upload_handler</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.return_layout" href="#dash_charts.modules_upload.UploadModule.return_layout">return_layout</a></code></li>
+<li><code><a title="dash_charts.modules_upload.UploadModule.upload_data" href="#dash_charts.modules_upload.UploadModule.upload_data">upload_data</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>

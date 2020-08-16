@@ -1,3 +1,6 @@
+- Add infrastructure to override/extend the CSS and JS: http://dash.plotly.com/external-resources
+	- Create temporary directory merged with user specified content? Accept string custom_css like the static ones do?
+
 - FIXME: Add DataCache to the README (and implement an example)
 
 - TODO: Implement TODO feature list for the datatable with Kitsu exploratory app!

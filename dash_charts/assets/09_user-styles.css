@@ -21,3 +21,8 @@ body {
 iframe#plaid-link-iframe-1 {
     height: 100vh;
 }
+
+/* Make sure the date range picker appears above all elements */
+.DateRangePicker_picker {
+    z-index: 999;
+}

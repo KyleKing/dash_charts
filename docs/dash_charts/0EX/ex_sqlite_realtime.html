@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>dash_charts.0EX.ex_sqlite_realtime API documentation</title>
+<meta name="description" content="From file: `dash_charts/tests/examples/ex_sqlite_realtime.py`
+```
+&#34;&#34;&#34;Demonstrate realtime updates in Dash …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>
+a {
+text-decoration: underline;
+}
+h1,h2,h3,h4 {
+font-weight: 400;
+}
+h2 {
+margin: 0.50em 0 .25em 0;
+}
+dd p {
+margin: 5px 0;
+}
+dl dl:last-child {
+margin-bottom: 2.5em;
+}
+main {
+margin-bottom: 80vh;
+}
+#content {
+max-width: 1100px;
+}
+.source summary {
+background-color: #fafafa; /* match HLJS background */
+padding: 1px 5px;
+}
+.source summary:focus {
+outline: none !important;
+}
+.source pre {
+background-color: #fafafa; /* match HLJS background */
+}
+.source pre code {
+padding-bottom: 1em;
+}
+table, th, td {
+border: 1px solid #d4d4d4;
+padding: 0 5px;
+}
+</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dash_charts.0EX.ex_sqlite_realtime</code></h1>
+</header>
+<section id="section-intro">
+<p>From file: <code>dash_charts/tests/examples/ex_sqlite_realtime.py</code></p>
+<pre><code>&quot;&quot;&quot;Demonstrate realtime updates in Dash.
+
+Based on: https://medium.com/analytics-vidhya/programming-with-databases-in-python-using-sqlite-4cecbef51ab9
+
+Example Python/SQLite: https://www.dataquest.io/blog/python-pandas-databases/ &amp;
+    https://sebastianraschka.com/Articles/2014_sqlite_in_python_tutorial.html
+
+PLANNED: https://plot.ly/python/big-data-analytics-with-pandas-and-sqlite/
+
+&quot;&quot;&quot;
+
+import multiprocessing
+import time
+from pathlib import Path
+
+import dash_core_components as dcc
+import dash_html_components as html
+import numpy as np
+import pandas as pd
+from dash.exceptions import PreventUpdate
+from dash_charts.dash_helpers import SQLConnection, parse_dash_cli_args
+from dash_charts.scatter_line_charts import RollingChart
+from dash_charts.utils_app import AppBase
+from dash_charts.utils_callbacks import map_outputs
+from dash_charts.utils_fig import min_graph
+from tqdm import tqdm
+
+
+def use_flag_file(callback, *args, **kwargs):
+    &quot;&quot;&quot;Use a flag file to determine if the callback is to be run.
+
+    Args:
+        callback: path to SQLite file
+        args: arguments to pass to callback
+        kwargs: keyword arguments to pass to callback
+
+    &quot;&quot;&quot;
+    # Use a file to indicate if the function is currently writing to the database
+    flag_file = Path(__file__).parent / 'flag-tempfile.log'
+    if flag_file.is_file():
+        initial = int(flag_file.read_text())
+        time.sleep(2)
+        if flag_file.is_file() and int(flag_file.read_text()) &gt; initial:
+            return  # The thread is currently writing to the flag file
+
+    # Otherwise, create the flag file and run the script
+    flag_file.write_text('')
+    try:
+        callback(*args, flag_file=flag_file, **kwargs)
+    finally:
+        flag_file.unlink()
+
+
+def simulate_db_population(db_file, points=1000, delay=0.1, flag_file=None):
+    &quot;&quot;&quot;Populate a SQL database in real time so that the changes can be visualized in a chart.
+
+    Args:
+        db_file: path to SQLite file
+        points: total number of points to create. Default is 1000
+        delay: time to wait between creating each new data point (in seconds). Default is 0.1seconds
+
+    &quot;&quot;&quot;
+    # Clear database if it exists
+    if db_file.is_file():
+        db_file.unlink()
+
+    with SQLConnection(db_file) as conn:
+        # Create EVENTS table
+        cursor = conn.cursor()
+        cursor.execute(&quot;&quot;&quot;CREATE TABLE EVENTS (
+            id   INT   PRIMARY KEY   NOT NULL,
+            label   TEXT   NOT NULL,
+            value   INT   NOT NULL
+        );&quot;&quot;&quot;)
+        conn.commit()
+
+        # Generate random data points
+        mu, sigma = (10, 8)  # mean and standard deviation
+        samples = np.random.normal(mu, sigma, points)
+
+        # Fill the database with sample data
+        for idx in tqdm(range(points)):
+            value = (-1 if idx &gt; 500 else 1) * idx / 10.0  # Introduce variability
+            cursor.execute('INSERT INTO EVENTS (id, label, value) VALUES'  # noqa: S608
+                        f' ({idx}, &quot;idx-{idx}&quot;, {samples[idx] + value})')
+            conn.commit()
+            if flag_file is not None:
+                flag_file.write_text(str(idx))
+            time.sleep(delay)
+
+
+class RealTimeSQLDemo(AppBase):
+    &quot;&quot;&quot;Example creating a rolling mean chart.&quot;&quot;&quot;
+
+    name = 'Example Scatter of Real Time SQL Data'
+    &quot;&quot;&quot;Application name&quot;&quot;&quot;
+
+    db_file = Path(__file__).parent / 'realtime-sql-data.sqlite'
+    &quot;&quot;&quot;Path to the SQLite database file.&quot;&quot;&quot;
+
+    chart_main = None
+    &quot;&quot;&quot;Main chart (Scatter).&quot;&quot;&quot;
+
+    id_chart = 'real-time-chart'
+    &quot;&quot;&quot;Unique name for the main chart.&quot;&quot;&quot;
+
+    id_interval = 'graph-update'
+    &quot;&quot;&quot;ID of the interval element to regularly update the UI.&quot;&quot;&quot;
+
+    def initialization(self):
+        &quot;&quot;&quot;Initialize ids with `self.register_uniq_ids([...])` and other one-time actions.&quot;&quot;&quot;
+        super().initialization()
+        self.register_uniq_ids([self.id_chart, self.id_interval])
+
+    def create_elements(self):
+        &quot;&quot;&quot;Initialize the charts, tables, and other Dash elements.&quot;&quot;&quot;
+        self.chart_main = RollingChart(
+            title='Live-Updating Scatter Plot',
+            xlabel='Index',
+            ylabel='Value',
+        )
+        self.chart_main.count_rolling = 20
+
+    def generate_data(self):
+        &quot;&quot;&quot;Start the realtime updates of the database. Function could be run from separate process.&quot;&quot;&quot;
+        db_file = self.db_file
+        process = multiprocessing.Process(
+            target=use_flag_file, args=[simulate_db_population, db_file], kwargs={'points': 1000, 'delay': 0.05},
+        )
+        process.start()
+
+    def return_layout(self):
+        &quot;&quot;&quot;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        &quot;&quot;&quot;
+        return html.Div(
+            style={
+                'maxWidth': '1000px',
+                'marginRight': 'auto',
+                'marginLeft': 'auto',
+            },
+            children=[
+                html.H4(children=self.name),
+                min_graph(id=self.ids[self.id_chart], animate=True),
+                dcc.Interval(id=self.ids[self.id_interval], interval=1000, n_intervals=0),
+            ],
+        )
+
+    def create_callbacks(self):
+        &quot;&quot;&quot;Create Dash callbacks.&quot;&quot;&quot;
+        outputs = [(self.id_chart, 'figure')]
+        inputs = [(self.id_interval, 'n_intervals')]
+        states = []
+
+        @self.callback(outputs, inputs, states, pic=True)
+        def update_chart(*raw_args):
+            with SQLConnection(self.db_file) as conn:
+                df_events = pd.read_sql_query('SELECT id, label, value FROM EVENTS', conn)
+            moving_window = 5
+            count_points = len(df_events['id'])
+            if count_points &lt; moving_window:
+                raise PreventUpdate
+
+            for new_key, old_key in [('x', 'id'), ('y', 'value')]:
+                df_events[new_key] = df_events[old_key]
+            self.chart_main.axis_range = {
+                'x': [float(np.max([0, count_points - 500])), count_points],
+            }
+            new_figure = self.chart_main.create_figure(df_raw=df_events)
+
+            return map_outputs(outputs, [(self.id_chart, 'figure', new_figure)])
+
+
+instance = RealTimeSQLDemo
+if __name__ == '__main__':
+    app = instance()
+    app.create()
+    app.run(**parse_dash_cli_args())
+else:
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()
+
+</code></pre>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;From file: `dash_charts/tests/examples/ex_sqlite_realtime.py`
+```
+\&#34;\&#34;\&#34;Demonstrate realtime updates in Dash.
+
+Based on: https://medium.com/analytics-vidhya/programming-with-databases-in-python-using-sqlite-4cecbef51ab9
+
+Example Python/SQLite: https://www.dataquest.io/blog/python-pandas-databases/ &amp;
+    https://sebastianraschka.com/Articles/2014_sqlite_in_python_tutorial.html
+
+PLANNED: https://plot.ly/python/big-data-analytics-with-pandas-and-sqlite/
+
+\&#34;\&#34;\&#34;
+
+import multiprocessing
+import time
+from pathlib import Path
+
+import dash_core_components as dcc
+import dash_html_components as html
+import numpy as np
+import pandas as pd
+from dash.exceptions import PreventUpdate
+from dash_charts.dash_helpers import SQLConnection, parse_dash_cli_args
+from dash_charts.scatter_line_charts import RollingChart
+from dash_charts.utils_app import AppBase
+from dash_charts.utils_callbacks import map_outputs
+from dash_charts.utils_fig import min_graph
+from tqdm import tqdm
+
+
+def use_flag_file(callback, *args, **kwargs):
+    \&#34;\&#34;\&#34;Use a flag file to determine if the callback is to be run.
+
+    Args:
+        callback: path to SQLite file
+        args: arguments to pass to callback
+        kwargs: keyword arguments to pass to callback
+
+    \&#34;\&#34;\&#34;
+    # Use a file to indicate if the function is currently writing to the database
+    flag_file = Path(__file__).parent / &#39;flag-tempfile.log&#39;
+    if flag_file.is_file():
+        initial = int(flag_file.read_text())
+        time.sleep(2)
+        if flag_file.is_file() and int(flag_file.read_text()) &gt; initial:
+            return  # The thread is currently writing to the flag file
+
+    # Otherwise, create the flag file and run the script
+    flag_file.write_text(&#39;&#39;)
+    try:
+        callback(*args, flag_file=flag_file, **kwargs)
+    finally:
+        flag_file.unlink()
+
+
+def simulate_db_population(db_file, points=1000, delay=0.1, flag_file=None):
+    \&#34;\&#34;\&#34;Populate a SQL database in real time so that the changes can be visualized in a chart.
+
+    Args:
+        db_file: path to SQLite file
+        points: total number of points to create. Default is 1000
+        delay: time to wait between creating each new data point (in seconds). Default is 0.1seconds
+
+    \&#34;\&#34;\&#34;
+    # Clear database if it exists
+    if db_file.is_file():
+        db_file.unlink()
+
+    with SQLConnection(db_file) as conn:
+        # Create EVENTS table
+        cursor = conn.cursor()
+        cursor.execute(\&#34;\&#34;\&#34;CREATE TABLE EVENTS (
+            id   INT   PRIMARY KEY   NOT NULL,
+            label   TEXT   NOT NULL,
+            value   INT   NOT NULL
+        );\&#34;\&#34;\&#34;)
+        conn.commit()
+
+        # Generate random data points
+        mu, sigma = (10, 8)  # mean and standard deviation
+        samples = np.random.normal(mu, sigma, points)
+
+        # Fill the database with sample data
+        for idx in tqdm(range(points)):
+            value = (-1 if idx &gt; 500 else 1) * idx / 10.0  # Introduce variability
+            cursor.execute(&#39;INSERT INTO EVENTS (id, label, value) VALUES&#39;  # noqa: S608
+                        f&#39; ({idx}, \&#34;idx-{idx}\&#34;, {samples[idx] + value})&#39;)
+            conn.commit()
+            if flag_file is not None:
+                flag_file.write_text(str(idx))
+            time.sleep(delay)
+
+
+class RealTimeSQLDemo(AppBase):
+    \&#34;\&#34;\&#34;Example creating a rolling mean chart.\&#34;\&#34;\&#34;
+
+    name = &#39;Example Scatter of Real Time SQL Data&#39;
+    \&#34;\&#34;\&#34;Application name\&#34;\&#34;\&#34;
+
+    db_file = Path(__file__).parent / &#39;realtime-sql-data.sqlite&#39;
+    \&#34;\&#34;\&#34;Path to the SQLite database file.\&#34;\&#34;\&#34;
+
+    chart_main = None
+    \&#34;\&#34;\&#34;Main chart (Scatter).\&#34;\&#34;\&#34;
+
+    id_chart = &#39;real-time-chart&#39;
+    \&#34;\&#34;\&#34;Unique name for the main chart.\&#34;\&#34;\&#34;
+
+    id_interval = &#39;graph-update&#39;
+    \&#34;\&#34;\&#34;ID of the interval element to regularly update the UI.\&#34;\&#34;\&#34;
+
+    def initialization(self):
+        \&#34;\&#34;\&#34;Initialize ids with `self.register_uniq_ids([...])` and other one-time actions.\&#34;\&#34;\&#34;
+        super().initialization()
+        self.register_uniq_ids([self.id_chart, self.id_interval])
+
+    def create_elements(self):
+        \&#34;\&#34;\&#34;Initialize the charts, tables, and other Dash elements.\&#34;\&#34;\&#34;
+        self.chart_main = RollingChart(
+            title=&#39;Live-Updating Scatter Plot&#39;,
+            xlabel=&#39;Index&#39;,
+            ylabel=&#39;Value&#39;,
+        )
+        self.chart_main.count_rolling = 20
+
+    def generate_data(self):
+        \&#34;\&#34;\&#34;Start the realtime updates of the database. Function could be run from separate process.\&#34;\&#34;\&#34;
+        db_file = self.db_file
+        process = multiprocessing.Process(
+            target=use_flag_file, args=[simulate_db_population, db_file], kwargs={&#39;points&#39;: 1000, &#39;delay&#39;: 0.05},
+        )
+        process.start()
+
+    def return_layout(self):
+        \&#34;\&#34;\&#34;Return Dash application layout.
+
+        Returns:
+            dict: Dash HTML object
+
+        \&#34;\&#34;\&#34;
+        return html.Div(
+            style={
+                &#39;maxWidth&#39;: &#39;1000px&#39;,
+                &#39;marginRight&#39;: &#39;auto&#39;,
+                &#39;marginLeft&#39;: &#39;auto&#39;,
+            },
+            children=[
+                html.H4(children=self.name),
+                min_graph(id=self.ids[self.id_chart], animate=True),
+                dcc.Interval(id=self.ids[self.id_interval], interval=1000, n_intervals=0),
+            ],
+        )
+
+    def create_callbacks(self):
+        \&#34;\&#34;\&#34;Create Dash callbacks.\&#34;\&#34;\&#34;
+        outputs = [(self.id_chart, &#39;figure&#39;)]
+        inputs = [(self.id_interval, &#39;n_intervals&#39;)]
+        states = []
+
+        @self.callback(outputs, inputs, states, pic=True)
+        def update_chart(*raw_args):
+            with SQLConnection(self.db_file) as conn:
+                df_events = pd.read_sql_query(&#39;SELECT id, label, value FROM EVENTS&#39;, conn)
+            moving_window = 5
+            count_points = len(df_events[&#39;id&#39;])
+            if count_points &lt; moving_window:
+                raise PreventUpdate
+
+            for new_key, old_key in [(&#39;x&#39;, &#39;id&#39;), (&#39;y&#39;, &#39;value&#39;)]:
+                df_events[new_key] = df_events[old_key]
+            self.chart_main.axis_range = {
+                &#39;x&#39;: [float(np.max([0, count_points - 500])), count_points],
+            }
+            new_figure = self.chart_main.create_figure(df_raw=df_events)
+
+            return map_outputs(outputs, [(self.id_chart, &#39;figure&#39;, new_figure)])
+
+
+instance = RealTimeSQLDemo
+if __name__ == &#39;__main__&#39;:
+    app = instance()
+    app.create()
+    app.run(**parse_dash_cli_args())
+else:
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()
+
+```
+&#34;&#34;&#34;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dash_charts.0EX" href="index.html">dash_charts.0EX</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>

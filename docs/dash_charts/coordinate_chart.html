@@ -1,0 +1,1497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>dash_charts.coordinate_chart API documentation</title>
+<meta name="description" content="Coordinate chart …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>
+a {
+text-decoration: underline;
+}
+h1,h2,h3,h4 {
+font-weight: 400;
+}
+h2 {
+margin: 0.50em 0 .25em 0;
+}
+dd p {
+margin: 5px 0;
+}
+dl dl:last-child {
+margin-bottom: 2.5em;
+}
+main {
+margin-bottom: 80vh;
+}
+#content {
+max-width: 1100px;
+}
+.source summary {
+background-color: #fafafa; /* match HLJS background */
+padding: 1px 5px;
+}
+.source summary:focus {
+outline: none !important;
+}
+.source pre {
+background-color: #fafafa; /* match HLJS background */
+}
+.source pre code {
+padding-bottom: 1em;
+}
+table, th, td {
+border: 1px solid #d4d4d4;
+padding: 0 5px;
+}
+</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dash_charts.coordinate_chart</code></h1>
+</header>
+<section id="section-intro">
+<p>Coordinate chart.</p>
+<p>Creates a grid of tiles with consistently spaced x/y positions. Provided data is plotted as a marker at each position
+unless None. This can be used to create all sorts of visualizations that have spatially related data, such as calendars</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Coordinate chart.
+
+Creates a grid of tiles with consistently spaced x/y positions. Provided data is plotted as a marker at each position
+unless None. This can be used to create all sorts of visualizations that have spatially related data, such as calendars
+
+&#34;&#34;&#34;
+
+import calendar
+import cmath
+import math
+from itertools import chain
+
+import numpy as np
+import pandas as pd
+import plotly.graph_objects as go
+
+from .utils_fig import CustomChart, check_raw_data
+
+# PLANNED: subplots for multiple years of calendar charts (Subplot title is year)
+
+
+def calculate_grid(grid_dims, corners, width, height):
+    &#34;&#34;&#34;Calculate the grid x and y coordinates.
+
+    Args:
+        grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+        corners: dictionary with keys `(x, y)` containing lists of the four exterior corner coordinates
+        width: float width in pixels
+        height: float height in pixels
+
+    Returns:
+        dict: with keys `(x, y)` with lists of lists containing float values
+
+    &#34;&#34;&#34;
+    grid = {&#39;x&#39;: [], &#39;y&#39;: []}
+    for r_idx in range(grid_dims[0]):
+        y_offset = height * (grid_dims[0] - r_idx)
+        y_grid = [y_offset - _y for _y in corners[&#39;y&#39;]]
+        for c_idx in range(grid_dims[1]):
+            x_offset = width * c_idx
+            grid[&#39;x&#39;].extend([x_offset + _x for _x in corners[&#39;x&#39;]])
+            grid[&#39;y&#39;].extend(y_grid)
+    return grid
+
+
+def calculate_border(grid_dims, width, height):
+    &#34;&#34;&#34;Calculate each line in all borders.
+
+    Args:
+        grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+        width: float width in pixels
+        height: float height in pixels
+
+    Returns:
+        list: containing dictionaries keys `(x, y)` and values for the two points for each line in grid
+
+    &#34;&#34;&#34;
+    return [
+        {
+            &#39;x&#39;: [c_idx * width] * 2,
+            &#39;y&#39;: [0, height * grid_dims[0]],
+        } for c_idx in range(grid_dims[1] + 1)
+    ] + [
+        {
+            &#39;x&#39;: [0, width * grid_dims[1]],
+            &#39;y&#39;: [r_idx * height] * 2,
+        } for r_idx in range(grid_dims[0] + 1)
+    ]
+
+
+class CoordinateChart(CustomChart):  # noqa: H601
+    &#34;&#34;&#34;Coordinate Chart.&#34;&#34;&#34;
+
+    border_opacity: float = 0.2
+    &#34;&#34;&#34;Border opacity for grid. Value must be in [0-1] where 0 is none. Default is 0.2.&#34;&#34;&#34;
+
+    border_line = None
+    &#34;&#34;&#34;Dictionary passed to plotly `line`. Used to set thickness, color, dash style, etc. Default is None.&#34;&#34;&#34;
+
+    marker_kwargs = None
+    &#34;&#34;&#34;Marker keyword arguments used in `create_marker()`. Default is None.&#34;&#34;&#34;
+
+    # Private states for managing coordinate chart dimensions
+    _grid: dict
+    _borders: list
+
+    def __init__(self, *, title, grid_dims, corners, titles=None, layout_overrides=()):
+        &#34;&#34;&#34;Initialize Coordinate Chart and store parameters as data members.
+
+        Args:
+            title: String title for chart (can be an empty string for blank)
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+            corners: dictionary with keys `(x, y)` containing lists of the four corner coordinates
+            titles: list of strings that will appear in each tile. Default is None for no titles
+            layout_overrides: Custom parameters in format [ParentKey, SubKey, Value] to customize &#39;go.layout&#39;
+
+        &#34;&#34;&#34;
+        # Initialize base method. Sets xlabel and ylabel to empty strings because coordinate chart use the x/y
+        #   axis for arranging points. Data is displayed by color or size
+        super().__init__(title=title, xlabel=&#39;&#39;, ylabel=&#39;&#39;, layout_overrides=layout_overrides)
+
+        # Initialize chart parameters
+        self.calculate_layout(grid_dims, corners, titles)
+
+    def calculate_layout(self, grid_dims, corners, titles):
+        &#34;&#34;&#34;Calculate coordinate chart layout. Called by __init__, but can be called later to update the chart.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+            corners: dictionary with keys `(x, y)` containing lists of the four corner coordinates
+            titles: list of strings that will appear in each tile. Default is None for no titles
+
+        &#34;&#34;&#34;
+        # Calculate exterior height and width of grid
+        width = float(np.max(corners[&#39;x&#39;]) + np.min(corners[&#39;x&#39;]))
+        height = float(np.max(corners[&#39;y&#39;]) + np.min(corners[&#39;y&#39;]))
+
+        # Set grid and border coordinates for traces
+        self._grid = calculate_grid(grid_dims, corners, width, height)
+        self._borders = calculate_border(grid_dims, width, height)
+
+        # Add titles to annotations if provided
+        if titles is None:
+            self.annotations = []
+        else:
+            v_offset = np.min(corners[&#39;y&#39;]) * 0.4
+            self.annotations = [
+                go.layout.Annotation(
+                    ax=0, ay=0,
+                    x=(idx % grid_dims[1] + 0.5) * width,  # noqa: S001
+                    y=(grid_dims[0] - int(idx / grid_dims[1]) % grid_dims[0]) * height - v_offset,
+                    text=title,
+                )
+                for idx, title in enumerate(titles) if title is not None
+            ]
+
+    def create_traces(self, df_raw):
+        &#34;&#34;&#34;Return traces for plotly chart.
+
+        Args:
+            df_raw: pandas dataframe with at minimum the column `values: str`
+
+        Returns:
+            list: Dash chart traces
+
+        &#34;&#34;&#34;
+        # Check that the raw data frame is properly formatted
+        check_raw_data(df_raw, min_keys=[&#39;values&#39;])
+
+        # Merge x/y grid data with values. Temporarily extend values with None, then drop those rows
+        values = df_raw[&#39;values&#39;].to_list()
+        values.extend([None] * (len(self._grid[&#39;x&#39;]) - len(values)))
+        df_grid = pd.DataFrame(data={
+            &#39;values&#39;: values,
+            &#39;x&#39;: self._grid[&#39;x&#39;],
+            &#39;y&#39;: self._grid[&#39;y&#39;],
+        }).dropna()
+
+        return [
+            go.Scatter(
+                hoverinfo=&#39;none&#39;,
+                line={&#39;color&#39;: &#39;black&#39;} if self.border_line is None else self.border_line,
+                mode=&#39;lines&#39;,
+                opacity=self.border_opacity,
+                showlegend=False,
+                x=border[&#39;x&#39;],
+                y=border[&#39;y&#39;],
+            ) for border in self._borders
+        ] + [
+            go.Scatter(
+                hoverinfo=&#39;text&#39;,
+                mode=&#39;markers&#39;,
+                showlegend=False,
+                text=df_grid[&#39;values&#39;],
+                x=df_grid[&#39;x&#39;],
+                y=df_grid[&#39;y&#39;],
+                marker=self.create_marker(df_grid, **({} if self.marker_kwargs is None else self.marker_kwargs)),
+            ),
+        ]
+
+    def create_marker(self, df_grid, colorscale=&#39;Viridis&#39;, size=16, symbol=&#39;circle&#39;):
+        &#34;&#34;&#34;Return a dictionary for the scatter plot.
+
+        See: https://plot.ly/python/colorscales/ (Named colorscales: Reds, Bluered, Jet, Viridis, Cividis, etc.)
+
+        Args:
+            df_grid: pandas dataframe with at minimum the column `values: str`, `x: float`, `y: float`
+            colorscale: plotly colorscale, see doc link above. Default is &#39;Viridis&#39;
+            size: integer marker size
+            symbol: marker symbol (square, circle, circle-open, x, etc.)
+
+        Returns:
+            dict: the chart marker shape, symbol, color, etc.
+
+        &#34;&#34;&#34;
+        return {
+            &#39;color&#39;: df_grid[&#39;values&#39;],
+            &#39;colorscale&#39;: colorscale,
+            &#39;showscale&#39;: True,
+            &#39;size&#39;: size,
+            &#39;symbol&#39;: symbol,
+        }
+
+    def create_layout(self):
+        &#34;&#34;&#34;Extend the standard layout.
+
+        Returns:
+            dict: layout for Dash figure
+
+        &#34;&#34;&#34;
+        layout = super().create_layout()
+        for axis in [&#39;xaxis&#39;, &#39;yaxis&#39;]:
+            layout[axis][&#39;showgrid&#39;] = False
+            layout[axis][&#39;showticklabels&#39;] = False
+            layout[axis][&#39;zeroline&#39;] = False
+        layout[&#39;yaxis&#39;][&#39;scaleanchor&#39;] = &#39;x&#39;
+        layout[&#39;yaxis&#39;][&#39;scaleratio&#39;] = 1
+        return layout
+
+
+# ==============================================================================
+# Standard Coordinate Grids
+
+
+class GridClass:
+    &#34;&#34;&#34;Base class for specifying a grid for the Coordinate chart.&#34;&#34;&#34;
+
+    marker_kwargs = None
+    &#34;&#34;&#34;Marker keyword arguments. Default is None.&#34;&#34;&#34;
+
+    def __init__(self, grid_dims, titles):
+        &#34;&#34;&#34;Initialize the coordinates.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+            titles: list of titles to place in each grid element
+
+        &#34;&#34;&#34;
+        self.grid_dims = grid_dims
+        self.titles = titles
+
+
+class CircleGrid(GridClass):  # noqa: H601
+    &#34;&#34;&#34;Grid of circular coordinates.&#34;&#34;&#34;
+
+    marker_kwargs = {&#39;size&#39;: 10}
+    &#34;&#34;&#34;Marker keyword arguments. Default is `{&#39;size&#39;: 10}`&#34;&#34;&#34;
+
+    def __init__(self, grid_dims, titles=None):
+        &#34;&#34;&#34;Initialize the coordinates.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+            titles: list of titles to place in each grid element. Default is None
+
+        &#34;&#34;&#34;
+        if titles is None:
+            titles = []
+            for idx in range(grid_dims[0] * grid_dims[1]):
+                x_coord = int(idx / grid_dims[1]) + 1
+                y_coord = idx % (grid_dims[0] + 1) + 1  # noqa: S001
+                titles.append(f&#39;Subtitle for ({x_coord}, {y_coord})&#39;)
+
+        super().__init__(grid_dims=grid_dims, titles=titles)
+
+        # Calculate four corners
+        opp = 0.5 * math.cos(cmath.pi / 4)
+        adj = 0.5 * math.sin(cmath.pi / 4)
+        self.corners = {
+            &#39;x&#39;: [0.5, 1 - adj, 1.0, 1 + adj, 1.5, 1 + adj, 1.0, 1 - adj],
+            &#39;y&#39;: [1.0, 1 - opp, 0.5, 1 - opp, 1.0, 1 + opp, 1.5, 1 + opp],
+        }
+
+
+def calculate_calendar_grid_corners(margin, days_in_week=7, max_weeks_in_month=6):
+    &#34;&#34;&#34;Calculate the four exterior corner coordinates of a calendar coordinate grid.
+
+    Args:
+        margin: float spacing between tiles
+        days_in_week: number of days in week. Default is 7
+        max_weeks_in_month: max number of weeks in a month. Default is 6
+
+    Returns:
+        list: dictionary with keys `(x, y)` containing lists of the four exterior corner coordinates
+
+    &#34;&#34;&#34;
+    y_indices = [[idx] * days_in_week for idx in range(max_weeks_in_month)]
+    return {
+        &#39;x&#39;: np.add([*range(days_in_week)] * max_weeks_in_month, margin),
+        &#39;y&#39;: np.add([*chain.from_iterable(y_indices)], margin),
+    }
+
+
+class YearGrid(GridClass):  # noqa: H601
+    &#34;&#34;&#34;Coordinates of days within a grid of months in one year.&#34;&#34;&#34;
+
+    marker_kwargs = {&#39;size&#39;: 10, &#39;symbol&#39;: &#39;square&#39;}
+    &#34;&#34;&#34;Marker keyword arguments. Default is `{&#39;size&#39;: 10, &#39;symbol&#39;: &#39;square&#39;}`&#34;&#34;&#34;
+
+    def __init__(self, grid_dims=(4, 3), titles=None):
+        &#34;&#34;&#34;Initialize the coordinates.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`. Default is (4, 3)
+            titles: list of titles to place in each grid element. Default is None
+
+        Raises:
+            RuntimeError: if error in the grid dimensions
+
+        &#34;&#34;&#34;
+        if grid_dims[0] * grid_dims[1] != 12:  # pragma: no cover
+            raise RuntimeError(&#39;Calendar must show all 12 months Expected (12,1), (6,2), (4,3), (1,12), etc.&#39;)
+        if titles is None:
+            titles = calendar.month_name[1:]
+
+        super().__init__(grid_dims=grid_dims, titles=titles)
+
+        # Calculate four corners
+        self.corners = calculate_calendar_grid_corners(margin=2)
+
+    def format_data(self, month_lists, year):
+        &#34;&#34;&#34;Return the formatted list that can be passed to a coordinate chart.
+
+        Args:
+            month_lists: list of daily values where each sublist is one month starting with January
+            year: year expressed in 4 decimal places (i.e. 2019)
+
+        Returns:
+            list: of values with additional None values to align with grid
+
+        &#34;&#34;&#34;
+        values = []
+        for idx_month, daily_list in enumerate(month_lists):
+            idx_first_day, count_days = calendar.monthrange(year, idx_month + 1)
+            idx_first_day += 1  # Increment to start on Sunday -- PLANNED: make this configureable
+            values.extend([None] * idx_first_day)
+            values.extend(daily_list)
+            values.extend([None] * (len(self.corners[&#39;x&#39;]) - idx_first_day - count_days))
+        return values
+
+
+class MonthGrid(GridClass):  # noqa: H601
+    &#34;&#34;&#34;Coordinates of days within a single month.&#34;&#34;&#34;
+
+    marker_kwargs = {&#39;size&#39;: 35, &#39;symbol&#39;: &#39;square&#39;}
+    &#34;&#34;&#34;Marker keyword arguments. Default is `{&#39;size&#39;: 35, &#39;symbol&#39;: &#39;square&#39;}`&#34;&#34;&#34;
+
+    def __init__(self, grid_dims=(1, 1), titles=None):
+        &#34;&#34;&#34;Initialize the coordinates.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`. Default is (1, 1)
+            titles: list of titles to place in each grid element. Default is None
+
+        Raises:
+            RuntimeError: if error in the grid dimensions or titles
+
+        &#34;&#34;&#34;
+        if grid_dims != (1, 1):  # pragma: no cover
+            raise RuntimeError(&#39;Day grid can only show one month, expected (1, 1)&#39;)
+        if titles is not None and len(titles) != 1:  # pragma: no cover
+            raise RuntimeError(f&#39;Only one title is allowed for the MonthGrid. Received: {titles}&#39;)
+
+        super().__init__(grid_dims=grid_dims, titles=titles)
+
+        # Calculate four corners
+        self.corners = calculate_calendar_grid_corners(margin=1.25)
+
+    def format_data(self, daily_values, year, month):
+        &#34;&#34;&#34;Return the formatted list that can be passed to a coordinate chart.
+
+        Args:
+            daily_values: list of values for each day of month
+            year: year expressed in 4 digits (2019, 2020, etc.)
+            month: month index in [1, 12]
+
+        Returns:
+            list: of values with additional None values to align with grid
+
+        &#34;&#34;&#34;
+        idx_first_day = calendar.monthrange(year, month)[0]
+        values = [None] * idx_first_day
+        values.extend(daily_values)
+        return values</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="dash_charts.coordinate_chart.calculate_border"><code class="name flex">
+<span>def <span class="ident">calculate_border</span></span>(<span>grid_dims, width, height)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate each line in all borders.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>grid_dims</code></strong></dt>
+<dd>tuple of the number of tiles in grid. In format <code>(row, column)</code></dd>
+<dt><strong><code>width</code></strong></dt>
+<dd>float width in pixels</dd>
+<dt><strong><code>height</code></strong></dt>
+<dd>float height in pixels</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>containing dictionaries keys <code>(x, y)</code> and values for the two points for each line in grid</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_border(grid_dims, width, height):
+    &#34;&#34;&#34;Calculate each line in all borders.
+
+    Args:
+        grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+        width: float width in pixels
+        height: float height in pixels
+
+    Returns:
+        list: containing dictionaries keys `(x, y)` and values for the two points for each line in grid
+
+    &#34;&#34;&#34;
+    return [
+        {
+            &#39;x&#39;: [c_idx * width] * 2,
+            &#39;y&#39;: [0, height * grid_dims[0]],
+        } for c_idx in range(grid_dims[1] + 1)
+    ] + [
+        {
+            &#39;x&#39;: [0, width * grid_dims[1]],
+            &#39;y&#39;: [r_idx * height] * 2,
+        } for r_idx in range(grid_dims[0] + 1)
+    ]</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.coordinate_chart.calculate_calendar_grid_corners"><code class="name flex">
+<span>def <span class="ident">calculate_calendar_grid_corners</span></span>(<span>margin, days_in_week=7, max_weeks_in_month=6)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate the four exterior corner coordinates of a calendar coordinate grid.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>margin</code></strong></dt>
+<dd>float spacing between tiles</dd>
+<dt><strong><code>days_in_week</code></strong></dt>
+<dd>number of days in week. Default is 7</dd>
+<dt><strong><code>max_weeks_in_month</code></strong></dt>
+<dd>max number of weeks in a month. Default is 6</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>dictionary with keys <code>(x, y)</code> containing lists of the four exterior corner coordinates</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_calendar_grid_corners(margin, days_in_week=7, max_weeks_in_month=6):
+    &#34;&#34;&#34;Calculate the four exterior corner coordinates of a calendar coordinate grid.
+
+    Args:
+        margin: float spacing between tiles
+        days_in_week: number of days in week. Default is 7
+        max_weeks_in_month: max number of weeks in a month. Default is 6
+
+    Returns:
+        list: dictionary with keys `(x, y)` containing lists of the four exterior corner coordinates
+
+    &#34;&#34;&#34;
+    y_indices = [[idx] * days_in_week for idx in range(max_weeks_in_month)]
+    return {
+        &#39;x&#39;: np.add([*range(days_in_week)] * max_weeks_in_month, margin),
+        &#39;y&#39;: np.add([*chain.from_iterable(y_indices)], margin),
+    }</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.coordinate_chart.calculate_grid"><code class="name flex">
+<span>def <span class="ident">calculate_grid</span></span>(<span>grid_dims, corners, width, height)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate the grid x and y coordinates.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>grid_dims</code></strong></dt>
+<dd>tuple of the number of tiles in grid. In format <code>(row, column)</code></dd>
+<dt><strong><code>corners</code></strong></dt>
+<dd>dictionary with keys <code>(x, y)</code> containing lists of the four exterior corner coordinates</dd>
+<dt><strong><code>width</code></strong></dt>
+<dd>float width in pixels</dd>
+<dt><strong><code>height</code></strong></dt>
+<dd>float height in pixels</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>with keys <code>(x, y)</code> with lists of lists containing float values</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_grid(grid_dims, corners, width, height):
+    &#34;&#34;&#34;Calculate the grid x and y coordinates.
+
+    Args:
+        grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+        corners: dictionary with keys `(x, y)` containing lists of the four exterior corner coordinates
+        width: float width in pixels
+        height: float height in pixels
+
+    Returns:
+        dict: with keys `(x, y)` with lists of lists containing float values
+
+    &#34;&#34;&#34;
+    grid = {&#39;x&#39;: [], &#39;y&#39;: []}
+    for r_idx in range(grid_dims[0]):
+        y_offset = height * (grid_dims[0] - r_idx)
+        y_grid = [y_offset - _y for _y in corners[&#39;y&#39;]]
+        for c_idx in range(grid_dims[1]):
+            x_offset = width * c_idx
+            grid[&#39;x&#39;].extend([x_offset + _x for _x in corners[&#39;x&#39;]])
+            grid[&#39;y&#39;].extend(y_grid)
+    return grid</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="dash_charts.coordinate_chart.CircleGrid"><code class="flex name class">
+<span>class <span class="ident">CircleGrid</span></span>
+<span>(</span><span>grid_dims, titles=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Grid of circular coordinates.</p>
+<p>Initialize the coordinates.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>grid_dims</code></strong></dt>
+<dd>tuple of the number of tiles in grid. In format <code>(row, column)</code></dd>
+<dt><strong><code>titles</code></strong></dt>
+<dd>list of titles to place in each grid element. Default is None</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CircleGrid(GridClass):  # noqa: H601
+    &#34;&#34;&#34;Grid of circular coordinates.&#34;&#34;&#34;
+
+    marker_kwargs = {&#39;size&#39;: 10}
+    &#34;&#34;&#34;Marker keyword arguments. Default is `{&#39;size&#39;: 10}`&#34;&#34;&#34;
+
+    def __init__(self, grid_dims, titles=None):
+        &#34;&#34;&#34;Initialize the coordinates.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+            titles: list of titles to place in each grid element. Default is None
+
+        &#34;&#34;&#34;
+        if titles is None:
+            titles = []
+            for idx in range(grid_dims[0] * grid_dims[1]):
+                x_coord = int(idx / grid_dims[1]) + 1
+                y_coord = idx % (grid_dims[0] + 1) + 1  # noqa: S001
+                titles.append(f&#39;Subtitle for ({x_coord}, {y_coord})&#39;)
+
+        super().__init__(grid_dims=grid_dims, titles=titles)
+
+        # Calculate four corners
+        opp = 0.5 * math.cos(cmath.pi / 4)
+        adj = 0.5 * math.sin(cmath.pi / 4)
+        self.corners = {
+            &#39;x&#39;: [0.5, 1 - adj, 1.0, 1 + adj, 1.5, 1 + adj, 1.0, 1 - adj],
+            &#39;y&#39;: [1.0, 1 - opp, 0.5, 1 - opp, 1.0, 1 + opp, 1.5, 1 + opp],
+        }</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="dash_charts.coordinate_chart.GridClass" href="#dash_charts.coordinate_chart.GridClass">GridClass</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="dash_charts.coordinate_chart.CircleGrid.marker_kwargs"><code class="name">var <span class="ident">marker_kwargs</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.coordinate_chart.GridClass" href="#dash_charts.coordinate_chart.GridClass">GridClass</a></code>.<code><a title="dash_charts.coordinate_chart.GridClass.marker_kwargs" href="#dash_charts.coordinate_chart.GridClass.marker_kwargs">marker_kwargs</a></code>
+</p>
+<div class="desc inherited"><p>Marker keyword arguments. Default is None.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart"><code class="flex name class">
+<span>class <span class="ident">CoordinateChart</span></span>
+<span>(</span><span>*, title, grid_dims, corners, titles=None, layout_overrides=())</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Coordinate Chart.</p>
+<p>Initialize Coordinate Chart and store parameters as data members.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>title</code></strong></dt>
+<dd>String title for chart (can be an empty string for blank)</dd>
+<dt><strong><code>grid_dims</code></strong></dt>
+<dd>tuple of the number of tiles in grid. In format <code>(row, column)</code></dd>
+<dt><strong><code>corners</code></strong></dt>
+<dd>dictionary with keys <code>(x, y)</code> containing lists of the four corner coordinates</dd>
+<dt><strong><code>titles</code></strong></dt>
+<dd>list of strings that will appear in each tile. Default is None for no titles</dd>
+<dt><strong><code>layout_overrides</code></strong></dt>
+<dd>Custom parameters in format [ParentKey, SubKey, Value] to customize 'go.layout'</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CoordinateChart(CustomChart):  # noqa: H601
+    &#34;&#34;&#34;Coordinate Chart.&#34;&#34;&#34;
+
+    border_opacity: float = 0.2
+    &#34;&#34;&#34;Border opacity for grid. Value must be in [0-1] where 0 is none. Default is 0.2.&#34;&#34;&#34;
+
+    border_line = None
+    &#34;&#34;&#34;Dictionary passed to plotly `line`. Used to set thickness, color, dash style, etc. Default is None.&#34;&#34;&#34;
+
+    marker_kwargs = None
+    &#34;&#34;&#34;Marker keyword arguments used in `create_marker()`. Default is None.&#34;&#34;&#34;
+
+    # Private states for managing coordinate chart dimensions
+    _grid: dict
+    _borders: list
+
+    def __init__(self, *, title, grid_dims, corners, titles=None, layout_overrides=()):
+        &#34;&#34;&#34;Initialize Coordinate Chart and store parameters as data members.
+
+        Args:
+            title: String title for chart (can be an empty string for blank)
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+            corners: dictionary with keys `(x, y)` containing lists of the four corner coordinates
+            titles: list of strings that will appear in each tile. Default is None for no titles
+            layout_overrides: Custom parameters in format [ParentKey, SubKey, Value] to customize &#39;go.layout&#39;
+
+        &#34;&#34;&#34;
+        # Initialize base method. Sets xlabel and ylabel to empty strings because coordinate chart use the x/y
+        #   axis for arranging points. Data is displayed by color or size
+        super().__init__(title=title, xlabel=&#39;&#39;, ylabel=&#39;&#39;, layout_overrides=layout_overrides)
+
+        # Initialize chart parameters
+        self.calculate_layout(grid_dims, corners, titles)
+
+    def calculate_layout(self, grid_dims, corners, titles):
+        &#34;&#34;&#34;Calculate coordinate chart layout. Called by __init__, but can be called later to update the chart.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+            corners: dictionary with keys `(x, y)` containing lists of the four corner coordinates
+            titles: list of strings that will appear in each tile. Default is None for no titles
+
+        &#34;&#34;&#34;
+        # Calculate exterior height and width of grid
+        width = float(np.max(corners[&#39;x&#39;]) + np.min(corners[&#39;x&#39;]))
+        height = float(np.max(corners[&#39;y&#39;]) + np.min(corners[&#39;y&#39;]))
+
+        # Set grid and border coordinates for traces
+        self._grid = calculate_grid(grid_dims, corners, width, height)
+        self._borders = calculate_border(grid_dims, width, height)
+
+        # Add titles to annotations if provided
+        if titles is None:
+            self.annotations = []
+        else:
+            v_offset = np.min(corners[&#39;y&#39;]) * 0.4
+            self.annotations = [
+                go.layout.Annotation(
+                    ax=0, ay=0,
+                    x=(idx % grid_dims[1] + 0.5) * width,  # noqa: S001
+                    y=(grid_dims[0] - int(idx / grid_dims[1]) % grid_dims[0]) * height - v_offset,
+                    text=title,
+                )
+                for idx, title in enumerate(titles) if title is not None
+            ]
+
+    def create_traces(self, df_raw):
+        &#34;&#34;&#34;Return traces for plotly chart.
+
+        Args:
+            df_raw: pandas dataframe with at minimum the column `values: str`
+
+        Returns:
+            list: Dash chart traces
+
+        &#34;&#34;&#34;
+        # Check that the raw data frame is properly formatted
+        check_raw_data(df_raw, min_keys=[&#39;values&#39;])
+
+        # Merge x/y grid data with values. Temporarily extend values with None, then drop those rows
+        values = df_raw[&#39;values&#39;].to_list()
+        values.extend([None] * (len(self._grid[&#39;x&#39;]) - len(values)))
+        df_grid = pd.DataFrame(data={
+            &#39;values&#39;: values,
+            &#39;x&#39;: self._grid[&#39;x&#39;],
+            &#39;y&#39;: self._grid[&#39;y&#39;],
+        }).dropna()
+
+        return [
+            go.Scatter(
+                hoverinfo=&#39;none&#39;,
+                line={&#39;color&#39;: &#39;black&#39;} if self.border_line is None else self.border_line,
+                mode=&#39;lines&#39;,
+                opacity=self.border_opacity,
+                showlegend=False,
+                x=border[&#39;x&#39;],
+                y=border[&#39;y&#39;],
+            ) for border in self._borders
+        ] + [
+            go.Scatter(
+                hoverinfo=&#39;text&#39;,
+                mode=&#39;markers&#39;,
+                showlegend=False,
+                text=df_grid[&#39;values&#39;],
+                x=df_grid[&#39;x&#39;],
+                y=df_grid[&#39;y&#39;],
+                marker=self.create_marker(df_grid, **({} if self.marker_kwargs is None else self.marker_kwargs)),
+            ),
+        ]
+
+    def create_marker(self, df_grid, colorscale=&#39;Viridis&#39;, size=16, symbol=&#39;circle&#39;):
+        &#34;&#34;&#34;Return a dictionary for the scatter plot.
+
+        See: https://plot.ly/python/colorscales/ (Named colorscales: Reds, Bluered, Jet, Viridis, Cividis, etc.)
+
+        Args:
+            df_grid: pandas dataframe with at minimum the column `values: str`, `x: float`, `y: float`
+            colorscale: plotly colorscale, see doc link above. Default is &#39;Viridis&#39;
+            size: integer marker size
+            symbol: marker symbol (square, circle, circle-open, x, etc.)
+
+        Returns:
+            dict: the chart marker shape, symbol, color, etc.
+
+        &#34;&#34;&#34;
+        return {
+            &#39;color&#39;: df_grid[&#39;values&#39;],
+            &#39;colorscale&#39;: colorscale,
+            &#39;showscale&#39;: True,
+            &#39;size&#39;: size,
+            &#39;symbol&#39;: symbol,
+        }
+
+    def create_layout(self):
+        &#34;&#34;&#34;Extend the standard layout.
+
+        Returns:
+            dict: layout for Dash figure
+
+        &#34;&#34;&#34;
+        layout = super().create_layout()
+        for axis in [&#39;xaxis&#39;, &#39;yaxis&#39;]:
+            layout[axis][&#39;showgrid&#39;] = False
+            layout[axis][&#39;showticklabels&#39;] = False
+            layout[axis][&#39;zeroline&#39;] = False
+        layout[&#39;yaxis&#39;][&#39;scaleanchor&#39;] = &#39;x&#39;
+        layout[&#39;yaxis&#39;][&#39;scaleratio&#39;] = 1
+        return layout</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.annotations"><code class="name">var <span class="ident">annotations</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.annotations" href="utils_fig.html#dash_charts.utils_fig.CustomChart.annotations">annotations</a></code>
+</p>
+<div class="desc inherited"><p>Store annotations. Default is an empty list …</p></div>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.border_line"><code class="name">var <span class="ident">border_line</span></code></dt>
+<dd>
+<div class="desc"><p>Dictionary passed to plotly <code>line</code>. Used to set thickness, color, dash style, etc. Default is None.</p></div>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.border_opacity"><code class="name">var <span class="ident">border_opacity</span> : float</code></dt>
+<dd>
+<div class="desc"><p>Border opacity for grid. Value must be in [0-1] where 0 is none. Default is 0.2.</p></div>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.marker_kwargs"><code class="name">var <span class="ident">marker_kwargs</span></code></dt>
+<dd>
+<div class="desc"><p>Marker keyword arguments used in <code>create_marker()</code>. Default is None.</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.axis_range"><code class="name">var <span class="ident">axis_range</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.axis_range" href="utils_fig.html#dash_charts.utils_fig.CustomChart.axis_range">axis_range</a></code>
+</p>
+<div class="desc inherited"><p>Specify x/y axis range or leave as empty dictionary for autorange …</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.apply_custom_layout"><code class="name flex">
+<span>def <span class="ident">apply_custom_layout</span></span>(<span>self, layout)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.apply_custom_layout" href="utils_fig.html#dash_charts.utils_fig.CustomChart.apply_custom_layout">apply_custom_layout</a></code>
+</p>
+<div class="desc inherited"><p>Extend and/or override layout with custom settings …</p></div>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.calculate_layout"><code class="name flex">
+<span>def <span class="ident">calculate_layout</span></span>(<span>self, grid_dims, corners, titles)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate coordinate chart layout. Called by <strong>init</strong>, but can be called later to update the chart.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>grid_dims</code></strong></dt>
+<dd>tuple of the number of tiles in grid. In format <code>(row, column)</code></dd>
+<dt><strong><code>corners</code></strong></dt>
+<dd>dictionary with keys <code>(x, y)</code> containing lists of the four corner coordinates</dd>
+<dt><strong><code>titles</code></strong></dt>
+<dd>list of strings that will appear in each tile. Default is None for no titles</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_layout(self, grid_dims, corners, titles):
+    &#34;&#34;&#34;Calculate coordinate chart layout. Called by __init__, but can be called later to update the chart.
+
+    Args:
+        grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+        corners: dictionary with keys `(x, y)` containing lists of the four corner coordinates
+        titles: list of strings that will appear in each tile. Default is None for no titles
+
+    &#34;&#34;&#34;
+    # Calculate exterior height and width of grid
+    width = float(np.max(corners[&#39;x&#39;]) + np.min(corners[&#39;x&#39;]))
+    height = float(np.max(corners[&#39;y&#39;]) + np.min(corners[&#39;y&#39;]))
+
+    # Set grid and border coordinates for traces
+    self._grid = calculate_grid(grid_dims, corners, width, height)
+    self._borders = calculate_border(grid_dims, width, height)
+
+    # Add titles to annotations if provided
+    if titles is None:
+        self.annotations = []
+    else:
+        v_offset = np.min(corners[&#39;y&#39;]) * 0.4
+        self.annotations = [
+            go.layout.Annotation(
+                ax=0, ay=0,
+                x=(idx % grid_dims[1] + 0.5) * width,  # noqa: S001
+                y=(grid_dims[0] - int(idx / grid_dims[1]) % grid_dims[0]) * height - v_offset,
+                text=title,
+            )
+            for idx, title in enumerate(titles) if title is not None
+        ]</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.create_figure"><code class="name flex">
+<span>def <span class="ident">create_figure</span></span>(<span>self, df_raw, **kwargs_data)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.create_figure" href="utils_fig.html#dash_charts.utils_fig.CustomChart.create_figure">create_figure</a></code>
+</p>
+<div class="desc inherited"><p>Create the figure dictionary …</p></div>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.create_layout"><code class="name flex">
+<span>def <span class="ident">create_layout</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Extend the standard layout.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>layout for Dash figure</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_layout(self):
+    &#34;&#34;&#34;Extend the standard layout.
+
+    Returns:
+        dict: layout for Dash figure
+
+    &#34;&#34;&#34;
+    layout = super().create_layout()
+    for axis in [&#39;xaxis&#39;, &#39;yaxis&#39;]:
+        layout[axis][&#39;showgrid&#39;] = False
+        layout[axis][&#39;showticklabels&#39;] = False
+        layout[axis][&#39;zeroline&#39;] = False
+    layout[&#39;yaxis&#39;][&#39;scaleanchor&#39;] = &#39;x&#39;
+    layout[&#39;yaxis&#39;][&#39;scaleratio&#39;] = 1
+    return layout</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.create_marker"><code class="name flex">
+<span>def <span class="ident">create_marker</span></span>(<span>self, df_grid, colorscale='Viridis', size=16, symbol='circle')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a dictionary for the scatter plot.</p>
+<p>See: <a href="https://plot.ly/python/colorscales/">https://plot.ly/python/colorscales/</a> (Named colorscales: Reds, Bluered, Jet, Viridis, Cividis, etc.)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_grid</code></strong></dt>
+<dd>pandas dataframe with at minimum the column <code>values: str</code>, <code>x: float</code>, <code>y: float</code></dd>
+<dt><strong><code>colorscale</code></strong></dt>
+<dd>plotly colorscale, see doc link above. Default is 'Viridis'</dd>
+<dt><strong><code>size</code></strong></dt>
+<dd>integer marker size</dd>
+<dt><strong><code>symbol</code></strong></dt>
+<dd>marker symbol (square, circle, circle-open, x, etc.)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>the chart marker shape, symbol, color, etc.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_marker(self, df_grid, colorscale=&#39;Viridis&#39;, size=16, symbol=&#39;circle&#39;):
+    &#34;&#34;&#34;Return a dictionary for the scatter plot.
+
+    See: https://plot.ly/python/colorscales/ (Named colorscales: Reds, Bluered, Jet, Viridis, Cividis, etc.)
+
+    Args:
+        df_grid: pandas dataframe with at minimum the column `values: str`, `x: float`, `y: float`
+        colorscale: plotly colorscale, see doc link above. Default is &#39;Viridis&#39;
+        size: integer marker size
+        symbol: marker symbol (square, circle, circle-open, x, etc.)
+
+    Returns:
+        dict: the chart marker shape, symbol, color, etc.
+
+    &#34;&#34;&#34;
+    return {
+        &#39;color&#39;: df_grid[&#39;values&#39;],
+        &#39;colorscale&#39;: colorscale,
+        &#39;showscale&#39;: True,
+        &#39;size&#39;: size,
+        &#39;symbol&#39;: symbol,
+    }</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.create_traces"><code class="name flex">
+<span>def <span class="ident">create_traces</span></span>(<span>self, df_raw)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return traces for plotly chart.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_raw</code></strong></dt>
+<dd>pandas dataframe with at minimum the column <code>values: str</code></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Dash chart traces</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_traces(self, df_raw):
+    &#34;&#34;&#34;Return traces for plotly chart.
+
+    Args:
+        df_raw: pandas dataframe with at minimum the column `values: str`
+
+    Returns:
+        list: Dash chart traces
+
+    &#34;&#34;&#34;
+    # Check that the raw data frame is properly formatted
+    check_raw_data(df_raw, min_keys=[&#39;values&#39;])
+
+    # Merge x/y grid data with values. Temporarily extend values with None, then drop those rows
+    values = df_raw[&#39;values&#39;].to_list()
+    values.extend([None] * (len(self._grid[&#39;x&#39;]) - len(values)))
+    df_grid = pd.DataFrame(data={
+        &#39;values&#39;: values,
+        &#39;x&#39;: self._grid[&#39;x&#39;],
+        &#39;y&#39;: self._grid[&#39;y&#39;],
+    }).dropna()
+
+    return [
+        go.Scatter(
+            hoverinfo=&#39;none&#39;,
+            line={&#39;color&#39;: &#39;black&#39;} if self.border_line is None else self.border_line,
+            mode=&#39;lines&#39;,
+            opacity=self.border_opacity,
+            showlegend=False,
+            x=border[&#39;x&#39;],
+            y=border[&#39;y&#39;],
+        ) for border in self._borders
+    ] + [
+        go.Scatter(
+            hoverinfo=&#39;text&#39;,
+            mode=&#39;markers&#39;,
+            showlegend=False,
+            text=df_grid[&#39;values&#39;],
+            x=df_grid[&#39;x&#39;],
+            y=df_grid[&#39;y&#39;],
+            marker=self.create_marker(df_grid, **({} if self.marker_kwargs is None else self.marker_kwargs)),
+        ),
+    ]</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.coordinate_chart.CoordinateChart.initialize_mutables"><code class="name flex">
+<span>def <span class="ident">initialize_mutables</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.utils_fig.CustomChart" href="utils_fig.html#dash_charts.utils_fig.CustomChart">CustomChart</a></code>.<code><a title="dash_charts.utils_fig.CustomChart.initialize_mutables" href="utils_fig.html#dash_charts.utils_fig.CustomChart.initialize_mutables">initialize_mutables</a></code>
+</p>
+<div class="desc inherited"><p>Initialize the mutable data members to prevent modifying one attribute and impacting all instances.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="dash_charts.coordinate_chart.GridClass"><code class="flex name class">
+<span>class <span class="ident">GridClass</span></span>
+<span>(</span><span>grid_dims, titles)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Base class for specifying a grid for the Coordinate chart.</p>
+<p>Initialize the coordinates.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>grid_dims</code></strong></dt>
+<dd>tuple of the number of tiles in grid. In format <code>(row, column)</code></dd>
+<dt><strong><code>titles</code></strong></dt>
+<dd>list of titles to place in each grid element</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GridClass:
+    &#34;&#34;&#34;Base class for specifying a grid for the Coordinate chart.&#34;&#34;&#34;
+
+    marker_kwargs = None
+    &#34;&#34;&#34;Marker keyword arguments. Default is None.&#34;&#34;&#34;
+
+    def __init__(self, grid_dims, titles):
+        &#34;&#34;&#34;Initialize the coordinates.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`
+            titles: list of titles to place in each grid element
+
+        &#34;&#34;&#34;
+        self.grid_dims = grid_dims
+        self.titles = titles</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="dash_charts.coordinate_chart.CircleGrid" href="#dash_charts.coordinate_chart.CircleGrid">CircleGrid</a></li>
+<li><a title="dash_charts.coordinate_chart.MonthGrid" href="#dash_charts.coordinate_chart.MonthGrid">MonthGrid</a></li>
+<li><a title="dash_charts.coordinate_chart.YearGrid" href="#dash_charts.coordinate_chart.YearGrid">YearGrid</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="dash_charts.coordinate_chart.GridClass.marker_kwargs"><code class="name">var <span class="ident">marker_kwargs</span></code></dt>
+<dd>
+<div class="desc"><p>Marker keyword arguments. Default is None.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="dash_charts.coordinate_chart.MonthGrid"><code class="flex name class">
+<span>class <span class="ident">MonthGrid</span></span>
+<span>(</span><span>grid_dims=(1, 1), titles=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Coordinates of days within a single month.</p>
+<p>Initialize the coordinates.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>grid_dims</code></strong></dt>
+<dd>tuple of the number of tiles in grid. In format <code>(row, column)</code>. Default is (1, 1)</dd>
+<dt><strong><code>titles</code></strong></dt>
+<dd>list of titles to place in each grid element. Default is None</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>if error in the grid dimensions or titles</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MonthGrid(GridClass):  # noqa: H601
+    &#34;&#34;&#34;Coordinates of days within a single month.&#34;&#34;&#34;
+
+    marker_kwargs = {&#39;size&#39;: 35, &#39;symbol&#39;: &#39;square&#39;}
+    &#34;&#34;&#34;Marker keyword arguments. Default is `{&#39;size&#39;: 35, &#39;symbol&#39;: &#39;square&#39;}`&#34;&#34;&#34;
+
+    def __init__(self, grid_dims=(1, 1), titles=None):
+        &#34;&#34;&#34;Initialize the coordinates.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`. Default is (1, 1)
+            titles: list of titles to place in each grid element. Default is None
+
+        Raises:
+            RuntimeError: if error in the grid dimensions or titles
+
+        &#34;&#34;&#34;
+        if grid_dims != (1, 1):  # pragma: no cover
+            raise RuntimeError(&#39;Day grid can only show one month, expected (1, 1)&#39;)
+        if titles is not None and len(titles) != 1:  # pragma: no cover
+            raise RuntimeError(f&#39;Only one title is allowed for the MonthGrid. Received: {titles}&#39;)
+
+        super().__init__(grid_dims=grid_dims, titles=titles)
+
+        # Calculate four corners
+        self.corners = calculate_calendar_grid_corners(margin=1.25)
+
+    def format_data(self, daily_values, year, month):
+        &#34;&#34;&#34;Return the formatted list that can be passed to a coordinate chart.
+
+        Args:
+            daily_values: list of values for each day of month
+            year: year expressed in 4 digits (2019, 2020, etc.)
+            month: month index in [1, 12]
+
+        Returns:
+            list: of values with additional None values to align with grid
+
+        &#34;&#34;&#34;
+        idx_first_day = calendar.monthrange(year, month)[0]
+        values = [None] * idx_first_day
+        values.extend(daily_values)
+        return values</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="dash_charts.coordinate_chart.GridClass" href="#dash_charts.coordinate_chart.GridClass">GridClass</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="dash_charts.coordinate_chart.MonthGrid.marker_kwargs"><code class="name">var <span class="ident">marker_kwargs</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.coordinate_chart.GridClass" href="#dash_charts.coordinate_chart.GridClass">GridClass</a></code>.<code><a title="dash_charts.coordinate_chart.GridClass.marker_kwargs" href="#dash_charts.coordinate_chart.GridClass.marker_kwargs">marker_kwargs</a></code>
+</p>
+<div class="desc inherited"><p>Marker keyword arguments. Default is None.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="dash_charts.coordinate_chart.MonthGrid.format_data"><code class="name flex">
+<span>def <span class="ident">format_data</span></span>(<span>self, daily_values, year, month)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the formatted list that can be passed to a coordinate chart.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>daily_values</code></strong></dt>
+<dd>list of values for each day of month</dd>
+<dt><strong><code>year</code></strong></dt>
+<dd>year expressed in 4 digits (2019, 2020, etc.)</dd>
+<dt><strong><code>month</code></strong></dt>
+<dd>month index in [1, 12]</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>of values with additional None values to align with grid</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def format_data(self, daily_values, year, month):
+    &#34;&#34;&#34;Return the formatted list that can be passed to a coordinate chart.
+
+    Args:
+        daily_values: list of values for each day of month
+        year: year expressed in 4 digits (2019, 2020, etc.)
+        month: month index in [1, 12]
+
+    Returns:
+        list: of values with additional None values to align with grid
+
+    &#34;&#34;&#34;
+    idx_first_day = calendar.monthrange(year, month)[0]
+    values = [None] * idx_first_day
+    values.extend(daily_values)
+    return values</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="dash_charts.coordinate_chart.YearGrid"><code class="flex name class">
+<span>class <span class="ident">YearGrid</span></span>
+<span>(</span><span>grid_dims=(4, 3), titles=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Coordinates of days within a grid of months in one year.</p>
+<p>Initialize the coordinates.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>grid_dims</code></strong></dt>
+<dd>tuple of the number of tiles in grid. In format <code>(row, column)</code>. Default is (4, 3)</dd>
+<dt><strong><code>titles</code></strong></dt>
+<dd>list of titles to place in each grid element. Default is None</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>if error in the grid dimensions</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class YearGrid(GridClass):  # noqa: H601
+    &#34;&#34;&#34;Coordinates of days within a grid of months in one year.&#34;&#34;&#34;
+
+    marker_kwargs = {&#39;size&#39;: 10, &#39;symbol&#39;: &#39;square&#39;}
+    &#34;&#34;&#34;Marker keyword arguments. Default is `{&#39;size&#39;: 10, &#39;symbol&#39;: &#39;square&#39;}`&#34;&#34;&#34;
+
+    def __init__(self, grid_dims=(4, 3), titles=None):
+        &#34;&#34;&#34;Initialize the coordinates.
+
+        Args:
+            grid_dims: tuple of the number of tiles in grid. In format `(row, column)`. Default is (4, 3)
+            titles: list of titles to place in each grid element. Default is None
+
+        Raises:
+            RuntimeError: if error in the grid dimensions
+
+        &#34;&#34;&#34;
+        if grid_dims[0] * grid_dims[1] != 12:  # pragma: no cover
+            raise RuntimeError(&#39;Calendar must show all 12 months Expected (12,1), (6,2), (4,3), (1,12), etc.&#39;)
+        if titles is None:
+            titles = calendar.month_name[1:]
+
+        super().__init__(grid_dims=grid_dims, titles=titles)
+
+        # Calculate four corners
+        self.corners = calculate_calendar_grid_corners(margin=2)
+
+    def format_data(self, month_lists, year):
+        &#34;&#34;&#34;Return the formatted list that can be passed to a coordinate chart.
+
+        Args:
+            month_lists: list of daily values where each sublist is one month starting with January
+            year: year expressed in 4 decimal places (i.e. 2019)
+
+        Returns:
+            list: of values with additional None values to align with grid
+
+        &#34;&#34;&#34;
+        values = []
+        for idx_month, daily_list in enumerate(month_lists):
+            idx_first_day, count_days = calendar.monthrange(year, idx_month + 1)
+            idx_first_day += 1  # Increment to start on Sunday -- PLANNED: make this configureable
+            values.extend([None] * idx_first_day)
+            values.extend(daily_list)
+            values.extend([None] * (len(self.corners[&#39;x&#39;]) - idx_first_day - count_days))
+        return values</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="dash_charts.coordinate_chart.GridClass" href="#dash_charts.coordinate_chart.GridClass">GridClass</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="dash_charts.coordinate_chart.YearGrid.marker_kwargs"><code class="name">var <span class="ident">marker_kwargs</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="dash_charts.coordinate_chart.GridClass" href="#dash_charts.coordinate_chart.GridClass">GridClass</a></code>.<code><a title="dash_charts.coordinate_chart.GridClass.marker_kwargs" href="#dash_charts.coordinate_chart.GridClass.marker_kwargs">marker_kwargs</a></code>
+</p>
+<div class="desc inherited"><p>Marker keyword arguments. Default is None.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="dash_charts.coordinate_chart.YearGrid.format_data"><code class="name flex">
+<span>def <span class="ident">format_data</span></span>(<span>self, month_lists, year)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the formatted list that can be passed to a coordinate chart.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>month_lists</code></strong></dt>
+<dd>list of daily values where each sublist is one month starting with January</dd>
+<dt><strong><code>year</code></strong></dt>
+<dd>year expressed in 4 decimal places (i.e. 2019)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>of values with additional None values to align with grid</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def format_data(self, month_lists, year):
+    &#34;&#34;&#34;Return the formatted list that can be passed to a coordinate chart.
+
+    Args:
+        month_lists: list of daily values where each sublist is one month starting with January
+        year: year expressed in 4 decimal places (i.e. 2019)
+
+    Returns:
+        list: of values with additional None values to align with grid
+
+    &#34;&#34;&#34;
+    values = []
+    for idx_month, daily_list in enumerate(month_lists):
+        idx_first_day, count_days = calendar.monthrange(year, idx_month + 1)
+        idx_first_day += 1  # Increment to start on Sunday -- PLANNED: make this configureable
+        values.extend([None] * idx_first_day)
+        values.extend(daily_list)
+        values.extend([None] * (len(self.corners[&#39;x&#39;]) - idx_first_day - count_days))
+    return values</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dash_charts" href="index.html">dash_charts</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="dash_charts.coordinate_chart.calculate_border" href="#dash_charts.coordinate_chart.calculate_border">calculate_border</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.calculate_calendar_grid_corners" href="#dash_charts.coordinate_chart.calculate_calendar_grid_corners">calculate_calendar_grid_corners</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.calculate_grid" href="#dash_charts.coordinate_chart.calculate_grid">calculate_grid</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="dash_charts.coordinate_chart.CircleGrid" href="#dash_charts.coordinate_chart.CircleGrid">CircleGrid</a></code></h4>
+<ul class="">
+<li><code><a title="dash_charts.coordinate_chart.CircleGrid.marker_kwargs" href="#dash_charts.coordinate_chart.CircleGrid.marker_kwargs">marker_kwargs</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="dash_charts.coordinate_chart.CoordinateChart" href="#dash_charts.coordinate_chart.CoordinateChart">CoordinateChart</a></code></h4>
+<ul class="two-column">
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.annotations" href="utils_fig.html#dash_charts.coordinate_chart.CoordinateChart.annotations">annotations</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.apply_custom_layout" href="utils_fig.html#dash_charts.coordinate_chart.CoordinateChart.apply_custom_layout">apply_custom_layout</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.axis_range" href="utils_fig.html#dash_charts.coordinate_chart.CoordinateChart.axis_range">axis_range</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.border_line" href="#dash_charts.coordinate_chart.CoordinateChart.border_line">border_line</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.border_opacity" href="#dash_charts.coordinate_chart.CoordinateChart.border_opacity">border_opacity</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.calculate_layout" href="#dash_charts.coordinate_chart.CoordinateChart.calculate_layout">calculate_layout</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.create_figure" href="utils_fig.html#dash_charts.coordinate_chart.CoordinateChart.create_figure">create_figure</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.create_layout" href="#dash_charts.coordinate_chart.CoordinateChart.create_layout">create_layout</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.create_marker" href="#dash_charts.coordinate_chart.CoordinateChart.create_marker">create_marker</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.create_traces" href="#dash_charts.coordinate_chart.CoordinateChart.create_traces">create_traces</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.initialize_mutables" href="utils_fig.html#dash_charts.coordinate_chart.CoordinateChart.initialize_mutables">initialize_mutables</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.CoordinateChart.marker_kwargs" href="#dash_charts.coordinate_chart.CoordinateChart.marker_kwargs">marker_kwargs</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="dash_charts.coordinate_chart.GridClass" href="#dash_charts.coordinate_chart.GridClass">GridClass</a></code></h4>
+<ul class="">
+<li><code><a title="dash_charts.coordinate_chart.GridClass.marker_kwargs" href="#dash_charts.coordinate_chart.GridClass.marker_kwargs">marker_kwargs</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="dash_charts.coordinate_chart.MonthGrid" href="#dash_charts.coordinate_chart.MonthGrid">MonthGrid</a></code></h4>
+<ul class="">
+<li><code><a title="dash_charts.coordinate_chart.MonthGrid.format_data" href="#dash_charts.coordinate_chart.MonthGrid.format_data">format_data</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.MonthGrid.marker_kwargs" href="#dash_charts.coordinate_chart.MonthGrid.marker_kwargs">marker_kwargs</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="dash_charts.coordinate_chart.YearGrid" href="#dash_charts.coordinate_chart.YearGrid">YearGrid</a></code></h4>
+<ul class="">
+<li><code><a title="dash_charts.coordinate_chart.YearGrid.format_data" href="#dash_charts.coordinate_chart.YearGrid.format_data">format_data</a></code></li>
+<li><code><a title="dash_charts.coordinate_chart.YearGrid.marker_kwargs" href="#dash_charts.coordinate_chart.YearGrid.marker_kwargs">marker_kwargs</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>
