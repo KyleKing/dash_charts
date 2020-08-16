@@ -208,7 +208,7 @@ class FullScreenAppWithTabs(AppWithTabs):  # noqa: H601
         # Extend tab style for selected case
         selected_style = deepcopy(tab_style)
         opposite_lookup = {'top': 'bottom', 'bottom': 'top', 'left': 'right', 'right': 'left'}
-        tabs_style = {
+        tabs_style = {   # noqa: ECE001
             'backgroundColor': '#F9F9F9',
             'padding': tabs_padding,
             'position': 'fixed',

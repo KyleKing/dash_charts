@@ -57,7 +57,7 @@ class UploadModuleDemo(AppBase):  # noqa: H601
             dict: Dash HTML object
 
         """
-        return dbc.Container([
+        return dbc.Container([   # noqa: ECE001
             dbc.Col([
                 html.H1(self.name),
                 html.Hr(),

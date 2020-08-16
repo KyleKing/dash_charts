@@ -45,7 +45,7 @@ def validate(document, schema, **validator_kwargs):
     return validator.errors
 
 
-def json_dumps_compact(data):
+def json_dumps_compact(data):   # noqa: CCR001
     """Format provided dictionary into compact JSON. Lists will be in one line rather than split on new lines.
 
     Args:
@@ -150,15 +150,15 @@ def uniq_table_id():
 class SQLConnection(ContextDecorator):
     """Ensure the SQLite connection is properly opened and closed."""
 
-    def __init__(self, db_file):
+    def __init__(self, db_path):
         """Initialize context wrapper.
 
         Args:
-            db_file: Path to a SQLite file
+            db_path: Path to a SQLite file
 
         """
         self.conn = None
-        self.db_path = db_file
+        self.db_path = db_path
 
     def __enter__(self):
         """Connect to the database and return connection reference.
@@ -175,17 +175,17 @@ class SQLConnection(ContextDecorator):
         self.conn.close()
 
 
-def list_sql_tables(db_file):
+def list_sql_tables(db_path):
     """Return all table names from the SQL database.
 
     Args:
-        db_file: path to SQLite database file
+        db_path: path to SQLite database file
 
     Returns:
         list: of unique table names in the SQL database
 
     """
-    with SQLConnection(db_file) as conn:
+    with SQLConnection(db_path) as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT name FROM sqlite_master WHERE TYPE = "table"')
         return [names[0] for names in cursor.fetchall()]

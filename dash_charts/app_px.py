@@ -148,7 +148,7 @@ class TabBase(AppBase):  # noqa: H601
         """
         self.verify_types_for_layout()
 
-        return html.Div([
+        return html.Div([  # noqa: ECE001
             html.Div([
                 dropdown_group('Plot Type:', self.ids[self.id_func], self.func_opts, value=self.func_opts[0]['label']),
                 dropdown_group('Template:', self.ids[self.id_template], self.t_opts, value=self.t_opts[0]['label']),
@@ -168,7 +168,7 @@ class TabBase(AppBase):  # noqa: H601
 
         self.register_update_chart()
 
-    def register_update_chart(self):
+    def register_update_chart(self):   # noqa: CCR001
         """Register the update_chart callback."""
         outputs = [(self.id_chart, 'figure')]
         inputs = [(_id, 'value') for _id in self.input_ids]

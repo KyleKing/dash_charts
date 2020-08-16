@@ -222,7 +222,7 @@ def tag_table(df_table, table_class=None):
                         tags.td(str(value))
 
 
-def write_lookup(key, function_lookup):
+def write_lookup(key, function_lookup):   # noqa: CCR001
     """Determine the lookup result and add to the file.
 
     Args:

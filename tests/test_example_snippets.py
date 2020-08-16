@@ -62,7 +62,8 @@ class ComponentDemo(AppBase):
 
 
 @pytest.mark.CHROME
-def test_inin001_simple_callback(dash_duo):
+def test_in_in001_simple_callback(dash_duo):
+    """Test in_in001_simple_callback."""
     app = ComponentDemo()
     app.create()
 

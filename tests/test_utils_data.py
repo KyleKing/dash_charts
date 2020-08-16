@@ -2,13 +2,18 @@
 
 import tempfile
 from pathlib import Path
+import pandas as pd
 
 from dash_charts import utils_data
-# def enable_verbose_pandas():
-# import pandas as pd
-# pd.get_option('display.max_columns')  is None
-# def write_csv(csv_path, rows):
-# def list_sql_tables(db_file):
+
+
+def test_enable_verbose_pandas():
+    """Test enable_verbose_pandas."""
+    pd.set_option('display.max_columns', 0)
+
+    utils_data.enable_verbose_pandas()  # act
+
+    pd.get_option('display.max_columns') is None
 
 
 def test_validate():
@@ -53,10 +58,10 @@ def test_json_dumps_compact():
 def test_write_pretty_json():
     """Test write_pretty_json."""
     with tempfile.TemporaryDirectory() as tmp_dir:
-        tmp_file = Path(tmp_dir) / 'tmp.json'
-        utils_data.write_pretty_json(tmp_file, {'A': [1, 2, 3], 'B': 2})
+        json_path = Path(tmp_dir) / 'tmp.json'
+        utils_data.write_pretty_json(json_path, {'A': [1, 2, 3], 'B': 2})
 
-        result = tmp_file.read_text()
+        result = json_path.read_text()
 
     assert result == """{
     \"A\": [
@@ -66,6 +71,17 @@ def test_write_pretty_json():
     ],
     \"B\": 2
 }"""
+
+
+def test_write_csv():
+    """Test write_csv."""
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        csv_path = Path(tmp_dir) / 'tmp.json'
+        utils_data.write_csv(csv_path, [['header 1', 'headder 2'], ['row 1', 'a'], ['row 2', 'b']])
+
+        result = csv_path.read_text()
+
+    assert result == 'header 1,headder 2\nrow 1,a\nrow 2,b\n'
 
 
 def test_get_unix():
@@ -88,3 +104,25 @@ def test_uniq_table_id():
 
     assert result.startswith('U')
     assert len(result) == 20
+
+
+def test_list_sql_tables():
+    """Test list_sql_tables."""
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        db_path = Path(tmp_dir) / 'tmp.db'
+        with utils_data.SQLConnection(db_path) as conn:
+            # Create EVENTS table
+            cursor = conn.cursor()
+            cursor.execute("""CREATE TABLE EVENTS (
+                id   INT   PRIMARY KEY   NOT NULL,
+                label   TEXT   NOT NULL
+            );""")
+            cursor.execute("""CREATE TABLE MAIN (
+                id   INT   PRIMARY KEY   NOT NULL,
+                value   INT   NOT NULL
+            );""")
+            conn.commit()
+
+        result = utils_data.list_sql_tables(db_path)
+
+    assert result == ['EVENTS', 'MAIN']

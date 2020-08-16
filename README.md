@@ -276,28 +276,30 @@ Latest coverage table
 | File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
 | `dash_charts/__init__.py` | 1 | 0 | 0 | 100.0% |
-| `dash_charts/app_px.py` | 121 | 27 | 0 | 77.7% |
+| `dash_charts/app_px.py` | 121 | 11 | 0 | 90.9% |
 | `dash_charts/components.py` | 13 | 0 | 0 | 100.0% |
 | `dash_charts/coordinate_chart.py` | 102 | 1 | 6 | 99.0% |
 | `dash_charts/custom_colorscales.py` | 3 | 0 | 0 | 100.0% |
 | `dash_charts/datatable.py` | 79 | 25 | 0 | 68.4% |
 | `dash_charts/equations.py` | 11 | 0 | 0 | 100.0% |
 | `dash_charts/gantt_chart.py` | 54 | 0 | 0 | 100.0% |
-| `dash_charts/modules_datatable.py` | 97 | 34 | 0 | 64.9% |
+| `dash_charts/modules_datatable.py` | 97 | 11 | 0 | 88.7% |
 | `dash_charts/modules_upload.py` | 131 | 60 | 0 | 54.2% |
 | `dash_charts/pareto_chart.py` | 41 | 0 | 2 | 100.0% |
-| `dash_charts/scatter_line_charts.py` | 47 | 20 | 4 | 57.4% |
+| `dash_charts/scatter_line_charts.py` | 47 | 0 | 4 | 100.0% |
 | `dash_charts/time_vis_chart.py` | 61 | 0 | 0 | 100.0% |
 | `dash_charts/utils_app.py` | 65 | 1 | 8 | 98.5% |
 | `dash_charts/utils_app_modules.py` | 26 | 3 | 4 | 88.5% |
-| `dash_charts/utils_app_with_navigation.py` | 114 | 53 | 6 | 53.5% |
+| `dash_charts/utils_app_with_navigation.py` | 114 | 7 | 6 | 93.9% |
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4% |
-| `dash_charts/utils_dash.py` | 122 | 41 | 7 | 66.4% |
+| `dash_charts/utils_data.py` | 54 | 0 | 0 | 100.0% |
+| `dash_charts/utils_dataset.py` | 63 | 32 | 0 | 49.2% |
 | `dash_charts/utils_fig.py` | 75 | 2 | 4 | 97.3% |
-| `dash_charts/utils_json_cache.py` | 41 | 8 | 0 | 80.5% |
+| `dash_charts/utils_helpers.py` | 8 | 1 | 7 | 87.5% |
+| `dash_charts/utils_json_cache.py` | 42 | 8 | 0 | 81.0% |
 | `dash_charts/utils_static.py` | 107 | 4 | 0 | 96.3% |
 
-Generated on: 2020-08-15T21:37:23.713104
+Generated on: 2020-08-16T08:50:43.835633
 
 <!-- /COVERAGE -->
 

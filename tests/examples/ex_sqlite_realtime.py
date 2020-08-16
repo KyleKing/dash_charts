@@ -52,20 +52,21 @@ def use_flag_file(callback, *args, **kwargs):
         flag_file.unlink()
 
 
-def simulate_db_population(db_file, points=1000, delay=0.1, flag_file=None):
+def simulate_db_population(db_path, points=1000, delay=0.1, flag_file=None):   # noqa: CCR001
     """Populate a SQL database in real time so that the changes can be visualized in a chart.
 
     Args:
-        db_file: path to SQLite file
+        db_path: path to SQLite file
         points: total number of points to create. Default is 1000
         delay: time to wait between creating each new data point (in seconds). Default is 0.1seconds
+        flag_file: path to a file used to flag when index is running. Default is None. See `use_flag_file()`
 
     """
     # Clear database if it exists
-    if db_file.is_file():
-        db_file.unlink()
+    if db_path.is_file():
+        db_path.unlink()
 
-    with SQLConnection(db_file) as conn:
+    with SQLConnection(db_path) as conn:
         # Create EVENTS table
         cursor = conn.cursor()
         cursor.execute("""CREATE TABLE EVENTS (
@@ -83,20 +84,20 @@ def simulate_db_population(db_file, points=1000, delay=0.1, flag_file=None):
         for idx in tqdm(range(points)):
             value = (-1 if idx > 500 else 1) * idx / 10.0  # Introduce variability
             cursor.execute('INSERT INTO EVENTS (id, label, value) VALUES'  # noqa: S608
-                        f' ({idx}, "idx-{idx}", {samples[idx] + value})')
+                           f' ({idx}, "idx-{idx}", {samples[idx] + value})')
             conn.commit()
             if flag_file is not None:
                 flag_file.write_text(str(idx))
             time.sleep(delay)
 
 
-class RealTimeSQLDemo(AppBase):
+class RealTimeSQLDemo(AppBase):  # noqa: H601
     """Example creating a rolling mean chart."""
 
     name = 'Example Scatter of Real Time SQL Data'
     """Application name"""
 
-    db_file = Path(__file__).parent / 'realtime-sql-data.sqlite'
+    db_path = Path(__file__).parent / 'realtime-sql-data.sqlite'
     """Path to the SQLite database file."""
 
     chart_main = None
@@ -124,9 +125,9 @@ class RealTimeSQLDemo(AppBase):
 
     def generate_data(self):
         """Start the realtime updates of the database. Function could be run from separate process."""
-        db_file = self.db_file
+        db_path = self.db_path
         process = multiprocessing.Process(
-            target=use_flag_file, args=[simulate_db_population, db_file], kwargs={'points': 1000, 'delay': 0.05},
+            target=use_flag_file, args=[simulate_db_population, db_path], kwargs={'points': 1000, 'delay': 0.05},
         )
         process.start()
 
@@ -151,14 +152,19 @@ class RealTimeSQLDemo(AppBase):
         )
 
     def create_callbacks(self):
-        """Create Dash callbacks."""
+        """Create Dash callbacks.
+
+        Raises:
+            PreventUpdate: if there is not yet enough data to plot the moving average
+
+        """
         outputs = [(self.id_chart, 'figure')]
         inputs = [(self.id_interval, 'n_intervals')]
         states = []
 
         @self.callback(outputs, inputs, states, pic=True)
         def update_chart(*raw_args):
-            with SQLConnection(self.db_file) as conn:
+            with SQLConnection(self.db_path) as conn:
                 df_events = pd.read_sql_query('SELECT id, label, value FROM EVENTS', conn)
             moving_window = 5
             count_points = len(df_events['id'])

@@ -8,13 +8,13 @@ import dash_bootstrap_components as dbc
 import jsonpickle
 import pandas as pd
 import plotly.express as px
+from dominate import tags, util
+
 from dash_charts import equations
 from dash_charts.scatter_line_charts import FittedChart
 from dash_charts.utils_data import json_dumps_compact
-from dash_charts.utils_static import (
-    add_image, add_video, create_dbc_doc, make_div, tag_code, tag_markdown, tag_table, write_from_markdown,
-    write_image_file)
-from dominate import tags, util
+from dash_charts.utils_static import add_image, add_video, create_dbc_doc, make_div, tag_code, tag_markdown, tag_table
+from dash_charts.utils_static import write_from_markdown, write_image_file
 
 
 def toggle_written_image_file(image_path, figure):
@@ -119,7 +119,7 @@ def example_write_from_markdown():
     """
     filename = Path(__file__).parent / 'example_write_from_markdown.md'
     figure_px = px.scatter(x=range(10), y=range(10))
-    function_lookup = {
+    function_lookup = {   # noqa: ECE001
         'make_div(figure_px)': (make_div, [figure_px]),
         'table(iris_data)': (tag_table, [px.data.iris().head(10)]),
     }

@@ -67,15 +67,15 @@ class DBConnect:
 class DBConnection(ContextDecorator):
     """Ensure the DBConnect connection is properly opened and closed."""
 
-    def __init__(self, db_file):
+    def __init__(self, db_path):
         """Initialize context wrapper.
 
         Args:
-            db_file: Path to the SQLite file
+            db_path: Path to the SQLite file
 
         """
         self.conn = None
-        self.db_path = db_file
+        self.db_path = db_path
 
     def __enter__(self):
         """Connect to the database and return connection reference.
@@ -123,18 +123,18 @@ def safe_col_name(args_pair):
     return str(idx) if col == '' else col
 
 
-def store_reference_tables(db_file, data_dicts, meta_table_name=META_TABLE_NAME):
+def store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME):   # noqa: CCR001
     """Store multi-dimensionsal data in a SQLite database.
 
     WARN: This will append to the META_TABLE_NAME without checking for duplicates. Handling de-duping separately
 
     Args:
-        db_file: Path to a `.db` file
+        db_path: Path to a `.db` file
         data_dicts: all data to be stored in SQLite. Can contain Pandas dataframes
         meta_table_name: optional name of the main SQLite table. Default is `META_TABLE_NAME`
 
     """
-    with DBConnection(db_file) as data_db:
+    with DBConnection(db_path) as data_db:
         meta_table = []
         unique = uniq_table_id()
         for dict_idx, data_dict in enumerate(data_dicts):
@@ -154,11 +154,11 @@ def store_reference_tables(db_file, data_dicts, meta_table_name=META_TABLE_NAME)
         table_main.insert_many(meta_table)
 
 
-def get_table(db_file, table_name, drop_id_col=True):
+def get_table(db_path, table_name, drop_id_col=True):
     """Retrieve the meta table as a Pandas dataframe.
 
     Args:
-        db_file: Path to a `.db` file
+        db_path: Path to a `.db` file
         table_name: SQLite table name
         drop_id_col: if True, drop the `id` column from SQL. Default is True
 
@@ -166,7 +166,7 @@ def get_table(db_file, table_name, drop_id_col=True):
         df_table: pandas dataframe for the values in the specified table (`meta_table_name`)
 
     """
-    with DBConnection(db_file) as data_db:
+    with DBConnection(db_path) as data_db:
         df_table = pd.DataFrame([*data_db.db[table_name].all()])
     # Optionally remove the 'id' column added in the SQL database
     if drop_id_col:

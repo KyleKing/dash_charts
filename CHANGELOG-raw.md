@@ -5,6 +5,10 @@
 
 ### New
 
+* Split utils_dash into more specific files. [Kyle King]
+
+  - See utils_helpers, utils_data, utils_dataset
+
 * Add matplotlib conversion convenience method. [Kyle King]
 
 * Refactor and add test for utils_cache. [Kyle King]
@@ -12,6 +16,10 @@
 * Time Vis chart. [Kyle King]
 
 ### Changes
+
+* Downgrade Matplotlib 3.1 for pytest warning. [Kyle King]
+
+* Rename dash_helpers to utils_dash. [Kyle King]
 
 * Sync local changes for database & cache. [Kyle King]
 

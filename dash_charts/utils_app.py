@@ -106,7 +106,7 @@ class AppBase:  # noqa: H601
         self.init_app_kwargs['title'] = self.name
         self.app = init_app(**self.init_app_kwargs) if app is None else app
 
-    def create(self, assign_layout=True):
+    def create(self, assign_layout=True):  # noqa: CCR001
         """Create the ids, app charts, layout, callbacks, and optional modules.
 
         Args:

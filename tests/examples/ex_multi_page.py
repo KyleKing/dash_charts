@@ -6,11 +6,11 @@ import dash_html_components as html
 import plotly.express as px
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_app_with_navigation import AppMultiPage
-from dash_charts.utils_helpers import parse_dash_cli_args
 from dash_charts.utils_fig import min_graph
+from dash_charts.utils_helpers import parse_dash_cli_args
 
 
-class StaticPage(AppBase):
+class StaticPage(AppBase):  # noqa: H601
     """Simple App without charts or callbacks."""
 
     basic_style = {
@@ -88,7 +88,7 @@ class Page404(StaticPage):
 
         """
         return html.Div(style=self.basic_style, children=[
-            html.H1(children=f'404: Path not found'),
+            html.H1(children='404: Path not found'),
             html.Img(src='https://upload.wikimedia.org/wikipedia/commons/2/26/NL_Route_404.svg'),
         ])
 
@@ -96,7 +96,7 @@ class Page404(StaticPage):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-class MultiPageDemo(AppMultiPage):
+class MultiPageDemo(AppMultiPage):  # noqa: H601
     """Demo application."""
 
     name = 'MultiPageDemo'

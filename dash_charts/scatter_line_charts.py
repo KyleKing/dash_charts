@@ -44,7 +44,7 @@ def create_rolling_traces(df_raw, count_rolling, count_std):
     ]
 
 
-def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):
+def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):   # noqa: CCR001
     """Create traces for specified equation.
 
     Args:
@@ -148,7 +148,7 @@ class FittedChart(CustomChart):
     suppress_fit_errors = False
     """If True, bury errors from scipy fit and will print message to console. Default is True."""
 
-    def create_traces(self, df_raw):
+    def create_traces(self, df_raw):   # noqa: CCR001
         """Return traces for plotly chart.
 
         Args:

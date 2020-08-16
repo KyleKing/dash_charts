@@ -41,7 +41,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
     _shapes = []
     """List of shapes for plotly layout."""
 
-    def create_traces(self, df_raw):
+    def create_traces(self, df_raw):   # noqa: CCR001
         """Return traces for plotly chart.
 
         Args:

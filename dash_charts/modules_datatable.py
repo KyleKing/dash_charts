@@ -199,6 +199,9 @@ class ModuleFilteredTable(ModuleDataTable):
         Args:
             parent: parent instance (ex: `self`)
 
+        Raises:
+            PreventUpdate if no columns found in the table
+
         """
         outputs = [(self.get(self.id_table_parent), 'children')]
         inputs = [(self.get(self.id_column_select), 'value')]
@@ -231,7 +234,7 @@ class ModuleFilteredTable(ModuleDataTable):
                 query = ''
             return map_outputs(outputs, [(self.get(self.id_table), 'filter_query', query)])
 
-    def register_show_query(self, parent):
+    def register_show_query(self, parent):   # noqa: CCR001
         """Register callbacks to handle user interaction.
 
         Args:

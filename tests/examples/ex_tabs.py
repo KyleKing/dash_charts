@@ -96,7 +96,7 @@ class TabThree(StaticTab):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-class TabAppDemo(AppWithTabs):
+class TabAppDemo(AppWithTabs):  # noqa: H601
     """Demo application."""
 
     name = 'TabAppDemo'
