@@ -4,10 +4,11 @@ from io import StringIO
 
 import dash_html_components as html
 import pandas as pd
+
 from dash_charts.pareto_chart import ParetoChart
 from dash_charts.utils_app import AppBase
-from dash_charts.utils_helpers import parse_dash_cli_args
 from dash_charts.utils_fig import min_graph
+from dash_charts.utils_helpers import parse_dash_cli_args
 
 CSV_DATA = """category,events
 Every Cloud Has a Silver Lining,10

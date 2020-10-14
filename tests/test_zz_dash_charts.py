@@ -1,6 +1,7 @@
 """Final test alphabetically (zz) to catch general integration cases."""
 
 import toml
+
 from dash_charts import __version__
 
 

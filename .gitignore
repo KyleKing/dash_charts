@@ -1,3 +1,6 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# General Python Ignore Patterns from Github
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -128,19 +131,65 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# ==============
-# Custom
+# ----------------------------------------------------------------------------------------------------------------------
+# Common_Package Rules
 .vscode/*
-.doit*
-tmp.*
-docs/coverage*
-docs/*.mako
-docs/*.html
+*.csv
+*.doc*
+*.jsonl
+*.lnk
+*.log
+*.pdf
+*.png
+*.jp*g
+*.spe
+*.svg
+*.xl*
+~*.*
+~$*
+
+# SQLite DB files (Note: use *.dvc to check these into git)
+*.db
+*.sqlite
+
+# Other Python
+*.whl
+*.tar.gz
+setup.py
+
+# Coverage (for Pytest)
+**/coverage*
+**/cov_html/
 coverage.json
+
+# Static Type Checkers
+.pytype/*
+
+# Ignore doc outputs
+docs/*
+
+# Ignore DOIT cache files
+**/.doit.*
+
+# Ignore testmon cache files
+**/.testmondata
+
+# Temporary folders created for documentation
+/*/0*
+
+# Other common ignore rules
+**/secret.json
+**/*.html
+
+# Ignore temporary files
+/tmp.txt
+
+# Track hosted documentation
+!docs/*/*.html
+!index.html
+
+# ======================================================================================================================
+# Other-Custom
 
 # Upload Module Database Directory
 **/local_cache/*
-
-# Ignore the temporary files created for tests
-/tests/examples/example_write_from_markdown.html
-/tests/examples/realtime-sql-data.sqlite

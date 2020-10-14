@@ -2,6 +2,7 @@
 
 import dash_bootstrap_components as dbc
 import dash_html_components as html
+
 from dash_charts.components import format_email_pass_id, login_form
 from dash_charts.modules_upload import UploadModule
 from dash_charts.utils_app import AppBase

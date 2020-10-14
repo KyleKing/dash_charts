@@ -2,6 +2,7 @@
 
 import dash_html_components as html
 import pytest
+
 from dash_charts.components import dropdown_group, opts_dd
 from dash_charts.utils_app import AppBase
 

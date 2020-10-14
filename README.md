@@ -39,8 +39,11 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
     <!-- CODE:tests/examples/readme.py -->
 
     ```py
+    """Example Dash Application."""
+
     import dash_html_components as html
     import plotly.express as px
+
     from dash_charts.pareto_chart import ParetoChart
     from dash_charts.utils_app import AppBase
     from dash_charts.utils_fig import min_graph
@@ -290,16 +293,16 @@ Latest coverage table
 | `dash_charts/time_vis_chart.py` | 61 | 0 | 0 | 100.0% |
 | `dash_charts/utils_app.py` | 65 | 1 | 8 | 98.5% |
 | `dash_charts/utils_app_modules.py` | 26 | 3 | 4 | 88.5% |
-| `dash_charts/utils_app_with_navigation.py` | 114 | 7 | 6 | 93.9% |
+| `dash_charts/utils_app_with_navigation.py` | 114 | 9 | 6 | 92.1% |
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4% |
 | `dash_charts/utils_data.py` | 54 | 0 | 0 | 100.0% |
 | `dash_charts/utils_dataset.py` | 63 | 32 | 0 | 49.2% |
-| `dash_charts/utils_fig.py` | 75 | 2 | 4 | 97.3% |
+| `dash_charts/utils_fig.py` | 75 | 3 | 4 | 96.0% |
 | `dash_charts/utils_helpers.py` | 8 | 1 | 7 | 87.5% |
 | `dash_charts/utils_json_cache.py` | 42 | 8 | 0 | 81.0% |
 | `dash_charts/utils_static.py` | 107 | 4 | 0 | 96.3% |
 
-Generated on: 2020-08-16T08:50:43.835633
+Generated on: 2020-10-14T08:03:19.087286
 
 <!-- /COVERAGE -->
 

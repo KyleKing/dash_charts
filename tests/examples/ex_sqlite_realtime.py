@@ -18,13 +18,14 @@ import dash_html_components as html
 import numpy as np
 import pandas as pd
 from dash.exceptions import PreventUpdate
+from tqdm import tqdm
+
 from dash_charts.scatter_line_charts import RollingChart
 from dash_charts.utils_app import AppBase
 from dash_charts.utils_callbacks import map_outputs
 from dash_charts.utils_data import SQLConnection
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
-from tqdm import tqdm
 
 
 def use_flag_file(callback, *args, **kwargs):

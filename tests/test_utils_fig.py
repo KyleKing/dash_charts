@@ -4,17 +4,18 @@ import math
 
 import numpy as np
 import pytest
-from dash_charts import utils_fig
 from matplotlib import pyplot as plt
+
+from dash_charts import utils_fig
 
 
 def test_convert_matplolib():
     """Test convert_matplolib."""
     # Create figure with example code from plotly.py tests
     fig = plt.figure()
-    x = [10, 20, 30]
-    y = [100, 200, 300]
-    plt.plot(x, y)
+    x_values = [10, 20, 30]
+    y_values = [100, 200, 300]
+    plt.plot(x_values, y_values)
 
     result = utils_fig.convert_matplolib(fig)  # Convert to Plotly
 

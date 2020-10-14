@@ -17,6 +17,8 @@
 
 ### Changes
 
+* Add additional tests, update docs, & fix lint. [Kyle King]
+
 * Downgrade Matplotlib 3.1 for pytest warning. [Kyle King]
 
 * Rename dash_helpers to utils_dash. [Kyle King]
@@ -74,6 +76,8 @@
 * Merge rolling and fitted charts (inc: 0.0.5) [Kyle King]
 
 ### Fix
+
+* Experiment with isort corrections. [Kyle King]
 
 * Isort and dash testing requirements. [Kyle King]
 

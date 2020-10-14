@@ -1,6 +1,7 @@
 """Test pareto_chart."""
 
 import pytest
+
 from dash_charts import pareto_chart
 
 
