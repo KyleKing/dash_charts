@@ -1,3 +1,7 @@
+- Add way to specify the x/y axis key names separate of the labels. See plotly express as an example syntax
+- Improve performance of the JSON Cache using SQL directly rather than datasette for handling larger data sets
+
+
 - Add infrastructure to override/extend the CSS and JS: http://dash.plotly.com/external-resources
 	- Create temporary directory merged with user specified content? Accept string custom_css like the static ones do?
 

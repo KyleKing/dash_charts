@@ -3,9 +3,30 @@ requires = [ "poetry>=1.0",]
 build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
-line_length = 120
-length_sort = false
+combine_as_imports = true
 default_section = "THIRDPARTY"
+force_grid_wrap = 0
+# import_heading_firstparty = "First party"
+# import_heading_localfolder = "Local Folder"
+# import_heading_thirdparty = "Third party"
+length_sort = false
+line_length = 120
+multi_line_output = 0
+
+# ["setup.cfg".flake8]
+# annoy = true
+# assertive-snakecase = true
+# cohesion-below = 20.0
+# docstring-convention = "all"
+# ignore = "D203,D213,D214,D406,D407,G004,PD005,PD011,S322,SC100,SC200,W503"
+# max-cognitive-complexity = 5
+# max-function-length = 55
+# max-line-length = 120
+# max-parameters-amount = 6
+# per-file-ignores = "test_*.py:S101"
+# select = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
+# # ignore = "D107,D202,D203,D401"
+# # max-line-length = 120
 
 [tool.poetry]
 name = "dash_charts"
@@ -45,4 +66,3 @@ version = "^1.14"
 
 [tool.poetry.dev-dependencies.dash_dev]
 git = "https://github.com/KyleKing/dash_dev.git"
-rev = "366ad98"
