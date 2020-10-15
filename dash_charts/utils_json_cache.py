@@ -132,7 +132,7 @@ def store_cache_object(prefix, identifier, obj, db_instance, cache_dir=CACHE_DIR
     """
     filename = store_cache_as_file(prefix, identifier, db_instance, cache_dir)
     try:
-        write_pretty_json(filename, obj, compression=2)
+        write_pretty_json(filename, obj)
     except Exception:
         # If writing the file fails, ensure that the record is removed from the database
         get_files_table(db_instance).delete(filename=filename)

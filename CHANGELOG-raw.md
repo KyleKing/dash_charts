@@ -17,6 +17,8 @@
 
 ### Changes
 
+* Improve logging functionality. [Kyle King]
+
 * Drop bottleneck and update docstrings. [Kyle King]
 
 * Upgrade to latest dash_dev. [Kyle King]

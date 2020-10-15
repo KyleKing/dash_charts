@@ -84,15 +84,38 @@ from cerberus import Validator
 # For Working with Data
 
 
-def enable_verbose_pandas():
-    &#34;&#34;&#34;Update global pandas configuration for printed dataframes.&#34;&#34;&#34;
+def enable_verbose_pandas(max_columns=None, max_rows=None, max_seq_items=None):
+    &#34;&#34;&#34;Update global pandas configuration for printed dataframes.
+
+    Args:
+        max_columns: the number of max columns. Default is None (to show all)
+        max_rows: the number of max rows. Default is None (to show all)
+        max_seq_items: the number of max sequence items. Default is None (to show all) # TODO: what does this set?
+
+    &#34;&#34;&#34;
     # Enable all columns to be displayed at once (or tweak to set a new limit)
     pd.set_option(&#39;display.max_columns&#39;, None)
     pd.set_option(&#39;display.width&#39;, None)
-    pd.set_option(&#39;display.max_colwidth&#39;, None)
+    pd.set_option(&#39;display.max_colwidth&#39;, max_columns)
 
     # Optionally modify number of rows shown
-    pd.set_option(&#39;display.max_rows&#39;, None)
+    pd.set_option(&#39;display.max_rows&#39;, max_rows)
+    if max_seq_items:
+        pd.options(&#39;display.max_seq_items&#39;, max_seq_items)
+
+
+def append_df(df_old, df_new):
+    &#34;&#34;&#34;Handle appending a dataframe if the old_df is None. Useful for iteration.
+
+    Args:
+        df_old: dataframe or None
+        df_new: new dataframe to append. Expects all columns to match
+
+    Returns:
+        dataframe: combined dataframe
+
+    &#34;&#34;&#34;
+    return df_new if df_old is None else df_old.append(df_new).reset_index(drop=True)
 
 
 def validate(document, schema, **validator_kwargs):
@@ -127,6 +150,7 @@ def json_dumps_compact(data):   # noqa: CCR001
     clean_data = {}
     # Check each key/value pair to determine if any intermediary strings are needed for later formatting
     for key, raw in data.items():
+        # PLANNED: Convert to FP and recursive calls?
         if isinstance(raw, list):
             values = [f&#39;``{value}``&#39; if isinstance(value, str) else value for value in raw]
             clean_data[key] = &#39;[&#39; + &#39;,&#39;.join(map(str, values)) + &#39;]&#39;
@@ -168,6 +192,21 @@ def write_csv(csv_path, rows):
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Time Helpers
+
+US_TIME_FORMAT = &#39;%m/%d/%Y %H:%M:%S&#39;
+&#34;&#34;&#34;String time format with month/year (MM/DD/YYYY HH:MM:SS).&#34;&#34;&#34;
+
+DASHED_TIME_FORMAT_US = &#39;%m-%d-%Y %H:%M:%S&#39;
+&#34;&#34;&#34;Dashed time format with month first (MM-DD-YYYY HH:MM:SS).&#34;&#34;&#34;
+
+DASHED_TIME_FORMAT_YEAR = &#39;%Y-%m-%d %H:%M:%S&#39;
+&#34;&#34;&#34;Dashed time format with year first (YYYY-MM-DD HH:MM:SS).&#34;&#34;&#34;
+
+TIME_FORMAT_FILE = &#39;%Y-%m-%d_%H%M%S&#39;
+&#34;&#34;&#34;Filename-safe time format with year first (YYYY-MM-DD_HHMMSS).&#34;&#34;&#34;
+
+GDP_TIME_FORMAT = &#39;%d%b%Y %H:%M:%S&#39;
+&#34;&#34;&#34;Good Documentation Practice time format (DDMMMYYYY HH:MM:SS).&#34;&#34;&#34;
 
 
 def get_unix(str_ts, date_format):
@@ -263,28 +302,104 @@ def list_sql_tables(db_path):
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-variables">Global variables</h2>
+<dl>
+<dt id="dash_charts.utils_data.DASHED_TIME_FORMAT_US"><code class="name">var <span class="ident">DASHED_TIME_FORMAT_US</span></code></dt>
+<dd>
+<div class="desc"><p>Dashed time format with month first (MM-DD-YYYY HH:MM:SS).</p></div>
+</dd>
+<dt id="dash_charts.utils_data.DASHED_TIME_FORMAT_YEAR"><code class="name">var <span class="ident">DASHED_TIME_FORMAT_YEAR</span></code></dt>
+<dd>
+<div class="desc"><p>Dashed time format with year first (YYYY-MM-DD HH:MM:SS).</p></div>
+</dd>
+<dt id="dash_charts.utils_data.GDP_TIME_FORMAT"><code class="name">var <span class="ident">GDP_TIME_FORMAT</span></code></dt>
+<dd>
+<div class="desc"><p>Good Documentation Practice time format (DDMMMYYYY HH:MM:SS).</p></div>
+</dd>
+<dt id="dash_charts.utils_data.TIME_FORMAT_FILE"><code class="name">var <span class="ident">TIME_FORMAT_FILE</span></code></dt>
+<dd>
+<div class="desc"><p>Filename-safe time format with year first (YYYY-MM-DD_HHMMSS).</p></div>
+</dd>
+<dt id="dash_charts.utils_data.US_TIME_FORMAT"><code class="name">var <span class="ident">US_TIME_FORMAT</span></code></dt>
+<dd>
+<div class="desc"><p>String time format with month/year (MM/DD/YYYY HH:MM:SS).</p></div>
+</dd>
+</dl>
 </section>
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="dash_charts.utils_data.enable_verbose_pandas"><code class="name flex">
-<span>def <span class="ident">enable_verbose_pandas</span></span>(<span>)</span>
+<dt id="dash_charts.utils_data.append_df"><code class="name flex">
+<span>def <span class="ident">append_df</span></span>(<span>df_old, df_new)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Update global pandas configuration for printed dataframes.</p></div>
+<div class="desc"><p>Handle appending a dataframe if the old_df is None. Useful for iteration.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_old</code></strong></dt>
+<dd>dataframe or None</dd>
+<dt><strong><code>df_new</code></strong></dt>
+<dd>new dataframe to append. Expects all columns to match</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dataframe</code></dt>
+<dd>combined dataframe</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def enable_verbose_pandas():
-    &#34;&#34;&#34;Update global pandas configuration for printed dataframes.&#34;&#34;&#34;
+<pre><code class="python">def append_df(df_old, df_new):
+    &#34;&#34;&#34;Handle appending a dataframe if the old_df is None. Useful for iteration.
+
+    Args:
+        df_old: dataframe or None
+        df_new: new dataframe to append. Expects all columns to match
+
+    Returns:
+        dataframe: combined dataframe
+
+    &#34;&#34;&#34;
+    return df_new if df_old is None else df_old.append(df_new).reset_index(drop=True)</code></pre>
+</details>
+</dd>
+<dt id="dash_charts.utils_data.enable_verbose_pandas"><code class="name flex">
+<span>def <span class="ident">enable_verbose_pandas</span></span>(<span>max_columns=None, max_rows=None, max_seq_items=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update global pandas configuration for printed dataframes.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>max_columns</code></strong></dt>
+<dd>the number of max columns. Default is None (to show all)</dd>
+<dt><strong><code>max_rows</code></strong></dt>
+<dd>the number of max rows. Default is None (to show all)</dd>
+<dt><strong><code>max_seq_items</code></strong></dt>
+<dd>the number of max sequence items. Default is None (to show all) # TODO: what does this set?</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def enable_verbose_pandas(max_columns=None, max_rows=None, max_seq_items=None):
+    &#34;&#34;&#34;Update global pandas configuration for printed dataframes.
+
+    Args:
+        max_columns: the number of max columns. Default is None (to show all)
+        max_rows: the number of max rows. Default is None (to show all)
+        max_seq_items: the number of max sequence items. Default is None (to show all) # TODO: what does this set?
+
+    &#34;&#34;&#34;
     # Enable all columns to be displayed at once (or tweak to set a new limit)
     pd.set_option(&#39;display.max_columns&#39;, None)
     pd.set_option(&#39;display.width&#39;, None)
-    pd.set_option(&#39;display.max_colwidth&#39;, None)
+    pd.set_option(&#39;display.max_colwidth&#39;, max_columns)
 
     # Optionally modify number of rows shown
-    pd.set_option(&#39;display.max_rows&#39;, None)</code></pre>
+    pd.set_option(&#39;display.max_rows&#39;, max_rows)
+    if max_seq_items:
+        pd.options(&#39;display.max_seq_items&#39;, max_seq_items)</code></pre>
 </details>
 </dd>
 <dt id="dash_charts.utils_data.format_unix"><code class="name flex">
@@ -389,6 +504,7 @@ def list_sql_tables(db_path):
     clean_data = {}
     # Check each key/value pair to determine if any intermediary strings are needed for later formatting
     for key, raw in data.items():
+        # PLANNED: Convert to FP and recursive calls?
         if isinstance(raw, list):
             values = [f&#39;``{value}``&#39; if isinstance(value, str) else value for value in raw]
             clean_data[key] = &#39;[&#39; + &#39;,&#39;.join(map(str, values)) + &#39;]&#39;
@@ -675,8 +791,18 @@ setTimeout(() => input.focus(), 100);
 <li><code><a title="dash_charts" href="index.html">dash_charts</a></code></li>
 </ul>
 </li>
+<li><h3><a href="#header-variables">Global variables</a></h3>
+<ul class="">
+<li><code><a title="dash_charts.utils_data.DASHED_TIME_FORMAT_US" href="#dash_charts.utils_data.DASHED_TIME_FORMAT_US">DASHED_TIME_FORMAT_US</a></code></li>
+<li><code><a title="dash_charts.utils_data.DASHED_TIME_FORMAT_YEAR" href="#dash_charts.utils_data.DASHED_TIME_FORMAT_YEAR">DASHED_TIME_FORMAT_YEAR</a></code></li>
+<li><code><a title="dash_charts.utils_data.GDP_TIME_FORMAT" href="#dash_charts.utils_data.GDP_TIME_FORMAT">GDP_TIME_FORMAT</a></code></li>
+<li><code><a title="dash_charts.utils_data.TIME_FORMAT_FILE" href="#dash_charts.utils_data.TIME_FORMAT_FILE">TIME_FORMAT_FILE</a></code></li>
+<li><code><a title="dash_charts.utils_data.US_TIME_FORMAT" href="#dash_charts.utils_data.US_TIME_FORMAT">US_TIME_FORMAT</a></code></li>
+</ul>
+</li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="dash_charts.utils_data.append_df" href="#dash_charts.utils_data.append_df">append_df</a></code></li>
 <li><code><a title="dash_charts.utils_data.enable_verbose_pandas" href="#dash_charts.utils_data.enable_verbose_pandas">enable_verbose_pandas</a></code></li>
 <li><code><a title="dash_charts.utils_data.format_unix" href="#dash_charts.utils_data.format_unix">format_unix</a></code></li>
 <li><code><a title="dash_charts.utils_data.get_unix" href="#dash_charts.utils_data.get_unix">get_unix</a></code></li>

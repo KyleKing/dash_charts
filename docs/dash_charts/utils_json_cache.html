@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.1" />
 <title>dash_charts.utils_json_cache API documentation</title>
-<meta name="description" content="Helpers for managing a generic JSON data file cache. Could be used to reduce API calls, etc." />
+<meta name="description" content="Helpers for managing a generic JSON data file cache. Can be used to reduce API calls, etc …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -62,12 +62,17 @@ padding: 0 5px;
 <h1 class="title">Module <code>dash_charts.utils_json_cache</code></h1>
 </header>
 <section id="section-intro">
-<p>Helpers for managing a generic JSON data file cache. Could be used to reduce API calls, etc.</p>
+<p>Helpers for managing a generic JSON data file cache. Can be used to reduce API calls, etc.</p>
+<p>Full dataset documentation: <a href="https://dataset.readthedocs.io/en/latest/api.html">https://dataset.readthedocs.io/en/latest/api.html</a></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;Helpers for managing a generic JSON data file cache. Could be used to reduce API calls, etc.&#34;&#34;&#34;
+<pre><code class="python">&#34;&#34;&#34;Helpers for managing a generic JSON data file cache. Can be used to reduce API calls, etc.
+
+Full dataset documentation: https://dataset.readthedocs.io/en/latest/api.html
+
+&#34;&#34;&#34;
 
 import json
 import time
@@ -82,36 +87,60 @@ CACHE_DIR = Path(__file__).parent / &#39;local_cache&#39;
 FILE_DATA = DBConnect(CACHE_DIR / &#39;_file_lookup_database.db&#39;)
 &#34;&#34;&#34;Global instance of the DBConnect() for the file lookup database.&#34;&#34;&#34;
 
+CACHE_TABLE_NAME = &#39;files&#39;
+&#34;&#34;&#34;Table name containing the cache file information.&#34;&#34;&#34;
+
+ID_KEY = &#39;identifier&#39;
+&#34;&#34;&#34;Name of the SQLite column containing the unique identifier.&#34;&#34;&#34;
+TS_KEY = &#39;timestamp&#39;
+&#34;&#34;&#34;Name of the SQLite column containing the timestamp.&#34;&#34;&#34;
+FILENAME_KEY = &#39;filename&#39;
+&#34;&#34;&#34;Name of the SQLite column containing the string filename.&#34;&#34;&#34;
+
 
 def get_files_table(db_instance):
     &#34;&#34;&#34;Retrieve stored object from cache database.
 
     Args:
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     Returns:
         table: Dataset table for the files lookup
 
     &#34;&#34;&#34;
-    return db_instance.db.load_table(&#39;files&#39;)
+    return db_instance.db.load_table(CACHE_TABLE_NAME)
 
 
 def initialize_cache(db_instance):
     &#34;&#34;&#34;Ensure that the directory and database exist. Remove files from database if manually removed.
 
     Args:
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     &#34;&#34;&#34;
-    table = db_instance.db.create_table(&#39;files&#39;)
+    table = db_instance.db.create_table(CACHE_TABLE_NAME)
 
     removed_files = []
     for row in table:
-        if not Path(row[&#39;filename&#39;]).is_file():
-            removed_files.append(row[&#39;filename&#39;])
+        if not Path(row[FILENAME_KEY]).is_file():
+            removed_files.append(row[FILENAME_KEY])
 
     for filename in removed_files:
         table.delete(filename=filename)
+
+
+def get_cache_dict(db_instance):
+    &#34;&#34;&#34;Return a dictionary `{identifier: path}` keys and values.
+
+    Args:
+        db_instance: Connected Database file with `DBConnect()`.
+
+    Returns:
+        dict: dictionary `{identifier: path}` keys and values
+
+    &#34;&#34;&#34;
+    table = get_files_table(db_instance)
+    return {row[ID_KEY]: Path(row[FILENAME_KEY]) for row in table}
 
 
 def match_identifier_in_cache(identifier, db_instance):
@@ -119,23 +148,25 @@ def match_identifier_in_cache(identifier, db_instance):
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     Returns:
         list: list of match object with keys of the SQL table
 
     &#34;&#34;&#34;
-    return [*get_files_table(db_instance).find(identifier=identifier)]
+    kwargs = {ID_KEY: identifier}
+    return [*get_files_table(db_instance).find(**kwargs)]
 
 
-def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR):
+def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR, suffix=&#39;.json&#39;):
     &#34;&#34;&#34;Store the reference in the cache database and return the file so the user can handle saving the file.
 
     Args:
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
+        suffix: string filename suffix. The default is `.json`
 
     Returns:
         Path: to the cached file. Caller needs to write to the file
@@ -149,8 +180,8 @@ def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR):
     if len(matches) &gt; 0:
         raise RuntimeError(f&#39;Already have an entry for this identifier (`{identifier}`): {matches}&#39;)
     # Update the database and store the file
-    filename = cache_dir / f&#39;{prefix}_{uniq_table_id()}.json&#39;
-    new_row = {&#39;filename&#39;: str(filename), &#39;identifier&#39;: identifier, &#39;timestamp&#39;: time.time()}
+    filename = cache_dir / f&#39;{prefix}_{uniq_table_id()}{suffix}&#39;
+    new_row = {FILENAME_KEY: str(filename), ID_KEY: identifier, TS_KEY: time.time()}
     get_files_table(db_instance).insert(new_row)
     return filename
 
@@ -162,7 +193,7 @@ def store_cache_object(prefix, identifier, obj, db_instance, cache_dir=CACHE_DIR
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
         obj: JSON object to write
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
 
     Raises:
@@ -183,7 +214,7 @@ def retrieve_cache_fn(identifier, db_instance):
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     Returns:
         Path: to the cached file. Caller needs to read the file
@@ -195,7 +226,7 @@ def retrieve_cache_fn(identifier, db_instance):
     matches = match_identifier_in_cache(identifier, db_instance)
     if len(matches) != 1:
         raise RuntimeError(f&#39;Did not find exactly one entry for this identifier (`{identifier}`): {matches}&#39;)
-    return Path(matches[0][&#39;filename&#39;])
+    return Path(matches[0][FILENAME_KEY])
 
 
 def retrieve_cache_object(identifier, db_instance):
@@ -203,7 +234,7 @@ def retrieve_cache_object(identifier, db_instance):
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     Returns:
         dict: object stored in the cache
@@ -222,15 +253,64 @@ def retrieve_cache_object(identifier, db_instance):
 <dd>
 <div class="desc"><p>Path to folder with all downloaded responses from Kitsu API.</p></div>
 </dd>
+<dt id="dash_charts.utils_json_cache.CACHE_TABLE_NAME"><code class="name">var <span class="ident">CACHE_TABLE_NAME</span></code></dt>
+<dd>
+<div class="desc"><p>Table name containing the cache file information.</p></div>
+</dd>
+<dt id="dash_charts.utils_json_cache.FILENAME_KEY"><code class="name">var <span class="ident">FILENAME_KEY</span></code></dt>
+<dd>
+<div class="desc"><p>Name of the SQLite column containing the string filename.</p></div>
+</dd>
 <dt id="dash_charts.utils_json_cache.FILE_DATA"><code class="name">var <span class="ident">FILE_DATA</span></code></dt>
 <dd>
 <div class="desc"><p>Global instance of the DBConnect() for the file lookup database.</p></div>
+</dd>
+<dt id="dash_charts.utils_json_cache.ID_KEY"><code class="name">var <span class="ident">ID_KEY</span></code></dt>
+<dd>
+<div class="desc"><p>Name of the SQLite column containing the unique identifier.</p></div>
+</dd>
+<dt id="dash_charts.utils_json_cache.TS_KEY"><code class="name">var <span class="ident">TS_KEY</span></code></dt>
+<dd>
+<div class="desc"><p>Name of the SQLite column containing the timestamp.</p></div>
 </dd>
 </dl>
 </section>
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="dash_charts.utils_json_cache.get_cache_dict"><code class="name flex">
+<span>def <span class="ident">get_cache_dict</span></span>(<span>db_instance)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a dictionary <code>{identifier: path}</code> keys and values.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>db_instance</code></strong></dt>
+<dd>Connected Database file with <code>DBConnect()</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>dictionary <code>{identifier: path}</code> keys and values</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_cache_dict(db_instance):
+    &#34;&#34;&#34;Return a dictionary `{identifier: path}` keys and values.
+
+    Args:
+        db_instance: Connected Database file with `DBConnect()`.
+
+    Returns:
+        dict: dictionary `{identifier: path}` keys and values
+
+    &#34;&#34;&#34;
+    table = get_files_table(db_instance)
+    return {row[ID_KEY]: Path(row[FILENAME_KEY]) for row in table}</code></pre>
+</details>
+</dd>
 <dt id="dash_charts.utils_json_cache.get_files_table"><code class="name flex">
 <span>def <span class="ident">get_files_table</span></span>(<span>db_instance)</span>
 </code></dt>
@@ -239,7 +319,7 @@ def retrieve_cache_object(identifier, db_instance):
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>utils_dataset.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>DBConnect()</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -254,13 +334,13 @@ def retrieve_cache_object(identifier, db_instance):
     &#34;&#34;&#34;Retrieve stored object from cache database.
 
     Args:
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     Returns:
         table: Dataset table for the files lookup
 
     &#34;&#34;&#34;
-    return db_instance.db.load_table(&#39;files&#39;)</code></pre>
+    return db_instance.db.load_table(CACHE_TABLE_NAME)</code></pre>
 </details>
 </dd>
 <dt id="dash_charts.utils_json_cache.initialize_cache"><code class="name flex">
@@ -271,7 +351,7 @@ def retrieve_cache_object(identifier, db_instance):
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>utils_dataset.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>DBConnect()</code>.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -281,15 +361,15 @@ def retrieve_cache_object(identifier, db_instance):
     &#34;&#34;&#34;Ensure that the directory and database exist. Remove files from database if manually removed.
 
     Args:
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     &#34;&#34;&#34;
-    table = db_instance.db.create_table(&#39;files&#39;)
+    table = db_instance.db.create_table(CACHE_TABLE_NAME)
 
     removed_files = []
     for row in table:
-        if not Path(row[&#39;filename&#39;]).is_file():
-            removed_files.append(row[&#39;filename&#39;])
+        if not Path(row[FILENAME_KEY]).is_file():
+            removed_files.append(row[FILENAME_KEY])
 
     for filename in removed_files:
         table.delete(filename=filename)</code></pre>
@@ -305,7 +385,7 @@ def retrieve_cache_object(identifier, db_instance):
 <dt><strong><code>identifier</code></strong></dt>
 <dd>identifier to use as a reference if the corresponding data is already cached</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>utils_dataset.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>DBConnect()</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -321,13 +401,14 @@ def retrieve_cache_object(identifier, db_instance):
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     Returns:
         list: list of match object with keys of the SQL table
 
     &#34;&#34;&#34;
-    return [*get_files_table(db_instance).find(identifier=identifier)]</code></pre>
+    kwargs = {ID_KEY: identifier}
+    return [*get_files_table(db_instance).find(**kwargs)]</code></pre>
 </details>
 </dd>
 <dt id="dash_charts.utils_json_cache.retrieve_cache_fn"><code class="name flex">
@@ -340,7 +421,7 @@ def retrieve_cache_object(identifier, db_instance):
 <dt><strong><code>identifier</code></strong></dt>
 <dd>identifier to use as a reference if the corresponding data is already cached</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>utils_dataset.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>DBConnect()</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -361,7 +442,7 @@ def retrieve_cache_object(identifier, db_instance):
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     Returns:
         Path: to the cached file. Caller needs to read the file
@@ -373,7 +454,7 @@ def retrieve_cache_object(identifier, db_instance):
     matches = match_identifier_in_cache(identifier, db_instance)
     if len(matches) != 1:
         raise RuntimeError(f&#39;Did not find exactly one entry for this identifier (`{identifier}`): {matches}&#39;)
-    return Path(matches[0][&#39;filename&#39;])</code></pre>
+    return Path(matches[0][FILENAME_KEY])</code></pre>
 </details>
 </dd>
 <dt id="dash_charts.utils_json_cache.retrieve_cache_object"><code class="name flex">
@@ -386,7 +467,7 @@ def retrieve_cache_object(identifier, db_instance):
 <dt><strong><code>identifier</code></strong></dt>
 <dd>identifier to use as a reference if the corresponding data is already cached</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>utils_dataset.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>DBConnect()</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -402,7 +483,7 @@ def retrieve_cache_object(identifier, db_instance):
 
     Args:
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
 
     Returns:
         dict: object stored in the cache
@@ -413,7 +494,7 @@ def retrieve_cache_object(identifier, db_instance):
 </details>
 </dd>
 <dt id="dash_charts.utils_json_cache.store_cache_as_file"><code class="name flex">
-<span>def <span class="ident">store_cache_as_file</span></span>(<span>prefix, identifier, db_instance, cache_dir=PosixPath('/Users/kyleking/Developer/Werk/__LocalProjects/dash_charts/dash_charts/local_cache'))</span>
+<span>def <span class="ident">store_cache_as_file</span></span>(<span>prefix, identifier, db_instance, cache_dir=PosixPath('/Users/kyleking/Developer/Werk/__LocalProjects/dash_charts/dash_charts/local_cache'), suffix='.json')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Store the reference in the cache database and return the file so the user can handle saving the file.</p>
@@ -424,9 +505,11 @@ def retrieve_cache_object(identifier, db_instance):
 <dt><strong><code>identifier</code></strong></dt>
 <dd>identifier to use as a reference if the corresponding data is already cached</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>utils_dataset.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>DBConnect()</code>.</dd>
 <dt><strong><code>cache_dir</code></strong></dt>
 <dd>path to the directory to store the file. Default is `CACHE_DIR</dd>
+<dt><strong><code>suffix</code></strong></dt>
+<dd>string filename suffix. The default is <code>.json</code></dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -442,14 +525,15 @@ def retrieve_cache_object(identifier, db_instance):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR):
+<pre><code class="python">def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR, suffix=&#39;.json&#39;):
     &#34;&#34;&#34;Store the reference in the cache database and return the file so the user can handle saving the file.
 
     Args:
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
+        suffix: string filename suffix. The default is `.json`
 
     Returns:
         Path: to the cached file. Caller needs to write to the file
@@ -463,8 +547,8 @@ def retrieve_cache_object(identifier, db_instance):
     if len(matches) &gt; 0:
         raise RuntimeError(f&#39;Already have an entry for this identifier (`{identifier}`): {matches}&#39;)
     # Update the database and store the file
-    filename = cache_dir / f&#39;{prefix}_{uniq_table_id()}.json&#39;
-    new_row = {&#39;filename&#39;: str(filename), &#39;identifier&#39;: identifier, &#39;timestamp&#39;: time.time()}
+    filename = cache_dir / f&#39;{prefix}_{uniq_table_id()}{suffix}&#39;
+    new_row = {FILENAME_KEY: str(filename), ID_KEY: identifier, TS_KEY: time.time()}
     get_files_table(db_instance).insert(new_row)
     return filename</code></pre>
 </details>
@@ -483,7 +567,7 @@ def retrieve_cache_object(identifier, db_instance):
 <dt><strong><code>obj</code></strong></dt>
 <dd>JSON object to write</dd>
 <dt><strong><code>db_instance</code></strong></dt>
-<dd>Connected Database file with <code>utils_dataset.DBConnect()</code>.</dd>
+<dd>Connected Database file with <code>DBConnect()</code>.</dd>
 <dt><strong><code>cache_dir</code></strong></dt>
 <dd>path to the directory to store the file. Default is `CACHE_DIR</dd>
 </dl>
@@ -503,7 +587,7 @@ def retrieve_cache_object(identifier, db_instance):
         prefix: string used to create more recognizable filenames
         identifier: identifier to use as a reference if the corresponding data is already cached
         obj: JSON object to write
-        db_instance: Connected Database file with `utils_dataset.DBConnect()`.
+        db_instance: Connected Database file with `DBConnect()`.
         cache_dir: path to the directory to store the file. Default is `CACHE_DIR
 
     Raises:
@@ -582,13 +666,18 @@ setTimeout(() => input.focus(), 100);
 </ul>
 </li>
 <li><h3><a href="#header-variables">Global variables</a></h3>
-<ul class="">
+<ul class="two-column">
 <li><code><a title="dash_charts.utils_json_cache.CACHE_DIR" href="#dash_charts.utils_json_cache.CACHE_DIR">CACHE_DIR</a></code></li>
+<li><code><a title="dash_charts.utils_json_cache.CACHE_TABLE_NAME" href="#dash_charts.utils_json_cache.CACHE_TABLE_NAME">CACHE_TABLE_NAME</a></code></li>
+<li><code><a title="dash_charts.utils_json_cache.FILENAME_KEY" href="#dash_charts.utils_json_cache.FILENAME_KEY">FILENAME_KEY</a></code></li>
 <li><code><a title="dash_charts.utils_json_cache.FILE_DATA" href="#dash_charts.utils_json_cache.FILE_DATA">FILE_DATA</a></code></li>
+<li><code><a title="dash_charts.utils_json_cache.ID_KEY" href="#dash_charts.utils_json_cache.ID_KEY">ID_KEY</a></code></li>
+<li><code><a title="dash_charts.utils_json_cache.TS_KEY" href="#dash_charts.utils_json_cache.TS_KEY">TS_KEY</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="dash_charts.utils_json_cache.get_cache_dict" href="#dash_charts.utils_json_cache.get_cache_dict">get_cache_dict</a></code></li>
 <li><code><a title="dash_charts.utils_json_cache.get_files_table" href="#dash_charts.utils_json_cache.get_files_table">get_files_table</a></code></li>
 <li><code><a title="dash_charts.utils_json_cache.initialize_cache" href="#dash_charts.utils_json_cache.initialize_cache">initialize_cache</a></code></li>
 <li><code><a title="dash_charts.utils_json_cache.match_identifier_in_cache" href="#dash_charts.utils_json_cache.match_identifier_in_cache">match_identifier_in_cache</a></code></li>

@@ -13,7 +13,7 @@ See daattali/TimeVis: https://github.com/daattali/timevis
 import numpy as np
 import plotly.graph_objects as go
 
-from .utils_data import format_unix, get_unix, DASHED_TIME_FORMAT_YEAR, GDP_TIME_FORMAT
+from .utils_data import DASHED_TIME_FORMAT_YEAR, GDP_TIME_FORMAT, format_unix, get_unix
 from .utils_fig import CustomChart
 
 

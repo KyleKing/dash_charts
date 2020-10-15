@@ -69,7 +69,6 @@ padding: 0 5px;
 </summary>
 <pre><code class="python">&#34;&#34;&#34;Charts for plotting scatter or fitted data.&#34;&#34;&#34;
 
-import bottleneck
 import numpy as np
 import plotly.graph_objects as go
 from icecream import ic
@@ -90,8 +89,8 @@ def create_rolling_traces(df_raw, count_rolling, count_std):
         list: of Scatter traces for rolling mean and std
 
     &#34;&#34;&#34;
-    rolling_mean = bottleneck.move_mean(df_raw[&#39;y&#39;], count_rolling)
-    rolling_std = bottleneck.move_std(df_raw[&#39;y&#39;], count_rolling)
+    rolling_mean = df_raw[&#39;y&#39;].rolling(count_rolling).mean().tolist()
+    rolling_std = df_raw[&#39;y&#39;].rolling(count_std).std().tolist()
     return [
         go.Scatter(
             fill=&#39;toself&#39;,
@@ -113,7 +112,7 @@ def create_rolling_traces(df_raw, count_rolling, count_std):
     ]
 
 
-def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):   # noqa: CCR001
+def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):  # noqa: CCR001
     &#34;&#34;&#34;Create traces for specified equation.
 
     Args:
@@ -147,9 +146,10 @@ def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):   
             y=fit_equation(x_values, *popt),
         )]
     except (RuntimeError, ValueError) as err:  # pragma: no cover
-        if not suppress_fit_errors:
+        if suppress_fit_errors:
+            ic(err, name)
+        else:
             raise
-        ic(err, name)
 
     return fitted_data  # noqa: R504
 
@@ -157,11 +157,11 @@ def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):   
 class RollingChart(CustomChart):
     &#34;&#34;&#34;Rolling Mean and Filled Standard Deviation Chart for monitoring trends.&#34;&#34;&#34;
 
-    count_std = 2
-    &#34;&#34;&#34;Count of STD deviations to display. Default 2.&#34;&#34;&#34;
+    count_std = 5
+    &#34;&#34;&#34;Count of STD deviations to display. Default 5.&#34;&#34;&#34;
 
-    count_rolling = 5
-    &#34;&#34;&#34;Count of items to use for rolling calculations. Default 5.&#34;&#34;&#34;
+    count_rolling = count_std
+    &#34;&#34;&#34;Count of items to use for rolling calculations. Default `count_std`.&#34;&#34;&#34;
 
     label_data = &#39;Data&#39;
     &#34;&#34;&#34;Label for the scatter data. Default is &#39;Data&#39;.&#34;&#34;&#34;
@@ -286,7 +286,7 @@ class FittedChart(CustomChart):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):   # noqa: CCR001
+<pre><code class="python">def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):  # noqa: CCR001
     &#34;&#34;&#34;Create traces for specified equation.
 
     Args:
@@ -320,9 +320,10 @@ class FittedChart(CustomChart):
             y=fit_equation(x_values, *popt),
         )]
     except (RuntimeError, ValueError) as err:  # pragma: no cover
-        if not suppress_fit_errors:
+        if suppress_fit_errors:
+            ic(err, name)
+        else:
             raise
-        ic(err, name)
 
     return fitted_data  # noqa: R504</code></pre>
 </details>
@@ -362,8 +363,8 @@ class FittedChart(CustomChart):
         list: of Scatter traces for rolling mean and std
 
     &#34;&#34;&#34;
-    rolling_mean = bottleneck.move_mean(df_raw[&#39;y&#39;], count_rolling)
-    rolling_std = bottleneck.move_std(df_raw[&#39;y&#39;], count_rolling)
+    rolling_mean = df_raw[&#39;y&#39;].rolling(count_rolling).mean().tolist()
+    rolling_std = df_raw[&#39;y&#39;].rolling(count_std).std().tolist()
     return [
         go.Scatter(
             fill=&#39;toself&#39;,
@@ -637,11 +638,11 @@ class FittedChart(CustomChart):
 <pre><code class="python">class RollingChart(CustomChart):
     &#34;&#34;&#34;Rolling Mean and Filled Standard Deviation Chart for monitoring trends.&#34;&#34;&#34;
 
-    count_std = 2
-    &#34;&#34;&#34;Count of STD deviations to display. Default 2.&#34;&#34;&#34;
+    count_std = 5
+    &#34;&#34;&#34;Count of STD deviations to display. Default 5.&#34;&#34;&#34;
 
-    count_rolling = 5
-    &#34;&#34;&#34;Count of items to use for rolling calculations. Default 5.&#34;&#34;&#34;
+    count_rolling = count_std
+    &#34;&#34;&#34;Count of items to use for rolling calculations. Default `count_std`.&#34;&#34;&#34;
 
     label_data = &#39;Data&#39;
     &#34;&#34;&#34;Label for the scatter data. Default is &#39;Data&#39;.&#34;&#34;&#34;
@@ -694,11 +695,11 @@ class FittedChart(CustomChart):
 </dd>
 <dt id="dash_charts.scatter_line_charts.RollingChart.count_rolling"><code class="name">var <span class="ident">count_rolling</span></code></dt>
 <dd>
-<div class="desc"><p>Count of items to use for rolling calculations. Default 5.</p></div>
+<div class="desc"><p>Count of items to use for rolling calculations. Default <code>count_std</code>.</p></div>
 </dd>
 <dt id="dash_charts.scatter_line_charts.RollingChart.count_std"><code class="name">var <span class="ident">count_std</span></code></dt>
 <dd>
-<div class="desc"><p>Count of STD deviations to display. Default 2.</p></div>
+<div class="desc"><p>Count of STD deviations to display. Default 5.</p></div>
 </dd>
 <dt id="dash_charts.scatter_line_charts.RollingChart.label_data"><code class="name">var <span class="ident">label_data</span></code></dt>
 <dd>

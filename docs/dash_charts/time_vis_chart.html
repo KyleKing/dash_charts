@@ -89,15 +89,15 @@ See daattali/TimeVis: https://github.com/daattali/timevis
 import numpy as np
 import plotly.graph_objects as go
 
-from .utils_data import format_unix, get_unix
+from .utils_data import DASHED_TIME_FORMAT_YEAR, GDP_TIME_FORMAT, format_unix, get_unix
 from .utils_fig import CustomChart
 
 
 class TimeVisChart(CustomChart):  # noqa: H601
     &#34;&#34;&#34;Time Vis Chart: resource use timeline.&#34;&#34;&#34;
 
-    date_format = &#39;%Y-%m-%d %H:%M:%S&#39;
-    &#34;&#34;&#34;Date format for bar chart.&#34;&#34;&#34;
+    date_format = DASHED_TIME_FORMAT_YEAR
+    &#34;&#34;&#34;Date format for bar chart. Default is `DASHED_TIME_FORMAT_YEAR`.&#34;&#34;&#34;
 
     fillcolor = &#39;#D5DDF6&#39;
     &#34;&#34;&#34;Default fillcolor for time vis events.&#34;&#34;&#34;
@@ -158,7 +158,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
             string: HTML-formatted hover text
 
         &#34;&#34;&#34;
-        new_format = &#39;%a, %d%b%Y %H:%M:%S&#39;
+        new_format = f&#39;%a, {GDP_TIME_FORMAT}&#39;
         start_date = format_unix(get_unix(vis.start, self.date_format), new_format)
         if vis.end:
             end_date = format_unix(get_unix(vis.end, self.date_format), new_format)
@@ -363,8 +363,8 @@ class TimeVisChart(CustomChart):  # noqa: H601
 <pre><code class="python">class TimeVisChart(CustomChart):  # noqa: H601
     &#34;&#34;&#34;Time Vis Chart: resource use timeline.&#34;&#34;&#34;
 
-    date_format = &#39;%Y-%m-%d %H:%M:%S&#39;
-    &#34;&#34;&#34;Date format for bar chart.&#34;&#34;&#34;
+    date_format = DASHED_TIME_FORMAT_YEAR
+    &#34;&#34;&#34;Date format for bar chart. Default is `DASHED_TIME_FORMAT_YEAR`.&#34;&#34;&#34;
 
     fillcolor = &#39;#D5DDF6&#39;
     &#34;&#34;&#34;Default fillcolor for time vis events.&#34;&#34;&#34;
@@ -425,7 +425,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
             string: HTML-formatted hover text
 
         &#34;&#34;&#34;
-        new_format = &#39;%a, %d%b%Y %H:%M:%S&#39;
+        new_format = f&#39;%a, {GDP_TIME_FORMAT}&#39;
         start_date = format_unix(get_unix(vis.start, self.date_format), new_format)
         if vis.end:
             end_date = format_unix(get_unix(vis.end, self.date_format), new_format)
@@ -615,7 +615,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
 </dd>
 <dt id="dash_charts.time_vis_chart.TimeVisChart.date_format"><code class="name">var <span class="ident">date_format</span></code></dt>
 <dd>
-<div class="desc"><p>Date format for bar chart.</p></div>
+<div class="desc"><p>Date format for bar chart. Default is <code>DASHED_TIME_FORMAT_YEAR</code>.</p></div>
 </dd>
 <dt id="dash_charts.time_vis_chart.TimeVisChart.fillcolor"><code class="name">var <span class="ident">fillcolor</span></code></dt>
 <dd>

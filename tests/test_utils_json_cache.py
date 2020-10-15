@@ -3,8 +3,8 @@
 import shutil
 
 from dash_charts.utils_dataset import DBConnect
-from dash_charts.utils_json_cache import (CACHE_DIR, get_files_table, initialize_cache, retrieve_cache_object,
-                                          store_cache_object)
+from dash_charts.utils_json_cache import (CACHE_DIR, get_files_table, initialize_cache,
+                                          retrieve_cache_object, store_cache_object)
 
 
 def test_utils_json_cache():

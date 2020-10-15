@@ -75,6 +75,7 @@ from base64 import b64encode
 import dash_bootstrap_components as dbc
 import dominate
 import markdown
+import pandas as pd
 import plotly.io
 from bs4 import BeautifulSoup
 from dominate import tags, util
@@ -274,9 +275,16 @@ def tag_table(df_table, table_class=None):
         df_table: pandas dataframe to show in table
         table_class: string classes to add to table. If None, will use default string
 
+    Raises:
+        RuntimeError: if `df_table` is not a DataFrame object
+
     &#34;&#34;&#34;
     if table_class is None:
         table_class = &#39;table table-bordered table-striped table-hover&#39;
+    if not isinstance(df_table, pd.core.frame.DataFrame):
+        raise RuntimeError(f&#39;df_table is not a DataFrame ({type(df_table)}):\n{df_table}&#39;)
+
+    df_table = df_table.reset_index()
 
     with tags.div(_class=&#39;table-responsive&#39;).add(tags.table(_class=table_class)):
         # Create header row
@@ -285,13 +293,13 @@ def tag_table(df_table, table_class=None):
                 tags.th(col)
         # Create body rows
         with tags.tbody():
-            for row in df_table.itertuples():
+            for row in df_table.itertuples(index=False):
                 with tags.tr():
-                    for value in row[1:]:
+                    for value in row:
                         tags.td(str(value))
 
 
-def write_lookup(key, function_lookup):   # noqa: CCR001
+def write_lookup(key, function_lookup):
     &#34;&#34;&#34;Determine the lookup result and add to the file.
 
     Args:
@@ -743,6 +751,11 @@ Will be inserted into file where <code>&gt;&gt;lookup:function_name</code> assum
 <dd>pandas dataframe to show in table</dd>
 <dt><strong><code>table_class</code></strong></dt>
 <dd>string classes to add to table. If None, will use default string</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>if <code>df_table</code> is not a DataFrame object</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -757,9 +770,16 @@ Will be inserted into file where <code>&gt;&gt;lookup:function_name</code> assum
         df_table: pandas dataframe to show in table
         table_class: string classes to add to table. If None, will use default string
 
+    Raises:
+        RuntimeError: if `df_table` is not a DataFrame object
+
     &#34;&#34;&#34;
     if table_class is None:
         table_class = &#39;table table-bordered table-striped table-hover&#39;
+    if not isinstance(df_table, pd.core.frame.DataFrame):
+        raise RuntimeError(f&#39;df_table is not a DataFrame ({type(df_table)}):\n{df_table}&#39;)
+
+    df_table = df_table.reset_index()
 
     with tags.div(_class=&#39;table-responsive&#39;).add(tags.table(_class=table_class)):
         # Create header row
@@ -768,9 +788,9 @@ Will be inserted into file where <code>&gt;&gt;lookup:function_name</code> assum
                 tags.th(col)
         # Create body rows
         with tags.tbody():
-            for row in df_table.itertuples():
+            for row in df_table.itertuples(index=False):
                 with tags.tr():
-                    for value in row[1:]:
+                    for value in row:
                         tags.td(str(value))</code></pre>
 </details>
 </dd>
@@ -913,7 +933,7 @@ Will be inserted into file where <code>&gt;&gt;lookup:function_name</code> assum
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def write_lookup(key, function_lookup):   # noqa: CCR001
+<pre><code class="python">def write_lookup(key, function_lookup):
     &#34;&#34;&#34;Determine the lookup result and add to the file.
 
     Args:

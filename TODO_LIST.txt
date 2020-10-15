@@ -1,18 +1,28 @@
-- Add way to specify the x/y axis key names separate of the labels. See plotly express as an example syntax
-- Improve performance of the JSON Cache using SQL directly rather than datasette for handling larger data sets
+- TODO: add implements/interface
+- PLANNED: for Dash Dev
+	- Maybe collect TODO/FIXME and add to README
+	- Move snoop functions to dev
+- FIXME: Use `.set_keynames(x='x', y='y', color='TBD', **kwargs)` where kwargs are specific to chart type and are specified in the interface
+	- Add way to specify the x/y axis key names separate of the labels. See plotly express as an example syntax
+- FIXME: Improve performance of the JSON Cache using SQL directly rather than datasette for handling larger data sets
+	- Could consider grouping the dictionaries first, but SQL is likely better
 
+- PLANNED: Try adding types to Dash Charts
+- PLANNED: Try out the class improvements such as attrs and data classes
+	- DOIT-API and auto class from smarie
+	- Funcy Fastcore other?
 
-- Add infrastructure to override/extend the CSS and JS: http://dash.plotly.com/external-resources
+- PLANNED: Add infrastructure to override/extend the CSS and JS: http://dash.plotly.com/external-resources
 	- Create temporary directory merged with user specified content? Accept string custom_css like the static ones do?
 
-- FIXME: Add DataCache to the README (and implement an example)
+- TODO: Add DataCache to the README (and implement an example)
 
-- TODO: Implement TODO feature list for the datatable with Kitsu exploratory app!
+- PLANNED: Implement TODO feature list for the datatable with Kitsu exploratory app!
 	- Data table
 		- Show using the column lookup for markdown formatting, number of decimal places, etc.
 		- Implement modal that can open on button click
 
-- TODO: app_px
+- PLANNED: app_px
 	- Add tab to view preview of all data frames found in px
 	- Add ability to select data source (CSV, JSON, SQlite, etc.) with upload module
 		- data upload is in top bar where user can use dcc.upload to pick the file - https://dash.plot.ly/dash-core-components/upload
@@ -23,11 +33,11 @@
 - PLANNED: sparklines (status: nothing right now)
 	- create new sparklines figures
 
-- Test datatable (All)
-- test utils_callbacks.get_triggered_id() > put in a demo app?
+- PLANNED: Test datatable (All)
+- PLANNED: test utils_callbacks.get_triggered_id() > put in a demo app?
 - Round up other TODOs/FIXMEs from source code
 
-- TODO: ESRI Inspiration:
+- PLANNED: ESRI Inspiration:
 	- View guidelines on TS from ESRI: https://doc.arcgis.com/en/operations-dashboard/help/serial-chart.htm
 		- Maybe update rolling chart to use recommendations from ESRI?
 	- Build indicator like in ESRI: https://doc.arcgis.com/en/operations-dashboard/help/indicator.htm

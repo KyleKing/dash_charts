@@ -193,3 +193,4 @@ docs/*
 
 # Upload Module Database Directory
 **/local_cache/*
+!/tests/data/*

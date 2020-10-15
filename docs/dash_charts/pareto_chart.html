@@ -72,7 +72,7 @@ padding: 0 5px;
 import pandas as pd
 import plotly.graph_objects as go
 
-from .utils_data import validate
+from .utils_data import append_df, validate
 from .utils_fig import CustomChart, check_raw_data
 
 
@@ -94,7 +94,7 @@ def tidy_pareto_data(df_raw, cap_categories):
             &#39;value&#39;: [df_raw.loc[df_raw[&#39;category&#39;] == cat][&#39;value&#39;].sum()],
             &#39;counts&#39;: df_raw[&#39;category&#39;].value_counts()[cat],
         })
-        df_p = df_row if df_p is None else df_p.append(df_row)
+        df_p = append_df(df_p, df_row)
     # Sort and calculate percentage
     df_p = (df_p[df_p[&#39;value&#39;] != 0]
             .sort_values(by=[&#39;value&#39;], ascending=False)
@@ -250,7 +250,7 @@ class ParetoChart(CustomChart):
             &#39;value&#39;: [df_raw.loc[df_raw[&#39;category&#39;] == cat][&#39;value&#39;].sum()],
             &#39;counts&#39;: df_raw[&#39;category&#39;].value_counts()[cat],
         })
-        df_p = df_row if df_p is None else df_p.append(df_row)
+        df_p = append_df(df_p, df_row)
     # Sort and calculate percentage
     df_p = (df_p[df_p[&#39;value&#39;] != 0]
             .sort_values(by=[&#39;value&#39;], ascending=False)

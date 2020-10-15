@@ -206,6 +206,9 @@ def tag_table(df_table, table_class=None):
         df_table: pandas dataframe to show in table
         table_class: string classes to add to table. If None, will use default string
 
+    Raises:
+        RuntimeError: if `df_table` is not a DataFrame object
+
     """
     if table_class is None:
         table_class = 'table table-bordered table-striped table-hover'
