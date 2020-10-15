@@ -1,6 +1,5 @@
 """Charts for plotting scatter or fitted data."""
 
-import bottleneck
 import numpy as np
 import plotly.graph_objects as go
 from icecream import ic
@@ -21,8 +20,8 @@ def create_rolling_traces(df_raw, count_rolling, count_std):
         list: of Scatter traces for rolling mean and std
 
     """
-    rolling_mean = bottleneck.move_mean(df_raw['y'], count_rolling)
-    rolling_std = bottleneck.move_std(df_raw['y'], count_rolling)
+    rolling_mean = df_raw['y'].rolling(count_rolling).mean().tolist()
+    rolling_std = df_raw['y'].rolling(count_std).std().tolist()
     return [
         go.Scatter(
             fill='toself',
@@ -44,7 +43,7 @@ def create_rolling_traces(df_raw, count_rolling, count_std):
     ]
 
 
-def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):   # noqa: CCR001
+def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):  # noqa: CCR001
     """Create traces for specified equation.
 
     Args:
@@ -78,9 +77,10 @@ def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):   
             y=fit_equation(x_values, *popt),
         )]
     except (RuntimeError, ValueError) as err:  # pragma: no cover
-        if not suppress_fit_errors:
+        if suppress_fit_errors:
+            ic(err, name)
+        else:
             raise
-        ic(err, name)
 
     return fitted_data  # noqa: R504
 
@@ -88,11 +88,11 @@ def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):   
 class RollingChart(CustomChart):
     """Rolling Mean and Filled Standard Deviation Chart for monitoring trends."""
 
-    count_std = 2
-    """Count of STD deviations to display. Default 2."""
+    count_std = 5
+    """Count of STD deviations to display. Default 5."""
 
-    count_rolling = 5
-    """Count of items to use for rolling calculations. Default 5."""
+    count_rolling = count_std
+    """Count of items to use for rolling calculations. Default `count_std`."""
 
     label_data = 'Data'
     """Label for the scatter data. Default is 'Data'."""

@@ -26,6 +26,20 @@ def enable_verbose_pandas():
     pd.set_option('display.max_rows', None)
 
 
+def append_df(df_old, df_new):
+    """Handle appending a dataframe if the old_df is None. Useful for iteration.
+
+    Args:
+        df_old: dataframe or None
+        df_new: new dataframe to append. Expects all columns to match
+
+    Returns:
+        dataframe: combined dataframe
+
+    """
+    return df_new if df_old is None else df_old.append(df_new).reset_index(drop=True)
+
+
 def validate(document, schema, **validator_kwargs):
     """Validate a data structure. Return errors if any found.
 
@@ -99,6 +113,21 @@ def write_csv(csv_path, rows):
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Time Helpers
+
+US_TIME_FORMAT = '%m/%d/%Y %H:%M:%S'
+"""String time format with month/year (MM/DD/YYYY HH:MM:SS)."""
+
+DASHED_TIME_FORMAT_US = '%m-%d-%Y %H:%M:%S'
+"""Dashed time format with month first (MM-DD-YYYY HH:MM:SS)."""
+
+DASHED_TIME_FORMAT_YEAR = '%Y-%m-%d %H:%M:%S'
+"""Dashed time format with year first (YYYY-MM-DD HH:MM:SS)."""
+
+DASHED_TIME_FORMAT_FILE = '%Y-%m-%d_%H%M%S'
+"""Filename-safe dashed time format with year first (YYYY-MM-DD_HHMMSS)."""
+
+GDP_TIME_FORMAT = '%d%b%Y %H:%M:%S'
+"""Good Documentation Practice time format (DDMMMYYYY HH:MM:SS)."""
 
 
 def get_unix(str_ts, date_format):

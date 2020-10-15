@@ -23,7 +23,6 @@ documentation = "https://kyleking.me/dash_charts/"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-bottleneck = "*"
 cerberus = "*"
 dash = "*"
 dash-bootstrap-components = "*"

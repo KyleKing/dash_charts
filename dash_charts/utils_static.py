@@ -6,6 +6,7 @@ from base64 import b64encode
 import dash_bootstrap_components as dbc
 import dominate
 import markdown
+import pandas as pd
 import plotly.io
 from bs4 import BeautifulSoup
 from dominate import tags, util
@@ -208,6 +209,10 @@ def tag_table(df_table, table_class=None):
     """
     if table_class is None:
         table_class = 'table table-bordered table-striped table-hover'
+    if not isinstance(df_table, pd.core.frame.DataFrame):
+        raise RuntimeError(f'df_table is not a DataFrame ({type(df_table)}):\n{df_table}')
+
+    df_table = df_table.reset_index()
 
     with tags.div(_class='table-responsive').add(tags.table(_class=table_class)):
         # Create header row
@@ -216,13 +221,13 @@ def tag_table(df_table, table_class=None):
                 tags.th(col)
         # Create body rows
         with tags.tbody():
-            for row in df_table.itertuples():
+            for row in df_table.itertuples(index=False):
                 with tags.tr():
-                    for value in row[1:]:
+                    for value in row:
                         tags.td(str(value))
 
 
-def write_lookup(key, function_lookup):   # noqa: CCR001
+def write_lookup(key, function_lookup):
     """Determine the lookup result and add to the file.
 
     Args:
