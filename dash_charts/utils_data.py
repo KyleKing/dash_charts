@@ -15,15 +15,24 @@ from cerberus import Validator
 # For Working with Data
 
 
-def enable_verbose_pandas():
-    """Update global pandas configuration for printed dataframes."""
+def enable_verbose_pandas(max_columns=None, max_rows=None, max_seq_items=None):
+    """Update global pandas configuration for printed dataframes.
+
+    Args:
+        max_columns: the number of max columns. Default is None (to show all)
+        max_rows: the number of max rows. Default is None (to show all)
+        max_seq_items: the number of max sequence items. Default is None (to show all) # TODO: what does this set?
+
+    """
     # Enable all columns to be displayed at once (or tweak to set a new limit)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.width', None)
-    pd.set_option('display.max_colwidth', None)
+    pd.set_option('display.max_colwidth', max_columns)
 
     # Optionally modify number of rows shown
-    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_rows', max_rows)
+    if max_seq_items:
+        pd.options('display.max_seq_items', max_seq_items)
 
 
 def append_df(df_old, df_new):
@@ -72,6 +81,7 @@ def json_dumps_compact(data):   # noqa: CCR001
     clean_data = {}
     # Check each key/value pair to determine if any intermediary strings are needed for later formatting
     for key, raw in data.items():
+        # PLANNED: Convert to FP and recursive calls?
         if isinstance(raw, list):
             values = [f'``{value}``' if isinstance(value, str) else value for value in raw]
             clean_data[key] = '[' + ','.join(map(str, values)) + ']'
@@ -123,8 +133,8 @@ DASHED_TIME_FORMAT_US = '%m-%d-%Y %H:%M:%S'
 DASHED_TIME_FORMAT_YEAR = '%Y-%m-%d %H:%M:%S'
 """Dashed time format with year first (YYYY-MM-DD HH:MM:SS)."""
 
-DASHED_TIME_FORMAT_FILE = '%Y-%m-%d_%H%M%S'
-"""Filename-safe dashed time format with year first (YYYY-MM-DD_HHMMSS)."""
+TIME_FORMAT_FILE = '%Y-%m-%d_%H%M%S'
+"""Filename-safe time format with year first (YYYY-MM-DD_HHMMSS)."""
 
 GDP_TIME_FORMAT = '%d%b%Y %H:%M:%S'
 """Good Documentation Practice time format (DDMMMYYYY HH:MM:SS)."""

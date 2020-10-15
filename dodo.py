@@ -21,7 +21,7 @@ DOIT_CONFIG = {
         'export_req', 'check_req', 'update_cl',  # Comment on/off as needed
         'set_lint_config',  # Comment on/off as needed
         'auto_format',  # Comment on/off as needed
-        'lint_pre_commit',  # Comment on/off as needed
+        # 'lint_pre_commit',  # Comment on/off as needed
         'coverage',  # Comment on/off as needed
         # 'open_test_docs',  # Comment on/off as needed
         'document',  # Comment on/off as needed

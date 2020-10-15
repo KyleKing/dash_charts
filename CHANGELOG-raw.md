@@ -17,6 +17,10 @@
 
 ### Changes
 
+* Drop bottleneck and update docstrings. [Kyle King]
+
+* Upgrade to latest dash_dev. [Kyle King]
+
 * Add additional tests, update docs, & fix lint. [Kyle King]
 
 * Downgrade Matplotlib 3.1 for pytest warning. [Kyle King]

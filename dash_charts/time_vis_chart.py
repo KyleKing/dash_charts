@@ -13,15 +13,15 @@ See daattali/TimeVis: https://github.com/daattali/timevis
 import numpy as np
 import plotly.graph_objects as go
 
-from .utils_data import format_unix, get_unix
+from .utils_data import format_unix, get_unix, DASHED_TIME_FORMAT_YEAR, GDP_TIME_FORMAT
 from .utils_fig import CustomChart
 
 
 class TimeVisChart(CustomChart):  # noqa: H601
     """Time Vis Chart: resource use timeline."""
 
-    date_format = '%Y-%m-%d %H:%M:%S'
-    """Date format for bar chart."""
+    date_format = DASHED_TIME_FORMAT_YEAR
+    """Date format for bar chart. Default is `DASHED_TIME_FORMAT_YEAR`."""
 
     fillcolor = '#D5DDF6'
     """Default fillcolor for time vis events."""
@@ -82,7 +82,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
             string: HTML-formatted hover text
 
         """
-        new_format = '%a, %d%b%Y %H:%M:%S'
+        new_format = f'%a, {GDP_TIME_FORMAT}'
         start_date = format_unix(get_unix(vis.start, self.date_format), new_format)
         if vis.end:
             end_date = format_unix(get_unix(vis.end, self.date_format), new_format)
