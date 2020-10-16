@@ -5,15 +5,17 @@ import dash_html_components as html
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
+from implements import implements
 
 from dash_charts.scatter_line_charts import RollingChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_callbacks import map_args, map_outputs
 from dash_charts.utils_fig import make_dict_an, min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
-class RollingDemo(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class RollingDemo(AppBase):
     """Example creating a rolling mean chart."""
 
     name = 'Example Rolling Chart'

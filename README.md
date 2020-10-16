@@ -43,12 +43,14 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
     import dash_html_components as html
     import plotly.express as px
+    from implements import implements
 
     from dash_charts.pareto_chart import ParetoChart
-    from dash_charts.utils_app import AppBase
+    from dash_charts.utils_app import AppBase, AppInterface
     from dash_charts.utils_fig import min_graph
 
 
+    # @implements(AppInterface)
     class ParetoDemo(AppBase):
         """Example creating a simple Pareto chart."""
 
@@ -279,7 +281,7 @@ Latest coverage table
 | File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
 | `dash_charts/__init__.py` | 1 | 0 | 0 | 100.0% |
-| `dash_charts/app_px.py` | 121 | 11 | 0 | 90.9% |
+| `dash_charts/app_px.py` | 123 | 46 | 0 | 62.6% |
 | `dash_charts/components.py` | 13 | 0 | 0 | 100.0% |
 | `dash_charts/coordinate_chart.py` | 102 | 1 | 6 | 99.0% |
 | `dash_charts/custom_colorscales.py` | 3 | 0 | 0 | 100.0% |
@@ -291,9 +293,9 @@ Latest coverage table
 | `dash_charts/pareto_chart.py` | 41 | 0 | 2 | 100.0% |
 | `dash_charts/scatter_line_charts.py` | 46 | 0 | 5 | 100.0% |
 | `dash_charts/time_vis_chart.py` | 61 | 0 | 0 | 100.0% |
-| `dash_charts/utils_app.py` | 65 | 1 | 8 | 98.5% |
+| `dash_charts/utils_app.py` | 97 | 66 | 6 | 32.0% |
 | `dash_charts/utils_app_modules.py` | 26 | 3 | 4 | 88.5% |
-| `dash_charts/utils_app_with_navigation.py` | 114 | 9 | 6 | 92.1% |
+| `dash_charts/utils_app_with_navigation.py` | 115 | 51 | 6 | 55.7% |
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4% |
 | `dash_charts/utils_data.py` | 63 | 1 | 0 | 98.4% |
 | `dash_charts/utils_dataset.py` | 63 | 32 | 0 | 49.2% |
@@ -303,7 +305,7 @@ Latest coverage table
 | `dash_charts/utils_static.py` | 111 | 5 | 0 | 95.5% |
 | `dash_charts/utils_static_toc.py` | 22 | 1 | 0 | 95.5% |
 
-Generated on: 2020-10-15T08:25:20.303506
+Generated on: 2020-10-15T20:11:39.318848
 
 <!-- /COVERAGE -->
 

@@ -18,10 +18,11 @@ import dash_html_components as html
 import numpy as np
 import pandas as pd
 from dash.exceptions import PreventUpdate
+from implements import implements
 from tqdm import tqdm
 
 from dash_charts.scatter_line_charts import RollingChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_callbacks import map_outputs
 from dash_charts.utils_data import SQLConnection
 from dash_charts.utils_fig import min_graph
@@ -92,7 +93,8 @@ def simulate_db_population(db_path, points=1000, delay=0.1, flag_file=None):   #
             time.sleep(delay)
 
 
-class RealTimeSQLDemo(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class RealTimeSQLDemo(AppBase):
     """Example creating a rolling mean chart."""
 
     name = 'Example Scatter of Real Time SQL Data'

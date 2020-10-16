@@ -168,7 +168,7 @@ class FittedChart(CustomChart):
             df_name = df_raw[df_raw['name'] == name]
             scatter_data.append(go.Scatter(
                 customdata=[name],
-                mode='markers' if len(self.fit_eqs) else self.fallback_mode,
+                mode='markers' if self.fit_eqs else self.fallback_mode,
                 name=name,
                 opacity=0.5,
                 text=df_name['label'],

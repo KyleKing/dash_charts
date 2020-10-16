@@ -8,13 +8,15 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
+from implements import implements
 
 from dash_charts.modules_datatable import ModuleFilteredTable
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
-class DataTableDemo(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class DataTableDemo(AppBase):
     """Example creating a DataTable."""
 
     name = 'Example DataTable'
@@ -85,9 +87,9 @@ else:
 # 		- Would require pattern matching callback: https://dash.plotly.com/pattern-matching-callbacks
 
 # # TODO: See: https://dash.plot.ly/datatable/interactivity
-# ('datatable-id...', 'derived_virtual_row_ids'),
-# ('datatable-id...', 'selected_row_ids'),
-# ('datatable-id...', 'active_cell'),
+# > ('datatable-id...', 'derived_virtual_row_ids'),
+# > ('datatable-id...', 'selected_row_ids'),
+# > ('datatable-id...', 'active_cell'),
 
 
 # TODO: Formatting (Typing): https://dash.plot.ly/datatable/typing

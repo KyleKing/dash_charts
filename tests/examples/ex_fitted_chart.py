@@ -3,14 +3,16 @@
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
+from implements import implements
 
 from dash_charts import equations
 from dash_charts.scatter_line_charts import FittedChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
+@implements(AppInterface)  # noqa: H601
 class FittedDemo(AppBase):
     """Example creating a Fitted chart."""
 

@@ -2,12 +2,14 @@
 
 import dash_html_components as html
 import plotly.express as px
+from implements import implements
 
 from dash_charts.pareto_chart import ParetoChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 
 
+@implements(AppInterface)
 class ParetoDemo(AppBase):
     """Example creating a simple Pareto chart."""
 

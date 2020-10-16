@@ -4,15 +4,17 @@ from pathlib import Path
 
 import dash_html_components as html
 import pandas as pd
+from implements import implements
 from palettable.wesanderson import FantasticFox2_5
 
 from dash_charts.gantt_chart import GanttChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
-class GanttDemo(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class GanttDemo(AppBase):
     """Example creating a Gantt chart."""
 
     name = 'Example Gantt Chart'

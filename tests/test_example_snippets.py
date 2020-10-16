@@ -2,13 +2,15 @@
 
 import dash_html_components as html
 import pytest
+from implements import implements
 
 from dash_charts.components import dropdown_group, opts_dd
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 
 from .configuration import no_log_errors
 
 
+@implements(AppInterface)
 class ComponentDemo(AppBase):
     """Example utilizing the Dash components."""
 

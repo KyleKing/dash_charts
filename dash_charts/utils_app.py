@@ -7,6 +7,7 @@ from pathlib import Path
 import dash
 import dash_html_components as html
 from icecream import ic
+from implements import Interface
 
 from .utils_callbacks import format_app_callback
 
@@ -67,7 +68,67 @@ def init_app(**app_kwargs):
     return dash.Dash(__name__, **app_kwargs)
 
 
-class AppBase:  # noqa: H601
+class AppInterface(Interface):  # noqa: H601
+    """Base Dash Application Interface."""
+
+    name = None
+    ids = {}
+    external_stylesheets = []
+    modules: list = []
+    validation_layout = None
+    init_app_kwargs = {}
+
+    def __init__(self, app=None):  # noqa: D102, D107
+        pass
+
+    def create(self, assign_layout=True):  # noqa: D102
+        pass
+
+    def override_module_defaults(self):  # noqa: D102
+        pass
+
+    def initialization(self):  # noqa: D102
+        pass
+
+    def generate_data(self):  # noqa: D102
+        pass
+
+    def register_uniq_ids(self, app_ids):  # noqa: D102
+        pass
+
+    def verify_app_initialization(self):  # noqa: D102
+        pass
+
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements.
+
+        Does not return a result. All charts should be initialized in this method (ex `self.chart_main = ParetoChart()`)
+
+        """
+        pass
+
+    def return_layout(self):  # noqa: D102
+        pass
+
+    def callback(self, outputs, inputs, states, pic=False, **kwargs):  # noqa: D102
+        pass
+
+    def create_callbacks(self):
+        """Register the chart callbacks.
+
+        Does not return a result. May `pass` as long as no callbacks are needed for application
+
+        """
+        pass
+
+    def run(self, **dash_kwargs):  # noqa: D102
+        pass
+
+    def get_server(self):  # noqa: D102
+        pass
+
+
+class AppBase(Interface):  # noqa: H601
     """Base class for building Dash Applications."""
 
     name = None
@@ -184,17 +245,6 @@ class AppBase:  # noqa: H601
         if not self.ids.keys():  # pragma: no cover
             raise RuntimeError('Child class must first call `self.register_uniq_ids(__)` before self.run()')
 
-    def create_elements(self):
-        """Initialize the charts, tables, and other Dash elements..
-
-        Does not return a result. All charts should be initialized in this method (ex `self.chart_main = ParetoChart()`)
-
-        Raises:
-            NotImplementedError: Child class must implement this method
-
-        """
-        raise NotImplementedError('create_elements must be implemented by child class')  # pragma: no cover
-
     def return_layout(self):
         """Return Dash application layout.
 
@@ -223,17 +273,6 @@ class AppBase:  # noqa: H601
             prevent_initial_call=pic,
             **kwargs,
         )
-
-    def create_callbacks(self):
-        """Register the chart callbacks.
-
-        Does not return a result. May `pass` as long as no callbacks are needed for application
-
-        Raises:
-            NotImplementedError: Child class must implement this method
-
-        """
-        raise NotImplementedError('create_callbacks must be implemented by child class')  # pragma: no cover
 
     def run(self, **dash_kwargs):
         """Launch the Dash server instance.

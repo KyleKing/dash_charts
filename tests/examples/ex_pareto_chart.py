@@ -4,9 +4,10 @@ from io import StringIO
 
 import dash_html_components as html
 import pandas as pd
+from implements import implements
 
 from dash_charts.pareto_chart import ParetoChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
@@ -29,6 +30,7 @@ Everything But The Kitchen Sink,42
 Happy as a Clam,92"""
 
 
+@implements(AppInterface)
 class ParetoDemo(AppBase):
     """Example creating a simple Pareto chart."""
 

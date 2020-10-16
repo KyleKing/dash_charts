@@ -5,8 +5,9 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from implements import implements
 
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import MarginalChart, check_raw_data, min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
@@ -42,6 +43,9 @@ class SampleMarginalChart(MarginalChart):
         Args:
             df_raw: same pandas dataframe as self.create_traces()
 
+        Returns:
+            list: trace data points. List may be empty
+
         """
         return [
             go.Bar(
@@ -58,6 +62,9 @@ class SampleMarginalChart(MarginalChart):
 
         Args:
             df_raw: same pandas dataframe as self.create_traces()
+
+        Returns:
+            list: trace data points. List may be empty
 
         """
         key = 'name'
@@ -85,6 +92,7 @@ class SampleMarginalChart(MarginalChart):
         return layout
 
 
+@implements(AppInterface)
 class SampleMarginalChartDemo(AppBase):
     """Example creating a Marginal chart."""
 

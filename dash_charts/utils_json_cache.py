@@ -107,7 +107,7 @@ def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR, su
     """
     # Check that the identifier isn't already in the database
     matches = match_identifier_in_cache(identifier, db_instance)
-    if len(matches) > 0:
+    if matches:
         raise RuntimeError(f'Already have an entry for this identifier (`{identifier}`): {matches}')
     # Update the database and store the file
     filename = cache_dir / f'{prefix}_{uniq_table_id()}{suffix}'

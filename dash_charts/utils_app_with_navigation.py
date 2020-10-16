@@ -6,8 +6,9 @@ from copy import deepcopy
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
+from implements import implements
 
-from .utils_app import AppBase
+from .utils_app import AppBase, AppInterface
 
 TODO_CLIENT_CALLBACK = '''
 TODO: Create clientside callbacks dynamically to update the title on navigation
@@ -30,7 +31,9 @@ app.clientside_callback(
 '''
 
 
-class AppWithNavigation(AppBase):  # noqa: H601
+# TODO: Try to see if I can resolve the interface differences or if I need make a subclass interface
+# @implements(AppInterface)  # noqa: H601
+class AppWithNavigation(AppBase):
     """Base class for building Dash Application with tabs or URL routing."""
 
     app = None
@@ -87,7 +90,8 @@ class AppWithNavigation(AppBase):  # noqa: H601
         pass  # pragma: no cover
 
 
-class StaticTab(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class StaticTab(AppBase):
     """Simple App without charts or callbacks."""
 
     basic_style = {

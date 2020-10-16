@@ -40,9 +40,10 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
+from implements import implements
 
 from .components import dropdown_group, opts_dd
-from .utils_app import AppBase
+from .utils_app import AppBase, AppInterface
 from .utils_app_with_navigation import FullScreenAppWithTabs
 from .utils_callbacks import map_args, map_outputs
 from .utils_fig import min_graph
@@ -52,7 +53,8 @@ from .utils_fig import min_graph
 # >> Demo uses sample data. User could replace with data loaded from a static CSV file, TinyDB, SQLite, etc.
 
 
-class TabBase(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabBase(AppBase):
     """Base tab class with helper methods."""
 
     external_stylesheets = [dbc.themes.FLATLY]
@@ -117,7 +119,7 @@ class TabBase(AppBase):  # noqa: H601
             errors.append(f'Expected self.dims="{self.dims}" to be tuple')
         if not isinstance(self.dims_dict, OrderedDict):
             errors.append(f'Expected self.dims_dict="{self.dims_dict}" to be OrderedDict')
-        if len(errors):
+        if errors:
             formatted_errors = '\n' + '\n'.join(errors)
             raise RuntimeError(f'Found errors in data members:{formatted_errors}')
 
@@ -135,7 +137,7 @@ class TabBase(AppBase):  # noqa: H601
             errors.append(f'Expected self.data="{self.data}" to be pd.DataFrame or None')
         if not isinstance(self.func_map, OrderedDict):
             errors.append(f'Expected self.func_map="{self.func_map}" to be OrderedDict')
-        if len(errors):
+        if errors:
             formatted_errors = '\n' + '\n'.join(errors)
             raise RuntimeError(f'Found errors in data members:{formatted_errors}')
 

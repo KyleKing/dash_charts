@@ -4,14 +4,16 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
+from implements import implements
 
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_app_with_navigation import AppMultiPage
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
-class StaticPage(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class StaticPage(AppBase):
     """Simple App without charts or callbacks."""
 
     basic_style = {

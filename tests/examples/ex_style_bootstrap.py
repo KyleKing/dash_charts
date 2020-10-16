@@ -7,12 +7,14 @@ See documentation: https://dash-bootstrap-components.opensource.faculty.ai/l/com
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import plotly.express as px
+from implements import implements
 
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
+@implements(AppInterface)
 class BootstrapStylingDemo(AppBase):
     """Demo laying out a 3 column grid with Bootstrap where.
 

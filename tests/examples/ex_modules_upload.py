@@ -2,15 +2,17 @@
 
 import dash_bootstrap_components as dbc
 import dash_html_components as html
+from implements import implements
 
 from dash_charts.components import format_email_pass_id, login_form
 from dash_charts.modules_upload import UploadModule
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_callbacks import map_args, map_outputs
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
-class UploadModuleDemo(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class UploadModuleDemo(AppBase):
     """Example using the Upload Module."""
 
     name = 'Example Use of the Upload Module'

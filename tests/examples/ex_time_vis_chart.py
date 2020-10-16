@@ -2,14 +2,16 @@
 
 import dash_html_components as html
 import pandas as pd
+from implements import implements
 
 from dash_charts.time_vis_chart import TimeVisChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
-class TimeVisDemo(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TimeVisDemo(AppBase):
     """Example creating a TimeVis chart."""
 
     name = 'Example TimeVis Chart'

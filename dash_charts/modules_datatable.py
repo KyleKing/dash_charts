@@ -83,6 +83,9 @@ class ModuleDataTable(ModuleBase):
         Args:
             parent: parent instance (ex: `self`)
 
+        Raises:
+            PreventUpdate: if no columns found in the table
+
         """
         outputs = [(self.get(self.id_table), 'style_data_conditional')]
         inputs = [(self.get(self.id_table), 'sort_by')]
@@ -196,6 +199,9 @@ class ModuleFilteredTable(ModuleDataTable):
         Args:
             parent: parent instance (ex: `self`)
 
+        Raises:
+            PreventUpdate: if no columns found in the table
+
         """
         outputs = [(self.get(self.id_table_parent), 'children')]
         inputs = [(self.get(self.id_column_select), 'value')]
@@ -205,7 +211,7 @@ class ModuleFilteredTable(ModuleDataTable):
         def create_table(*raw_args):
             a_in, a_states = map_args(raw_args, inputs, states)
             columns = a_in[self.get(self.id_column_select)]['value']
-            if len(columns) == 0:
+            if not columns:
                 raise PreventUpdate
             return map_outputs(outputs, self.return_table_map(parent.ids, self.mod_df, columns))
 
