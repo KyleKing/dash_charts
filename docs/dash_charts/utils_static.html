@@ -348,7 +348,7 @@ def markdown_machine(lines, function_lookup):  # noqa: CCR001
             write_lookup(line.split(&#39;&gt;&gt;lookup:&#39;)[1], function_lookup)
         else:
             markdown_lines.append(line)
-    if len(markdown_lines) &gt; 0:
+    if markdown_lines:
         tag_markdown(&#39;\n&#39;.join(markdown_lines))
 
 
@@ -681,7 +681,7 @@ Will be inserted into file where <code>&gt;&gt;lookup:function_name</code> assum
             write_lookup(line.split(&#39;&gt;&gt;lookup:&#39;)[1], function_lookup)
         else:
             markdown_lines.append(line)
-    if len(markdown_lines) &gt; 0:
+    if markdown_lines:
         tag_markdown(&#39;\n&#39;.join(markdown_lines))</code></pre>
 </details>
 </dd>

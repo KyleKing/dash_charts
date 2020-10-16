@@ -73,10 +73,11 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import numpy as np
 import pandas as pd
+from implements import implements
 
 from dash_charts import coordinate_chart
 from dash_charts.coordinate_chart import CoordinateChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
@@ -85,6 +86,7 @@ from dash_charts.utils_helpers import parse_dash_cli_args
 # TODO: Maybe green heat map like Github? For one year?
 
 
+@implements(AppInterface)  # noqa: H601
 class CoordinateDemo(AppBase):
     &quot;&quot;&quot;Example creating basic Coordinate Charts.&quot;&quot;&quot;
 
@@ -245,10 +247,11 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import numpy as np
 import pandas as pd
+from implements import implements
 
 from dash_charts import coordinate_chart
 from dash_charts.coordinate_chart import CoordinateChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
@@ -257,6 +260,7 @@ from dash_charts.utils_helpers import parse_dash_cli_args
 # TODO: Maybe green heat map like Github? For one year?
 
 
+@implements(AppInterface)  # noqa: H601
 class CoordinateDemo(AppBase):
     \&#34;\&#34;\&#34;Example creating basic Coordinate Charts.\&#34;\&#34;\&#34;
 

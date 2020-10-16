@@ -69,14 +69,16 @@ padding: 0 5px;
 
 import dash_html_components as html
 import pandas as pd
+from implements import implements
 
 from dash_charts.time_vis_chart import TimeVisChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
-class TimeVisDemo(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TimeVisDemo(AppBase):
     &quot;&quot;&quot;Example creating a TimeVis chart.&quot;&quot;&quot;
 
     name = 'Example TimeVis Chart'
@@ -189,14 +191,16 @@ else:
 
 import dash_html_components as html
 import pandas as pd
+from implements import implements
 
 from dash_charts.time_vis_chart import TimeVisChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
-class TimeVisDemo(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TimeVisDemo(AppBase):
     \&#34;\&#34;\&#34;Example creating a TimeVis chart.\&#34;\&#34;\&#34;
 
     name = &#39;Example TimeVis Chart&#39;

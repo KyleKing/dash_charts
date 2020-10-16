@@ -73,12 +73,14 @@ See documentation on Bulma layouts: https://bulma.io/documentation/layout/tiles/
 
 import dash_html_components as html
 import plotly.express as px
+from implements import implements
 
-from dash_charts.utils_app import STATIC_URLS, AppBase
+from dash_charts.utils_app import STATIC_URLS, AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
+@implements(AppInterface)
 class BulmaStylingDemo(AppBase):
     &quot;&quot;&quot;Demo laying out a 3 column grid with Bulma where.
 
@@ -176,12 +178,14 @@ See documentation on Bulma layouts: https://bulma.io/documentation/layout/tiles/
 
 import dash_html_components as html
 import plotly.express as px
+from implements import implements
 
-from dash_charts.utils_app import STATIC_URLS, AppBase
+from dash_charts.utils_app import STATIC_URLS, AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
+@implements(AppInterface)
 class BulmaStylingDemo(AppBase):
     \&#34;\&#34;\&#34;Demo laying out a 3 column grid with Bulma where.
 

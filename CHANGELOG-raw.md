@@ -5,6 +5,10 @@
 
 ### New
 
+* AppInterface and minor tweaks. [Kyle King]
+
+* Write toc to an HTML file. [Kyle King]
+
 * Split utils_dash into more specific files. [Kyle King]
 
   - See utils_helpers, utils_data, utils_dataset

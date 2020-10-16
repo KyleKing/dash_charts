@@ -75,8 +75,9 @@ from copy import deepcopy
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
+from implements import implements
 
-from .utils_app import AppBase
+from .utils_app import AppBase, AppInterface
 
 TODO_CLIENT_CALLBACK = &#39;&#39;&#39;
 TODO: Create clientside callbacks dynamically to update the title on navigation
@@ -99,7 +100,9 @@ app.clientside_callback(
 &#39;&#39;&#39;
 
 
-class AppWithNavigation(AppBase):  # noqa: H601
+# TODO: Try to see if I can resolve the interface differences or if I need make a subclass interface
+# @implements(AppInterface)  # noqa: H601
+class AppWithNavigation(AppBase):
     &#34;&#34;&#34;Base class for building Dash Application with tabs or URL routing.&#34;&#34;&#34;
 
     app = None
@@ -156,7 +159,8 @@ class AppWithNavigation(AppBase):  # noqa: H601
         pass  # pragma: no cover
 
 
-class StaticTab(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class StaticTab(AppBase):
     &#34;&#34;&#34;Simple App without charts or callbacks.&#34;&#34;&#34;
 
     basic_style = {
@@ -604,6 +608,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
 <ul class="hlist">
 <li><a title="dash_charts.utils_app_with_navigation.AppWithNavigation" href="#dash_charts.utils_app_with_navigation.AppWithNavigation">AppWithNavigation</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
@@ -1007,7 +1012,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class AppWithNavigation(AppBase):  # noqa: H601
+<pre><code class="python">class AppWithNavigation(AppBase):
     &#34;&#34;&#34;Base class for building Dash Application with tabs or URL routing.&#34;&#34;&#34;
 
     app = None
@@ -1066,6 +1071,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -1383,6 +1389,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
 <ul class="hlist">
 <li><a title="dash_charts.utils_app_with_navigation.AppWithNavigation" href="#dash_charts.utils_app_with_navigation.AppWithNavigation">AppWithNavigation</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -1766,6 +1773,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
 <li><a title="dash_charts.utils_app_with_navigation.AppWithTabs" href="#dash_charts.utils_app_with_navigation.AppWithTabs">AppWithTabs</a></li>
 <li><a title="dash_charts.utils_app_with_navigation.AppWithNavigation" href="#dash_charts.utils_app_with_navigation.AppWithNavigation">AppWithNavigation</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -2155,7 +2163,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class StaticTab(AppBase):  # noqa: H601
+<pre><code class="python">class StaticTab(AppBase):
     &#34;&#34;&#34;Simple App without charts or callbacks.&#34;&#34;&#34;
 
     basic_style = {
@@ -2181,6 +2189,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Class variables</h3>
 <dl>

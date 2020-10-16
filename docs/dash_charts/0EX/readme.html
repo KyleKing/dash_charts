@@ -69,12 +69,14 @@ padding: 0 5px;
 
 import dash_html_components as html
 import plotly.express as px
+from implements import implements
 
 from dash_charts.pareto_chart import ParetoChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 
 
+@implements(AppInterface)
 class ParetoDemo(AppBase):
     &quot;&quot;&quot;Example creating a simple Pareto chart.&quot;&quot;&quot;
 
@@ -138,12 +140,14 @@ if __name__ == '__main__':
 
 import dash_html_components as html
 import plotly.express as px
+from implements import implements
 
 from dash_charts.pareto_chart import ParetoChart
-from dash_charts.utils_app import AppBase
+from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 
 
+@implements(AppInterface)
 class ParetoDemo(AppBase):
     \&#34;\&#34;\&#34;Example creating a simple Pareto chart.\&#34;\&#34;\&#34;
 

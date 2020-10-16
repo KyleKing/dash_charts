@@ -177,7 +177,7 @@ def store_cache_as_file(prefix, identifier, db_instance, cache_dir=CACHE_DIR, su
     &#34;&#34;&#34;
     # Check that the identifier isn&#39;t already in the database
     matches = match_identifier_in_cache(identifier, db_instance)
-    if len(matches) &gt; 0:
+    if matches:
         raise RuntimeError(f&#39;Already have an entry for this identifier (`{identifier}`): {matches}&#39;)
     # Update the database and store the file
     filename = cache_dir / f&#39;{prefix}_{uniq_table_id()}{suffix}&#39;
@@ -544,7 +544,7 @@ def retrieve_cache_object(identifier, db_instance):
     &#34;&#34;&#34;
     # Check that the identifier isn&#39;t already in the database
     matches = match_identifier_in_cache(identifier, db_instance)
-    if len(matches) &gt; 0:
+    if matches:
         raise RuntimeError(f&#39;Already have an entry for this identifier (`{identifier}`): {matches}&#39;)
     # Update the database and store the file
     filename = cache_dir / f&#39;{prefix}_{uniq_table_id()}{suffix}&#39;

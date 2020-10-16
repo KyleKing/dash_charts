@@ -145,9 +145,10 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
+from implements import implements
 
 from .components import dropdown_group, opts_dd
-from .utils_app import AppBase
+from .utils_app import AppBase, AppInterface
 from .utils_app_with_navigation import FullScreenAppWithTabs
 from .utils_callbacks import map_args, map_outputs
 from .utils_fig import min_graph
@@ -157,7 +158,8 @@ from .utils_fig import min_graph
 # &gt;&gt; Demo uses sample data. User could replace with data loaded from a static CSV file, TinyDB, SQLite, etc.
 
 
-class TabBase(AppBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabBase(AppBase):
     &#34;&#34;&#34;Base tab class with helper methods.&#34;&#34;&#34;
 
     external_stylesheets = [dbc.themes.FLATLY]
@@ -222,7 +224,7 @@ class TabBase(AppBase):  # noqa: H601
             errors.append(f&#39;Expected self.dims=&#34;{self.dims}&#34; to be tuple&#39;)
         if not isinstance(self.dims_dict, OrderedDict):
             errors.append(f&#39;Expected self.dims_dict=&#34;{self.dims_dict}&#34; to be OrderedDict&#39;)
-        if len(errors):
+        if errors:
             formatted_errors = &#39;\n&#39; + &#39;\n&#39;.join(errors)
             raise RuntimeError(f&#39;Found errors in data members:{formatted_errors}&#39;)
 
@@ -240,7 +242,7 @@ class TabBase(AppBase):  # noqa: H601
             errors.append(f&#39;Expected self.data=&#34;{self.data}&#34; to be pd.DataFrame or None&#39;)
         if not isinstance(self.func_map, OrderedDict):
             errors.append(f&#39;Expected self.func_map=&#34;{self.func_map}&#34; to be OrderedDict&#39;)
-        if len(errors):
+        if errors:
             formatted_errors = &#39;\n&#39; + &#39;\n&#39;.join(errors)
             raise RuntimeError(f&#39;Found errors in data members:{formatted_errors}&#39;)
 
@@ -534,6 +536,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <li><a title="dash_charts.utils_app_with_navigation.AppWithTabs" href="utils_app_with_navigation.html#dash_charts.utils_app_with_navigation.AppWithTabs">AppWithTabs</a></li>
 <li><a title="dash_charts.utils_app_with_navigation.AppWithNavigation" href="utils_app_with_navigation.html#dash_charts.utils_app_with_navigation.AppWithNavigation">AppWithNavigation</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
@@ -849,7 +852,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class TabBase(AppBase):  # noqa: H601
+<pre><code class="python">class TabBase(AppBase):
     &#34;&#34;&#34;Base tab class with helper methods.&#34;&#34;&#34;
 
     external_stylesheets = [dbc.themes.FLATLY]
@@ -914,7 +917,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
             errors.append(f&#39;Expected self.dims=&#34;{self.dims}&#34; to be tuple&#39;)
         if not isinstance(self.dims_dict, OrderedDict):
             errors.append(f&#39;Expected self.dims_dict=&#34;{self.dims_dict}&#34; to be OrderedDict&#39;)
-        if len(errors):
+        if errors:
             formatted_errors = &#39;\n&#39; + &#39;\n&#39;.join(errors)
             raise RuntimeError(f&#39;Found errors in data members:{formatted_errors}&#39;)
 
@@ -932,7 +935,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
             errors.append(f&#39;Expected self.data=&#34;{self.data}&#34; to be pd.DataFrame or None&#39;)
         if not isinstance(self.func_map, OrderedDict):
             errors.append(f&#39;Expected self.func_map=&#34;{self.func_map}&#34; to be OrderedDict&#39;)
-        if len(errors):
+        if errors:
             formatted_errors = &#39;\n&#39; + &#39;\n&#39;.join(errors)
             raise RuntimeError(f&#39;Found errors in data members:{formatted_errors}&#39;)
 
@@ -992,6 +995,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -1332,7 +1336,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
         errors.append(f&#39;Expected self.data=&#34;{self.data}&#34; to be pd.DataFrame or None&#39;)
     if not isinstance(self.func_map, OrderedDict):
         errors.append(f&#39;Expected self.func_map=&#34;{self.func_map}&#34; to be OrderedDict&#39;)
-    if len(errors):
+    if errors:
         formatted_errors = &#39;\n&#39; + &#39;\n&#39;.join(errors)
         raise RuntimeError(f&#39;Found errors in data members:{formatted_errors}&#39;)</code></pre>
 </details>
@@ -1365,7 +1369,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
         errors.append(f&#39;Expected self.dims=&#34;{self.dims}&#34; to be tuple&#39;)
     if not isinstance(self.dims_dict, OrderedDict):
         errors.append(f&#39;Expected self.dims_dict=&#34;{self.dims_dict}&#34; to be OrderedDict&#39;)
-    if len(errors):
+    if errors:
         formatted_errors = &#39;\n&#39; + &#39;\n&#39;.join(errors)
         raise RuntimeError(f&#39;Found errors in data members:{formatted_errors}&#39;)</code></pre>
 </details>
@@ -1411,6 +1415,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <ul class="hlist">
 <li><a title="dash_charts.app_px.TabBase" href="#dash_charts.app_px.TabBase">TabBase</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
@@ -1722,6 +1727,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <ul class="hlist">
 <li><a title="dash_charts.app_px.TabBase" href="#dash_charts.app_px.TabBase">TabBase</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
@@ -2034,6 +2040,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <ul class="hlist">
 <li><a title="dash_charts.app_px.TabBase" href="#dash_charts.app_px.TabBase">TabBase</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
@@ -2346,6 +2353,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <ul class="hlist">
 <li><a title="dash_charts.app_px.TabBase" href="#dash_charts.app_px.TabBase">TabBase</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
@@ -2661,6 +2669,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <ul class="hlist">
 <li><a title="dash_charts.app_px.TabBase" href="#dash_charts.app_px.TabBase">TabBase</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
@@ -2973,6 +2982,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <ul class="hlist">
 <li><a title="dash_charts.app_px.TabBase" href="#dash_charts.app_px.TabBase">TabBase</a></li>
 <li><a title="dash_charts.utils_app.AppBase" href="utils_app.html#dash_charts.utils_app.AppBase">AppBase</a></li>
+<li>implements.Interface</li>
 </ul>
 <h3>Class variables</h3>
 <dl>
