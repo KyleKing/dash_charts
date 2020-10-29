@@ -195,7 +195,8 @@ class TabBase(AppBase):
             return map_outputs(outputs, [(self.id_chart, 'figure', new_chart)])
 
 
-class TabTip(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabTip(TabBase):
     """TabTip properties."""
 
     name = 'Tip Data'
@@ -217,7 +218,8 @@ class TabTip(TabBase):  # noqa: H601
     }
 
 
-class TabIris(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabIris(TabBase):
     """TabIris properties."""
 
     name = 'Iris Data'
@@ -236,7 +238,8 @@ class TabIris(TabBase):  # noqa: H601
     }
 
 
-class TabGapminder(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabGapminder(TabBase):
     """TabGapminder properties."""
 
     name = 'Gapminder Data'
@@ -254,7 +257,8 @@ class TabGapminder(TabBase):  # noqa: H601
     }
 
 
-class TabTernary(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabTernary(TabBase):
     """TabTernary properties."""
 
     name = 'Ternary'
@@ -273,7 +277,8 @@ class TabTernary(TabBase):  # noqa: H601
     }
 
 
-class TabWind(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabWind(TabBase):
     """TabWind properties."""
 
     name = 'Wind'
@@ -292,7 +297,8 @@ class TabWind(TabBase):  # noqa: H601
     }
 
 
-class TabColor(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabColor(TabBase):
     """TabColor properties."""
 
     name = 'Color Swatches'
