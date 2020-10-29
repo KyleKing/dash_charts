@@ -142,7 +142,7 @@ I wanted to show that an object oriented programming approach to Dash projects c
 - Move any methods that do not require state (`self`) into standalone functions
 - If you can separate Dash (ids/layout/Callbacks) and Plotly (figures/tables) code, you can generate static HTML or PNGs more easily. Sometimes static output is useful when programmatically generating views rather than tweaking the interactive inputs each time.
 
-Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input. See
+Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input. See [./DESIGN.md](https://github.com/KyleKing/dash_charts/blob/master/DESIGN.md) for additional information on design decisions and package architecture
 
 ## Local Development
 
@@ -302,7 +302,7 @@ Latest coverage table
 
 | File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
-| `dash_charts/__init__.py` | 2 | 2 | 0 | 0.0% |
+| `dash_charts/__init__.py` | 2 | 0 | 0 | 100.0% |
 | `dash_charts/app_px.py` | 129 | 11 | 0 | 91.5% |
 | `dash_charts/components.py` | 13 | 0 | 0 | 100.0% |
 | `dash_charts/coordinate_chart.py` | 102 | 1 | 6 | 99.0% |
@@ -320,14 +320,14 @@ Latest coverage table
 | `dash_charts/utils_app_with_navigation.py` | 116 | 9 | 6 | 92.2% |
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4% |
 | `dash_charts/utils_data.py` | 63 | 1 | 0 | 98.4% |
-| `dash_charts/utils_dataset.py` | 63 | 32 | 0 | 49.2% |
-| `dash_charts/utils_fig.py` | 75 | 3 | 4 | 96.0% |
+| `dash_charts/utils_dataset.py` | 75 | 43 | 0 | 42.7% |
+| `dash_charts/utils_fig.py` | 75 | 2 | 4 | 97.3% |
 | `dash_charts/utils_helpers.py` | 30 | 14 | 7 | 53.3% |
-| `dash_charts/utils_json_cache.py` | 50 | 10 | 0 | 80.0% |
+| `dash_charts/utils_json_cache.py` | 51 | 10 | 0 | 80.4% |
 | `dash_charts/utils_static.py` | 111 | 5 | 0 | 95.5% |
 | `dash_charts/utils_static_toc.py` | 22 | 1 | 0 | 95.5% |
 
-Generated on: 2020-10-28T23:10:11.479261
+Generated on: 2020-10-28T23:38:52.314661
 
 <!-- /COVERAGE -->
 

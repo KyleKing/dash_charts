@@ -5,7 +5,7 @@ from contextlib import ContextDecorator
 import dataset
 import pandas as pd
 
-from .utils_data import uniq_table_id, write_csv
+from .utils_data import SQLConnection, uniq_table_id, write_csv
 
 # ----------------------------------------------------------------------------------------------------------------------
 # dataset
@@ -14,7 +14,7 @@ META_TABLE_NAME = 'meta'
 """Name of the Meta-Data table in a typical SQLite database."""
 
 
-class DBConnect:
+class DBConnect:  # noqa: H601
     """Manage database connection since closing connection isn't possible."""
 
     db_path = None
@@ -123,7 +123,7 @@ def safe_col_name(args_pair):
     return str(idx) if col == '' else col
 
 
-def store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME):   # noqa: CCR001
+def store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME, use_raw_sql=True):   # noqa: CCR001
     """Store multi-dimensionsal data in a SQLite database.
 
     WARN: This will append to the META_TABLE_NAME without checking for duplicates. Handling de-duping separately
@@ -132,26 +132,53 @@ def store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME)
         db_path: Path to a `.db` file
         data_dicts: all data to be stored in SQLite. Can contain Pandas dataframes
         meta_table_name: optional name of the main SQLite table. Default is `META_TABLE_NAME`
+        use_raw_sql: if True, will use the raw SQL connection rather than DataSet. This is faster for meta_tables that
+            have more than 1000 rows, but less safe
 
     """
-    with DBConnection(db_path) as data_db:
+    with SQLConnection(db_path) as conn:
         meta_table = []
         unique = uniq_table_id()
         for dict_idx, data_dict in enumerate(data_dicts):
             lookup = {}
             for key_idx, (key, value) in enumerate(data_dict.items()):
                 if isinstance(value, pd.DataFrame):
-                    table_name = f'{unique}D{dict_idx}K{key_idx}'
-                    table = data_db.new_table(table_name)
                     value.columns = [*map(safe_col_name, enumerate(value.columns.to_list()))]
-                    table.insert_many([*value.to_dict(orient='records')])
+                    table_name = f'{unique}Dict{dict_idx}Key{key_idx}'
+                    value.to_sql(table_name, con=conn)
                     lookup[key] = table_name
                 else:
                     lookup[key] = value
             meta_table.append(lookup)
 
-        table_main = data_db.db.create_table(meta_table_name)
-        table_main.insert_many(meta_table)
+    if use_raw_sql:
+        add_meta_table_records_sql(db_path, meta_table, meta_table_name)
+    else:
+        with DBConnection(db_path) as data_db:
+            table_main = data_db.db.create_table(meta_table_name)
+            table_main.insert_many(meta_table)
+
+
+def add_meta_table_records_sql(db_path, meta_table, meta_table_name):
+    """Store new rows for the meta table using a more performant SQLite implementation.
+
+    WARN: This will append to the META_TABLE_NAME without checking for duplicates. Handling de-duping separately
+
+    Args:
+        db_path: Path to a `.db` file
+        meta_table: list of dictionaries to add to the meta_table
+        meta_table_name: optional name of the main SQLite table
+
+    """
+    with SQLConnection(db_path) as conn:
+        cursor = conn.cursor()
+        keys = [*meta_table[0].keys()]
+        names_formatted = ','.join(map(safe_col_name, enumerate(keys)))
+        cursor.execute(f'CREATE TABLE IF NOT EXISTS {meta_table_name}({names_formatted});')
+        rows = [[row[col] for col in keys] for row in meta_table]
+        places = ','.join(['?'] * len(keys))
+        cursor.executemany(f'INSERT INTO {meta_table_name}({names_formatted}) VALUES ({places});', rows)
+        conn.commit()
 
 
 def get_table(db_path, table_name, drop_id_col=True):
@@ -170,5 +197,5 @@ def get_table(db_path, table_name, drop_id_col=True):
         df_table = pd.DataFrame([*data_db.db[table_name].all()])
     # Optionally remove the 'id' column added in the SQL database
     if drop_id_col:
-        df_table = df_table.drop(['id'], axis=1)
+        df_table = df_table.drop(labels=['id', 'index'], axis=1, errors='ignore')
     return df_table  # noqa: R504

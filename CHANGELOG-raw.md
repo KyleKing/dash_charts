@@ -5,6 +5,8 @@
 
 ### New
 
+* WIP plantuml diagrams. [Kyle King]
+
 * AppInterface and minor tweaks. [Kyle King]
 
 * Write toc to an HTML file. [Kyle King]
@@ -20,6 +22,10 @@
 * Time Vis chart. [Kyle King]
 
 ### Changes
+
+* Move into .diagrams & track png. [Kyle King]
+
+* Update image links for pdoc README. [Kyle King]
 
 * Update docs. [Kyle King]
 

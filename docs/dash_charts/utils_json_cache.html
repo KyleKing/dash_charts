@@ -97,6 +97,10 @@ TS_KEY = &#39;timestamp&#39;
 FILENAME_KEY = &#39;filename&#39;
 &#34;&#34;&#34;Name of the SQLite column containing the string filename.&#34;&#34;&#34;
 
+# TODO: Enable versioning of data and automatic deletion when the version changes
+DATA_VERSION_KEY = &#39;data_version&#39;
+&#34;&#34;&#34;Key to indicate the data version.&#34;&#34;&#34;
+
 
 def get_files_table(db_instance):
     &#34;&#34;&#34;Retrieve stored object from cache database.
@@ -256,6 +260,10 @@ def retrieve_cache_object(identifier, db_instance):
 <dt id="dash_charts.utils_json_cache.CACHE_TABLE_NAME"><code class="name">var <span class="ident">CACHE_TABLE_NAME</span></code></dt>
 <dd>
 <div class="desc"><p>Table name containing the cache file information.</p></div>
+</dd>
+<dt id="dash_charts.utils_json_cache.DATA_VERSION_KEY"><code class="name">var <span class="ident">DATA_VERSION_KEY</span></code></dt>
+<dd>
+<div class="desc"><p>Key to indicate the data version.</p></div>
 </dd>
 <dt id="dash_charts.utils_json_cache.FILENAME_KEY"><code class="name">var <span class="ident">FILENAME_KEY</span></code></dt>
 <dd>
@@ -669,6 +677,7 @@ setTimeout(() => input.focus(), 100);
 <ul class="two-column">
 <li><code><a title="dash_charts.utils_json_cache.CACHE_DIR" href="#dash_charts.utils_json_cache.CACHE_DIR">CACHE_DIR</a></code></li>
 <li><code><a title="dash_charts.utils_json_cache.CACHE_TABLE_NAME" href="#dash_charts.utils_json_cache.CACHE_TABLE_NAME">CACHE_TABLE_NAME</a></code></li>
+<li><code><a title="dash_charts.utils_json_cache.DATA_VERSION_KEY" href="#dash_charts.utils_json_cache.DATA_VERSION_KEY">DATA_VERSION_KEY</a></code></li>
 <li><code><a title="dash_charts.utils_json_cache.FILENAME_KEY" href="#dash_charts.utils_json_cache.FILENAME_KEY">FILENAME_KEY</a></code></li>
 <li><code><a title="dash_charts.utils_json_cache.FILE_DATA" href="#dash_charts.utils_json_cache.FILE_DATA">FILE_DATA</a></code></li>
 <li><code><a title="dash_charts.utils_json_cache.ID_KEY" href="#dash_charts.utils_json_cache.ID_KEY">ID_KEY</a></code></li>

@@ -199,7 +199,7 @@ git = "https://github.com/KyleKing/dash_charts.git"
 <li>Move any methods that do not require state (<code>self</code>) into standalone functions</li>
 <li>If you can separate Dash (ids/layout/Callbacks) and Plotly (figures/tables) code, you can generate static HTML or PNGs more easily. Sometimes static output is useful when programmatically generating views rather than tweaking the interactive inputs each time.</li>
 </ul>
-<p>Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input. See</p>
+<p>Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input. See <a href="https://github.com/KyleKing/dash_charts/blob/master/DESIGN.md">./DESIGN.md</a> for additional information on design decisions and package architecture</p>
 <h2 id="local-development">Local Development</h2>
 <p>Initial commands to clone code from Github, create Python virtual environment, and run first example application</p>
 <pre><code class="language-sh">git clone https://github.com/KyleKing/dash_charts.git
@@ -295,9 +295,9 @@ poetry run doit
 <tr>
 <td align="right"><code>dash_charts/__init__.py</code></td>
 <td align="right">2</td>
-<td align="right">2</td>
 <td align="right">0</td>
-<td align="right">0.0%</td>
+<td align="right">0</td>
+<td align="right">100.0%</td>
 </tr>
 <tr>
 <td align="right"><code>dash_charts/app_px.py</code></td>
@@ -420,17 +420,17 @@ poetry run doit
 </tr>
 <tr>
 <td align="right"><code>dash_charts/utils_dataset.py</code></td>
-<td align="right">63</td>
-<td align="right">32</td>
+<td align="right">75</td>
+<td align="right">43</td>
 <td align="right">0</td>
-<td align="right">49.2%</td>
+<td align="right">42.7%</td>
 </tr>
 <tr>
 <td align="right"><code>dash_charts/utils_fig.py</code></td>
 <td align="right">75</td>
-<td align="right">3</td>
+<td align="right">2</td>
 <td align="right">4</td>
-<td align="right">96.0%</td>
+<td align="right">97.3%</td>
 </tr>
 <tr>
 <td align="right"><code>dash_charts/utils_helpers.py</code></td>
@@ -441,10 +441,10 @@ poetry run doit
 </tr>
 <tr>
 <td align="right"><code>dash_charts/utils_json_cache.py</code></td>
-<td align="right">50</td>
+<td align="right">51</td>
 <td align="right">10</td>
 <td align="right">0</td>
-<td align="right">80.0%</td>
+<td align="right">80.4%</td>
 </tr>
 <tr>
 <td align="right"><code>dash_charts/utils_static.py</code></td>
@@ -462,7 +462,7 @@ poetry run doit
 </tr>
 </tbody>
 </table>
-<p>Generated on: 2020-10-28T23:10:11.479261</p>
+<p>Generated on: 2020-10-28T23:38:52.314661</p>
 <!-- /COVERAGE -->
 <h2 id="external-links">External Links</h2>
 <p><a href="https://codebeat.co/projects/github-com-kyleking-dash_charts-master"><img alt="codebeat badge" src="https://codebeat.co/badges/9d2b9a53-9203-4467-8cde-68f24e930389"></a> <a href="https://kyleking.me/dash_charts/"><img alt="Documentation Site Online Status Badge" src="https://img.shields.io/website?label=Doc%20Site&amp;up_message=up&amp;url=https%3A%2F%2Fgithub.com%2FKyleKing%2Fdash_charts%2F"></a> <img alt="Commits Since last Release" src="https://img.shields.io/github/commits-since/KyleKing/dash_charts/latest"> <img alt="Last Commit Badge" src="https://img.shields.io/github/last-commit/kyleking/dash_charts"></p>
@@ -642,7 +642,7 @@ I wanted to show that an object oriented programming approach to Dash projects c
 - Move any methods that do not require state (`self`) into standalone functions
 - If you can separate Dash (ids/layout/Callbacks) and Plotly (figures/tables) code, you can generate static HTML or PNGs more easily. Sometimes static output is useful when programmatically generating views rather than tweaking the interactive inputs each time.
 
-Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input. See
+Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input. See [./DESIGN.md](https://github.com/KyleKing/dash_charts/blob/master/DESIGN.md) for additional information on design decisions and package architecture
 
 ## Local Development
 
@@ -802,7 +802,7 @@ Latest coverage table
 
 | File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
-| `dash_charts/__init__.py` | 2 | 2 | 0 | 0.0% |
+| `dash_charts/__init__.py` | 2 | 0 | 0 | 100.0% |
 | `dash_charts/app_px.py` | 129 | 11 | 0 | 91.5% |
 | `dash_charts/components.py` | 13 | 0 | 0 | 100.0% |
 | `dash_charts/coordinate_chart.py` | 102 | 1 | 6 | 99.0% |
@@ -820,14 +820,14 @@ Latest coverage table
 | `dash_charts/utils_app_with_navigation.py` | 116 | 9 | 6 | 92.2% |
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4% |
 | `dash_charts/utils_data.py` | 63 | 1 | 0 | 98.4% |
-| `dash_charts/utils_dataset.py` | 63 | 32 | 0 | 49.2% |
-| `dash_charts/utils_fig.py` | 75 | 3 | 4 | 96.0% |
+| `dash_charts/utils_dataset.py` | 75 | 43 | 0 | 42.7% |
+| `dash_charts/utils_fig.py` | 75 | 2 | 4 | 97.3% |
 | `dash_charts/utils_helpers.py` | 30 | 14 | 7 | 53.3% |
-| `dash_charts/utils_json_cache.py` | 50 | 10 | 0 | 80.0% |
+| `dash_charts/utils_json_cache.py` | 51 | 10 | 0 | 80.4% |
 | `dash_charts/utils_static.py` | 111 | 5 | 0 | 95.5% |
 | `dash_charts/utils_static_toc.py` | 22 | 1 | 0 | 95.5% |
 
-Generated on: 2020-10-28T23:10:11.479261
+Generated on: 2020-10-28T23:38:52.314661
 
 &lt;!-- /COVERAGE --&gt;
 

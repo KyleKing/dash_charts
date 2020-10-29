@@ -1,26 +1,32 @@
 - TODO: add implements/interface
 - PLANNED: for Dash Dev
 	- Maybe collect TODO/FIXME and add to README
-	- Move snoop functions to dev
+	- Replace snoop with loguru
+
+- PLANNED: Create dash app for viewing loguru logs
+	- filtered/searchable table with columns time stamp, level, message, source, etc
+	- Click on row for 'extras' which shows JSON formatted data below table (Button?)
+	- Navigate to next file in the directory
+		- Maybe show a ToC with time stamps and number of lines. Maybe last line?
+	- PLANNED: Implement TODO feature list for the datatable with Kitsu exploratory app!
+		- Data table
+			- Show using the column lookup for markdown formatting, number of decimal places, etc.
+			- Implement modal that can open on button click
+
 - FIXME: Use `.set_keynames(x='x', y='y', color='TBD', **kwargs)` where kwargs are specific to chart type and are specified in the interface
 	- Add way to specify the x/y axis key names separate of the labels. See plotly express as an example syntax
 - FIXME: Improve performance of the JSON Cache using SQL directly rather than datasette for handling larger data sets
 	- Could consider grouping the dictionaries first, but SQL is likely better
 
-- PLANNED: Try adding types to Dash Charts
+- PLANNED: Try adding types to Dash Charts (see packages that can auto-assign types)
 - PLANNED: Try out the class improvements such as attrs and data classes
 	- DOIT-API and auto class from smarie
-	- Funcy Fastcore other?
+	- Funcy, Fastcore, other?
 
 - PLANNED: Add infrastructure to override/extend the CSS and JS: http://dash.plotly.com/external-resources
 	- Create temporary directory merged with user specified content? Accept string custom_css like the static ones do?
 
-- TODO: Add DataCache to the README (and implement an example)
-
-- PLANNED: Implement TODO feature list for the datatable with Kitsu exploratory app!
-	- Data table
-		- Show using the column lookup for markdown formatting, number of decimal places, etc.
-		- Implement modal that can open on button click
+- TODO: Add DataCache and store meta tables to the README (and implement an example)
 
 - PLANNED: app_px
 	- Add tab to view preview of all data frames found in px

@@ -74,7 +74,7 @@ from contextlib import ContextDecorator
 import dataset
 import pandas as pd
 
-from .utils_data import uniq_table_id, write_csv
+from .utils_data import SQLConnection, uniq_table_id, write_csv
 
 # ----------------------------------------------------------------------------------------------------------------------
 # dataset
@@ -83,7 +83,7 @@ META_TABLE_NAME = &#39;meta&#39;
 &#34;&#34;&#34;Name of the Meta-Data table in a typical SQLite database.&#34;&#34;&#34;
 
 
-class DBConnect:
+class DBConnect:  # noqa: H601
     &#34;&#34;&#34;Manage database connection since closing connection isn&#39;t possible.&#34;&#34;&#34;
 
     db_path = None
@@ -192,7 +192,7 @@ def safe_col_name(args_pair):
     return str(idx) if col == &#39;&#39; else col
 
 
-def store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME):   # noqa: CCR001
+def store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME, use_raw_sql=True):   # noqa: CCR001
     &#34;&#34;&#34;Store multi-dimensionsal data in a SQLite database.
 
     WARN: This will append to the META_TABLE_NAME without checking for duplicates. Handling de-duping separately
@@ -201,26 +201,53 @@ def store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME)
         db_path: Path to a `.db` file
         data_dicts: all data to be stored in SQLite. Can contain Pandas dataframes
         meta_table_name: optional name of the main SQLite table. Default is `META_TABLE_NAME`
+        use_raw_sql: if True, will use the raw SQL connection rather than DataSet. This is faster for meta_tables that
+            have more than 1000 rows, but less safe
 
     &#34;&#34;&#34;
-    with DBConnection(db_path) as data_db:
+    with SQLConnection(db_path) as conn:
         meta_table = []
         unique = uniq_table_id()
         for dict_idx, data_dict in enumerate(data_dicts):
             lookup = {}
             for key_idx, (key, value) in enumerate(data_dict.items()):
                 if isinstance(value, pd.DataFrame):
-                    table_name = f&#39;{unique}D{dict_idx}K{key_idx}&#39;
-                    table = data_db.new_table(table_name)
                     value.columns = [*map(safe_col_name, enumerate(value.columns.to_list()))]
-                    table.insert_many([*value.to_dict(orient=&#39;records&#39;)])
+                    table_name = f&#39;{unique}Dict{dict_idx}Key{key_idx}&#39;
+                    value.to_sql(table_name, con=conn)
                     lookup[key] = table_name
                 else:
                     lookup[key] = value
             meta_table.append(lookup)
 
-        table_main = data_db.db.create_table(meta_table_name)
-        table_main.insert_many(meta_table)
+    if use_raw_sql:
+        add_meta_table_records_sql(db_path, meta_table, meta_table_name)
+    else:
+        with DBConnection(db_path) as data_db:
+            table_main = data_db.db.create_table(meta_table_name)
+            table_main.insert_many(meta_table)
+
+
+def add_meta_table_records_sql(db_path, meta_table, meta_table_name):
+    &#34;&#34;&#34;Store new rows for the meta table using a more performant SQLite implementation.
+
+    WARN: This will append to the META_TABLE_NAME without checking for duplicates. Handling de-duping separately
+
+    Args:
+        db_path: Path to a `.db` file
+        meta_table: list of dictionaries to add to the meta_table
+        meta_table_name: optional name of the main SQLite table
+
+    &#34;&#34;&#34;
+    with SQLConnection(db_path) as conn:
+        cursor = conn.cursor()
+        keys = [*meta_table[0].keys()]
+        names_formatted = &#39;,&#39;.join(map(safe_col_name, enumerate(keys)))
+        cursor.execute(f&#39;CREATE TABLE IF NOT EXISTS {meta_table_name}({names_formatted});&#39;)
+        rows = [[row[col] for col in keys] for row in meta_table]
+        places = &#39;,&#39;.join([&#39;?&#39;] * len(keys))
+        cursor.executemany(f&#39;INSERT INTO {meta_table_name}({names_formatted}) VALUES ({places});&#39;, rows)
+        conn.commit()
 
 
 def get_table(db_path, table_name, drop_id_col=True):
@@ -239,7 +266,7 @@ def get_table(db_path, table_name, drop_id_col=True):
         df_table = pd.DataFrame([*data_db.db[table_name].all()])
     # Optionally remove the &#39;id&#39; column added in the SQL database
     if drop_id_col:
-        df_table = df_table.drop([&#39;id&#39;], axis=1)
+        df_table = df_table.drop(labels=[&#39;id&#39;, &#39;index&#39;], axis=1, errors=&#39;ignore&#39;)
     return df_table  # noqa: R504</code></pre>
 </details>
 </section>
@@ -257,6 +284,47 @@ def get_table(db_path, table_name, drop_id_col=True):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="dash_charts.utils_dataset.add_meta_table_records_sql"><code class="name flex">
+<span>def <span class="ident">add_meta_table_records_sql</span></span>(<span>db_path, meta_table, meta_table_name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Store new rows for the meta table using a more performant SQLite implementation.</p>
+<p>WARN: This will append to the META_TABLE_NAME without checking for duplicates. Handling de-duping separately</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>db_path</code></strong></dt>
+<dd>Path to a <code>.db</code> file</dd>
+<dt><strong><code>meta_table</code></strong></dt>
+<dd>list of dictionaries to add to the meta_table</dd>
+<dt><strong><code>meta_table_name</code></strong></dt>
+<dd>optional name of the main SQLite table</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_meta_table_records_sql(db_path, meta_table, meta_table_name):
+    &#34;&#34;&#34;Store new rows for the meta table using a more performant SQLite implementation.
+
+    WARN: This will append to the META_TABLE_NAME without checking for duplicates. Handling de-duping separately
+
+    Args:
+        db_path: Path to a `.db` file
+        meta_table: list of dictionaries to add to the meta_table
+        meta_table_name: optional name of the main SQLite table
+
+    &#34;&#34;&#34;
+    with SQLConnection(db_path) as conn:
+        cursor = conn.cursor()
+        keys = [*meta_table[0].keys()]
+        names_formatted = &#39;,&#39;.join(map(safe_col_name, enumerate(keys)))
+        cursor.execute(f&#39;CREATE TABLE IF NOT EXISTS {meta_table_name}({names_formatted});&#39;)
+        rows = [[row[col] for col in keys] for row in meta_table]
+        places = &#39;,&#39;.join([&#39;?&#39;] * len(keys))
+        cursor.executemany(f&#39;INSERT INTO {meta_table_name}({names_formatted}) VALUES ({places});&#39;, rows)
+        conn.commit()</code></pre>
+</details>
+</dd>
 <dt id="dash_charts.utils_dataset.export_table_as_csv"><code class="name flex">
 <span>def <span class="ident">export_table_as_csv</span></span>(<span>csv_filename, table)</span>
 </code></dt>
@@ -326,7 +394,7 @@ def get_table(db_path, table_name, drop_id_col=True):
         df_table = pd.DataFrame([*data_db.db[table_name].all()])
     # Optionally remove the &#39;id&#39; column added in the SQL database
     if drop_id_col:
-        df_table = df_table.drop([&#39;id&#39;], axis=1)
+        df_table = df_table.drop(labels=[&#39;id&#39;, &#39;index&#39;], axis=1, errors=&#39;ignore&#39;)
     return df_table  # noqa: R504</code></pre>
 </details>
 </dd>
@@ -368,7 +436,7 @@ def get_table(db_path, table_name, drop_id_col=True):
 </details>
 </dd>
 <dt id="dash_charts.utils_dataset.store_reference_tables"><code class="name flex">
-<span>def <span class="ident">store_reference_tables</span></span>(<span>db_path, data_dicts, meta_table_name='meta')</span>
+<span>def <span class="ident">store_reference_tables</span></span>(<span>db_path, data_dicts, meta_table_name='meta', use_raw_sql=True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Store multi-dimensionsal data in a SQLite database.</p>
@@ -381,12 +449,15 @@ def get_table(db_path, table_name, drop_id_col=True):
 <dd>all data to be stored in SQLite. Can contain Pandas dataframes</dd>
 <dt><strong><code>meta_table_name</code></strong></dt>
 <dd>optional name of the main SQLite table. Default is <code><a title="dash_charts.utils_dataset.META_TABLE_NAME" href="#dash_charts.utils_dataset.META_TABLE_NAME">META_TABLE_NAME</a></code></dd>
+<dt><strong><code>use_raw_sql</code></strong></dt>
+<dd>if True, will use the raw SQL connection rather than DataSet. This is faster for meta_tables that
+have more than 1000 rows, but less safe</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME):   # noqa: CCR001
+<pre><code class="python">def store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME, use_raw_sql=True):   # noqa: CCR001
     &#34;&#34;&#34;Store multi-dimensionsal data in a SQLite database.
 
     WARN: This will append to the META_TABLE_NAME without checking for duplicates. Handling de-duping separately
@@ -395,26 +466,31 @@ def get_table(db_path, table_name, drop_id_col=True):
         db_path: Path to a `.db` file
         data_dicts: all data to be stored in SQLite. Can contain Pandas dataframes
         meta_table_name: optional name of the main SQLite table. Default is `META_TABLE_NAME`
+        use_raw_sql: if True, will use the raw SQL connection rather than DataSet. This is faster for meta_tables that
+            have more than 1000 rows, but less safe
 
     &#34;&#34;&#34;
-    with DBConnection(db_path) as data_db:
+    with SQLConnection(db_path) as conn:
         meta_table = []
         unique = uniq_table_id()
         for dict_idx, data_dict in enumerate(data_dicts):
             lookup = {}
             for key_idx, (key, value) in enumerate(data_dict.items()):
                 if isinstance(value, pd.DataFrame):
-                    table_name = f&#39;{unique}D{dict_idx}K{key_idx}&#39;
-                    table = data_db.new_table(table_name)
                     value.columns = [*map(safe_col_name, enumerate(value.columns.to_list()))]
-                    table.insert_many([*value.to_dict(orient=&#39;records&#39;)])
+                    table_name = f&#39;{unique}Dict{dict_idx}Key{key_idx}&#39;
+                    value.to_sql(table_name, con=conn)
                     lookup[key] = table_name
                 else:
                     lookup[key] = value
             meta_table.append(lookup)
 
-        table_main = data_db.db.create_table(meta_table_name)
-        table_main.insert_many(meta_table)</code></pre>
+    if use_raw_sql:
+        add_meta_table_records_sql(db_path, meta_table, meta_table_name)
+    else:
+        with DBConnection(db_path) as data_db:
+            table_main = data_db.db.create_table(meta_table_name)
+            table_main.insert_many(meta_table)</code></pre>
 </details>
 </dd>
 </dl>
@@ -438,7 +514,7 @@ def get_table(db_path, table_name, drop_id_col=True):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class DBConnect:
+<pre><code class="python">class DBConnect:  # noqa: H601
     &#34;&#34;&#34;Manage database connection since closing connection isn&#39;t possible.&#34;&#34;&#34;
 
     db_path = None
@@ -690,6 +766,7 @@ setTimeout(() => input.focus(), 100);
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="dash_charts.utils_dataset.add_meta_table_records_sql" href="#dash_charts.utils_dataset.add_meta_table_records_sql">add_meta_table_records_sql</a></code></li>
 <li><code><a title="dash_charts.utils_dataset.export_table_as_csv" href="#dash_charts.utils_dataset.export_table_as_csv">export_table_as_csv</a></code></li>
 <li><code><a title="dash_charts.utils_dataset.get_table" href="#dash_charts.utils_dataset.get_table">get_table</a></code></li>
 <li><code><a title="dash_charts.utils_dataset.safe_col_name" href="#dash_charts.utils_dataset.safe_col_name">safe_col_name</a></code></li>

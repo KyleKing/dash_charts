@@ -27,6 +27,10 @@ TS_KEY = 'timestamp'
 FILENAME_KEY = 'filename'
 """Name of the SQLite column containing the string filename."""
 
+# TODO: Enable versioning of data and automatic deletion when the version changes
+DATA_VERSION_KEY = 'data_version'
+"""Key to indicate the data version."""
+
 
 def get_files_table(db_instance):
     """Retrieve stored object from cache database.
