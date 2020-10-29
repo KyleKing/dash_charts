@@ -1,0 +1,177 @@
+@startuml
+scale 1
+skinparam {
+dpi 100
+shadowing false
+linetype ortho
+}
+
+Interface AppInterface {
+  +name
+  +ids
+  +external_stylesheets
+  +validation_layout
+  +init_app_kwargs
+  -__init__(app=None)
+  +create(assign_layout=True)
+  +override_module_defaults()
+  +initialization()
+  +generate_data()
+  +register_uniq_ids(app_ids)
+  +verify_app_initialization()
+  +create_elements()
+  +return_layout()
+  +callback(outputs, inputs, states, pic=False, **kwargs)
+  +create_callbacks()
+  +run(**dash_kwargs)
+  +get_server()
+}
+
+AppInterface <-- AppBase
+class AppBase {
+  +name
+  +ids
+  +external_stylesheets
+  +validation_layout
+  +init_app_kwargs
+  +app
+  -__init__(app=None)
+  +create(assign_layout=True)
+  +override_module_defaults()
+  +initialization()
+  +generate_data()
+  +register_uniq_ids(app_ids)
+  +verify_app_initialization()
+  +return_layout()
+  +callback(outputs, inputs, states, pic=False, **kwargs)
+  +run(**dash_kwargs)
+  +get_server()
+}
+
+class __module__ {
+  +ASSETS_DIR
+  +COUNTER
+  +STATIC_URLS
+  +init_app(**app_kwargs)
+}
+
+class ModuleBase {
+  +all_ids
+  +name
+  -_ids
+  +all_ids
+  -__init__(name)
+  +get(_id)
+  +initialize_mutables()
+  +create_elements(ids)
+  +return_layout(ids)
+  +create_callbacks(parent)
+}
+
+ModuleBase <-- DataCache
+class DataCache {
+  +id_cache
+  +all_ids
+  +return_layout(ids, storage_type='memory', **store_kwargs)
+  +return_write_df_map(df_table)
+  +read_df(args)
+}
+
+class __module__ {
+}
+
+AppBase <-- AppWithNavigation
+class AppWithNavigation {
+  +app
+  +nav_lookup
+  +nav_layouts
+  +define_nav_elements()
+  +create(**kwargs)
+  +initialization()
+  +create_elements()
+  +create_callbacks()
+}
+
+AppBase <-- StaticTab
+class StaticTab {
+  +basic_style
+  +initialization()
+  +create_elements()
+  +create_callbacks()
+}
+
+AppWithNavigation <-- AppWithTabs
+class AppWithTabs {
+  +id_tabs_content
+  +id_tabs_select
+  +app_ids
+  +return_layout()
+  +create_callbacks()
+}
+
+AppWithTabs <-- FullScreenAppWithTabs
+class FullScreenAppWithTabs {
+  +tabs_location
+  +tabs_margin
+  +tabs_compact
+  +verify_app_initialization()
+  +return_layout()
+  +generate_tab_kwargs()
+  +tab_menu()
+}
+
+AppWithNavigation <-- AppMultiPage
+class AppMultiPage {
+  +navbar_links
+  +dropdown_links
+  +logo
+  +id_url
+  +id_pages_content
+  +id_toggler
+  +id_collapse
+  +app_ids
+  +return_layout()
+  +nav_bar()
+  +create_callbacks()
+  +select_page_name(pathname)
+}
+
+class __module__ {
+  +TODO_CLIENT_CALLBACK
+}
+
+class CustomChart {
+  +annotations
+  -_axis_range
+  -_axis_range_schema
+  +title
+  +labels
+  +layout_overrides
+  +axis_range(){@property}
+  +axis_range(axis_range){@axis_range.setter}
+  -__init__(*, title, xlabel, ylabel, layout_overrides=())
+  +initialize_mutables()
+  +create_figure(df_raw, **kwargs_data)
+  +create_traces(df_raw, **kwargs_data)
+  +create_layout()
+  +apply_custom_layout(layout)
+}
+
+CustomChart <-- MarginalChart
+class MarginalChart {
+  +create_figure(df_raw, **kwargs_data)
+  +create_traces(df_raw, **kwargs_data)
+  +create_marg_top(df_raw, **kwargs_data)
+  +create_marg_right(df_raw, **kwargs_data)
+  +create_layout(*, bg_color='#F0F0F0')
+}
+
+class __module__ {
+  +FIGURE_PLACEHOLDER
+  +min_graph(config=None, figure=FIGURE_PLACEHOLDER, **kwargs)
+  +convert_matplolib(fig)
+  +check_raw_data(df_raw, min_keys)
+  +make_dict_an(coord, text, label=None, color=None, y_offset=10)
+}
+
+@enduml

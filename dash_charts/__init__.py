@@ -29,7 +29,6 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
     - [Static HTML Generation](#static-html-generation)
   - [Coverage](#coverage)
   - [External Links](#external-links)
-  - [Experimental](#experimental)
 
 <!-- /TOC -->
 
@@ -328,7 +327,7 @@ Latest coverage table
 | `dash_charts/utils_static.py` | 111 | 5 | 0 | 95.5% |
 | `dash_charts/utils_static_toc.py` | 22 | 1 | 0 | 95.5% |
 
-Generated on: 2020-10-28T23:08:36.478914
+Generated on: 2020-10-28T23:10:11.479261
 
 <!-- /COVERAGE -->
 
@@ -361,14 +360,6 @@ Useful Dash reference links
   - [AI Color Palette](http://colormind.io/) / [Coolors](https://coolors.co/2b303a-92dce5-eee5e9-7c7c7c-d64933)
 - Reference
   - [Pandas CheatSheet for Data Manipulation](https://github.com/pandas-dev/pandas/blob/master/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)
-
-## Experimental
-
-Experimenting with rendering Plant UML
-
-![dash_charts](./dash_charts.png)
-
-![dash_charts-example](./dash_charts-example.png)
 """  # noqa
 
 # Generated with DoIt. Do not modify
