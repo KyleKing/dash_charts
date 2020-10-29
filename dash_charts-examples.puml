@@ -1,0 +1,401 @@
+@startuml
+scale 1
+skinparam {
+dpi 100
+shadowing false
+linetype ortho
+}
+
+namespace examples {
+  namespace ex_app_px {
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_coordinate_chart {
+    AppBase <|-- CoordinateDemo
+    class CoordinateDemo {
+      {static} +name
+      {static} +external_stylesheets
+      {static} +data_raw_years
+      {static} +data_raw_months
+      {static} +data_raw_circle
+      {static} +chart_years
+      {static} +chart_months
+      {static} +chart_circle
+      {static} +id_chart_years
+      {static} +id_chart_months
+      {static} +id_chart_circle
+      {static} +grid_years
+      {static} +grid_months
+      {static} +grid_circle
+      +initialization()
+      +create_elements()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_datatable {
+    AppBase <|-- DataTableDemo
+    class DataTableDemo {
+      {static} +name
+      {static} +external_stylesheets
+      {static} +data_raw
+      {static} +mod_table
+      +initialization()
+      +create_elements()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_fitted_chart {
+    AppBase <|-- FittedDemo
+    class FittedDemo {
+      {static} +name
+      {static} +data_raw
+      {static} +chart_main
+      {static} +id_chart
+      +initialization()
+      +create_elements()
+      +generate_data()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_gantt_chart {
+    AppBase <|-- GanttDemo
+    class GanttDemo {
+      {static} +name
+      {static} +chart_main
+      {static} +id_chart
+      +initialization()
+      +create_elements()
+      +generate_data()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_marginal_chart {
+    MarginalChart <|-- SampleMarginalChart
+    class SampleMarginalChart {
+      +create_traces(df_raw)
+      +create_marg_top(df_raw)
+      +create_marg_right(df_raw)
+      +create_layout()
+    }
+
+    AppBase <|-- SampleMarginalChartDemo
+    class SampleMarginalChartDemo {
+      {static} +name
+      {static} +data_raw
+      {static} +chart_main
+      {static} +id_chart
+      +initialization()
+      +create_elements()
+      +generate_data()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_modules_upload {
+    AppBase <|-- UploadModuleDemo
+    class UploadModuleDemo {
+      {static} +name
+      {static} +user_info
+      {static} +submit_id
+      {static} +external_stylesheets
+      {static} +data_raw
+      {static} +mod_upload
+      +initialization()
+      +create_elements()
+      -_show_current_user(username)
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_multi_page {
+    AppBase <|-- StaticPage
+    class StaticPage {
+      {static} +basic_style
+      +initialization()
+      +create_elements()
+      +create_callbacks()
+    }
+
+    StaticPage <|-- PageText
+    class PageText {
+      {static} +name
+      +return_layout()
+    }
+
+    StaticPage <|-- PageChart
+    class PageChart {
+      {static} +name
+      +return_layout()
+    }
+
+    StaticPage <|-- Page404
+    class Page404 {
+      {static} +name
+      +return_layout()
+    }
+
+    AppMultiPage <|-- MultiPageDemo
+    class MultiPageDemo {
+      {static} +name
+      {static} +navbar_links
+      {static} +dropdown_links
+      {static} +logo
+      {static} +external_stylesheets
+      +define_nav_elements()
+      +select_page_name(pathname)
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_pareto_chart {
+    AppBase <|-- ParetoDemo
+    class ParetoDemo {
+      {static} +name
+      {static} +data_raw
+      {static} +chart_main
+      {static} +id_chart
+      +initialization()
+      +create_elements()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +CSV_DATA
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_rolling_chart {
+    AppBase <|-- RollingDemo
+    class RollingDemo {
+      {static} +name
+      {static} +data_raw
+      {static} +chart_main
+      {static} +id_slider
+      {static} +id_chart
+      +initialization()
+      +generate_data()
+      +create_elements()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_sqlite_realtime {
+    AppBase <|-- RealTimeSQLDemo
+    class RealTimeSQLDemo {
+      {static} +name
+      {static} +db_path
+      {static} +chart_main
+      {static} +id_chart
+      {static} +id_interval
+      +initialization()
+      +create_elements()
+      +generate_data()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+      +use_flag_file(callback, *args, **kwargs)
+      +simulate_db_population(db_path, points=1000, delay=0.1, flag_file=None)
+    }
+
+  }
+  namespace ex_style_bootstrap {
+    AppBase <|-- BootstrapStylingDemo
+    class BootstrapStylingDemo {
+      {static} +name
+      {static} +external_stylesheets
+      +initialization()
+      +create_elements()
+      +return_navbar()
+      +return_body()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_style_bulma {
+    AppBase <|-- BulmaStylingDemo
+    class BulmaStylingDemo {
+      {static} +name
+      {static} +external_stylesheets
+      +initialization()
+      +create_elements()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_tabs {
+    StaticTab <|-- TabZero
+    class TabZero {
+      {static} +name
+      +return_layout()
+    }
+
+    StaticTab <|-- TabOne
+    class TabOne {
+      {static} +name
+      +return_layout()
+    }
+
+    StaticTab <|-- TabTwo
+    class TabTwo {
+      {static} +name
+      +return_layout()
+    }
+
+    StaticTab <|-- TabThree
+    class TabThree {
+      {static} +name
+      +return_layout()
+    }
+
+    AppWithTabs <|-- TabAppDemo
+    class TabAppDemo {
+      {static} +name
+      {static} +tabs_location
+      +define_nav_elements()
+      +return_layout()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_time_vis_chart {
+    AppBase <|-- TimeVisDemo
+    class TimeVisDemo {
+      {static} +name
+      {static} +chart_main
+      {static} +id_chart
+      +initialization()
+      +create_elements()
+      +generate_data()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +instance
+      +app
+      +FLASK_HANDLE
+    }
+
+  }
+  namespace ex_utils_static {
+    class __module__ {
+      +filename
+      +filename_from_md
+      +toggle_written_image_file(image_path, figure)
+      +create_sample_custom_chart_figure()
+      +write_sample_html(filename)
+      +example_write_from_markdown()
+    }
+
+  }
+  namespace readme {
+    AppBase <|-- ParetoDemo
+    class ParetoDemo {
+      {static} +name
+      {static} +data_raw
+      {static} +chart_main
+      {static} +id_chart
+      +initialization()
+      +create_elements()
+      +return_layout()
+      +create_callbacks()
+    }
+
+    class __module__ {
+      +app
+    }
+
+  }
+}
+@enduml

@@ -28,12 +28,29 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
     - [Static HTML Generation](#static-html-generation)
   - [Coverage](#coverage)
   - [External Links](#external-links)
+  - [Experimental](#experimental)
 
 <!-- /TOC -->
 
 ## Quick Start
 
 1. Install `dash_charts` from Github with: `pip install git+https://github.com/KyleKing/dash_charts.git` (or in a Poetry project with `pip install dash_charts --git https://github.com/KyleKing/dash_charts.git`)
+
+    ```toml
+    [tool.poetry.dependencies]
+    # matplotlib = "~3.1"  # Optional, see: https://github.com/plotly/plotly.py/issues/1568#issuecomment-653764426
+
+    [tool.poetry.dev-dependencies.dash]
+    extras = [ "testing",]
+    version = "*, ^1.16"
+
+    [tool.poetry.dev-dependencies.dash_dev]
+    git = "https://github.com/KyleKing/dash_dev.git"
+
+    [tool.poetry.dev-dependencies.dash_charts]
+    git = "https://github.com/KyleKing/dash_charts.git"
+    ```
+
 1. Minimum example:
 
     <!-- CODE:tests/examples/readme.py -->
@@ -281,7 +298,7 @@ Latest coverage table
 | File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
 | `dash_charts/__init__.py` | 1 | 0 | 0 | 100.0% |
-| `dash_charts/app_px.py` | 123 | 11 | 0 | 91.1% |
+| `dash_charts/app_px.py` | 129 | 11 | 0 | 91.5% |
 | `dash_charts/components.py` | 13 | 0 | 0 | 100.0% |
 | `dash_charts/coordinate_chart.py` | 102 | 1 | 6 | 99.0% |
 | `dash_charts/custom_colorscales.py` | 3 | 0 | 0 | 100.0% |
@@ -291,7 +308,7 @@ Latest coverage table
 | `dash_charts/modules_datatable.py` | 97 | 11 | 0 | 88.7% |
 | `dash_charts/modules_upload.py` | 131 | 60 | 0 | 54.2% |
 | `dash_charts/pareto_chart.py` | 41 | 0 | 2 | 100.0% |
-| `dash_charts/scatter_line_charts.py` | 46 | 0 | 5 | 100.0% |
+| `dash_charts/scatter_line_charts.py` | 45 | 0 | 3 | 100.0% |
 | `dash_charts/time_vis_chart.py` | 61 | 0 | 0 | 100.0% |
 | `dash_charts/utils_app.py` | 97 | 14 | 6 | 85.6% |
 | `dash_charts/utils_app_modules.py` | 26 | 3 | 4 | 88.5% |
@@ -305,7 +322,7 @@ Latest coverage table
 | `dash_charts/utils_static.py` | 111 | 5 | 0 | 95.5% |
 | `dash_charts/utils_static_toc.py` | 22 | 1 | 0 | 95.5% |
 
-Generated on: 2020-10-15T22:09:20.978799
+Generated on: 2020-10-28T22:43:54.595394
 
 <!-- /COVERAGE -->
 
@@ -338,3 +355,11 @@ Useful Dash reference links
   - [AI Color Palette](http://colormind.io/) / [Coolors](https://coolors.co/2b303a-92dce5-eee5e9-7c7c7c-d64933)
 - Reference
   - [Pandas CheatSheet for Data Manipulation](https://github.com/pandas-dev/pandas/blob/master/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)
+
+## Experimental
+
+Experimenting with rendering Plant UML
+
+![dash_charts](http://www.plantuml.com/plantuml/proxy?src=https://raw.github.com/KyleKing/dash_dev/master/dash_charts.puml)
+
+![dash_charts-examples](http://www.plantuml.com/plantuml/proxy?src=https://raw.github.com/KyleKing/dash_dev/master/dash_charts-examples.puml)

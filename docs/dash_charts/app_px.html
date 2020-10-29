@@ -300,7 +300,8 @@ class TabBase(AppBase):
             return map_outputs(outputs, [(self.id_chart, &#39;figure&#39;, new_chart)])
 
 
-class TabTip(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabTip(TabBase):
     &#34;&#34;&#34;TabTip properties.&#34;&#34;&#34;
 
     name = &#39;Tip Data&#39;
@@ -322,7 +323,8 @@ class TabTip(TabBase):  # noqa: H601
     }
 
 
-class TabIris(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabIris(TabBase):
     &#34;&#34;&#34;TabIris properties.&#34;&#34;&#34;
 
     name = &#39;Iris Data&#39;
@@ -341,7 +343,8 @@ class TabIris(TabBase):  # noqa: H601
     }
 
 
-class TabGapminder(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabGapminder(TabBase):
     &#34;&#34;&#34;TabGapminder properties.&#34;&#34;&#34;
 
     name = &#39;Gapminder Data&#39;
@@ -359,7 +362,8 @@ class TabGapminder(TabBase):  # noqa: H601
     }
 
 
-class TabTernary(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabTernary(TabBase):
     &#34;&#34;&#34;TabTernary properties.&#34;&#34;&#34;
 
     name = &#39;Ternary&#39;
@@ -378,7 +382,8 @@ class TabTernary(TabBase):  # noqa: H601
     }
 
 
-class TabWind(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabWind(TabBase):
     &#34;&#34;&#34;TabWind properties.&#34;&#34;&#34;
 
     name = &#39;Wind&#39;
@@ -397,7 +402,8 @@ class TabWind(TabBase):  # noqa: H601
     }
 
 
-class TabColor(TabBase):  # noqa: H601
+@implements(AppInterface)  # noqa: H601
+class TabColor(TabBase):
     &#34;&#34;&#34;TabColor properties.&#34;&#34;&#34;
 
     name = &#39;Color Swatches&#39;
@@ -1392,7 +1398,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class TabColor(TabBase):  # noqa: H601
+<pre><code class="python">class TabColor(TabBase):
     &#34;&#34;&#34;TabColor properties.&#34;&#34;&#34;
 
     name = &#39;Color Swatches&#39;
@@ -1706,7 +1712,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class TabGapminder(TabBase):  # noqa: H601
+<pre><code class="python">class TabGapminder(TabBase):
     &#34;&#34;&#34;TabGapminder properties.&#34;&#34;&#34;
 
     name = &#39;Gapminder Data&#39;
@@ -2018,7 +2024,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class TabIris(TabBase):  # noqa: H601
+<pre><code class="python">class TabIris(TabBase):
     &#34;&#34;&#34;TabIris properties.&#34;&#34;&#34;
 
     name = &#39;Iris Data&#39;
@@ -2331,7 +2337,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class TabTernary(TabBase):  # noqa: H601
+<pre><code class="python">class TabTernary(TabBase):
     &#34;&#34;&#34;TabTernary properties.&#34;&#34;&#34;
 
     name = &#39;Ternary&#39;
@@ -2644,7 +2650,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class TabTip(TabBase):  # noqa: H601
+<pre><code class="python">class TabTip(TabBase):
     &#34;&#34;&#34;TabTip properties.&#34;&#34;&#34;
 
     name = &#39;Tip Data&#39;
@@ -2960,7 +2966,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class TabWind(TabBase):  # noqa: H601
+<pre><code class="python">class TabWind(TabBase):
     &#34;&#34;&#34;TabWind properties.&#34;&#34;&#34;
 
     name = &#39;Wind&#39;

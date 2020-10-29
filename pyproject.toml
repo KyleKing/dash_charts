@@ -39,6 +39,7 @@ scipy = "*"
 snoop = "*"
 
 [tool.poetry.dev-dependencies]
+astor = "*"
 jsonpickle = "*"
 matplotlib = "~3.1"
 

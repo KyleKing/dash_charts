@@ -21,6 +21,8 @@
 
 ### Changes
 
+* Update docs. [Kyle King]
+
 * Improve logging functionality. [Kyle King]
 
 * Drop bottleneck and update docstrings. [Kyle King]

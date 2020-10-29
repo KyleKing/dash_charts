@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from dash_dev.doit_base import DIG, task_check_req, task_export_req  # noqa: F401
+from dash_dev.doit_base import DIG, debug_action, task_check_req, task_export_req  # noqa: F401
 from dash_dev.doit_doc import (task_create_tag, task_document,  # noqa: F401
                                task_open_docs, task_remove_tag, task_update_cl)
 from dash_dev.doit_lint import (task_auto_format, task_lint_pre_commit,  # noqa: F401
@@ -29,3 +29,25 @@ DOIT_CONFIG = {
     ],
 }
 """DoIt Configuration Settings. Run with `poetry run doit`."""
+
+
+def task_write_puml():
+    """Write an updated PlantUML file with `py2puml`."""
+    pkg = DIG.pkg_name
+
+    # TODO: pypi package wasn't working. Used local version
+    run_py2puml = 'poetry run ../py-puml-tools/py2puml/py2puml.py --config ./py2puml.ini'
+
+    # PLANNED: needs to be a bit more efficient...
+    files = []
+    for file_path in (DIG.source_path / pkg).glob('*.py'):
+        if any(line.startswith('class ') for line in file_path.read_text().split('\n')):
+            files.append(file_path.name)
+
+    return debug_action([
+        f'{run_py2puml} -o {pkg}.puml' + ''.join([f' {pkg}/{fn}' for fn in files]),
+        f'plantuml {pkg}.puml -tsvg',
+
+        f'{run_py2puml} -o {pkg}-examples.puml ./tests/examples/*.py --root ./tests',
+        f'plantuml {pkg}-examples.puml -tsvg',
+    ])

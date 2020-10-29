@@ -1,0 +1,555 @@
+@startuml
+scale 1
+skinparam {
+dpi 100
+shadowing false
+linetype ortho
+}
+
+Interface <|-- AppInterface
+class AppInterface {
+  {static} +name
+  {static} +ids
+  {static} +external_stylesheets
+  {static} +validation_layout
+  {static} +init_app_kwargs
+  -__init__(app=None)
+  +create(assign_layout=True)
+  +override_module_defaults()
+  +initialization()
+  +generate_data()
+  +register_uniq_ids(app_ids)
+  +verify_app_initialization()
+  +create_elements()
+  +return_layout()
+  +callback(outputs, inputs, states, pic=False, **kwargs)
+  +create_callbacks()
+  +run(**dash_kwargs)
+  +get_server()
+}
+
+Interface <|-- AppBase
+class AppBase {
+  {static} +name
+  {static} +ids
+  {static} +external_stylesheets
+  {static} +validation_layout
+  {static} +init_app_kwargs
+  +app
+  -__init__(app=None)
+  +create(assign_layout=True)
+  +override_module_defaults()
+  +initialization()
+  +generate_data()
+  +register_uniq_ids(app_ids)
+  +verify_app_initialization()
+  +return_layout()
+  +callback(outputs, inputs, states, pic=False, **kwargs)
+  +run(**dash_kwargs)
+  +get_server()
+}
+
+class __module__ {
+  +ASSETS_DIR
+  +COUNTER
+  +STATIC_URLS
+  +init_app(**app_kwargs)
+}
+
+AppBase <|-- TabBase
+class TabBase {
+  {static} +external_stylesheets
+  {static} +default_dim_name
+  +initialization()
+  +create_elements()
+  +verify_types_for_layout()
+  +verify_types_for_callbacks()
+  +return_layout()
+  +create_callbacks()
+  +register_update_chart()
+}
+
+TabBase <|-- TabTip
+class TabTip {
+  {static} +name
+  {static} +data
+  {static} +func_map
+  {static} +dims
+  {static} +dims_dict
+  {static} +default_dim_name
+}
+
+TabBase <|-- TabIris
+class TabIris {
+  {static} +name
+  {static} +data
+  {static} +func_map
+  {static} +dims
+  {static} +default_dim_name
+}
+
+TabBase <|-- TabGapminder
+class TabGapminder {
+  {static} +name
+  {static} +data
+  {static} +func_map
+  {static} +dims
+  {static} +default_dim_name
+}
+
+TabBase <|-- TabTernary
+class TabTernary {
+  {static} +name
+  {static} +data
+  {static} +func_map
+  {static} +dims
+  {static} +default_dim_name
+}
+
+TabBase <|-- TabWind
+class TabWind {
+  {static} +name
+  {static} +data
+  {static} +func_map
+  {static} +dims
+  {static} +default_dim_name
+}
+
+TabBase <|-- TabColor
+class TabColor {
+  {static} +name
+  {static} +takes_args
+  {static} +func_map
+  {static} +default_dim_name
+}
+
+FullScreenAppWithTabs <|-- InteractivePXApp
+class InteractivePXApp {
+  {static} +name
+  {static} +tabs_location
+  {static} +tabs_margin
+  {static} +tabs_compact
+  +define_nav_elements()
+  +return_layout()
+}
+
+class __module__ {
+}
+
+CustomChart <|-- RollingChart
+class RollingChart {
+  {static} +count_std
+  {static} +count_rolling
+  {static} +label_data
+  +create_traces(df_raw)
+}
+
+CustomChart <|-- FittedChart
+class FittedChart {
+  {static} +label_data
+  {static} +fit_eqs
+  {static} +fallback_mode
+  {static} +min_scatter_for_fit
+  {static} +suppress_fit_errors
+  +create_traces(df_raw)
+}
+
+class __module__ {
+  +create_rolling_traces(df_raw, count_rolling, count_std)
+  +create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False)
+}
+
+class DBConnect {
+  {static} +db_path
+  {static} -_db
+  +db_path
+  +db(){@property}
+  -__init__(db_path)
+  +new_table(table_name)
+  +close()
+}
+
+ContextDecorator <|-- DBConnection
+class DBConnection {
+  +conn
+  +db_path
+  -__init__(db_path)
+  -__enter__()
+  -__exit__(exc_type, exc_value, traceback)
+}
+
+class __module__ {
+  +META_TABLE_NAME
+  +export_table_as_csv(csv_filename, table)
+  +safe_col_name(args_pair)
+  +store_reference_tables(db_path, data_dicts, meta_table_name=META_TABLE_NAME)
+  +get_table(db_path, table_name, drop_id_col=True)
+}
+
+class BaseDataTable {
+  {static} +filter_summary
+  {static} +style_table
+  {static} +css
+  {static} +style_cell
+  {static} +style_cell_conditional
+  {static} +style_data
+  {static} +style_data_conditional
+  {static} +style_header
+  {static} +style_header_conditional
+  {static} +style_filter
+  {static} +style_filter_conditional
+  {static} +column_selectable
+  {static} +column_kwarg_lookup
+  {static} +export_format
+  {static} +export_headers
+  {static} +filter_action
+  {static} +page_size
+  {static} +row_selectable
+  {static} +style_as_list_view
+  {static} +sort_action
+  {static} +sort_mode
+  {static} +text_color
+  {static} +background_color
+  {static} +zebra_color
+  {static} +selected_cell_color
+  -__init__()
+  +initialize_mutables()
+  +initialize_column_kwarg_lookup()
+  +create_table(df_raw, columns=None, **kwargs_datatable)
+  +format_datatable_columns(df_raw, columns)
+  -_create_datatable(df_raw, columns, **table_kwargs)
+}
+
+class __module__ {
+  +OPERATORS
+  +split_filter_part(filter_part)
+  +apply_datatable_filters(df_table, filter_query)
+}
+
+AppBase <|-- AppWithNavigation
+class AppWithNavigation {
+  {static} +app
+  {static} +nav_lookup
+  {static} +nav_layouts
+  +define_nav_elements()
+  +create(**kwargs)
+  +initialization()
+  +create_elements()
+  +create_callbacks()
+}
+
+AppBase <|-- StaticTab
+class StaticTab {
+  {static} +basic_style
+  +initialization()
+  +create_elements()
+  +create_callbacks()
+}
+
+AppWithNavigation <|-- AppWithTabs
+class AppWithTabs {
+  {static} +id_tabs_content
+  {static} +id_tabs_select
+  {static} +app_ids
+  +return_layout()
+  +create_callbacks()
+}
+
+AppWithTabs <|-- FullScreenAppWithTabs
+class FullScreenAppWithTabs {
+  {static} +tabs_location
+  {static} +tabs_margin
+  {static} +tabs_compact
+  +verify_app_initialization()
+  +return_layout()
+  +generate_tab_kwargs()
+  +tab_menu()
+}
+
+AppWithNavigation <|-- AppMultiPage
+class AppMultiPage {
+  {static} +navbar_links
+  {static} +dropdown_links
+  {static} +logo
+  {static} +id_url
+  {static} +id_pages_content
+  {static} +id_toggler
+  {static} +id_collapse
+  {static} +app_ids
+  +return_layout()
+  +nav_bar()
+  +create_callbacks()
+  +select_page_name(pathname)
+}
+
+class __module__ {
+  +TODO_CLIENT_CALLBACK
+}
+
+class Snooper {
+  {static} +snoop_path
+  {static} +snooper
+  +snoop_path
+  +snooper
+  -__init__(log_dir=None)
+  +clear_snoop_logs()
+}
+
+class __module__ {
+  +debug_time(message, last=None)
+  +snoop_line_col(event)
+  +parse_dash_cli_args()
+  +graph_return(resp, keys)
+}
+
+CustomChart <|-- ParetoChart
+class ParetoChart {
+  {static} -_pareto_colors_schema
+  +pareto_colors(){@property}
+  +pareto_colors(pareto_colors){@pareto_colors.setter}
+  +create_traces(df_raw)
+  +create_layout()
+}
+
+class __module__ {
+  +tidy_pareto_data(df_raw, cap_categories)
+}
+
+class ModuleBase {
+  {static} +all_ids
+  +name
+  -_ids
+  +all_ids
+  -__init__(name)
+  +get(_id)
+  +initialize_mutables()
+  +create_elements(ids)
+  +return_layout(ids)
+  +create_callbacks(parent)
+}
+
+ModuleBase <|-- DataCache
+class DataCache {
+  {static} +id_cache
+  {static} +all_ids
+  +return_layout(ids, storage_type='memory', **store_kwargs)
+  +return_write_df_map(df_table)
+  +read_df(args)
+}
+
+class __module__ {
+}
+
+ContextDecorator <|-- SQLConnection
+class SQLConnection {
+  +conn
+  +db_path
+  -__init__(db_path)
+  -__enter__()
+  -__exit__(exc_type, exc_value, traceback)
+}
+
+class __module__ {
+  +US_TIME_FORMAT
+  +DASHED_TIME_FORMAT_US
+  +DASHED_TIME_FORMAT_YEAR
+  +TIME_FORMAT_FILE
+  +GDP_TIME_FORMAT
+  +enable_verbose_pandas(max_columns=None, max_rows=None, max_seq_items=None)
+  +append_df(df_old, df_new)
+  +validate(document, schema, **validator_kwargs)
+  +json_dumps_compact(data)
+  +write_pretty_json(filename, obj)
+  +write_csv(csv_path, rows)
+  +get_unix(str_ts, date_format)
+  +format_unix(unix_ts, date_format)
+  +uniq_table_id()
+  +list_sql_tables(db_path)
+}
+
+CustomChart <|-- CoordinateChart
+class CoordinateChart {
+  {static} +border_line
+  {static} +marker_kwargs
+  -__init__(*, title, grid_dims, corners, titles=None, layout_overrides=())
+  +calculate_layout(grid_dims, corners, titles)
+  +create_traces(df_raw)
+  +create_marker(df_grid, colorscale='Viridis', size=16, symbol='circle')
+  +create_layout()
+}
+
+class GridClass {
+  {static} +marker_kwargs
+  +grid_dims
+  +titles
+  -__init__(grid_dims, titles)
+}
+
+GridClass <|-- CircleGrid
+class CircleGrid {
+  {static} +marker_kwargs
+  +corners
+  -__init__(grid_dims, titles=None)
+}
+
+GridClass <|-- YearGrid
+class YearGrid {
+  {static} +marker_kwargs
+  +corners
+  -__init__(grid_dims=(4, 3), titles=None)
+  +format_data(month_lists, year)
+}
+
+GridClass <|-- MonthGrid
+class MonthGrid {
+  {static} +marker_kwargs
+  +corners
+  -__init__(grid_dims=(1, 1), titles=None)
+  +format_data(daily_values, year, month)
+}
+
+class __module__ {
+  +calculate_grid(grid_dims, corners, width, height)
+  +calculate_border(grid_dims, width, height)
+  +calculate_calendar_grid_corners(margin, days_in_week=7, max_weeks_in_month=6)
+}
+
+ModuleBase <|-- UploadModule
+class UploadModule {
+  {static} +id_upload
+  {static} +id_upload_output
+  {static} +id_username_cache
+  {static} +all_ids
+  {static} +cache_dir
+  -__init__(*args, **kwargs)
+  -_initialize_database()
+  +find_user(username)
+  +add_user(username)
+  +upload_data(username, df_name, df_upload)
+  +get_data(table_name)
+  +delete_data(table_name)
+  +return_layout(ids)
+  +create_callbacks(parent)
+  -_show_data(username)
+  +register_upload_handler(parent)
+}
+
+class __module__ {
+  +split_b64_file(b64_file)
+  +save_file(dest_path, b64_file)
+  +uploaded_files(upload_dir)
+  +file_download_link(filename)
+  +parse_uploaded_image(b64_file, filename, timestamp)
+  +parse_json(raw_json)
+  +load_df(decoded, filename)
+  +parse_uploaded_df(b64_file, filename, timestamp)
+  +show_toast(message, header, icon='warning', style=None, **toast_kwargs)
+  +drop_to_upload(**upload_kwargs)
+}
+
+class CustomChart {
+  {static} +annotations
+  {static} -_axis_range
+  {static} -_axis_range_schema
+  +title
+  +labels
+  +layout_overrides
+  +axis_range(){@property}
+  +axis_range(axis_range){@axis_range.setter}
+  -__init__(*, title, xlabel, ylabel, layout_overrides=())
+  +initialize_mutables()
+  +create_figure(df_raw, **kwargs_data)
+  +create_traces(df_raw, **kwargs_data)
+  +create_layout()
+  +apply_custom_layout(layout)
+}
+
+CustomChart <|-- MarginalChart
+class MarginalChart {
+  +create_figure(df_raw, **kwargs_data)
+  +create_traces(df_raw, **kwargs_data)
+  +create_marg_top(df_raw, **kwargs_data)
+  +create_marg_right(df_raw, **kwargs_data)
+  +create_layout(*, bg_color='#F0F0F0')
+}
+
+class __module__ {
+  +FIGURE_PLACEHOLDER
+  +min_graph(config=None, figure=FIGURE_PLACEHOLDER, **kwargs)
+  +convert_matplolib(fig)
+  +check_raw_data(df_raw, min_keys)
+  +make_dict_an(coord, text, label=None, color=None, y_offset=10)
+}
+
+CustomChart <|-- TimeVisChart
+class TimeVisChart {
+  {static} +date_format
+  {static} +fillcolor
+  {static} +hover_label_settings
+  {static} +rh
+  {static} +y_space
+  {static} +categories
+  {static} -_shapes
+  +create_traces(df_raw)
+  -_create_hover_text(vis)
+  -_create_non_cat_shape(vis, y_pos)
+  -_create_time_vis_shape(vis, y_pos)
+  -_create_annotation(vis, y_pos)
+  -_create_event(vis, y_pos)
+  +create_layout()
+}
+
+class __module__ {
+}
+
+CustomChart <|-- GanttChart
+class GanttChart {
+  {static} +date_format
+  {static} +pallette
+  {static} +hover_label_settings
+  {static} +rh
+  +create_traces(df_raw)
+  -_create_hover_text(task)
+  -_create_task_shape(task, y_pos, is_first)
+  -_create_progress_shape(task, y_pos)
+  -_create_annotation(task, y_pos)
+  +create_layout()
+}
+
+class __module__ {
+}
+
+ModuleBase <|-- ModuleDataTable
+class ModuleDataTable {
+  {static} +id_table_parent
+  {static} +id_table
+  {static} +table
+  {static} +all_ids
+  +create_elements(ids)
+  +return_layout(ids)
+  +return_table_map(ids, df_table, columns=None)
+  +create_callbacks(parent)
+  +register_highlight_sort_column(parent)
+}
+
+ModuleDataTable <|-- ModuleFilteredTable
+class ModuleFilteredTable {
+  {static} +id_column_select
+  {static} +id_filter_button
+  {static} +id_filter_input
+  {static} +id_filter_output
+  {static} +id_filter_structure
+  {static} +all_ids
+  {static} +show_filter
+  {static} +mod_df
+  +return_layout(ids, mod_df)
+  +create_callbacks(parent)
+  +register_create_table(parent)
+  +register_filter_interface(parent)
+  +register_show_query(parent)
+}
+
+class __module__ {
+}
+
+@enduml

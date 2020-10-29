@@ -3,10 +3,10 @@
 from copy import deepcopy
 from itertools import count
 from pathlib import Path
+from pprint import pprint
 
 import dash
 import dash_html_components as html
-from icecream import ic
 from implements import Interface
 
 from .utils_callbacks import format_app_callback
@@ -197,8 +197,8 @@ class AppBase(Interface):  # noqa: H601
             self.app.layout = self.return_layout()
         if assign_layout and self.validation_layout:
             self.app.validation_layout = [deepcopy(self.app.layout)] + self.validation_layout
-            ic('\n\nValidationLayout?')
-            ic(self.app.validation_layout)
+            pprint('\n\nValidationLayout?')
+            pprint(self.app.validation_layout)
 
         # Create callbacks for app and each module
         self.create_callbacks()
