@@ -24,7 +24,7 @@ documentation = "https://kyleking.me/dash_charts/"
 "Bug Tracker" = "https://github.com/kyleking/dash_charts/issues"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.7,<3.9"
 cerberus = "*"
 dash = "*"
 dash-bootstrap-components = "*"
