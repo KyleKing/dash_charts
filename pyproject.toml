@@ -36,7 +36,6 @@ Palettable = "*"
 pandas = "*"
 psutil = "*"
 scipy = "*"
-snoop = "*"
 
 [tool.poetry.dev-dependencies]
 astor = "*"

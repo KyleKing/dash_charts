@@ -250,7 +250,7 @@ Press enter of tab to apply the filter"""
         """
         self.column_kwarg_lookup = {
             'default_kwargs': {
-                'selectable': (self.column_selectable is not None),
+                'selectable': True,
             },
         }
 

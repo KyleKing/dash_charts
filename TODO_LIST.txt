@@ -1,7 +1,6 @@
 - TODO: add implements/interface
 - PLANNED: for Dash Dev
 	- Maybe collect TODO/FIXME and add to README
-	- Replace snoop with loguru
 
 - PLANNED: Create dash app for viewing loguru logs
 	- filtered/searchable table with columns time stamp, level, message, source, etc

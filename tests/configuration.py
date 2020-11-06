@@ -2,16 +2,11 @@
 
 from pathlib import Path
 
-import snoop
-
-TEST_DIR = Path(__file__).parent
+TEST_DIR = Path(__file__).resolve().parent
 """Path to the `test` directory that contains this file and all other tests."""
 
 TEST_DATA_DIR = TEST_DIR / 'data'
 """Path to subdirectory with test data within the Test Directory."""
-
-TEST_SNOOPER = snoop.Config(out=TEST_DIR / 'test.log', overwrite=True)
-"""Snoop configuration for logging to a test.log file in the test directory."""
 
 
 # PLANNED: Output the test name and other information to the test.log file. Currently only used in `no_log_errors`
@@ -30,5 +25,6 @@ def no_log_errors(dash_duo, suppressed_errors=None):
     if suppressed_errors is None:
         suppressed_errors = []
 
-    logs = TEST_SNOOPER.pp(dash_duo.get_logs())
+    logs = dash_duo.get_logs()
+    # logger.debug(logs)
     return not [log for log in logs if log['level'] not in suppressed_errors]
