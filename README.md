@@ -5,7 +5,12 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 <!-- TOC -->
 
 - [Dash_Charts](#dash_charts)
+  - [Nov2020 Updates](#nov2020-updates)
   - [Quick Start](#quick-start)
+    - [1. Install](#1-install)
+    - [2. Example Code](#2-example-code)
+    - [3. Resulting Pareto Chart](#3-resulting-pareto-chart)
+    - [4. Additional Notes](#4-additional-notes)
   - [Design Principles](#design-principles)
   - [Local Development](#local-development)
   - [Example Charts and Tables](#example-charts-and-tables)
@@ -31,108 +36,118 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
 <!-- /TOC -->
 
+## Nov2020 Updates
+
+<!-- FIXME: Keep updates up to date! -->
+I am in the process of implementing breaking changes for a `0.1` version. The major change will be to refactor the various chart constructors to match the plotly express initialization arguments
+
+I'm also planning on cleaning up `dash_dev`, reaching >75% test coverage, adding type annotations, and improving the documentation
+
 ## Quick Start
 
-1. Install `dash_charts` from Github with: `pip install git+https://github.com/KyleKing/dash_charts.git` (or in a Poetry project with `pip install dash_charts --git https://github.com/KyleKing/dash_charts.git`)
-1. Minimum example:
+### 1. Install
 
-    <!-- CODE:tests/examples/readme.py -->
+With Poetry install `dash_charts` with: `poetry add dash_charts --git https://github.com/KyleKing/dash_charts.git#main`
 
-    ```py
-    """Example Dash Application."""
+### 2. Example Code
 
-    import dash_html_components as html
-    import plotly.express as px
-    from implements import implements
+<!-- CODE:tests/examples/readme.py -->
 
-    from dash_charts.pareto_chart import ParetoChart
-    from dash_charts.utils_app import AppBase, AppInterface
-    from dash_charts.utils_fig import min_graph
+```py
+"""Example Dash Application."""
 
+import dash_html_components as html
+import plotly.express as px
+from implements import implements
 
-    @implements(AppInterface)
-    class ParetoDemo(AppBase):
-        """Example creating a simple Pareto chart."""
-
-        name = 'Car Share Pareto Demo'
-        """Application name"""
-
-        data_raw = None
-        """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
-
-        chart_main = None
-        """Main chart (Pareto)."""
-
-        id_chart = 'pareto'
-        """Unique name for the main chart."""
-
-        def initialization(self):
-            """Initialize ids with `self.register_uniq_ids([...])` and application data."""
-            super().initialization()
-            self.register_uniq_ids([self.id_chart])
-            # Format the car share data from plotly express for the Pareto
-            self.data_raw = (px.data.carshare()
-                             .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
-            self.data_raw['category'] = [f'H:{cat:02}' for cat in self.data_raw['category']]
-
-        def create_elements(self):
-            """Initialize the charts, tables, and other Dash elements."""
-            self.chart_main = ParetoChart(title='Car Share Pareto', xlabel='Peak Hours', ylabel='Car Hours')
-
-        def return_layout(self):
-            """Return Dash application layout.
-
-            Returns:
-                dict: Dash HTML object
-
-            """
-            return html.Div([
-                html.Div([min_graph(
-                    id=self.ids[self.id_chart],
-                    figure=self.chart_main.create_figure(df_raw=self.data_raw),
-                )]),
-            ])
-
-        def create_callbacks(self):
-            """Register the callbacks."""
-            pass  # Override base class. Not necessary for this example
+from dash_charts.pareto_chart import ParetoChart
+from dash_charts.utils_app import AppBase, AppInterface
+from dash_charts.utils_fig import min_graph
 
 
-    if __name__ == '__main__':
-        app = ParetoDemo()
-        app.create()
-        app.run(debug=True)
+@implements(AppInterface)
+class ParetoDemo(AppBase):
+    """Example creating a simple Pareto chart."""
 
-    ```
+    name = 'Car Share Pareto Demo'
+    """Application name"""
 
-    <!-- /CODE:tests/examples/readme.py -->
+    data_raw = None
+    """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
 
-1. Resulting Pareto Chart
+    chart_main = None
+    """Main chart (Pareto)."""
 
-    ![MinimumExampleScreenCapture](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/pareto_readme.png)
+    id_chart = 'pareto'
+    """Unique name for the main chart."""
 
-1. Next Steps
+    def initialization(self):
+        """Initialize ids with `self.register_uniq_ids([...])` and application data."""
+        super().initialization()
+        self.register_uniq_ids([self.id_chart])
+        # Format the car share data from plotly express for the Pareto
+        self.data_raw = (px.data.carshare()
+                         .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
+        self.data_raw['category'] = [f'H:{cat:02}' for cat in self.data_raw['category']]
 
-   - Create a new poetry project and add the below lines to pyproject.toml (make sure to run `poetry install`)
+    def create_elements(self):
+        """Initialize the charts, tables, and other Dash elements."""
+        self.chart_main = ParetoChart(title='Car Share Pareto', xlabel='Peak Hours', ylabel='Car Hours')
 
-       ```toml
-       [tool.poetry.dependencies]
-       # matplotlib = "~3.1"  # Optional, see: https://github.com/plotly/plotly.py/issues/1568#issuecomment-653764426
+    def return_layout(self):
+        """Return Dash application layout.
 
-       [tool.poetry.dev-dependencies.dash]
-       extras = [ "testing",]
-       version = "*, ^1.16"
+        Returns:
+            dict: Dash HTML object
 
-       [tool.poetry.dev-dependencies.dash_dev]
-       git = "https://github.com/KyleKing/dash_dev.git"
-       branch = "main"
+        """
+        return html.Div([
+            html.Div([min_graph(
+                id=self.ids[self.id_chart],
+                figure=self.chart_main.create_figure(df_raw=self.data_raw),
+            )]),
+        ])
 
-       [tool.poetry.dev-dependencies.dash_charts]
-       git = "https://github.com/KyleKing/dash_charts.git"
-       branch = "main"
-       ```
+    def create_callbacks(self):
+        """Register the callbacks."""
+        pass  # Override base class. Not necessary for this example
 
-    - Copy at minimum the (dodo.py)[https://raw.githubusercontent.com/KyleKing/dash_charts/blob/main/dodo.py] and folder structure from [dash_charts](https://github.com/KyleKing/dash_charts)
+
+if __name__ == '__main__':
+    app = ParetoDemo()
+    app.create()
+    app.run(debug=True)
+
+```
+
+<!-- /CODE:tests/examples/readme.py -->
+
+### 3. Resulting Pareto Chart
+
+![MinimumExampleScreenCapture](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/pareto_readme.png)
+
+### 4. Additional Notes
+
+TO get the most out of the tools, you may want to add `dash_dev` and add the below snippets to your `pyproject.toml` file
+
+```toml
+[tool.poetry.dependencies]
+# matplotlib = "~3.1"  # Optional, see: https://github.com/plotly/plotly.py/issues/1568#issuecomment-653764426
+
+[tool.poetry.dev-dependencies.dash]
+extras = [ "testing",]
+version = "*, ^1.16"
+
+[tool.poetry.dev-dependencies.dash_dev]
+git = "https://github.com/KyleKing/dash_dev.git"
+branch = "main"
+
+[tool.poetry.dev-dependencies.dash_charts]
+git = "https://github.com/KyleKing/dash_charts.git"
+branch = "main"
+```
+
+You will also want at minimum the (dodo.py)[https://raw.githubusercontent.com/KyleKing/dash_charts/blob/main/dodo.py] and folder structure from [dash_charts](https://github.com/KyleKing/dash_charts)
 
 ## Design Principles
 
@@ -304,31 +319,31 @@ Latest coverage table
 | File | Statements | Missing | Excluded | Coverage |
 | --: | --: | --: | --: | --: |
 | `dash_charts/__init__.py` | 2 | 0 | 0 | 100.0% |
-| `dash_charts/app_px.py` | 129 | 11 | 0 | 91.5% |
+| `dash_charts/app_px.py` | 130 | 11 | 0 | 91.5% |
 | `dash_charts/components.py` | 13 | 0 | 0 | 100.0% |
 | `dash_charts/coordinate_chart.py` | 102 | 1 | 6 | 99.0% |
 | `dash_charts/custom_colorscales.py` | 3 | 0 | 0 | 100.0% |
 | `dash_charts/datatable.py` | 79 | 25 | 0 | 68.4% |
 | `dash_charts/equations.py` | 11 | 0 | 0 | 100.0% |
 | `dash_charts/gantt_chart.py` | 54 | 0 | 0 | 100.0% |
-| `dash_charts/modules_datatable.py` | 97 | 11 | 0 | 88.7% |
-| `dash_charts/modules_upload.py` | 131 | 60 | 0 | 54.2% |
-| `dash_charts/pareto_chart.py` | 41 | 0 | 2 | 100.0% |
+| `dash_charts/modules_datatable.py` | 101 | 11 | 0 | 89.1% |
+| `dash_charts/modules_upload.py` | 132 | 60 | 0 | 54.5% |
+| `dash_charts/pareto_chart.py` | 43 | 0 | 2 | 100.0% |
 | `dash_charts/scatter_line_charts.py` | 45 | 0 | 3 | 100.0% |
 | `dash_charts/time_vis_chart.py` | 61 | 0 | 0 | 100.0% |
-| `dash_charts/utils_app.py` | 97 | 14 | 6 | 85.6% |
+| `dash_charts/utils_app.py` | 98 | 14 | 6 | 85.7% |
 | `dash_charts/utils_app_modules.py` | 26 | 3 | 4 | 88.5% |
-| `dash_charts/utils_app_with_navigation.py` | 116 | 9 | 6 | 92.2% |
+| `dash_charts/utils_app_with_navigation.py` | 119 | 9 | 6 | 92.4% |
 | `dash_charts/utils_callbacks.py` | 34 | 6 | 0 | 82.4% |
 | `dash_charts/utils_data.py` | 63 | 1 | 0 | 98.4% |
-| `dash_charts/utils_dataset.py` | 75 | 43 | 0 | 42.7% |
-| `dash_charts/utils_fig.py` | 75 | 2 | 4 | 97.3% |
-| `dash_charts/utils_helpers.py` | 30 | 14 | 7 | 53.3% |
+| `dash_charts/utils_dataset.py` | 76 | 43 | 0 | 43.4% |
+| `dash_charts/utils_fig.py` | 77 | 2 | 4 | 97.4% |
+| `dash_charts/utils_helpers.py` | 17 | 8 | 7 | 52.9% |
 | `dash_charts/utils_json_cache.py` | 51 | 10 | 0 | 80.4% |
 | `dash_charts/utils_static.py` | 111 | 5 | 0 | 95.5% |
 | `dash_charts/utils_static_toc.py` | 22 | 1 | 0 | 95.5% |
 
-Generated on: 2020-10-28T23:38:52.314661
+Generated on: 2020-11-08T22:46:27.420973
 
 <!-- /COVERAGE -->
 
