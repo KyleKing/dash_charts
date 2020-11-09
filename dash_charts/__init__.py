@@ -110,7 +110,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
 1. Resulting Pareto Chart
 
-    ![MinimumExampleScreenCapture](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/pareto_readme.png)
+    ![MinimumExampleScreenCapture](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/pareto_readme.png)
 
 1. Next Steps
 
@@ -126,12 +126,14 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
        [tool.poetry.dev-dependencies.dash_dev]
        git = \"https://github.com/KyleKing/dash_dev.git\"
+       branch = \"main\"
 
        [tool.poetry.dev-dependencies.dash_charts]
        git = \"https://github.com/KyleKing/dash_charts.git\"
+       branch = \"main\"
        ```
 
-    - Copy at minimum the (dodo.py)[https://raw.githubusercontent.com/KyleKing/dash_charts/blob/master/dodo.py] and folder structure from [dash_charts](https://github.com/KyleKing/dash_charts)
+    - Copy at minimum the (dodo.py)[https://raw.githubusercontent.com/KyleKing/dash_charts/blob/main/dodo.py] and folder structure from [dash_charts](https://github.com/KyleKing/dash_charts)
 
 ## Design Principles
 
@@ -142,7 +144,7 @@ I wanted to show that an object oriented programming approach to Dash projects c
 - Move any methods that do not require state (`self`) into standalone functions
 - If you can separate Dash (ids/layout/Callbacks) and Plotly (figures/tables) code, you can generate static HTML or PNGs more easily. Sometimes static output is useful when programmatically generating views rather than tweaking the interactive inputs each time.
 
-Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input. See [./DESIGN.md](https://github.com/KyleKing/dash_charts/blob/master/DESIGN.md) for additional information on design decisions and package architecture
+Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input. See [./DESIGN.md](https://github.com/KyleKing/dash_charts/blob/main/DESIGN.md) for additional information on design decisions and package architecture
 
 ## Local Development
 
@@ -172,81 +174,81 @@ Below are screenshots and links to the example code for each chart or table incl
 
 Create Pareto charts in Dash. Handles ordering the category, calculating the cumulative percentage, and configuring both YAxis.
 
-See sample code in [tests/examples/ex_pareto_chart.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_pareto_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_pareto_chart.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_pareto_chart.py). Screenshot below:
 
-![ex_pareto_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_pareto_chart.png)
+![ex_pareto_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_pareto_chart.png)
 
 ### Gantt Chart
 
 Create simple Gantt charts in Dash. Doesn't support more advanced features such as dependencies and resource assignment, but effectively shows tasks, progress, and projects in a clear way. You can toggle the different projects on/off and use zoom like a normal Plotly chart.
 
-See sample code in [tests/examples/ex_gantt_chart.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_gantt_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_gantt_chart.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_gantt_chart.py). Screenshot below:
 
-![ex_gantt_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_gantt_chart.png)
+![ex_gantt_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_gantt_chart.png)
 
 ### Time Vis Chart
 
 Create a TimeVis chart to plot general time visualizations (based on [daattali/timevis](https://github.com/daattali/timevis) from R). This chart differs from a Gantt chart by showing events that repeat in the same row.
 
-See sample code in [tests/examples/ex_time_vis_chart.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_time_vis_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_time_vis_chart.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_time_vis_chart.py). Screenshot below:
 
-![ex_time_vis_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_time_vis_chart.png)
+![ex_time_vis_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_time_vis_chart.png)
 
 ### Rolling Mean and STD Chart
 
 Easily chart the rolling mean and standard deviation for a given scatter data set. Demonstrates using chart annotations.
 
-See sample code in [tests/examples/ex_rolling_chart.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_rolling_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_rolling_chart.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_rolling_chart.py). Screenshot below:
 
-![ex_rolling_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_rolling_chart.png)
+![ex_rolling_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_rolling_chart.png)
 
 ### Fitted Chart
 
 Fit arbitrary scatter data with a specified equation. On hover will show the rounded fit parameters. Useful for experimenting with new data.
 
-See sample code in [tests/examples/ex_fitted_chart.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_fitted_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_fitted_chart.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_fitted_chart.py). Screenshot below:
 
-![ex_fitted_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_fitted_chart.png)
+![ex_fitted_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_fitted_chart.png)
 
 ### Real Time SQL Demo
 
 Example using a Rolling Chart to show real time data from a SQLite database. For the demo, a background thread populates the database as the Dash app runs in a separate thread.
 
-See sample code in [tests/examples/ex_sqlite_realtime.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_sqlite_realtime.py). Screenshot below:
+See sample code in [tests/examples/ex_sqlite_realtime.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_sqlite_realtime.py). Screenshot below:
 
-![ex_sqlite_realtime.gif](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_sqlite_realtime.gif)
+![ex_sqlite_realtime.gif](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_sqlite_realtime.gif)
 
 ### Coordinate Chart
 
 Chart a discrete data set on a 2D plane with color for intensity. Below examples show how to use the `YearGrid()`, `MonthGrid()`, and `CircleGrid()` classes
 
-See sample code in [tests/examples/ex_coordinate_chart.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_coordinate_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_coordinate_chart.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_coordinate_chart.py). Screenshot below:
 
-![ex_coordinate_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_coordinate_chart.png)
+![ex_coordinate_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_coordinate_chart.png)
 
 ### Marginal Chart
 
 Example creating a new chart from utils_fig.MarginalChart
 
-See sample code in [tests/examples/ex_marginal_chart.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_marginal_chart.py). Screenshot below:
+See sample code in [tests/examples/ex_marginal_chart.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_marginal_chart.py). Screenshot below:
 
-![ex_marginal_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_marginal_chart.png)
+![ex_marginal_chart.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_marginal_chart.png)
 
 ### Data Table Module
 
 Display Dash data table from dataframe
 
-See sample code in [tests/examples/ex_datatable.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_datatable.py). Screenshot below:
+See sample code in [tests/examples/ex_datatable.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_datatable.py). Screenshot below:
 
-![ex_datatable.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_datatable.png)
+![ex_datatable.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_datatable.png)
 
 ### Upload Module
 
 Upload module for user-selected CSV, JSON, or SQLite files.
 
-See sample code in [tests/examples/ex_upload.py](https://ra/www.gubusem/KyleKing/dash_charts/blob/master/tests/examples/ex_upload.py). Screenshot below:
+See sample code in [tests/examples/ex_upload.py](https://ra/www.gubusem/KyleKing/dash_charts/blob/main/tests/examples/ex_upload.py). Screenshot below:
 
-![ex_upload.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_upload.png)
+![ex_upload.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_upload.png)
 
 ## Applications
 
@@ -256,25 +258,25 @@ Every app derives from `AppBase()` so that each tab or page can be run independe
 
 Use the `AppWithTabs()` base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.
 
-See sample code in [tests/examples/ex_tabs.py](https://ra/www.gubusem/KyleKing/dash_charts/blob/master/tests/examples/ex_tabs.py). Screenshot below:
+See sample code in [tests/examples/ex_tabs.py](https://ra/www.gubusem/KyleKing/dash_charts/blob/main/tests/examples/ex_tabs.py). Screenshot below:
 
-![ex_tabs.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_tabs.png)
+![ex_tabs.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_tabs.png)
 
 ### Multi-Page Application
 
 Use the `AppMultiPage()` base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.
 
-See sample code in [tests/examples/ex_multi_page.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_multi_page.py). Screenshot below:
+See sample code in [tests/examples/ex_multi_page.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_multi_page.py). Screenshot below:
 
-![ex_multi_page.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_multi_page.png)
+![ex_multi_page.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_multi_page.png)
 
 ### PX Generic Application
 
 To facilitate general data analysis from a JSON, CSV, or SQLite file, dash_charts includes apps for each px plot type and a tabbed app to bring them all together.
 
-See sample code in [tests/examples/ex_app_px.py](https://ra/www.gubusem/KyleKing/dash_charts/blob/master/tests/examples/ex_app_px.py). Screenshot below:
+See sample code in [tests/examples/ex_app_px.py](https://ra/www.gubusem/KyleKing/dash_charts/blob/main/tests/examples/ex_app_px.py). Screenshot below:
 
-![ex_app_px.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_app_px.png)
+![ex_app_px.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_app_px.png)
 
 ## Other
 
@@ -284,15 +286,15 @@ Other notable components in `dash_charts`
 
 Utilities for utilizing a local cache file system for storing JSON data. Particularly useful if scraping or making many API calls to cache the responses locally.
 
-See sample code in the relevant test file [tests/test_utils_json_cache.py](https:/raw./usercontentgithub.com/KyleKing/dash_charts/blob/master/tests/test_utils_json_cache.py)
+See sample code in the relevant test file [tests/test_utils_json_cache.py](https:/raw./usercontentgithub.com/KyleKing/dash_charts/blob/main/tests/test_utils_json_cache.py)
 
 ### Static HTML Generation
 
 utilities for creating static HTML output with all of the CustomCharts above or user-created. Also includes utilities for writing tables, code, markdown, and more to be added.
 
-See sample code in [tests/examples/ex_utils_static.py](https://www.github.com/KyleKing/dash_charts/blob/master/tests/examples/ex_utils_static.py). Screenshot below:
+See sample code in [tests/examples/ex_utils_static.py](https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_utils_static.py). Screenshot below:
 
-![ex_utils_static.png](https://raw.githubusercontent.com/KyleKing/dash_charts/master/.images/ex_utils_static.png)
+![ex_utils_static.png](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_utils_static.png)
 
 ## Coverage
 
@@ -333,15 +335,15 @@ Generated on: 2020-10-28T23:38:52.314661
 
 ## External Links
 
-[![codebeat badge](https://codebeat.co/badges/9d2b9a53-9203-4467-8cde-68f24e930389)](https://codebeat.co/projects/github-com-kyleking-dash_charts-master) [![Documentation Site Online Status Badge](https://img.shields.io/website?label=Doc%20Site&up_message=up&url=https%3A%2F%2Fgithub.com%2FKyleKing%2Fdash_charts%2F)](https://kyleking.me/dash_charts/) ![Commits Since last Release](https://img.shields.io/github/commits-since/KyleKing/dash_charts/latest) ![Last Commit Badge](https://img.shields.io/github/last-commit/kyleking/dash_charts)
+[![codebeat badge](https://codebeat.co/badges/9d2b9a53-9203-4467-8cde-68f24e930389)](https://codebeat.co/projects/github-com-kyleking-dash_charts-main) [![Documentation Site Online Status Badge](https://img.shields.io/website?label=Doc%20Site&up_message=up&url=https%3A%2F%2Fgithub.com%2FKyleKing%2Fdash_charts%2F)](https://kyleking.me/dash_charts/) ![Commits Since last Release](https://img.shields.io/github/commits-since/KyleKing/dash_charts/latest) ![Last Commit Badge](https://img.shields.io/github/last-commit/kyleking/dash_charts)
 
 Useful Dash reference links
 
 - Official [Dash Docs](https://dash.plot.ly) / [Plotly Docs](https://plot.ly/python/)
 - Example Apps
   - Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX), a commercial Dash app
-  - Pleasant dark app from Dash-Bio, [Circos](https://github.com/plotly/dash-bio/blob/master/tests/dashbio_demos/app_circos.py)
-  - All [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/master/apps)
+  - Pleasant dark app from Dash-Bio, [Circos](https://github.com/plotly/dash-bio/blob/main/tests/dashbio_demos/app_circos.py)
+  - All [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/main/apps)
 - Code Conceptual inspiration
   - [On Tidy data](https://www.jeannicholashould.com/tidy-data-in-python.html)
   - [Using field for properties in a @DataClass](https://florimond.dev/blog/articles/2018/10/reconciling-dataclasses-and-properties-in-python/)
@@ -359,7 +361,7 @@ Useful Dash reference links
   - [Viz-Palette Tool](https://projects.susielu.com/viz-palette)
   - [AI Color Palette](http://colormind.io/) / [Coolors](https://coolors.co/2b303a-92dce5-eee5e9-7c7c7c-d64933)
 - Reference
-  - [Pandas CheatSheet for Data Manipulation](https://github.com/pandas-dev/pandas/blob/master/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)
+  - [Pandas CheatSheet for Data Manipulation](https://github.com/pandas-dev/pandas/blob/main/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)
 """  # noqa
 
 # Generated with DoIt. Do not modify

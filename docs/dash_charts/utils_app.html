@@ -221,7 +221,7 @@ class AppBase(Interface):  # noqa: H601
     validation_layout = None
     &#34;&#34;&#34;Validation layout used for callback validation. If None, will use the default layout for callback exceptions.&#34;&#34;&#34;
 
-    init_app_kwargs = {&#39;external_stylesheets&#39;: external_stylesheets}
+    init_app_kwargs = {}
     &#34;&#34;&#34;Additional keyword arguments passed to `init_app()`.&#34;&#34;&#34;
 
     # In child class, declare the rest of the static data members here
@@ -233,7 +233,8 @@ class AppBase(Interface):  # noqa: H601
             app: Dash instance. If None, will create standalone app. Otherwise, will be part of existing app
 
         &#34;&#34;&#34;
-        self.init_app_kwargs[&#39;title&#39;] = self.name
+        default = {&#39;title&#39;: self.name, &#39;external_stylesheets&#39;: self.external_stylesheets}
+        self.init_app_kwargs = {**default, **self.init_app_kwargs}
         self.app = init_app(**self.init_app_kwargs) if app is None else app
 
     def create(self, assign_layout=True):  # noqa: CCR001
@@ -471,7 +472,7 @@ class AppBase(Interface):  # noqa: H601
     validation_layout = None
     &#34;&#34;&#34;Validation layout used for callback validation. If None, will use the default layout for callback exceptions.&#34;&#34;&#34;
 
-    init_app_kwargs = {&#39;external_stylesheets&#39;: external_stylesheets}
+    init_app_kwargs = {}
     &#34;&#34;&#34;Additional keyword arguments passed to `init_app()`.&#34;&#34;&#34;
 
     # In child class, declare the rest of the static data members here
@@ -483,7 +484,8 @@ class AppBase(Interface):  # noqa: H601
             app: Dash instance. If None, will create standalone app. Otherwise, will be part of existing app
 
         &#34;&#34;&#34;
-        self.init_app_kwargs[&#39;title&#39;] = self.name
+        default = {&#39;title&#39;: self.name, &#39;external_stylesheets&#39;: self.external_stylesheets}
+        self.init_app_kwargs = {**default, **self.init_app_kwargs}
         self.app = init_app(**self.init_app_kwargs) if app is None else app
 
     def create(self, assign_layout=True):  # noqa: CCR001
