@@ -101,19 +101,19 @@ class GanttChart(CustomChart):  # noqa: H601
 
         """
         color = self.color_lookup[task.category]
-        scatter_kwargs = dict(
-            fill='toself',
-            fillcolor=color,
-            hoverlabel=self.hover_label_settings,
-            legendgroup=color,
-            line={'width': 1},
-            marker={'color': color},
-            mode='lines',
-            showlegend=is_first,
-            text=self._create_hover_text(task),
-            x=[task.start, task.end, task.end, task.start, task.start],
-            y=[y_pos, y_pos, y_pos - self.rh, y_pos - self.rh, y_pos],
-        )
+        scatter_kwargs = {
+            'fill': 'toself',
+            'fillcolor': color,
+            'hoverlabel': self.hover_label_settings,
+            'legendgroup': color,
+            'line': {'width': 1},
+            'marker': {'color': color},
+            'mode': 'lines',
+            'showlegend': is_first,
+            'text': self._create_hover_text(task),
+            'x': [task.start, task.end, task.end, task.start, task.start],
+            'y': [y_pos, y_pos, y_pos - self.rh, y_pos - self.rh, y_pos],
+        }
         if is_first:
             scatter_kwargs['name'] = task.category
         return go.Scatter(**scatter_kwargs)

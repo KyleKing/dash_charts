@@ -43,6 +43,9 @@ I am in the process of implementing breaking changes for a `0.1` version. The ma
 
 I'm also planning on cleaning up `dash_dev`, reaching >75% test coverage, adding type annotations, and improving the documentation
 
+Use builder in dash charts to extend the constructor!
+https://github.com/faif/python-patterns/blob/master/patterns/creational/builder.py. Have chaining so that this can be done more succinctly (`return self`). Use case is creating multiple views from the same chart
+
 ## Quick Start
 
 ### 1. Install
@@ -147,7 +150,7 @@ git = "https://github.com/KyleKing/dash_charts.git"
 branch = "main"
 ```
 
-You will also want at minimum the (dodo.py)[https://raw.githubusercontent.com/KyleKing/dash_charts/blob/main/dodo.py] and folder structure from [dash_charts](https://github.com/KyleKing/dash_charts)
+You will also want at minimum the [dodo.py](https://raw.githubusercontent.com/KyleKing/dash_charts/blob/main/dodo.py) and folder structure from [dash_charts](https://github.com/KyleKing/dash_charts)
 
 ## Design Principles
 

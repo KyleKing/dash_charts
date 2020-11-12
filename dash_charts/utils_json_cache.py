@@ -11,6 +11,8 @@ from pathlib import Path
 from .utils_data import uniq_table_id, write_pretty_json
 from .utils_dataset import DBConnect
 
+#  FIXME: Add versioning to the cache directory with semver logic: https://pypi.org/project/semantic-version/
+
 CACHE_DIR = Path(__file__).parent / 'local_cache'
 """Path to folder with all downloaded responses from Kitsu API."""
 
