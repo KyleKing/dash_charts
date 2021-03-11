@@ -8,11 +8,15 @@ from .examples import ex_utils_static
 
 def test_smoke_test_write_plotly_html():
     """Smoke test WritePlotlyHTML."""
-    with tempfile.TemporaryDirectory() as dir_name:  # act
-        filename = Path(dir_name) / 'tmp.html'
-        ex_utils_static.write_sample_html(filename)
-        content = filename.read_text()
+    try:
+        with tempfile.TemporaryDirectory() as dir_name:  # act
+            filename = Path(dir_name) / 'tmp.html'
 
+            ex_utils_static.write_sample_html(filename)  # act
+
+            content = filename.read_text()
+    except ValueError:
+        raise ValueError('Likely no orca installation was found. Try "conda install -c plotly plotly-orca"')
     assert len(content.split('\n')) >= 2500
 
 

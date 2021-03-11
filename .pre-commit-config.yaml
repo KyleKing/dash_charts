@@ -1,0 +1,73 @@
+# Common commands:
+# TODO: poetry run pre-commit install
+# poetry run pre-commit run --hook-stage commit --all-files
+# poetry run pre-commit run --hook-stage push --all-files
+# poetry run doit run pre_commit_hooks
+#
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-yaml
+        args: ['--unsafe']
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: double-quote-string-fixer
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: fix-encoding-pragma
+        args: ['--remove']
+      - id: forbid-new-submodules
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+      - id: pretty-format-json
+        args: ['--autofix']
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v2.15.1
+    hooks:
+      - id: commitizen
+        additional_dependencies: ['git+https://github.com/KyleKing/cz_legacy.git@bfff2ab4134c26a31f1e7f9c3a8d4bedba824b08']
+        stages: [commit-msg]
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.10.0
+    hooks:
+      - id: pyupgrade
+        stages: [push]
+  - repo: https://github.com/asottile/add-trailing-comma
+    rev: v2.1.0
+    hooks:
+      - id: add-trailing-comma
+        stages: [push]
+  - repo: local
+    hooks:
+      - id: copier-forbidden-files
+        name: copier_forbidden_files
+        entry: found copier update rejection files; review them and remove them (https://copier.readthedocs.io/en/stable/updating/)
+        language: fail
+        files: "\\.rej$"
+      - id: lock_deps
+        name: lock_dependencies
+        entry: poetry lock
+        language: system
+        files: pyproject.toml
+        stages: [push]
+        pass_filenames: false
+      - id: doit
+        name: doit
+        entry: poetry run doit run test
+        language: system
+        files: "\\.py"
+        stages: [push]
+        pass_filenames: false

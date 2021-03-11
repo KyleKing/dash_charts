@@ -1,6 +1,21 @@
 [build-system]
-requires = [ "poetry-core>=1.0",]
+requires = [ "poetry-core>=1.0.0",]
 build-backend = "poetry.core.masonry.api"
+
+[tool.commitizen]
+name = "cz_legacy"
+change_type_order = [
+    "BREAKING CHANGE", "Feat", "Fix", "Refactor", "Perf",
+    "New (Old)", "Change (Old)", "Fix (Old)",
+]
+version = "0.1.0a0"
+tag_format = "2021.$version"
+version_files = [ "pyproject.toml", "calcipy/__init__.py",]
+
+[tool.commitizen.cz_legacy_map]
+Chg = "Change (Old)"
+Fix = "Fix (Old)"
+New = "New (Old)"
 
 [tool.isort]
 balanced_wrapping = true
@@ -11,14 +26,39 @@ line_length = 120
 
 [tool.poetry]
 name = "dash_charts"
-version = "0.0.5"
+version = "0.1.0a0"
 description = "Python package for OOP of Plotly/Dash apps and custom templates"
-license = "MIT"
-authors = [ "Kyle King <https://github.com/KyleKing>",]
+license = "Unlicense"
+authors = [ "Kyle King <dev.act.kyle@gmail.com>",]
 maintainers = []
-readme = "README.md"
 repository = "https://github.com/kyleking/dash_charts"
-documentation = "https://kyleking.me/dash_charts/"
+documentation = "https://github.com/kyleking/dash_charts"
+readme = "README.md"
+include = [ "LICENSE.md",]
+keywords = [ "dash", ]
+classifiers = [
+    # https://pypi.org/classifiers/
+    # And based on: https://github.com/plotly/dash/blob/dev/setup.py#L43
+    "Development Status :: 2 - Pre-Alpha",
+    "Environment :: Web Environment",
+    "Framework :: Dash",
+    "Framework :: Flask",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Manufacturing",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: The Unlicense (Unlicense)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Database :: Front-Ends",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Widget Sets",
+]
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/dash_charts/issues"
@@ -32,26 +72,35 @@ dataset = "*"
 dominate = "*"
 implements = "*"
 markdown = "*"
-matplotlib = {version = "<3.2", optional = true}
 Palettable = "*"
 pandas = "*"
 psutil = "*"
 scipy = "*"
-archan = {git = "https://github.com/pawamoy/archan.git"}
+
+# matplotlib - See: https://github.com/plotly/plotly.py/issues/1568
+matplotlib = {version = "<3.2", optional = true}
 
 [tool.poetry.dependencies.calcipy]
-git = "https://github.com/KyleKing/calcipy.git"
-branch = "main"
+git = "https://github.com/kyleking/calcipy.git"
+branch = "dev/development"
+
+[tool.poetry.dev-dependencies.calcipy]
+git = "https://github.com/kyleking/calcipy.git"
+branch = "dev/development"
+extras = [ "dev", "lint", "test", "commitizen_legacy"]
 
 [tool.poetry.dev-dependencies]
 astor = "*"
-dash-dev = {git = "https://github.com/KyleKing/dash_dev.git", rev = "main"}
 jsonpickle = "*"
 
 # Experimental dependencies
+archan = {git = "https://github.com/pawamoy/archan.git"}
 dependenpy = "^3.3.0"
 archan-pylint = {git = "https://github.com/pawamoy/archan-pylint"}
 
 [tool.poetry.dev-dependencies.dash]
 extras = [ "testing",]
 version = "^1.16"
+
+[tool.poetry.extras]
+matplotlib = [ "matplotlib",]

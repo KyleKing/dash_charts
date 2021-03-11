@@ -128,7 +128,7 @@ class AppInterface(Interface):  # noqa: H601
         pass
 
 
-class AppBase(Interface):  # noqa: H601
+class AppBase:  # noqa: H601
     """Base class for building Dash Applications."""
 
     name = None

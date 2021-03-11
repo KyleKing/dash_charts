@@ -84,6 +84,7 @@ def apply_datatable_filters(df_table, filter_query):
     return df_table
 
 
+# PLANNED: Maybe move parameters to attr.ib classes?
 class BaseDataTable:  # noqa: H601
     """Base Class for Data Tables."""
 
@@ -145,7 +146,7 @@ Press enter of tab to apply the filter"""
     """DataTable.style_filter_conditional list. Default is empty list. Set in `initialize_mutables`."""
 
     column_selectable = None
-    """DataTable.column_selectable. Default is `'single'`."""
+    """DataTable.column_selectable. Default is `None`."""
 
     column_kwarg_lookup = None
     """Lookup for keyword arguments for each column allowing deletable, selectable, etc. to be set per column."""
@@ -163,7 +164,7 @@ Press enter of tab to apply the filter"""
     """DataTable.page_size. Default is `'25'`."""
 
     row_selectable = None
-    """DataTable.row_selectable. Default is `'single'`."""
+    """DataTable.row_selectable. Default is `None`."""
 
     style_as_list_view = False
     """DataTable.style_as_list_view. Default is False."""

@@ -5,34 +5,34 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 <!-- TOC -->
 
 - [Dash_Charts](#dash_charts)
-  - [Nov2020 Updates](#nov2020-updates)
-  - [Quick Start](#quick-start)
-    - [1. Install](#1-install)
-    - [2. Example Code](#2-example-code)
-    - [3. Resulting Pareto Chart](#3-resulting-pareto-chart)
-    - [4. Additional Notes](#4-additional-notes)
-  - [Design Principles](#design-principles)
-  - [Local Development](#local-development)
-  - [Example Charts and Tables](#example-charts-and-tables)
-    - [Pareto Chart](#pareto-chart)
-    - [Gantt Chart](#gantt-chart)
-    - [Time Vis Chart](#time-vis-chart)
-    - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
-    - [Fitted Chart](#fitted-chart)
-    - [Real Time SQL Demo](#real-time-sql-demo)
-    - [Coordinate Chart](#coordinate-chart)
-    - [Marginal Chart](#marginal-chart)
-    - [Data Table Module](#data-table-module)
-    - [Upload Module](#upload-module)
-  - [Applications](#applications)
-    - [Tabbed Application](#tabbed-application)
-    - [Multi-Page Application](#multi-page-application)
-    - [PX Generic Application](#px-generic-application)
-  - [Other](#other)
-    - [Cache](#cache)
-    - [Static HTML Generation](#static-html-generation)
-  - [Coverage](#coverage)
-  - [External Links](#external-links)
+    - [Nov2020 Updates](#nov2020-updates)
+    - [Quick Start](#quick-start)
+        - [1. Install](#1-install)
+        - [2. Example Code](#2-example-code)
+        - [3. Resulting Pareto Chart](#3-resulting-pareto-chart)
+        - [4. Additional Notes](#4-additional-notes)
+    - [Design Principles](#design-principles)
+    - [Local Development](#local-development)
+    - [Example Charts and Tables](#example-charts-and-tables)
+        - [Pareto Chart](#pareto-chart)
+        - [Gantt Chart](#gantt-chart)
+        - [Time Vis Chart](#time-vis-chart)
+        - [Rolling Mean and STD Chart](#rolling-mean-and-std-chart)
+        - [Fitted Chart](#fitted-chart)
+        - [Real Time SQL Demo](#real-time-sql-demo)
+        - [Coordinate Chart](#coordinate-chart)
+        - [Marginal Chart](#marginal-chart)
+        - [Data Table Module](#data-table-module)
+        - [Upload Module](#upload-module)
+    - [Applications](#applications)
+        - [Tabbed Application](#tabbed-application)
+        - [Multi-Page Application](#multi-page-application)
+        - [PX Generic Application](#px-generic-application)
+    - [Other](#other)
+        - [Cache](#cache)
+        - [Static HTML Generation](#static-html-generation)
+    - [Coverage](#coverage)
+    - [External Links](#external-links)
 
 <!-- /TOC -->
 
@@ -45,6 +45,16 @@ I'm also planning on cleaning up `dash_dev`, reaching >75% test coverage, adding
 
 Use builder in dash charts to extend the constructor!
 https://github.com/faif/python-patterns/blob/master/patterns/creational/builder.py. Have chaining so that this can be done more succinctly (`return self`). Use case is creating multiple views from the same chart
+
+TODO: Proposed Pattern?
+
+```py
+# class Chart():
+#     def init() < Use the same arguments as plotly express!
+#     def set_data(df, labels...)
+#     def set_labels() ?
+# chart = Chart().set_data().set_labels()
+```
 
 ## Quick Start
 

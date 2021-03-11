@@ -27,4 +27,15 @@ def no_log_errors(dash_duo, suppressed_errors=None):
 
     logs = dash_duo.get_logs()
     # logger.debug(logs)
-    return not [log for log in logs if log['level'] not in suppressed_errors]
+    # HACK: get_logs always return None with webdrivers other than Chrome
+    # FIXME: Handle path to the executable. Example with Firefox when the Gecko Drive is installed and on path
+    # poetry run pytest tests -x -l --ff -vv --webdriver Firefox
+    # Will one of these work?
+    # - https://pypi.org/project/webdrivermanager/
+    # - https://pypi.org/project/chromedriver-binary/
+    # - https://pypi.org/project/undetected-chromedriver/
+    # - https://pypi.org/project/webdriver-manager/
+    #
+    # Actually set DASH_TEST_CHROMEPATH? Maybe still use one of the above packages to get the path?
+    # - https://github.com/plotly/dash/blob/5ef534943852f2d02a9da636cf18357c5df5b3e5/dash/testing/browser.py#L436
+    return logs is None or not [log for log in logs if log['level'] not in suppressed_errors]

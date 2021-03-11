@@ -1,0 +1,49 @@
+site_name: dash_charts
+site_author: Kyle King
+site_description: dash_charts project documentation
+repo_name: KyleKing/dash_charts
+repo_url: https://github.com/KyleKing/dash_charts
+edit_uri: edit/main/docs
+docs_dir: docs
+site_dir: releases/site
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      accent: green
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - toc.autohide
+
+plugins:
+  - search
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - codehilite
+  - def_list
+  - extra
+  - fenced_code
+  - footnotes
+  - markdown_include.include
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: false
+  - smarty
+  - tables
+  - toc:
+      permalink: ⚓︎
+      toc_depth: 5

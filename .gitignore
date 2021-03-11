@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------------------------------------
-# General Python Ignore Patterns from Github
+# General Python Ignore Patterns from Github and https://www.gitignore.io/api/python
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -120,6 +120,11 @@ venv.bak/
 # Rope project settings
 .ropeproject
 
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
 # mkdocs documentation
 /site
 
@@ -165,28 +170,19 @@ coverage.json
 # Static Type Checkers
 .pytype/*
 
-# Ignore doc outputs
-docs/*
-
 # Ignore DOIT cache files
 **/.doit.*
 
 # Ignore testmon cache files
 **/.testmondata
 
-# Temporary folders created for documentation
-/*/0*
-
-# Other common ignore rules
-**/secret.json
-**/*.html
-
 # Ignore temporary files
 /tmp.txt
 
-# Track hosted documentation
-!docs/*/*.html
-!index.html
+# Built Outputs
+!/docs/*.svg
+/docs/*/*
+/releases/
 
 # ======================================================================================================================
 # Other-Custom
