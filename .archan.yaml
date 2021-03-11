@@ -1,0 +1,29 @@
+analysis:
+  archan_pylint.PylintProvider:
+    # name: Pylint
+    arguments:
+      pylint_args:
+        - dash_charts
+    checkers:
+      archan.CodeClean:
+        allow_failure: true
+        arguments:
+          threshold: 10
+  dependenpy.InternalDependencies:
+    # name: Software Architecture
+    arguments:
+      packages:
+        - dash_charts
+    checkers:
+      - archan.CompleteMediation
+      - archan.EconomyOfMechanism:
+          allow_failure: true
+          arguments:
+            simplicity_factor: 2
+      - archan.LayeredArchitecture
+      - archan.LeastCommonMechanism:
+          allow_failure: true
+          arguments:
+            independence_factor: 5
+  Open Design:
+    Source Code: true

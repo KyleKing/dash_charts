@@ -32,16 +32,25 @@ dataset = "*"
 dominate = "*"
 implements = "*"
 markdown = "*"
+matplotlib = {version = "<3.2", optional = true}
 Palettable = "*"
 pandas = "*"
 psutil = "*"
 scipy = "*"
+archan = {git = "https://github.com/pawamoy/archan.git"}
+
+[tool.poetry.dependencies.calcipy]
+git = "https://github.com/KyleKing/calcipy.git"
+branch = "main"
 
 [tool.poetry.dev-dependencies]
 astor = "*"
 dash-dev = {git = "https://github.com/KyleKing/dash_dev.git", rev = "main"}
 jsonpickle = "*"
-matplotlib = "<3.2"
+
+# Experimental dependencies
+dependenpy = "^3.3.0"
+archan-pylint = {git = "https://github.com/pawamoy/archan-pylint"}
 
 [tool.poetry.dev-dependencies.dash]
 extras = [ "testing",]
