@@ -334,7 +334,7 @@ class UploadModule(ModuleBase):  # noqa: H601
         """Return the Upload module application layout.
 
         Args:
-            ids: `self.ids` from base application
+            ids: `self._il` from base application
 
         Returns:
             dict: Dash HTML object.

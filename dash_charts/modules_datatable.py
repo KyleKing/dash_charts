@@ -33,7 +33,7 @@ class ModuleDataTable(ModuleBase):
         """Register the callback for creating the main chart.
 
         Args:
-            ids: `self.ids` from base application
+            ids: `self._il` from base application
 
         """
         self.table = BaseDataTable()
@@ -42,7 +42,7 @@ class ModuleDataTable(ModuleBase):
         """Return Dash application layout.
 
         Args:
-            ids: `self.ids` from base application
+            ids: `self._il` from base application
 
         Returns:
             dict: Dash HTML object
@@ -57,7 +57,7 @@ class ModuleDataTable(ModuleBase):
         """Return list of tuples for `map_outputs` that includes the new datatable.
 
         Args:
-            ids: `self.ids` from base application
+            ids: `self._il` from base application
             df_table: dataframe to show in table
             columns: list of columns to show. Default is None, which will show all columns
 
@@ -143,7 +143,7 @@ class ModuleFilteredTable(ModuleDataTable):
         """Return Dash application layout.
 
         Args:
-            ids: `self.ids` from base application
+            ids: `self._il` from base application
             mod_df: dataframe for
 
         Returns:

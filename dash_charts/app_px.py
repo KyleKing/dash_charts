@@ -152,16 +152,16 @@ class TabBase(AppBase):
 
         return html.Div([  # noqa: ECE001
             html.Div([
-                dropdown_group('Plot Type:', self.ids[self.id_func], self.func_opts, value=self.func_opts[0]['label']),
-                dropdown_group('Template:', self.ids[self.id_template], self.t_opts, value=self.t_opts[0]['label']),
+                dropdown_group('Plot Type:', self._il[self.id_func], self.func_opts, value=self.func_opts[0]['label']),
+                dropdown_group('Template:', self._il[self.id_template], self.t_opts, value=self.t_opts[0]['label']),
             ] + [
-                dropdown_group(f'{dim}:', self.ids[dim], self.col_opts, value=self.default_dim_name.get(dim, None))
+                dropdown_group(f'{dim}:', self._il[dim], self.col_opts, value=self.default_dim_name.get(dim, None))
                 for dim in self.dims
             ] + [
-                dropdown_group(f'{dim}:', self.ids[dim], [opts_dd(item, item) for item in items])
+                dropdown_group(f'{dim}:', self._il[dim], [opts_dd(item, item) for item in items])
                 for dim, items in self.dims_dict.items()
             ], style={'width': '25%', 'float': 'left'}),
-            min_graph(id=self.ids[self.id_chart], style={'width': '75%', 'display': 'inline-block'}),
+            min_graph(id=self._il[self.id_chart], style={'width': '75%', 'display': 'inline-block'}),
         ], style={'padding': '15px'})
 
     def create_callbacks(self):

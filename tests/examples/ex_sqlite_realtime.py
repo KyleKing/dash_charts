@@ -149,8 +149,8 @@ class RealTimeSQLDemo(AppBase):
             },
             children=[
                 html.H4(children=self.name),
-                min_graph(id=self.ids[self.id_chart], animate=True),
-                dcc.Interval(id=self.ids[self.id_interval], interval=1000, n_intervals=0),
+                min_graph(id=self._il[self.id_chart], animate=True),
+                dcc.Interval(id=self._il[self.id_interval], interval=1000, n_intervals=0),
             ],
         )
 

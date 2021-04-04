@@ -86,7 +86,7 @@ class ParetoDemo(AppBase):
             }, children=[
                 html.H4(children=self.name),
                 html.Div([min_graph(
-                    id=self.ids[self.id_chart],
+                    id=self._il[self.id_chart],
                     figure=self.chart_main.create_figure(df_raw=self.data_raw),
                 )]),
             ],

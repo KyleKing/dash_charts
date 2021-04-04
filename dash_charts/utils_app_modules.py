@@ -50,7 +50,7 @@ class ModuleBase:  # noqa: H601
         """Register the callback for creating the main chart.
 
         Args:
-            ids: `self.ids` from base application
+            ids: `self._il` from base application
 
         """
         pass  # pragma: no cover
@@ -59,7 +59,7 @@ class ModuleBase:  # noqa: H601
         """Return Dash application layout.
 
         Args:
-            ids: `self.ids` from base application
+            ids: `self._il` from base application
 
         Raises:
             NotImplementedError: Dash HTML object. Default is simple HTML text
@@ -92,7 +92,7 @@ class DataCache(ModuleBase):  # noqa: H601
         `dcc.Store` documentation: https://dash.plotly.com/dash-core-components/store
 
         Args:
-            ids: `self.ids` from base application
+            ids: `self._il` from base application
             storage_type: `dcc.Store` storage type. Default is memory to clear on refresh
             store_kwargs: additional keyword arguments to pass to `dcc.Store`
 

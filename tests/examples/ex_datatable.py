@@ -59,7 +59,7 @@ class DataTableDemo(AppBase):
                 dcc.Markdown(self.mod_table.table.filter_summary),
                 html.Br(),
                 html.H1(self.name),
-                self.mod_table.return_layout(self.ids, self.data_raw),
+                self.mod_table.return_layout(self._il, self.data_raw),
             ]),
         ])
 

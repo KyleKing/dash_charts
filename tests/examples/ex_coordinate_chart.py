@@ -134,17 +134,17 @@ class CoordinateDemo(AppBase):
             ]),
             dbc.Row([
                 dbc.Col([min_graph(
-                    id=self.ids[self.id_chart_months],
+                    id=self._il[self.id_chart_months],
                     figure=self.chart_months.create_figure(df_raw=self.data_raw_months),
                 )], width=4),
             ]),
             dbc.Row([
                 dbc.Col([min_graph(
-                    id=self.ids[self.id_chart_years],
+                    id=self._il[self.id_chart_years],
                     figure=self.chart_years.create_figure(df_raw=self.data_raw_years),
                 )], width=5),
                 dbc.Col([min_graph(
-                    id=self.ids[self.id_chart_circle],
+                    id=self._il[self.id_chart_circle],
                     figure=self.chart_circle.create_figure(df_raw=self.data_raw_circle),
                 )], width=5),
             ]),

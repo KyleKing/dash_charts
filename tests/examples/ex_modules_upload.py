@@ -66,14 +66,14 @@ class UploadModuleDemo(AppBase):
                 html.Hr(),
                 dbc.Row([
                     dbc.Col([
-                        login_form(self.ids[self.submit_id]),
+                        login_form(self._il[self.submit_id]),
                     ]),
                     dbc.Col([
-                        html.Div([self._show_current_user(None)], id=self.ids[self.user_info]),
+                        html.Div([self._show_current_user(None)], id=self._il[self.user_info]),
                     ]),
                 ]),
                 html.Hr(),
-                self.mod_upload.return_layout(self.ids),
+                self.mod_upload.return_layout(self._il),
             ]),
         ])
 

@@ -89,9 +89,9 @@ class RollingDemo(AppBase):
                 'marginLeft': 'auto',
             }, children=[
                 html.H4(children=self.name),
-                min_graph(id=self.ids[self.id_chart], figure=self.chart_main.create_figure(self.data_raw)),
+                min_graph(id=self._il[self.id_chart], figure=self.chart_main.create_figure(self.data_raw)),
                 dcc.RangeSlider(
-                    id=self.ids[self.id_slider], min=0, max=slider_max, step=step / 5, value=[150, 825],
+                    id=self._il[self.id_slider], min=0, max=slider_max, step=step / 5, value=[150, 825],
                     marks={str(idx * step): str(idx * step) for idx in range(int(slider_max / step))},
                 ),
             ],

@@ -123,7 +123,7 @@ class AppWithTabs(AppWithNavigation):
     id_tabs_select = 'tabs-content'
 
     app_ids = [id_tabs_content, id_tabs_select]
-    """List of all ids for the top-level tab view. Will be mapped to `self.ids` for globally unique ids."""
+    """List of all ids for the top-level tab view. Will be mapped to `self._il` for globally unique ids."""
 
     def return_layout(self):
         """Return Dash application layout.
@@ -135,10 +135,10 @@ class AppWithTabs(AppWithNavigation):
         tabs = [dcc.Tab(label=name, value=name) for name, tab in self.nav_lookup.items()]
         return html.Div(children=[
             dcc.Tabs(
-                id=self.ids[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
+                id=self._il[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
                 children=tabs,
             ),
-            html.Div(id=self.ids[self.id_tabs_content]),
+            html.Div(id=self._il[self.id_tabs_content]),
         ])
 
     def create_callbacks(self):
@@ -187,7 +187,7 @@ class FullScreenAppWithTabs(AppWithTabs):  # noqa: H601
             self.tab_menu(),
             html.Div(
                 style={f'margin-{self.tabs_location}': self.tabs_margin},
-                children=[html.Div(id=self.ids[self.id_tabs_content])],
+                children=[html.Div(id=self._il[self.id_tabs_content])],
             ),
         ])
 
@@ -253,7 +253,7 @@ class FullScreenAppWithTabs(AppWithTabs):  # noqa: H601
         tabs = [dcc.Tab(label=name, value=name, **tab_kwargs) for name, tab in self.nav_lookup.items()]
         return html.Div(children=[
             dcc.Tabs(
-                id=self.ids[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
+                id=self._il[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
                 children=tabs, **tabs_kwargs,
             ),
         ], style=tabs_style)
@@ -278,7 +278,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
     id_collapse = 'nav-collapse'
 
     app_ids = [id_url, id_pages_content, id_toggler, id_collapse]
-    """List of all ids for the top-level pages view. Will be mapped to `self.ids` for globally unique ids."""
+    """List of all ids for the top-level pages view. Will be mapped to `self._il` for globally unique ids."""
 
     def return_layout(self):
         """Return Dash application layout.
@@ -288,9 +288,9 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
 
         """
         return html.Div(children=[
-            dcc.Location(id=self.ids[self.id_url], refresh=False),
+            dcc.Location(id=self._il[self.id_url], refresh=False),
             self.nav_bar(),
-            html.Div(id=self.ids[self.id_pages_content]),
+            html.Div(id=self._il[self.id_pages_content]),
         ])
 
     def nav_bar(self):
@@ -333,7 +333,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
                         no_gutters=True,
                     ),
                 ], href='/'),
-                dbc.NavbarToggler(id=self.ids[self.id_toggler]),
+                dbc.NavbarToggler(id=self._il[self.id_toggler]),
                 dbc.Collapse(
                     dbc.Row(
                         children=links,
@@ -341,7 +341,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
                         className='flex-nowrap mt-3 mt-md-0',
                         align='center',
                     ),
-                    id=self.ids[self.id_collapse],
+                    id=self._il[self.id_collapse],
                     navbar=True,
                 ),
             ],

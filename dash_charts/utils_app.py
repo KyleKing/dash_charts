@@ -72,7 +72,7 @@ class AppInterface(Interface):  # noqa: H601
     """Base Dash Application Interface."""
 
     name = None
-    ids = {}
+    _il = {}
     external_stylesheets = []
     modules: list = []
     validation_layout = None
@@ -132,10 +132,10 @@ class AppBase:  # noqa: H601
     """Base class for building Dash Applications."""
 
     name = None
-    """Child class must specify a name for the application"""
+    """Child class must specify a name for the application.
 
-    ids = {}
-    """Lookup dictionary used to track each element in UI that requires a callback"""
+    _il = {}
+    """Specific ID lookup (IL) used to track each element in UI that requires a callback."""
 
     external_stylesheets = [STATIC_URLS['dash']]
     """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
@@ -191,7 +191,7 @@ class AppBase:  # noqa: H601
         # Create charts for app and each module
         self.create_elements()
         for mod in self.modules:
-            mod.create_elements(self.ids)
+            mod.create_elements(self._il)
 
         # Create app layout. User must call the return_layout method from each module within own return_layout method
         if assign_layout:
@@ -232,9 +232,9 @@ class AppBase:  # noqa: H601
             app_ids: list of strings that are unique within this App
 
         """
-        self.ids = deepcopy(self.ids)
+        self._il = deepcopy(self._il)
         for app_id in app_ids:
-            self.ids[app_id] = f'{self.name}-{app_id}'.replace(' ', '-')
+            self._il[app_id] = f'{self.name}-{app_id}'.replace(' ', '-')
 
     def verify_app_initialization(self):
         """Check that the app was properly initialized.
@@ -243,7 +243,7 @@ class AppBase:  # noqa: H601
             RuntimeError: if child class has not called `self.register_uniq_ids`
 
         """
-        if not self.ids.keys():  # pragma: no cover
+        if not self._il.keys():  # pragma: no cover
             raise RuntimeError('Child class must first call `self.register_uniq_ids(__)` before self.run()')
 
     def return_layout(self):
@@ -270,7 +270,7 @@ class AppBase:  # noqa: H601
 
         """
         return self.app.callback(
-            *format_app_callback(self.ids, outputs, inputs, states),
+            *format_app_callback(self._il, outputs, inputs, states),
             prevent_initial_call=pic,
             **kwargs,
         )
