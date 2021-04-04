@@ -5,7 +5,7 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 <!-- TOC -->
 
 - [Dash_Charts](#dash_charts)
-    - [Nov2020 Updates](#nov2020-updates)
+    - [Nov2020-Mar2021 Updates](#nov2020-mar2021-updates)
     - [Quick Start](#quick-start)
         - [1. Install](#1-install)
         - [2. Example Code](#2-example-code)
@@ -36,25 +36,32 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
 
 <!-- /TOC -->
 
-## Nov2020 Updates
+## Nov2020-Mar2021 Updates
 
 <!-- FIXME: Keep updates up to date! -->
 I am in the process of implementing breaking changes for a `0.1` version. The major change will be to refactor the various chart constructors to match the plotly express initialization arguments
 
-I'm also planning on cleaning up `dash_dev`, reaching >75% test coverage, adding type annotations, and improving the documentation
+I plan on reaching >75% test coverage, adding type annotations, and improving the documentation as well
 
-Use builder in dash charts to extend the constructor!
-https://github.com/faif/python-patterns/blob/master/patterns/creational/builder.py. Have chaining so that this can be done more succinctly (`return self`). Use case is creating multiple views from the same chart
-
-TODO: Proposed Pattern?
+I considered using a builder pattern, but the plotly.express approach can be implemented through an attributes class that accepts unhandled keyword arguments to the plots
 
 ```py
-# class Chart():
-#     def init() < Use the same arguments as plotly express!
-#     def set_data(df, labels...)
-#     def set_labels() ?
-# chart = Chart().set_data().set_labels()
+@attr.s(auto..)
+class ChartSettings(BaseSettings):
+
+    x_label: str
+    y_label: str
+    etc: int
+
+
+class SomeChart:
+    def __init__(self, **kwargs):
+        self.something = AttrClass(**kwargs)
 ```
+
+~~Alternatively, the builder pattern might be useful to create new charts with slightly different views.~~ Would require serializing the class in order to copy rather than modify in memory
+
+Currently blocked by pending changes to `calcipy` and `calcipy-template` to how doit tasks are configured
 
 ## Quick Start
 
@@ -69,45 +76,53 @@ With Poetry install `dash_charts` with: `poetry add dash_charts --git https://gi
 ```py
 """Example Dash Application."""
 
+from typing import Optional
+
+import dash
 import dash_html_components as html
 import plotly.express as px
+from box import Box
 from implements import implements
 
 from dash_charts.pareto_chart import ParetoChart
 from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 
+_ID = Box({
+    'chart': 'pareto',
+})
+"""Default App IDs."""
+
 
 @implements(AppInterface)
 class ParetoDemo(AppBase):
     """Example creating a simple Pareto chart."""
 
-    name = 'Car Share Pareto Demo'
-    """Application name"""
+    def __init__(self, app: Optional[dash.Dash] = None) -> None:
+        """Initialize app and initial data members. Should be inherited in child class and called with super().
 
-    data_raw = None
-    """All in-memory data referenced by callbacks and plotted. If modified, will impact all viewers."""
+        Args:
+            app: Dash instance. If None, will create standalone app. Otherwise, will be part of existing app
 
-    chart_main = None
-    """Main chart (Pareto)."""
+        """
+        self.name = 'Car Share Pareto Demo'
+        self.data_raw = None
+        self.chart_main = None
+        self._id = _ID
 
-    id_chart = 'pareto'
-    """Unique name for the main chart."""
+        super().__init__(app=app)
 
-    def initialization(self):
-        """Initialize ids with `self.register_uniq_ids([...])` and application data."""
-        super().initialization()
-        self.register_uniq_ids([self.id_chart])
-        # Format the car share data from plotly express for the Pareto
+    def generate_data(self) -> None:
+        """Format the car share data from plotly express for the Pareto. Called by parent class."""
         self.data_raw = (px.data.carshare()
                          .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
         self.data_raw['category'] = [f'H:{cat:02}' for cat in self.data_raw['category']]
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = ParetoChart(title='Car Share Pareto', xlabel='Peak Hours', ylabel='Car Hours')
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -116,12 +131,12 @@ class ParetoDemo(AppBase):
         """
         return html.Div([
             html.Div([min_graph(
-                id=self.ids[self.id_chart],
+                id=self._il[self._id.chart],
                 figure=self.chart_main.create_figure(df_raw=self.data_raw),
             )]),
         ])
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Register the callbacks."""
         pass  # Override base class. Not necessary for this example
 
@@ -130,6 +145,10 @@ if __name__ == '__main__':
     app = ParetoDemo()
     app.create()
     app.run(debug=True)
+else:
+    app = instance()
+    app.create()
+    FLASK_HANDLE = app.get_server()
 
 ```
 

@@ -115,7 +115,6 @@ class ParetoChart(CustomChart):
         layout['margin'] = {'l': 75, 'b': 100, 't': 50, 'r': 125}
 
         # Update YAxis configuration
-        layout['yaxis']['dtick'] = 10
         layout['yaxis']['mirror'] = 'ticks'
         layout['yaxis']['showline'] = True
         layout['yaxis']['tickformat'] = '.0f'

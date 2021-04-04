@@ -4,9 +4,11 @@ from copy import deepcopy
 from itertools import count
 from pathlib import Path
 from pprint import pprint
+from typing import List, Optional
 
 import dash
 import dash_html_components as html
+from box import Box
 from implements import Interface
 
 from .utils_callbacks import format_app_callback
@@ -47,7 +49,7 @@ Hashes generated from: https://www.srihash.org/
 """
 
 
-def init_app(**app_kwargs):
+def init_app(**app_kwargs: dict) -> dash.Dash:
     """Return new Dash app.
 
     If not overridden in kwargs, will set path to assets folder, add dash stylesheets, and default meta tags.
@@ -56,7 +58,7 @@ def init_app(**app_kwargs):
         app_kwargs: any kwargs to pass to the dash initializer
 
     Returns:
-        dict: `dash.Dash()` instance (`app`)
+        dash.Dash: instance (`app`)
 
     """
     if 'assets_folder' not in app_kwargs:
@@ -78,28 +80,28 @@ class AppInterface(Interface):  # noqa: H601
     validation_layout = None
     init_app_kwargs = {}
 
-    def __init__(self, app=None):  # noqa: D102, D107
+    def __init__(self, app: Optional[dash.Dash] = None) -> None:  # noqa: D102, D107
         pass
 
-    def create(self, assign_layout=True):  # noqa: D102
+    def create(self, assign_layout: bool = True) -> None:  # noqa: D102
         pass
 
-    def override_module_defaults(self):  # noqa: D102
+    def override_module_defaults(self) -> None:  # noqa: D102
         pass
 
-    def initialization(self):  # noqa: D102
+    def initialization(self) -> None:  # noqa: D102
         pass
 
-    def generate_data(self):  # noqa: D102
+    def generate_data(self) -> None:  # noqa: D102
         pass
 
-    def register_uniq_ids(self, app_ids):  # noqa: D102
+    def register_uniq_ids(self, app_ids: List[str]) -> None:  # noqa: D102
         pass
 
-    def verify_app_initialization(self):  # noqa: D102
+    def verify_app_initialization(self) -> None:  # noqa: D102
         pass
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements.
 
         Does not return a result. All charts should be initialized in this method (ex `self.chart_main = ParetoChart()`)
@@ -107,13 +109,13 @@ class AppInterface(Interface):  # noqa: H601
         """
         pass
 
-    def return_layout(self):  # noqa: D102
+    def return_layout(self) -> dict:  # noqa: D102
         pass
 
-    def callback(self, outputs, inputs, states, pic=False, **kwargs):  # noqa: D102
+    def callback(self, outputs, inputs, states, pic: bool = False, **kwargs: dict):  # noqa: D102
         pass
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Register the chart callbacks.
 
         Does not return a result. May `pass` as long as no callbacks are needed for application
@@ -121,7 +123,7 @@ class AppInterface(Interface):  # noqa: H601
         """
         pass
 
-    def run(self, **dash_kwargs):  # noqa: D102
+    def run(self, **dash_kwargs: dict) -> None:  # noqa: D102
         pass
 
     def get_server(self):  # noqa: D102
@@ -133,6 +135,17 @@ class AppBase:  # noqa: H601
 
     name = None
     """Child class must specify a name for the application.
+
+    Set in `self.__init__()`
+
+    """
+
+    nsi = Box({})
+    """Box dictionary of Non-Specific IDs (NSI). In `self.initialization()` automatically registered.
+
+    Set in `self.__init__()`
+
+    """
 
     _il = {}
     """Specific ID lookup (IL) used to track each element in UI that requires a callback."""
@@ -157,7 +170,7 @@ class AppBase:  # noqa: H601
 
     # In child class, declare the rest of the static data members here
 
-    def __init__(self, app=None):
+    def __init__(self, app: Optional[dash.Dash] = None) -> None:
         """Initialize app and initial data members. Should be inherited in child class and called with super().
 
         Args:
@@ -168,7 +181,7 @@ class AppBase:  # noqa: H601
         self.init_app_kwargs = {**default, **self.init_app_kwargs}
         self.app = init_app(**self.init_app_kwargs) if app is None else app
 
-    def create(self, assign_layout=True):  # noqa: CCR001
+    def create(self, assign_layout: bool = True) -> None:  # noqa: CCR001
         """Create the ids, app charts, layout, callbacks, and optional modules.
 
         Args:
@@ -208,22 +221,23 @@ class AppBase:  # noqa: H601
 
         self.verify_app_initialization()
 
-    def override_module_defaults(self):
+    def override_module_defaults(self) -> None:
         """Override default values from modules."""
         pass
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
+        self.register_uniq_ids([*self._id.values()])
         self.generate_data()
 
-    def generate_data(self):
+    def generate_data(self) -> None:
         """Recommended method for generating data stored in memory. Called in initialization."""
         pass
 
-    def register_uniq_ids(self, app_ids):
-        """Register the `app_ids` to the corresponding global_id in the `self.ids` lookup dictionary.
+    def register_uniq_ids(self, app_ids: List[str]) -> None:
+        """Register the `app_ids` to the corresponding global_id in the `self._il` lookup dictionary.
 
-        The app_ids must be unique within this App so that a layout can be created. This method registers `self.ids`
+        The app_ids must be unique within this App so that a layout can be created. This method registers `self._il`
           which are a list of globally unique ids (incorporating this App's unique `self.name`) allowing for the child
           class of this base App to be resused multiple times within a tabbed or multi-page application without
           id-collision
@@ -236,7 +250,7 @@ class AppBase:  # noqa: H601
         for app_id in app_ids:
             self._il[app_id] = f'{self.name}-{app_id}'.replace(' ', '-')
 
-    def verify_app_initialization(self):
+    def verify_app_initialization(self) -> None:
         """Check that the app was properly initialized.
 
         Raises:
@@ -246,7 +260,7 @@ class AppBase:  # noqa: H601
         if not self._il.keys():  # pragma: no cover
             raise RuntimeError('Child class must first call `self.register_uniq_ids(__)` before self.run()')
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -255,7 +269,7 @@ class AppBase:  # noqa: H601
         """
         return html.Div(['Welcome to the BaseApp! Override return_layout() in child class.'])  # pragma: no cover
 
-    def callback(self, outputs, inputs, states, pic=False, **kwargs):
+    def callback(self, outputs, inputs, states, pic: bool = False, **kwargs: dict):
         """Return app callback decorator based on provided components.
 
         Args:
@@ -275,7 +289,7 @@ class AppBase:  # noqa: H601
             **kwargs,
         )
 
-    def run(self, **dash_kwargs):
+    def run(self, **dash_kwargs: dict) -> None:
         """Launch the Dash server instance.
 
         Args:
