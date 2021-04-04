@@ -71,10 +71,12 @@ dash-bootstrap-components = "*"
 dataset = "*"
 dominate = "*"
 implements = "*"
+lxml = "*"
 markdown = "*"
 Palettable = "*"
 pandas = "*"
 psutil = "*"
+python-box = "*"
 scipy = "*"
 
 # matplotlib - See: https://github.com/plotly/plotly.py/issues/1568
@@ -92,6 +94,16 @@ extras = [ "dev", "lint", "test", "commitizen_legacy"]
 [tool.poetry.dev-dependencies]
 astor = "*"
 jsonpickle = "*"
+
+# TODO: Try these additional and potentially useful dependencies
+typeguard = "*"
+# ...
+datasette = "*"
+datasette-vega = "*"
+pendulum = "*"
+sqlite-utils = "*"
+# ...
+great-expectations = "*"
 
 # Experimental dependencies
 archan = {git = "https://github.com/pawamoy/archan.git"}
