@@ -121,7 +121,7 @@ class SampleMarginalChartDemo(AppBase):
             ylabel='Petal Length',
         )
 
-    def generate_data(self):
+    def generate_data(self) -> None:
         """Create self.data_raw with sample data."""
         # Create dataframe based on px sample dataset
         iris = px.data.iris()

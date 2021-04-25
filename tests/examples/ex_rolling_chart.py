@@ -38,7 +38,7 @@ class RollingDemo(AppBase):
         super().initialization()
         self.register_uniq_ids([self.id_slider, self.id_chart])
 
-    def generate_data(self):
+    def generate_data(self) -> None:
         """Create self.data_raw with sample data."""
         # Generate random data points
         count = 1000

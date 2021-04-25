@@ -40,7 +40,7 @@ class GanttDemo(AppBase):
         )
         self.chart_main.pallette = FantasticFox2_5.hex_colors
 
-    def generate_data(self):
+    def generate_data(self) -> None:
         """Create self.data_raw with sample data."""
         csv_filename = Path(__file__).parent / 'ex_gantt_data.csv'
         self.data_raw = pd.read_csv(csv_filename)

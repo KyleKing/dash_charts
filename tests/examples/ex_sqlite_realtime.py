@@ -126,7 +126,7 @@ class RealTimeSQLDemo(AppBase):
         )
         self.chart_main.count_rolling = 20
 
-    def generate_data(self):
+    def generate_data(self) -> None:
         """Start the realtime updates of the database. Function could be run from separate process."""
         db_path = self.db_path
         process = multiprocessing.Process(

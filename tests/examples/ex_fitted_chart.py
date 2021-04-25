@@ -43,7 +43,7 @@ class FittedDemo(AppBase):
         # Set fit equations
         self.chart_main.fit_eqs = [('quadratic', equations.quadratic)]
 
-    def generate_data(self):
+    def generate_data(self) -> None:
         """Create self.data_raw with sample data."""
         # Create dataframe based on px sample dataset
         iris = px.data.iris()

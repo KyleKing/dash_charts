@@ -37,7 +37,7 @@ class TimeVisDemo(AppBase):
         )
         self.chart_main.fillcolor = '#A9DDDF'
 
-    def generate_data(self):
+    def generate_data(self) -> None:
         """Create self.data_raw with sample data."""
         data = [
             {'category': '', 'label': 'Closed',
