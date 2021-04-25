@@ -95,6 +95,8 @@ from dash_charts.pareto_chart import ParetoChart
 from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
 
+# FIXME: the change to use Box/_ID needs to be implemented in the examples. This is causing failures in the test cases
+#   Still pending if this is the preferred approach
 _ID = Box({
     'chart': 'pareto',
 })
