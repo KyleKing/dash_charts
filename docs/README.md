@@ -1,10 +1,12 @@
-# [Dash_Charts](https://github.com/KyleKing/dash_charts)
+# dash_charts
 
-Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes base classes for building a custom chart or application, new charts such as a Pareto, and base classes for tabbed or multi-page applications. See full documentation at [https://kyleking.me/dash_charts/](https://kyleking.me/dash_charts/).
+Python package for [Plotly/Dash](https://dash.plot.ly/) apps with support for multi-page, modules, and new charts such as Pareto with an Object Orient Approach
+
+Includes base classes for building a custom chart or application, new charts such as a Pareto, and base classes for tabbed or multi-page applications. See full documentation at [https://kyleking.me/dash_charts/](https://kyleking.me/dash_charts/). ( TODO: Currently not online )
 
 <!-- TOC -->
 
-- [Dash_Charts](#dash_charts)
+- [dash_charts](#dash_charts)
     - [Nov2020-Mar2021 Updates](#nov2020-mar2021-updates)
     - [Quick Start](#quick-start)
         - [1. Install](#1-install)
@@ -33,6 +35,11 @@ Library for OOP implementation of [Plotly/Dash](https://dash.plot.ly/). Includes
         - [Static HTML Generation](#static-html-generation)
     - [Coverage](#coverage)
     - [External Links](#external-links)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Roadmap](#roadmap)
+    - [Contributing](#contributing)
+    - [License](#license)
 
 <!-- /TOC -->
 
@@ -408,3 +415,42 @@ Useful Dash reference links
     - [AI Color Palette](http://colormind.io/) / [Coolors](https://coolors.co/2b303a-92dce5-eee5e9-7c7c7c-d64933)
 - Reference
     - [Pandas CheatSheet for Data Manipulation](https://github.com/pandas-dev/pandas/blob/main/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)
+
+<!-- TODO: See https://github.com/KyleKing/calcipy/issues/38 -->
+
+## Installation
+
+1. ...
+2. ...
+
+    ```sh
+    echo Hello World!
+    ```
+
+3. ...
+
+## Usage
+
+<!-- TODO: Show an example (screenshots, terminal recording, etc.) -->
+
+For more examples, see [Scripts](https://github.com/kyleking/dash_charts/scripts) or [Tests](https://github.com/kyleking/dash_charts/tests)
+
+## Roadmap
+
+See the `Open Issues` and `Milestones` for current status and [./CODE_TAG_SUMMARY.md](./CODE_TAG_SUMMARY.md) for annotations in the source code.
+
+For release history, see the [./CHANGELOG.md](./CHANGELOG.md)
+
+## Contributing
+
+See the Developer Guide, Contribution Guidelines, etc
+
+- [./DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
+- [./STYLE_GUIDE.md](./STYLE_GUIDE.md)
+- [./CONTRIBUTING.md](./CONTRIBUTING.md)
+- [./CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
+- [./SECURITY.md](./SECURITY.md)
+
+## License
+
+[LICENSE](https://github.com/kyleking/dash_charts/LICENSE)
