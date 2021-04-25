@@ -137,7 +137,7 @@ dmypy.json
 .pyre/
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Common_Package Rules
+# Common Rules
 .vscode/*
 *.csv
 *.doc*
@@ -176,16 +176,10 @@ coverage.json
 # Ignore testmon cache files
 **/.testmondata
 
-# Ignore temporary files
-/tmp.txt
-
 # Built Outputs
-!/docs/*.svg
-/docs/*/*
 /releases/
-
-# ======================================================================================================================
-# Other-Custom
+# ----------------------------------------------------------------------------------------------------------------------
+# Custom Rules
 
 # Upload Module Database Directory
 **/local_cache/*

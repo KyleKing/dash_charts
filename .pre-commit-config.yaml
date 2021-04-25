@@ -1,5 +1,5 @@
 # Common commands:
-# TODO: poetry run pre-commit install
+# poetry run pre-commit install
 # poetry run pre-commit run --hook-stage commit --all-files
 # poetry run pre-commit run --hook-stage push --all-files
 # poetry run doit run pre_commit_hooks
@@ -35,7 +35,7 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.15.1
+    rev: v2.15.3
     hooks:
       - id: commitizen
         additional_dependencies: ['git+https://github.com/KyleKing/cz_legacy.git@bfff2ab4134c26a31f1e7f9c3a8d4bedba824b08']

@@ -17,25 +17,18 @@ Chg = "Change (Old)"
 Fix = "Fix (Old)"
 New = "New (Old)"
 
-[tool.isort]
-balanced_wrapping = true
-default_section = "THIRDPARTY"
-force_grid_wrap = 0
-length_sort = false
-line_length = 120
-
 [tool.poetry]
 name = "dash_charts"
 version = "0.1.0a0"
-description = "Python package for OOP of Plotly/Dash apps and custom templates"
+description = "Python package for Plotly/Dash apps with support for multi-page, modules, and new charts such as Pareto with an Object Orient Approach"
 license = "Unlicense"
 authors = [ "Kyle King <dev.act.kyle@gmail.com>",]
 maintainers = []
 repository = "https://github.com/kyleking/dash_charts"
-documentation = "https://github.com/kyleking/dash_charts"
+documentation = "https://github.com/kyleking/dash_charts/docs"
 readme = "README.md"
 include = [ "LICENSE.md",]
-keywords = [ "dash", ]
+keywords = [ "plotly-dash", "plotly-python", ]
 classifiers = [
     # https://pypi.org/classifiers/
     # And based on: https://github.com/plotly/dash/blob/dev/setup.py#L43
@@ -51,7 +44,6 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: The Unlicense (Unlicense)",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Topic :: Database :: Front-Ends",

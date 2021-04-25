@@ -1,8 +1,8 @@
 site_name: dash_charts
 site_author: Kyle King
 site_description: dash_charts project documentation
-repo_name: KyleKing/dash_charts
-repo_url: https://github.com/KyleKing/dash_charts
+repo_name: kyleking/dash_charts
+repo_url: https://github.com/kyleking/dash_charts
 edit_uri: edit/main/docs
 docs_dir: docs
 site_dir: releases/site

@@ -1,4 +1,4 @@
-"""PyTest Configuration."""
+"""PyTest configuration."""
 
 from calcipy.conftest import pytest_configure  # noqa: F401
 from calcipy.conftest import pytest_html_results_table_header  # noqa: F401
