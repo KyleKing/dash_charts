@@ -48,7 +48,7 @@ class CoordinateDemo(AppBase):
     grid_circle = coordinate_chart.CircleGrid(grid_dims=(5, 4))  # set grid to arbitrary 5x4
     """Coordinate chart grids (Year/Month/Circle)."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids([self.id_chart_years, self.id_chart_months, self.id_chart_circle])
@@ -77,7 +77,7 @@ class CoordinateDemo(AppBase):
         for idx in list(set(np.random.randint(len(values), size=remove_count * 2)))[:remove_count]:
             self.data_raw_circle['values'][idx] = None
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
         self.chart_years = CoordinateChart(
             title='Example Year Grid',
@@ -121,7 +121,7 @@ class CoordinateDemo(AppBase):
         self.chart_circle.marker_kwargs = self.grid_circle.marker_kwargs
         self.chart_circle.marker_kwargs['colorscale'] = 'Cividis'
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -150,7 +150,7 @@ class CoordinateDemo(AppBase):
             ]),
         ])
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 

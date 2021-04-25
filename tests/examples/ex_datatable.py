@@ -31,7 +31,7 @@ class DataTableDemo(AppBase):
     mod_table = None
     """Main table (DataTable)."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         # Load sample plotly express data to populate the datatable
@@ -43,11 +43,11 @@ class DataTableDemo(AppBase):
             self.mod_table,
         ]
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize charts and tables."""
         pass
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -63,7 +63,7 @@ class DataTableDemo(AppBase):
             ]),
         ])
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 

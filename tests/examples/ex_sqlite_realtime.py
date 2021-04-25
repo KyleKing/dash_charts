@@ -112,12 +112,12 @@ class RealTimeSQLDemo(AppBase):
     id_interval = 'graph-update'
     """ID of the interval element to regularly update the UI."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids([self.id_chart, self.id_interval])
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = RollingChart(
             title='Live-Updating Scatter Plot',
@@ -134,7 +134,7 @@ class RealTimeSQLDemo(AppBase):
         )
         process.start()
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -154,7 +154,7 @@ class RealTimeSQLDemo(AppBase):
             ],
         )
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Create Dash callbacks.
 
         Raises:

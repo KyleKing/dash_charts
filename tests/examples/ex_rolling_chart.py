@@ -33,7 +33,7 @@ class RollingDemo(AppBase):
     id_chart = 'rolling'
     """Unique name for the main chart."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids([self.id_slider, self.id_chart])
@@ -55,7 +55,7 @@ class RollingDemo(AppBase):
             'label': [f'Point {idx}' for idx in range(count)],
         })
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = RollingChart(
             title='Sample Timeseries Chart with Rolling Calculations',
@@ -73,7 +73,7 @@ class RollingDemo(AppBase):
                 **make_dict_an(coord, str(idx + 1), label, color, y_offset),
             ))
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -97,7 +97,7 @@ class RollingDemo(AppBase):
             ],
         )
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Create Dash callbacks."""
         outputs = [(self.id_chart, 'figure')]
         inputs = [(self.id_slider, 'value')]

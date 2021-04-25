@@ -30,12 +30,12 @@ class BootstrapStylingDemo(AppBase):
     external_stylesheets = [dbc.themes.FLATLY]  # DARKLY, FLATLY, etc. (https://bootswatch.com/)
     """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids(['placeholder'])
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
         pass
 
@@ -77,7 +77,7 @@ class BootstrapStylingDemo(AppBase):
             ]),
         ], className='mt-4')
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -134,7 +134,7 @@ class BootstrapStylingDemo(AppBase):
             ], className='mt-5'),  # Shorthand `mt-#` for margin top
         ])
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 

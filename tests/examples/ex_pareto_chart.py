@@ -46,7 +46,7 @@ class ParetoDemo(AppBase):
     id_chart = 'pareto'
     """Unique name for the main chart."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids([self.id_chart])
@@ -54,7 +54,7 @@ class ParetoDemo(AppBase):
         self.data_raw = (pd.read_csv(StringIO(CSV_DATA))
                          .rename(columns={'events': 'value'}))
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = ParetoChart(
             title='Made Up Categories vs. Made Up Counts',
@@ -71,7 +71,7 @@ class ParetoDemo(AppBase):
         self.chart_main.show_count = True
         self.chart_main.pareto_colors = {'bar': '#A5AFC8', 'line': '#391D2F'}
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -92,7 +92,7 @@ class ParetoDemo(AppBase):
             ],
         )
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 

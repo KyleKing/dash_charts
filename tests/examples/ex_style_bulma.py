@@ -29,16 +29,16 @@ class BulmaStylingDemo(AppBase):
     external_stylesheets = [STATIC_URLS['bulmaswatch-flatly']]
     """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids(['---'])
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
         pass
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -81,7 +81,7 @@ class BulmaStylingDemo(AppBase):
             ]),
         ])
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 

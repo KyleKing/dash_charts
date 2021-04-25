@@ -108,12 +108,12 @@ class SampleMarginalChartDemo(AppBase):
     id_chart = 'marginal'
     """Unique name for the main chart."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids([self.id_chart])
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
         self.chart_main = SampleMarginalChart(
             title='Sample User-Implemented Marginal Chart with Iris dataset',
@@ -132,7 +132,7 @@ class SampleMarginalChartDemo(AppBase):
             'label': None,
         })
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -155,7 +155,7 @@ class SampleMarginalChartDemo(AppBase):
             ],
         )
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Create Dash callbacks."""
         pass  # No callbacks necessary for this simple example
 

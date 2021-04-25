@@ -76,16 +76,16 @@ class AppWithNavigation(AppBase):
         # Initialize parent application that handles navigation
         super().create(**kwargs)
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids(self.app_ids)
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Override method as not needed at navigation-level."""
         pass  # pragma: no cover
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Override method as not needed at navigation-level."""
         pass  # pragma: no cover
 
@@ -101,16 +101,16 @@ class StaticTab(AppBase):
         'paddingTop': '10px',
     }
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids(['N/A'])
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements.."""
         pass
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Register callbacks necessary for this tab."""
         pass
 
@@ -125,7 +125,7 @@ class AppWithTabs(AppWithNavigation):
     app_ids = [id_tabs_content, id_tabs_select]
     """List of all ids for the top-level tab view. Will be mapped to `self._il` for globally unique ids."""
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -141,7 +141,7 @@ class AppWithTabs(AppWithNavigation):
             html.Div(id=self._il[self.id_tabs_content]),
         ])
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Register the navigation callback."""
         outputs = [(self.id_tabs_content, 'children')]
         inputs = [(self.id_tabs_select, 'value')]
@@ -176,7 +176,7 @@ class FullScreenAppWithTabs(AppWithTabs):  # noqa: H601
         if self.tabs_location not in allowed_locations:  # pragma: no cover
             raise RuntimeError(f'`self.tabs_location = {self.tabs_location}` is not in {allowed_locations}')
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -280,7 +280,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
     app_ids = [id_url, id_pages_content, id_toggler, id_collapse]
     """List of all ids for the top-level pages view. Will be mapped to `self._il` for globally unique ids."""
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -350,7 +350,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
             dark=True,
         )
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Register the navigation callback."""
         outputs = [(self.id_pages_content, 'children')]
         inputs = [(self.id_url, 'pathname')]

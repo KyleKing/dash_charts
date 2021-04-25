@@ -33,7 +33,7 @@ class UploadModuleDemo(AppBase):
     mod_upload = None
     """Main table (DataTable)."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.email_id, self.pass_id = format_email_pass_id(self.submit_id)
@@ -45,7 +45,7 @@ class UploadModuleDemo(AppBase):
             self.mod_upload,
         ]
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize charts and tables."""
         pass
 
@@ -53,7 +53,7 @@ class UploadModuleDemo(AppBase):
 
         return f'(Currently logged in as: {username})' if username else '(Not Logged In)'
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -77,7 +77,7 @@ class UploadModuleDemo(AppBase):
             ]),
         ])
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Create Dash callbacks."""
         outputs = [(self.user_info, 'children'), (self.mod_upload.get(self.mod_upload.id_username_cache), 'data')]
         inputs = [(self.submit_id, 'n_clicks')]

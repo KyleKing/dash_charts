@@ -14,7 +14,7 @@ class TabZero(StaticTab):
 
     name = 'Tab Name for Tab Zero'
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -32,7 +32,7 @@ class TabOne(StaticTab):
 
     name = 'Tab Name for Tab One'
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -50,7 +50,7 @@ class TabTwo(StaticTab):
 
     name = 'Tab Name for Tab Two'
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -73,7 +73,7 @@ class TabThree(StaticTab):
 
     name = 'Tab Name for Tab Three'
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -119,7 +119,7 @@ class TabAppDemo(AppWithTabs):  # noqa: H601
             TabThree(app=self.app),
         ]
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:

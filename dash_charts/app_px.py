@@ -88,7 +88,7 @@ class TabBase(AppBase):
     default_dim_name = {}
     """Lookup for dim:column name to use as default in dropdown."""
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
 
@@ -101,7 +101,7 @@ class TabBase(AppBase):
         self.func_opts = tuple(opts_dd(lbl, lbl) for lbl in self.func_map.keys())
         self.t_opts = tuple(opts_dd(template, template) for template in self.templates)
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
         pass
 
@@ -141,7 +141,7 @@ class TabBase(AppBase):
             formatted_errors = '\n' + '\n'.join(errors)
             raise RuntimeError(f'Found errors in data members:{formatted_errors}')
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -164,7 +164,7 @@ class TabBase(AppBase):
             min_graph(id=self._il[self.id_chart], style={'width': '75%', 'display': 'inline-block'}),
         ], style={'padding': '15px'})
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Register callbacks necessary for this tab."""
         self.verify_types_for_callbacks()
 
@@ -351,7 +351,7 @@ class InteractivePXApp(FullScreenAppWithTabs):  # noqa: H601
             TabColor(app=self.app),
         ]
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:

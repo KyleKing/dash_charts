@@ -23,16 +23,16 @@ class StaticPage(AppBase):
         'paddingTop': '10px',
     }
 
-    def initialization(self):
+    def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
         super().initialization()
         self.register_uniq_ids(['N/A'])
 
-    def create_elements(self):
+    def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements.."""
         pass
 
-    def create_callbacks(self):
+    def create_callbacks(self) -> None:
         """Register callbacks necessary for this tab."""
         pass
 
@@ -42,7 +42,7 @@ class PageText(StaticPage):
 
     name = 'Text Page'
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -60,7 +60,7 @@ class PageChart(StaticPage):
 
     name = 'Chart Page'
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
@@ -83,7 +83,7 @@ class Page404(StaticPage):
 
     name = 'Page 404'
 
-    def return_layout(self):
+    def return_layout(self) -> dict:
         """Return Dash application layout.
 
         Returns:
