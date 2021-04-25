@@ -98,11 +98,9 @@ class ParetoDemo(AppBase):
 
 
 instance = ParetoDemo
+app = instance()
+app.create()
 if __name__ == '__main__':
-    app = instance()
-    app.create()
     app.run(**parse_dash_cli_args())
 else:
-    app = instance()
-    app.create()
     FLASK_HANDLE = app.get_server()
