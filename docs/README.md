@@ -387,24 +387,24 @@ Useful Dash reference links
 
 - Official [Dash Docs](https://dash.plot.ly) / [Plotly Docs](https://plot.ly/python/)
 - Example Apps
-  - Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX), a commercial Dash app
-  - Pleasant dark app from Dash-Bio, [Circos](https://github.com/plotly/dash-bio/blob/main/tests/dashbio_demos/app_circos.py)
-  - All [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/main/apps)
+    - Pretty annotations from [Market Ahead](https://www.marketahead.com/p/FOX), a commercial Dash app
+    - Pleasant dark app from Dash-Bio, [Circos](https://github.com/plotly/dash-bio/blob/main/tests/dashbio_demos/app_circos.py)
+    - All [Dash Sample Apps](https://github.com/plotly/dash-sample-apps/tree/main/apps)
 - Code Conceptual inspiration
-  - [On Tidy data](https://www.jeannicholashould.com/tidy-data-in-python.html)
-  - [Using field for properties in a @DataClass](https://florimond.dev/blog/articles/2018/10/reconciling-dataclasses-and-properties-in-python/)
+    - [On Tidy data](https://www.jeannicholashould.com/tidy-data-in-python.html)
+    - [Using field for properties in a @DataClass](https://florimond.dev/blog/articles/2018/10/reconciling-dataclasses-and-properties-in-python/)
 - Best Practices
-  - IBM Design Language (note that v2 doesn't have documentation on visualization yet)
-    - [Process](https://www.ibm.com/design/v1/language/experience/data-visualization/process/)
-    - [Select Chart](https://www.ibm.com/design/v1/language/experience/data-visualization/chart-models/)
-      - Alt [Chart Decision Diagram](https://www.tatvic.com/blog/7-visualizations-learn-r/)
-    - [Principles (color conventions, etc.)](https://www.ibm.com/design/v1/language/experience/data-visualization/visualization/)
-    - [Color Library and Data Vis Swatches](https://www.ibm.com/design/v1/language/resources/color-library/)
-    - [Interaction](https://www.ibm.com/design/v1/language/experience/data-visualization/interaction/)
-    - [Style](https://www.ibm.com/design/v1/language/experience/data-visualization/style/)
+    - IBM Design Language (note that v2 doesn't have documentation on visualization yet)
+        - [Process](https://www.ibm.com/design/v1/language/experience/data-visualization/process/)
+        - [Select Chart](https://www.ibm.com/design/v1/language/experience/data-visualization/chart-models/)
+            - Alt [Chart Decision Diagram](https://www.tatvic.com/blog/7-visualizations-learn-r/)
+        - [Principles (color conventions, etc.)](https://www.ibm.com/design/v1/language/experience/data-visualization/visualization/)
+        - [Color Library and Data Vis Swatches](https://www.ibm.com/design/v1/language/resources/color-library/)
+        - [Interaction](https://www.ibm.com/design/v1/language/experience/data-visualization/interaction/)
+        - [Style](https://www.ibm.com/design/v1/language/experience/data-visualization/style/)
 - Colors
-  - [Friendly Guide to Colors](https://lisacharlotterost.de/2016/04/22/Colors-for-DataVis/)
-  - [Viz-Palette Tool](https://projects.susielu.com/viz-palette)
-  - [AI Color Palette](http://colormind.io/) / [Coolors](https://coolors.co/2b303a-92dce5-eee5e9-7c7c7c-d64933)
+    - [Friendly Guide to Colors](https://lisacharlotterost.de/2016/04/22/Colors-for-DataVis/)
+    - [Viz-Palette Tool](https://projects.susielu.com/viz-palette)
+    - [AI Color Palette](http://colormind.io/) / [Coolors](https://coolors.co/2b303a-92dce5-eee5e9-7c7c7c-d64933)
 - Reference
-  - [Pandas CheatSheet for Data Manipulation](https://github.com/pandas-dev/pandas/blob/main/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)
+    - [Pandas CheatSheet for Data Manipulation](https://github.com/pandas-dev/pandas/blob/main/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)
