@@ -150,6 +150,13 @@ class AppBase:  # noqa: H601
     _il = {}
     """Specific ID lookup (IL) used to track each element in UI that requires a callback."""
 
+    _id = {}
+    """Dotted-dict to store ID's relevant for a given chart (replaces storing each id as a data member).
+
+    FIXME: Need to decide if there is a better approach. Reading this code is confusing...
+
+    """
+
     external_stylesheets = [STATIC_URLS['dash']]
     """List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided."""
 

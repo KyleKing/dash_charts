@@ -15,6 +15,7 @@ from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_helpers import parse_dash_cli_args
 
 
+# FIXME: AttributeError: 'DataTableDemo' object has no attribute 'ids'
 @implements(AppInterface)  # noqa: H601
 class DataTableDemo(AppBase):
     """Example creating a DataTable."""
