@@ -181,6 +181,8 @@ coverage.json
 # ----------------------------------------------------------------------------------------------------------------------
 # Custom Rules
 
+/tests/examples/example_write_from_markdown.html
+
 # Upload Module Database Directory
 **/local_cache/*
 !/tests/data/*
