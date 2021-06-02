@@ -186,7 +186,7 @@ class AppBase:  # noqa: H601
         """
         default = {'title': self.name, 'external_stylesheets': self.external_stylesheets}
         self.init_app_kwargs = {**default, **self.init_app_kwargs}
-        self.app = init_app(**self.init_app_kwargs) if app is None else app
+        self.app = app or init_app(**self.init_app_kwargs)
 
     def create(self, assign_layout: bool = True) -> None:  # noqa: CCR001
         """Create the ids, app charts, layout, callbacks, and optional modules.

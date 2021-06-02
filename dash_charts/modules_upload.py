@@ -47,7 +47,7 @@ def save_file(dest_path, b64_file):
 
     """
     data = split_b64_file(b64_file)[1]
-    dest_path.write_text(base64.decodebytes(data))
+    dest_path.write_text(base64.decodebytes(data).decode())
 
 
 def uploaded_files(upload_dir):

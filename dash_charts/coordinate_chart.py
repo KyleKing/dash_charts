@@ -159,7 +159,7 @@ class CoordinateChart(CustomChart):  # noqa: H601
         return [
             go.Scatter(
                 hoverinfo='none',
-                line={'color': 'black'} if self.border_line is None else self.border_line,
+                line=self.border_line or {'color': 'black'},
                 mode='lines',
                 opacity=self.border_opacity,
                 showlegend=False,
@@ -174,7 +174,7 @@ class CoordinateChart(CustomChart):  # noqa: H601
                 text=df_grid['values'],
                 x=df_grid['x'],
                 y=df_grid['y'],
-                marker=self.create_marker(df_grid, **({} if self.marker_kwargs is None else self.marker_kwargs)),
+                marker=self.create_marker(df_grid, **(self.marker_kwargs or {})),
             ),
         ]
 

@@ -59,7 +59,7 @@ def add_image(image_path, alt_text=None):
     with open(image_path, 'rb') as image_file:
         encoded_image = b64encode(image_file.read()).decode()
     image_uri = f'data:image/{image_path.suffix[1:]};base64,{encoded_image}'
-    return f'<img src="{image_uri}" alt="{image_path.name if alt_text is None else alt_text}"/>'
+    return f'<img src="{image_uri}" alt="{alt_text or image_path.name}"/>'
 
 
 def add_video(video_path, alt_text=None):
@@ -78,7 +78,7 @@ def add_video(video_path, alt_text=None):
     with open(video_path, 'rb') as video_file:
         encoded_video = b64encode(video_file.read()).decode()
     video_uri = f'data:video/{video_path.suffix[1:]};base64,{encoded_video}'
-    return f'<video src="{video_uri}" controls>{video_path.name if alt_text is None else alt_text}</video>'
+    return f'<video src="{video_uri}" controls>{alt_text or video_path.name}</video>'
 
 
 def write_image_file(figure, path_or_file_object, image_format, **img_kwargs):

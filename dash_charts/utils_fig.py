@@ -91,7 +91,7 @@ def make_dict_an(coord, text, label=None, color=None, y_offset=10):
 
     """
     return {
-        'arrowcolor': 'black' if color is None else color,
+        'arrowcolor': color or 'black',
         'arrowhead': 7,
         'arrowsize': 0.3,
         'arrowwidth': 1.5,
@@ -99,8 +99,8 @@ def make_dict_an(coord, text, label=None, color=None, y_offset=10):
         'axref': 'x',
         'ay': coord[1] + y_offset,
         'ayref': 'y',
-        'bgcolor': 'black' if color is None else color,
-        'bordercolor': 'black' if color is None else color,
+        'bgcolor': color or 'black',
+        'bordercolor': color or 'black',
         'borderpad': 2,
         'borderwidth': 1,
         'font': {'color': '#ffffff'},
