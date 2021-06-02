@@ -169,7 +169,9 @@ else:
 
 ### 4. Additional Notes
 
-TO get the most out of the tools, you may want to add `dash_dev` and add the below snippets to your `pyproject.toml` file
+<!-- FIXME: Document use of the `calcipy_template` instead of manual configuration -->
+
+TO get the most out of the tools, you may want to add `calcipy` and add the below snippets to your `pyproject.toml` file
 
 ```toml
 [tool.poetry.dependencies]
@@ -179,8 +181,8 @@ TO get the most out of the tools, you may want to add `dash_dev` and add the bel
 extras = [ "testing",]
 version = "*, ^1.16"
 
-[tool.poetry.dev-dependencies.dash_dev]
-git = "https://github.com/KyleKing/dash_dev.git"
+[tool.poetry.dependencies.calcipy]
+git = "https://github.com/kyleking/calcipy.git"
 branch = "main"
 
 [tool.poetry.dev-dependencies.dash_charts]

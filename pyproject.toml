@@ -26,7 +26,7 @@ authors = [ "Kyle King <dev.act.kyle@gmail.com>",]
 maintainers = []
 repository = "https://github.com/kyleking/dash_charts"
 documentation = "https://github.com/kyleking/dash_charts/docs"
-readme = "README.md"
+readme = "docs/README.md"
 include = [ "LICENSE.md",]
 keywords = [ "plotly-dash", "plotly-python", ]
 classifiers = [
@@ -35,13 +35,7 @@ classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Environment :: Web Environment",
     "Framework :: Dash",
-    "Framework :: Flask",
     "Intended Audience :: Developers",
-    "Intended Audience :: Education",
-    "Intended Audience :: Financial and Insurance Industry",
-    "Intended Audience :: Healthcare Industry",
-    "Intended Audience :: Manufacturing",
-    "Intended Audience :: Science/Research",
     "License :: OSI Approved :: The Unlicense (Unlicense)",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.8",
@@ -49,14 +43,13 @@ classifiers = [
     "Topic :: Database :: Front-Ends",
     "Topic :: Scientific/Engineering :: Visualization",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
-    "Topic :: Software Development :: Widget Sets",
 ]
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/dash_charts/issues"
 
 [tool.poetry.dependencies]
-python = "^3.8,<3.9"
+python = "^3.8"
 cerberus = "*"
 dash = "*"
 dash-bootstrap-components = "*"
@@ -77,25 +70,21 @@ matplotlib = {version = "<3.2", optional = true}
 [tool.poetry.dependencies.calcipy]
 git = "https://github.com/kyleking/calcipy.git"
 branch = "dev/development"
+rev = "ad148bc"  # Always pin to a commit
+develop = true  # Optional: will reinstall each time
 
 [tool.poetry.dev-dependencies.calcipy]
 git = "https://github.com/kyleking/calcipy.git"
 branch = "dev/development"
 extras = [ "dev", "lint", "test", "commitizen_legacy"]
 
+[tool.poetry.dev-dependencies.calcipy]
+git = "https://github.com/kyleking/calcipy.git"
+branch = "dev/development"
+
 [tool.poetry.dev-dependencies]
 astor = "*"
 jsonpickle = "*"
-
-# TODO: Try these additional and potentially useful dependencies
-typeguard = "*"
-# ...
-datasette = "*"
-datasette-vega = "*"
-pendulum = "*"
-sqlite-utils = "*"
-# ...
-great-expectations = "*"
 
 # Experimental dependencies
 archan = {git = "https://github.com/pawamoy/archan.git"}

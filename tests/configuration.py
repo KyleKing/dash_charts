@@ -27,7 +27,7 @@ logger.info(
 
 
 # PLANNED: Output the test name and other information to the test.log file. Currently only used in `no_log_errors`
-# PLANNED: move to dash_dev
+# PLANNED: move to a lazy import within dash_charts?
 def no_log_errors(dash_duo, suppressed_errors=None):
     """Return True if any unsuppressed errors found in console logs.
 
