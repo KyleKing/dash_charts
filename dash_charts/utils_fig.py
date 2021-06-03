@@ -2,7 +2,6 @@
 
 import dash_core_components as dcc
 import plotly.graph_objects as go
-import plotly.tools as tls
 from plotly.subplots import make_subplots
 
 from .utils_data import validate
@@ -28,36 +27,6 @@ def min_graph(config=None, figure=FIGURE_PLACEHOLDER, **kwargs):
     if config is None:
         config = {'displayModeBar': False}
     return dcc.Graph(config=config, figure=figure, **kwargs)
-
-
-def convert_matplolib(fig):
-    """Convert a matplotlib chart to a plotly figure.
-
-    WARN: Use Matplolib <3.2 until https://github.com/plotly/plotly.py/issues/1568 is resolved
-
-    If using >3.3, may see an error: `AttributeError: 'Spine' object has no attribute 'is_frame_like'`
-
-    ```py
-    # Create Example Plot of a Sine Wave
-    x_coords = np.arange(0, math.pi * 2, 0.05)
-    plt.plot(x_coords, np.sin(x_coords))
-    plt.xlabel('Angle')
-    plt.ylabel('Sine')
-    plt.title('Sine Wave')
-
-    # Convert to Plotly and show
-    plotly_fig = convert_matplolib(fig)
-    plotly_fig.show()
-    ```
-
-    Args:
-        fig: matplotlib figure
-
-    Returns:
-        figure: Plotly figure for plotting (try: `.show()` or `.to_dict()`)
-
-    """
-    return tls.mpl_to_plotly(fig)
 
 
 def check_raw_data(df_raw, min_keys):

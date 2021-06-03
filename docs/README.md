@@ -174,9 +174,6 @@ else:
 TO get the most out of the tools, you may want to add `calcipy` and add the below snippets to your `pyproject.toml` file
 
 ```toml
-[tool.poetry.dependencies]
-# matplotlib = "~3.1"  # Optional, see: https://github.com/plotly/plotly.py/issues/1568#issuecomment-653764426
-
 [tool.poetry.dev-dependencies.dash]
 extras = [ "testing",]
 version = "*, ^1.16"

@@ -64,9 +64,6 @@ psutil = "*"
 python-box = "*"
 scipy = "*"
 
-# matplotlib - See: https://github.com/plotly/plotly.py/issues/1568
-matplotlib = {version = "<3.2", optional = true}
-
 [tool.poetry.dependencies.calcipy]
 git = "https://github.com/kyleking/calcipy.git"
 branch = "dev/development"
