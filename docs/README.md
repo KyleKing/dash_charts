@@ -176,15 +176,18 @@ TO get the most out of the tools, you may want to add `calcipy` and add the belo
 ```toml
 [tool.poetry.dev-dependencies.dash]
 extras = [ "testing",]
-version = "*, ^1.16"
+version = "*, ^1.19"
 
 [tool.poetry.dependencies.calcipy]
 git = "https://github.com/kyleking/calcipy.git"
-branch = "main"
+branch = "dev/development"
+rev = "01635ea"  # Always pin to a commit
+develop = true  # Optional: will reinstall each time
 
-[tool.poetry.dev-dependencies.dash_charts]
-git = "https://github.com/KyleKing/dash_charts.git"
-branch = "main"
+[tool.poetry.dev-dependencies.calcipy]
+git = "https://github.com/kyleking/calcipy.git"
+branch = "dev/development"
+extras = [ "dev", "lint", "test", "commitizen_legacy"]
 ```
 
 You will also want at minimum the [dodo.py](https://raw.githubusercontent.com/KyleKing/dash_charts/blob/main/dodo.py) and folder structure from [dash_charts](https://github.com/KyleKing/dash_charts)

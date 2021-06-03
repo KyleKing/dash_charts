@@ -64,20 +64,20 @@ psutil = "*"
 python-box = "*"
 scipy = "*"
 
+# sqlite-utils = "*"
+# datasette-vega = "*"
+# great-expectations = "*"
+
 [tool.poetry.dependencies.calcipy]
 git = "https://github.com/kyleking/calcipy.git"
 branch = "dev/development"
-rev = "ad148bc"  # Always pin to a commit
+rev = "01635ea"  # Always pin to a commit
 develop = true  # Optional: will reinstall each time
 
 [tool.poetry.dev-dependencies.calcipy]
 git = "https://github.com/kyleking/calcipy.git"
 branch = "dev/development"
 extras = [ "dev", "lint", "test", "commitizen_legacy"]
-
-[tool.poetry.dev-dependencies.calcipy]
-git = "https://github.com/kyleking/calcipy.git"
-branch = "dev/development"
 
 [tool.poetry.dev-dependencies]
 astor = "*"
