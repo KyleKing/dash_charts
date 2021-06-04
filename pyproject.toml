@@ -68,6 +68,10 @@ scipy = "*"
 # datasette-vega = "*"
 # great-expectations = "*"
 
+# FIXME: In-progress testing of a better dash table
+dash-tabulator = "^0.4.2"
+dash-extensions = "^0.0.55"
+
 [tool.poetry.dependencies.calcipy]
 git = "https://github.com/kyleking/calcipy.git"
 branch = "dev/development"
