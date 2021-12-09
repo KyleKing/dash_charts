@@ -32,3 +32,5 @@ Steps and/or code snippet(s) to reproduce the behavior:
 - OS Version [e.g. Catalina/10]:
 
 <!-- TODO: Add `pip freeze` or other version information that is relevant -->
+
+<!-- 'calcipy:skip_tags' -->

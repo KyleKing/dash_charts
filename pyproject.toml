@@ -1,16 +1,32 @@
 [build-system]
-requires = [ "poetry-core>=1.0.0",]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+balanced_wrapping = true
+default_section = "THIRDPARTY"
+force_grid_wrap = 0
+include_trailing_comma = true
+known_first_party = "dash_charts"
+length_sort = false
+line_length = 120
+multi_line_output = 5
 
 [tool.commitizen]
 name = "cz_legacy"
 change_type_order = [
-    "BREAKING CHANGE", "Feat", "Fix", "Refactor", "Perf",
-    "New (Old)", "Change (Old)", "Fix (Old)",
+    "BREAKING CHANGE",
+    "Feat",
+    "Fix",
+    "Refactor",
+    "Perf",
+    "New (Old)",
+    "Change (Old)",
+    "Fix (Old)",
 ]
 version = "0.1.0a0"
 tag_format = "2021.$version"
-version_files = [ "pyproject.toml", "calcipy/__init__.py",]
+version_files = ["pyproject.toml", "dash_charts/__init__.py", "appveyor.yml"]
 
 [tool.commitizen.cz_legacy_map]
 Chg = "Change (Old)"
@@ -19,31 +35,30 @@ New = "New (Old)"
 
 [tool.poetry]
 name = "dash_charts"
-version = "0.1.0a0"
+version = "2021.0.1.0a0"
 description = "Python package for Plotly/Dash apps with support for multi-page, modules, and new charts such as Pareto with an Object Orient Approach"
-license = "Unlicense"
-authors = [ "Kyle King <dev.act.kyle@gmail.com>",]
+license = "MIT"
+authors = ["Kyle King <dev.act.kyle@gmail.com>"]
 maintainers = []
 repository = "https://github.com/kyleking/dash_charts"
 documentation = "https://github.com/kyleking/dash_charts/docs"
 readme = "docs/README.md"
-include = [ "LICENSE.md",]
-keywords = [ "plotly-dash", "plotly-python", ]
+include = ["LICENSE.md"]
+keywords = ["plotly-dash", "plotly-python"]
 classifiers = [
-    # https://pypi.org/classifiers/
-    # And based on: https://github.com/plotly/dash/blob/dev/setup.py#L43
     "Development Status :: 2 - Pre-Alpha",
     "Environment :: Web Environment",
     "Framework :: Dash",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: The Unlicense (Unlicense)",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Topic :: Database :: Front-Ends",
     "Topic :: Scientific/Engineering :: Visualization",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
-]
+] # https://pypi.org/classifiers/
+# And based on: https://github.com/plotly/dash/blob/dev/setup.py#L43
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/dash_charts/issues"
@@ -75,26 +90,26 @@ dash-extensions = "^0.0.55"
 [tool.poetry.dependencies.calcipy]
 git = "https://github.com/kyleking/calcipy.git"
 branch = "dev/development"
-rev = "01635ea"  # Always pin to a commit
-develop = true  # Optional: will reinstall each time
+rev = "01635ea"                                 # Always pin to a commit
+develop = true                                  # Optional: will reinstall each time
 
 [tool.poetry.dev-dependencies.calcipy]
 git = "https://github.com/kyleking/calcipy.git"
 branch = "dev/development"
-extras = [ "dev", "lint", "test", "commitizen_legacy"]
+extras = ["dev", "lint", "test", "commitizen_legacy"]
 
 [tool.poetry.dev-dependencies]
 astor = "*"
 jsonpickle = "*"
 
 # Experimental dependencies
-archan = {git = "https://github.com/pawamoy/archan.git"}
+archan = { git = "https://github.com/pawamoy/archan.git" }
 dependenpy = "^3.3.0"
-archan-pylint = {git = "https://github.com/pawamoy/archan-pylint"}
+archan-pylint = { git = "https://github.com/pawamoy/archan-pylint" }
 
 [tool.poetry.dev-dependencies.dash]
-extras = [ "testing",]
+extras = ["testing"]
 version = "^1.16"
 
 [tool.poetry.extras]
-matplotlib = [ "matplotlib",]
+matplotlib = ["matplotlib"]
