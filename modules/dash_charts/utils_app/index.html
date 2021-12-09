@@ -1,0 +1,2789 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="dash_charts project documentation">
+      
+      
+        <meta name="author" content="Kyle King">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.5">
+    
+    
+      
+        <title>dash_charts.utils_app - dash_charts</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.a617204b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dash_chartsutils_app" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="dash_charts" class="md-header__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dash_charts
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              dash_charts.utils_app
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      dash_charts
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../CODE_TAG_SUMMARY/" class="md-tabs__link">
+      Task Summary
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../DESIGN/" class="md-tabs__link">
+      Design and Architecture Notes
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../docs/CHANGELOG/" class="md-tabs__link">
+        Docs
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        Modules
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="dash_charts" class="md-nav__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dash_charts
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DESIGN/" class="md-nav__link">
+        Design and Architecture Notes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Docs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Docs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Docs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CHANGELOG/" class="md-nav__link">
+        CHANGELOG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_OF_CONDUCT/" class="md-nav__link">
+        Contributor Covenant Code of Conduct
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DEVELOPER_GUIDE/" class="md-nav__link">
+        Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/SECURITY/" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/STYLE_GUIDE/" class="md-nav__link">
+        Personal Style Guides
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Modules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Modules" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Dash charts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dash charts" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Dash charts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../_code_diagrams/" class="md-nav__link">
+        Code Diagrams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app_px/" class="md-nav__link">
+        dash_charts.app_px
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../components/" class="md-nav__link">
+        dash_charts.components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coordinate_chart/" class="md-nav__link">
+        dash_charts.coordinate_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom_colorscales/" class="md-nav__link">
+        dash_charts.custom_colorscales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datatable/" class="md-nav__link">
+        dash_charts.datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../equations/" class="md-nav__link">
+        dash_charts.equations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gantt_chart/" class="md-nav__link">
+        dash_charts.gantt_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules_datatable/" class="md-nav__link">
+        dash_charts.modules_datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules_upload/" class="md-nav__link">
+        dash_charts.modules_upload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pareto_chart/" class="md-nav__link">
+        dash_charts.pareto_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scatter_line_charts/" class="md-nav__link">
+        dash_charts.scatter_line_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time_vis_chart/" class="md-nav__link">
+        dash_charts.time_vis_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          dash_charts.utils_app
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        dash_charts.utils_app
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#init_app" class="md-nav__link">
+    init_app
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appbase" class="md-nav__link">
+    AppBase
+  </a>
+  
+    <nav class="md-nav" aria-label="AppBase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#descendants" class="md-nav__link">
+    Descendants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callback" class="md-nav__link">
+    callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    create
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_data" class="md-nav__link">
+    generate_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_server" class="md-nav__link">
+    get_server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#override_module_defaults" class="md-nav__link">
+    override_module_defaults
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_uniq_ids" class="md-nav__link">
+    register_uniq_ids
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_layout" class="md-nav__link">
+    return_layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify_app_initialization" class="md-nav__link">
+    verify_app_initialization
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appinterface" class="md-nav__link">
+    AppInterface
+  </a>
+  
+    <nav class="md-nav" aria-label="AppInterface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables_1" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callback_1" class="md-nav__link">
+    callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_1" class="md-nav__link">
+    create
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_callbacks" class="md-nav__link">
+    create_callbacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_elements" class="md-nav__link">
+    create_elements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_data_1" class="md-nav__link">
+    generate_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_server_1" class="md-nav__link">
+    get_server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialization_1" class="md-nav__link">
+    initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#override_module_defaults_1" class="md-nav__link">
+    override_module_defaults
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_uniq_ids_1" class="md-nav__link">
+    register_uniq_ids
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_layout_1" class="md-nav__link">
+    return_layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_1" class="md-nav__link">
+    run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify_app_initialization_1" class="md-nav__link">
+    verify_app_initialization
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_modules/" class="md-nav__link">
+        dash_charts.utils_app_modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_with_navigation/" class="md-nav__link">
+        dash_charts.utils_app_with_navigation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_callbacks/" class="md-nav__link">
+        dash_charts.utils_callbacks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_data/" class="md-nav__link">
+        dash_charts.utils_data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_dataset/" class="md-nav__link">
+        dash_charts.utils_dataset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_fig/" class="md-nav__link">
+        dash_charts.utils_fig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_helpers/" class="md-nav__link">
+        dash_charts.utils_helpers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_json_cache/" class="md-nav__link">
+        dash_charts.utils_json_cache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_static/" class="md-nav__link">
+        dash_charts.utils_static
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_static_toc/" class="md-nav__link">
+        dash_charts.utils_static_toc
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#init_app" class="md-nav__link">
+    init_app
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appbase" class="md-nav__link">
+    AppBase
+  </a>
+  
+    <nav class="md-nav" aria-label="AppBase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#descendants" class="md-nav__link">
+    Descendants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callback" class="md-nav__link">
+    callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    create
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_data" class="md-nav__link">
+    generate_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_server" class="md-nav__link">
+    get_server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#override_module_defaults" class="md-nav__link">
+    override_module_defaults
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_uniq_ids" class="md-nav__link">
+    register_uniq_ids
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_layout" class="md-nav__link">
+    return_layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify_app_initialization" class="md-nav__link">
+    verify_app_initialization
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appinterface" class="md-nav__link">
+    AppInterface
+  </a>
+  
+    <nav class="md-nav" aria-label="AppInterface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables_1" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callback_1" class="md-nav__link">
+    callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_1" class="md-nav__link">
+    create
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_callbacks" class="md-nav__link">
+    create_callbacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_elements" class="md-nav__link">
+    create_elements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_data_1" class="md-nav__link">
+    generate_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_server_1" class="md-nav__link">
+    get_server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialization_1" class="md-nav__link">
+    initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#override_module_defaults_1" class="md-nav__link">
+    override_module_defaults
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_uniq_ids_1" class="md-nav__link">
+    register_uniq_ids
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_layout_1" class="md-nav__link">
+    return_layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_1" class="md-nav__link">
+    run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify_app_initialization_1" class="md-nav__link">
+    verify_app_initialization
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/kyleking/dash_charts/edit/main/docs/modules/dash_charts/utils_app.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="dash_chartsutils_app">dash_charts.utils_app<a class="headerlink" href="#dash_chartsutils_app" title="Permanent link">⚓︎</a></h1>
+<p>Utility functions and classes for building applications.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Utility functions and classes for building applications.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">dash</span>
+<span class="kn">import</span> <span class="nn">dash_html_components</span> <span class="k">as</span> <span class="nn">html</span>
+<span class="kn">from</span> <span class="nn">box</span> <span class="kn">import</span> <span class="n">Box</span>
+<span class="kn">from</span> <span class="nn">implements</span> <span class="kn">import</span> <span class="n">Interface</span>
+
+<span class="kn">from</span> <span class="nn">.utils_callbacks</span> <span class="kn">import</span> <span class="n">format_app_callback</span>
+
+<span class="n">ASSETS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;assets&#39;</span>
+<span class="sd">&quot;&quot;&quot;Path to the static files directory.&quot;&quot;&quot;</span>
+
+<span class="n">COUNTER</span> <span class="o">=</span> <span class="n">count</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;Initialize iterator to provide set of unique integers when called with `next(...)`.&quot;&quot;&quot;</span>
+
+<span class="n">STATIC_URLS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;dash&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;href&#39;</span><span class="p">:</span> <span class="s1">&#39;https://codepen.io/chriddyp/pen/bWLwgP.css&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rel&#39;</span><span class="p">:</span> <span class="s1">&#39;stylesheet&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;crossorigin&#39;</span><span class="p">:</span> <span class="s1">&#39;anonymous&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;bulma&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;href&#39;</span><span class="p">:</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rel&#39;</span><span class="p">:</span> <span class="s1">&#39;stylesheet&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;integrity&#39;</span><span class="p">:</span> <span class="s1">&#39;sha384-H5O3U+oUYwd/bFECZMaQ1XJlueV5e1gB4b7Xt0M06fPbgz48WH33qxUyQNPeZVou&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;crossorigin&#39;</span><span class="p">:</span> <span class="s1">&#39;anonymous&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;bulmaswatch-flatly&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;href&#39;</span><span class="p">:</span> <span class="s1">&#39;https://jenil.github.io/bulmaswatch/flatly/bulmaswatch.min.css&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rel&#39;</span><span class="p">:</span> <span class="s1">&#39;stylesheet&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;normalize&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;href&#39;</span><span class="p">:</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rel&#39;</span><span class="p">:</span> <span class="s1">&#39;stylesheet&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;integrity&#39;</span><span class="p">:</span> <span class="s1">&#39;sha384-9Z9AuAj0Xi0z7WFOSgjjow8EnNY9wPNp925TVLlAyWhvZPsf5Ks23Ex0mxIrWJzJ&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;crossorigin&#39;</span><span class="p">:</span> <span class="s1">&#39;anonymous&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+<span class="sd">&quot;&quot;&quot;Dictionary of stylesheet names and URL to minimized CSS asset.</span>
+
+<span class="sd">Hashes generated from: https://www.srihash.org/</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">init_app</span><span class="p">(</span><span class="o">**</span><span class="n">app_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return new Dash app.</span>
+
+<span class="sd">    If not overridden in kwargs, will set path to assets folder, add dash stylesheets, and default meta tags.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app_kwargs: any kwargs to pass to the dash initializer</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dash.Dash: instance (`app`)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;assets_folder&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">app_kwargs</span><span class="p">:</span>
+        <span class="n">app_kwargs</span><span class="p">[</span><span class="s1">&#39;assets_folder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ASSETS_DIR</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;external_stylesheets&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">app_kwargs</span><span class="p">:</span>
+        <span class="n">app_kwargs</span><span class="p">[</span><span class="s1">&#39;external_stylesheets&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">STATIC_URLS</span><span class="p">[</span><span class="s1">&#39;dash&#39;</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="s1">&#39;meta_tags&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">app_kwargs</span><span class="p">:</span>
+        <span class="n">app_kwargs</span><span class="p">[</span><span class="s1">&#39;meta_tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;viewport&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;width=device-width, initial-scale=1&#39;</span><span class="p">}]</span>
+    <span class="k">return</span> <span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="o">**</span><span class="n">app_kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">AppInterface</span><span class="p">(</span><span class="n">Interface</span><span class="p">):</span>  <span class="c1"># noqa: H601</span>
+    <span class="sd">&quot;&quot;&quot;Base Dash Application Interface.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_il</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">external_stylesheets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">modules</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">validation_layout</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">init_app_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102, D107</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assign_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">override_module_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">register_uniq_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">verify_app_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the charts, tables, and other Dash elements.</span>
+
+<span class="sd">        Does not return a result. All charts should be initialized in this method (ex `self.chart_main = ParetoChart()`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">pic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Register the chart callbacks.</span>
+
+<span class="sd">        Does not return a result. May `pass` as long as no callbacks are needed for application</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">dash_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">get_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">AppBase</span><span class="p">:</span>  <span class="c1"># noqa: H601</span>
+    <span class="sd">&quot;&quot;&quot;Base class for building Dash Applications.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Child class must specify a name for the application.</span>
+
+<span class="sd">    Set in `self.__init__()`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nsi</span> <span class="o">=</span> <span class="n">Box</span><span class="p">({})</span>
+    <span class="sd">&quot;&quot;&quot;Box dictionary of Non-Specific IDs (NSI). In `self.initialization()` automatically registered.</span>
+
+<span class="sd">    Set in `self.__init__()`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_il</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="sd">&quot;&quot;&quot;Specific ID lookup (IL) used to track each element in UI that requires a callback.&quot;&quot;&quot;</span>
+
+    <span class="n">_id</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="sd">&quot;&quot;&quot;Dotted-dict to store ID&#39;s relevant for a given chart (replaces storing each id as a data member).</span>
+
+<span class="sd">    FIXME: Need to decide if there is a better approach. Reading this code is confusing...</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">external_stylesheets</span> <span class="o">=</span> <span class="p">[</span><span class="n">STATIC_URLS</span><span class="p">[</span><span class="s1">&#39;dash&#39;</span><span class="p">]]</span>
+    <span class="sd">&quot;&quot;&quot;List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided.&quot;&quot;&quot;</span>
+
+    <span class="n">modules</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&quot;&quot;&quot;Initialized modules for GUI set in `self.initialization()`. Leave as an empty list if no modules are needed.</span>
+
+<span class="sd">    If list contains modules, in self.create(), each module&#39;s `*.create_elements` / `*.create_callbacks` will be called</span>
+
+<span class="sd">    Child class must call `*.return_layout(ids)` to render each module&#39;s layout in `self.return_layout()` method</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">validation_layout</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Validation layout used for callback validation. If None, will use the default layout for callback exceptions.&quot;&quot;&quot;</span>
+
+    <span class="n">init_app_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="sd">&quot;&quot;&quot;Additional keyword arguments passed to `init_app()`.&quot;&quot;&quot;</span>
+
+    <span class="c1"># In child class, declare the rest of the static data members here</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize app and initial data members. Should be inherited in child class and called with super().</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            app: Dash instance. If None, will create standalone app. Otherwise, will be part of existing app</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">default</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;external_stylesheets&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">external_stylesheets</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_app_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">default</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">init_app_kwargs</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span> <span class="ow">or</span> <span class="n">init_app</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">init_app_kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assign_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: CCR001</span>
+        <span class="sd">&quot;&quot;&quot;Create the ids, app charts, layout, callbacks, and optional modules.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            assign_layout: if True, will assign `self.app.layout`. If False, must call `self.return_layout` separately.</span>
+<span class="sd">                Default is True</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: if child class has not set the `self.name` data member</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Child class must set `self.name` to a unique string for this app&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Initialize app and each module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialization</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_uniq_ids</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">all_ids</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">override_module_defaults</span><span class="p">()</span>  <span class="c1"># Call optional override method</span>
+
+        <span class="c1"># Create charts for app and each module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_elements</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="n">mod</span><span class="o">.</span><span class="n">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">)</span>
+
+        <span class="c1"># Create app layout. User must call the return_layout method from each module within own return_layout method</span>
+        <span class="k">if</span> <span class="n">assign_layout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_layout</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">assign_layout</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_layout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">validation_layout</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">layout</span><span class="p">)]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_layout</span>
+            <span class="n">pprint</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">ValidationLayout?&#39;</span><span class="p">)</span>
+            <span class="n">pprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">validation_layout</span><span class="p">)</span>
+
+        <span class="c1"># Create callbacks for app and each module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_callbacks</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="n">mod</span><span class="o">.</span><span class="n">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">verify_app_initialization</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">override_module_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Override default values from modules.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize ids with `self.register_uniq_ids([...])` and other one-time actions.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_uniq_ids</span><span class="p">([</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate_data</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Recommended method for generating data stored in memory. Called in initialization.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">register_uniq_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Register the `app_ids` to the corresponding global_id in the `self._il` lookup dictionary.</span>
+
+<span class="sd">        The app_ids must be unique within this App so that a layout can be created. This method registers `self._il`</span>
+<span class="sd">          which are a list of globally unique ids (incorporating this App&#39;s unique `self.name`) allowing for the child</span>
+<span class="sd">          class of this base App to be resused multiple times within a tabbed or multi-page application without</span>
+<span class="sd">          id-collision</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            app_ids: list of strings that are unique within this App</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_il</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">app_id</span> <span class="ow">in</span> <span class="n">app_ids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">[</span><span class="n">app_id</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">app_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">verify_app_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check that the app was properly initialized.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            RuntimeError: if child class has not called `self.register_uniq_ids`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Child class must first call `self.register_uniq_ids(__)` before self.run()&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object. Default is simple HTML text</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">([</span><span class="s1">&#39;Welcome to the BaseApp! Override return_layout() in child class.&#39;</span><span class="p">])</span>  <span class="c1"># pragma: no cover</span>
+
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">pic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return app callback decorator based on provided components.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            outputs: list of tuples with app_id and property name</span>
+<span class="sd">            inputs: list of tuples with app_id and property name</span>
+<span class="sd">            states: list of tuples with app_id and property name</span>
+<span class="sd">            pic: If True, prevent call on page load (`prevent_initial_call`). Default is False</span>
+<span class="sd">            **kwargs: any additional keyword arguments for `self.app.callback`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: result of `self.app.callback()`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
+            <span class="o">*</span><span class="n">format_app_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">),</span>
+            <span class="n">prevent_initial_call</span><span class="o">=</span><span class="n">pic</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">dash_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Launch the Dash server instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **dash_kwargs: keyword arguments for `Dash.run_server()`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="o">**</span><span class="n">dash_kwargs</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
+
+    <span class="k">def</span> <span class="nf">get_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve server from app instance for production hosting with green unicorn, waitress, IIS, etc.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: the Flask `server` component of the Dash app</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">server</span>
+</code></pre></div>
+</details>
+<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">⚓︎</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">ASSETS_DIR</span>
+</code></pre></div>
+<p>Path to the static files directory.</p>
+<div class="highlight"><pre><span></span><code><span class="n">COUNTER</span>
+</code></pre></div>
+<p>Initialize iterator to provide set of unique integers when called with <code>next(...)</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">STATIC_URLS</span>
+</code></pre></div>
+<p>Dictionary of stylesheet names and URL to minimized CSS asset.</p>
+<p>Hashes generated from: https://www.srihash.org/</p>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="init_app">init_app<a class="headerlink" href="#init_app" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">init_app</span><span class="p">(</span>
+    <span class="o">**</span><span class="n">app_kwargs</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dash</span><span class="o">.</span><span class="n">dash</span><span class="o">.</span><span class="n">Dash</span>
+</code></pre></div>
+<p>Return new Dash app.</p>
+<p>If not overridden in kwargs, will set path to assets folder, add dash stylesheets, and default meta tags.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app_kwargs</td>
+<td>any kwargs to pass to the dash initializer</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dash.Dash</td>
+<td>instance (<code>app</code>)</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">init_app</span><span class="p">(</span><span class="o">**</span><span class="n">app_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return new Dash app.</span>
+
+<span class="sd">    If not overridden in kwargs, will set path to assets folder, add dash stylesheets, and default meta tags.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app_kwargs: any kwargs to pass to the dash initializer</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dash.Dash: instance (`app`)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;assets_folder&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">app_kwargs</span><span class="p">:</span>
+        <span class="n">app_kwargs</span><span class="p">[</span><span class="s1">&#39;assets_folder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ASSETS_DIR</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;external_stylesheets&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">app_kwargs</span><span class="p">:</span>
+        <span class="n">app_kwargs</span><span class="p">[</span><span class="s1">&#39;external_stylesheets&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">STATIC_URLS</span><span class="p">[</span><span class="s1">&#39;dash&#39;</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="s1">&#39;meta_tags&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">app_kwargs</span><span class="p">:</span>
+        <span class="n">app_kwargs</span><span class="p">[</span><span class="s1">&#39;meta_tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;viewport&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;width=device-width, initial-scale=1&#39;</span><span class="p">}]</span>
+    <span class="k">return</span> <span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="o">**</span><span class="n">app_kwargs</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="appbase">AppBase<a class="headerlink" href="#appbase" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AppBase</span><span class="p">(</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">dash</span><span class="o">.</span><span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AppBase</span><span class="p">:</span>  <span class="c1"># noqa: H601</span>
+    <span class="sd">&quot;&quot;&quot;Base class for building Dash Applications.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Child class must specify a name for the application.</span>
+
+<span class="sd">    Set in `self.__init__()`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nsi</span> <span class="o">=</span> <span class="n">Box</span><span class="p">({})</span>
+    <span class="sd">&quot;&quot;&quot;Box dictionary of Non-Specific IDs (NSI). In `self.initialization()` automatically registered.</span>
+
+<span class="sd">    Set in `self.__init__()`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_il</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="sd">&quot;&quot;&quot;Specific ID lookup (IL) used to track each element in UI that requires a callback.&quot;&quot;&quot;</span>
+
+    <span class="n">_id</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="sd">&quot;&quot;&quot;Dotted-dict to store ID&#39;s relevant for a given chart (replaces storing each id as a data member).</span>
+
+<span class="sd">    FIXME: Need to decide if there is a better approach. Reading this code is confusing...</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">external_stylesheets</span> <span class="o">=</span> <span class="p">[</span><span class="n">STATIC_URLS</span><span class="p">[</span><span class="s1">&#39;dash&#39;</span><span class="p">]]</span>
+    <span class="sd">&quot;&quot;&quot;List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided.&quot;&quot;&quot;</span>
+
+    <span class="n">modules</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&quot;&quot;&quot;Initialized modules for GUI set in `self.initialization()`. Leave as an empty list if no modules are needed.</span>
+
+<span class="sd">    If list contains modules, in self.create(), each module&#39;s `*.create_elements` / `*.create_callbacks` will be called</span>
+
+<span class="sd">    Child class must call `*.return_layout(ids)` to render each module&#39;s layout in `self.return_layout()` method</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">validation_layout</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Validation layout used for callback validation. If None, will use the default layout for callback exceptions.&quot;&quot;&quot;</span>
+
+    <span class="n">init_app_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="sd">&quot;&quot;&quot;Additional keyword arguments passed to `init_app()`.&quot;&quot;&quot;</span>
+
+    <span class="c1"># In child class, declare the rest of the static data members here</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize app and initial data members. Should be inherited in child class and called with super().</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            app: Dash instance. If None, will create standalone app. Otherwise, will be part of existing app</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">default</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;external_stylesheets&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">external_stylesheets</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_app_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">default</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">init_app_kwargs</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span> <span class="ow">or</span> <span class="n">init_app</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">init_app_kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assign_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: CCR001</span>
+        <span class="sd">&quot;&quot;&quot;Create the ids, app charts, layout, callbacks, and optional modules.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            assign_layout: if True, will assign `self.app.layout`. If False, must call `self.return_layout` separately.</span>
+<span class="sd">                Default is True</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: if child class has not set the `self.name` data member</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Child class must set `self.name` to a unique string for this app&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Initialize app and each module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialization</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_uniq_ids</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">all_ids</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">override_module_defaults</span><span class="p">()</span>  <span class="c1"># Call optional override method</span>
+
+        <span class="c1"># Create charts for app and each module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_elements</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="n">mod</span><span class="o">.</span><span class="n">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">)</span>
+
+        <span class="c1"># Create app layout. User must call the return_layout method from each module within own return_layout method</span>
+        <span class="k">if</span> <span class="n">assign_layout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_layout</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">assign_layout</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_layout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">validation_layout</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">layout</span><span class="p">)]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_layout</span>
+            <span class="n">pprint</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">ValidationLayout?&#39;</span><span class="p">)</span>
+            <span class="n">pprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">validation_layout</span><span class="p">)</span>
+
+        <span class="c1"># Create callbacks for app and each module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_callbacks</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="n">mod</span><span class="o">.</span><span class="n">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">verify_app_initialization</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">override_module_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Override default values from modules.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize ids with `self.register_uniq_ids([...])` and other one-time actions.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_uniq_ids</span><span class="p">([</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate_data</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Recommended method for generating data stored in memory. Called in initialization.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">register_uniq_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Register the `app_ids` to the corresponding global_id in the `self._il` lookup dictionary.</span>
+
+<span class="sd">        The app_ids must be unique within this App so that a layout can be created. This method registers `self._il`</span>
+<span class="sd">          which are a list of globally unique ids (incorporating this App&#39;s unique `self.name`) allowing for the child</span>
+<span class="sd">          class of this base App to be resused multiple times within a tabbed or multi-page application without</span>
+<span class="sd">          id-collision</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            app_ids: list of strings that are unique within this App</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_il</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">app_id</span> <span class="ow">in</span> <span class="n">app_ids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">[</span><span class="n">app_id</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">app_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">verify_app_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check that the app was properly initialized.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            RuntimeError: if child class has not called `self.register_uniq_ids`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Child class must first call `self.register_uniq_ids(__)` before self.run()&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object. Default is simple HTML text</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">([</span><span class="s1">&#39;Welcome to the BaseApp! Override return_layout() in child class.&#39;</span><span class="p">])</span>  <span class="c1"># pragma: no cover</span>
+
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">pic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return app callback decorator based on provided components.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            outputs: list of tuples with app_id and property name</span>
+<span class="sd">            inputs: list of tuples with app_id and property name</span>
+<span class="sd">            states: list of tuples with app_id and property name</span>
+<span class="sd">            pic: If True, prevent call on page load (`prevent_initial_call`). Default is False</span>
+<span class="sd">            **kwargs: any additional keyword arguments for `self.app.callback`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: result of `self.app.callback()`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
+            <span class="o">*</span><span class="n">format_app_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">),</span>
+            <span class="n">prevent_initial_call</span><span class="o">=</span><span class="n">pic</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">dash_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Launch the Dash server instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **dash_kwargs: keyword arguments for `Dash.run_server()`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="o">**</span><span class="n">dash_kwargs</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
+
+    <span class="k">def</span> <span class="nf">get_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve server from app instance for production hosting with green unicorn, waitress, IIS, etc.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: the Flask `server` component of the Dash app</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">server</span>
+</code></pre></div>
+</details>
+<h4 id="descendants">Descendants<a class="headerlink" href="#descendants" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>dash_charts.utils_app_with_navigation.AppWithNavigation</li>
+<li>dash_charts.utils_app_with_navigation.StaticTab</li>
+<li>dash_charts.app_px.TabBase</li>
+</ul>
+<h4 id="class-variables">Class variables<a class="headerlink" href="#class-variables" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">external_stylesheets</span>
+</code></pre></div>
+<p>List of external stylesheets. Default is minimal Dash CSS. Only applies if app argument not provided.</p>
+<div class="highlight"><pre><span></span><code><span class="n">init_app_kwargs</span>
+</code></pre></div>
+<p>Additional keyword arguments passed to <code>init_app()</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">modules</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">name</span>
+</code></pre></div>
+<p>Child class must specify a name for the application.</p>
+<p>Set in <code>self.__init__()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">nsi</span>
+</code></pre></div>
+<p>Box dictionary of Non-Specific IDs (NSI). In <code>self.initialization()</code> automatically registered.</p>
+<p>Set in <code>self.__init__()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">validation_layout</span>
+</code></pre></div>
+<p>Validation layout used for callback validation. If None, will use the default layout for callback exceptions.</p>
+<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
+<h4 id="callback">callback<a class="headerlink" href="#callback" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">outputs</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">,</span>
+    <span class="n">states</span><span class="p">,</span>
+    <span class="n">pic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Return app callback decorator based on provided components.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>outputs</td>
+<td>list of tuples with app_id and property name</td>
+</tr>
+<tr>
+<td>inputs</td>
+<td>list of tuples with app_id and property name</td>
+</tr>
+<tr>
+<td>states</td>
+<td>list of tuples with app_id and property name</td>
+</tr>
+<tr>
+<td>pic</td>
+<td>If True, prevent call on page load (<code>prevent_initial_call</code>). Default is False</td>
+</tr>
+<tr>
+<td>**kwargs</td>
+<td>any additional keyword arguments for <code>self.app.callback</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dict</td>
+<td>result of <code>self.app.callback()</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">pic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return app callback decorator based on provided components.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            outputs: list of tuples with app_id and property name</span>
+<span class="sd">            inputs: list of tuples with app_id and property name</span>
+<span class="sd">            states: list of tuples with app_id and property name</span>
+<span class="sd">            pic: If True, prevent call on page load (`prevent_initial_call`). Default is False</span>
+<span class="sd">            **kwargs: any additional keyword arguments for `self.app.callback`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: result of `self.app.callback()`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
+            <span class="o">*</span><span class="n">format_app_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">),</span>
+            <span class="n">prevent_initial_call</span><span class="o">=</span><span class="n">pic</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div>
+</details>
+<h4 id="create">create<a class="headerlink" href="#create" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">assign_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Create the ids, app charts, layout, callbacks, and optional modules.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assign_layout</td>
+<td>if True, will assign <code>self.app.layout</code>. If False, must call <code>self.return_layout</code> separately.<br>Default is True</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raises:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NotImplementedError</td>
+<td>if child class has not set the <code>self.name</code> data member</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assign_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: CCR001</span>
+        <span class="sd">&quot;&quot;&quot;Create the ids, app charts, layout, callbacks, and optional modules.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            assign_layout: if True, will assign `self.app.layout`. If False, must call `self.return_layout` separately.</span>
+<span class="sd">                Default is True</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: if child class has not set the `self.name` data member</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Child class must set `self.name` to a unique string for this app&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Initialize app and each module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialization</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_uniq_ids</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">all_ids</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">override_module_defaults</span><span class="p">()</span>  <span class="c1"># Call optional override method</span>
+
+        <span class="c1"># Create charts for app and each module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_elements</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="n">mod</span><span class="o">.</span><span class="n">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">)</span>
+
+        <span class="c1"># Create app layout. User must call the return_layout method from each module within own return_layout method</span>
+        <span class="k">if</span> <span class="n">assign_layout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_layout</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">assign_layout</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_layout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">validation_layout</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">layout</span><span class="p">)]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_layout</span>
+            <span class="n">pprint</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">ValidationLayout?&#39;</span><span class="p">)</span>
+            <span class="n">pprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">validation_layout</span><span class="p">)</span>
+
+        <span class="c1"># Create callbacks for app and each module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_callbacks</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="n">mod</span><span class="o">.</span><span class="n">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">verify_app_initialization</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h4 id="generate_data">generate_data<a class="headerlink" href="#generate_data" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Recommended method for generating data stored in memory. Called in initialization.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Recommended method for generating data stored in memory. Called in initialization.&quot;&quot;&quot;</span>
+</code></pre></div>
+</details>
+<h4 id="get_server">get_server<a class="headerlink" href="#get_server" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_server</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Retrieve server from app instance for production hosting with green unicorn, waitress, IIS, etc.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dict</td>
+<td>the Flask <code>server</code> component of the Dash app</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">get_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve server from app instance for production hosting with green unicorn, waitress, IIS, etc.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: the Flask `server` component of the Dash app</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">server</span>
+</code></pre></div>
+</details>
+<h4 id="initialization">initialization<a class="headerlink" href="#initialization" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialization</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Initialize ids with <code>self.register_uniq_ids([...])</code> and other one-time actions.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize ids with `self.register_uniq_ids([...])` and other one-time actions.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_uniq_ids</span><span class="p">([</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate_data</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h4 id="override_module_defaults">override_module_defaults<a class="headerlink" href="#override_module_defaults" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">override_module_defaults</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Override default values from modules.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">override_module_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Override default values from modules.&quot;&quot;&quot;</span>
+</code></pre></div>
+</details>
+<h4 id="register_uniq_ids">register_uniq_ids<a class="headerlink" href="#register_uniq_ids" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_uniq_ids</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">app_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Register the <code>app_ids</code> to the corresponding global_id in the <code>self._il</code> lookup dictionary.</p>
+<p>The app_ids must be unique within this App so that a layout can be created. This method registers <code>self._il</code>
+  which are a list of globally unique ids (incorporating this App&rsquo;s unique <code>self.name</code>) allowing for the child
+  class of this base App to be resused multiple times within a tabbed or multi-page application without
+  id-collision</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app_ids</td>
+<td>list of strings that are unique within this App</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">register_uniq_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Register the `app_ids` to the corresponding global_id in the `self._il` lookup dictionary.</span>
+
+<span class="sd">        The app_ids must be unique within this App so that a layout can be created. This method registers `self._il`</span>
+<span class="sd">          which are a list of globally unique ids (incorporating this App&#39;s unique `self.name`) allowing for the child</span>
+<span class="sd">          class of this base App to be resused multiple times within a tabbed or multi-page application without</span>
+<span class="sd">          id-collision</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            app_ids: list of strings that are unique within this App</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_il</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">app_id</span> <span class="ow">in</span> <span class="n">app_ids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">[</span><span class="n">app_id</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">app_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h4 id="return_layout">return_layout<a class="headerlink" href="#return_layout" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
+</code></pre></div>
+<p>Return Dash application layout.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dict</td>
+<td>Dash HTML object. Default is simple HTML text</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object. Default is simple HTML text</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">([</span><span class="s1">&#39;Welcome to the BaseApp! Override return_layout() in child class.&#39;</span><span class="p">])</span>  <span class="c1"># pragma: no cover</span>
+</code></pre></div>
+</details>
+<h4 id="run">run<a class="headerlink" href="#run" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">dash_kwargs</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Launch the Dash server instance.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>**dash_kwargs</td>
+<td>keyword arguments for <code>Dash.run_server()</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">dash_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Launch the Dash server instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **dash_kwargs: keyword arguments for `Dash.run_server()`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="o">**</span><span class="n">dash_kwargs</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
+</code></pre></div>
+</details>
+<h4 id="verify_app_initialization">verify_app_initialization<a class="headerlink" href="#verify_app_initialization" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">verify_app_initialization</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Check that the app was properly initialized.</p>
+<p><strong>Raises:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RuntimeError</td>
+<td>if child class has not called <code>self.register_uniq_ids</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">verify_app_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check that the app was properly initialized.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            RuntimeError: if child class has not called `self.register_uniq_ids`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Child class must first call `self.register_uniq_ids(__)` before self.run()&#39;</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h3 id="appinterface">AppInterface<a class="headerlink" href="#appinterface" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AppInterface</span><span class="p">(</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">dash</span><span class="o">.</span><span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AppInterface</span><span class="p">(</span><span class="n">Interface</span><span class="p">):</span>  <span class="c1"># noqa: H601</span>
+    <span class="sd">&quot;&quot;&quot;Base Dash Application Interface.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_il</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">external_stylesheets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">modules</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">validation_layout</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">init_app_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102, D107</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assign_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">override_module_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">register_uniq_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">verify_app_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the charts, tables, and other Dash elements.</span>
+
+<span class="sd">        Does not return a result. All charts should be initialized in this method (ex `self.chart_main = ParetoChart()`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">pic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Register the chart callbacks.</span>
+
+<span class="sd">        Does not return a result. May `pass` as long as no callbacks are needed for application</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">dash_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">get_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="ancestors-in-mro">Ancestors (in MRO)<a class="headerlink" href="#ancestors-in-mro" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>implements.Interface</li>
+</ul>
+<h4 id="class-variables_1">Class variables<a class="headerlink" href="#class-variables_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">external_stylesheets</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">init_app_kwargs</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">modules</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">name</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">validation_layout</span>
+</code></pre></div>
+<h4 id="methods_1">Methods<a class="headerlink" href="#methods_1" title="Permanent link">⚓︎</a></h4>
+<h4 id="callback_1">callback<a class="headerlink" href="#callback_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">outputs</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">,</span>
+    <span class="n">states</span><span class="p">,</span>
+    <span class="n">pic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">pic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="create_1">create<a class="headerlink" href="#create_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">assign_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assign_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="create_callbacks">create_callbacks<a class="headerlink" href="#create_callbacks" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Register the chart callbacks.</p>
+<p>Does not return a result. May <code>pass</code> as long as no callbacks are needed for application</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Register the chart callbacks.</span>
+
+<span class="sd">        Does not return a result. May `pass` as long as no callbacks are needed for application</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div>
+</details>
+<h4 id="create_elements">create_elements<a class="headerlink" href="#create_elements" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Initialize the charts, tables, and other Dash elements.</p>
+<p>Does not return a result. All charts should be initialized in this method (ex <code>self.chart_main = ParetoChart()</code>)</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the charts, tables, and other Dash elements.</span>
+
+<span class="sd">        Does not return a result. All charts should be initialized in this method (ex `self.chart_main = ParetoChart()`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div>
+</details>
+<h4 id="generate_data_1">generate_data<a class="headerlink" href="#generate_data_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="get_server_1">get_server<a class="headerlink" href="#get_server_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_server</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">get_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="initialization_1">initialization<a class="headerlink" href="#initialization_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialization</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="override_module_defaults_1">override_module_defaults<a class="headerlink" href="#override_module_defaults_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">override_module_defaults</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">override_module_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="register_uniq_ids_1">register_uniq_ids<a class="headerlink" href="#register_uniq_ids_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_uniq_ids</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">app_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">register_uniq_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="return_layout_1">return_layout<a class="headerlink" href="#return_layout_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="run_1">run<a class="headerlink" href="#run_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">dash_kwargs</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">dash_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+<h4 id="verify_app_initialization_1">verify_app_initialization<a class="headerlink" href="#verify_app_initialization_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">verify_app_initialization</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">verify_app_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">pass</span>
+</code></pre></div>
+</details>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../time_vis_chart/" class="md-footer__link md-footer__link--prev" aria-label="Previous: dash_charts.time_vis_chart" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              dash_charts.time_vis_chart
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../utils_app_modules/" class="md-footer__link md-footer__link--next" aria-label="Next: dash_charts.utils_app_modules" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              dash_charts.utils_app_modules
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f8ea78.min.js"></script>
+      
+    
+  </body>
+</html>

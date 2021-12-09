@@ -1,0 +1,2301 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="dash_charts project documentation">
+      
+      
+        <meta name="author" content="Kyle King">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.5">
+    
+    
+      
+        <title>dash_charts.datatable - dash_charts</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.a617204b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dash_chartsdatatable" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="dash_charts" class="md-header__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dash_charts
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              dash_charts.datatable
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      dash_charts
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../CODE_TAG_SUMMARY/" class="md-tabs__link">
+      Task Summary
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../DESIGN/" class="md-tabs__link">
+      Design and Architecture Notes
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../docs/CHANGELOG/" class="md-tabs__link">
+        Docs
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        Modules
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="dash_charts" class="md-nav__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dash_charts
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DESIGN/" class="md-nav__link">
+        Design and Architecture Notes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Docs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Docs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Docs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CHANGELOG/" class="md-nav__link">
+        CHANGELOG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_OF_CONDUCT/" class="md-nav__link">
+        Contributor Covenant Code of Conduct
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DEVELOPER_GUIDE/" class="md-nav__link">
+        Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/SECURITY/" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/STYLE_GUIDE/" class="md-nav__link">
+        Personal Style Guides
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Modules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Modules" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Dash charts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dash charts" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Dash charts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../_code_diagrams/" class="md-nav__link">
+        Code Diagrams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app_px/" class="md-nav__link">
+        dash_charts.app_px
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../components/" class="md-nav__link">
+        dash_charts.components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coordinate_chart/" class="md-nav__link">
+        dash_charts.coordinate_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom_colorscales/" class="md-nav__link">
+        dash_charts.custom_colorscales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          dash_charts.datatable
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        dash_charts.datatable
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apply_datatable_filters" class="md-nav__link">
+    apply_datatable_filters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#split_filter_part" class="md-nav__link">
+    split_filter_part
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basedatatable" class="md-nav__link">
+    BaseDataTable
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseDataTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_table" class="md-nav__link">
+    create_table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format_datatable_columns" class="md-nav__link">
+    format_datatable_columns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize_column_kwarg_lookup" class="md-nav__link">
+    initialize_column_kwarg_lookup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize_mutables" class="md-nav__link">
+    initialize_mutables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../equations/" class="md-nav__link">
+        dash_charts.equations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gantt_chart/" class="md-nav__link">
+        dash_charts.gantt_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules_datatable/" class="md-nav__link">
+        dash_charts.modules_datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules_upload/" class="md-nav__link">
+        dash_charts.modules_upload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pareto_chart/" class="md-nav__link">
+        dash_charts.pareto_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scatter_line_charts/" class="md-nav__link">
+        dash_charts.scatter_line_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time_vis_chart/" class="md-nav__link">
+        dash_charts.time_vis_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app/" class="md-nav__link">
+        dash_charts.utils_app
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_modules/" class="md-nav__link">
+        dash_charts.utils_app_modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_with_navigation/" class="md-nav__link">
+        dash_charts.utils_app_with_navigation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_callbacks/" class="md-nav__link">
+        dash_charts.utils_callbacks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_data/" class="md-nav__link">
+        dash_charts.utils_data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_dataset/" class="md-nav__link">
+        dash_charts.utils_dataset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_fig/" class="md-nav__link">
+        dash_charts.utils_fig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_helpers/" class="md-nav__link">
+        dash_charts.utils_helpers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_json_cache/" class="md-nav__link">
+        dash_charts.utils_json_cache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_static/" class="md-nav__link">
+        dash_charts.utils_static
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_static_toc/" class="md-nav__link">
+        dash_charts.utils_static_toc
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apply_datatable_filters" class="md-nav__link">
+    apply_datatable_filters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#split_filter_part" class="md-nav__link">
+    split_filter_part
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basedatatable" class="md-nav__link">
+    BaseDataTable
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseDataTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_table" class="md-nav__link">
+    create_table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format_datatable_columns" class="md-nav__link">
+    format_datatable_columns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize_column_kwarg_lookup" class="md-nav__link">
+    initialize_column_kwarg_lookup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize_mutables" class="md-nav__link">
+    initialize_mutables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/kyleking/dash_charts/edit/main/docs/modules/dash_charts/datatable.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="dash_chartsdatatable">dash_charts.datatable<a class="headerlink" href="#dash_chartsdatatable" title="Permanent link">⚓︎</a></h1>
+<p>DataTable Base Classes.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;DataTable Base Classes.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">dash_table</span>
+
+<span class="c1"># TODO: See pattern mathing callbacks for adding buttons (to show modal) to datatables</span>
+<span class="c1">#   https://dash.plotly.com/pattern-matching-callbacks</span>
+
+<span class="c1"># PLANNED: see conditional formatting: https://dash.plotly.com/datatable/conditional-formatting</span>
+
+<span class="c1"># PLANNED: These methods may be replaced in a future version of Dash</span>
+<span class="c1"># Currently, edge case when column is string, but filter could be a number</span>
+<span class="c1"># See: https://dash.plot.ly/datatable/callbacks &amp; https://github.com/plotly/dash-table/issues/441</span>
+
+<span class="n">OPERATORS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;ge &#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;le &#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;lt &#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;gt &#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;ne &#39;</span><span class="p">,</span> <span class="s1">&#39;!=&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;eq &#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;contains &#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;datestartswith &#39;</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="sd">&quot;&quot;&quot;List of lists containing each possible filter string.&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">split_filter_part</span><span class="p">(</span><span class="n">filter_part</span><span class="p">):</span>  <span class="c1"># noqa: CCR001</span>
+    <span class="sd">&quot;&quot;&quot;Split the filter into `(name, operator, value)` components.</span>
+
+<span class="sd">    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filter_part: string filter query</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: `(name, operator, value)` which could be all None if no match was found</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">operator_type</span> <span class="ow">in</span> <span class="n">OPERATORS</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">operator</span> <span class="ow">in</span> <span class="n">operator_type</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">operator</span> <span class="ow">in</span> <span class="n">filter_part</span><span class="p">:</span>
+                <span class="n">name_part</span><span class="p">,</span> <span class="n">value_part</span> <span class="o">=</span> <span class="n">filter_part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">name_part</span><span class="p">[</span><span class="n">name_part</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="n">name_part</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">)]</span>
+
+                <span class="n">value_part</span> <span class="o">=</span> <span class="n">value_part</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">v0</span> <span class="o">=</span> <span class="n">value_part</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">v0</span> <span class="o">==</span> <span class="n">value_part</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">v0</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;`&#39;</span><span class="p">)):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">value_part</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">v0</span><span class="p">,</span> <span class="n">v0</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value_part</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">value_part</span>
+
+                <span class="c1"># Word operators need spaces after them in the filter string, but we don&#39;t want these later</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">operator_type</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">apply_datatable_filters</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">filter_query</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filter a dataframe based on Dash datatable filterquery.</span>
+
+<span class="sd">    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_table: pandas dataframe to filter</span>
+<span class="sd">        filter_query: Dash datatable string filter query</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dataframe: filtered dataframe</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filtering_expressions</span> <span class="o">=</span> <span class="n">filter_query</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &amp;&amp; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">filter_part</span> <span class="ow">in</span> <span class="n">filtering_expressions</span><span class="p">:</span>
+        <span class="n">col_name</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">filter_value</span> <span class="o">=</span> <span class="n">split_filter_part</span><span class="p">(</span><span class="n">filter_part</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">operator</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;ne&#39;</span><span class="p">,</span> <span class="s1">&#39;lt&#39;</span><span class="p">,</span> <span class="s1">&#39;le&#39;</span><span class="p">,</span> <span class="s1">&#39;gt&#39;</span><span class="p">,</span> <span class="s1">&#39;ge&#39;</span><span class="p">):</span>
+            <span class="c1"># these operators match pandas series operator method names</span>
+            <span class="n">df_table</span> <span class="o">=</span> <span class="n">df_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">df_table</span><span class="p">[</span><span class="n">col_name</span><span class="p">],</span> <span class="n">operator</span><span class="p">)(</span><span class="n">filter_value</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">operator</span> <span class="o">==</span> <span class="s1">&#39;contains&#39;</span><span class="p">:</span>
+            <span class="n">df_table</span> <span class="o">=</span> <span class="n">df_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_table</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">filter_value</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">operator</span> <span class="o">==</span> <span class="s1">&#39;datestartswith&#39;</span><span class="p">:</span>
+            <span class="c1"># this is a simplification of the front-end filtering logic,</span>
+            <span class="c1"># only works with complete fields in standard format</span>
+            <span class="n">df_table</span> <span class="o">=</span> <span class="n">df_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_table</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">filter_value</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">df_table</span>
+
+
+<span class="c1"># PLANNED: Maybe move parameters to attr.ib classes?</span>
+<span class="k">class</span> <span class="nc">BaseDataTable</span><span class="p">:</span>  <span class="c1"># noqa: H601</span>
+    <span class="sd">&quot;&quot;&quot;Base Class for Data Tables.&quot;&quot;&quot;</span>
+
+    <span class="n">filter_summary</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Table Filter Syntax:</span>
+
+<span class="s2">Full documentation at: [https://dash.plot.ly/datatable/filtering](https://dash.plot.ly/datatable/filtering)</span>
+
+<span class="s2">- `eq`: exact match (applies to number columns and will try to convert string to number)</span>
+<span class="s2">- `contains`: search for exact (case-sensitive) substring in each cell</span>
+<span class="s2">- `datestartswith`: matches partial datetime. For example, datestartswith `2018-03-01` will match `2018-03-01 12:59`</span>
+<span class="s2">but not `2018-03`</span>
+<span class="s2">- `ne`, `gt`, `ge`, `lt`, `le`: comparison operators for not equal, greater than, greater or equal, less than, etc.</span>
+<span class="s2">Applies to numbers and string columns (uses numbers, symbols, uppercase letter, lowercase letters)</span>
+
+<span class="s2">Press enter of tab to apply the filter&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Markdown text explaining dash_table.DataTable filtering rules with link to full documentation.&quot;&quot;&quot;</span>
+
+    <span class="c1"># dash_table.DataTable Parameters. Documentation: https://dash.plot.ly/datatable/reference</span>
+
+    <span class="n">style_table</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_table dictionary. Default enables overflowX scroll. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">css</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.css list. Use the style_* properties first.  Set in `initialize_mutables`.</span>
+
+<span class="sd">    Default sets row margin to zero to fix a negative margin issue when using dash_table and Bootstrap</span>
+<span class="sd">    See: https://github.com/facultyai/dash-bootstrap-components/issues/334</span>
+
+<span class="sd">    Also sets other various style tweaks to highlight the filter icons on hover, etc.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">style_cell</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_cell dictionary. Default is empty dictionary. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_cell_conditional</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_cell_conditional list. Default is empty list. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_data</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_data dictionary. Default is empty dictionary. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_data_conditional</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_data_conditional list. Default is for odd rows to have an off-white background (zebra stripe).</span>
+
+<span class="sd">    Set in `initialize_mutables`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">style_header</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_header dictionary. Default is bold and off-white background. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_header_conditional</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_header_conditional list. Default is empty list. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_filter</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_filter dictionary. Default is empty dictionary. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_filter_conditional</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_filter_conditional list. Default is empty list. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">column_selectable</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.column_selectable. Default is `None`.&quot;&quot;&quot;</span>
+
+    <span class="n">column_kwarg_lookup</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Lookup for keyword arguments for each column allowing deletable, selectable, etc. to be set per column.&quot;&quot;&quot;</span>
+
+    <span class="n">export_format</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.export_format. Default is `&#39;none&#39;`. Could be one of `(csv, xlsx)`.&quot;&quot;&quot;</span>
+
+    <span class="n">export_headers</span> <span class="o">=</span> <span class="s1">&#39;names&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.export_headers. Default is `&#39;names&#39;`. See documentation.&quot;&quot;&quot;</span>
+
+    <span class="n">filter_action</span> <span class="o">=</span> <span class="s1">&#39;native&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.filter_action. Default is `&#39;native&#39;`.&quot;&quot;&quot;</span>
+
+    <span class="n">page_size</span> <span class="o">=</span> <span class="mi">25</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.page_size. Default is `&#39;25&#39;`.&quot;&quot;&quot;</span>
+
+    <span class="n">row_selectable</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.row_selectable. Default is `None`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_as_list_view</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_as_list_view. Default is False.&quot;&quot;&quot;</span>
+
+    <span class="n">sort_action</span> <span class="o">=</span> <span class="s1">&#39;native&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.sort_action. Default is `&#39;native&#39;`.&quot;&quot;&quot;</span>
+
+    <span class="n">sort_mode</span> <span class="o">=</span> <span class="s1">&#39;single&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.sort_mode. Default is `&#39;single&#39;`.&quot;&quot;&quot;</span>
+
+    <span class="c1"># CSS Variables</span>
+
+    <span class="n">text_color</span> <span class="o">=</span> <span class="s1">&#39;#333333&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Default text color.&quot;&quot;&quot;</span>
+
+    <span class="n">background_color</span> <span class="o">=</span> <span class="s1">&#39;#ffffff&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Default background color.&quot;&quot;&quot;</span>
+
+    <span class="n">zebra_color</span> <span class="o">=</span> <span class="s1">&#39;#f9f9f9&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Default background color for odd rows (zebra-stripe).&quot;&quot;&quot;</span>
+
+    <span class="n">selected_cell_color</span> <span class="o">=</span> <span class="s1">&#39;#eaeaea&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Default color for selected cells.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize class.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_mutables</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">initialize_mutables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the mutable data members to prevent modifying one attribute and impacting all instances.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_table</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;overflowX&#39;</span><span class="p">:</span> <span class="s1">&#39;scroll&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">css</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="c1"># Fix width when overflow is True and using dash_bootstrap_components</span>
+            <span class="p">{</span><span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;.row&#39;</span><span class="p">,</span> <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;margin: 0&#39;</span><span class="p">},</span>
+
+            <span class="c1"># Based on: https://community.plot.ly/t/dash-table-datatable-styling-examples/15594/</span>
+            <span class="c1"># Align the select icon to the left and the sort icon to the right</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;display: flex; align-items: center;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div span.column-header--select&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;order: 1; flex-shrink: 5; text-align: left;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div span.column-header-name&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;order: 2; flex-grow: 5; text-align: center;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div span.column-header--sort&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;order: 3; flex-shrink: 5; text-align: right;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+
+            <span class="c1"># Remove excess borders to better match JQuery DataTables styling</span>
+            <span class="c1"># (Some border styles don&#39;t appear to work from `self.style_header`)</span>
+            <span class="p">{</span><span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-filter&#39;</span><span class="p">,</span> <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;border-bottom-color: rgb(17, 17, 17) !important;&#39;</span><span class="p">},</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_cell</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;backgroundColor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span><span class="p">,</span>
+            <span class="s1">&#39;borderStyle&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;1px solid </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">zebra_color</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_cell_conditional</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_data_conditional</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;even&#39;</span><span class="p">},</span> <span class="s1">&#39;backgroundColor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">zebra_color</span><span class="p">},</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_header</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;borderLeft&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;borderRight&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;borderTop&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;fontWeight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_header_conditional</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_filter</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;borderBottomColor&#39;</span><span class="p">:</span> <span class="s1">&#39;rgb(17, 17, 17)&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_filter_conditional</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_column_kwarg_lookup</span><span class="p">()</span>  <span class="c1"># Must be called last</span>
+
+    <span class="k">def</span> <span class="nf">initialize_column_kwarg_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the column lookup based on the other mutables.</span>
+
+<span class="sd">        Documentation: https://dash.plot.ly/datatable/reference</span>
+
+<span class="sd">        Additional kwargs not set in default lookup:</span>
+<span class="sd">            - clearable, deletable, editable, hideable, renamable, format, presentation, on_change, sort_as_null,</span>
+<span class="sd">                validation, type</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_kwarg_lookup</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;default_kwargs&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;selectable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs_datatable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create the dash_table.DataTable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df_raw: data to pass to datatable</span>
+<span class="sd">            columns: list of column names to display. Default is None to use all columns from df_raw</span>
+<span class="sd">            kwargs_datatable: keyword arguments to pass to the datatable</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DataTable: returns dash_table.DataTable object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">columns</span>
+        <span class="k">return</span> <span class="n">dash_table</span><span class="o">.</span><span class="n">DataTable</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_create_datatable</span><span class="p">(</span><span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs_datatable</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">format_datatable_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of column names formatted for a dash_table. Uses `self.self.column_name_kwarg_lookup`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df_raw: data to pass to datatable</span>
+<span class="sd">            columns: list of strings or None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: of dict with keys `(name, id, deleteable, selectable)` in order of df_raw columns</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">column_kwarg_lookup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_kwarg_lookup</span><span class="p">[</span><span class="s1">&#39;default_kwargs&#39;</span><span class="p">])}</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="p">(</span><span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_create_datatable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">table_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return dictionary of keyword arguments for datatable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df_raw: data to pass to datatable</span>
+<span class="sd">            columns: will auto format list of string column names to display or use list of dicts</span>
+<span class="sd">            table_kwargs: additional keyword arguments to pass to datatable, such as id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: keys include `(columns, data)` and all data members</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;columns&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_datatable_columns</span><span class="p">(</span><span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">columns</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">df_raw</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">columns</span><span class="p">]</span> <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">df_raw</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;records&#39;</span><span class="p">),</span>
+
+            <span class="c1"># Add all datamembers</span>
+            <span class="s1">&#39;css&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">css</span><span class="p">,</span>
+            <span class="s1">&#39;style_table&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_table</span><span class="p">,</span>
+            <span class="s1">&#39;style_cell&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_cell</span><span class="p">,</span>
+            <span class="s1">&#39;style_cell_conditional&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_cell_conditional</span><span class="p">,</span>
+            <span class="s1">&#39;style_data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_data</span><span class="p">,</span>
+            <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_data_conditional</span><span class="p">,</span>
+            <span class="s1">&#39;style_header&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_header</span><span class="p">,</span>
+            <span class="s1">&#39;style_header_conditional&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_header_conditional</span><span class="p">,</span>
+            <span class="s1">&#39;style_filter&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_filter</span><span class="p">,</span>
+            <span class="s1">&#39;style_filter_conditional&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_filter_conditional</span><span class="p">,</span>
+            <span class="s1">&#39;column_selectable&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_selectable</span><span class="p">,</span>
+            <span class="s1">&#39;export_format&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_format</span><span class="p">,</span>
+            <span class="s1">&#39;export_headers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_headers</span><span class="p">,</span>
+            <span class="s1">&#39;filter_action&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_action</span><span class="p">,</span>
+            <span class="s1">&#39;page_size&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span><span class="p">,</span>
+            <span class="s1">&#39;row_selectable&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_selectable</span><span class="p">,</span>
+            <span class="s1">&#39;style_as_list_view&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_as_list_view</span><span class="p">,</span>
+            <span class="s1">&#39;sort_action&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_action</span><span class="p">,</span>
+            <span class="s1">&#39;sort_mode&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_mode</span><span class="p">,</span>
+        <span class="p">}</span>
+</code></pre></div>
+</details>
+<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">⚓︎</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">OPERATORS</span>
+</code></pre></div>
+<p>List of lists containing each possible filter string.</p>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="apply_datatable_filters">apply_datatable_filters<a class="headerlink" href="#apply_datatable_filters" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">apply_datatable_filters</span><span class="p">(</span>
+    <span class="n">df_table</span><span class="p">,</span>
+    <span class="n">filter_query</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Filter a dataframe based on Dash datatable filterquery.</p>
+<p>Based on <code>Backend Paging with Filtering</code>: https://dash.plot.ly/datatable/callbacks</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>df_table</td>
+<td>pandas dataframe to filter</td>
+</tr>
+<tr>
+<td>filter_query</td>
+<td>Dash datatable string filter query</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dataframe</td>
+<td>filtered dataframe</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">apply_datatable_filters</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">filter_query</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filter a dataframe based on Dash datatable filterquery.</span>
+
+<span class="sd">    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_table: pandas dataframe to filter</span>
+<span class="sd">        filter_query: Dash datatable string filter query</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dataframe: filtered dataframe</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filtering_expressions</span> <span class="o">=</span> <span class="n">filter_query</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &amp;&amp; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">filter_part</span> <span class="ow">in</span> <span class="n">filtering_expressions</span><span class="p">:</span>
+        <span class="n">col_name</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">filter_value</span> <span class="o">=</span> <span class="n">split_filter_part</span><span class="p">(</span><span class="n">filter_part</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">operator</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;ne&#39;</span><span class="p">,</span> <span class="s1">&#39;lt&#39;</span><span class="p">,</span> <span class="s1">&#39;le&#39;</span><span class="p">,</span> <span class="s1">&#39;gt&#39;</span><span class="p">,</span> <span class="s1">&#39;ge&#39;</span><span class="p">):</span>
+            <span class="c1"># these operators match pandas series operator method names</span>
+            <span class="n">df_table</span> <span class="o">=</span> <span class="n">df_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">df_table</span><span class="p">[</span><span class="n">col_name</span><span class="p">],</span> <span class="n">operator</span><span class="p">)(</span><span class="n">filter_value</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">operator</span> <span class="o">==</span> <span class="s1">&#39;contains&#39;</span><span class="p">:</span>
+            <span class="n">df_table</span> <span class="o">=</span> <span class="n">df_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_table</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">filter_value</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">operator</span> <span class="o">==</span> <span class="s1">&#39;datestartswith&#39;</span><span class="p">:</span>
+            <span class="c1"># this is a simplification of the front-end filtering logic,</span>
+            <span class="c1"># only works with complete fields in standard format</span>
+            <span class="n">df_table</span> <span class="o">=</span> <span class="n">df_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_table</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">filter_value</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">df_table</span>
+</code></pre></div>
+</details>
+<h3 id="split_filter_part">split_filter_part<a class="headerlink" href="#split_filter_part" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">split_filter_part</span><span class="p">(</span>
+    <span class="n">filter_part</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Split the filter into <code>(name, operator, value)</code> components.</p>
+<p>Based on <code>Backend Paging with Filtering</code>: https://dash.plot.ly/datatable/callbacks</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter_part</td>
+<td>string filter query</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tuple</td>
+<td><code>(name, operator, value)</code> which could be all None if no match was found</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">split_filter_part</span><span class="p">(</span><span class="n">filter_part</span><span class="p">):</span>  <span class="c1"># noqa: CCR001</span>
+    <span class="sd">&quot;&quot;&quot;Split the filter into `(name, operator, value)` components.</span>
+
+<span class="sd">    Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filter_part: string filter query</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: `(name, operator, value)` which could be all None if no match was found</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">operator_type</span> <span class="ow">in</span> <span class="n">OPERATORS</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">operator</span> <span class="ow">in</span> <span class="n">operator_type</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">operator</span> <span class="ow">in</span> <span class="n">filter_part</span><span class="p">:</span>
+                <span class="n">name_part</span><span class="p">,</span> <span class="n">value_part</span> <span class="o">=</span> <span class="n">filter_part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">name_part</span><span class="p">[</span><span class="n">name_part</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="n">name_part</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">)]</span>
+
+                <span class="n">value_part</span> <span class="o">=</span> <span class="n">value_part</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">v0</span> <span class="o">=</span> <span class="n">value_part</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">v0</span> <span class="o">==</span> <span class="n">value_part</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">v0</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;`&#39;</span><span class="p">)):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">value_part</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">v0</span><span class="p">,</span> <span class="n">v0</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value_part</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">value_part</span>
+
+                <span class="c1"># Word operators need spaces after them in the filter string, but we don&#39;t want these later</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">operator_type</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+</code></pre></div>
+</details>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="basedatatable">BaseDataTable<a class="headerlink" href="#basedatatable" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseDataTable</span><span class="p">(</span>
+
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseDataTable</span><span class="p">:</span>  <span class="c1"># noqa: H601</span>
+    <span class="sd">&quot;&quot;&quot;Base Class for Data Tables.&quot;&quot;&quot;</span>
+
+    <span class="n">filter_summary</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Table Filter Syntax:</span>
+
+<span class="s2">Full documentation at: [https://dash.plot.ly/datatable/filtering](https://dash.plot.ly/datatable/filtering)</span>
+
+<span class="s2">- `eq`: exact match (applies to number columns and will try to convert string to number)</span>
+<span class="s2">- `contains`: search for exact (case-sensitive) substring in each cell</span>
+<span class="s2">- `datestartswith`: matches partial datetime. For example, datestartswith `2018-03-01` will match `2018-03-01 12:59`</span>
+<span class="s2">but not `2018-03`</span>
+<span class="s2">- `ne`, `gt`, `ge`, `lt`, `le`: comparison operators for not equal, greater than, greater or equal, less than, etc.</span>
+<span class="s2">Applies to numbers and string columns (uses numbers, symbols, uppercase letter, lowercase letters)</span>
+
+<span class="s2">Press enter of tab to apply the filter&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Markdown text explaining dash_table.DataTable filtering rules with link to full documentation.&quot;&quot;&quot;</span>
+
+    <span class="c1"># dash_table.DataTable Parameters. Documentation: https://dash.plot.ly/datatable/reference</span>
+
+    <span class="n">style_table</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_table dictionary. Default enables overflowX scroll. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">css</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.css list. Use the style_* properties first.  Set in `initialize_mutables`.</span>
+
+<span class="sd">    Default sets row margin to zero to fix a negative margin issue when using dash_table and Bootstrap</span>
+<span class="sd">    See: https://github.com/facultyai/dash-bootstrap-components/issues/334</span>
+
+<span class="sd">    Also sets other various style tweaks to highlight the filter icons on hover, etc.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">style_cell</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_cell dictionary. Default is empty dictionary. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_cell_conditional</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_cell_conditional list. Default is empty list. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_data</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_data dictionary. Default is empty dictionary. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_data_conditional</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_data_conditional list. Default is for odd rows to have an off-white background (zebra stripe).</span>
+
+<span class="sd">    Set in `initialize_mutables`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">style_header</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_header dictionary. Default is bold and off-white background. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_header_conditional</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_header_conditional list. Default is empty list. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_filter</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_filter dictionary. Default is empty dictionary. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_filter_conditional</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_filter_conditional list. Default is empty list. Set in `initialize_mutables`.&quot;&quot;&quot;</span>
+
+    <span class="n">column_selectable</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.column_selectable. Default is `None`.&quot;&quot;&quot;</span>
+
+    <span class="n">column_kwarg_lookup</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Lookup for keyword arguments for each column allowing deletable, selectable, etc. to be set per column.&quot;&quot;&quot;</span>
+
+    <span class="n">export_format</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.export_format. Default is `&#39;none&#39;`. Could be one of `(csv, xlsx)`.&quot;&quot;&quot;</span>
+
+    <span class="n">export_headers</span> <span class="o">=</span> <span class="s1">&#39;names&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.export_headers. Default is `&#39;names&#39;`. See documentation.&quot;&quot;&quot;</span>
+
+    <span class="n">filter_action</span> <span class="o">=</span> <span class="s1">&#39;native&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.filter_action. Default is `&#39;native&#39;`.&quot;&quot;&quot;</span>
+
+    <span class="n">page_size</span> <span class="o">=</span> <span class="mi">25</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.page_size. Default is `&#39;25&#39;`.&quot;&quot;&quot;</span>
+
+    <span class="n">row_selectable</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.row_selectable. Default is `None`.&quot;&quot;&quot;</span>
+
+    <span class="n">style_as_list_view</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.style_as_list_view. Default is False.&quot;&quot;&quot;</span>
+
+    <span class="n">sort_action</span> <span class="o">=</span> <span class="s1">&#39;native&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.sort_action. Default is `&#39;native&#39;`.&quot;&quot;&quot;</span>
+
+    <span class="n">sort_mode</span> <span class="o">=</span> <span class="s1">&#39;single&#39;</span>
+    <span class="sd">&quot;&quot;&quot;DataTable.sort_mode. Default is `&#39;single&#39;`.&quot;&quot;&quot;</span>
+
+    <span class="c1"># CSS Variables</span>
+
+    <span class="n">text_color</span> <span class="o">=</span> <span class="s1">&#39;#333333&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Default text color.&quot;&quot;&quot;</span>
+
+    <span class="n">background_color</span> <span class="o">=</span> <span class="s1">&#39;#ffffff&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Default background color.&quot;&quot;&quot;</span>
+
+    <span class="n">zebra_color</span> <span class="o">=</span> <span class="s1">&#39;#f9f9f9&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Default background color for odd rows (zebra-stripe).&quot;&quot;&quot;</span>
+
+    <span class="n">selected_cell_color</span> <span class="o">=</span> <span class="s1">&#39;#eaeaea&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Default color for selected cells.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize class.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_mutables</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">initialize_mutables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the mutable data members to prevent modifying one attribute and impacting all instances.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_table</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;overflowX&#39;</span><span class="p">:</span> <span class="s1">&#39;scroll&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">css</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="c1"># Fix width when overflow is True and using dash_bootstrap_components</span>
+            <span class="p">{</span><span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;.row&#39;</span><span class="p">,</span> <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;margin: 0&#39;</span><span class="p">},</span>
+
+            <span class="c1"># Based on: https://community.plot.ly/t/dash-table-datatable-styling-examples/15594/</span>
+            <span class="c1"># Align the select icon to the left and the sort icon to the right</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;display: flex; align-items: center;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div span.column-header--select&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;order: 1; flex-shrink: 5; text-align: left;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div span.column-header-name&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;order: 2; flex-grow: 5; text-align: center;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div span.column-header--sort&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;order: 3; flex-shrink: 5; text-align: right;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+
+            <span class="c1"># Remove excess borders to better match JQuery DataTables styling</span>
+            <span class="c1"># (Some border styles don&#39;t appear to work from `self.style_header`)</span>
+            <span class="p">{</span><span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-filter&#39;</span><span class="p">,</span> <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;border-bottom-color: rgb(17, 17, 17) !important;&#39;</span><span class="p">},</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_cell</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;backgroundColor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span><span class="p">,</span>
+            <span class="s1">&#39;borderStyle&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;1px solid </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">zebra_color</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_cell_conditional</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_data_conditional</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;even&#39;</span><span class="p">},</span> <span class="s1">&#39;backgroundColor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">zebra_color</span><span class="p">},</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_header</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;borderLeft&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;borderRight&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;borderTop&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;fontWeight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_header_conditional</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_filter</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;borderBottomColor&#39;</span><span class="p">:</span> <span class="s1">&#39;rgb(17, 17, 17)&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_filter_conditional</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_column_kwarg_lookup</span><span class="p">()</span>  <span class="c1"># Must be called last</span>
+
+    <span class="k">def</span> <span class="nf">initialize_column_kwarg_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the column lookup based on the other mutables.</span>
+
+<span class="sd">        Documentation: https://dash.plot.ly/datatable/reference</span>
+
+<span class="sd">        Additional kwargs not set in default lookup:</span>
+<span class="sd">            - clearable, deletable, editable, hideable, renamable, format, presentation, on_change, sort_as_null,</span>
+<span class="sd">                validation, type</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_kwarg_lookup</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;default_kwargs&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;selectable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs_datatable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create the dash_table.DataTable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df_raw: data to pass to datatable</span>
+<span class="sd">            columns: list of column names to display. Default is None to use all columns from df_raw</span>
+<span class="sd">            kwargs_datatable: keyword arguments to pass to the datatable</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DataTable: returns dash_table.DataTable object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">columns</span>
+        <span class="k">return</span> <span class="n">dash_table</span><span class="o">.</span><span class="n">DataTable</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_create_datatable</span><span class="p">(</span><span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs_datatable</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">format_datatable_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of column names formatted for a dash_table. Uses `self.self.column_name_kwarg_lookup`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df_raw: data to pass to datatable</span>
+<span class="sd">            columns: list of strings or None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: of dict with keys `(name, id, deleteable, selectable)` in order of df_raw columns</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">column_kwarg_lookup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_kwarg_lookup</span><span class="p">[</span><span class="s1">&#39;default_kwargs&#39;</span><span class="p">])}</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="p">(</span><span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_create_datatable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">table_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return dictionary of keyword arguments for datatable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df_raw: data to pass to datatable</span>
+<span class="sd">            columns: will auto format list of string column names to display or use list of dicts</span>
+<span class="sd">            table_kwargs: additional keyword arguments to pass to datatable, such as id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: keys include `(columns, data)` and all data members</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;columns&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_datatable_columns</span><span class="p">(</span><span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">columns</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">df_raw</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">columns</span><span class="p">]</span> <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">df_raw</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;records&#39;</span><span class="p">),</span>
+
+            <span class="c1"># Add all datamembers</span>
+            <span class="s1">&#39;css&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">css</span><span class="p">,</span>
+            <span class="s1">&#39;style_table&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_table</span><span class="p">,</span>
+            <span class="s1">&#39;style_cell&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_cell</span><span class="p">,</span>
+            <span class="s1">&#39;style_cell_conditional&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_cell_conditional</span><span class="p">,</span>
+            <span class="s1">&#39;style_data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_data</span><span class="p">,</span>
+            <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_data_conditional</span><span class="p">,</span>
+            <span class="s1">&#39;style_header&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_header</span><span class="p">,</span>
+            <span class="s1">&#39;style_header_conditional&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_header_conditional</span><span class="p">,</span>
+            <span class="s1">&#39;style_filter&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_filter</span><span class="p">,</span>
+            <span class="s1">&#39;style_filter_conditional&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_filter_conditional</span><span class="p">,</span>
+            <span class="s1">&#39;column_selectable&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_selectable</span><span class="p">,</span>
+            <span class="s1">&#39;export_format&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_format</span><span class="p">,</span>
+            <span class="s1">&#39;export_headers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_headers</span><span class="p">,</span>
+            <span class="s1">&#39;filter_action&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_action</span><span class="p">,</span>
+            <span class="s1">&#39;page_size&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span><span class="p">,</span>
+            <span class="s1">&#39;row_selectable&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_selectable</span><span class="p">,</span>
+            <span class="s1">&#39;style_as_list_view&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_as_list_view</span><span class="p">,</span>
+            <span class="s1">&#39;sort_action&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_action</span><span class="p">,</span>
+            <span class="s1">&#39;sort_mode&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_mode</span><span class="p">,</span>
+        <span class="p">}</span>
+</code></pre></div>
+</details>
+<h4 id="class-variables">Class variables<a class="headerlink" href="#class-variables" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">background_color</span>
+</code></pre></div>
+<p>Default background color.</p>
+<div class="highlight"><pre><span></span><code><span class="n">column_kwarg_lookup</span>
+</code></pre></div>
+<p>Lookup for keyword arguments for each column allowing deletable, selectable, etc. to be set per column.</p>
+<div class="highlight"><pre><span></span><code><span class="n">column_selectable</span>
+</code></pre></div>
+<p>DataTable.column_selectable. Default is <code>None</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">css</span>
+</code></pre></div>
+<p>DataTable.css list. Use the style_* properties first.  Set in <code>initialize_mutables</code>.</p>
+<p>Default sets row margin to zero to fix a negative margin issue when using dash_table and Bootstrap
+See: https://github.com/facultyai/dash-bootstrap-components/issues/334</p>
+<p>Also sets other various style tweaks to highlight the filter icons on hover, etc.</p>
+<div class="highlight"><pre><span></span><code><span class="n">export_format</span>
+</code></pre></div>
+<p>DataTable.export_format. Default is <code>'none'</code>. Could be one of <code>(csv, xlsx)</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">export_headers</span>
+</code></pre></div>
+<p>DataTable.export_headers. Default is <code>'names'</code>. See documentation.</p>
+<div class="highlight"><pre><span></span><code><span class="n">filter_action</span>
+</code></pre></div>
+<p>DataTable.filter_action. Default is <code>'native'</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">filter_summary</span>
+</code></pre></div>
+<p>Markdown text explaining dash_table.DataTable filtering rules with link to full documentation.</p>
+<div class="highlight"><pre><span></span><code><span class="n">page_size</span>
+</code></pre></div>
+<p>DataTable.page_size. Default is <code>'25'</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">row_selectable</span>
+</code></pre></div>
+<p>DataTable.row_selectable. Default is <code>None</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">selected_cell_color</span>
+</code></pre></div>
+<p>Default color for selected cells.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sort_action</span>
+</code></pre></div>
+<p>DataTable.sort_action. Default is <code>'native'</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sort_mode</span>
+</code></pre></div>
+<p>DataTable.sort_mode. Default is <code>'single'</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">style_as_list_view</span>
+</code></pre></div>
+<p>DataTable.style_as_list_view. Default is False.</p>
+<div class="highlight"><pre><span></span><code><span class="n">style_cell</span>
+</code></pre></div>
+<p>DataTable.style_cell dictionary. Default is empty dictionary. Set in <code>initialize_mutables</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">style_cell_conditional</span>
+</code></pre></div>
+<p>DataTable.style_cell_conditional list. Default is empty list. Set in <code>initialize_mutables</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">style_data</span>
+</code></pre></div>
+<p>DataTable.style_data dictionary. Default is empty dictionary. Set in <code>initialize_mutables</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">style_data_conditional</span>
+</code></pre></div>
+<p>DataTable.style_data_conditional list. Default is for odd rows to have an off-white background (zebra stripe).</p>
+<p>Set in <code>initialize_mutables</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">style_filter</span>
+</code></pre></div>
+<p>DataTable.style_filter dictionary. Default is empty dictionary. Set in <code>initialize_mutables</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">style_filter_conditional</span>
+</code></pre></div>
+<p>DataTable.style_filter_conditional list. Default is empty list. Set in <code>initialize_mutables</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">style_header</span>
+</code></pre></div>
+<p>DataTable.style_header dictionary. Default is bold and off-white background. Set in <code>initialize_mutables</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">style_header_conditional</span>
+</code></pre></div>
+<p>DataTable.style_header_conditional list. Default is empty list. Set in <code>initialize_mutables</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">style_table</span>
+</code></pre></div>
+<p>DataTable.style_table dictionary. Default enables overflowX scroll. Set in <code>initialize_mutables</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">text_color</span>
+</code></pre></div>
+<p>Default text color.</p>
+<div class="highlight"><pre><span></span><code><span class="n">zebra_color</span>
+</code></pre></div>
+<p>Default background color for odd rows (zebra-stripe).</p>
+<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
+<h4 id="create_table">create_table<a class="headerlink" href="#create_table" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">df_raw</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs_datatable</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Create the dash_table.DataTable.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>df_raw</td>
+<td>data to pass to datatable</td>
+</tr>
+<tr>
+<td>columns</td>
+<td>list of column names to display. Default is None to use all columns from df_raw</td>
+</tr>
+<tr>
+<td>kwargs_datatable</td>
+<td>keyword arguments to pass to the datatable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DataTable</td>
+<td>returns dash_table.DataTable object</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs_datatable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create the dash_table.DataTable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df_raw: data to pass to datatable</span>
+<span class="sd">            columns: list of column names to display. Default is None to use all columns from df_raw</span>
+<span class="sd">            kwargs_datatable: keyword arguments to pass to the datatable</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DataTable: returns dash_table.DataTable object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">columns</span>
+        <span class="k">return</span> <span class="n">dash_table</span><span class="o">.</span><span class="n">DataTable</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_create_datatable</span><span class="p">(</span><span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs_datatable</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h4 id="format_datatable_columns">format_datatable_columns<a class="headerlink" href="#format_datatable_columns" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">format_datatable_columns</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">df_raw</span><span class="p">,</span>
+    <span class="n">columns</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Return a list of column names formatted for a dash_table. Uses <code>self.self.column_name_kwarg_lookup</code>.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>df_raw</td>
+<td>data to pass to datatable</td>
+</tr>
+<tr>
+<td>columns</td>
+<td>list of strings or None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>of dict with keys <code>(name, id, deleteable, selectable)</code> in order of df_raw columns</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">format_datatable_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_raw</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of column names formatted for a dash_table. Uses `self.self.column_name_kwarg_lookup`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df_raw: data to pass to datatable</span>
+<span class="sd">            columns: list of strings or None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: of dict with keys `(name, id, deleteable, selectable)` in order of df_raw columns</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">column_kwarg_lookup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_kwarg_lookup</span><span class="p">[</span><span class="s1">&#39;default_kwargs&#39;</span><span class="p">])}</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="p">(</span><span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">)</span>
+        <span class="p">]</span>
+</code></pre></div>
+</details>
+<h4 id="initialize_column_kwarg_lookup">initialize_column_kwarg_lookup<a class="headerlink" href="#initialize_column_kwarg_lookup" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize_column_kwarg_lookup</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Initialize the column lookup based on the other mutables.</p>
+<p>Documentation: https://dash.plot.ly/datatable/reference</p>
+<p>Additional kwargs not set in default lookup:
+    - clearable, deletable, editable, hideable, renamable, format, presentation, on_change, sort_as_null,
+        validation, type</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">initialize_column_kwarg_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the column lookup based on the other mutables.</span>
+
+<span class="sd">        Documentation: https://dash.plot.ly/datatable/reference</span>
+
+<span class="sd">        Additional kwargs not set in default lookup:</span>
+<span class="sd">            - clearable, deletable, editable, hideable, renamable, format, presentation, on_change, sort_as_null,</span>
+<span class="sd">                validation, type</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_kwarg_lookup</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;default_kwargs&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;selectable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+</code></pre></div>
+</details>
+<h4 id="initialize_mutables">initialize_mutables<a class="headerlink" href="#initialize_mutables" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize_mutables</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Initialize the mutable data members to prevent modifying one attribute and impacting all instances.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">initialize_mutables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the mutable data members to prevent modifying one attribute and impacting all instances.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_table</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;overflowX&#39;</span><span class="p">:</span> <span class="s1">&#39;scroll&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">css</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="c1"># Fix width when overflow is True and using dash_bootstrap_components</span>
+            <span class="p">{</span><span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;.row&#39;</span><span class="p">,</span> <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;margin: 0&#39;</span><span class="p">},</span>
+
+            <span class="c1"># Based on: https://community.plot.ly/t/dash-table-datatable-styling-examples/15594/</span>
+            <span class="c1"># Align the select icon to the left and the sort icon to the right</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;display: flex; align-items: center;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div span.column-header--select&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;order: 1; flex-shrink: 5; text-align: left;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div span.column-header-name&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;order: 2; flex-grow: 5; text-align: center;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-header div span.column-header--sort&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;order: 3; flex-shrink: 5; text-align: right;&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+
+            <span class="c1"># Remove excess borders to better match JQuery DataTables styling</span>
+            <span class="c1"># (Some border styles don&#39;t appear to work from `self.style_header`)</span>
+            <span class="p">{</span><span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;th.dash-filter&#39;</span><span class="p">,</span> <span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;border-bottom-color: rgb(17, 17, 17) !important;&#39;</span><span class="p">},</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_cell</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;backgroundColor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span><span class="p">,</span>
+            <span class="s1">&#39;borderStyle&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;1px solid </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">zebra_color</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_cell_conditional</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_data_conditional</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;even&#39;</span><span class="p">},</span> <span class="s1">&#39;backgroundColor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">zebra_color</span><span class="p">},</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_header</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;borderLeft&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;borderRight&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;borderTop&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;fontWeight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_header_conditional</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_filter</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;borderBottomColor&#39;</span><span class="p">:</span> <span class="s1">&#39;rgb(17, 17, 17)&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_filter_conditional</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_column_kwarg_lookup</span><span class="p">()</span>  <span class="c1"># Must be called last</span>
+</code></pre></div>
+</details>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../custom_colorscales/" class="md-footer__link md-footer__link--prev" aria-label="Previous: dash_charts.custom_colorscales" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              dash_charts.custom_colorscales
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../equations/" class="md-footer__link md-footer__link--next" aria-label="Next: dash_charts.equations" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              dash_charts.equations
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f8ea78.min.js"></script>
+      
+    
+  </body>
+</html>

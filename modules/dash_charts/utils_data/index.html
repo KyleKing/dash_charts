@@ -1,0 +1,2115 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="dash_charts project documentation">
+      
+      
+        <meta name="author" content="Kyle King">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.5">
+    
+    
+      
+        <title>dash_charts.utils_data - dash_charts</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.a617204b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dash_chartsutils_data" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="dash_charts" class="md-header__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dash_charts
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              dash_charts.utils_data
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      dash_charts
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../CODE_TAG_SUMMARY/" class="md-tabs__link">
+      Task Summary
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../DESIGN/" class="md-tabs__link">
+      Design and Architecture Notes
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../docs/CHANGELOG/" class="md-tabs__link">
+        Docs
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        Modules
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="dash_charts" class="md-nav__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dash_charts
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DESIGN/" class="md-nav__link">
+        Design and Architecture Notes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Docs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Docs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Docs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CHANGELOG/" class="md-nav__link">
+        CHANGELOG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_OF_CONDUCT/" class="md-nav__link">
+        Contributor Covenant Code of Conduct
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DEVELOPER_GUIDE/" class="md-nav__link">
+        Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/SECURITY/" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/STYLE_GUIDE/" class="md-nav__link">
+        Personal Style Guides
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Modules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Modules" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Dash charts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dash charts" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Dash charts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../_code_diagrams/" class="md-nav__link">
+        Code Diagrams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app_px/" class="md-nav__link">
+        dash_charts.app_px
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../components/" class="md-nav__link">
+        dash_charts.components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coordinate_chart/" class="md-nav__link">
+        dash_charts.coordinate_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom_colorscales/" class="md-nav__link">
+        dash_charts.custom_colorscales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datatable/" class="md-nav__link">
+        dash_charts.datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../equations/" class="md-nav__link">
+        dash_charts.equations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gantt_chart/" class="md-nav__link">
+        dash_charts.gantt_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules_datatable/" class="md-nav__link">
+        dash_charts.modules_datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules_upload/" class="md-nav__link">
+        dash_charts.modules_upload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pareto_chart/" class="md-nav__link">
+        dash_charts.pareto_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scatter_line_charts/" class="md-nav__link">
+        dash_charts.scatter_line_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time_vis_chart/" class="md-nav__link">
+        dash_charts.time_vis_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app/" class="md-nav__link">
+        dash_charts.utils_app
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_modules/" class="md-nav__link">
+        dash_charts.utils_app_modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_with_navigation/" class="md-nav__link">
+        dash_charts.utils_app_with_navigation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_callbacks/" class="md-nav__link">
+        dash_charts.utils_callbacks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          dash_charts.utils_data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        dash_charts.utils_data
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#append_df" class="md-nav__link">
+    append_df
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable_verbose_pandas" class="md-nav__link">
+    enable_verbose_pandas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format_unix" class="md-nav__link">
+    format_unix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_unix" class="md-nav__link">
+    get_unix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json_dumps_compact" class="md-nav__link">
+    json_dumps_compact
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_sql_tables" class="md-nav__link">
+    list_sql_tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uniq_table_id" class="md-nav__link">
+    uniq_table_id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    validate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_csv" class="md-nav__link">
+    write_csv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_pretty_json" class="md-nav__link">
+    write_pretty_json
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqlconnection" class="md-nav__link">
+    SQLConnection
+  </a>
+  
+    <nav class="md-nav" aria-label="SQLConnection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_dataset/" class="md-nav__link">
+        dash_charts.utils_dataset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_fig/" class="md-nav__link">
+        dash_charts.utils_fig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_helpers/" class="md-nav__link">
+        dash_charts.utils_helpers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_json_cache/" class="md-nav__link">
+        dash_charts.utils_json_cache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_static/" class="md-nav__link">
+        dash_charts.utils_static
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_static_toc/" class="md-nav__link">
+        dash_charts.utils_static_toc
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#append_df" class="md-nav__link">
+    append_df
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable_verbose_pandas" class="md-nav__link">
+    enable_verbose_pandas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format_unix" class="md-nav__link">
+    format_unix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_unix" class="md-nav__link">
+    get_unix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json_dumps_compact" class="md-nav__link">
+    json_dumps_compact
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_sql_tables" class="md-nav__link">
+    list_sql_tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uniq_table_id" class="md-nav__link">
+    uniq_table_id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    validate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_csv" class="md-nav__link">
+    write_csv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_pretty_json" class="md-nav__link">
+    write_pretty_json
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqlconnection" class="md-nav__link">
+    SQLConnection
+  </a>
+  
+    <nav class="md-nav" aria-label="SQLConnection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/kyleking/dash_charts/edit/main/docs/modules/dash_charts/utils_data.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="dash_chartsutils_data">dash_charts.utils_data<a class="headerlink" href="#dash_chartsutils_data" title="Permanent link">⚓︎</a></h1>
+<p>Helpers for building Dash applications.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Helpers for building Dash applications.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">ContextDecorator</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">cerberus</span> <span class="kn">import</span> <span class="n">Validator</span>
+
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
+<span class="c1"># For Working with Data</span>
+
+
+<span class="k">def</span> <span class="nf">enable_verbose_pandas</span><span class="p">(</span><span class="n">max_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_rows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_seq_items</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Update global pandas configuration for printed dataframes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        max_columns: the number of max columns. Default is None (to show all)</span>
+<span class="sd">        max_rows: the number of max rows. Default is None (to show all)</span>
+<span class="sd">        max_seq_items: the number of max sequence items. Default is None (to show all) # TODO: what does this set?</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Enable all columns to be displayed at once (or tweak to set a new limit)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="n">max_columns</span><span class="p">)</span>
+
+    <span class="c1"># Optionally modify number of rows shown</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="n">max_rows</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_seq_items</span><span class="p">:</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s1">&#39;display.max_seq_items&#39;</span><span class="p">,</span> <span class="n">max_seq_items</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">append_df</span><span class="p">(</span><span class="n">df_old</span><span class="p">,</span> <span class="n">df_new</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Handle appending a dataframe if the old_df is None. Useful for iteration.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_old: dataframe or None</span>
+<span class="sd">        df_new: new dataframe to append. Expects all columns to match</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dataframe: combined dataframe</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">df_new</span> <span class="k">if</span> <span class="n">df_old</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">df_old</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_new</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="o">**</span><span class="n">validator_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Validate a data structure. Return errors if any found.</span>
+
+<span class="sd">    Cerberus Documentation: https://docs.python-cerberus.org/en/stable/validation-rules.html</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        document: data structure to validate</span>
+<span class="sd">        schema: expected structure</span>
+<span class="sd">        validator_kwargs: additional keyword arguments for Validator class</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: validation errors</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="o">**</span><span class="n">validator_kwargs</span><span class="p">)</span>
+    <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">validator</span><span class="o">.</span><span class="n">errors</span>
+
+
+<span class="k">def</span> <span class="nf">json_dumps_compact</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>   <span class="c1"># noqa: CCR001</span>
+    <span class="sd">&quot;&quot;&quot;Format provided dictionary into compact JSON. Lists will be in one line rather than split on new lines.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: JSON-serializable dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: JSON-formatted string with lists compacted into a single line</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">clean_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># Check each key/value pair to determine if any intermediary strings are needed for later formatting</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">raw</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># PLANNED: Convert to FP and recursive calls?</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;``</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">``&#39;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">]</span>
+            <span class="n">clean_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">clean_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw</span>
+    <span class="c1"># Format the dictionary into JSON and replace the special characters used as intermediaries</span>
+    <span class="n">raw_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">clean_data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">),</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">raw_json</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;: &quot;[&#39;</span><span class="p">,</span> <span class="s1">&#39;: [&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;``&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">write_pretty_json</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write indented JSON file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename: Path or plain string filename to write (should end with `.json`)</span>
+<span class="sd">        obj: JSON object to write</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">write_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write a csv file with appropriate line terminator and encoding.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        csv_path: path to CSV file</span>
+<span class="sd">        rows: list of lists to write to CSV file</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csv_file</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_MINIMAL</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
+<span class="c1"># Time Helpers</span>
+
+<span class="n">US_TIME_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y %H:%M:%S&#39;</span>
+<span class="sd">&quot;&quot;&quot;String time format with month/year (MM/DD/YYYY HH:MM:SS).&quot;&quot;&quot;</span>
+
+<span class="n">DASHED_TIME_FORMAT_US</span> <span class="o">=</span> <span class="s1">&#39;%m-</span><span class="si">%d</span><span class="s1">-%Y %H:%M:%S&#39;</span>
+<span class="sd">&quot;&quot;&quot;Dashed time format with month first (MM-DD-YYYY HH:MM:SS).&quot;&quot;&quot;</span>
+
+<span class="n">DASHED_TIME_FORMAT_YEAR</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span>
+<span class="sd">&quot;&quot;&quot;Dashed time format with year first (YYYY-MM-DD HH:MM:SS).&quot;&quot;&quot;</span>
+
+<span class="n">TIME_FORMAT_FILE</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">_%H%M%S&#39;</span>
+<span class="sd">&quot;&quot;&quot;Filename-safe time format with year first (YYYY-MM-DD_HHMMSS).&quot;&quot;&quot;</span>
+
+<span class="n">GDP_TIME_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">%b%Y %H:%M:%S&#39;</span>
+<span class="sd">&quot;&quot;&quot;Good Documentation Practice time format (DDMMMYYYY HH:MM:SS).&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">get_unix</span><span class="p">(</span><span class="n">str_ts</span><span class="p">,</span> <span class="n">date_format</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get unix timestamp from a string timestamp in date_format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        str_ts: string timestamp in `date_format`</span>
+<span class="sd">        date_format: datetime time stamp format</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: unix timestamp</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">str_ts</span><span class="p">,</span> <span class="n">date_format</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">format_unix</span><span class="p">(</span><span class="n">unix_ts</span><span class="p">,</span> <span class="n">date_format</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format unix timestamp as a string timestamp in date_format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        unix_ts: unix timestamp</span>
+<span class="sd">        date_format: datetime time stamp format</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        string: formatted timestamp in `date_format`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">unix_ts</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">date_format</span><span class="p">)</span>
+
+
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
+<span class="c1"># General SQL</span>
+
+
+<span class="k">def</span> <span class="nf">uniq_table_id</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return a unique table ID based on the current time in ms.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: in format `U&lt;timestamp_ns&gt;`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;U</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time_ns</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span>
+
+
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
+<span class="c1"># sqlite3</span>
+
+
+<span class="k">class</span> <span class="nc">SQLConnection</span><span class="p">(</span><span class="n">ContextDecorator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ensure the SQLite connection is properly opened and closed.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize context wrapper.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            db_path: Path to a SQLite file</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db_path</span> <span class="o">=</span> <span class="n">db_path</span>
+
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Connect to the database and return connection reference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: connection to sqlite database</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Close connection.&quot;&quot;&quot;</span>  <span class="c1"># noqa: DAR101</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">list_sql_tables</span><span class="p">(</span><span class="n">db_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return all table names from the SQL database.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        db_path: path to SQLite database file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: of unique table names in the SQL database</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">SQLConnection</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT name FROM sqlite_master WHERE TYPE = &quot;table&quot;&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">names</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
+</code></pre></div>
+</details>
+<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">⚓︎</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">DASHED_TIME_FORMAT_US</span>
+</code></pre></div>
+<p>Dashed time format with month first (MM-DD-YYYY HH:MM:SS).</p>
+<div class="highlight"><pre><span></span><code><span class="n">DASHED_TIME_FORMAT_YEAR</span>
+</code></pre></div>
+<p>Dashed time format with year first (YYYY-MM-DD HH:MM:SS).</p>
+<div class="highlight"><pre><span></span><code><span class="n">GDP_TIME_FORMAT</span>
+</code></pre></div>
+<p>Good Documentation Practice time format (DDMMMYYYY HH:MM:SS).</p>
+<div class="highlight"><pre><span></span><code><span class="n">TIME_FORMAT_FILE</span>
+</code></pre></div>
+<p>Filename-safe time format with year first (YYYY-MM-DD_HHMMSS).</p>
+<div class="highlight"><pre><span></span><code><span class="n">US_TIME_FORMAT</span>
+</code></pre></div>
+<p>String time format with month/year (MM/DD/YYYY HH:MM:SS).</p>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="append_df">append_df<a class="headerlink" href="#append_df" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">append_df</span><span class="p">(</span>
+    <span class="n">df_old</span><span class="p">,</span>
+    <span class="n">df_new</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Handle appending a dataframe if the old_df is None. Useful for iteration.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>df_old</td>
+<td>dataframe or None</td>
+</tr>
+<tr>
+<td>df_new</td>
+<td>new dataframe to append. Expects all columns to match</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dataframe</td>
+<td>combined dataframe</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">append_df</span><span class="p">(</span><span class="n">df_old</span><span class="p">,</span> <span class="n">df_new</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Handle appending a dataframe if the old_df is None. Useful for iteration.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_old: dataframe or None</span>
+<span class="sd">        df_new: new dataframe to append. Expects all columns to match</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dataframe: combined dataframe</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">df_new</span> <span class="k">if</span> <span class="n">df_old</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">df_old</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_new</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h3 id="enable_verbose_pandas">enable_verbose_pandas<a class="headerlink" href="#enable_verbose_pandas" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">enable_verbose_pandas</span><span class="p">(</span>
+    <span class="n">max_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_rows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_seq_items</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Update global pandas configuration for printed dataframes.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_columns</td>
+<td>the number of max columns. Default is None (to show all)</td>
+</tr>
+<tr>
+<td>max_rows</td>
+<td>the number of max rows. Default is None (to show all)</td>
+</tr>
+<tr>
+<td>max_seq_items</td>
+<td>the number of max sequence items. Default is None (to show all) # TODO: what does this set?</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">enable_verbose_pandas</span><span class="p">(</span><span class="n">max_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_rows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_seq_items</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Update global pandas configuration for printed dataframes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        max_columns: the number of max columns. Default is None (to show all)</span>
+<span class="sd">        max_rows: the number of max rows. Default is None (to show all)</span>
+<span class="sd">        max_seq_items: the number of max sequence items. Default is None (to show all) # TODO: what does this set?</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Enable all columns to be displayed at once (or tweak to set a new limit)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="n">max_columns</span><span class="p">)</span>
+
+    <span class="c1"># Optionally modify number of rows shown</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="n">max_rows</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_seq_items</span><span class="p">:</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s1">&#39;display.max_seq_items&#39;</span><span class="p">,</span> <span class="n">max_seq_items</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h3 id="format_unix">format_unix<a class="headerlink" href="#format_unix" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">format_unix</span><span class="p">(</span>
+    <span class="n">unix_ts</span><span class="p">,</span>
+    <span class="n">date_format</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Format unix timestamp as a string timestamp in date_format.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unix_ts</td>
+<td>unix timestamp</td>
+</tr>
+<tr>
+<td>date_format</td>
+<td>datetime time stamp format</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>string</td>
+<td>formatted timestamp in <code>date_format</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">format_unix</span><span class="p">(</span><span class="n">unix_ts</span><span class="p">,</span> <span class="n">date_format</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format unix timestamp as a string timestamp in date_format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        unix_ts: unix timestamp</span>
+<span class="sd">        date_format: datetime time stamp format</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        string: formatted timestamp in `date_format`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">unix_ts</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">date_format</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h3 id="get_unix">get_unix<a class="headerlink" href="#get_unix" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_unix</span><span class="p">(</span>
+    <span class="n">str_ts</span><span class="p">,</span>
+    <span class="n">date_format</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Get unix timestamp from a string timestamp in date_format.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str_ts</td>
+<td>string timestamp in <code>date_format</code></td>
+</tr>
+<tr>
+<td>date_format</td>
+<td>datetime time stamp format</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>unix timestamp</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_unix</span><span class="p">(</span><span class="n">str_ts</span><span class="p">,</span> <span class="n">date_format</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get unix timestamp from a string timestamp in date_format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        str_ts: string timestamp in `date_format`</span>
+<span class="sd">        date_format: datetime time stamp format</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: unix timestamp</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">str_ts</span><span class="p">,</span> <span class="n">date_format</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h3 id="json_dumps_compact">json_dumps_compact<a class="headerlink" href="#json_dumps_compact" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">json_dumps_compact</span><span class="p">(</span>
+    <span class="n">data</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Format provided dictionary into compact JSON. Lists will be in one line rather than split on new lines.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>JSON-serializable dictionary</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>JSON-formatted string with lists compacted into a single line</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">json_dumps_compact</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>   <span class="c1"># noqa: CCR001</span>
+    <span class="sd">&quot;&quot;&quot;Format provided dictionary into compact JSON. Lists will be in one line rather than split on new lines.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: JSON-serializable dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: JSON-formatted string with lists compacted into a single line</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">clean_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># Check each key/value pair to determine if any intermediary strings are needed for later formatting</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">raw</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># PLANNED: Convert to FP and recursive calls?</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;``</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">``&#39;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">]</span>
+            <span class="n">clean_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">clean_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw</span>
+    <span class="c1"># Format the dictionary into JSON and replace the special characters used as intermediaries</span>
+    <span class="n">raw_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">clean_data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">),</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">raw_json</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;: &quot;[&#39;</span><span class="p">,</span> <span class="s1">&#39;: [&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;``&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div>
+</details>
+<h3 id="list_sql_tables">list_sql_tables<a class="headerlink" href="#list_sql_tables" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">list_sql_tables</span><span class="p">(</span>
+    <span class="n">db_path</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Return all table names from the SQL database.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>db_path</td>
+<td>path to SQLite database file</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>of unique table names in the SQL database</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">list_sql_tables</span><span class="p">(</span><span class="n">db_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return all table names from the SQL database.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        db_path: path to SQLite database file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: of unique table names in the SQL database</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">SQLConnection</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT name FROM sqlite_master WHERE TYPE = &quot;table&quot;&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">names</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
+</code></pre></div>
+</details>
+<h3 id="uniq_table_id">uniq_table_id<a class="headerlink" href="#uniq_table_id" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">uniq_table_id</span><span class="p">()</span>
+</code></pre></div>
+<p>Return a unique table ID based on the current time in ms.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>in format <code>U&lt;timestamp_ns&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">uniq_table_id</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return a unique table ID based on the current time in ms.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: in format `U&lt;timestamp_ns&gt;`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;U</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time_ns</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span>
+</code></pre></div>
+</details>
+<h3 id="validate">validate<a class="headerlink" href="#validate" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>
+    <span class="n">document</span><span class="p">,</span>
+    <span class="n">schema</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">validator_kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Validate a data structure. Return errors if any found.</p>
+<p>Cerberus Documentation: https://docs.python-cerberus.org/en/stable/validation-rules.html</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document</td>
+<td>data structure to validate</td>
+</tr>
+<tr>
+<td>schema</td>
+<td>expected structure</td>
+</tr>
+<tr>
+<td>validator_kwargs</td>
+<td>additional keyword arguments for Validator class</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>validation errors</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="o">**</span><span class="n">validator_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Validate a data structure. Return errors if any found.</span>
+
+<span class="sd">    Cerberus Documentation: https://docs.python-cerberus.org/en/stable/validation-rules.html</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        document: data structure to validate</span>
+<span class="sd">        schema: expected structure</span>
+<span class="sd">        validator_kwargs: additional keyword arguments for Validator class</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: validation errors</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="o">**</span><span class="n">validator_kwargs</span><span class="p">)</span>
+    <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">validator</span><span class="o">.</span><span class="n">errors</span>
+</code></pre></div>
+</details>
+<h3 id="write_csv">write_csv<a class="headerlink" href="#write_csv" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_csv</span><span class="p">(</span>
+    <span class="n">csv_path</span><span class="p">,</span>
+    <span class="n">rows</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Write a csv file with appropriate line terminator and encoding.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>csv_path</td>
+<td>path to CSV file</td>
+</tr>
+<tr>
+<td>rows</td>
+<td>list of lists to write to CSV file</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write a csv file with appropriate line terminator and encoding.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        csv_path: path to CSV file</span>
+<span class="sd">        rows: list of lists to write to CSV file</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csv_file</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_MINIMAL</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h3 id="write_pretty_json">write_pretty_json<a class="headerlink" href="#write_pretty_json" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_pretty_json</span><span class="p">(</span>
+    <span class="n">filename</span><span class="p">,</span>
+    <span class="n">obj</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Write indented JSON file.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>Path or plain string filename to write (should end with <code>.json</code>)</td>
+</tr>
+<tr>
+<td>obj</td>
+<td>JSON object to write</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_pretty_json</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write indented JSON file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename: Path or plain string filename to write (should end with `.json`)</span>
+<span class="sd">        obj: JSON object to write</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">)))</span>
+</code></pre></div>
+</details>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="sqlconnection">SQLConnection<a class="headerlink" href="#sqlconnection" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SQLConnection</span><span class="p">(</span>
+    <span class="n">db_path</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SQLConnection</span><span class="p">(</span><span class="n">ContextDecorator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ensure the SQLite connection is properly opened and closed.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize context wrapper.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            db_path: Path to a SQLite file</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db_path</span> <span class="o">=</span> <span class="n">db_path</span>
+
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Connect to the database and return connection reference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: connection to sqlite database</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Close connection.&quot;&quot;&quot;</span>  <span class="c1"># noqa: DAR101</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h4 id="ancestors-in-mro">Ancestors (in MRO)<a class="headerlink" href="#ancestors-in-mro" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>contextlib.ContextDecorator</li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../utils_callbacks/" class="md-footer__link md-footer__link--prev" aria-label="Previous: dash_charts.utils_callbacks" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              dash_charts.utils_callbacks
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../utils_dataset/" class="md-footer__link md-footer__link--next" aria-label="Next: dash_charts.utils_dataset" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              dash_charts.utils_dataset
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f8ea78.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2999 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="dash_charts project documentation">
+      
+      
+        <meta name="author" content="Kyle King">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.5">
+    
+    
+      
+        <title>dash_charts.modules_datatable - dash_charts</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.a617204b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dash_chartsmodules_datatable" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="dash_charts" class="md-header__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dash_charts
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              dash_charts.modules_datatable
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      dash_charts
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../CODE_TAG_SUMMARY/" class="md-tabs__link">
+      Task Summary
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../DESIGN/" class="md-tabs__link">
+      Design and Architecture Notes
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../docs/CHANGELOG/" class="md-tabs__link">
+        Docs
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        Modules
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="dash_charts" class="md-nav__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dash_charts
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DESIGN/" class="md-nav__link">
+        Design and Architecture Notes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Docs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Docs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Docs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CHANGELOG/" class="md-nav__link">
+        CHANGELOG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_OF_CONDUCT/" class="md-nav__link">
+        Contributor Covenant Code of Conduct
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DEVELOPER_GUIDE/" class="md-nav__link">
+        Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/SECURITY/" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/STYLE_GUIDE/" class="md-nav__link">
+        Personal Style Guides
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Modules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Modules" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Dash charts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dash charts" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Dash charts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../_code_diagrams/" class="md-nav__link">
+        Code Diagrams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app_px/" class="md-nav__link">
+        dash_charts.app_px
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../components/" class="md-nav__link">
+        dash_charts.components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coordinate_chart/" class="md-nav__link">
+        dash_charts.coordinate_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom_colorscales/" class="md-nav__link">
+        dash_charts.custom_colorscales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datatable/" class="md-nav__link">
+        dash_charts.datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../equations/" class="md-nav__link">
+        dash_charts.equations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gantt_chart/" class="md-nav__link">
+        dash_charts.gantt_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          dash_charts.modules_datatable
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        dash_charts.modules_datatable
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moduledatatable" class="md-nav__link">
+    ModuleDataTable
+  </a>
+  
+    <nav class="md-nav" aria-label="ModuleDataTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descendants" class="md-nav__link">
+    Descendants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_callbacks" class="md-nav__link">
+    create_callbacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_elements" class="md-nav__link">
+    create_elements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize_mutables" class="md-nav__link">
+    initialize_mutables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_highlight_sort_column" class="md-nav__link">
+    register_highlight_sort_column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_layout" class="md-nav__link">
+    return_layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_table_map" class="md-nav__link">
+    return_table_map
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulefilteredtable" class="md-nav__link">
+    ModuleFilteredTable
+  </a>
+  
+    <nav class="md-nav" aria-label="ModuleFilteredTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_1" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables_1" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_callbacks_1" class="md-nav__link">
+    create_callbacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_elements_1" class="md-nav__link">
+    create_elements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_1" class="md-nav__link">
+    get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize_mutables_1" class="md-nav__link">
+    initialize_mutables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_create_table" class="md-nav__link">
+    register_create_table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_filter_interface" class="md-nav__link">
+    register_filter_interface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_highlight_sort_column_1" class="md-nav__link">
+    register_highlight_sort_column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_show_query" class="md-nav__link">
+    register_show_query
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_layout_1" class="md-nav__link">
+    return_layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_table_map_1" class="md-nav__link">
+    return_table_map
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules_upload/" class="md-nav__link">
+        dash_charts.modules_upload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pareto_chart/" class="md-nav__link">
+        dash_charts.pareto_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scatter_line_charts/" class="md-nav__link">
+        dash_charts.scatter_line_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time_vis_chart/" class="md-nav__link">
+        dash_charts.time_vis_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app/" class="md-nav__link">
+        dash_charts.utils_app
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_modules/" class="md-nav__link">
+        dash_charts.utils_app_modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_with_navigation/" class="md-nav__link">
+        dash_charts.utils_app_with_navigation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_callbacks/" class="md-nav__link">
+        dash_charts.utils_callbacks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_data/" class="md-nav__link">
+        dash_charts.utils_data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_dataset/" class="md-nav__link">
+        dash_charts.utils_dataset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_fig/" class="md-nav__link">
+        dash_charts.utils_fig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_helpers/" class="md-nav__link">
+        dash_charts.utils_helpers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_json_cache/" class="md-nav__link">
+        dash_charts.utils_json_cache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_static/" class="md-nav__link">
+        dash_charts.utils_static
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_static_toc/" class="md-nav__link">
+        dash_charts.utils_static_toc
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moduledatatable" class="md-nav__link">
+    ModuleDataTable
+  </a>
+  
+    <nav class="md-nav" aria-label="ModuleDataTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descendants" class="md-nav__link">
+    Descendants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_callbacks" class="md-nav__link">
+    create_callbacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_elements" class="md-nav__link">
+    create_elements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize_mutables" class="md-nav__link">
+    initialize_mutables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_highlight_sort_column" class="md-nav__link">
+    register_highlight_sort_column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_layout" class="md-nav__link">
+    return_layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_table_map" class="md-nav__link">
+    return_table_map
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulefilteredtable" class="md-nav__link">
+    ModuleFilteredTable
+  </a>
+  
+    <nav class="md-nav" aria-label="ModuleFilteredTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_1" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables_1" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_callbacks_1" class="md-nav__link">
+    create_callbacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_elements_1" class="md-nav__link">
+    create_elements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_1" class="md-nav__link">
+    get
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize_mutables_1" class="md-nav__link">
+    initialize_mutables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_create_table" class="md-nav__link">
+    register_create_table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_filter_interface" class="md-nav__link">
+    register_filter_interface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_highlight_sort_column_1" class="md-nav__link">
+    register_highlight_sort_column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_show_query" class="md-nav__link">
+    register_show_query
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_layout_1" class="md-nav__link">
+    return_layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return_table_map_1" class="md-nav__link">
+    return_table_map
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/kyleking/dash_charts/edit/main/docs/modules/dash_charts/modules_datatable.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="dash_chartsmodules_datatable">dash_charts.modules_datatable<a class="headerlink" href="#dash_chartsmodules_datatable" title="Permanent link">⚓︎</a></h1>
+<p>Dash Modules for Data Tables.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Dash Modules for Data Tables.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">dash_bootstrap_components</span> <span class="k">as</span> <span class="nn">dbc</span>
+<span class="kn">import</span> <span class="nn">dash_core_components</span> <span class="k">as</span> <span class="nn">dcc</span>
+<span class="kn">import</span> <span class="nn">dash_html_components</span> <span class="k">as</span> <span class="nn">html</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">dash.exceptions</span> <span class="kn">import</span> <span class="n">PreventUpdate</span>
+
+<span class="kn">from</span> <span class="nn">.components</span> <span class="kn">import</span> <span class="n">dropdown_group</span><span class="p">,</span> <span class="n">opts_dd</span>
+<span class="kn">from</span> <span class="nn">.datatable</span> <span class="kn">import</span> <span class="n">BaseDataTable</span>
+<span class="kn">from</span> <span class="nn">.utils_app_modules</span> <span class="kn">import</span> <span class="n">ModuleBase</span>
+<span class="kn">from</span> <span class="nn">.utils_callbacks</span> <span class="kn">import</span> <span class="n">map_args</span><span class="p">,</span> <span class="n">map_outputs</span>
+
+
+<span class="k">class</span> <span class="nc">ModuleDataTable</span><span class="p">(</span><span class="n">ModuleBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Modular Dash data table.&quot;&quot;&quot;</span>
+
+    <span class="n">id_table_parent</span> <span class="o">=</span> <span class="s1">&#39;datatable-module-parent&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Table Parent ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_table</span> <span class="o">=</span> <span class="s1">&#39;datatable-module&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Table ID.&quot;&quot;&quot;</span>
+
+    <span class="n">table</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Dash Data Table.&quot;&quot;&quot;</span>
+
+    <span class="n">all_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">id_table_parent</span><span class="p">,</span> <span class="n">id_table</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;List of ids to register for this module.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register the callback for creating the main chart.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">BaseDataTable</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">placeholder</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">([[</span><span class="s1">&#39;body&#39;</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">placeholder</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)]),</span>
+            <span class="p">],</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">)],</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">return_table_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">df_table</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return list of tuples for `map_outputs` that includes the new datatable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+<span class="sd">            df_table: dataframe to show in table</span>
+<span class="sd">            columns: list of columns to show. Default is None, which will show all columns</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: list of tuples for `map_outputs`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">datatable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">datatable</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_highlight_sort_column</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_highlight_sort_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PreventUpdate: if no columns found in the table</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;sort_by&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">highlight_sort_column</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">sort_by</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;sort_by&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">sort_by</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PreventUpdate</span>
+
+            <span class="n">sorted_columns_style</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">sort</span> <span class="ow">in</span> <span class="n">sort_by</span><span class="p">:</span>
+                <span class="n">sorted_columns_style</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;column_id&#39;</span><span class="p">:</span> <span class="n">sort</span><span class="p">[</span><span class="s1">&#39;column_id&#39;</span><span class="p">],</span> <span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;odd&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span> <span class="s1">&#39;background-color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">zebra_color</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;column_id&#39;</span><span class="p">:</span> <span class="n">sort</span><span class="p">[</span><span class="s1">&#39;column_id&#39;</span><span class="p">],</span> <span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;even&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span> <span class="s1">&#39;background-color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">selected_cell_color</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">])</span>
+
+            <span class="n">style_data_conditional</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">style_data_conditional</span><span class="p">,</span> <span class="o">*</span><span class="n">sorted_columns_style</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">,</span> <span class="n">style_data_conditional</span><span class="p">)])</span>
+
+
+<span class="k">class</span> <span class="nc">ModuleFilteredTable</span><span class="p">(</span><span class="n">ModuleDataTable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Modular Dash data table with column selection and filter.&quot;&quot;&quot;</span>
+
+    <span class="n">id_column_select</span> <span class="o">=</span> <span class="s1">&#39;column-select&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Column select ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_filter_button</span> <span class="o">=</span> <span class="s1">&#39;filter-button&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Apply filter button ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_filter_input</span> <span class="o">=</span> <span class="s1">&#39;filter-query-input&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Filter query input ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_filter_output</span> <span class="o">=</span> <span class="s1">&#39;filter-query-output&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Filter query output ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_filter_structure</span> <span class="o">=</span> <span class="s1">&#39;filter-query-structure&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Filter query structure ID.&quot;&quot;&quot;</span>
+
+    <span class="n">all_ids</span> <span class="o">=</span> <span class="n">ModuleDataTable</span><span class="o">.</span><span class="n">all_ids</span> <span class="o">+</span> <span class="p">[</span>
+        <span class="n">id_column_select</span><span class="p">,</span> <span class="n">id_filter_button</span><span class="p">,</span> <span class="n">id_filter_input</span><span class="p">,</span> <span class="n">id_filter_output</span><span class="p">,</span>
+        <span class="n">id_filter_structure</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;List of ids to register for this module.&quot;&quot;&quot;</span>
+
+    <span class="n">show_filter</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="sd">&quot;&quot;&quot;If True (default), will show an input for entering a global filter.&quot;&quot;&quot;</span>
+
+    <span class="n">mod_df</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Data frame shown in table. Passed to `return_layout` and used when creating the table.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">mod_df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+<span class="sd">            mod_df: dataframe for</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span> <span class="o">=</span> <span class="n">mod_df</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">opts_dd</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_filter</span><span class="p">:</span>
+            <span class="n">filter_elements</span> <span class="o">=</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Form</span><span class="p">([</span>
+                            <span class="n">dcc</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span>
+                                <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_input</span><span class="p">)],</span> <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Enter filter query&#39;</span><span class="p">,</span>
+                                <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="s1">&#39;100%&#39;</span><span class="p">},</span>
+                            <span class="p">),</span>
+                            <span class="n">dbc</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                                <span class="s1">&#39;Apply&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_button</span><span class="p">)],</span>
+                                <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;paddingTop&#39;</span><span class="p">:</span> <span class="s1">&#39;5px&#39;</span><span class="p">},</span>
+                            <span class="p">),</span>
+                        <span class="p">]),</span>
+                    <span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">([],</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_output</span><span class="p">)]),</span>
+                    <span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_structure</span><span class="p">)],</span> <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;whitespace&#39;</span><span class="p">:</span> <span class="s1">&#39;pre&#39;</span><span class="p">}),</span>
+                    <span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">filter_elements</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">([</span>
+            <span class="n">dropdown_group</span><span class="p">(</span>
+                <span class="s1">&#39;Select DataFrame Columns&#39;</span><span class="p">,</span> <span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_column_select</span><span class="p">)],</span>
+                <span class="n">options</span><span class="p">,</span> <span class="n">multi</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">persistence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">filter_elements</span><span class="p">,</span>
+            <span class="n">html</span><span class="o">.</span><span class="n">Br</span><span class="p">(),</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">return_layout</span><span class="p">(</span><span class="n">ids</span><span class="p">),</span>
+        <span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">create_callbacks</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_create_table</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_filter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_filter_interface</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_show_query</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_create_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PreventUpdate: if no columns found in the table</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_column_select</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_column_select</span><span class="p">)][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">columns</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PreventUpdate</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_table_map</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">ids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span><span class="p">,</span> <span class="n">columns</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">register_filter_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;filter_query&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_button</span><span class="p">),</span> <span class="s1">&#39;n_clicks&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_input</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">)]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">show_query</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">a_states</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_input</span><span class="p">)][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">query</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;filter_query&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">)])</span>
+
+    <span class="k">def</span> <span class="nf">register_show_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>   <span class="c1"># noqa: CCR001</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_output</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_structure</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;filter_query&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;derived_filter_query_structure&#39;</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">show_query</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">filter_query</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;filter_query&#39;</span><span class="p">]</span>
+            <span class="n">derived_query</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;derived_filter_query_structure&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">filter_query</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter_query</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">filter_element</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;No filter query&#39;</span><span class="p">]</span>
+                <span class="n">derived_element</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">filter_element</span> <span class="o">=</span> <span class="p">[</span><span class="n">dcc</span><span class="o">.</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;```</span><span class="se">\n\n</span><span class="s1">filter_query:</span><span class="se">\n\n</span><span class="si">{</span><span class="n">filter_query</span><span class="si">}</span><span class="se">\n\n</span><span class="s1">```&#39;</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">derived_query</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">derived_element</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Error in query. Check formatting&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">derived_element</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">html</span><span class="o">.</span><span class="n">Details</span><span class="p">([</span>
+                            <span class="n">html</span><span class="o">.</span><span class="n">Summary</span><span class="p">(</span><span class="s1">&#39;Derived filter query structure&#39;</span><span class="p">),</span>
+                            <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="n">dcc</span><span class="o">.</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;```json</span><span class="se">\n\n</span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">derived_query</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="se">\n\n</span><span class="s1">```&#39;</span><span class="p">)),</span>
+                        <span class="p">]),</span>
+                    <span class="p">]</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span>
+                <span class="n">outputs</span><span class="p">,</span> <span class="p">[</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_output</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">filter_element</span><span class="p">),</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_structure</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">derived_element</span><span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">)</span>
+</code></pre></div>
+</details>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="moduledatatable">ModuleDataTable<a class="headerlink" href="#moduledatatable" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ModuleDataTable</span><span class="p">(</span>
+    <span class="n">name</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ModuleDataTable</span><span class="p">(</span><span class="n">ModuleBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Modular Dash data table.&quot;&quot;&quot;</span>
+
+    <span class="n">id_table_parent</span> <span class="o">=</span> <span class="s1">&#39;datatable-module-parent&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Table Parent ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_table</span> <span class="o">=</span> <span class="s1">&#39;datatable-module&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Table ID.&quot;&quot;&quot;</span>
+
+    <span class="n">table</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Dash Data Table.&quot;&quot;&quot;</span>
+
+    <span class="n">all_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">id_table_parent</span><span class="p">,</span> <span class="n">id_table</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;List of ids to register for this module.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register the callback for creating the main chart.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">BaseDataTable</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">placeholder</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">([[</span><span class="s1">&#39;body&#39;</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">placeholder</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)]),</span>
+            <span class="p">],</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">)],</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">return_table_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">df_table</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return list of tuples for `map_outputs` that includes the new datatable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+<span class="sd">            df_table: dataframe to show in table</span>
+<span class="sd">            columns: list of columns to show. Default is None, which will show all columns</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: list of tuples for `map_outputs`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">datatable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">datatable</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_highlight_sort_column</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_highlight_sort_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PreventUpdate: if no columns found in the table</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;sort_by&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">highlight_sort_column</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">sort_by</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;sort_by&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">sort_by</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PreventUpdate</span>
+
+            <span class="n">sorted_columns_style</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">sort</span> <span class="ow">in</span> <span class="n">sort_by</span><span class="p">:</span>
+                <span class="n">sorted_columns_style</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;column_id&#39;</span><span class="p">:</span> <span class="n">sort</span><span class="p">[</span><span class="s1">&#39;column_id&#39;</span><span class="p">],</span> <span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;odd&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span> <span class="s1">&#39;background-color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">zebra_color</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;column_id&#39;</span><span class="p">:</span> <span class="n">sort</span><span class="p">[</span><span class="s1">&#39;column_id&#39;</span><span class="p">],</span> <span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;even&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span> <span class="s1">&#39;background-color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">selected_cell_color</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">])</span>
+
+            <span class="n">style_data_conditional</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">style_data_conditional</span><span class="p">,</span> <span class="o">*</span><span class="n">sorted_columns_style</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">,</span> <span class="n">style_data_conditional</span><span class="p">)])</span>
+</code></pre></div>
+</details>
+<h4 id="ancestors-in-mro">Ancestors (in MRO)<a class="headerlink" href="#ancestors-in-mro" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>dash_charts.utils_app_modules.ModuleBase</li>
+</ul>
+<h4 id="descendants">Descendants<a class="headerlink" href="#descendants" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>dash_charts.modules_datatable.ModuleFilteredTable</li>
+</ul>
+<h4 id="class-variables">Class variables<a class="headerlink" href="#class-variables" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">all_ids</span>
+</code></pre></div>
+<p>List of ids to register for this module.</p>
+<div class="highlight"><pre><span></span><code><span class="n">id_table</span>
+</code></pre></div>
+<p>Table ID.</p>
+<div class="highlight"><pre><span></span><code><span class="n">id_table_parent</span>
+</code></pre></div>
+<p>Table Parent ID.</p>
+<div class="highlight"><pre><span></span><code><span class="n">table</span>
+</code></pre></div>
+<p>Dash Data Table.</p>
+<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
+<h4 id="create_callbacks">create_callbacks<a class="headerlink" href="#create_callbacks" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">parent</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register callbacks to handle user interaction.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>parent instance (ex: <code>self</code>)</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_highlight_sort_column</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h4 id="create_elements">create_elements<a class="headerlink" href="#create_elements" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">ids</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register the callback for creating the main chart.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ids</td>
+<td><code>self._il</code> from base application</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register the callback for creating the main chart.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">BaseDataTable</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h4 id="get">get<a class="headerlink" href="#get" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">_id</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Return the  the callback for creating the main chart.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_id</td>
+<td>id from this module that is found in <code>self.all_ids</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>unique id name from instance of this module</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the  the callback for creating the main chart.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            _id: id from this module that is found in `self.all_ids`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: unique id name from instance of this module</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ids</span><span class="p">[</span><span class="n">_id</span><span class="p">]</span>
+</code></pre></div>
+</details>
+<h4 id="initialize_mutables">initialize_mutables<a class="headerlink" href="#initialize_mutables" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize_mutables</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Initialize the mutable data members to prevent modifying one attribute and impacting all instances.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">initialize_mutables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the mutable data members to prevent modifying one attribute and impacting all instances.&quot;&quot;&quot;</span>
+</code></pre></div>
+</details>
+<h4 id="register_highlight_sort_column">register_highlight_sort_column<a class="headerlink" href="#register_highlight_sort_column" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_highlight_sort_column</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">parent</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register callbacks to handle user interaction.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>parent instance (ex: <code>self</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raises:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PreventUpdate</td>
+<td>if no columns found in the table</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">register_highlight_sort_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PreventUpdate: if no columns found in the table</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;sort_by&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">highlight_sort_column</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">sort_by</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;sort_by&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">sort_by</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PreventUpdate</span>
+
+            <span class="n">sorted_columns_style</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">sort</span> <span class="ow">in</span> <span class="n">sort_by</span><span class="p">:</span>
+                <span class="n">sorted_columns_style</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;column_id&#39;</span><span class="p">:</span> <span class="n">sort</span><span class="p">[</span><span class="s1">&#39;column_id&#39;</span><span class="p">],</span> <span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;odd&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span> <span class="s1">&#39;background-color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">zebra_color</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;column_id&#39;</span><span class="p">:</span> <span class="n">sort</span><span class="p">[</span><span class="s1">&#39;column_id&#39;</span><span class="p">],</span> <span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;even&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span> <span class="s1">&#39;background-color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">selected_cell_color</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">])</span>
+
+            <span class="n">style_data_conditional</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">style_data_conditional</span><span class="p">,</span> <span class="o">*</span><span class="n">sorted_columns_style</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">,</span> <span class="n">style_data_conditional</span><span class="p">)])</span>
+</code></pre></div>
+</details>
+<h4 id="return_layout">return_layout<a class="headerlink" href="#return_layout" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">ids</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Return Dash application layout.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ids</td>
+<td><code>self._il</code> from base application</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dict</td>
+<td>Dash HTML object</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">placeholder</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">([[</span><span class="s1">&#39;body&#39;</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">placeholder</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)]),</span>
+            <span class="p">],</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">)],</span>
+        <span class="p">)</span>
+</code></pre></div>
+</details>
+<h4 id="return_table_map">return_table_map<a class="headerlink" href="#return_table_map" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">return_table_map</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">ids</span><span class="p">,</span>
+    <span class="n">df_table</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Return list of tuples for <code>map_outputs</code> that includes the new datatable.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ids</td>
+<td><code>self._il</code> from base application</td>
+</tr>
+<tr>
+<td>df_table</td>
+<td>dataframe to show in table</td>
+</tr>
+<tr>
+<td>columns</td>
+<td>list of columns to show. Default is None, which will show all columns</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>list of tuples for <code>map_outputs</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">return_table_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">df_table</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return list of tuples for `map_outputs` that includes the new datatable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+<span class="sd">            df_table: dataframe to show in table</span>
+<span class="sd">            columns: list of columns to show. Default is None, which will show all columns</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: list of tuples for `map_outputs`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">datatable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">datatable</span><span class="p">)]</span>
+</code></pre></div>
+</details>
+<h3 id="modulefilteredtable">ModuleFilteredTable<a class="headerlink" href="#modulefilteredtable" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ModuleFilteredTable</span><span class="p">(</span>
+    <span class="n">name</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ModuleFilteredTable</span><span class="p">(</span><span class="n">ModuleDataTable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Modular Dash data table with column selection and filter.&quot;&quot;&quot;</span>
+
+    <span class="n">id_column_select</span> <span class="o">=</span> <span class="s1">&#39;column-select&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Column select ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_filter_button</span> <span class="o">=</span> <span class="s1">&#39;filter-button&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Apply filter button ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_filter_input</span> <span class="o">=</span> <span class="s1">&#39;filter-query-input&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Filter query input ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_filter_output</span> <span class="o">=</span> <span class="s1">&#39;filter-query-output&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Filter query output ID.&quot;&quot;&quot;</span>
+
+    <span class="n">id_filter_structure</span> <span class="o">=</span> <span class="s1">&#39;filter-query-structure&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Filter query structure ID.&quot;&quot;&quot;</span>
+
+    <span class="n">all_ids</span> <span class="o">=</span> <span class="n">ModuleDataTable</span><span class="o">.</span><span class="n">all_ids</span> <span class="o">+</span> <span class="p">[</span>
+        <span class="n">id_column_select</span><span class="p">,</span> <span class="n">id_filter_button</span><span class="p">,</span> <span class="n">id_filter_input</span><span class="p">,</span> <span class="n">id_filter_output</span><span class="p">,</span>
+        <span class="n">id_filter_structure</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;List of ids to register for this module.&quot;&quot;&quot;</span>
+
+    <span class="n">show_filter</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="sd">&quot;&quot;&quot;If True (default), will show an input for entering a global filter.&quot;&quot;&quot;</span>
+
+    <span class="n">mod_df</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Data frame shown in table. Passed to `return_layout` and used when creating the table.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">mod_df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+<span class="sd">            mod_df: dataframe for</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span> <span class="o">=</span> <span class="n">mod_df</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">opts_dd</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_filter</span><span class="p">:</span>
+            <span class="n">filter_elements</span> <span class="o">=</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Form</span><span class="p">([</span>
+                            <span class="n">dcc</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span>
+                                <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_input</span><span class="p">)],</span> <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Enter filter query&#39;</span><span class="p">,</span>
+                                <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="s1">&#39;100%&#39;</span><span class="p">},</span>
+                            <span class="p">),</span>
+                            <span class="n">dbc</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                                <span class="s1">&#39;Apply&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_button</span><span class="p">)],</span>
+                                <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;paddingTop&#39;</span><span class="p">:</span> <span class="s1">&#39;5px&#39;</span><span class="p">},</span>
+                            <span class="p">),</span>
+                        <span class="p">]),</span>
+                    <span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">([],</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_output</span><span class="p">)]),</span>
+                    <span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_structure</span><span class="p">)],</span> <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;whitespace&#39;</span><span class="p">:</span> <span class="s1">&#39;pre&#39;</span><span class="p">}),</span>
+                    <span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">filter_elements</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">([</span>
+            <span class="n">dropdown_group</span><span class="p">(</span>
+                <span class="s1">&#39;Select DataFrame Columns&#39;</span><span class="p">,</span> <span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_column_select</span><span class="p">)],</span>
+                <span class="n">options</span><span class="p">,</span> <span class="n">multi</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">persistence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">filter_elements</span><span class="p">,</span>
+            <span class="n">html</span><span class="o">.</span><span class="n">Br</span><span class="p">(),</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">return_layout</span><span class="p">(</span><span class="n">ids</span><span class="p">),</span>
+        <span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">create_callbacks</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_create_table</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_filter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_filter_interface</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_show_query</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_create_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PreventUpdate: if no columns found in the table</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_column_select</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_column_select</span><span class="p">)][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">columns</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PreventUpdate</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_table_map</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">ids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span><span class="p">,</span> <span class="n">columns</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">register_filter_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;filter_query&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_button</span><span class="p">),</span> <span class="s1">&#39;n_clicks&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_input</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">)]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">show_query</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">a_states</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_input</span><span class="p">)][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">query</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;filter_query&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">)])</span>
+
+    <span class="k">def</span> <span class="nf">register_show_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>   <span class="c1"># noqa: CCR001</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_output</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_structure</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;filter_query&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;derived_filter_query_structure&#39;</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">show_query</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">filter_query</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;filter_query&#39;</span><span class="p">]</span>
+            <span class="n">derived_query</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;derived_filter_query_structure&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">filter_query</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter_query</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">filter_element</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;No filter query&#39;</span><span class="p">]</span>
+                <span class="n">derived_element</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">filter_element</span> <span class="o">=</span> <span class="p">[</span><span class="n">dcc</span><span class="o">.</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;```</span><span class="se">\n\n</span><span class="s1">filter_query:</span><span class="se">\n\n</span><span class="si">{</span><span class="n">filter_query</span><span class="si">}</span><span class="se">\n\n</span><span class="s1">```&#39;</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">derived_query</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">derived_element</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Error in query. Check formatting&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">derived_element</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">html</span><span class="o">.</span><span class="n">Details</span><span class="p">([</span>
+                            <span class="n">html</span><span class="o">.</span><span class="n">Summary</span><span class="p">(</span><span class="s1">&#39;Derived filter query structure&#39;</span><span class="p">),</span>
+                            <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="n">dcc</span><span class="o">.</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;```json</span><span class="se">\n\n</span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">derived_query</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="se">\n\n</span><span class="s1">```&#39;</span><span class="p">)),</span>
+                        <span class="p">]),</span>
+                    <span class="p">]</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span>
+                <span class="n">outputs</span><span class="p">,</span> <span class="p">[</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_output</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">filter_element</span><span class="p">),</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_structure</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">derived_element</span><span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">)</span>
+</code></pre></div>
+</details>
+<h4 id="ancestors-in-mro_1">Ancestors (in MRO)<a class="headerlink" href="#ancestors-in-mro_1" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>dash_charts.modules_datatable.ModuleDataTable</li>
+<li>dash_charts.utils_app_modules.ModuleBase</li>
+</ul>
+<h4 id="class-variables_1">Class variables<a class="headerlink" href="#class-variables_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">all_ids</span>
+</code></pre></div>
+<p>List of ids to register for this module.</p>
+<div class="highlight"><pre><span></span><code><span class="n">id_column_select</span>
+</code></pre></div>
+<p>Column select ID.</p>
+<div class="highlight"><pre><span></span><code><span class="n">id_filter_button</span>
+</code></pre></div>
+<p>Apply filter button ID.</p>
+<div class="highlight"><pre><span></span><code><span class="n">id_filter_input</span>
+</code></pre></div>
+<p>Filter query input ID.</p>
+<div class="highlight"><pre><span></span><code><span class="n">id_filter_output</span>
+</code></pre></div>
+<p>Filter query output ID.</p>
+<div class="highlight"><pre><span></span><code><span class="n">id_filter_structure</span>
+</code></pre></div>
+<p>Filter query structure ID.</p>
+<div class="highlight"><pre><span></span><code><span class="n">id_table</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">id_table_parent</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">mod_df</span>
+</code></pre></div>
+<p>Data frame shown in table. Passed to <code>return_layout</code> and used when creating the table.</p>
+<div class="highlight"><pre><span></span><code><span class="n">show_filter</span>
+</code></pre></div>
+<p>If True (default), will show an input for entering a global filter.</p>
+<div class="highlight"><pre><span></span><code><span class="n">table</span>
+</code></pre></div>
+<h4 id="methods_1">Methods<a class="headerlink" href="#methods_1" title="Permanent link">⚓︎</a></h4>
+<h4 id="create_callbacks_1">create_callbacks<a class="headerlink" href="#create_callbacks_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">parent</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register callbacks to handle user interaction.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>parent instance (ex: <code>self</code>)</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">create_callbacks</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_create_table</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_filter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_filter_interface</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_show_query</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h4 id="create_elements_1">create_elements<a class="headerlink" href="#create_elements_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">ids</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register the callback for creating the main chart.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ids</td>
+<td><code>self._il</code> from base application</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register the callback for creating the main chart.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">BaseDataTable</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h4 id="get_1">get<a class="headerlink" href="#get_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">_id</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Return the  the callback for creating the main chart.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_id</td>
+<td>id from this module that is found in <code>self.all_ids</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>unique id name from instance of this module</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the  the callback for creating the main chart.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            _id: id from this module that is found in `self.all_ids`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: unique id name from instance of this module</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ids</span><span class="p">[</span><span class="n">_id</span><span class="p">]</span>
+</code></pre></div>
+</details>
+<h4 id="initialize_mutables_1">initialize_mutables<a class="headerlink" href="#initialize_mutables_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize_mutables</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Initialize the mutable data members to prevent modifying one attribute and impacting all instances.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">initialize_mutables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the mutable data members to prevent modifying one attribute and impacting all instances.&quot;&quot;&quot;</span>
+</code></pre></div>
+</details>
+<h4 id="register_create_table">register_create_table<a class="headerlink" href="#register_create_table" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_create_table</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">parent</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register callbacks to handle user interaction.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>parent instance (ex: <code>self</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raises:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PreventUpdate</td>
+<td>if no columns found in the table</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">register_create_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PreventUpdate: if no columns found in the table</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_column_select</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_column_select</span><span class="p">)][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">columns</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PreventUpdate</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_table_map</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">ids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span><span class="p">,</span> <span class="n">columns</span><span class="p">))</span>
+</code></pre></div>
+</details>
+<h4 id="register_filter_interface">register_filter_interface<a class="headerlink" href="#register_filter_interface" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_filter_interface</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">parent</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register callbacks to handle user interaction.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>parent instance (ex: <code>self</code>)</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">register_filter_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;filter_query&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_button</span><span class="p">),</span> <span class="s1">&#39;n_clicks&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_input</span><span class="p">),</span> <span class="s1">&#39;value&#39;</span><span class="p">)]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">show_query</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">a_states</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_input</span><span class="p">)][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">query</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;filter_query&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">)])</span>
+</code></pre></div>
+</details>
+<h4 id="register_highlight_sort_column_1">register_highlight_sort_column<a class="headerlink" href="#register_highlight_sort_column_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_highlight_sort_column</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">parent</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register callbacks to handle user interaction.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>parent instance (ex: <code>self</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raises:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PreventUpdate</td>
+<td>if no columns found in the table</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">register_highlight_sort_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PreventUpdate: if no columns found in the table</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;sort_by&#39;</span><span class="p">)]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">highlight_sort_column</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">sort_by</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;sort_by&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">sort_by</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PreventUpdate</span>
+
+            <span class="n">sorted_columns_style</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">sort</span> <span class="ow">in</span> <span class="n">sort_by</span><span class="p">:</span>
+                <span class="n">sorted_columns_style</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;column_id&#39;</span><span class="p">:</span> <span class="n">sort</span><span class="p">[</span><span class="s1">&#39;column_id&#39;</span><span class="p">],</span> <span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;odd&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span> <span class="s1">&#39;background-color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">zebra_color</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;column_id&#39;</span><span class="p">:</span> <span class="n">sort</span><span class="p">[</span><span class="s1">&#39;column_id&#39;</span><span class="p">],</span> <span class="s1">&#39;row_index&#39;</span><span class="p">:</span> <span class="s1">&#39;even&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">text_color</span><span class="p">,</span> <span class="s1">&#39;background-color&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">selected_cell_color</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">])</span>
+
+            <span class="n">style_data_conditional</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">style_data_conditional</span><span class="p">,</span> <span class="o">*</span><span class="n">sorted_columns_style</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;style_data_conditional&#39;</span><span class="p">,</span> <span class="n">style_data_conditional</span><span class="p">)])</span>
+</code></pre></div>
+</details>
+<h4 id="register_show_query">register_show_query<a class="headerlink" href="#register_show_query" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_show_query</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">parent</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register callbacks to handle user interaction.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>parent instance (ex: <code>self</code>)</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">register_show_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>   <span class="c1"># noqa: CCR001</span>
+        <span class="sd">&quot;&quot;&quot;Register callbacks to handle user interaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parent: parent instance (ex: `self`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_output</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_structure</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">)]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;filter_query&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">),</span> <span class="s1">&#39;derived_filter_query_structure&#39;</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nd">@parent</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">show_query</span><span class="p">(</span><span class="o">*</span><span class="n">raw_args</span><span class="p">):</span>
+            <span class="n">a_in</span><span class="p">,</span> <span class="n">a_states</span> <span class="o">=</span> <span class="n">map_args</span><span class="p">(</span><span class="n">raw_args</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+            <span class="n">filter_query</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;filter_query&#39;</span><span class="p">]</span>
+            <span class="n">derived_query</span> <span class="o">=</span> <span class="n">a_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)][</span><span class="s1">&#39;derived_filter_query_structure&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">filter_query</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter_query</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">filter_element</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;No filter query&#39;</span><span class="p">]</span>
+                <span class="n">derived_element</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">filter_element</span> <span class="o">=</span> <span class="p">[</span><span class="n">dcc</span><span class="o">.</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;```</span><span class="se">\n\n</span><span class="s1">filter_query:</span><span class="se">\n\n</span><span class="si">{</span><span class="n">filter_query</span><span class="si">}</span><span class="se">\n\n</span><span class="s1">```&#39;</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">derived_query</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">derived_element</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Error in query. Check formatting&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">derived_element</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">html</span><span class="o">.</span><span class="n">Details</span><span class="p">([</span>
+                            <span class="n">html</span><span class="o">.</span><span class="n">Summary</span><span class="p">(</span><span class="s1">&#39;Derived filter query structure&#39;</span><span class="p">),</span>
+                            <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="n">dcc</span><span class="o">.</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;```json</span><span class="se">\n\n</span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">derived_query</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="se">\n\n</span><span class="s1">```&#39;</span><span class="p">)),</span>
+                        <span class="p">]),</span>
+                    <span class="p">]</span>
+            <span class="k">return</span> <span class="n">map_outputs</span><span class="p">(</span>
+                <span class="n">outputs</span><span class="p">,</span> <span class="p">[</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_output</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">filter_element</span><span class="p">),</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_structure</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">derived_element</span><span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">)</span>
+</code></pre></div>
+</details>
+<h4 id="return_layout_1">return_layout<a class="headerlink" href="#return_layout_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">ids</span><span class="p">,</span>
+    <span class="n">mod_df</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Return Dash application layout.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ids</td>
+<td><code>self._il</code> from base application</td>
+</tr>
+<tr>
+<td>mod_df</td>
+<td>dataframe for</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dict</td>
+<td>Dash HTML object</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">mod_df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+<span class="sd">            mod_df: dataframe for</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span> <span class="o">=</span> <span class="n">mod_df</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">opts_dd</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_filter</span><span class="p">:</span>
+            <span class="n">filter_elements</span> <span class="o">=</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Form</span><span class="p">([</span>
+                            <span class="n">dcc</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span>
+                                <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_input</span><span class="p">)],</span> <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Enter filter query&#39;</span><span class="p">,</span>
+                                <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="s1">&#39;100%&#39;</span><span class="p">},</span>
+                            <span class="p">),</span>
+                            <span class="n">dbc</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                                <span class="s1">&#39;Apply&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_button</span><span class="p">)],</span>
+                                <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;paddingTop&#39;</span><span class="p">:</span> <span class="s1">&#39;5px&#39;</span><span class="p">},</span>
+                            <span class="p">),</span>
+                        <span class="p">]),</span>
+                    <span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">([],</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_output</span><span class="p">)]),</span>
+                    <span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_filter_structure</span><span class="p">)],</span> <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;whitespace&#39;</span><span class="p">:</span> <span class="s1">&#39;pre&#39;</span><span class="p">}),</span>
+                    <span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">filter_elements</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">([</span>
+            <span class="n">dropdown_group</span><span class="p">(</span>
+                <span class="s1">&#39;Select DataFrame Columns&#39;</span><span class="p">,</span> <span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_column_select</span><span class="p">)],</span>
+                <span class="n">options</span><span class="p">,</span> <span class="n">multi</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">persistence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mod_df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">filter_elements</span><span class="p">,</span>
+            <span class="n">html</span><span class="o">.</span><span class="n">Br</span><span class="p">(),</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">return_layout</span><span class="p">(</span><span class="n">ids</span><span class="p">),</span>
+        <span class="p">])</span>
+</code></pre></div>
+</details>
+<h4 id="return_table_map_1">return_table_map<a class="headerlink" href="#return_table_map_1" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">return_table_map</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">ids</span><span class="p">,</span>
+    <span class="n">df_table</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Return list of tuples for <code>map_outputs</code> that includes the new datatable.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ids</td>
+<td><code>self._il</code> from base application</td>
+</tr>
+<tr>
+<td>df_table</td>
+<td>dataframe to show in table</td>
+</tr>
+<tr>
+<td>columns</td>
+<td>list of columns to show. Default is None, which will show all columns</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>list of tuples for <code>map_outputs</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">return_table_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">df_table</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return list of tuples for `map_outputs` that includes the new datatable.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ids: `self._il` from base application</span>
+<span class="sd">            df_table: dataframe to show in table</span>
+<span class="sd">            columns: list of columns to show. Default is None, which will show all columns</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: list of tuples for `map_outputs`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">datatable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_table_parent</span><span class="p">),</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="n">datatable</span><span class="p">)]</span>
+</code></pre></div>
+</details>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../gantt_chart/" class="md-footer__link md-footer__link--prev" aria-label="Previous: dash_charts.gantt_chart" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              dash_charts.gantt_chart
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../modules_upload/" class="md-footer__link md-footer__link--next" aria-label="Next: dash_charts.modules_upload" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              dash_charts.modules_upload
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f8ea78.min.js"></script>
+      
+    
+  </body>
+</html>

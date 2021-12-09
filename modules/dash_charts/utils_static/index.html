@@ -1,0 +1,2417 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="dash_charts project documentation">
+      
+      
+        <meta name="author" content="Kyle King">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.5">
+    
+    
+      
+        <title>dash_charts.utils_static - dash_charts</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.a617204b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dash_chartsutils_static" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="dash_charts" class="md-header__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dash_charts
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              dash_charts.utils_static
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      dash_charts
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../CODE_TAG_SUMMARY/" class="md-tabs__link">
+      Task Summary
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../DESIGN/" class="md-tabs__link">
+      Design and Architecture Notes
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../docs/CHANGELOG/" class="md-tabs__link">
+        Docs
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        Modules
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="dash_charts" class="md-nav__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dash_charts
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DESIGN/" class="md-nav__link">
+        Design and Architecture Notes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Docs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Docs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Docs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CHANGELOG/" class="md-nav__link">
+        CHANGELOG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_OF_CONDUCT/" class="md-nav__link">
+        Contributor Covenant Code of Conduct
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DEVELOPER_GUIDE/" class="md-nav__link">
+        Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/SECURITY/" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/STYLE_GUIDE/" class="md-nav__link">
+        Personal Style Guides
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Modules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Modules" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Dash charts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dash charts" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Dash charts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../_code_diagrams/" class="md-nav__link">
+        Code Diagrams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app_px/" class="md-nav__link">
+        dash_charts.app_px
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../components/" class="md-nav__link">
+        dash_charts.components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coordinate_chart/" class="md-nav__link">
+        dash_charts.coordinate_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom_colorscales/" class="md-nav__link">
+        dash_charts.custom_colorscales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datatable/" class="md-nav__link">
+        dash_charts.datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../equations/" class="md-nav__link">
+        dash_charts.equations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gantt_chart/" class="md-nav__link">
+        dash_charts.gantt_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules_datatable/" class="md-nav__link">
+        dash_charts.modules_datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules_upload/" class="md-nav__link">
+        dash_charts.modules_upload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pareto_chart/" class="md-nav__link">
+        dash_charts.pareto_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scatter_line_charts/" class="md-nav__link">
+        dash_charts.scatter_line_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time_vis_chart/" class="md-nav__link">
+        dash_charts.time_vis_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app/" class="md-nav__link">
+        dash_charts.utils_app
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_modules/" class="md-nav__link">
+        dash_charts.utils_app_modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_app_with_navigation/" class="md-nav__link">
+        dash_charts.utils_app_with_navigation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_callbacks/" class="md-nav__link">
+        dash_charts.utils_callbacks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_data/" class="md-nav__link">
+        dash_charts.utils_data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_dataset/" class="md-nav__link">
+        dash_charts.utils_dataset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_fig/" class="md-nav__link">
+        dash_charts.utils_fig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_helpers/" class="md-nav__link">
+        dash_charts.utils_helpers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_json_cache/" class="md-nav__link">
+        dash_charts.utils_json_cache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          dash_charts.utils_static
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        dash_charts.utils_static
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add_image" class="md-nav__link">
+    add_image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_video" class="md-nav__link">
+    add_video
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capture_plotly_body" class="md-nav__link">
+    capture_plotly_body
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_dbc_doc" class="md-nav__link">
+    create_dbc_doc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format_plotly_boilerplate" class="md-nav__link">
+    format_plotly_boilerplate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make_div" class="md-nav__link">
+    make_div
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#markdown_machine" class="md-nav__link">
+    markdown_machine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag_code" class="md-nav__link">
+    tag_code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag_markdown" class="md-nav__link">
+    tag_markdown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag_table" class="md-nav__link">
+    tag_table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_div" class="md-nav__link">
+    write_div
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_from_markdown" class="md-nav__link">
+    write_from_markdown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_image_file" class="md-nav__link">
+    write_image_file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_lookup" class="md-nav__link">
+    write_lookup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils_static_toc/" class="md-nav__link">
+        dash_charts.utils_static_toc
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add_image" class="md-nav__link">
+    add_image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_video" class="md-nav__link">
+    add_video
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capture_plotly_body" class="md-nav__link">
+    capture_plotly_body
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_dbc_doc" class="md-nav__link">
+    create_dbc_doc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format_plotly_boilerplate" class="md-nav__link">
+    format_plotly_boilerplate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make_div" class="md-nav__link">
+    make_div
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#markdown_machine" class="md-nav__link">
+    markdown_machine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag_code" class="md-nav__link">
+    tag_code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag_markdown" class="md-nav__link">
+    tag_markdown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag_table" class="md-nav__link">
+    tag_table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_div" class="md-nav__link">
+    write_div
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_from_markdown" class="md-nav__link">
+    write_from_markdown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_image_file" class="md-nav__link">
+    write_image_file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_lookup" class="md-nav__link">
+    write_lookup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/kyleking/dash_charts/edit/main/docs/modules/dash_charts/utils_static.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="dash_chartsutils_static">dash_charts.utils_static<a class="headerlink" href="#dash_chartsutils_static" title="Permanent link">⚓︎</a></h1>
+<p>Utilities for generating static HTML reports.</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Utilities for generating static HTML reports.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64encode</span>
+
+<span class="kn">import</span> <span class="nn">dash_bootstrap_components</span> <span class="k">as</span> <span class="nn">dbc</span>
+<span class="kn">import</span> <span class="nn">dominate</span>
+<span class="kn">import</span> <span class="nn">markdown</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">dominate</span> <span class="kn">import</span> <span class="n">tags</span><span class="p">,</span> <span class="n">util</span>
+
+
+<span class="k">def</span> <span class="nf">write_div</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">path_or_file_object</span><span class="p">,</span> <span class="n">is_div</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">html_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write Plotly figure as HTML to specified file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        figure: Plotly figure (can be from `create_figure` for custom charts)</span>
+<span class="sd">        path_or_file_object: *string* path or file object</span>
+<span class="sd">        is_div: if True (default) will override html_kwargs to only write the minimum HTML needed</span>
+<span class="sd">        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;include_plotlyjs&#39;</span><span class="p">,</span> <span class="s1">&#39;full_html&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">html_kwargs</span> <span class="ow">and</span> <span class="n">is_div</span><span class="p">:</span>
+            <span class="n">html_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="n">fig</span><span class="o">=</span><span class="n">figure</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">path_or_file_object</span><span class="p">,</span> <span class="o">**</span><span class="n">html_kwargs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_div</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="o">**</span><span class="n">html_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write Plotly figure as HTML to specified file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        figure: Plotly figure (can be from `create_figure` for custom charts)</span>
+<span class="sd">        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: HTML div</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+        <span class="n">write_div</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">is_div</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">html_kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">add_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">alt_text</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write base64 image to HTML.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image_path: Path to image file and format will be read from file suffix.</span>
+<span class="sd">        alt_text: alternate text. If None, will show the image filename</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: HTML</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">image_file</span><span class="p">:</span>
+        <span class="n">encoded_image</span> <span class="o">=</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">image_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">image_uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;data:image/</span><span class="si">{</span><span class="n">image_path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s1">;base64,</span><span class="si">{</span><span class="n">encoded_image</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;img src=&quot;</span><span class="si">{</span><span class="n">image_uri</span><span class="si">}</span><span class="s1">&quot; alt=&quot;</span><span class="si">{</span><span class="n">alt_text</span> <span class="ow">or</span> <span class="n">image_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;/&gt;&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">add_video</span><span class="p">(</span><span class="n">video_path</span><span class="p">,</span> <span class="n">alt_text</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write base64 video to HTML.</span>
+
+<span class="sd">    Video formats can easily be converted with ffmpeg: `ffmpeg -i video_filename.mov video_filename.webm`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        video_path: Path to video file and format will be read from file suffix. Video should be in webm format</span>
+<span class="sd">        alt_text: alternate text. If None, will show the video filename</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: HTML video tag</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">video_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">video_file</span><span class="p">:</span>
+        <span class="n">encoded_video</span> <span class="o">=</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">video_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">video_uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;data:video/</span><span class="si">{</span><span class="n">video_path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s1">;base64,</span><span class="si">{</span><span class="n">encoded_video</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;video src=&quot;</span><span class="si">{</span><span class="n">video_uri</span><span class="si">}</span><span class="s1">&quot; controls&gt;</span><span class="si">{</span><span class="n">alt_text</span> <span class="ow">or</span> <span class="n">video_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&lt;/video&gt;&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">write_image_file</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">path_or_file_object</span><span class="p">,</span> <span class="n">image_format</span><span class="p">,</span> <span class="o">**</span><span class="n">img_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write Plotly figure as an image to specified file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        figure: Plotly figure (can be from `create_figure` for custom charts)</span>
+<span class="sd">        path_or_file_object: *string* path or file object</span>
+<span class="sd">        image_format: one of `(png, jpg, jpeg, webp, svg, pdf)`</span>
+<span class="sd">        img_kwargs: additional keyword arguments passed to `plotly.io.write_image()`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">fig</span><span class="o">=</span><span class="n">figure</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">path_or_file_object</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="n">image_format</span><span class="p">,</span> <span class="o">**</span><span class="n">img_kwargs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">capture_plotly_body</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return HTML body that includes necessary scripts for Plotly and MathJax.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: of the top and the bottom HTML content</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Capture necessary Plotly boilerplate HTML</span>
+    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+        <span class="n">write_div</span><span class="p">({},</span> <span class="n">output</span><span class="p">,</span> <span class="n">is_div</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_mathjax</span><span class="o">=</span><span class="s1">&#39;.js&#39;</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">blank_plotly</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">features</span><span class="o">=</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+    <span class="c1"># Remove the empty figure div and corresponding script</span>
+    <span class="n">plot_div</span> <span class="o">=</span> <span class="n">blank_plotly</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;plotly-graph-div&#39;</span><span class="p">})</span>
+    <span class="k">for</span> <span class="n">script</span> <span class="ow">in</span> <span class="n">blank_plotly</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="c1"># Use the ID from the plot to identify which script needs to be removed</span>
+        <span class="k">if</span> <span class="n">plot_div</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">script</span><span class="o">.</span><span class="n">prettify</span><span class="p">():</span>
+            <span class="n">script</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+            <span class="k">break</span>
+    <span class="n">plot_div</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">blank_plotly</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">prettify</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">format_plotly_boilerplate</span><span class="p">(</span><span class="o">**</span><span class="n">doc_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initialize a boilerplate dominate document for creating static Plotly HTML files.</span>
+
+<span class="sd">    See dominate documentation: https://pypi.org/project/dominate/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        doc_kwargs: keyword arguments for `dominate.document()`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: dominate document instance</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">dominate</span><span class="o">.</span><span class="n">document</span><span class="p">(</span><span class="o">**</span><span class="n">doc_kwargs</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">doc</span><span class="p">:</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">capture_plotly_body</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">doc</span>
+
+
+<span class="k">def</span> <span class="nf">create_dbc_doc</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="n">dbc</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">BOOTSTRAP</span><span class="p">,</span> <span class="n">custom_styles</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">doc_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create boilerplate dominate document with Bootstrap and Plotly for static HTML.</span>
+
+<span class="sd">    Based on: https://github.com/facultyai/dash-bootstrap-components/tree/master/docs/templates/partials</span>
+
+<span class="sd">    See dominate documentation: https://pypi.org/project/dominate/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        theme: string URL to CSS for theming Bootstrap. Default is `dbc.themes.BOOTSTRAP`</span>
+<span class="sd">        custom_styles: optional custom CSS to add to file. Default is blank (`&#39;&#39;`)</span>
+<span class="sd">        doc_kwargs: keyword arguments for `dominate.document()`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: dominate document instance</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">stylesheets</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;href&#39;</span><span class="p">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/a11y-light.min.css&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;href&#39;</span><span class="p">:</span> <span class="n">theme</span><span class="p">},</span>
+    <span class="p">]</span>
+    <span class="n">scripts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="s1">&#39;https://code.jquery.com/jquery-3.4.1.slim.min.js&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="s1">&#39;https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/highlight.min.js&#39;</span><span class="p">},</span>
+    <span class="p">]</span>
+
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">format_plotly_boilerplate</span><span class="p">(</span><span class="o">**</span><span class="n">doc_kwargs</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">doc</span><span class="o">.</span><span class="n">head</span><span class="p">:</span>
+        <span class="n">tags</span><span class="o">.</span><span class="n">meta</span><span class="p">(</span><span class="n">charset</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">tags</span><span class="o">.</span><span class="n">meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;viewport&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s1">&#39;width=device-width, initial-scale=1&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sheet_kwargs</span> <span class="ow">in</span> <span class="n">stylesheets</span><span class="p">:</span>
+            <span class="n">tags</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="s1">&#39;stylesheet&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">sheet_kwargs</span><span class="p">)</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;style&gt;</span><span class="si">{</span><span class="n">custom_styles</span><span class="si">}</span><span class="s1">&lt;/style&gt;&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">script_kwargs</span> <span class="ow">in</span> <span class="n">scripts</span><span class="p">:</span>
+            <span class="n">tags</span><span class="o">.</span><span class="n">script</span><span class="p">(</span><span class="o">**</span><span class="n">script_kwargs</span><span class="p">)</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="s1">&#39;&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">doc</span>
+
+
+<span class="k">def</span> <span class="nf">tag_code</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format HTML for a `pre.code` block with specified `hljs` language.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: string to show in code block</span>
+<span class="sd">        language: `hljs` language (ex: `&#39;language-json&#39;`). Default is `&#39;&#39;`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tags</span><span class="o">.</span><span class="n">pre</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">code</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">_class</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">language</span><span class="si">}</span><span class="s1"> hljs&#39;</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">tag_markdown</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">markdown_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format markdown text as HTML.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: markdown string</span>
+<span class="sd">        markdown_kwargs: additional keyword arguments for `markdown.markdown`, such as `extensions`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">markdown</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">markdown_kwargs</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">tag_table</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">table_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format HTML for a responsive Bootstrap table.</span>
+
+<span class="sd">    See Bootstrap documentation at: https://getbootstrap.com/docs/4.4/content/tables/#tables</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_table: pandas dataframe to show in table</span>
+<span class="sd">        table_class: string classes to add to table. If None, will use default string</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        RuntimeError: if `df_table` is not a DataFrame object</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">table_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">table_class</span> <span class="o">=</span> <span class="s1">&#39;table table-bordered table-striped table-hover&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;df_table is not a DataFrame (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">df_table</span><span class="p">)</span><span class="si">}</span><span class="s1">):</span><span class="se">\n</span><span class="si">{</span><span class="n">df_table</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">df_table</span> <span class="o">=</span> <span class="n">df_table</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">_class</span><span class="o">=</span><span class="s1">&#39;table-responsive&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">_class</span><span class="o">=</span><span class="n">table_class</span><span class="p">)):</span>
+        <span class="c1"># Create header row</span>
+        <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">thead</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">tr</span><span class="p">()):</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">tags</span><span class="o">.</span><span class="n">th</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="c1"># Create body rows</span>
+        <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">tbody</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_table</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">tr</span><span class="p">():</span>
+                    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                        <span class="n">tags</span><span class="o">.</span><span class="n">td</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">write_lookup</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">function_lookup</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Determine the lookup result and add to the file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: string key for function lookup</span>
+<span class="sd">        function_lookup: dictionary with either the string result or equation and arguments</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        RuntimeError: if error in lookup dictionary</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">function_lookup</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Could not find &quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot; in </span><span class="si">{</span><span class="n">function_lookup</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">match</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">fun</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">match</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Match failed for &quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot;. Returned: </span><span class="si">{</span><span class="n">match</span><span class="si">}</span><span class="s1"> from </span><span class="si">{</span><span class="n">function_lookup</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">markdown_machine</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">function_lookup</span><span class="p">):</span>  <span class="c1"># noqa: CCR001</span>
+    <span class="sd">&quot;&quot;&quot;Convert markdown text file into Plotly-HTML and write to doc context.</span>
+
+<span class="sd">    Note: you will need a document with necessary boilerplate and call this within a `with doc:` dominate context</span>
+<span class="sd">    Multiple Markdown files can then be put into a single HTML output file by calling this function with new lines</span>
+<span class="sd">    and function lookup arguments</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lines: list of text file lines</span>
+<span class="sd">        function_lookup: dictionary with either the string result or equation and arguments</span>
+<span class="sd">            Will be inserted into file where `&gt;&gt;lookup:function_name` assuming key of `function_name`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">markdown_lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;lookup:&#39;</span><span class="p">):</span>
+            <span class="c1"># Write stored markdown and clear list. Then write the matched lookup</span>
+            <span class="n">tag_markdown</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">markdown_lines</span><span class="p">))</span>
+            <span class="n">markdown_lines</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">write_lookup</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;lookup:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">function_lookup</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">markdown_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">markdown_lines</span><span class="p">:</span>
+        <span class="n">tag_markdown</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">markdown_lines</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">write_from_markdown</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">function_lookup</span><span class="p">,</span> <span class="o">**</span><span class="n">dbc_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrap markdown_machine to convert markdown to Bootstrap HTML.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename: path to markdown file</span>
+<span class="sd">        function_lookup: dictionary with either the string result or equation and arguments</span>
+<span class="sd">            Will be inserted into file where `&gt;&gt;lookup:function_name` assuming key of `function_name`</span>
+<span class="sd">        dbc_kwargs: keyword arguments to pass to `create_dbc_doc`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Path: created HTML filename</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">html_filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s1">.html&#39;</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">create_dbc_doc</span><span class="p">(</span><span class="o">**</span><span class="n">dbc_kwargs</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">doc</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">_class</span><span class="o">=</span><span class="s1">&#39;container&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">_class</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">)):</span>
+            <span class="n">markdown_machine</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">function_lookup</span><span class="p">)</span>
+
+    <span class="n">html_filename</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">doc</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">html_filename</span>
+</code></pre></div>
+</details>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="add_image">add_image<a class="headerlink" href="#add_image" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_image</span><span class="p">(</span>
+    <span class="n">image_path</span><span class="p">,</span>
+    <span class="n">alt_text</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Write base64 image to HTML.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>image_path</td>
+<td>Path to image file and format will be read from file suffix.</td>
+</tr>
+<tr>
+<td>alt_text</td>
+<td>alternate text. If None, will show the image filename</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>HTML</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">alt_text</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write base64 image to HTML.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image_path: Path to image file and format will be read from file suffix.</span>
+<span class="sd">        alt_text: alternate text. If None, will show the image filename</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: HTML</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">image_file</span><span class="p">:</span>
+        <span class="n">encoded_image</span> <span class="o">=</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">image_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">image_uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;data:image/</span><span class="si">{</span><span class="n">image_path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s1">;base64,</span><span class="si">{</span><span class="n">encoded_image</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;img src=&quot;</span><span class="si">{</span><span class="n">image_uri</span><span class="si">}</span><span class="s1">&quot; alt=&quot;</span><span class="si">{</span><span class="n">alt_text</span> <span class="ow">or</span> <span class="n">image_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;/&gt;&#39;</span>
+</code></pre></div>
+</details>
+<h3 id="add_video">add_video<a class="headerlink" href="#add_video" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_video</span><span class="p">(</span>
+    <span class="n">video_path</span><span class="p">,</span>
+    <span class="n">alt_text</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Write base64 video to HTML.</p>
+<p>Video formats can easily be converted with ffmpeg: <code>ffmpeg -i video_filename.mov video_filename.webm</code></p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>video_path</td>
+<td>Path to video file and format will be read from file suffix. Video should be in webm format</td>
+</tr>
+<tr>
+<td>alt_text</td>
+<td>alternate text. If None, will show the video filename</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>HTML video tag</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_video</span><span class="p">(</span><span class="n">video_path</span><span class="p">,</span> <span class="n">alt_text</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write base64 video to HTML.</span>
+
+<span class="sd">    Video formats can easily be converted with ffmpeg: `ffmpeg -i video_filename.mov video_filename.webm`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        video_path: Path to video file and format will be read from file suffix. Video should be in webm format</span>
+<span class="sd">        alt_text: alternate text. If None, will show the video filename</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: HTML video tag</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">video_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">video_file</span><span class="p">:</span>
+        <span class="n">encoded_video</span> <span class="o">=</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">video_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">video_uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;data:video/</span><span class="si">{</span><span class="n">video_path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s1">;base64,</span><span class="si">{</span><span class="n">encoded_video</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;video src=&quot;</span><span class="si">{</span><span class="n">video_uri</span><span class="si">}</span><span class="s1">&quot; controls&gt;</span><span class="si">{</span><span class="n">alt_text</span> <span class="ow">or</span> <span class="n">video_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&lt;/video&gt;&#39;</span>
+</code></pre></div>
+</details>
+<h3 id="capture_plotly_body">capture_plotly_body<a class="headerlink" href="#capture_plotly_body" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">capture_plotly_body</span><span class="p">()</span>
+</code></pre></div>
+<p>Return HTML body that includes necessary scripts for Plotly and MathJax.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tuple</td>
+<td>of the top and the bottom HTML content</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">capture_plotly_body</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return HTML body that includes necessary scripts for Plotly and MathJax.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: of the top and the bottom HTML content</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Capture necessary Plotly boilerplate HTML</span>
+    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+        <span class="n">write_div</span><span class="p">({},</span> <span class="n">output</span><span class="p">,</span> <span class="n">is_div</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_mathjax</span><span class="o">=</span><span class="s1">&#39;.js&#39;</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">blank_plotly</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">features</span><span class="o">=</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+    <span class="c1"># Remove the empty figure div and corresponding script</span>
+    <span class="n">plot_div</span> <span class="o">=</span> <span class="n">blank_plotly</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;plotly-graph-div&#39;</span><span class="p">})</span>
+    <span class="k">for</span> <span class="n">script</span> <span class="ow">in</span> <span class="n">blank_plotly</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="c1"># Use the ID from the plot to identify which script needs to be removed</span>
+        <span class="k">if</span> <span class="n">plot_div</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">script</span><span class="o">.</span><span class="n">prettify</span><span class="p">():</span>
+            <span class="n">script</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+            <span class="k">break</span>
+    <span class="n">plot_div</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">blank_plotly</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">prettify</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h3 id="create_dbc_doc">create_dbc_doc<a class="headerlink" href="#create_dbc_doc" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_dbc_doc</span><span class="p">(</span>
+    <span class="n">theme</span><span class="o">=</span><span class="s1">&#39;https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css&#39;</span><span class="p">,</span>
+    <span class="n">custom_styles</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">doc_kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Create boilerplate dominate document with Bootstrap and Plotly for static HTML.</p>
+<p>Based on: https://github.com/facultyai/dash-bootstrap-components/tree/master/docs/templates/partials</p>
+<p>See dominate documentation: https://pypi.org/project/dominate/</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>theme</td>
+<td>string URL to CSS for theming Bootstrap. Default is <code>dbc.themes.BOOTSTRAP</code></td>
+</tr>
+<tr>
+<td>custom_styles</td>
+<td>optional custom CSS to add to file. Default is blank (<code>''</code>)</td>
+</tr>
+<tr>
+<td>doc_kwargs</td>
+<td>keyword arguments for <code>dominate.document()</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dict</td>
+<td>dominate document instance</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_dbc_doc</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="n">dbc</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">BOOTSTRAP</span><span class="p">,</span> <span class="n">custom_styles</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">doc_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create boilerplate dominate document with Bootstrap and Plotly for static HTML.</span>
+
+<span class="sd">    Based on: https://github.com/facultyai/dash-bootstrap-components/tree/master/docs/templates/partials</span>
+
+<span class="sd">    See dominate documentation: https://pypi.org/project/dominate/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        theme: string URL to CSS for theming Bootstrap. Default is `dbc.themes.BOOTSTRAP`</span>
+<span class="sd">        custom_styles: optional custom CSS to add to file. Default is blank (`&#39;&#39;`)</span>
+<span class="sd">        doc_kwargs: keyword arguments for `dominate.document()`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: dominate document instance</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">stylesheets</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;href&#39;</span><span class="p">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/a11y-light.min.css&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;href&#39;</span><span class="p">:</span> <span class="n">theme</span><span class="p">},</span>
+    <span class="p">]</span>
+    <span class="n">scripts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="s1">&#39;https://code.jquery.com/jquery-3.4.1.slim.min.js&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="s1">&#39;https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/highlight.min.js&#39;</span><span class="p">},</span>
+    <span class="p">]</span>
+
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">format_plotly_boilerplate</span><span class="p">(</span><span class="o">**</span><span class="n">doc_kwargs</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">doc</span><span class="o">.</span><span class="n">head</span><span class="p">:</span>
+        <span class="n">tags</span><span class="o">.</span><span class="n">meta</span><span class="p">(</span><span class="n">charset</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">tags</span><span class="o">.</span><span class="n">meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;viewport&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s1">&#39;width=device-width, initial-scale=1&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sheet_kwargs</span> <span class="ow">in</span> <span class="n">stylesheets</span><span class="p">:</span>
+            <span class="n">tags</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="s1">&#39;stylesheet&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">sheet_kwargs</span><span class="p">)</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;style&gt;</span><span class="si">{</span><span class="n">custom_styles</span><span class="si">}</span><span class="s1">&lt;/style&gt;&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">script_kwargs</span> <span class="ow">in</span> <span class="n">scripts</span><span class="p">:</span>
+            <span class="n">tags</span><span class="o">.</span><span class="n">script</span><span class="p">(</span><span class="o">**</span><span class="n">script_kwargs</span><span class="p">)</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="s1">&#39;&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">doc</span>
+</code></pre></div>
+</details>
+<h3 id="format_plotly_boilerplate">format_plotly_boilerplate<a class="headerlink" href="#format_plotly_boilerplate" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">format_plotly_boilerplate</span><span class="p">(</span>
+    <span class="o">**</span><span class="n">doc_kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Initialize a boilerplate dominate document for creating static Plotly HTML files.</p>
+<p>See dominate documentation: https://pypi.org/project/dominate/</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>doc_kwargs</td>
+<td>keyword arguments for <code>dominate.document()</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dict</td>
+<td>dominate document instance</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">format_plotly_boilerplate</span><span class="p">(</span><span class="o">**</span><span class="n">doc_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initialize a boilerplate dominate document for creating static Plotly HTML files.</span>
+
+<span class="sd">    See dominate documentation: https://pypi.org/project/dominate/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        doc_kwargs: keyword arguments for `dominate.document()`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: dominate document instance</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">dominate</span><span class="o">.</span><span class="n">document</span><span class="p">(</span><span class="o">**</span><span class="n">doc_kwargs</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">doc</span><span class="p">:</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">capture_plotly_body</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">doc</span>
+</code></pre></div>
+</details>
+<h3 id="make_div">make_div<a class="headerlink" href="#make_div" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_div</span><span class="p">(</span>
+    <span class="n">figure</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">html_kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Write Plotly figure as HTML to specified file.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>figure</td>
+<td>Plotly figure (can be from <code>create_figure</code> for custom charts)</td>
+</tr>
+<tr>
+<td>html_kwargs</td>
+<td>additional keyword arguments passed to <code>plotly.io.write_html()</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>HTML div</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_div</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="o">**</span><span class="n">html_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write Plotly figure as HTML to specified file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        figure: Plotly figure (can be from `create_figure` for custom charts)</span>
+<span class="sd">        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: HTML div</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+        <span class="n">write_div</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">is_div</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">html_kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h3 id="markdown_machine">markdown_machine<a class="headerlink" href="#markdown_machine" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">markdown_machine</span><span class="p">(</span>
+    <span class="n">lines</span><span class="p">,</span>
+    <span class="n">function_lookup</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Convert markdown text file into Plotly-HTML and write to doc context.</p>
+<p>Note: you will need a document with necessary boilerplate and call this within a <code>with doc:</code> dominate context
+Multiple Markdown files can then be put into a single HTML output file by calling this function with new lines
+and function lookup arguments</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lines</td>
+<td>list of text file lines</td>
+</tr>
+<tr>
+<td>function_lookup</td>
+<td>dictionary with either the string result or equation and arguments<br>Will be inserted into file where <code>&gt;&gt;lookup:function_name</code> assuming key of <code>function_name</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">markdown_machine</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">function_lookup</span><span class="p">):</span>  <span class="c1"># noqa: CCR001</span>
+    <span class="sd">&quot;&quot;&quot;Convert markdown text file into Plotly-HTML and write to doc context.</span>
+
+<span class="sd">    Note: you will need a document with necessary boilerplate and call this within a `with doc:` dominate context</span>
+<span class="sd">    Multiple Markdown files can then be put into a single HTML output file by calling this function with new lines</span>
+<span class="sd">    and function lookup arguments</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lines: list of text file lines</span>
+<span class="sd">        function_lookup: dictionary with either the string result or equation and arguments</span>
+<span class="sd">            Will be inserted into file where `&gt;&gt;lookup:function_name` assuming key of `function_name`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">markdown_lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;lookup:&#39;</span><span class="p">):</span>
+            <span class="c1"># Write stored markdown and clear list. Then write the matched lookup</span>
+            <span class="n">tag_markdown</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">markdown_lines</span><span class="p">))</span>
+            <span class="n">markdown_lines</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">write_lookup</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;lookup:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">function_lookup</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">markdown_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">markdown_lines</span><span class="p">:</span>
+        <span class="n">tag_markdown</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">markdown_lines</span><span class="p">))</span>
+</code></pre></div>
+</details>
+<h3 id="tag_code">tag_code<a class="headerlink" href="#tag_code" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tag_code</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Format HTML for a <code>pre.code</code> block with specified <code>hljs</code> language.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td>string to show in code block</td>
+</tr>
+<tr>
+<td>language</td>
+<td><code>hljs</code> language (ex: <code>'language-json'</code>). Default is <code>''</code>.</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tag_code</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format HTML for a `pre.code` block with specified `hljs` language.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: string to show in code block</span>
+<span class="sd">        language: `hljs` language (ex: `&#39;language-json&#39;`). Default is `&#39;&#39;`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tags</span><span class="o">.</span><span class="n">pre</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">code</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">_class</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">language</span><span class="si">}</span><span class="s1"> hljs&#39;</span><span class="p">))</span>
+</code></pre></div>
+</details>
+<h3 id="tag_markdown">tag_markdown<a class="headerlink" href="#tag_markdown" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tag_markdown</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">markdown_kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Format markdown text as HTML.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td>markdown string</td>
+</tr>
+<tr>
+<td>markdown_kwargs</td>
+<td>additional keyword arguments for <code>markdown.markdown</code>, such as <code>extensions</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tag_markdown</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">markdown_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format markdown text as HTML.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: markdown string</span>
+<span class="sd">        markdown_kwargs: additional keyword arguments for `markdown.markdown`, such as `extensions`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">markdown</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">markdown_kwargs</span><span class="p">))</span>
+</code></pre></div>
+</details>
+<h3 id="tag_table">tag_table<a class="headerlink" href="#tag_table" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tag_table</span><span class="p">(</span>
+    <span class="n">df_table</span><span class="p">,</span>
+    <span class="n">table_class</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Format HTML for a responsive Bootstrap table.</p>
+<p>See Bootstrap documentation at: https://getbootstrap.com/docs/4.4/content/tables/#tables</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>df_table</td>
+<td>pandas dataframe to show in table</td>
+</tr>
+<tr>
+<td>table_class</td>
+<td>string classes to add to table. If None, will use default string</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raises:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RuntimeError</td>
+<td>if <code>df_table</code> is not a DataFrame object</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tag_table</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">table_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format HTML for a responsive Bootstrap table.</span>
+
+<span class="sd">    See Bootstrap documentation at: https://getbootstrap.com/docs/4.4/content/tables/#tables</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_table: pandas dataframe to show in table</span>
+<span class="sd">        table_class: string classes to add to table. If None, will use default string</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        RuntimeError: if `df_table` is not a DataFrame object</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">table_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">table_class</span> <span class="o">=</span> <span class="s1">&#39;table table-bordered table-striped table-hover&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df_table</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;df_table is not a DataFrame (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">df_table</span><span class="p">)</span><span class="si">}</span><span class="s1">):</span><span class="se">\n</span><span class="si">{</span><span class="n">df_table</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">df_table</span> <span class="o">=</span> <span class="n">df_table</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">_class</span><span class="o">=</span><span class="s1">&#39;table-responsive&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">_class</span><span class="o">=</span><span class="n">table_class</span><span class="p">)):</span>
+        <span class="c1"># Create header row</span>
+        <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">thead</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">tr</span><span class="p">()):</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">tags</span><span class="o">.</span><span class="n">th</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="c1"># Create body rows</span>
+        <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">tbody</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_table</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">tr</span><span class="p">():</span>
+                    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                        <span class="n">tags</span><span class="o">.</span><span class="n">td</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+</code></pre></div>
+</details>
+<h3 id="write_div">write_div<a class="headerlink" href="#write_div" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_div</span><span class="p">(</span>
+    <span class="n">figure</span><span class="p">,</span>
+    <span class="n">path_or_file_object</span><span class="p">,</span>
+    <span class="n">is_div</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">html_kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Write Plotly figure as HTML to specified file.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>figure</td>
+<td>Plotly figure (can be from <code>create_figure</code> for custom charts)</td>
+</tr>
+<tr>
+<td>path_or_file_object</td>
+<td><em>string</em> path or file object</td>
+</tr>
+<tr>
+<td>is_div</td>
+<td>if True (default) will override html_kwargs to only write the minimum HTML needed</td>
+</tr>
+<tr>
+<td>html_kwargs</td>
+<td>additional keyword arguments passed to <code>plotly.io.write_html()</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_div</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">path_or_file_object</span><span class="p">,</span> <span class="n">is_div</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">html_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write Plotly figure as HTML to specified file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        figure: Plotly figure (can be from `create_figure` for custom charts)</span>
+<span class="sd">        path_or_file_object: *string* path or file object</span>
+<span class="sd">        is_div: if True (default) will override html_kwargs to only write the minimum HTML needed</span>
+<span class="sd">        html_kwargs: additional keyword arguments passed to `plotly.io.write_html()`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;include_plotlyjs&#39;</span><span class="p">,</span> <span class="s1">&#39;full_html&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">html_kwargs</span> <span class="ow">and</span> <span class="n">is_div</span><span class="p">:</span>
+            <span class="n">html_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="n">fig</span><span class="o">=</span><span class="n">figure</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">path_or_file_object</span><span class="p">,</span> <span class="o">**</span><span class="n">html_kwargs</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h3 id="write_from_markdown">write_from_markdown<a class="headerlink" href="#write_from_markdown" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_from_markdown</span><span class="p">(</span>
+    <span class="n">filename</span><span class="p">,</span>
+    <span class="n">function_lookup</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">dbc_kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Wrap markdown_machine to convert markdown to Bootstrap HTML.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>path to markdown file</td>
+</tr>
+<tr>
+<td>function_lookup</td>
+<td>dictionary with either the string result or equation and arguments<br>Will be inserted into file where <code>&gt;&gt;lookup:function_name</code> assuming key of <code>function_name</code></td>
+</tr>
+<tr>
+<td>dbc_kwargs</td>
+<td>keyword arguments to pass to <code>create_dbc_doc</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Path</td>
+<td>created HTML filename</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_from_markdown</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">function_lookup</span><span class="p">,</span> <span class="o">**</span><span class="n">dbc_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrap markdown_machine to convert markdown to Bootstrap HTML.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename: path to markdown file</span>
+<span class="sd">        function_lookup: dictionary with either the string result or equation and arguments</span>
+<span class="sd">            Will be inserted into file where `&gt;&gt;lookup:function_name` assuming key of `function_name`</span>
+<span class="sd">        dbc_kwargs: keyword arguments to pass to `create_dbc_doc`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Path: created HTML filename</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">html_filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s1">.html&#39;</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">create_dbc_doc</span><span class="p">(</span><span class="o">**</span><span class="n">dbc_kwargs</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">doc</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">tags</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">_class</span><span class="o">=</span><span class="s1">&#39;container&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">_class</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">)):</span>
+            <span class="n">markdown_machine</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">function_lookup</span><span class="p">)</span>
+
+    <span class="n">html_filename</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">doc</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">html_filename</span>
+</code></pre></div>
+</details>
+<h3 id="write_image_file">write_image_file<a class="headerlink" href="#write_image_file" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_image_file</span><span class="p">(</span>
+    <span class="n">figure</span><span class="p">,</span>
+    <span class="n">path_or_file_object</span><span class="p">,</span>
+    <span class="n">image_format</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">img_kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Write Plotly figure as an image to specified file.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>figure</td>
+<td>Plotly figure (can be from <code>create_figure</code> for custom charts)</td>
+</tr>
+<tr>
+<td>path_or_file_object</td>
+<td><em>string</em> path or file object</td>
+</tr>
+<tr>
+<td>image_format</td>
+<td>one of <code>(png, jpg, jpeg, webp, svg, pdf)</code></td>
+</tr>
+<tr>
+<td>img_kwargs</td>
+<td>additional keyword arguments passed to <code>plotly.io.write_image()</code></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_image_file</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">path_or_file_object</span><span class="p">,</span> <span class="n">image_format</span><span class="p">,</span> <span class="o">**</span><span class="n">img_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write Plotly figure as an image to specified file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        figure: Plotly figure (can be from `create_figure` for custom charts)</span>
+<span class="sd">        path_or_file_object: *string* path or file object</span>
+<span class="sd">        image_format: one of `(png, jpg, jpeg, webp, svg, pdf)`</span>
+<span class="sd">        img_kwargs: additional keyword arguments passed to `plotly.io.write_image()`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plotly</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">fig</span><span class="o">=</span><span class="n">figure</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">path_or_file_object</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="n">image_format</span><span class="p">,</span> <span class="o">**</span><span class="n">img_kwargs</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h3 id="write_lookup">write_lookup<a class="headerlink" href="#write_lookup" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_lookup</span><span class="p">(</span>
+    <span class="n">key</span><span class="p">,</span>
+    <span class="n">function_lookup</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Determine the lookup result and add to the file.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>string key for function lookup</td>
+</tr>
+<tr>
+<td>function_lookup</td>
+<td>dictionary with either the string result or equation and arguments</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raises:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RuntimeError</td>
+<td>if error in lookup dictionary</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_lookup</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">function_lookup</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Determine the lookup result and add to the file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: string key for function lookup</span>
+<span class="sd">        function_lookup: dictionary with either the string result or equation and arguments</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        RuntimeError: if error in lookup dictionary</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">function_lookup</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Could not find &quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot; in </span><span class="si">{</span><span class="n">function_lookup</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">match</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">fun</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">match</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">util</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Match failed for &quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot;. Returned: </span><span class="si">{</span><span class="n">match</span><span class="si">}</span><span class="s1"> from </span><span class="si">{</span><span class="n">function_lookup</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../utils_json_cache/" class="md-footer__link md-footer__link--prev" aria-label="Previous: dash_charts.utils_json_cache" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              dash_charts.utils_json_cache
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../utils_static_toc/" class="md-footer__link md-footer__link--next" aria-label="Next: dash_charts.utils_static_toc" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              dash_charts.utils_static_toc
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.cefbb252.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f8ea78.min.js"></script>
+      
+    
+  </body>
+</html>

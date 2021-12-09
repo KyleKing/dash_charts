@@ -1,0 +1,2068 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="dash_charts project documentation">
+      
+      
+        <meta name="author" content="Kyle King">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.5">
+    
+    
+      
+        <title>dash_charts</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.a617204b.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dash_charts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="dash_charts" class="md-header__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dash_charts
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              dash_charts
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="." class="md-tabs__link md-tabs__link--active">
+      dash_charts
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="CODE_TAG_SUMMARY/" class="md-tabs__link">
+      Task Summary
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="DESIGN/" class="md-tabs__link">
+      Design and Architecture Notes
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="docs/CHANGELOG/" class="md-tabs__link">
+        Docs
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="modules/dash_charts/" class="md-tabs__link">
+        Modules
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="dash_charts" class="md-nav__button md-logo" aria-label="dash_charts" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dash_charts
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/kyleking/dash_charts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    kyleking/dash_charts
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          dash_charts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        dash_charts
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nov2020-mar2021-updates" class="md-nav__link">
+    Nov2020-Mar2021 Updates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    Quick Start
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-install" class="md-nav__link">
+    1. Install
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-example-code" class="md-nav__link">
+    2. Example Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-resulting-pareto-chart" class="md-nav__link">
+    3. Resulting Pareto Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-additional-notes" class="md-nav__link">
+    4. Additional Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    Design Principles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-development" class="md-nav__link">
+    Local Development
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-charts-and-tables" class="md-nav__link">
+    Example Charts and Tables
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Charts and Tables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pareto-chart" class="md-nav__link">
+    Pareto Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gantt-chart" class="md-nav__link">
+    Gantt Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-vis-chart" class="md-nav__link">
+    Time Vis Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-mean-and-std-chart" class="md-nav__link">
+    Rolling Mean and STD Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fitted-chart" class="md-nav__link">
+    Fitted Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-sql-demo" class="md-nav__link">
+    Real Time SQL Demo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coordinate-chart" class="md-nav__link">
+    Coordinate Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marginal-chart" class="md-nav__link">
+    Marginal Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-table-module" class="md-nav__link">
+    Data Table Module
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-module" class="md-nav__link">
+    Upload Module
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    Applications
+  </a>
+  
+    <nav class="md-nav" aria-label="Applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabbed-application" class="md-nav__link">
+    Tabbed Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-page-application" class="md-nav__link">
+    Multi-Page Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#px-generic-application" class="md-nav__link">
+    PX Generic Application
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other" class="md-nav__link">
+    Other
+  </a>
+  
+    <nav class="md-nav" aria-label="Other">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-html-generation" class="md-nav__link">
+    Static HTML Generation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coverage" class="md-nav__link">
+    Coverage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#external-links" class="md-nav__link">
+    External Links
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap" class="md-nav__link">
+    Roadmap
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    Contributing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    License
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DESIGN/" class="md-nav__link">
+        Design and Architecture Notes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Docs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Docs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Docs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/CHANGELOG/" class="md-nav__link">
+        CHANGELOG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/CODE_OF_CONDUCT/" class="md-nav__link">
+        Contributor Covenant Code of Conduct
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/CODE_TAG_SUMMARY/" class="md-nav__link">
+        Task Summary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/CONTRIBUTING/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/DEVELOPER_GUIDE/" class="md-nav__link">
+        Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/SECURITY/" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/STYLE_GUIDE/" class="md-nav__link">
+        Personal Style Guides
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Modules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Modules" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Dash charts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dash charts" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Dash charts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/" class="md-nav__link">
+        dash_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/_code_diagrams/" class="md-nav__link">
+        Code Diagrams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/app_px/" class="md-nav__link">
+        dash_charts.app_px
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/components/" class="md-nav__link">
+        dash_charts.components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/coordinate_chart/" class="md-nav__link">
+        dash_charts.coordinate_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/custom_colorscales/" class="md-nav__link">
+        dash_charts.custom_colorscales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/datatable/" class="md-nav__link">
+        dash_charts.datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/equations/" class="md-nav__link">
+        dash_charts.equations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/gantt_chart/" class="md-nav__link">
+        dash_charts.gantt_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/modules_datatable/" class="md-nav__link">
+        dash_charts.modules_datatable
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/modules_upload/" class="md-nav__link">
+        dash_charts.modules_upload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/pareto_chart/" class="md-nav__link">
+        dash_charts.pareto_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/scatter_line_charts/" class="md-nav__link">
+        dash_charts.scatter_line_charts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/time_vis_chart/" class="md-nav__link">
+        dash_charts.time_vis_chart
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_app/" class="md-nav__link">
+        dash_charts.utils_app
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_app_modules/" class="md-nav__link">
+        dash_charts.utils_app_modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_app_with_navigation/" class="md-nav__link">
+        dash_charts.utils_app_with_navigation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_callbacks/" class="md-nav__link">
+        dash_charts.utils_callbacks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_data/" class="md-nav__link">
+        dash_charts.utils_data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_dataset/" class="md-nav__link">
+        dash_charts.utils_dataset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_fig/" class="md-nav__link">
+        dash_charts.utils_fig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_helpers/" class="md-nav__link">
+        dash_charts.utils_helpers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_json_cache/" class="md-nav__link">
+        dash_charts.utils_json_cache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_static/" class="md-nav__link">
+        dash_charts.utils_static
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modules/dash_charts/utils_static_toc/" class="md-nav__link">
+        dash_charts.utils_static_toc
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nov2020-mar2021-updates" class="md-nav__link">
+    Nov2020-Mar2021 Updates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    Quick Start
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-install" class="md-nav__link">
+    1. Install
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-example-code" class="md-nav__link">
+    2. Example Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-resulting-pareto-chart" class="md-nav__link">
+    3. Resulting Pareto Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-additional-notes" class="md-nav__link">
+    4. Additional Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    Design Principles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-development" class="md-nav__link">
+    Local Development
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-charts-and-tables" class="md-nav__link">
+    Example Charts and Tables
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Charts and Tables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pareto-chart" class="md-nav__link">
+    Pareto Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gantt-chart" class="md-nav__link">
+    Gantt Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-vis-chart" class="md-nav__link">
+    Time Vis Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-mean-and-std-chart" class="md-nav__link">
+    Rolling Mean and STD Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fitted-chart" class="md-nav__link">
+    Fitted Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-sql-demo" class="md-nav__link">
+    Real Time SQL Demo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coordinate-chart" class="md-nav__link">
+    Coordinate Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marginal-chart" class="md-nav__link">
+    Marginal Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-table-module" class="md-nav__link">
+    Data Table Module
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-module" class="md-nav__link">
+    Upload Module
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    Applications
+  </a>
+  
+    <nav class="md-nav" aria-label="Applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabbed-application" class="md-nav__link">
+    Tabbed Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-page-application" class="md-nav__link">
+    Multi-Page Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#px-generic-application" class="md-nav__link">
+    PX Generic Application
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other" class="md-nav__link">
+    Other
+  </a>
+  
+    <nav class="md-nav" aria-label="Other">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-html-generation" class="md-nav__link">
+    Static HTML Generation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coverage" class="md-nav__link">
+    Coverage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#external-links" class="md-nav__link">
+    External Links
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap" class="md-nav__link">
+    Roadmap
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    Contributing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    License
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/kyleking/dash_charts/edit/main/docs/README.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="dash_charts">dash_charts<a class="headerlink" href="#dash_charts" title="Permanent link">⚓︎</a></h1>
+<p>Python package for <a href="https://dash.plot.ly/">Plotly/Dash</a> apps with support for multi-page, modules, and new charts such as Pareto with an Object Orient Approach</p>
+<p>Includes base classes for building a custom chart or application, new charts such as a Pareto, and base classes for tabbed or multi-page applications. See full documentation at <a href="https://kyleking.me/dash_charts/">https://kyleking.me/dash_charts/</a>. ( TODO: Currently not online )</p>
+<!-- TOC -->
+
+<ul>
+<li><a href="#dash_charts">dash_charts</a><ul>
+<li><a href="#nov2020-mar2021-updates">Nov2020-Mar2021 Updates</a></li>
+<li><a href="#quick-start">Quick Start</a><ul>
+<li><a href="#1-install">1. Install</a></li>
+<li><a href="#2-example-code">2. Example Code</a></li>
+<li><a href="#3-resulting-pareto-chart">3. Resulting Pareto Chart</a></li>
+<li><a href="#4-additional-notes">4. Additional Notes</a></li>
+</ul>
+</li>
+<li><a href="#design-principles">Design Principles</a></li>
+<li><a href="#local-development">Local Development</a></li>
+<li><a href="#example-charts-and-tables">Example Charts and Tables</a><ul>
+<li><a href="#pareto-chart">Pareto Chart</a></li>
+<li><a href="#gantt-chart">Gantt Chart</a></li>
+<li><a href="#time-vis-chart">Time Vis Chart</a></li>
+<li><a href="#rolling-mean-and-std-chart">Rolling Mean and STD Chart</a></li>
+<li><a href="#fitted-chart">Fitted Chart</a></li>
+<li><a href="#real-time-sql-demo">Real Time SQL Demo</a></li>
+<li><a href="#coordinate-chart">Coordinate Chart</a></li>
+<li><a href="#marginal-chart">Marginal Chart</a></li>
+<li><a href="#data-table-module">Data Table Module</a></li>
+<li><a href="#upload-module">Upload Module</a></li>
+</ul>
+</li>
+<li><a href="#applications">Applications</a><ul>
+<li><a href="#tabbed-application">Tabbed Application</a></li>
+<li><a href="#multi-page-application">Multi-Page Application</a></li>
+<li><a href="#px-generic-application">PX Generic Application</a></li>
+</ul>
+</li>
+<li><a href="#other">Other</a><ul>
+<li><a href="#cache">Cache</a></li>
+<li><a href="#static-html-generation">Static HTML Generation</a></li>
+</ul>
+</li>
+<li><a href="#coverage">Coverage</a></li>
+<li><a href="#external-links">External Links</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+
+<h2 id="nov2020-mar2021-updates">Nov2020-Mar2021 Updates<a class="headerlink" href="#nov2020-mar2021-updates" title="Permanent link">⚓︎</a></h2>
+<!-- FIXME: Keep updates up to date! -->
+<p>I am in the process of implementing breaking changes for a <code>0.1</code> version. The major change will be to refactor the various chart constructors to match the plotly express initialization arguments</p>
+<p>I plan on reaching &gt;75% test coverage, adding type annotations, and improving the documentation as well</p>
+<p>I considered using a builder pattern, but the plotly.express approach can be implemented through an attributes class that accepts unhandled keyword arguments to the plots</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">auto</span><span class="o">..</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ChartSettings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
+
+    <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">etc</span><span class="p">:</span> <span class="nb">int</span>
+
+
+<span class="k">class</span> <span class="nc">SomeChart</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">something</span> <span class="o">=</span> <span class="n">AttrClass</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+<p>~~Alternatively, the builder pattern might be useful to create new charts with slightly different views.~~ Would require serializing the class in order to copy rather than modify in memory</p>
+<p>Currently blocked by pending changes to <code>calcipy</code> and <code>calcipy-template</code> to how doit tasks are configured</p>
+<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">⚓︎</a></h2>
+<h3 id="1-install">1. Install<a class="headerlink" href="#1-install" title="Permanent link">⚓︎</a></h3>
+<p>With Poetry install <code>dash_charts</code> with: <code>poetry add dash_charts --git https://github.com/KyleKing/dash_charts.git#main</code></p>
+<h3 id="2-example-code">2. Example Code<a class="headerlink" href="#2-example-code" title="Permanent link">⚓︎</a></h3>
+<!-- CODE:tests/examples/readme.py -->
+
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Example Dash Application.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">dash</span>
+<span class="kn">import</span> <span class="nn">dash_html_components</span> <span class="k">as</span> <span class="nn">html</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">from</span> <span class="nn">box</span> <span class="kn">import</span> <span class="n">Box</span>
+<span class="kn">from</span> <span class="nn">implements</span> <span class="kn">import</span> <span class="n">implements</span>
+
+<span class="kn">from</span> <span class="nn">dash_charts.pareto_chart</span> <span class="kn">import</span> <span class="n">ParetoChart</span>
+<span class="kn">from</span> <span class="nn">dash_charts.utils_app</span> <span class="kn">import</span> <span class="n">AppBase</span><span class="p">,</span> <span class="n">AppInterface</span>
+<span class="kn">from</span> <span class="nn">dash_charts.utils_fig</span> <span class="kn">import</span> <span class="n">min_graph</span>
+
+<span class="c1"># FIXME: the change to use Box/_ID needs to be implemented in the examples. This is causing failures in the test cases</span>
+<span class="c1">#   Still pending if this is the preferred approach</span>
+<span class="n">_ID</span> <span class="o">=</span> <span class="n">Box</span><span class="p">({</span>
+    <span class="s1">&#39;chart&#39;</span><span class="p">:</span> <span class="s1">&#39;pareto&#39;</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="sd">&quot;&quot;&quot;Default App IDs.&quot;&quot;&quot;</span>
+
+
+<span class="nd">@implements</span><span class="p">(</span><span class="n">AppInterface</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ParetoDemo</span><span class="p">(</span><span class="n">AppBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Example creating a simple Pareto chart.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dash</span><span class="o">.</span><span class="n">Dash</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize app and initial data members. Should be inherited in child class and called with super().</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            app: Dash instance. If None, will create standalone app. Otherwise, will be part of existing app</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Car Share Pareto Demo&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_raw</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chart_main</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">_ID</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Format the car share data from plotly express for the Pareto. Called by parent class.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_raw</span> <span class="o">=</span> <span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">carshare</span><span class="p">()</span>
+                         <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;peak_hour&#39;</span><span class="p">:</span> <span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="s1">&#39;car_hours&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">}))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_raw</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;H:</span><span class="si">{</span><span class="n">cat</span><span class="si">:</span><span class="s1">02</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_raw</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]]</span>
+
+    <span class="k">def</span> <span class="nf">create_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the charts, tables, and other Dash elements.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chart_main</span> <span class="o">=</span> <span class="n">ParetoChart</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Car Share Pareto&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Peak Hours&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Car Hours&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">return_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return Dash application layout.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dash HTML object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">([</span>
+            <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">([</span><span class="n">min_graph</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_il</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="o">.</span><span class="n">chart</span><span class="p">],</span>
+                <span class="n">figure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chart_main</span><span class="o">.</span><span class="n">create_figure</span><span class="p">(</span><span class="n">df_raw</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_raw</span><span class="p">),</span>
+            <span class="p">)]),</span>
+        <span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">create_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Register the callbacks.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>  <span class="c1"># Override base class. Not necessary for this example</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">ParetoDemo</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">instance</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+    <span class="n">FLASK_HANDLE</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get_server</span><span class="p">()</span>
+</code></pre></div>
+<!-- /CODE:tests/examples/readme.py -->
+
+<h3 id="3-resulting-pareto-chart">3. Resulting Pareto Chart<a class="headerlink" href="#3-resulting-pareto-chart" title="Permanent link">⚓︎</a></h3>
+<p><img alt="MinimumExampleScreenCapture" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/pareto_readme.png" /></p>
+<h3 id="4-additional-notes">4. Additional Notes<a class="headerlink" href="#4-additional-notes" title="Permanent link">⚓︎</a></h3>
+<!-- FIXME: Document use of the `calcipy_template` instead of manual configuration -->
+
+<p>TO get the most out of the tools, you may want to add <code>calcipy</code> and add the below snippets to your <code>pyproject.toml</code> file</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.poetry.dev-dependencies.dash]</span>
+<span class="n">extras</span> <span class="o">=</span> <span class="p">[</span> <span class="s">&quot;testing&quot;</span><span class="p">,]</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s">&quot;*, ^1.19&quot;</span>
+
+<span class="k">[tool.poetry.dependencies.calcipy]</span>
+<span class="n">git</span> <span class="o">=</span> <span class="s">&quot;https://github.com/kyleking/calcipy.git&quot;</span>
+<span class="n">branch</span> <span class="o">=</span> <span class="s">&quot;dev/development&quot;</span>
+<span class="n">rev</span> <span class="o">=</span> <span class="s">&quot;01635ea&quot;</span>  <span class="c1"># Always pin to a commit</span>
+<span class="n">develop</span> <span class="o">=</span> <span class="n">true</span>  <span class="c1"># Optional: will reinstall each time</span>
+
+<span class="k">[tool.poetry.dev-dependencies.calcipy]</span>
+<span class="n">git</span> <span class="o">=</span> <span class="s">&quot;https://github.com/kyleking/calcipy.git&quot;</span>
+<span class="n">branch</span> <span class="o">=</span> <span class="s">&quot;dev/development&quot;</span>
+<span class="n">extras</span> <span class="o">=</span> <span class="p">[</span> <span class="s">&quot;dev&quot;</span><span class="p">,</span> <span class="s">&quot;lint&quot;</span><span class="p">,</span> <span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;commitizen_legacy&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>You will also want at minimum the <a href="https://raw.githubusercontent.com/KyleKing/dash_charts/blob/main/dodo.py">dodo.py</a> and folder structure from <a href="https://github.com/KyleKing/dash_charts">dash_charts</a></p>
+<h2 id="design-principles">Design Principles<a class="headerlink" href="#design-principles" title="Permanent link">⚓︎</a></h2>
+<p>I wanted to show that an object oriented programming approach to Dash projects could be really powerful for improving code reuse and improving readability in large projects. Below are a couple of design principles to keep that I try to keep in mind when implementing this package.</p>
+<ul>
+<li>Try to encapsulate all application logic (callbacks, ids, etc.) in application classes or modules</li>
+<li>For components that are reused between application, create a <code>module</code>. The layout, state, and callbacks can all be delegated to the module rather than cluttering the main application&rsquo;s class and allowing for better code reuse</li>
+<li>Move any methods that do not require state (<code>self</code>) into standalone functions</li>
+<li>If you can separate Dash (ids/layout/Callbacks) and Plotly (figures/tables) code, you can generate static HTML or PNGs more easily. Sometimes static output is useful when programmatically generating views rather than tweaking the interactive inputs each time.</li>
+</ul>
+<p>Overall, I find that this package really improves my Dash code and I hope others find it useful. Please feel free to submit PRs or open issues if you have any input. See <a href="https://github.com/KyleKing/dash_charts/blob/main/DESIGN.md">./DESIGN.md</a> for additional information on design decisions and package architecture</p>
+<h2 id="local-development">Local Development<a class="headerlink" href="#local-development" title="Permanent link">⚓︎</a></h2>
+<p>Initial commands to clone code from Github, create Python virtual environment, and run first example application</p>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/KyleKing/dash_charts.git
+<span class="nb">cd</span> dash_charts
+poetry install
+poetry shell
+python tests/examples/ex_app_px.py
+</code></pre></div>
+<p>Other useful scripts for testing, documentation, and more:</p>
+<div class="highlight"><pre><span></span><code>poetry run ptw -- -m <span class="s2">&quot;not CHROME&quot;</span>
+poetry run doit run <span class="nb">test</span>
+poetry run doit
+</code></pre></div>
+<h2 id="example-charts-and-tables">Example Charts and Tables<a class="headerlink" href="#example-charts-and-tables" title="Permanent link">⚓︎</a></h2>
+<p>Below are screenshots and links to the example code for each chart or table included in dash_charts</p>
+<h3 id="pareto-chart">Pareto Chart<a class="headerlink" href="#pareto-chart" title="Permanent link">⚓︎</a></h3>
+<p>Create Pareto charts in Dash. Handles ordering the category, calculating the cumulative percentage, and configuring both YAxis.</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_pareto_chart.py">tests/examples/ex_pareto_chart.py</a>. Screenshot below:</p>
+<p><img alt="ex_pareto_chart.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_pareto_chart.png" /></p>
+<h3 id="gantt-chart">Gantt Chart<a class="headerlink" href="#gantt-chart" title="Permanent link">⚓︎</a></h3>
+<p>Create simple Gantt charts in Dash. Doesn&rsquo;t support more advanced features such as dependencies and resource assignment, but effectively shows tasks, progress, and projects in a clear way. You can toggle the different projects on/off and use zoom like a normal Plotly chart.</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_gantt_chart.py">tests/examples/ex_gantt_chart.py</a>. Screenshot below:</p>
+<p><img alt="ex_gantt_chart.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_gantt_chart.png" /></p>
+<h3 id="time-vis-chart">Time Vis Chart<a class="headerlink" href="#time-vis-chart" title="Permanent link">⚓︎</a></h3>
+<p>Create a TimeVis chart to plot general time visualizations (based on <a href="https://github.com/daattali/timevis">daattali/timevis</a> from R). This chart differs from a Gantt chart by showing events that repeat in the same row.</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_time_vis_chart.py">tests/examples/ex_time_vis_chart.py</a>. Screenshot below:</p>
+<p><img alt="ex_time_vis_chart.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_time_vis_chart.png" /></p>
+<h3 id="rolling-mean-and-std-chart">Rolling Mean and STD Chart<a class="headerlink" href="#rolling-mean-and-std-chart" title="Permanent link">⚓︎</a></h3>
+<p>Easily chart the rolling mean and standard deviation for a given scatter data set. Demonstrates using chart annotations.</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_rolling_chart.py">tests/examples/ex_rolling_chart.py</a>. Screenshot below:</p>
+<p><img alt="ex_rolling_chart.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_rolling_chart.png" /></p>
+<h3 id="fitted-chart">Fitted Chart<a class="headerlink" href="#fitted-chart" title="Permanent link">⚓︎</a></h3>
+<p>Fit arbitrary scatter data with a specified equation. On hover will show the rounded fit parameters. Useful for experimenting with new data.</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_fitted_chart.py">tests/examples/ex_fitted_chart.py</a>. Screenshot below:</p>
+<p><img alt="ex_fitted_chart.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_fitted_chart.png" /></p>
+<h3 id="real-time-sql-demo">Real Time SQL Demo<a class="headerlink" href="#real-time-sql-demo" title="Permanent link">⚓︎</a></h3>
+<p>Example using a Rolling Chart to show real time data from a SQLite database. For the demo, a background thread populates the database as the Dash app runs in a separate thread.</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_sqlite_realtime.py">tests/examples/ex_sqlite_realtime.py</a>. Screenshot below:</p>
+<p><img alt="ex_sqlite_realtime.gif" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_sqlite_realtime.gif" /></p>
+<h3 id="coordinate-chart">Coordinate Chart<a class="headerlink" href="#coordinate-chart" title="Permanent link">⚓︎</a></h3>
+<p>Chart a discrete data set on a 2D plane with color for intensity. Below examples show how to use the <code>YearGrid()</code>, <code>MonthGrid()</code>, and <code>CircleGrid()</code> classes</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_coordinate_chart.py">tests/examples/ex_coordinate_chart.py</a>. Screenshot below:</p>
+<p><img alt="ex_coordinate_chart.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_coordinate_chart.png" /></p>
+<h3 id="marginal-chart">Marginal Chart<a class="headerlink" href="#marginal-chart" title="Permanent link">⚓︎</a></h3>
+<p>Example creating a new chart from utils_fig.MarginalChart</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_marginal_chart.py">tests/examples/ex_marginal_chart.py</a>. Screenshot below:</p>
+<p><img alt="ex_marginal_chart.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_marginal_chart.png" /></p>
+<h3 id="data-table-module">Data Table Module<a class="headerlink" href="#data-table-module" title="Permanent link">⚓︎</a></h3>
+<p>Display Dash data table from dataframe</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_datatable.py">tests/examples/ex_datatable.py</a>. Screenshot below:</p>
+<p><img alt="ex_datatable.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_datatable.png" /></p>
+<h3 id="upload-module">Upload Module<a class="headerlink" href="#upload-module" title="Permanent link">⚓︎</a></h3>
+<p>Upload module for user-selected CSV, JSON, or SQLite files.</p>
+<p>See sample code in <a href="https://ra/www.gubusem/KyleKing/dash_charts/blob/main/tests/examples/ex_upload.py">tests/examples/ex_upload.py</a>. Screenshot below:</p>
+<p><img alt="ex_upload.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_upload.png" /></p>
+<h2 id="applications">Applications<a class="headerlink" href="#applications" title="Permanent link">⚓︎</a></h2>
+<p>Every app derives from <code>AppBase()</code> so that each tab or page can be run independently or part of a more complicated application</p>
+<h3 id="tabbed-application">Tabbed Application<a class="headerlink" href="#tabbed-application" title="Permanent link">⚓︎</a></h3>
+<p>Use the <code>AppWithTabs()</code> base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.</p>
+<p>See sample code in <a href="https://ra/www.gubusem/KyleKing/dash_charts/blob/main/tests/examples/ex_tabs.py">tests/examples/ex_tabs.py</a>. Screenshot below:</p>
+<p><img alt="ex_tabs.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_tabs.png" /></p>
+<h3 id="multi-page-application">Multi-Page Application<a class="headerlink" href="#multi-page-application" title="Permanent link">⚓︎</a></h3>
+<p>Use the <code>AppMultiPage()</code> base class to quickly build applications with tabbed navigation. You can set tabs to the top/bottom/left/right, to be compact or not, etc.</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_multi_page.py">tests/examples/ex_multi_page.py</a>. Screenshot below:</p>
+<p><img alt="ex_multi_page.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_multi_page.png" /></p>
+<h3 id="px-generic-application">PX Generic Application<a class="headerlink" href="#px-generic-application" title="Permanent link">⚓︎</a></h3>
+<p>To facilitate general data analysis from a JSON, CSV, or SQLite file, dash_charts includes apps for each px plot type and a tabbed app to bring them all together.</p>
+<p>See sample code in <a href="https://ra/www.gubusem/KyleKing/dash_charts/blob/main/tests/examples/ex_app_px.py">tests/examples/ex_app_px.py</a>. Screenshot below:</p>
+<p><img alt="ex_app_px.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_app_px.png" /></p>
+<h2 id="other">Other<a class="headerlink" href="#other" title="Permanent link">⚓︎</a></h2>
+<p>Other notable components in <code>dash_charts</code></p>
+<h3 id="cache">Cache<a class="headerlink" href="#cache" title="Permanent link">⚓︎</a></h3>
+<p>Utilities for utilizing a local cache file system for storing JSON data. Particularly useful if scraping or making many API calls to cache the responses locally.</p>
+<p>See sample code in the relevant test file <a href="https:/raw./usercontentgithub.com/KyleKing/dash_charts/blob/main/tests/test_utils_json_cache.py">tests/test_utils_json_cache.py</a></p>
+<h3 id="static-html-generation">Static HTML Generation<a class="headerlink" href="#static-html-generation" title="Permanent link">⚓︎</a></h3>
+<p>utilities for creating static HTML output with all of the CustomCharts above or user-created. Also includes utilities for writing tables, code, markdown, and more to be added.</p>
+<p>See sample code in <a href="https://www.github.com/KyleKing/dash_charts/blob/main/tests/examples/ex_utils_static.py">tests/examples/ex_utils_static.py</a>. Screenshot below:</p>
+<p><img alt="ex_utils_static.png" src="https://raw.githubusercontent.com/KyleKing/dash_charts/main/.images/ex_utils_static.png" /></p>
+<h2 id="coverage">Coverage<a class="headerlink" href="#coverage" title="Permanent link">⚓︎</a></h2>
+<p>Latest coverage table</p>
+<!-- COVERAGE -->
+
+<table>
+<thead>
+<tr>
+<th align="right">File</th>
+<th align="right">Statements</th>
+<th align="right">Missing</th>
+<th align="right">Excluded</th>
+<th align="right">Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right"><code>dash_charts/__init__.py</code></td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">100.0%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/app_px.py</code></td>
+<td align="right">130</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">91.5%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/components.py</code></td>
+<td align="right">13</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">100.0%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/coordinate_chart.py</code></td>
+<td align="right">102</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">99.0%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/custom_colorscales.py</code></td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">100.0%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/datatable.py</code></td>
+<td align="right">79</td>
+<td align="right">25</td>
+<td align="right">0</td>
+<td align="right">68.4%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/equations.py</code></td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">100.0%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/gantt_chart.py</code></td>
+<td align="right">54</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">100.0%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/modules_datatable.py</code></td>
+<td align="right">101</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">89.1%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/modules_upload.py</code></td>
+<td align="right">132</td>
+<td align="right">60</td>
+<td align="right">0</td>
+<td align="right">54.5%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/pareto_chart.py</code></td>
+<td align="right">43</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">100.0%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/scatter_line_charts.py</code></td>
+<td align="right">45</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">100.0%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/time_vis_chart.py</code></td>
+<td align="right">61</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">100.0%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_app.py</code></td>
+<td align="right">98</td>
+<td align="right">14</td>
+<td align="right">6</td>
+<td align="right">85.7%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_app_modules.py</code></td>
+<td align="right">26</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">88.5%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_app_with_navigation.py</code></td>
+<td align="right">119</td>
+<td align="right">9</td>
+<td align="right">6</td>
+<td align="right">92.4%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_callbacks.py</code></td>
+<td align="right">34</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">82.4%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_data.py</code></td>
+<td align="right">63</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">98.4%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_dataset.py</code></td>
+<td align="right">76</td>
+<td align="right">43</td>
+<td align="right">0</td>
+<td align="right">43.4%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_fig.py</code></td>
+<td align="right">77</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">97.4%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_helpers.py</code></td>
+<td align="right">17</td>
+<td align="right">8</td>
+<td align="right">7</td>
+<td align="right">52.9%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_json_cache.py</code></td>
+<td align="right">51</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">80.4%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_static.py</code></td>
+<td align="right">111</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">95.5%</td>
+</tr>
+<tr>
+<td align="right"><code>dash_charts/utils_static_toc.py</code></td>
+<td align="right">22</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">95.5%</td>
+</tr>
+</tbody>
+</table>
+<p>Generated on: 2020-11-08T22:46:27.420973</p>
+<!-- /COVERAGE -->
+
+<h2 id="external-links">External Links<a class="headerlink" href="#external-links" title="Permanent link">⚓︎</a></h2>
+<p><a href="https://codebeat.co/projects/github-com-kyleking-dash_charts-main"><img alt="codebeat badge" src="https://codebeat.co/badges/9d2b9a53-9203-4467-8cde-68f24e930389" /></a> <a href="https://kyleking.me/dash_charts/"><img alt="Documentation Site Online Status Badge" src="https://img.shields.io/website?label=Doc%20Site&amp;up_message=up&amp;url=https%3A%2F%2Fgithub.com%2FKyleKing%2Fdash_charts%2F" /></a> <img alt="Commits Since last Release" src="https://img.shields.io/github/commits-since/KyleKing/dash_charts/latest" /> <img alt="Last Commit Badge" src="https://img.shields.io/github/last-commit/kyleking/dash_charts" /></p>
+<p>Useful Dash reference links</p>
+<ul>
+<li>Official <a href="https://dash.plot.ly">Dash Docs</a> / <a href="https://plot.ly/python/">Plotly Docs</a></li>
+<li>Example Apps<ul>
+<li>Pretty annotations from <a href="https://www.marketahead.com/p/FOX">Market Ahead</a>, a commercial Dash app</li>
+<li>Pleasant dark app from Dash-Bio, <a href="https://github.com/plotly/dash-bio/blob/main/tests/dashbio_demos/app_circos.py">Circos</a></li>
+<li>All <a href="https://github.com/plotly/dash-sample-apps/tree/main/apps">Dash Sample Apps</a></li>
+</ul>
+</li>
+<li>Code Conceptual inspiration<ul>
+<li><a href="https://www.jeannicholashould.com/tidy-data-in-python.html">On Tidy data</a></li>
+<li><a href="https://florimond.dev/blog/articles/2018/10/reconciling-dataclasses-and-properties-in-python/">Using field for properties in a @DataClass</a></li>
+</ul>
+</li>
+<li>Best Practices<ul>
+<li>IBM Design Language (note that v2 doesn&rsquo;t have documentation on visualization yet)<ul>
+<li><a href="https://www.ibm.com/design/v1/language/experience/data-visualization/process/">Process</a></li>
+<li><a href="https://www.ibm.com/design/v1/language/experience/data-visualization/chart-models/">Select Chart</a><ul>
+<li>Alt <a href="https://www.tatvic.com/blog/7-visualizations-learn-r/">Chart Decision Diagram</a></li>
+</ul>
+</li>
+<li><a href="https://www.ibm.com/design/v1/language/experience/data-visualization/visualization/">Principles (color conventions, etc.)</a></li>
+<li><a href="https://www.ibm.com/design/v1/language/resources/color-library/">Color Library and Data Vis Swatches</a></li>
+<li><a href="https://www.ibm.com/design/v1/language/experience/data-visualization/interaction/">Interaction</a></li>
+<li><a href="https://www.ibm.com/design/v1/language/experience/data-visualization/style/">Style</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Colors<ul>
+<li><a href="https://lisacharlotterost.de/2016/04/22/Colors-for-DataVis/">Friendly Guide to Colors</a></li>
+<li><a href="https://projects.susielu.com/viz-palette">Viz-Palette Tool</a></li>
+<li><a href="http://colormind.io/">AI Color Palette</a> / <a href="https://coolors.co/2b303a-92dce5-eee5e9-7c7c7c-d64933">Coolors</a></li>
+</ul>
+</li>
+<li>Reference<ul>
+<li><a href="https://github.com/pandas-dev/pandas/blob/main/doc/cheatsheet/Pandas_Cheat_Sheet.pdf">Pandas CheatSheet for Data Manipulation</a></li>
+</ul>
+</li>
+</ul>
+<!-- TODO: See https://github.com/KyleKing/calcipy/issues/38 -->
+
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">⚓︎</a></h2>
+<ol>
+<li>&hellip;</li>
+<li>
+<p>&hellip;</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span> Hello World!
+</code></pre></div>
+</li>
+<li>
+<p>&hellip;</p>
+</li>
+</ol>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">⚓︎</a></h2>
+<!-- TODO: Show an example (screenshots, terminal recording, etc.) -->
+
+<p>For more examples, see <a href="https://github.com/kyleking/dash_charts/scripts">Scripts</a> or <a href="https://github.com/kyleking/dash_charts/tests">Tests</a></p>
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">⚓︎</a></h2>
+<p>See the <code>Open Issues</code> and <code>Milestones</code> for current status and <a href="docs/CODE_TAG_SUMMARY/">./docs/CODE_TAG_SUMMARY.md</a> for annotations in the source code.</p>
+<p>For release history, see the <a href="docs/CHANGELOG/">./docs/CHANGELOG.md</a></p>
+<h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">⚓︎</a></h2>
+<p>See the Developer Guide, Contribution Guidelines, etc</p>
+<ul>
+<li><a href="docs/DEVELOPER_GUIDE/">./docs/DEVELOPER_GUIDE.md</a></li>
+<li><a href="docs/STYLE_GUIDE/">./docs/STYLE_GUIDE.md</a></li>
+<li><a href="docs/CONTRIBUTING/">./docs/CONTRIBUTING.md</a></li>
+<li><a href="docs/CODE_OF_CONDUCT/">./docs/CODE_OF_CONDUCT.md</a></li>
+<li><a href="docs/SECURITY/">./docs/SECURITY.md</a></li>
+</ul>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">⚓︎</a></h2>
+<p><a href="https://github.com/kyleking/dash_charts/LICENSE">LICENSE</a></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+      
+        
+        <a href="CODE_TAG_SUMMARY/" class="md-footer__link md-footer__link--next" aria-label="Next: Task Summary" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Task Summary
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "toc.autohide"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.cefbb252.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.a5f8ea78.min.js"></script>
+      
+    
+  </body>
+</html>
