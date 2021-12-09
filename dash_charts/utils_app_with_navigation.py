@@ -83,11 +83,11 @@ class AppWithNavigation(AppBase):
 
     def create_elements(self) -> None:
         """Override method as not needed at navigation-level."""
-        pass  # pragma: no cover
+        ...  # pragma: no cover
 
     def create_callbacks(self) -> None:
         """Override method as not needed at navigation-level."""
-        pass  # pragma: no cover
+        ...  # pragma: no cover
 
 
 @implements(AppInterface)  # noqa: H601
@@ -108,11 +108,11 @@ class StaticTab(AppBase):
 
     def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements.."""
-        pass
+        ...
 
     def create_callbacks(self) -> None:
         """Register callbacks necessary for this tab."""
-        pass
+        ...
 
 
 class AppWithTabs(AppWithNavigation):

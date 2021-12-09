@@ -58,13 +58,15 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Visualization",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
 ] # https://pypi.org/classifiers/
-# And based on: https://github.com/plotly/dash/blob/dev/setup.py#L43
+# And based on: https://github.com/plotly/dash/blob/6cfb7874800152794d8d603e8d9c4334bf61e3fd/setup.py#L47-L70
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kyleking/dash_charts/issues"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+attrs-strict = ">=0.2.2"
+calcipy = "^2021.0.2"
 cerberus = "*"
 dash = "*"
 dash-bootstrap-components = "*"
@@ -78,6 +80,7 @@ pandas = "*"
 psutil = "*"
 python-box = "*"
 scipy = "*"
+tqdm = ">=4.62.3"
 
 # sqlite-utils = "*"
 # datasette-vega = "*"
@@ -87,25 +90,20 @@ scipy = "*"
 dash-tabulator = "^0.4.2"
 dash-extensions = "^0.0.55"
 
-[tool.poetry.dependencies.calcipy]
-git = "https://github.com/kyleking/calcipy.git"
-branch = "dev/development"
-rev = "01635ea"                                 # Always pin to a commit
-develop = true                                  # Optional: will reinstall each time
-
-[tool.poetry.dev-dependencies.calcipy]
-git = "https://github.com/kyleking/calcipy.git"
-branch = "dev/development"
-extras = ["dev", "lint", "test", "commitizen_legacy"]
-
 [tool.poetry.dev-dependencies]
 astor = "*"
+calcipy = { version = "*", extras = [
+    "dev",
+    "lint",
+    "test",
+    "commitizen_legacy",
+] }
 jsonpickle = "*"
 
 # Experimental dependencies
-archan = { git = "https://github.com/pawamoy/archan.git" }
-dependenpy = "^3.3.0"
-archan-pylint = { git = "https://github.com/pawamoy/archan-pylint" }
+# archan = { git = "https://github.com/pawamoy/archan.git" }
+# dependenpy = "^3.3.0"
+# archan-pylint = { git = "https://github.com/pawamoy/archan-pylint" }
 
 [tool.poetry.dev-dependencies.dash]
 extras = ["testing"]

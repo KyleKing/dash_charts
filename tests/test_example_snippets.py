@@ -35,7 +35,7 @@ class ComponentDemo(AppBase):
 
     def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
-        pass  # No charts in this demo
+        ...  # No charts in this demo
 
     def return_layout(self) -> dict:
         """Return Dash application layout.
@@ -63,7 +63,7 @@ class ComponentDemo(AppBase):
 
     def create_callbacks(self) -> None:
         """Create Dash callbacks."""
-        pass  # No callbacks necessary for this simple example
+        ...  # No callbacks necessary for this simple example
 
 
 @pytest.mark.CHROME
@@ -903,7 +903,7 @@ def test_in_in001_simple_callback(dash_duo):
 #             [Input("input-output", "children")],
 #         )
 #         def failure(children):
-#             pass
+#             ...
 
 #     msg = "Same output and input: input-output.children"
 #     assert err.value.args[0] == msg
@@ -916,7 +916,7 @@ def test_in_in001_simple_callback(dash_duo):
 #             [Input("input-output", "children")],
 #         )
 #         def failure2(children):
-#             pass
+#             ...
 
 #     msg = "Same output and input: input-output.children"
 #     assert err.value.args[0] == msg

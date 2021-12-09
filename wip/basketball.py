@@ -199,7 +199,7 @@ def filter_hexbins(hexbin_stats, min_threshold=0.0):
     temp_len = len(filter_hexbin_stats['freq_by_hex'])
     filter_array = [i > min_threshold for i in filter_hexbin_stats['freq_by_hex']]
     for k, v in filter_hexbin_stats.items():
-        if type(v) != int and len(v) == temp_len:
+        if not isinstance(v, int) and len(v) == temp_len:
             filter_hexbin_stats[k] = [v[i] for i in range(temp_len) if filter_array[i]]
 
     return filter_hexbin_stats

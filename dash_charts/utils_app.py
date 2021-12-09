@@ -9,6 +9,7 @@ from typing import List, Optional
 import dash
 import dash_html_components as html
 from box import Box
+
 from implements import Interface
 
 from .utils_callbacks import format_app_callback
@@ -28,7 +29,7 @@ STATIC_URLS = {
     'bulma': {
         'href': 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css',
         'rel': 'stylesheet',
-        'integrity': 'sha384-H5O3U+oUYwd/bFECZMaQ1XJlueV5e1gB4b7Xt0M06fPbgz48WH33qxUyQNPeZVou',
+        'integrity': 'sha384-H5O3U+oUYwd/bFECZMaQ1XJlueV5e1gB4b7Xt0M06fPbgz48WH33qxUyQNPeZVou',  # pragma: allowlist secret
         'crossorigin': 'anonymous',
     },
     'bulmaswatch-flatly': {
@@ -38,7 +39,7 @@ STATIC_URLS = {
     'normalize': {
         'href': 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
         'rel': 'stylesheet',
-        'integrity': 'sha384-9Z9AuAj0Xi0z7WFOSgjjow8EnNY9wPNp925TVLlAyWhvZPsf5Ks23Ex0mxIrWJzJ',
+        'integrity': 'sha384-9Z9AuAj0Xi0z7WFOSgjjow8EnNY9wPNp925TVLlAyWhvZPsf5Ks23Ex0mxIrWJzJ',  # pragma: allowlist secret
         'crossorigin': 'anonymous',
     },
 }
@@ -81,25 +82,25 @@ class AppInterface(Interface):  # noqa: H601
     init_app_kwargs = {}
 
     def __init__(self, app: Optional[dash.Dash] = None) -> None:  # noqa: D102, D107
-        pass
+        ...
 
     def create(self, assign_layout: bool = True) -> None:  # noqa: D102
-        pass
+        ...
 
     def override_module_defaults(self) -> None:  # noqa: D102
-        pass
+        ...
 
     def initialization(self) -> None:  # noqa: D102
-        pass
+        ...
 
     def generate_data(self) -> None:  # noqa: D102
-        pass
+        ...
 
     def register_uniq_ids(self, app_ids: List[str]) -> None:  # noqa: D102
-        pass
+        ...
 
     def verify_app_initialization(self) -> None:  # noqa: D102
-        pass
+        ...
 
     def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements.
@@ -107,13 +108,13 @@ class AppInterface(Interface):  # noqa: H601
         Does not return a result. All charts should be initialized in this method (ex `self.chart_main = ParetoChart()`)
 
         """
-        pass
+        ...
 
     def return_layout(self) -> dict:  # noqa: D102
-        pass
+        ...
 
     def callback(self, outputs, inputs, states, pic: bool = False, **kwargs: dict):  # noqa: D102
-        pass
+        ...
 
     def create_callbacks(self) -> None:
         """Register the chart callbacks.
@@ -121,13 +122,13 @@ class AppInterface(Interface):  # noqa: H601
         Does not return a result. May `pass` as long as no callbacks are needed for application
 
         """
-        pass
+        ...
 
     def run(self, **dash_kwargs: dict) -> None:  # noqa: D102
-        pass
+        ...
 
     def get_server(self):  # noqa: D102
-        pass
+        ...
 
 
 class AppBase:  # noqa: H601
@@ -230,7 +231,7 @@ class AppBase:  # noqa: H601
 
     def override_module_defaults(self) -> None:
         """Override default values from modules."""
-        pass
+        ...
 
     def initialization(self) -> None:
         """Initialize ids with `self.register_uniq_ids([...])` and other one-time actions."""
@@ -239,7 +240,7 @@ class AppBase:  # noqa: H601
 
     def generate_data(self) -> None:
         """Recommended method for generating data stored in memory. Called in initialization."""
-        pass
+        ...
 
     def register_uniq_ids(self, app_ids: List[str]) -> None:
         """Register the `app_ids` to the corresponding global_id in the `self._il` lookup dictionary.

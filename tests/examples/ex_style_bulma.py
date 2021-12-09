@@ -36,7 +36,7 @@ class BulmaStylingDemo(AppBase):
 
     def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
-        pass
+        ...
 
     def return_layout(self) -> dict:
         """Return Dash application layout.
@@ -55,7 +55,10 @@ class BulmaStylingDemo(AppBase):
                                     className='tile is-child notification', children=[
                                         html.P(className='title', children='Top Vertical Tile'),
                                         html.P(className='subtitle', children='Notification class for grey background'),
-                                        html.P(className='subtitle', children='Could also add is-info, is-warning, etc.'),
+                                        html.P(
+                                            className='subtitle',
+                                            children='Could also add is-info, is-warning, etc.',
+                                        ),
                                     ],
                                 ),
                                 html.Article(
@@ -63,7 +66,9 @@ class BulmaStylingDemo(AppBase):
                                         html.P(className='title', children='Vertical...'),
                                         html.P(className='subtitle', children='(Top tile)'),
                                         min_graph(
-                                            figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+                                            figure=px.scatter(
+                                                px.data.iris(), x='sepal_width', y='sepal_length', height=200,
+                                            ),
                                         ),
                                     ],
                                 ),
@@ -72,7 +77,9 @@ class BulmaStylingDemo(AppBase):
                                         html.P(className='title', children='...tiles'),
                                         html.P(className='subtitle', children='(Bottom tile)'),
                                         min_graph(
-                                            figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+                                            figure=px.scatter(
+                                                px.data.iris(), x='sepal_width', y='sepal_length', height=200,
+                                            ),
                                         ),
                                     ],
                                 ),
@@ -85,7 +92,14 @@ class BulmaStylingDemo(AppBase):
                         html.Article(
                             className='tile is-child is-3 is-block-desktop', children=[
                                 html.P(className='title', children='A Small Chart'),
-                                min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=350)),
+                                min_graph(
+                                    figure=px.scatter(
+                                        px.data.iris(),
+                                        x='sepal_width',
+                                        y='sepal_length',
+                                        height=350,
+                                    ),
+                                ),
                                 html.P(className='subtitle', children='An Image'),
                                 html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif'),
                             ],
@@ -97,7 +111,7 @@ class BulmaStylingDemo(AppBase):
 
     def create_callbacks(self) -> None:
         """Create Dash callbacks."""
-        pass  # No callbacks necessary for this simple example
+        ...  # No callbacks necessary for this simple example
 
 
 instance = BulmaStylingDemo

@@ -12,6 +12,6 @@ FIXME: Replace with programmatic imports? Maybe explicit imports to check backwa
 from pprint import pprint
 
 # TODO: Replace with imports to test
-from dash_charts.components import *
+from dash_charts.components import *  # noqa: F401
 
 pprint(locals())  # noqa: T003

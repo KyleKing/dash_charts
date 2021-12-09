@@ -23,5 +23,3 @@ df_dep = pd.DataFrame(map(unwrap_attr, cache.values()))
 # > fig = px.histogram(df_dep, x='datetime')
 fig = px.scatter(df_dep, x='datetime', hover_name='name')
 fig.show()
-
-breakpoint()

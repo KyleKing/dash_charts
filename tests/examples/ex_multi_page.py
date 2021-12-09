@@ -30,11 +30,11 @@ class StaticPage(AppBase):
 
     def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements.."""
-        pass
+        ...
 
     def create_callbacks(self) -> None:
         """Register callbacks necessary for this tab."""
-        pass
+        ...
 
 
 class PageText(StaticPage):

@@ -2,15 +2,17 @@
 
 import argparse
 import time
-from pathlib import Path
+from datetime import datetime
+from typing import Optional
 
-from .utils_data import TIME_FORMAT_FILE, format_unix
+from beartype import beartype
 
 # ----------------------------------------------------------------------------------------------------------------------
 # General Debug
 
 
-def debug_time(message, last=None):
+@beartype
+def debug_time(message: str, last: Optional[datetime] = None) -> datetime:
     """Debug timing issues.
 
     Args:

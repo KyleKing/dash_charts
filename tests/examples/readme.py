@@ -66,7 +66,7 @@ class ParetoDemo(AppBase):
 
     def create_callbacks(self) -> None:
         """Register the callbacks."""
-        pass  # Override base class. Not necessary for this example
+        ...  # Override base class. Not necessary for this example
 
 
 if __name__ == '__main__':

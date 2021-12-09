@@ -37,7 +37,7 @@ class BootstrapStylingDemo(AppBase):
 
     def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
-        pass
+        ...
 
     def return_navbar(self):
         """Return Dash navbar layout."""
@@ -112,7 +112,9 @@ class BootstrapStylingDemo(AppBase):
                                             html.P(children='Vertical...'),
                                             html.P(children='(Top tile)'),
                                             min_graph(
-                                                figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+                                                figure=px.scatter(
+                                                    px.data.iris(), x='sepal_width', y='sepal_length', height=200,
+                                                ),
                                             ),
                                         ],
                                     ),
@@ -121,7 +123,9 @@ class BootstrapStylingDemo(AppBase):
                                             html.P(children='...tiles'),
                                             html.P(children='(Bottom tile)'),
                                             min_graph(
-                                                figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+                                                figure=px.scatter(
+                                                    px.data.iris(), x='sepal_width', y='sepal_length', height=200,
+                                                ),
                                             ),
                                         ],
                                     ),
@@ -140,7 +144,14 @@ class BootstrapStylingDemo(AppBase):
                                     html.Article(
                                         children=[
                                             html.P(children='A Small Chart'),
-                                            min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=350)),
+                                            min_graph(
+                                                figure=px.scatter(
+                                                    px.data.iris(),
+                                                    x='sepal_width',
+                                                    y='sepal_length',
+                                                    height=350,
+                                                ),
+                                            ),
                                             html.P(children='An Image'),
                                             html.Img(
                                                 src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif',
@@ -158,7 +169,7 @@ class BootstrapStylingDemo(AppBase):
 
     def create_callbacks(self) -> None:
         """Create Dash callbacks."""
-        pass  # No callbacks necessary for this simple example
+        ...  # No callbacks necessary for this simple example
 
 
 instance = BootstrapStylingDemo
