@@ -125,12 +125,14 @@ class SampleMarginalChartDemo(AppBase):
         """Create self.data_raw with sample data."""
         # Create dataframe based on px sample dataset
         iris = px.data.iris()
-        self.data_raw = pd.DataFrame(data={
-            'name': iris['species'],
-            'x': iris['petal_width'],
-            'y': iris['petal_length'],
-            'label': None,
-        })
+        self.data_raw = pd.DataFrame(
+            data={
+                'name': iris['species'],
+                'x': iris['petal_width'],
+                'y': iris['petal_length'],
+                'label': None,
+            },
+        )
 
     def return_layout(self) -> dict:
         """Return Dash application layout.
@@ -146,12 +148,14 @@ class SampleMarginalChartDemo(AppBase):
                 'marginLeft': 'auto',
             }, children=[
                 html.H4(children=self.name),
-                html.Div([min_graph(
-                    id=self._il[self.id_chart],
-                    figure=self.chart_main.create_figure(
-                        df_raw=self.data_raw,
+                html.Div([
+                    min_graph(
+                        id=self._il[self.id_chart],
+                        figure=self.chart_main.create_figure(
+                            df_raw=self.data_raw,
+                        ),
                     ),
-                )]),
+                ]),
             ],
         )
 

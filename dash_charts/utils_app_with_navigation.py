@@ -133,13 +133,15 @@ class AppWithTabs(AppWithNavigation):
 
         """
         tabs = [dcc.Tab(label=name, value=name) for name, tab in self.nav_lookup.items()]
-        return html.Div(children=[
-            dcc.Tabs(
-                id=self._il[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
-                children=tabs,
-            ),
-            html.Div(id=self._il[self.id_tabs_content]),
-        ])
+        return html.Div(
+            children=[
+                dcc.Tabs(
+                    id=self._il[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
+                    children=tabs,
+                ),
+                html.Div(id=self._il[self.id_tabs_content]),
+            ],
+        )
 
     def create_callbacks(self) -> None:
         """Register the navigation callback."""
@@ -183,13 +185,15 @@ class FullScreenAppWithTabs(AppWithTabs):  # noqa: H601
             dict: Dash HTML object
 
         """
-        return html.Div(children=[
-            self.tab_menu(),
-            html.Div(
-                style={f'margin-{self.tabs_location}': self.tabs_margin},
-                children=[html.Div(id=self._il[self.id_tabs_content])],
-            ),
-        ])
+        return html.Div(
+            children=[
+                self.tab_menu(),
+                html.Div(
+                    style={f'margin-{self.tabs_location}': self.tabs_margin},
+                    children=[html.Div(id=self._il[self.id_tabs_content])],
+                ),
+            ],
+        )
 
     def generate_tab_kwargs(self):
         """Create the tab keyword arguments. Intended to be modified through inheritance.
@@ -251,12 +255,14 @@ class FullScreenAppWithTabs(AppWithTabs):  # noqa: H601
         """
         tab_kwargs, tabs_kwargs, tabs_style = self.generate_tab_kwargs()
         tabs = [dcc.Tab(label=name, value=name, **tab_kwargs) for name, tab in self.nav_lookup.items()]
-        return html.Div(children=[
-            dcc.Tabs(
-                id=self._il[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
-                children=tabs, **tabs_kwargs,
-            ),
-        ], style=tabs_style)
+        return html.Div(
+            children=[
+                dcc.Tabs(
+                    id=self._il[self.id_tabs_select], value=list(self.nav_lookup.keys())[0],
+                    children=tabs, **tabs_kwargs,
+                ),
+            ], style=tabs_style,
+        )
 
 
 class AppMultiPage(AppWithNavigation):  # noqa: H601
@@ -287,11 +293,13 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
             dict: Dash HTML object
 
         """
-        return html.Div(children=[
-            dcc.Location(id=self._il[self.id_url], refresh=False),
-            self.nav_bar(),
-            html.Div(id=self._il[self.id_pages_content]),
-        ])
+        return html.Div(
+            children=[
+                dcc.Location(id=self._il[self.id_url], refresh=False),
+                self.nav_bar(),
+                html.Div(id=self._il[self.id_pages_content]),
+            ],
+        )
 
     def nav_bar(self):
         """Return the HTML elements for the navigation menu.
@@ -308,31 +316,37 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
         # Create links in navbar and dropdown. Both are optional
         links = []
         if self.navbar_links:
-            links.append(dbc.Nav(
-                children=[dbc.NavItem(dbc.NavLink(name, href=link)) for name, link in self.navbar_links],
-                fill=True,
-                navbar=True,
-            ))
-        if self.dropdown_links:
-            links.append(dbc.Nav(
-                dbc.DropdownMenu(
-                    children=[dbc.DropdownMenuItem(name, href=link) for name, link in self.dropdown_links],
-                    in_navbar=True,
-                    label='Links',
-                    nav=True,
+            links.append(
+                dbc.Nav(
+                    children=[dbc.NavItem(dbc.NavLink(name, href=link)) for name, link in self.navbar_links],
+                    fill=True,
+                    navbar=True,
                 ),
-                navbar=True,
-            ))
+            )
+        if self.dropdown_links:
+            links.append(
+                dbc.Nav(
+                    dbc.DropdownMenu(
+                        children=[dbc.DropdownMenuItem(name, href=link) for name, link in self.dropdown_links],
+                        in_navbar=True,
+                        label='Links',
+                        nav=True,
+                    ),
+                    navbar=True,
+                ),
+            )
         # Layout default navbar
         return dbc.Navbar(
             children=[
-                dbc.NavLink([
-                    dbc.Row(
-                        children=brand,
-                        align='center',
-                        no_gutters=True,
-                    ),
-                ], href='/'),
+                dbc.NavLink(
+                    [
+                        dbc.Row(
+                            children=brand,
+                            align='center',
+                            no_gutters=True,
+                        ),
+                    ], href='/',
+                ),
                 dbc.NavbarToggler(id=self._il[self.id_toggler]),
                 dbc.Collapse(
                     dbc.Row(
@@ -366,7 +380,8 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
         @self.callback(
             [(self.id_collapse, 'is_open')],
             [(self.id_toggler, 'n_clicks')],
-            [(self.id_collapse, 'is_open')])
+            [(self.id_collapse, 'is_open')],
+        )
         def toggle_navbar_collapse(n_clicks, is_open):
             return [not is_open if n_clicks else is_open]
 

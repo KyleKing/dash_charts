@@ -90,10 +90,12 @@ class UploadModuleDemo(AppBase):
             # password = a_state[self.pass_id]['value']  # noqa: E800
             print("WARN: The password isn't authenticated. This is just a placeholder")  # noqa: T001
 
-            return map_outputs(outputs, [
-                (self.user_info, 'children', self._show_current_user(email)),
-                (self.mod_upload.get(self.mod_upload.id_username_cache), 'data', email),
-            ])
+            return map_outputs(
+                outputs, [
+                    (self.user_info, 'children', self._show_current_user(email)),
+                    (self.mod_upload.get(self.mod_upload.id_username_cache), 'data', email),
+                ],
+            )
 
 
 instance = UploadModuleDemo

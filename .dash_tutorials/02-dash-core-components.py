@@ -189,8 +189,10 @@ app.layout = html.Div([
                 figure=go.Figure(
                     data=[
                         go.Bar(
-                            x=[1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
-                                2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012],
+                            x=[
+                                1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
+                                2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012,
+                            ],
                             y=[219, 99, 97, 112, 127, 180, 236, 207, 236, 263, 350, 430, 474, 526, 488, 537, 500, 439],
                             name='Rest of world',
                             marker=go.bar.Marker(
@@ -198,8 +200,10 @@ app.layout = html.Div([
                             ),
                         ),
                         go.Bar(
-                            x=[1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
-                                2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012],
+                            x=[
+                                1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
+                                2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012,
+                            ],
                             y=[16, 13, 10, 11, 28, 37, 43, 55, 56, 88, 105, 156, 270, 299, 340, 403, 549, 499],
                             name='China',
                             marker=go.bar.Marker(
@@ -229,7 +233,8 @@ app.layout = html.Div([
 @app.callback(
     dash.dependencies.Output('output-container-button', 'children'),
     [dash.dependencies.Input('button', 'n_clicks')],
-    [dash.dependencies.State('input-box', 'value')])
+    [dash.dependencies.State('input-box', 'value')],
+)
 def update_output(n_clicks, value):
     """Indicate button-click event."""
     return f'The input value was "{value}" and the button has been clicked {n_clicks} times'  # noqa: DAR101, DAR201

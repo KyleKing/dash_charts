@@ -114,8 +114,10 @@ def parse_json(raw_json):
     dict_json = json.loads(raw_json)
     keys = [*dict_json.keys()]
     if len(keys) != 1:
-        raise RuntimeError('Expected JSON with format `{data: [...]}` where `data` could be any key.'
-                           f'However, more than one key was found: {keys}')
+        raise RuntimeError(
+            'Expected JSON with format `{data: [...]}` where `data` could be any key.'
+            f'However, more than one key was found: {keys}',
+        )
     return pd.DataFrame.from_records(dict_json[keys[0]])
 
 
@@ -255,9 +257,11 @@ class UploadModule(ModuleBase):  # noqa: H601
         """Create data members `(self.database, self.user_table, self.inventory_table)`."""
         self.database = DBConnect(self.cache_dir / f'_placeholder_app-{self.name}.db')
         self.user_table = self.database.db.create_table(
-            'users', primary_id='username', primary_type=self.database.db.types.text)
+            'users', primary_id='username', primary_type=self.database.db.types.text,
+        )
         self.inventory_table = self.database.db.create_table(
-            'inventory', primary_id='table_name', primary_type=self.database.db.types.text)
+            'inventory', primary_id='table_name', primary_type=self.database.db.types.text,
+        )
 
     def find_user(self, username):
         """Return the database row for the specified user.
@@ -305,8 +309,10 @@ class UploadModule(ModuleBase):  # noqa: H601
             table.drop()  # Delete the table if upload fails
             raise
 
-        self.inventory_table.insert({'table_name': table_name, 'df_name': df_name, 'username': username,
-                                     'creation': now})
+        self.inventory_table.insert({
+            'table_name': table_name, 'df_name': df_name, 'username': username,
+            'creation': now,
+        })
 
     def get_data(self, table_name):
         """Retrieve stored data for specified dataframe name.

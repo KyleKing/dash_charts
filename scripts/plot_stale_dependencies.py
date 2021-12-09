@@ -12,8 +12,10 @@ cache = _read_cache(path_pack_lock)
 
 
 def unwrap_attr(item: Any) -> Dict[str, Any]:
-    return {attrib: item.__getattribute__(attrib)
-            for attrib in dir(item) if not attrib.startswith('_')}
+    return {
+        attrib: item.__getattribute__(attrib)
+        for attrib in dir(item) if not attrib.startswith('_')
+    }
 
 
 df_dep = pd.DataFrame(map(unwrap_attr, cache.values()))

@@ -50,10 +50,12 @@ class GanttChart(CustomChart):  # noqa: H601
         for index in [idx for idx, is_na in enumerate(df_raw['start'].isna()) if is_na]:
             df_raw.iloc[index, start_index] = df_raw.iloc[index, end_index]
         df_raw['progress'] = df_raw['progress'].fillna(0)  # Fill possibly missing progress values for milestones
-        df_raw = (df_raw
-                  .sort_values(by=['category', 'start'], ascending=False)
-                  .sort_values(by=['end'], ascending=False)
-                  .reset_index(drop=True))
+        df_raw = (
+            df_raw
+            .sort_values(by=['category', 'start'], ascending=False)
+            .sort_values(by=['end'], ascending=False)
+            .reset_index(drop=True)
+        )
         # Create color lookup using categories in sorted order
         categories = set(df_raw['category'])
         self.color_lookup = {cat: self.pallette[idx] for idx, cat in enumerate(categories)}

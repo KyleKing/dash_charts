@@ -45,41 +45,55 @@ class BulmaStylingDemo(AppBase):
             dict: Dash HTML object
 
         """
-        return html.Div(className='section', children=[
-            html.Div(className='tile is-ancestor', children=[
-                html.Div(className='tile is-parent is-vertical is-3', children=[
-                    html.Article(className='tile is-child notification', children=[
-                        html.P(className='title', children='Top Vertical Tile'),
-                        html.P(className='subtitle', children='Notification class for grey background'),
-                        html.P(className='subtitle', children='Could also add is-info, is-warning, etc.'),
-                    ]),
-                    html.Article(className='tile is-child', children=[
-                        html.P(className='title', children='Vertical...'),
-                        html.P(className='subtitle', children='(Top tile)'),
-                        min_graph(
-                            figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+        return html.Div(
+            className='section', children=[
+                html.Div(
+                    className='tile is-ancestor', children=[
+                        html.Div(
+                            className='tile is-parent is-vertical is-3', children=[
+                                html.Article(
+                                    className='tile is-child notification', children=[
+                                        html.P(className='title', children='Top Vertical Tile'),
+                                        html.P(className='subtitle', children='Notification class for grey background'),
+                                        html.P(className='subtitle', children='Could also add is-info, is-warning, etc.'),
+                                    ],
+                                ),
+                                html.Article(
+                                    className='tile is-child', children=[
+                                        html.P(className='title', children='Vertical...'),
+                                        html.P(className='subtitle', children='(Top tile)'),
+                                        min_graph(
+                                            figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+                                        ),
+                                    ],
+                                ),
+                                html.Article(
+                                    className='tile is-child', children=[
+                                        html.P(className='title', children='...tiles'),
+                                        html.P(className='subtitle', children='(Bottom tile)'),
+                                        min_graph(
+                                            figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+                                        ),
+                                    ],
+                                ),
+                            ],
                         ),
-                    ]),
-                    html.Article(className='tile is-child', children=[
-                        html.P(className='title', children='...tiles'),
-                        html.P(className='subtitle', children='(Bottom tile)'),
                         min_graph(
-                            figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+                            className='tile is-child is-6 is-block-desktop',
+                            figure={},
                         ),
-                    ]),
-                ]),
-                min_graph(
-                    className='tile is-child is-6 is-block-desktop',
-                    figure={},
+                        html.Article(
+                            className='tile is-child is-3 is-block-desktop', children=[
+                                html.P(className='title', children='A Small Chart'),
+                                min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=350)),
+                                html.P(className='subtitle', children='An Image'),
+                                html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif'),
+                            ],
+                        ),
+                    ],
                 ),
-                html.Article(className='tile is-child is-3 is-block-desktop', children=[
-                    html.P(className='title', children='A Small Chart'),
-                    min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=350)),
-                    html.P(className='subtitle', children='An Image'),
-                    html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif'),
-                ]),
-            ]),
-        ])
+            ],
+        )
 
     def create_callbacks(self) -> None:
         """Create Dash callbacks."""

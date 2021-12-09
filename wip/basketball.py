@@ -23,8 +23,10 @@ freq_by_hex = league_hexbin_stats['freq_by_hex']
 def draw_plotly_court(fig, fig_width=600, margins=10):
 
     # From: https://community.plot.ly/t/arc-shape-with-path/7205/5
-    def ellipse_arc(x_center=0.0, y_center=0.0, a=10.5, b=10.5, start_angle=0.0,
-                    end_angle=2 * np.pi, N=200, closed=False):
+    def ellipse_arc(
+        x_center=0.0, y_center=0.0, a=10.5, b=10.5, start_angle=0.0,
+        end_angle=2 * np.pi, N=200, closed=False,
+    ):
         t = np.linspace(start_angle, end_angle, N)
         x = x_center + a * np.cos(t)
         y = y_center + b * np.sin(t)

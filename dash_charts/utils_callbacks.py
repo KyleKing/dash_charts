@@ -20,9 +20,11 @@ def format_app_callback(lookup, outputs, inputs, states):
         list: list[lists] in order `(Outputs, Inputs, States)` for `@app.callback()`. Some sublists may be empty
 
     """
-    return ([Output(component_id=lookup[_id], component_property=prop) for _id, prop in outputs],
-            [Input(component_id=lookup[_id], component_property=prop) for _id, prop in inputs],
-            [State(component_id=lookup[_id], component_property=prop) for _id, prop in states])
+    return (
+        [Output(component_id=lookup[_id], component_property=prop) for _id, prop in outputs],
+        [Input(component_id=lookup[_id], component_property=prop) for _id, prop in inputs],
+        [State(component_id=lookup[_id], component_property=prop) for _id, prop in states],
+    )
 
 
 def map_args(raw_args, inputs, states):

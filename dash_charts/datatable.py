@@ -11,14 +11,16 @@ import dash_table
 # Currently, edge case when column is string, but filter could be a number
 # See: https://dash.plot.ly/datatable/callbacks & https://github.com/plotly/dash-table/issues/441
 
-OPERATORS = [['ge ', '>='],
-             ['le ', '<='],
-             ['lt ', '<'],
-             ['gt ', '>'],
-             ['ne ', '!='],
-             ['eq ', '='],
-             ['contains '],
-             ['datestartswith ']]
+OPERATORS = [
+    ['ge ', '>='],
+    ['le ', '<='],
+    ['lt ', '<'],
+    ['gt ', '>'],
+    ['ne ', '!='],
+    ['eq ', '='],
+    ['contains '],
+    ['datestartswith '],
+]
 """List of lists containing each possible filter string."""
 
 
@@ -202,14 +204,22 @@ Press enter of tab to apply the filter"""
 
             # Based on: https://community.plot.ly/t/dash-table-datatable-styling-examples/15594/
             # Align the select icon to the left and the sort icon to the right
-            {'selector': 'th.dash-header div',
-             'rule': 'display: flex; align-items: center;'},
-            {'selector': 'th.dash-header div span.column-header--select',
-             'rule': 'order: 1; flex-shrink: 5; text-align: left;'},
-            {'selector': 'th.dash-header div span.column-header-name',
-             'rule': 'order: 2; flex-grow: 5; text-align: center;'},
-            {'selector': 'th.dash-header div span.column-header--sort',
-             'rule': 'order: 3; flex-shrink: 5; text-align: right;'},
+            {
+                'selector': 'th.dash-header div',
+                'rule': 'display: flex; align-items: center;',
+            },
+            {
+                'selector': 'th.dash-header div span.column-header--select',
+                'rule': 'order: 1; flex-shrink: 5; text-align: left;',
+            },
+            {
+                'selector': 'th.dash-header div span.column-header-name',
+                'rule': 'order: 2; flex-grow: 5; text-align: center;',
+            },
+            {
+                'selector': 'th.dash-header div span.column-header--sort',
+                'rule': 'order: 3; flex-shrink: 5; text-align: right;',
+            },
 
             # Remove excess borders to better match JQuery DataTables styling
             # (Some border styles don't appear to work from `self.style_header`)

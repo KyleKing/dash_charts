@@ -24,7 +24,7 @@ from calcipy import __pkg_name__
 from calcipy.doit_tasks import *  # noqa: F401,F403,H303 (Run 'doit list' to see tasks). skipcq: PYL-W0614
 from calcipy.doit_tasks import DOIT_CONFIG_RECOMMENDED
 from calcipy.doit_tasks.base import debug_task
-from calcipy.doit_tasks.doit_globals import DIG
+from calcipy.doit_tasks.doit_globals import DG
 from calcipy.log_helpers import build_logger_config
 from loguru import logger
 
@@ -47,15 +47,15 @@ DOIT_CONFIG = DOIT_CONFIG_RECOMMENDED
 
 def task_write_puml():
     """Write updated PlantUML file(s) with `py2puml`."""
-    pkg = DIG.meta.pkg_name
-    diagram_dir = DIG.meta.path_project / '.diagrams'
+    pkg = DG.meta.pkg_name
+    diagram_dir = DG.meta.path_project / '.diagrams'
 
     # TODO: pypi package wasn't working. Used local version
     run_py2puml = f'poetry run ../py-puml-tools/py2puml/py2puml.py --config {diagram_dir}/py2puml.ini'
 
     # # PLANNED: needs to be a bit more efficient...
     # > files = []
-    # > for file_path in (DIG.source_path / pkg).glob('*.py'):
+    # > for file_path in (DG.source_path / pkg).glob('*.py'):
     # >     if any(line.startswith('class ') for line in file_path.read_text().split('\n')):
     # >         files.append(file_path.name)
     files = [

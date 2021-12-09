@@ -67,9 +67,11 @@ class TabBase(AppBase):
     takes_args: bool = True
     """If True, will pass arguments from UI to function."""
 
-    templates: list = ['ggplot2', 'seaborn', 'simple_white', 'plotly',
-                       'plotly_white', 'plotly_dark', 'presentation', 'xgridoff',
-                       'ygridoff', 'gridon', 'none']
+    templates: list = [
+        'ggplot2', 'seaborn', 'simple_white', 'plotly',
+        'plotly_white', 'plotly_dark', 'presentation', 'xgridoff',
+        'ygridoff', 'gridon', 'none',
+    ]
     """List of templates from: `import plotly.io as pio; pio.templates`"""
 
     # Must override in child class
@@ -150,19 +152,23 @@ class TabBase(AppBase):
         """
         self.verify_types_for_layout()
 
-        return html.Div([  # noqa: ECE001
-            html.Div([
-                dropdown_group('Plot Type:', self._il[self.id_func], self.func_opts, value=self.func_opts[0]['label']),
-                dropdown_group('Template:', self._il[self.id_template], self.t_opts, value=self.t_opts[0]['label']),
-            ] + [
-                dropdown_group(f'{dim}:', self._il[dim], self.col_opts, value=self.default_dim_name.get(dim, None))
-                for dim in self.dims
-            ] + [
-                dropdown_group(f'{dim}:', self._il[dim], [opts_dd(item, item) for item in items])
-                for dim, items in self.dims_dict.items()
-            ], style={'width': '25%', 'float': 'left'}),
-            min_graph(id=self._il[self.id_chart], style={'width': '75%', 'display': 'inline-block'}),
-        ], style={'padding': '15px'})
+        return html.Div(
+            [  # noqa: ECE001
+                html.Div(
+                    [
+                        dropdown_group('Plot Type:', self._il[self.id_func], self.func_opts, value=self.func_opts[0]['label']),
+                        dropdown_group('Template:', self._il[self.id_template], self.t_opts, value=self.t_opts[0]['label']),
+                    ] + [
+                        dropdown_group(f'{dim}:', self._il[dim], self.col_opts, value=self.default_dim_name.get(dim, None))
+                        for dim in self.dims
+                    ] + [
+                        dropdown_group(f'{dim}:', self._il[dim], [opts_dd(item, item) for item in items])
+                        for dim, items in self.dims_dict.items()
+                    ], style={'width': '25%', 'float': 'left'},
+                ),
+                min_graph(id=self._il[self.id_chart], style={'width': '75%', 'display': 'inline-block'}),
+            ], style={'padding': '15px'},
+        )
 
     def create_callbacks(self) -> None:
         """Register callbacks necessary for this tab."""

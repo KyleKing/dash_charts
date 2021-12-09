@@ -21,10 +21,12 @@ class TabZero(StaticTab):
             dict: Dash HTML object
 
         """
-        return html.Div(style=self.basic_style, children=(
-            [html.H1(children=f'{self.name} Scrollable Content')]
-            + [html.P(children=[str(count) + '-word' * 10]) for count in range(100)]
-        ))
+        return html.Div(
+            style=self.basic_style, children=(
+                [html.H1(children=f'{self.name} Scrollable Content')]
+                + [html.P(children=[str(count) + '-word' * 10]) for count in range(100)]
+            ),
+        )
 
 
 class TabOne(StaticTab):
@@ -39,10 +41,12 @@ class TabOne(StaticTab):
             dict: Dash HTML object
 
         """
-        return html.Div(style=self.basic_style, children=[
-            html.H1(children=f'Image from {self.name}'),
-            html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif'),
-        ])
+        return html.Div(
+            style=self.basic_style, children=[
+                html.H1(children=f'Image from {self.name}'),
+                html.Img(src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif'),
+            ],
+        )
 
 
 class TabTwo(StaticTab):
@@ -57,15 +61,17 @@ class TabTwo(StaticTab):
             dict: Dash HTML object
 
         """
-        return html.Div(style=self.basic_style, children=[
-            html.H1(children=f'{self.name} Chart'),
-            dcc.Loading(
-                type='circle',
-                children=[
-                    min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=500)),
-                ],
-            ),
-        ])
+        return html.Div(
+            style=self.basic_style, children=[
+                html.H1(children=f'{self.name} Chart'),
+                dcc.Loading(
+                    type='circle',
+                    children=[
+                        min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=500)),
+                    ],
+                ),
+            ],
+        )
 
 
 class TabThree(StaticTab):
@@ -80,18 +86,22 @@ class TabThree(StaticTab):
             dict: Dash HTML object
 
         """
-        return html.Div(style=self.basic_style, children=[
-            html.H1(children=f'{self.name} Chart'),
-            dcc.Loading(
-                type='cube',
-                children=[
-                    min_graph(figure=px.scatter(
-                        px.data.iris(), x='sepal_width', y='sepal_length', color='species',
-                        marginal_y='rug', marginal_x='histogram', height=500,
-                    )),
-                ],
-            ),
-        ])
+        return html.Div(
+            style=self.basic_style, children=[
+                html.H1(children=f'{self.name} Chart'),
+                dcc.Loading(
+                    type='cube',
+                    children=[
+                        min_graph(
+                            figure=px.scatter(
+                                px.data.iris(), x='sepal_width', y='sepal_length', color='species',
+                                marginal_y='rug', marginal_x='histogram', height=500,
+                            ),
+                        ),
+                    ],
+                ),
+            ],
+        )
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -129,9 +139,11 @@ class TabAppDemo(AppWithTabs):  # noqa: H601
         side_padding = {'padding': '10px 0 0 10px'}
         return html.Div([
             html.H3('Application with Tabbed Content Demo', style=side_padding),
-            html.P('AppWithTabs is rendered inline, while FullScreenAppWithTabs has a navigation element fixed to the'
-                   'viewport. See the px app for an example with full screen and below for an example with'
-                   'AppWithTabs.', style=side_padding),
+            html.P(
+                'AppWithTabs is rendered inline, while FullScreenAppWithTabs has a navigation element fixed to the'
+                'viewport. See the px app for an example with full screen and below for an example with'
+                'AppWithTabs.', style=side_padding,
+            ),
             html.Hr(),
             super().return_layout(),
             html.Hr(),

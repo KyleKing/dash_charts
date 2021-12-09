@@ -51,8 +51,10 @@ class ParetoDemo(AppBase):
         super().initialization()
         self.register_uniq_ids([self.id_chart])
         # Format sample CSV data for the Pareto
-        self.data_raw = (pd.read_csv(StringIO(CSV_DATA))
-                         .rename(columns={'events': 'value'}))
+        self.data_raw = (
+            pd.read_csv(StringIO(CSV_DATA))
+            .rename(columns={'events': 'value'})
+        )
 
     def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
@@ -85,10 +87,12 @@ class ParetoDemo(AppBase):
                 'marginLeft': 'auto',
             }, children=[
                 html.H4(children=self.name),
-                html.Div([min_graph(
-                    id=self._il[self.id_chart],
-                    figure=self.chart_main.create_figure(df_raw=self.data_raw),
-                )]),
+                html.Div([
+                    min_graph(
+                        id=self._il[self.id_chart],
+                        figure=self.chart_main.create_figure(df_raw=self.data_raw),
+                    ),
+                ]),
             ],
         )
 
