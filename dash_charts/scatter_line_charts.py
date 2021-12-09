@@ -28,8 +28,10 @@ def create_rolling_traces(df_raw, count_rolling, count_std):
             name=f'{count_std}x STD Range',
             opacity=0.5,
             x=(df_raw['x'].tolist() + df_raw['x'].tolist()[::-1]),
-            y=(np.add(rolling_mean, np.multiply(count_std, rolling_std)).tolist()
-                + np.subtract(rolling_mean, np.multiply(count_std, rolling_std)).tolist()[::-1]),
+            y=(
+                np.add(rolling_mean, np.multiply(count_std, rolling_std)).tolist()
+                + np.subtract(rolling_mean, np.multiply(count_std, rolling_std)).tolist()[::-1]
+            ),
         ),
         go.Scatter(
             hoverinfo='skip',
@@ -67,14 +69,16 @@ def create_fit_traces(df_raw, name, fit_equation, suppress_fit_errors=False):  #
             *np.divide(range(int(x_min * 10), int(x_max * 10)), 10),
             x_max + 0.05 * x_range,
         ])
-        fitted_data = [go.Scatter(
-            mode='lines+markers',
-            name=name,
-            opacity=0.9,
-            text=f'popt:{[round(param, 3) for param in popt]}',
-            x=x_values,
-            y=fit_equation(x_values, *popt),
-        )]
+        fitted_data = [
+            go.Scatter(
+                mode='lines+markers',
+                name=name,
+                opacity=0.9,
+                text=f'popt:{[round(param, 3) for param in popt]}',
+                x=x_values,
+                y=fit_equation(x_values, *popt),
+            ),
+        ]
     except (RuntimeError, ValueError) as err:  # pragma: no cover
         if not suppress_fit_errors:
             raise
@@ -163,15 +167,17 @@ class FittedChart(CustomChart):
         fit_traces = []
         for name in set(df_raw['name']):
             df_name = df_raw[df_raw['name'] == name]
-            scatter_data.append(go.Scatter(
-                customdata=[name],
-                mode='markers' if self.fit_eqs else self.fallback_mode,
-                name=name,
-                opacity=0.5,
-                text=df_name['label'],
-                x=df_name['x'],
-                y=df_name['y'],
-            ))
+            scatter_data.append(
+                go.Scatter(
+                    customdata=[name],
+                    mode='markers' if self.fit_eqs else self.fallback_mode,
+                    name=name,
+                    opacity=0.5,
+                    text=df_name['label'],
+                    x=df_name['x'],
+                    y=df_name['y'],
+                ),
+            )
 
             if len(df_name['x']) > self.min_scatter_for_fit:
                 for fit_name, fit_equation in self.fit_eqs:

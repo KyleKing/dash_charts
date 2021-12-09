@@ -49,10 +49,12 @@ class PageText(StaticPage):
             dict: Dash HTML object
 
         """
-        return html.Div(style=self.basic_style, children=(
-            [html.H1(children=f'{self.name} Scrollable Content')]
-            + [html.P(children=[str(count) + '-word' * 10]) for count in range(100)]
-        ))
+        return html.Div(
+            style=self.basic_style, children=(
+                [html.H1(children=f'{self.name} Scrollable Content')]
+                + [html.P(children=[str(count) + '-word' * 10]) for count in range(100)]
+            ),
+        )
 
 
 class PageChart(StaticPage):
@@ -67,15 +69,17 @@ class PageChart(StaticPage):
             dict: Dash HTML object
 
         """
-        return html.Div(style=self.basic_style, children=[
-            html.H1(children=self.name),
-            dcc.Loading(
-                type='circle',
-                children=[
-                    min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=500)),
-                ],
-            ),
-        ])
+        return html.Div(
+            style=self.basic_style, children=[
+                html.H1(children=self.name),
+                dcc.Loading(
+                    type='circle',
+                    children=[
+                        min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=500)),
+                    ],
+                ),
+            ],
+        )
 
 
 class Page404(StaticPage):
@@ -90,10 +94,12 @@ class Page404(StaticPage):
             dict: Dash HTML object
 
         """
-        return html.Div(style=self.basic_style, children=[
-            html.H1(children='404: Path not found'),
-            html.Img(src='https://upload.wikimedia.org/wikipedia/commons/2/26/NL_Route_404.svg'),
-        ])
+        return html.Div(
+            style=self.basic_style, children=[
+                html.H1(children='404: Path not found'),
+                html.Img(src='https://upload.wikimedia.org/wikipedia/commons/2/26/NL_Route_404.svg'),
+            ],
+        )
 
 
 # ----------------------------------------------------------------------------------------------------------------------

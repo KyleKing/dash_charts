@@ -49,9 +49,11 @@ class ModuleDataTable(ModuleBase):
 
         """
         placeholder = pd.DataFrame.from_records([['body']], columns=['header'])
-        return html.Div([
-            self.table.create_table(placeholder, None, id=ids[self.get(self.id_table)]),
-        ], id=ids[self.get(self.id_table_parent)])
+        return html.Div(
+            [
+                self.table.create_table(placeholder, None, id=ids[self.get(self.id_table)]),
+            ], id=ids[self.get(self.id_table_parent)],
+        )
 
     def return_table_map(self, ids, df_table, columns=None):
         """Return list of tuples for `map_outputs` that includes the new datatable.
@@ -101,10 +103,14 @@ class ModuleDataTable(ModuleBase):
             sorted_columns_style = []
             for sort in sort_by:
                 sorted_columns_style.extend([
-                    {'if': {'column_id': sort['column_id'], 'row_index': 'odd'},
-                     'color': self.table.text_color, 'background-color': self.table.zebra_color},
-                    {'if': {'column_id': sort['column_id'], 'row_index': 'even'},
-                     'color': self.table.text_color, 'background-color': self.table.selected_cell_color},
+                    {
+                        'if': {'column_id': sort['column_id'], 'row_index': 'odd'},
+                        'color': self.table.text_color, 'background-color': self.table.zebra_color,
+                    },
+                    {
+                        'if': {'column_id': sort['column_id'], 'row_index': 'even'},
+                        'color': self.table.text_color, 'background-color': self.table.selected_cell_color,
+                    },
                 ])
 
             style_data_conditional = [*self.table.style_data_conditional, *sorted_columns_style]
@@ -129,8 +135,10 @@ class ModuleFilteredTable(ModuleDataTable):
     id_filter_structure = 'filter-query-structure'
     """Filter query structure ID."""
 
-    all_ids = ModuleDataTable.all_ids + [id_column_select, id_filter_button, id_filter_input, id_filter_output,
-                                         id_filter_structure]
+    all_ids = ModuleDataTable.all_ids + [
+        id_column_select, id_filter_button, id_filter_input, id_filter_output,
+        id_filter_structure,
+    ]
     """List of ids to register for this module."""
 
     show_filter = True
@@ -154,27 +162,39 @@ class ModuleFilteredTable(ModuleDataTable):
         options = [opts_dd(column, column) for column in self.mod_df.columns]
         if self.show_filter:
             filter_elements = dbc.Row([
-                dbc.Col([
-                    dbc.Form([
-                        dcc.Input(id=ids[self.get(self.id_filter_input)], placeholder='Enter filter query',
-                                  style={'width': '100%'}),
-                        dbc.Button('Apply', color='secondary', id=ids[self.get(self.id_filter_button)],
-                                   style={'paddingTop': '5px'}),
-                    ]),
-                ], width=4),
-                dbc.Col([
-                    html.Div([], id=ids[self.get(self.id_filter_output)]),
-                ], width=4),
-                dbc.Col([
-                    html.Div(id=ids[self.get(self.id_filter_structure)], style={'whitespace': 'pre'}),
-                ], width=4),
+                dbc.Col(
+                    [
+                        dbc.Form([
+                            dcc.Input(
+                                id=ids[self.get(self.id_filter_input)], placeholder='Enter filter query',
+                                style={'width': '100%'},
+                            ),
+                            dbc.Button(
+                                'Apply', color='secondary', id=ids[self.get(self.id_filter_button)],
+                                style={'paddingTop': '5px'},
+                            ),
+                        ]),
+                    ], width=4,
+                ),
+                dbc.Col(
+                    [
+                        html.Div([], id=ids[self.get(self.id_filter_output)]),
+                    ], width=4,
+                ),
+                dbc.Col(
+                    [
+                        html.Div(id=ids[self.get(self.id_filter_structure)], style={'whitespace': 'pre'}),
+                    ], width=4,
+                ),
             ])
         else:
             filter_elements = html.Div()
 
         return dbc.Col([
-            dropdown_group('Select DataFrame Columns', ids[self.get(self.id_column_select)],
-                           options, multi=True, persistence=True, value=self.mod_df.columns),
+            dropdown_group(
+                'Select DataFrame Columns', ids[self.get(self.id_column_select)],
+                options, multi=True, persistence=True, value=self.mod_df.columns,
+            ),
             filter_elements,
             html.Br(),
             super().return_layout(ids),
@@ -242,8 +262,10 @@ class ModuleFilteredTable(ModuleDataTable):
 
         """
         outputs = [(self.get(self.id_filter_output), 'children'), (self.get(self.id_filter_structure), 'children')]
-        inputs = [(self.get(self.id_table), 'filter_query'),
-                  (self.get(self.id_table), 'derived_filter_query_structure')]
+        inputs = [
+            (self.get(self.id_table), 'filter_query'),
+            (self.get(self.id_table), 'derived_filter_query_structure'),
+        ]
         states = []
 
         @parent.callback(outputs, inputs, states)
@@ -260,11 +282,15 @@ class ModuleFilteredTable(ModuleDataTable):
                 if derived_query is None:
                     derived_element = ['Error in query. Check formatting']
                 else:
-                    derived_element = [html.Details([
-                        html.Summary('Derived filter query structure'),
-                        html.Div(dcc.Markdown(f'```json\n\n{json.dumps(derived_query, indent=4)}\n\n```')),
-                    ])]
-            return map_outputs(outputs, [
-                (self.get(self.id_filter_output), 'children', filter_element),
-                (self.get(self.id_filter_structure), 'children', derived_element),
-            ])
+                    derived_element = [
+                        html.Details([
+                            html.Summary('Derived filter query structure'),
+                            html.Div(dcc.Markdown(f'```json\n\n{json.dumps(derived_query, indent=4)}\n\n```')),
+                        ]),
+                    ]
+            return map_outputs(
+                outputs, [
+                    (self.get(self.id_filter_output), 'children', filter_element),
+                    (self.get(self.id_filter_structure), 'children', derived_element),
+                ],
+            )

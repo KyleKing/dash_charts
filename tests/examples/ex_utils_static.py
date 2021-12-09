@@ -13,8 +13,10 @@ from dominate import tags, util
 from dash_charts import equations
 from dash_charts.scatter_line_charts import FittedChart
 from dash_charts.utils_data import json_dumps_compact
-from dash_charts.utils_static import (add_image, add_video, create_dbc_doc, make_div, tag_code,
-                                      tag_markdown, tag_table, write_from_markdown, write_image_file)
+from dash_charts.utils_static import (
+    add_image, add_video, create_dbc_doc, make_div, tag_code,
+    tag_markdown, tag_table, write_from_markdown, write_image_file,
+)
 
 
 def toggle_written_image_file(image_path, figure):
@@ -40,12 +42,14 @@ def create_sample_custom_chart_figure():
     chart_main.fit_eqs = [('linear', equations.linear)]
     # Create dataframe based on px sample dataset
     iris = px.data.iris()
-    data_raw = pd.DataFrame(data={
-        'name': iris['species'],
-        'x': iris['petal_width'],
-        'y': iris['petal_length'],
-        'label': None,
-    })
+    data_raw = pd.DataFrame(
+        data={
+            'name': iris['species'],
+            'x': iris['petal_width'],
+            'y': iris['petal_length'],
+            'label': None,
+        },
+    )
     return chart_main.create_figure(df_raw=data_raw)
 
 
@@ -65,8 +69,12 @@ def write_sample_html(filename):
     custom_styles = 'pre {max-height: 400px;}'
     doc = create_dbc_doc(dbc.themes.DARKLY, custom_styles, title='Example Static File')
     with doc.head:
-        tags.link(rel='stylesheet', href=('https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/'
-                                          'tomorrow-night-eighties.min.css'))
+        tags.link(
+            rel='stylesheet', href=(
+                'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/'
+                'tomorrow-night-eighties.min.css'
+            ),
+        )
 
     figure = create_sample_custom_chart_figure()
     px_figure = px.scatter(x=[*range(10)][::-1], y=range(10), template='plotly_dark')
@@ -97,8 +105,10 @@ def write_sample_html(filename):
             tags.h1('Example image')
             util.raw(add_image(image_path))
             util.raw(add_video(video_path))
-            tags.mark('Stock footage provided by Videvo, downloaded from [Videvo](https://www.videvo.net/video/'
-                      'there-is-no-planet-b-protest-sign/456789/)')
+            tags.mark(
+                'Stock footage provided by Videvo, downloaded from [Videvo](https://www.videvo.net/video/'
+                'there-is-no-planet-b-protest-sign/456789/)',
+            )
 
             tags.hr()
             tags.h1('Another Chart For Good Measure')

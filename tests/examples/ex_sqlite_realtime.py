@@ -85,8 +85,10 @@ def simulate_db_population(db_path, points=1000, delay=0.1, flag_file=None):   #
         # Fill the database with sample data
         for idx in tqdm(range(points)):
             value = (-1 if idx > 500 else 1) * idx / 10.0  # Introduce variability
-            cursor.execute('INSERT INTO EVENTS (id, label, value) VALUES'  # noqa: S608
-                           f' ({idx}, "idx-{idx}", {samples[idx] + value})')
+            cursor.execute(
+                'INSERT INTO EVENTS (id, label, value) VALUES'  # noqa: S608
+                f' ({idx}, "idx-{idx}", {samples[idx] + value})',
+            )
             conn.commit()
             if flag_file is not None:
                 flag_file.write_text(str(idx))

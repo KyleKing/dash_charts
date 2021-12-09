@@ -40,40 +40,68 @@ class TimeVisDemo(AppBase):
     def generate_data(self) -> None:
         """Create self.data_raw with sample data."""
         data = [
-            {'category': '', 'label': 'Closed',
-             'start': '2020-07-01 19:30:00', 'end': '2020-07-02 07:00:00'},
-            {'category': '', 'label': 'Closed',
-             'start': '2020-07-02 19:30:00', 'end': '2020-07-03 07:00:00'},
-            {'category': '', 'label': 'Closed',
-             'start': '2020-07-03 19:30:00', 'end': '2020-07-04 08:00:00'},
-            {'category': '', 'label': 'Closed',
-             'start': '2020-07-04 20:00:00', 'end': '2020-07-05 08:00:00'},
+            {
+                'category': '', 'label': 'Closed',
+                'start': '2020-07-01 19:30:00', 'end': '2020-07-02 07:00:00',
+            },
+            {
+                'category': '', 'label': 'Closed',
+                'start': '2020-07-02 19:30:00', 'end': '2020-07-03 07:00:00',
+            },
+            {
+                'category': '', 'label': 'Closed',
+                'start': '2020-07-03 19:30:00', 'end': '2020-07-04 08:00:00',
+            },
+            {
+                'category': '', 'label': 'Closed',
+                'start': '2020-07-04 20:00:00', 'end': '2020-07-05 08:00:00',
+            },
         ]
         for day in [1, 2, 3]:
             data.extend([
-                {'category': 'Events', 'label': 'Pool Opens to Public',
-                 'start': f'2020-07-0{day} 07:00:00', 'end': None},
-                {'category': 'Events', 'label': 'Closes',
-                 'start': f'2020-07-0{day} 19:30:00', 'end': None},
-                {'category': 'Restricted Swim Hours', 'label': 'Adult Swim',
-                 'start': f'2020-07-0{day} 16:00:00', 'end': f'2020-07-0{day} 19:30:00'},
-                {'category': 'Open Swim', 'label': 'Open',
-                 'start': f'2020-07-0{day} 09:00:00', 'end': f'2020-07-0{day} 15:50:00'},
-                {'category': 'Restricted Swim Hours', 'label': 'Lap',
-                 'start': f'2020-07-0{day} 07:00:00', 'end': f'2020-07-0{day} 08:30:00'},
-                {'category': 'Swim Team', 'label': 'P-A',
-                 'start': f'2020-07-0{day} 08:00:00', 'end': f'2020-07-0{day} 09:00:00'},
-                {'category': 'Swim Team', 'label': 'P-B',
-                 'start': f'2020-07-0{day} 14:00:00', 'end': f'2020-07-0{day} 15:00:00'},
+                {
+                    'category': 'Events', 'label': 'Pool Opens to Public',
+                    'start': f'2020-07-0{day} 07:00:00', 'end': None,
+                },
+                {
+                    'category': 'Events', 'label': 'Closes',
+                    'start': f'2020-07-0{day} 19:30:00', 'end': None,
+                },
+                {
+                    'category': 'Restricted Swim Hours', 'label': 'Adult Swim',
+                    'start': f'2020-07-0{day} 16:00:00', 'end': f'2020-07-0{day} 19:30:00',
+                },
+                {
+                    'category': 'Open Swim', 'label': 'Open',
+                    'start': f'2020-07-0{day} 09:00:00', 'end': f'2020-07-0{day} 15:50:00',
+                },
+                {
+                    'category': 'Restricted Swim Hours', 'label': 'Lap',
+                    'start': f'2020-07-0{day} 07:00:00', 'end': f'2020-07-0{day} 08:30:00',
+                },
+                {
+                    'category': 'Swim Team', 'label': 'P-A',
+                    'start': f'2020-07-0{day} 08:00:00', 'end': f'2020-07-0{day} 09:00:00',
+                },
+                {
+                    'category': 'Swim Team', 'label': 'P-B',
+                    'start': f'2020-07-0{day} 14:00:00', 'end': f'2020-07-0{day} 15:00:00',
+                },
             ])
         for weekend in [4, 5]:
             data.extend([
-                {'category': 'Events', 'label': 'Pool Opens to Public',
-                 'start': f'2020-07-0{weekend} 08:00:00', 'end': None},
-                {'category': 'Events', 'label': 'Closes',
-                 'start': f'2020-07-0{weekend} 20:00:00', 'end': None},
-                {'category': 'Open Swim', 'label': 'Weekend Open Swim',
-                 'start': f'2020-07-0{weekend} 08:00:00', 'end': f'2020-07-0{weekend} 20:00:00'},
+                {
+                    'category': 'Events', 'label': 'Pool Opens to Public',
+                    'start': f'2020-07-0{weekend} 08:00:00', 'end': None,
+                },
+                {
+                    'category': 'Events', 'label': 'Closes',
+                    'start': f'2020-07-0{weekend} 20:00:00', 'end': None,
+                },
+                {
+                    'category': 'Open Swim', 'label': 'Weekend Open Swim',
+                    'start': f'2020-07-0{weekend} 08:00:00', 'end': f'2020-07-0{weekend} 20:00:00',
+                },
             ])
         self.data_raw = pd.DataFrame.from_dict(data)
 
@@ -91,10 +119,12 @@ class TimeVisDemo(AppBase):
                 'marginLeft': 'auto',
             }, children=[
                 html.H4(children=self.name),
-                html.Div([min_graph(
-                    id=self._il[self.id_chart],
-                    figure=self.chart_main.create_figure(df_raw=self.data_raw),
-                )]),
+                html.Div([
+                    min_graph(
+                        id=self._il[self.id_chart],
+                        figure=self.chart_main.create_figure(df_raw=self.data_raw),
+                    ),
+                ]),
             ],
         )
 

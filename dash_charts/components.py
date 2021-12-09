@@ -36,10 +36,12 @@ def dropdown_group(name, _id, options, form_style=None, **dropdown_kwargs):
     """
     if form_style is None:
         form_style = {}
-    return dbc.FormGroup([
-        dbc.Label(name),
-        dcc.Dropdown(id=_id, options=options, **dropdown_kwargs),
-    ], style=form_style)
+    return dbc.FormGroup(
+        [
+            dbc.Label(name),
+            dcc.Dropdown(id=_id, options=options, **dropdown_kwargs),
+        ], style=form_style,
+    )
 
 
 def format_email_pass_id(submit_id):

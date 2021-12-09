@@ -38,8 +38,10 @@ class ParetoDemo(AppBase):
 
     def generate_data(self) -> None:
         """Format the car share data from plotly express for the Pareto. Called by parent class."""
-        self.data_raw = (px.data.carshare()
-                         .rename(columns={'peak_hour': 'category', 'car_hours': 'value'}))
+        self.data_raw = (
+            px.data.carshare()
+            .rename(columns={'peak_hour': 'category', 'car_hours': 'value'})
+        )
         self.data_raw['category'] = [f'H:{cat:02}' for cat in self.data_raw['category']]
 
     def create_elements(self) -> None:
@@ -54,10 +56,12 @@ class ParetoDemo(AppBase):
 
         """
         return html.Div([
-            html.Div([min_graph(
-                id=self._il[self._id.chart],
-                figure=self.chart_main.create_figure(df_raw=self.data_raw),
-            )]),
+            html.Div([
+                min_graph(
+                    id=self._il[self._id.chart],
+                    figure=self.chart_main.create_figure(df_raw=self.data_raw),
+                ),
+            ]),
         ])
 
     def create_callbacks(self) -> None:

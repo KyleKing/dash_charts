@@ -53,8 +53,10 @@ class ComponentDemo(AppBase):
                 }, children=[
                     html.H4(children=self.name),
                     # Demonstrate how to generate dropdowns
-                    dropdown_group('Example Dropdown', self._il[self.id_dropdown], self.opts_dropdown,
-                                   form_style={'maxWidth': '250px'}, value=self.opt_def_dropdown, persistence=True),
+                    dropdown_group(
+                        'Example Dropdown', self._il[self.id_dropdown], self.opts_dropdown,
+                        form_style={'maxWidth': '250px'}, value=self.opt_def_dropdown, persistence=True,
+                    ),
                 ],
             ),
         ])

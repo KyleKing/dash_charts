@@ -150,11 +150,13 @@ class CoordinateChart(CustomChart):  # noqa: H601
         # Merge x/y grid data with values. Temporarily extend values with None, then drop those rows
         values = df_raw['values'].to_list()
         values.extend([None] * (len(self._grid['x']) - len(values)))
-        df_grid = pd.DataFrame(data={
-            'values': values,
-            'x': self._grid['x'],
-            'y': self._grid['y'],
-        }).dropna()
+        df_grid = pd.DataFrame(
+            data={
+                'values': values,
+                'x': self._grid['x'],
+                'y': self._grid['y'],
+            },
+        ).dropna()
 
         return [
             go.Scatter(

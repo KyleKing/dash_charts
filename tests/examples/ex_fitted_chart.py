@@ -47,12 +47,14 @@ class FittedDemo(AppBase):
         """Create self.data_raw with sample data."""
         # Create dataframe based on px sample dataset
         iris = px.data.iris()
-        self.data_raw = pd.DataFrame(data={
-            'name': iris['species'],
-            'x': iris['petal_width'],
-            'y': iris['petal_length'],
-            'label': None,
-        })
+        self.data_raw = pd.DataFrame(
+            data={
+                'name': iris['species'],
+                'x': iris['petal_width'],
+                'y': iris['petal_length'],
+                'label': None,
+            },
+        )
         # Alternatively, use `[random.expovariate(0.2) for _i in range(count)]`
 
     def return_layout(self) -> dict:
@@ -69,10 +71,12 @@ class FittedDemo(AppBase):
                 'marginLeft': 'auto',
             }, children=[
                 html.H4(children=self.name),
-                html.Div([min_graph(
-                    id=self._il[self.id_chart],
-                    figure=self.chart_main.create_figure(df_raw=self.data_raw),
-                )]),
+                html.Div([
+                    min_graph(
+                        id=self._il[self.id_chart],
+                        figure=self.chart_main.create_figure(df_raw=self.data_raw),
+                    ),
+                ]),
             ],
         )
 

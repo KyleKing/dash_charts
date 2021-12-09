@@ -23,8 +23,10 @@ freq_by_hex = league_hexbin_stats['freq_by_hex']
 def draw_plotly_court(fig, fig_width=600, margins=10):
 
     # From: https://community.plot.ly/t/arc-shape-with-path/7205/5
-    def ellipse_arc(x_center=0.0, y_center=0.0, a=10.5, b=10.5, start_angle=0.0,
-                    end_angle=2 * np.pi, N=200, closed=False):
+    def ellipse_arc(
+        x_center=0.0, y_center=0.0, a=10.5, b=10.5, start_angle=0.0,
+        end_angle=2 * np.pi, N=200, closed=False,
+    ):
         t = np.linspace(start_angle, end_angle, N)
         x = x_center + a * np.cos(t)
         y = y_center + b * np.sin(t)
@@ -197,9 +199,8 @@ def filter_hexbins(hexbin_stats, min_threshold=0.0):
     temp_len = len(filter_hexbin_stats['freq_by_hex'])
     filter_array = [i > min_threshold for i in filter_hexbin_stats['freq_by_hex']]
     for k, v in filter_hexbin_stats.items():
-        if type(v) != int:
-            if len(v) == temp_len:
-                filter_hexbin_stats[k] = [v[i] for i in range(temp_len) if filter_array[i]]
+        if type(v) != int and len(v) == temp_len:
+            filter_hexbin_stats[k] = [v[i] for i in range(temp_len) if filter_array[i]]
 
     return filter_hexbin_stats
 

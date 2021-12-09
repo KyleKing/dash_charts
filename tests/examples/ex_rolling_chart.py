@@ -49,11 +49,13 @@ class RollingDemo(AppBase):
         y_vals = [samples[_i] + (-1 if _i > mid_count else 1) * _i / 10.0 for _i in range(count)]
 
         # Combine into a dataframe
-        self.data_raw = pd.DataFrame(data={
-            'x': range(count),
-            'y': y_vals,
-            'label': [f'Point {idx}' for idx in range(count)],
-        })
+        self.data_raw = pd.DataFrame(
+            data={
+                'x': range(count),
+                'y': y_vals,
+                'label': [f'Point {idx}' for idx in range(count)],
+            },
+        )
 
     def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
@@ -69,9 +71,11 @@ class RollingDemo(AppBase):
         for idx, color in enumerate(colors):
             label = f'Additional Information for index {idx + 1} and color {color}'
             coord = [self.data_raw[ax][20 + int(idx * count / len(colors))] for ax in ['x', 'y']]
-            self.chart_main.annotations.append(go.layout.Annotation(
-                **make_dict_an(coord, str(idx + 1), label, color, y_offset),
-            ))
+            self.chart_main.annotations.append(
+                go.layout.Annotation(
+                    **make_dict_an(coord, str(idx + 1), label, color, y_offset),
+                ),
+            )
 
     def return_layout(self) -> dict:
         """Return Dash application layout.

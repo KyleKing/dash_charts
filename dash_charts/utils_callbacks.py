@@ -20,9 +20,11 @@ def format_app_callback(lookup, outputs, inputs, states):
         list: list[lists] in order `(Outputs, Inputs, States)` for `@app.callback()`. Some sublists may be empty
 
     """
-    return ([Output(component_id=lookup[_id], component_property=prop) for _id, prop in outputs],
-            [Input(component_id=lookup[_id], component_property=prop) for _id, prop in inputs],
-            [State(component_id=lookup[_id], component_property=prop) for _id, prop in states])
+    return (
+        [Output(component_id=lookup[_id], component_property=prop) for _id, prop in outputs],
+        [Input(component_id=lookup[_id], component_property=prop) for _id, prop in inputs],
+        [State(component_id=lookup[_id], component_property=prop) for _id, prop in states],
+    )
 
 
 def map_args(raw_args, inputs, states):
@@ -95,14 +97,10 @@ def map_outputs(outputs, element_info):
     lookup = {app_id: [] for app_id in {info[0] for info in element_info}}
     for app_id, prop, element in element_info:
         lookup[app_id].append((prop, element))
-    for app_id in lookup.keys():
+    for app_id in lookup:
         lookup[app_id] = dict(lookup[app_id])
 
-    # Create the returned list in the order of the outputs
-    results = []
-    for app_id, prop in outputs:
-        results.append(lookup[app_id][prop])
-    return results
+    return [lookup[app_id][prop] for app_id, prop in outputs]
 
 
 def get_triggered_id():

@@ -63,19 +63,23 @@ class BootstrapStylingDemo(AppBase):
 
     def return_body(self):
         """Return Dash body layout."""
-        return dbc.Container([
-            dbc.Row([
-                dbc.Col([
-                    html.H2('Heading'),
-                    html.P('Done id edit non mi sorta gravid at get meets.\n' * 10),
-                    dbc.Button('View details', color='secondary'),
-                ], md=4),
-                dbc.Col([
-                    html.H2('Graph'),
-                    min_graph(figure={'data': [{'x': [1, 2, 3], 'y': [1, 4, 9]}]}),
+        return dbc.Container(
+            [
+                dbc.Row([
+                    dbc.Col(
+                        [
+                            html.H2('Heading'),
+                            html.P('Done id edit non mi sorta gravid at get meets.\n' * 10),
+                            dbc.Button('View details', color='secondary'),
+                        ], md=4,
+                    ),
+                    dbc.Col([
+                        html.H2('Graph'),
+                        min_graph(figure={'data': [{'x': [1, 2, 3], 'y': [1, 4, 9]}]}),
+                    ]),
                 ]),
-            ]),
-        ], className='mt-4')
+            ], className='mt-4',
+        )
 
     def return_layout(self) -> dict:
         """Return Dash application layout.
@@ -84,55 +88,73 @@ class BootstrapStylingDemo(AppBase):
             dict: Dash HTML object
 
         """
-        return html.Div(children=[
-            # Code based on DBC example
-            self.return_navbar(),
-            self.return_body(),
-            # Re-implementation of the code from Bulma example in bootstrap
-            # TODO: Decide which styles from Bulma should be compared here
-            dbc.Container([
-                dbc.Row([
-                    dbc.Col([
-                        html.Article(children=[
-                            html.P(children='Top Vertical Tile'),
-                            html.P(children='Notification class for grey background'),
-                            html.P(children='Could also add is-info, is-warning, etc.'),
-                        ]),
-                        html.Article(children=[
-                            html.P(children='Vertical...'),
-                            html.P(children='(Top tile)'),
-                            min_graph(
-                                figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+        return html.Div(
+            children=[
+                # Code based on DBC example
+                self.return_navbar(),
+                self.return_body(),
+                # Re-implementation of the code from Bulma example in bootstrap
+                # TODO: Decide which styles from Bulma should be compared here
+                dbc.Container(
+                    [
+                        dbc.Row([
+                            dbc.Col(
+                                [
+                                    html.Article(
+                                        children=[
+                                            html.P(children='Top Vertical Tile'),
+                                            html.P(children='Notification class for grey background'),
+                                            html.P(children='Could also add is-info, is-warning, etc.'),
+                                        ],
+                                    ),
+                                    html.Article(
+                                        children=[
+                                            html.P(children='Vertical...'),
+                                            html.P(children='(Top tile)'),
+                                            min_graph(
+                                                figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+                                            ),
+                                        ],
+                                    ),
+                                    html.Article(
+                                        children=[
+                                            html.P(children='...tiles'),
+                                            html.P(children='(Bottom tile)'),
+                                            min_graph(
+                                                figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
+                                            ),
+                                        ],
+                                    ),
+                                ], sm=12, md=3,
+                            ),
+                            dbc.Col(
+                                [
+                                    min_graph(
+                                        className='',
+                                        figure={},
+                                    ),
+                                ], sm=12, md=6,
+                            ),
+                            dbc.Col(
+                                [
+                                    html.Article(
+                                        children=[
+                                            html.P(children='A Small Chart'),
+                                            min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=350)),
+                                            html.P(children='An Image'),
+                                            html.Img(
+                                                src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif',
+                                                style={'maxWidth': '100%'},
+                                            ),
+                                        ],
+                                    ),
+                                ], sm=12, md=3,
                             ),
                         ]),
-                        html.Article(children=[
-                            html.P(children='...tiles'),
-                            html.P(children='(Bottom tile)'),
-                            min_graph(
-                                figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=200),
-                            ),
-                        ]),
-                    ], sm=12, md=3),
-                    dbc.Col([
-                        min_graph(
-                            className='',
-                            figure={},
-                        ),
-                    ], sm=12, md=6),
-                    dbc.Col([
-                        html.Article(children=[
-                            html.P(children='A Small Chart'),
-                            min_graph(figure=px.scatter(px.data.iris(), x='sepal_width', y='sepal_length', height=350)),
-                            html.P(children='An Image'),
-                            html.Img(
-                                src='https://media.giphy.com/media/JGQe5mxayVF04/giphy.gif',
-                                style={'maxWidth': '100%'},
-                            ),
-                        ]),
-                    ], sm=12, md=3),
-                ]),
-            ], className='mt-5'),  # Shorthand `mt-#` for margin top
-        ])
+                    ], className='mt-5',
+                ),  # Shorthand `mt-#` for margin top
+            ],
+        )
 
     def create_callbacks(self) -> None:
         """Create Dash callbacks."""

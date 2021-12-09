@@ -89,11 +89,13 @@ def json_dumps_compact(data):   # noqa: CCR001
             clean_data[key] = raw
     # Format the dictionary into JSON and replace the special characters used as intermediaries
     raw_json = json.dumps(clean_data, indent=4, separators=(',', ': '), sort_keys=True)
-    return (raw_json
-            .replace(': "[', ': [')
-            .replace(']"', ']')
-            .replace('``', '"')
-            .replace("'", '"'))
+    return (
+        raw_json
+        .replace(': "[', ': [')
+        .replace(']"', ']')
+        .replace('``', '"')
+        .replace("'", '"')
+    )
 
 
 def write_pretty_json(filename, obj):

@@ -105,19 +105,21 @@ class TimeVisChart(CustomChart):  # noqa: H601
 
         """
         bot_y = self.y_space * len(self.categories)
-        self._shapes.append(go.layout.Shape(
-            fillcolor=self.fillcolor,
-            layer='below',
-            line={'width': 0},
-            opacity=0.4,
-            type='rect',
-            x0=vis.start,
-            x1=vis.end,
-            xref='x',
-            y0=bot_y,
-            y1=y_pos,
-            yref='y',
-        ))
+        self._shapes.append(
+            go.layout.Shape(
+                fillcolor=self.fillcolor,
+                layer='below',
+                line={'width': 0},
+                opacity=0.4,
+                type='rect',
+                x0=vis.start,
+                x1=vis.end,
+                xref='x',
+                y0=bot_y,
+                y1=y_pos,
+                yref='y',
+            ),
+        )
         return go.Scatter(
             fill='toself',
             opacity=0,
@@ -198,21 +200,23 @@ class TimeVisChart(CustomChart):  # noqa: H601
                 'y': y_pos - self.rh / 2,
                 'yanchor': 'middle',
             })
-        self._shapes.append(go.layout.Shape(
-            layer='below',
-            line={
-                'color': self.fillcolor,
-                'dash': 'longdashdot',
-                'width': 2,
-            },
-            type='line',
-            x0=vis.start,
-            x1=vis.start,
-            xref='x',
-            y0=self.y_space * len(self.categories),
-            y1=y_pos - self.rh / 2,
-            yref='y',
-        ))
+        self._shapes.append(
+            go.layout.Shape(
+                layer='below',
+                line={
+                    'color': self.fillcolor,
+                    'dash': 'longdashdot',
+                    'width': 2,
+                },
+                type='line',
+                x0=vis.start,
+                x1=vis.start,
+                xref='x',
+                y0=self.y_space * len(self.categories),
+                y1=y_pos - self.rh / 2,
+                yref='y',
+            ),
+        )
         return go.Scatter(
             hoverlabel=self.hover_label_settings,
             hovertemplate=self._create_hover_text(vis) + '<extra></extra>',

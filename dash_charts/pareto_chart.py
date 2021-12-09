@@ -20,16 +20,20 @@ def tidy_pareto_data(df_raw, cap_categories):
     """
     df_p = None
     for cat in df_raw['category'].unique():
-        df_row = pd.DataFrame(data={
-            'label': [cat],
-            'value': [df_raw.loc[df_raw['category'] == cat]['value'].sum()],
-            'counts': df_raw['category'].value_counts()[cat],
-        })
+        df_row = pd.DataFrame(
+            data={
+                'label': [cat],
+                'value': [df_raw.loc[df_raw['category'] == cat]['value'].sum()],
+                'counts': df_raw['category'].value_counts()[cat],
+            },
+        )
         df_p = append_df(df_p, df_row)
     # Sort and calculate percentage
-    df_p = (df_p[df_p['value'] != 0]
-            .sort_values(by=['value'], ascending=False)
-            .head(cap_categories))
+    df_p = (
+        df_p[df_p['value'] != 0]
+        .sort_values(by=['value'], ascending=False)
+        .head(cap_categories)
+    )
     df_p['cum_per'] = df_p['value'].divide(df_p['value'].sum()).cumsum()
     return df_p
 
@@ -92,13 +96,17 @@ class ParetoChart(CustomChart):
         df_p = tidy_pareto_data(df_raw, self.cap_categories)
         count_kwargs = {'text': df_p['counts'], 'textposition': 'auto'} if self.show_count else {}
         return [
-            go.Bar(hoverinfo='y', yaxis='y1', name='raw_value',
-                   marker={'color': self.pareto_colors['bar']},
-                   x=df_p['label'], y=df_p['value'], **count_kwargs),
+            go.Bar(
+                hoverinfo='y', yaxis='y1', name='raw_value',
+                marker={'color': self.pareto_colors['bar']},
+                x=df_p['label'], y=df_p['value'], **count_kwargs
+            ),
         ] + [
-            go.Scatter(hoverinfo='y', yaxis='y2', name='cumulative_percentage',
-                       marker={'color': self.pareto_colors['line']}, mode='lines',
-                       x=df_p['label'], y=df_p['cum_per']),
+            go.Scatter(
+                hoverinfo='y', yaxis='y2', name='cumulative_percentage',
+                marker={'color': self.pareto_colors['line']}, mode='lines',
+                x=df_p['label'], y=df_p['cum_per'],
+            ),
         ]
 
     def create_layout(self):
