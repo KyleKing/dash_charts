@@ -143,7 +143,7 @@ class CustomChart:  # noqa: H601
 
     def initialize_mutables(self):
         """Initialize the mutable data members to prevent modifying one attribute and impacting all instances."""
-        pass
+        ...
 
     def create_figure(self, df_raw, **kwargs_data):
         """Create the figure dictionary.

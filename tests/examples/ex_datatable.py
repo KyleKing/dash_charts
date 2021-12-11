@@ -46,7 +46,7 @@ class DataTableDemo(AppBase):
 
     def create_elements(self) -> None:
         """Initialize charts and tables."""
-        pass
+        ...
 
     def return_layout(self) -> dict:
         """Return Dash application layout.
@@ -66,7 +66,7 @@ class DataTableDemo(AppBase):
 
     def create_callbacks(self) -> None:
         """Create Dash callbacks."""
-        pass  # No callbacks necessary for this simple example
+        ...  # No callbacks necessary for this simple example
 
 
 instance = DataTableDemo

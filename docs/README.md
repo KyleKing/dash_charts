@@ -441,19 +441,19 @@ For more examples, see [Scripts](https://github.com/kyleking/dash_charts/scripts
 
 ## Roadmap
 
-See the `Open Issues` and `Milestones` for current status and [./CODE_TAG_SUMMARY.md](./CODE_TAG_SUMMARY.md) for annotations in the source code.
+See the `Open Issues` and `Milestones` for current status and [./docs/CODE_TAG_SUMMARY.md](./docs/CODE_TAG_SUMMARY.md) for annotations in the source code.
 
-For release history, see the [./CHANGELOG.md](./CHANGELOG.md)
+For release history, see the [./docs/CHANGELOG.md](./docs/CHANGELOG.md)
 
 ## Contributing
 
 See the Developer Guide, Contribution Guidelines, etc
 
-- [./DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
-- [./STYLE_GUIDE.md](./STYLE_GUIDE.md)
-- [./CONTRIBUTING.md](./CONTRIBUTING.md)
-- [./CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
-- [./SECURITY.md](./SECURITY.md)
+- [./docs/DEVELOPER_GUIDE.md](./docs/DEVELOPER_GUIDE.md)
+- [./docs/STYLE_GUIDE.md](./docs/STYLE_GUIDE.md)
+- [./docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md)
+- [./docs/CODE_OF_CONDUCT.md](./docs/CODE_OF_CONDUCT.md)
+- [./docs/SECURITY.md](./docs/SECURITY.md)
 
 ## License
 

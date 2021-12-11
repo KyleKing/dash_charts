@@ -25,3 +25,5 @@ Related to #TBD
     - [ ] I've run `poetry run doit` and the `pre-commit` checks locally
     - [ ] I've added one or more tests for every changes
     - [ ] I've updated any relevant documentation
+
+<!-- 'calcipy:skip_tags' -->

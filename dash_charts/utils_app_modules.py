@@ -44,7 +44,7 @@ class ModuleBase:  # noqa: H601
 
     def initialize_mutables(self):
         """Initialize the mutable data members to prevent modifying one attribute and impacting all instances."""
-        pass
+        ...
 
     def create_elements(self, ids):
         """Register the callback for creating the main chart.
@@ -53,7 +53,7 @@ class ModuleBase:  # noqa: H601
             ids: `self._il` from base application
 
         """
-        pass  # pragma: no cover
+        ...  # pragma: no cover
 
     def return_layout(self, ids):
         """Return Dash application layout.
@@ -74,7 +74,7 @@ class ModuleBase:  # noqa: H601
             parent: parent instance (ex: `self`)
 
         """
-        pass  # pragma: no cover
+        ...  # pragma: no cover
 
 
 class DataCache(ModuleBase):  # noqa: H601

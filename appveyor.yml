@@ -1,0 +1,88 @@
+---
+version: 2021.0.1.0a0.{build}
+
+image:
+  - Ubuntu
+  - Visual Studio 2019
+
+environment:
+  # Python versions
+  #   Windows: https://www.appveyor.com/docs/windows-images-software/#python
+  #   Linux: https://www.appveyor.com/docs/linux-images-software/#python
+  matrix:
+    # Use a single global Python version for pipx/poetry/etc.
+    #   Nox will handle specific python version testing
+    - PYTHON_WIN: C:/Python39
+      PYENV_38: 3.8.3
+      PYENV_39: 3.9.5
+
+  APPVEYOR_SAVE_CACHE_ON_ERROR: false
+  CODECOV_TOKEN: d414dacb-5b8d-4c0b-94e1-42fe8393187d
+
+  # To encrypt passwords, go to Account -> "Settings" -> "Encrypt YAML"
+
+# Python is now managed with pyenv instead of stack so that a ".venv" is created
+# > Must be after the declaration of "PYTHON_STACK" variable
+# > yamllint disable-line rule:line-length
+# > https://help.appveyor.com/discussions/questions/32001-ubuntu-python-3-as-default
+# > stack: python %PYTHON_STACK%
+
+cache:
+  - .venv -> poetry.lock
+  - .nox -> poetry.lock
+
+build: false
+
+# Specify commands specific to platform (cmd-Windows/sh-Linux/None-Both)
+install:
+  # Force Python to use UTF-8 encoding instead of cp1252 on Windows
+  - cmd: SET PYTHONUTF8=1
+  # For Windows, set Python paths based on environment variable from matrix
+  - cmd: set PATH=%PYTHON_WIN%/Scripts;%PYTHON_WIN%;%PATH%
+  # Use pyenv instead of the venv-based Python from AppVeyor Ubuntu
+  - sh: curl https://pyenv.run | $SHELL
+  # exec "$SHELL" causes AppVeyor to stop, so manually configure paths
+  - sh: export PYENV_ROOT="$HOME/.pyenv"
+  - sh: export PATH="$PYENV_ROOT/bin:$PATH"
+  - sh: eval "$(pyenv init --path)"
+  # Configure Python versions with pyenv
+  - sh: pyenv install $PYENV_38 --skip-existing
+  - sh: pyenv install $PYENV_39 --skip-existing
+  - sh: pyenv global $PYENV_39
+  - sh: pyenv local $PYENV_39 $PYENV_38
+  # Check global Python version
+  - python --version
+  # Install pipx to manage CLI installations (poetry, codecov)
+  - python -m pip install pipx
+  # Manually set the path because "pipx ensurepath" needs a reload to apply
+  - cmd: set PATH=%USERPROFILE%\.local\bin;%PATH%
+  - sh: export PATH=$HOME/.local/bin:$PATH
+  # Check the PATH
+  - cmd: echo %PATH%
+  - sh: echo $PATH
+  # Install poetry and configure
+  - python -m pipx install poetry
+  - poetry config virtualenvs.in-project true
+  - poetry config --list
+  # Install project-specific dependencies and extras
+  - poetry install -E dev -E lint -E test -E commitizen_legacy
+
+test_script:
+  - poetry run doit --continue
+  # On Windows only, install codecov and upload the coverage results
+  - cmd: poetry run doit run nox_coverage
+  - cmd: python -m pipx install codecov
+  - cmd: codecov --file coverage.json
+
+deploy_script:
+  - echo "Deploying..."
+
+on_success:
+  - echo "On Success..."
+
+on_failure:
+  - echo "On Error..."
+
+artifacts:
+  # PLANNED: Specify single files, like wheels, but zip the docs/reports
+  - path: releases/tests/*

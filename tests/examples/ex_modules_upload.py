@@ -47,7 +47,7 @@ class UploadModuleDemo(AppBase):
 
     def create_elements(self) -> None:
         """Initialize charts and tables."""
-        pass
+        ...
 
     def _show_current_user(self, username):
 

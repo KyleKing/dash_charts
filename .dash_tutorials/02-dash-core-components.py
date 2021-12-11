@@ -26,6 +26,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objects as go
+
 from dash_charts.utils_fig import min_graph
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']

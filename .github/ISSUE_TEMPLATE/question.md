@@ -18,3 +18,5 @@ Is it possible to ...?
 ## Additional context
 
 <!-- Any additional information that might be helpful, such as Operating System, Context, Screenshots, etc. -->
+
+<!-- 'calcipy:skip_tags' -->

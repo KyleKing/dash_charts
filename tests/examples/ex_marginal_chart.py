@@ -161,7 +161,7 @@ class SampleMarginalChartDemo(AppBase):
 
     def create_callbacks(self) -> None:
         """Create Dash callbacks."""
-        pass  # No callbacks necessary for this simple example
+        ...  # No callbacks necessary for this simple example
 
 
 instance = SampleMarginalChartDemo

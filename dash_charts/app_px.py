@@ -105,7 +105,7 @@ class TabBase(AppBase):
 
     def create_elements(self) -> None:
         """Initialize the charts, tables, and other Dash elements."""
-        pass
+        ...
 
     def verify_types_for_layout(self):
         """Verify data types of data members necessary for the layout of this tab.
@@ -156,10 +156,19 @@ class TabBase(AppBase):
             [  # noqa: ECE001
                 html.Div(
                     [
-                        dropdown_group('Plot Type:', self._il[self.id_func], self.func_opts, value=self.func_opts[0]['label']),
-                        dropdown_group('Template:', self._il[self.id_template], self.t_opts, value=self.t_opts[0]['label']),
+                        dropdown_group(
+                            'Plot Type:', self._il[self.id_func],
+                            self.func_opts, value=self.func_opts[0]['label'],
+                        ),
+                        dropdown_group(
+                            'Template:', self._il[self.id_template],
+                            self.t_opts, value=self.t_opts[0]['label'],
+                        ),
                     ] + [
-                        dropdown_group(f'{dim}:', self._il[dim], self.col_opts, value=self.default_dim_name.get(dim, None))
+                        dropdown_group(
+                            f'{dim}:', self._il[dim], self.col_opts,
+                            value=self.default_dim_name.get(dim, None),
+                        )
                         for dim in self.dims
                     ] + [
                         dropdown_group(f'{dim}:', self._il[dim], [opts_dd(item, item) for item in items])
