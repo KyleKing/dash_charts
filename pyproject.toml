@@ -66,14 +66,14 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 attrs-strict = ">=0.2.2"
-calcipy = "^2021.0.2"
+calcipy = "^0.9.1"
 cerberus = "*"
 dash = "*"
 dash-bootstrap-components = "*"
 dataset = "*"
 dominate = "*"
 implements = "*"
-lxml = "*"
+lxml = ">=4.6.5"
 markdown = "*"
 Palettable = "*"
 pandas = "*"
@@ -87,8 +87,8 @@ tqdm = ">=4.62.3"
 # great-expectations = "*"
 
 # FIXME: In-progress testing of a better dash table
-dash-tabulator = "^0.4.2"
-dash-extensions = "^0.0.55"
+dash-tabulator = ">=0.4.2"
+dash-extensions = ">=0.0.55"
 
 [tool.poetry.dev-dependencies]
 astor = "*"
@@ -107,7 +107,7 @@ jsonpickle = "*"
 
 [tool.poetry.dev-dependencies.dash]
 extras = ["testing"]
-version = "^1.16"
+version = ">=1.16"
 
 [tool.poetry.extras]
 matplotlib = ["matplotlib"]

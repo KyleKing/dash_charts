@@ -9,7 +9,6 @@ from typing import List, Optional
 import dash
 import dash_html_components as html
 from box import Box
-
 from implements import Interface
 
 from .utils_callbacks import format_app_callback
