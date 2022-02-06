@@ -66,15 +66,17 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 attrs-strict = ">=0.2.2"
-calcipy = "^0.9.1"
+calcipy = "^0.10.0"
 cerberus = "*"
 dash = ">=2.0.0"
 dash-bootstrap-components = ">=1.0.0"
 dataset = "*"
 dominate = "*"
+flask-caching = ">=1.10.1"
 implements = "*"
-lxml = ">=4.6.5"
+lxml = ">=4.7.1"
 markdown = "*"
+numpy = ">=1.22.2"
 Palettable = "*"
 pandas = "*"
 psutil = "*"
@@ -86,19 +88,22 @@ tqdm = ">=4.62.3"
 # datasette-vega = "*"
 # great-expectations = "*"
 
+# FIXME: Required for nox_coverage and should be configured as optional...
+astor = ">=0.8.1"
+jsonpickle = ">=2.1.0"
+beautifulsoup4 = ">=4.10.0"
+
 # FIXME: In-progress testing of a better dash table
 dash-tabulator = ">=0.4.2"
 dash-extensions = ">=0.0.55"
 
 [tool.poetry.dev-dependencies]
-astor = "*"
 calcipy = { version = "*", extras = [
     "dev",
     "lint",
     "test",
     "commitizen_legacy",
 ] }
-jsonpickle = "*"
 
 # Experimental dependencies
 # archan = { git = "https://github.com/pawamoy/archan.git" }

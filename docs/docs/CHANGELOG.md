@@ -7,6 +7,7 @@
 
 ### Fix
 
+- properly use pd.concat
 - resolve warnings from dash
 - migrate to dash-bootstrap-components >=1
 - drop unused matplotlib functionality
@@ -14,6 +15,7 @@
 
 ### Refactor
 
+- fix linting issues
 - subset of Sourcery Refactoring
 - use 'or' in place of some if/else
 - add return type for generate_data

@@ -160,12 +160,12 @@
         "version": "0.12.10"
     },
     "calcipy": {
-        "datetime": "2022-01-17T19:19:33.171699Z",
+        "datetime": "2022-01-19T12:54:47.598431Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2022-01-17T19:19:33.171699Z",
-        "latest_version": "0.9.1",
+        "latest_datetime": "2022-01-19T12:54:47.598431Z",
+        "latest_version": "0.10.0",
         "name": "calcipy",
-        "version": "0.9.1"
+        "version": "0.10.0"
     },
     "cement": {
         "datetime": "2021-12-18T18:27:13.099741Z",
@@ -951,14 +951,6 @@
         "name": "isort",
         "version": "5.10.1"
     },
-    "it": {
-        "datetime": "2020-05-09T18:52:24.721089Z",
-        "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2020-05-09T18:52:24.721089Z",
-        "latest_version": "1.0.0",
-        "name": "it",
-        "version": "1.0.0"
-    },
     "itsdangerous": {
         "datetime": "2021-05-18T15:09:42.542101Z",
         "domain": "https://pypi.org/pypi/{name}/{version}/json",
@@ -1070,14 +1062,6 @@
         "latest_version": "3.3.6",
         "name": "markdown",
         "version": "3.3.6"
-    },
-    "markdown-include": {
-        "datetime": "2020-08-20T23:10:25.382961Z",
-        "domain": "https://pypi.org/pypi/{name}/{version}/json",
-        "latest_datetime": "2020-08-20T23:10:25.382961Z",
-        "latest_version": "0.6.0",
-        "name": "markdown-include",
-        "version": "0.6.0"
     },
     "markupsafe": {
         "datetime": "2021-05-18T17:17:34.628517Z",
