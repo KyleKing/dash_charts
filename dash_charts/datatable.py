@@ -24,7 +24,7 @@ OPERATORS = [
 """List of lists containing each possible filter string."""
 
 
-def split_filter_part(filter_part):  # noqa: CCR001
+def split_filter_part(filter_part):    # noqa: CCR001
     """Split the filter into `(name, operator, value)` components.
 
     Based on `Backend Paging with Filtering`: https://dash.plot.ly/datatable/callbacks
@@ -45,7 +45,7 @@ def split_filter_part(filter_part):  # noqa: CCR001
                 value_part = value_part.strip()
                 v0 = value_part[0]
                 if (v0 == value_part[-1] and v0 in ("'", '"', '`')):
-                    value = value_part[1: -1].replace('\\' + v0, v0)
+                    value = value_part[1: -1].replace(f'\\{v0}', v0)
                 else:
                     try:
                         value = float(value_part)
