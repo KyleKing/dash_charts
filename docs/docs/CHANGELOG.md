@@ -1,4 +1,4 @@
-## Unreleased
+## 0.1.0a1 (2022-02-06)
 
 ### Feat
 
@@ -7,11 +7,17 @@
 
 ### Fix
 
+- more fixes for nox_coverage
+- properly use pd.concat
+- resolve warnings from dash
+- migrate to dash-bootstrap-components >=1
 - drop unused matplotlib functionality
 - temporarily patch the “_id” attr
 
 ### Refactor
 
+- fix linting issues
+- subset of Sourcery Refactoring
 - use 'or' in place of some if/else
 - add return type for generate_data
 - apply sourcery refactoring

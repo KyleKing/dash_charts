@@ -1,7 +1,7 @@
 """Example Time Vis Chart."""
 
-import dash_html_components as html
 import pandas as pd
+from dash import html
 from implements import implements
 
 from dash_charts.time_vis_chart import TimeVisChart

@@ -24,8 +24,7 @@ change_type_order = [
     "Change (Old)",
     "Fix (Old)",
 ]
-version = "0.1.0a0"
-tag_format = "2021.$version"
+version = "0.1.0a1"
 version_files = ["pyproject.toml", "dash_charts/__init__.py", "appveyor.yml"]
 
 [tool.commitizen.cz_legacy_map]
@@ -35,7 +34,7 @@ New = "New (Old)"
 
 [tool.poetry]
 name = "dash_charts"
-version = "2021.0.1.0a0"
+version = "0.1.0a1"
 description = "Python package for Plotly/Dash apps with support for multi-page, modules, and new charts such as Pareto with an Object Orient Approach"
 license = "MIT"
 authors = ["Kyle King <dev.act.kyle@gmail.com>"]
@@ -66,15 +65,17 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 attrs-strict = ">=0.2.2"
-calcipy = "^2021.0.2"
+calcipy = "^0.10.0"
 cerberus = "*"
-dash = "*"
-dash-bootstrap-components = "*"
+# dash = ">=2.0.0"
+dash-bootstrap-components = ">=1.0.0"
 dataset = "*"
 dominate = "*"
+flask-caching = ">=1.10.1"
 implements = "*"
-lxml = "*"
+lxml = ">=4.7.1"
 markdown = "*"
+numpy = ">=1.22.2"
 Palettable = "*"
 pandas = "*"
 psutil = "*"
@@ -86,28 +87,33 @@ tqdm = ">=4.62.3"
 # datasette-vega = "*"
 # great-expectations = "*"
 
+# FIXME: Required only for nox_coverage and optional for subset of use cases
+astor = ">=0.8.1"
+jsonpickle = ">=2.1.0"
+beautifulsoup4 = ">=4.10.0"
+
 # FIXME: In-progress testing of a better dash table
-dash-tabulator = "^0.4.2"
-dash-extensions = "^0.0.55"
+dash-tabulator = ">=0.4.2"
+dash-extensions = ">=0.0.55"
 
 [tool.poetry.dev-dependencies]
-astor = "*"
 calcipy = { version = "*", extras = [
     "dev",
     "lint",
     "test",
     "commitizen_legacy",
 ] }
-jsonpickle = "*"
 
 # Experimental dependencies
 # archan = { git = "https://github.com/pawamoy/archan.git" }
 # dependenpy = "^3.3.0"
 # archan-pylint = { git = "https://github.com/pawamoy/archan-pylint" }
 
-[tool.poetry.dev-dependencies.dash]
+# FIXME: testing extras are required for nox-coverage
+[tool.poetry.dependencies.dash]
+# [tool.poetry.dev-dependencies.dash]
 extras = ["testing"]
-version = "^1.16"
+version = ">=2.0.0"
 
 [tool.poetry.extras]
 matplotlib = ["matplotlib"]

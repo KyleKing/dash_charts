@@ -1,10 +1,10 @@
 """Example Marginal-Chart."""
 
-import dash_html_components as html
 import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from dash import html
 from implements import implements
 
 from dash_charts.utils_app import AppBase, AppInterface
@@ -76,7 +76,7 @@ class SampleMarginalChart(MarginalChart):
                 x=df_raw[key][df_raw[key] == name],
                 y=df_raw['y'][df_raw[key] == name],
             )
-            for idx, name in enumerate(np.sort(df_raw[key].unique()))
+            for name in np.sort(df_raw[key].unique())
         ]
 
     def create_layout(self):

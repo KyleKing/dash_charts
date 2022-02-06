@@ -4,8 +4,7 @@ from collections import OrderedDict
 from copy import deepcopy
 
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc, html
 from implements import implements
 
 from .utils_app import AppBase, AppInterface
@@ -342,8 +341,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
                     [
                         dbc.Row(
                             children=brand,
-                            align='center',
-                            no_gutters=True,
+                            align='center g-0',
                         ),
                     ], href='/',
                 ),
@@ -351,8 +349,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
                 dbc.Collapse(
                     dbc.Row(
                         children=links,
-                        no_gutters=True,
-                        className='flex-nowrap mt-3 mt-md-0',
+                        className='flex-nowrap mt-3 mt-md-0 g-0',
                         align='center',
                     ),
                     id=self._il[self.id_collapse],

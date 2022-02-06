@@ -8,9 +8,8 @@ PLANNED: Example with Bootstrap 4, to try next:
 """
 
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
 import dash_tabulator
+from dash import dcc, html
 from dash.dependencies import Input, Output
 
 # 3rd party js to export as xlsx

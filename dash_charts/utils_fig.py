@@ -1,7 +1,7 @@
 """Utilities for custom Dash figures."""
 
-import dash_core_components as dcc
 import plotly.graph_objects as go
+from dash import dcc
 from plotly.subplots import make_subplots
 
 from .utils_data import validate

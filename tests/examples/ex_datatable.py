@@ -5,9 +5,8 @@ TODO: See todo list at bottom!!
 """
 
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
 import plotly.express as px
+from dash import dcc, html
 from implements import implements
 
 from dash_charts.modules_datatable import ModuleFilteredTable

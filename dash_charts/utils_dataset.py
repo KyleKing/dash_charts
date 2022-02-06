@@ -43,6 +43,7 @@ class DBConnect:  # noqa: H601
         """
         self.db_path = db_path.resolve()
         self.db_path.parent.mkdir(exist_ok=True)
+        self.db  # Check initial connection
 
     def new_table(self, table_name):
         """Create a table. Drop a table if one existed before.
@@ -101,8 +102,7 @@ def export_table_as_csv(csv_filename, table):
 
     """
     rows = [[*table.columns]]
-    for row in table:
-        rows.append([*row.values()])
+    rows.extend([*row.values()] for row in table)
     write_csv(csv_filename, rows)
 
 

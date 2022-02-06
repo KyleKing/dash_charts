@@ -1,8 +1,7 @@
 """Example Tabbed Applet."""
 
-import dash_core_components as dcc
-import dash_html_components as html
 import plotly.express as px
+from dash import dcc, html
 
 from dash_charts.utils_app_with_navigation import AppWithTabs, StaticTab
 from dash_charts.utils_fig import min_graph

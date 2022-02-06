@@ -32,7 +32,6 @@ markdown_extensions:
   - extra
   - fenced_code
   - footnotes
-  - markdown_include.include
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg

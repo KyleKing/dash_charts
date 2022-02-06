@@ -86,7 +86,7 @@ With Poetry install `dash_charts` with: `poetry add dash_charts --git https://gi
 from typing import Optional
 
 import dash
-import dash_html_components as html
+from dash import html
 import plotly.express as px
 from box import Box
 from implements import implements
@@ -218,7 +218,7 @@ python tests/examples/ex_app_px.py
 Other useful scripts for testing, documentation, and more:
 
 ```sh
-poetry run ptw -- -m "not CHROME"
+poetry run ptw -- -m "not INTERACTIVE"
 poetry run doit run test
 poetry run doit
 ```

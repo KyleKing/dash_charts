@@ -8,7 +8,7 @@ from .configuration import no_log_errors
 from .examples import ex_style_bulma
 
 
-@pytest.mark.CHROME
+@pytest.mark.INTERACTIVE()
 def test_smoke_test_ex_style_bulma(dash_duo):
     """Test ex_style_bulma."""
     dash_duo.start_server(ex_style_bulma.app.app)

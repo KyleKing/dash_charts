@@ -8,7 +8,7 @@ from .configuration import no_log_errors
 from .examples import ex_gantt_chart
 
 
-@pytest.mark.CHROME
+@pytest.mark.INTERACTIVE()
 def test_smoke_test_ex_gantt_chart(dash_duo):
     """Test ex_gantt_chart."""
     dash_duo.start_server(ex_gantt_chart.app.app)

@@ -1,7 +1,7 @@
 """Application components built on Dash Bootstrap Components."""
 
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
+from dash import dcc
 
 
 def opts_dd(lbl, value):
@@ -31,12 +31,12 @@ def dropdown_group(name, _id, options, form_style=None, **dropdown_kwargs):
         dropdown_kwargs: key word arguments for dropdown. Could be: `(persistence, multi, searchable, etc.)`
 
     Returns:
-        FormGroup: dbc form group of label and dropdown
+        Row: dbc row with label and dropdown
 
     """
     if form_style is None:
         form_style = {}
-    return dbc.FormGroup(
+    return dbc.Row(
         [
             dbc.Label(name),
             dcc.Dropdown(id=_id, options=options, **dropdown_kwargs),
@@ -71,22 +71,20 @@ def login_form(submit_id):
     """
     email_id, pass_id = format_email_pass_id(submit_id)
     return dbc.Form(
-        [
-            dbc.FormGroup(
-                [
-                    dbc.Label('Email', className='mr-2'),
+        dbc.Row(
+            [
+                dbc.Label('Email', width='auto'),
+                dbc.Col(
                     dbc.Input(type='email', placeholder='Enter email', id=email_id),
-                ],
-                className='mr-3',
-            ),
-            dbc.FormGroup(
-                [
-                    dbc.Label('Password', className='mr-2'),
+                    className='me-3',
+                ),
+                dbc.Label('Password', width='auto'),
+                dbc.Col(
                     dbc.Input(type='password', placeholder='Enter password', id=pass_id),
-                ],
-                className='mr-3',
-            ),
-            dbc.Button('Submit', color='primary', id=submit_id),
-        ],
-        inline=True,
+                    className='me-3',
+                ),
+                dbc.Col(dbc.Button('Submit', color='primary', id=submit_id), width='auto'),
+            ],
+            className='g-2',
+        ),
     )

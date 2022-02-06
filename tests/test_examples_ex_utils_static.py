@@ -15,8 +15,12 @@ def test_smoke_test_write_plotly_html():
             ex_utils_static.write_sample_html(filename)  # act
 
             content = filename.read_text()
-    except ValueError:
-        raise ValueError('Likely no orca installation was found. Try "conda install -c plotly plotly-orca"')
+    except ValueError as exc:
+        raise ValueError(
+            'Likely no orca installation was found. Try'
+            + ' "brew install orca" (and open to finish the installation)'
+            + ' or "conda install -c plotly plotly-orca" for Windows',
+        ) from exc
     assert len(content.split('\n')) >= 2500
 
 

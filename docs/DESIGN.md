@@ -4,4 +4,4 @@ TODO: Work in progress. Also take a look at: https://gist.github.com/jerieljan/4
 
 PlantUML documentation
 
-![dash_charts](./.diagrams/dash_charts.png)
+![dash_charts](https://raw.githubusercontent.com/KyleKing/dash_charts/main/.diagrams/dash_charts.png)

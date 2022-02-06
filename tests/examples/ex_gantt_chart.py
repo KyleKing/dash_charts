@@ -2,8 +2,8 @@
 
 from pathlib import Path
 
-import dash_html_components as html
 import pandas as pd
+from dash import html
 from implements import implements
 from palettable.wesanderson import FantasticFox2_5
 

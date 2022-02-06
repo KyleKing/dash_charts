@@ -1,8 +1,8 @@
 """Example Scatter Data with Fitted Line."""
 
-import dash_html_components as html
 import pandas as pd
 import plotly.express as px
+from dash import html
 from implements import implements
 
 from dash_charts import equations

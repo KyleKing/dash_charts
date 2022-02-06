@@ -1,10 +1,9 @@
 """Example Rolling Mean and Filled Standard Deviation Chart."""
 
-import dash_core_components as dcc
-import dash_html_components as html
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
+from dash import dcc, html
 from implements import implements
 
 from dash_charts.scatter_line_charts import RollingChart
@@ -96,7 +95,7 @@ class RollingDemo(AppBase):
                 min_graph(id=self._il[self.id_chart], figure=self.chart_main.create_figure(self.data_raw)),
                 dcc.RangeSlider(
                     id=self._il[self.id_slider], min=0, max=slider_max, step=step / 5, value=[150, 825],
-                    marks={str(idx * step): str(idx * step) for idx in range(int(slider_max / step))},
+                    marks={str(idx * step): str(idx * step) for idx in range(slider_max // step)},
                 ),
             ],
         )

@@ -1,7 +1,7 @@
 """PLANNED: Improve tests for `dash_charts`. Examples from tests for plotly/dash."""
 
-import dash_html_components as html
 import pytest
+from dash import html
 from implements import implements
 
 from dash_charts.components import dropdown_group, opts_dd
@@ -66,7 +66,7 @@ class ComponentDemo(AppBase):
         ...  # No callbacks necessary for this simple example
 
 
-@pytest.mark.CHROME
+@pytest.mark.INTERACTIVE()
 def test_in_in001_simple_callback(dash_duo):
     """Test in_in001_simple_callback."""
     app = ComponentDemo()
@@ -97,7 +97,7 @@ def test_in_in001_simple_callback(dash_duo):
 
 # # 1. imports of your dash app
 # import dash
-# import dash_html_components as html
+# from dash import html
 
 
 # # 2. give each testcase a tcid, and pass the fixture
@@ -134,9 +134,9 @@ def test_in_in001_simple_callback(dash_duo):
 # # from copy import copy
 # from multiprocessing import Value
 
-# import dash_core_components as dcc
+# from dash import dcc
 # # import dash_dangerously_set_inner_html
-# import dash_html_components as html
+# from dash import html
 # # import pytest
 # from bs4 import BeautifulSoup
 # from dash import Dash, callback_context, no_update

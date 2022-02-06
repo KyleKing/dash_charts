@@ -8,7 +8,7 @@ from .configuration import no_log_errors
 from .examples import ex_pareto_chart
 
 
-@pytest.mark.CHROME
+@pytest.mark.INTERACTIVE()
 def test_smoke_test_ex_pareto_chart(dash_duo):
     """Test ex_pareto_chart."""
     dash_duo.start_server(ex_pareto_chart.app.app)
