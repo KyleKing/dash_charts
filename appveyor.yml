@@ -1,5 +1,5 @@
 ---
-version: 2021.0.1.0a0.{build}
+version: 0.1.0a0.{build}
 
 image:
   - Ubuntu
