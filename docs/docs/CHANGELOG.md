@@ -7,6 +7,7 @@
 
 ### Fix
 
+- more fixes for nox_coverage
 - properly use pd.concat
 - resolve warnings from dash
 - migrate to dash-bootstrap-components >=1
