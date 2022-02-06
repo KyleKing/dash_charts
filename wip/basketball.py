@@ -14,11 +14,6 @@ CWD = Path(__file__).parent
 with open(CWD / 'source_data/league_hexbin_stats.pickle', 'rb') as f:
     league_hexbin_stats = pickle.load(f)
 
-xlocs = league_hexbin_stats['xlocs']
-ylocs = league_hexbin_stats['ylocs']
-accs_by_hex = league_hexbin_stats['accs_by_hex']
-freq_by_hex = league_hexbin_stats['freq_by_hex']
-
 
 def draw_plotly_court(fig, fig_width=600, margins=10):
 
