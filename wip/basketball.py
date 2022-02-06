@@ -281,7 +281,8 @@ hexbin_text = [
     for i in range(len(freq_by_hex))
 ]
 ticktexts = ['Worse', 'Average', 'Better']
-logo_url = 'https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/bbr/' + teamname + '.png'
+logo_url = f'https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/bbr/{teamname}.png'
+
 
 fig = go.Figure()
 draw_plotly_court(fig, fig_width=600)
