@@ -67,7 +67,7 @@ python = "^3.8"
 attrs-strict = ">=0.2.2"
 calcipy = "^0.10.0"
 cerberus = "*"
-dash = ">=2.0.0"
+# dash = ">=2.0.0"
 dash-bootstrap-components = ">=1.0.0"
 dataset = "*"
 dominate = "*"
@@ -87,7 +87,7 @@ tqdm = ">=4.62.3"
 # datasette-vega = "*"
 # great-expectations = "*"
 
-# FIXME: Required for nox_coverage and should be configured as optional...
+# FIXME: Required only for nox_coverage and optional for subset of use cases
 astor = ">=0.8.1"
 jsonpickle = ">=2.1.0"
 beautifulsoup4 = ">=4.10.0"
@@ -109,9 +109,11 @@ calcipy = { version = "*", extras = [
 # dependenpy = "^3.3.0"
 # archan-pylint = { git = "https://github.com/pawamoy/archan-pylint" }
 
-[tool.poetry.dev-dependencies.dash]
+# FIXME: testing extras are required for nox-coverage
+[tool.poetry.dependencies.dash]
+# [tool.poetry.dev-dependencies.dash]
 extras = ["testing"]
-version = ">=1.16"
+version = ">=2.0.0"
 
 [tool.poetry.extras]
 matplotlib = ["matplotlib"]

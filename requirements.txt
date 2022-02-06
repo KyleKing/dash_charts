@@ -45,7 +45,7 @@ bandit==1.7.2; python_version >= "3.8" and python_version < "4.0" \
 beartype==0.9.1; python_version >= "3.8" and python_version < "4.0" and python_full_version >= "3.6.0" \
     --hash=sha256:fb23f59b709dd29c4bff25ede0969cdd76aa7e7812abef704d08007ea07372e0 \
     --hash=sha256:623630dc243b0da5a84f0fa414e6aaaf2613e567ad19abfe6a81c17ea5ab62f1
-beautifulsoup4==4.10.0; python_version >= "3.6" and python_full_version > "3.0.0" and python_version < "4" \
+beautifulsoup4==4.10.0; python_full_version > "3.0.0" \
     --hash=sha256:9a315ce70049920ea4572a4055bc4bd700c940521d36fc858205ad4fcde149bf \
     --hash=sha256:c23ad23c521d818955a4151a67d81580319d4bf548d3d49f4223ae041ff98891
 better-exceptions==0.3.3; python_version >= "3.8" and python_version < "4.0" \

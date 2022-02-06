@@ -11,6 +11,7 @@ from implements import implements
 from dash_charts.pareto_chart import ParetoChart
 from dash_charts.utils_app import AppBase, AppInterface
 from dash_charts.utils_fig import min_graph
+from dash_charts.utils_helpers import parse_dash_cli_args
 
 _ID = Box({
     'chart': 'pareto',
@@ -69,11 +70,10 @@ class ParetoDemo(AppBase):
         ...  # Override base class. Not necessary for this example
 
 
+instance = ParetoDemo
+app = instance()
+app.create()
 if __name__ == '__main__':
-    app = ParetoDemo()
-    app.create()
-    app.run(debug=True)
+    app.run(**parse_dash_cli_args())
 else:
-    app = instance()
-    app.create()
     FLASK_HANDLE = app.get_server()
