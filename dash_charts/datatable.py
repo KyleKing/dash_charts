@@ -1,6 +1,6 @@
 """DataTable Base Classes."""
 
-import dash_table
+from dash import dash_table
 
 # TODO: See pattern mathing callbacks for adding buttons (to show modal) to datatables
 #   https://dash.plotly.com/pattern-matching-callbacks

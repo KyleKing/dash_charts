@@ -8,7 +8,7 @@ from .configuration import no_log_errors
 from .examples import ex_sqlite_realtime
 
 
-@pytest.mark.CHROME
+@pytest.mark.INTERACTIVE
 def test_smoke_test_ex_sqlite_realtime(dash_duo):
     """Test ex_sqlite_realtime."""
     dash_duo.start_server(ex_sqlite_realtime.app.app)

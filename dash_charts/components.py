@@ -1,7 +1,7 @@
 """Application components built on Dash Bootstrap Components."""
 
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
+from dash import dcc
 
 
 def opts_dd(lbl, value):

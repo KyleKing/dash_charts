@@ -1,7 +1,7 @@
 """Utilities to build modules (delegated layout & callback methods) for Dash apps."""
 
-import dash_core_components as dcc
 import pandas as pd
+from dash import dcc
 
 
 class ModuleBase:  # noqa: H601

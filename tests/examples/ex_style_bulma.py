@@ -4,8 +4,8 @@ See documentation on Bulma layouts: https://bulma.io/documentation/layout/tiles/
 
 """
 
-import dash_html_components as html
 import plotly.express as px
+from dash import html
 from implements import implements
 
 from dash_charts.utils_app import STATIC_URLS, AppBase, AppInterface

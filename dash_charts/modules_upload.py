@@ -14,10 +14,8 @@ from pathlib import Path
 from urllib.parse import quote as urlquote
 
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
-import dash_table
 import pandas as pd
+from dash import dash_table, dcc, html
 
 from .utils_app_modules import ModuleBase
 from .utils_callbacks import map_args, map_outputs

@@ -37,9 +37,9 @@ from collections import OrderedDict
 
 import dash
 import dash_bootstrap_components as dbc
-import dash_html_components as html
 import pandas as pd
 import plotly.express as px
+from dash import html
 from implements import implements
 
 from .components import dropdown_group, opts_dd

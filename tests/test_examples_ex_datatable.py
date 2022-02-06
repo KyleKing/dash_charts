@@ -8,7 +8,7 @@ from .configuration import no_log_errors
 from .examples import ex_datatable
 
 
-@pytest.mark.CHROME
+@pytest.mark.INTERACTIVE
 def test_smoke_test_ex_datatable(dash_duo):
     """Test ex_datatable."""
     pytest.skip('Currently failing until "ids" is fixed')  # FIXME: Fix the "ids" error

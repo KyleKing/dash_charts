@@ -23,9 +23,8 @@ PLANNED: Need additional styling for the sliders
 from datetime import datetime as dt
 
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
 import plotly.graph_objects as go
+from dash import dcc, html
 
 from dash_charts.utils_fig import min_graph
 

@@ -13,10 +13,9 @@ import multiprocessing
 import time
 from pathlib import Path
 
-import dash_core_components as dcc
-import dash_html_components as html
 import numpy as np
 import pandas as pd
+from dash import dcc, html
 from dash.exceptions import PreventUpdate
 from implements import implements
 from tqdm import tqdm

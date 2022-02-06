@@ -3,9 +3,9 @@
 from typing import Optional
 
 import dash
-import dash_html_components as html
 import plotly.express as px
 from box import Box
+from dash import html
 from implements import implements
 
 from dash_charts.pareto_chart import ParetoChart

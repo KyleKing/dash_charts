@@ -1,10 +1,9 @@
 """Example Rolling Mean and Filled Standard Deviation Chart."""
 
-import dash_core_components as dcc
-import dash_html_components as html
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
+from dash import dcc, html
 from implements import implements
 
 from dash_charts.scatter_line_charts import RollingChart

@@ -1,10 +1,10 @@
 """Example Marginal-Chart."""
 
-import dash_html_components as html
 import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from dash import html
 from implements import implements
 
 from dash_charts.utils_app import AppBase, AppInterface
