@@ -46,7 +46,7 @@ def append_df(df_old, df_new):
         dataframe: combined dataframe
 
     """
-    return df_new if df_old is None else df_old.concat(df_new).reset_index(drop=True)
+    return df_new if df_old is None else pd.concat([df_old, df_new]).reset_index(drop=True)
 
 
 def validate(document, schema, **validator_kwargs):
