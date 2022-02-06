@@ -342,8 +342,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
                     [
                         dbc.Row(
                             children=brand,
-                            align='center',
-                            no_gutters=True,
+                            align='center g-0',
                         ),
                     ], href='/',
                 ),
@@ -351,8 +350,7 @@ class AppMultiPage(AppWithNavigation):  # noqa: H601
                 dbc.Collapse(
                     dbc.Row(
                         children=links,
-                        no_gutters=True,
-                        className='flex-nowrap mt-3 mt-md-0',
+                        className='flex-nowrap mt-3 mt-md-0 g-0',
                         align='center',
                     ),
                     id=self._il[self.id_collapse],
