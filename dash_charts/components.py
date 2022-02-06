@@ -86,5 +86,5 @@ def login_form(submit_id):
                 dbc.Col(dbc.Button('Submit', color='primary', id=submit_id), width='auto'),
             ],
             className='g-2',
-        )
+        ),
     )

@@ -1,3 +1,4 @@
+---
 analysis:
   archan_pylint.PylintProvider:
     # name: Pylint

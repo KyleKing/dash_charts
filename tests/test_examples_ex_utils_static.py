@@ -19,7 +19,7 @@ def test_smoke_test_write_plotly_html():
         raise ValueError(
             'Likely no orca installation was found. Try'
             + ' "brew install orca" (and open to finish the installation)'
-            + ' or "conda install -c plotly plotly-orca" for Windows'
+            + ' or "conda install -c plotly plotly-orca" for Windows',
         ) from exc
     assert len(content.split('\n')) >= 2500
 

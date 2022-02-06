@@ -8,7 +8,7 @@ from .configuration import no_log_errors
 from .examples import ex_app_px
 
 
-@pytest.mark.INTERACTIVE
+@pytest.mark.INTERACTIVE()
 def test_smoke_test_ex_app_px(dash_duo):
     """Test ex_app_px."""
     dash_duo.start_server(ex_app_px.app.app)

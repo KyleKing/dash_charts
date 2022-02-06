@@ -7,11 +7,14 @@
 
 ### Fix
 
+- resolve warnings from dash
+- migrate to dash-bootstrap-components >=1
 - drop unused matplotlib functionality
 - temporarily patch the “_id” attr
 
 ### Refactor
 
+- subset of Sourcery Refactoring
 - use 'or' in place of some if/else
 - add return type for generate_data
 - apply sourcery refactoring

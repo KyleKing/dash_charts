@@ -8,7 +8,7 @@ from .configuration import no_log_errors
 from .examples import ex_modules_upload
 
 
-@pytest.mark.INTERACTIVE
+@pytest.mark.INTERACTIVE()
 def test_smoke_test_ex_modules_upload(dash_duo):
     """Test ex_modules_upload."""
     dash_duo.start_server(ex_modules_upload.app.app)

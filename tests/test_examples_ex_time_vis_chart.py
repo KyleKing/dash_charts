@@ -8,7 +8,7 @@ from .configuration import no_log_errors
 from .examples import ex_time_vis_chart
 
 
-@pytest.mark.INTERACTIVE
+@pytest.mark.INTERACTIVE()
 def test_smoke_test_ex_time_vis_chart(dash_duo):
     """Test ex_time_vis_chart."""
     dash_duo.start_server(ex_time_vis_chart.app.app)

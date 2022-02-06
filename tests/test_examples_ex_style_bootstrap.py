@@ -8,7 +8,7 @@ from .configuration import no_log_errors
 from .examples import ex_style_bootstrap
 
 
-@pytest.mark.INTERACTIVE
+@pytest.mark.INTERACTIVE()
 def test_smoke_test_ex_style_bootstrap(dash_duo):
     """Test ex_style_bootstrap."""
     dash_duo.start_server(ex_style_bootstrap.app.app)

@@ -66,7 +66,7 @@ class ComponentDemo(AppBase):
         ...  # No callbacks necessary for this simple example
 
 
-@pytest.mark.INTERACTIVE
+@pytest.mark.INTERACTIVE()
 def test_in_in001_simple_callback(dash_duo):
     """Test in_in001_simple_callback."""
     app = ComponentDemo()

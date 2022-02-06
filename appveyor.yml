@@ -23,7 +23,7 @@ environment:
 
 # Python is now managed with pyenv instead of stack so that a ".venv" is created
 # > Must be after the declaration of "PYTHON_STACK" variable
-# > yamllint disable-line rule:line-length
+# yamllint disable-line rule:line-length
 # > https://help.appveyor.com/discussions/questions/32001-ubuntu-python-3-as-default
 # > stack: python %PYTHON_STACK%
 
@@ -35,6 +35,7 @@ build: false
 
 # Specify commands specific to platform (cmd-Windows/sh-Linux/None-Both)
 install:
+  - echo "Install..."
   # Force Python to use UTF-8 encoding instead of cp1252 on Windows
   - cmd: SET PYTHONUTF8=1
   # For Windows, set Python paths based on environment variable from matrix
@@ -68,11 +69,14 @@ install:
   - poetry install -E dev -E lint -E test -E commitizen_legacy
 
 test_script:
+  - echo "Testing..."
   - poetry run doit --continue
   # On Windows only, install codecov and upload the coverage results
   - cmd: poetry run doit run nox_coverage
   - cmd: python -m pipx install codecov
   - cmd: codecov --file coverage.json
+  # Pack up the release into a single zip file
+  - poetry run doit run zip_release
 
 deploy_script:
   - echo "Deploying..."
@@ -83,6 +87,9 @@ on_success:
 on_failure:
   - echo "On Error..."
 
+on_finish:
+  - cmd: ECHO "Build Finish"
+
 artifacts:
-  # PLANNED: Specify single files, like wheels, but zip the docs/reports
-  - path: releases/tests/*
+  - path: releases/site.zip
+  - path: releases/tests.zip
