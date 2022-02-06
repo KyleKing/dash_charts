@@ -95,7 +95,7 @@ class RollingDemo(AppBase):
                 min_graph(id=self._il[self.id_chart], figure=self.chart_main.create_figure(self.data_raw)),
                 dcc.RangeSlider(
                     id=self._il[self.id_slider], min=0, max=slider_max, step=step / 5, value=[150, 825],
-                    marks={str(idx * step): str(idx * step) for idx in range(int(slider_max / step))},
+                    marks={str(idx * step): str(idx * step) for idx in range(slider_max // step)},
                 ),
             ],
         )

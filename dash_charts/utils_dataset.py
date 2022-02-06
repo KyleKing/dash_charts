@@ -102,8 +102,7 @@ def export_table_as_csv(csv_filename, table):
 
     """
     rows = [[*table.columns]]
-    for row in table:
-        rows.append([*row.values()])
+    rows.extend([*row.values()] for row in table)
     write_csv(csv_filename, rows)
 
 
