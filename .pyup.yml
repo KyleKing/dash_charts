@@ -18,7 +18,7 @@ pin: false
 # update schedule
 # default: empty
 # allowed: "every day", "every week", ..
-schedule: "every month"
+schedule: every month
 
 # search for requirement files
 # default: true
@@ -42,7 +42,7 @@ search: true
 # requires private repo permissions, even on public repos
 # default: empty
 assignees:
- - kyleking
+  - kyleking
 
 # configure the branch prefix the bot is using
 # default: pyup-
@@ -50,7 +50,7 @@ branch_prefix: pyup/
 
 # set a global prefix for PRs
 # default: empty
-pr_prefix: "build:"
+pr_prefix: 'build:'
 
 # allow to close stale PRs
 # default: true

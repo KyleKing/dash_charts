@@ -1,5 +1,5 @@
 ---
-version: 0.1.0a1.{build}
+version: 0.1.0.{build}
 
 image:
   - Ubuntu
@@ -66,7 +66,7 @@ install:
   - poetry config virtualenvs.in-project true
   - poetry config --list
   # Install project-specific dependencies and extras
-  - poetry install -E dev -E lint -E test -E commitizen_legacy
+  - poetry install
 
 test_script:
   - echo "Testing..."
@@ -88,7 +88,7 @@ on_failure:
   - echo "On Error..."
 
 on_finish:
-  - cmd: ECHO "Build Finish"
+  - echo "Build Finish"
 
 artifacts:
   - path: releases/site.zip
