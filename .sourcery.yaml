@@ -1,3 +1,4 @@
 ---
+# See: https://docs.sourcery.ai/Configuration/
 refactor:
   python_version: '3.7'
