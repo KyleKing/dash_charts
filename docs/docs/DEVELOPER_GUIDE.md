@@ -47,4 +47,33 @@ poetry run doit run lock document deploy_docs publish
 ## Current Status
 
 <!-- {cts} COVERAGE -->
+| File                                       |   Statements |   Missing |   Excluded | Coverage   |
+|:-------------------------------------------|-------------:|----------:|-----------:|:-----------|
+| `dash_charts/__init__.py`                  |            4 |         0 |          0 | 100.0%     |
+| `dash_charts/app_px.py`                    |          130 |        11 |          0 | 91.5%      |
+| `dash_charts/components.py`                |           13 |         0 |          0 | 100.0%     |
+| `dash_charts/coordinate_chart.py`          |          102 |         1 |          6 | 99.0%      |
+| `dash_charts/custom_colorscales.py`        |            3 |         0 |          0 | 100.0%     |
+| `dash_charts/datatable.py`                 |           79 |        25 |          0 | 68.4%      |
+| `dash_charts/equations.py`                 |           11 |         0 |          0 | 100.0%     |
+| `dash_charts/gantt_chart.py`               |           54 |         0 |          0 | 100.0%     |
+| `dash_charts/modules_datatable.py`         |          100 |        33 |          0 | 67.0%      |
+| `dash_charts/modules_upload.py`            |          130 |        60 |          0 | 53.8%      |
+| `dash_charts/pareto_chart.py`              |           42 |         0 |          2 | 100.0%     |
+| `dash_charts/scatter_line_charts.py`       |           45 |         0 |          3 | 100.0%     |
+| `dash_charts/time_vis_chart.py`            |           61 |         0 |          0 | 100.0%     |
+| `dash_charts/utils_app.py`                 |          103 |        14 |          6 | 86.4%      |
+| `dash_charts/utils_app_modules.py`         |           26 |         3 |          4 | 88.5%      |
+| `dash_charts/utils_app_with_navigation.py` |          118 |         9 |          6 | 92.4%      |
+| `dash_charts/utils_callbacks.py`           |           31 |         6 |          0 | 80.6%      |
+| `dash_charts/utils_data.py`                |           63 |         1 |          0 | 98.4%      |
+| `dash_charts/utils_dataset.py`             |           76 |        43 |          0 | 43.4%      |
+| `dash_charts/utils_fig.py`                 |           74 |         3 |          4 | 95.9%      |
+| `dash_charts/utils_helpers.py`             |           19 |         8 |          7 | 57.9%      |
+| `dash_charts/utils_json_cache.py`          |           51 |        10 |          0 | 80.4%      |
+| `dash_charts/utils_static.py`              |          111 |         5 |          0 | 95.5%      |
+| `dash_charts/utils_static_toc.py`          |           22 |         1 |          0 | 95.5%      |
+| **Totals**                                 |         1468 |       233 |         38 | 84.1%      |
+
+Generated on: 2022-02-18T16:02:01.731526
 <!-- {cte} -->

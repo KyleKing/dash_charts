@@ -65,7 +65,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 attrs-strict = ">=0.2.2"
-calcipy = "^0.10.0"
+calcipy = ">=0.11.0"
 cerberus = "*"
 # dash = ">=2.0.0"
 dash-bootstrap-components = ">=1.0.0"

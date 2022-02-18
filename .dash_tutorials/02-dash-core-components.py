@@ -53,7 +53,7 @@ app.layout = html.Div([
             dcc.Dropdown(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
-                    {'label': u'Montréal', 'value': 'MTL'},
+                    {'label': 'Montréal', 'value': 'MTL'},
                     {'label': 'San Francisco', 'value': 'SF'},
                 ],
                 value='MTL',
@@ -63,7 +63,7 @@ app.layout = html.Div([
             dcc.Dropdown(
                 options=[
                     {'label': 'New York City', 'value': 'NYC'},
-                    {'label': u'Montréal', 'value': 'MTL'},
+                    {'label': 'Montréal', 'value': 'MTL'},
                     {'label': 'San Francisco', 'value': 'SF'},
                 ],
                 value=['MTL', 'SF'],

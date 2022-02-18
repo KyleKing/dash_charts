@@ -133,7 +133,7 @@ def display_output(row, cell, dataChanged, filters, dataFiltered):
     print(dataChanged)
     print(filters)
     print(dataFiltered)
-    return 'You have clicked row {} ; cell {}'.format(row, cell)
+    return f'You have clicked row {row} ; cell {cell}'
 
 
 if __name__ == '__main__':
