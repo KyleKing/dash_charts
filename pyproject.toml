@@ -24,7 +24,7 @@ change_type_order = [
     "Change (Old)",
     "Fix (Old)",
 ]
-version = "0.1.0a1"
+version = "0.1.0"
 version_files = ["pyproject.toml", "dash_charts/__init__.py", "appveyor.yml"]
 
 [tool.commitizen.cz_legacy_map]
@@ -34,7 +34,7 @@ New = "New (Old)"
 
 [tool.poetry]
 name = "dash_charts"
-version = "0.1.0a1"
+version = "0.1.0"
 description = "Python package for Plotly/Dash apps with support for multi-page, modules, and new charts such as Pareto with an Object Orient Approach"
 license = "MIT"
 authors = ["Kyle King <dev.act.kyle@gmail.com>"]

@@ -2,7 +2,7 @@
 
 from loguru import logger
 
-__version__ = '0.1.0a1'
+__version__ = '0.1.0'
 __pkg_name__ = 'dash_charts'
 
 logger.disable(__pkg_name__)
