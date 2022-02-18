@@ -99,7 +99,7 @@ class ParetoChart(CustomChart):
             go.Bar(
                 hoverinfo='y', yaxis='y1', name='raw_value',
                 marker={'color': self.pareto_colors['bar']},
-                x=df_p['label'], y=df_p['value'], **count_kwargs
+                x=df_p['label'], y=df_p['value'], **count_kwargs,
             ),
         ] + [
             go.Scatter(

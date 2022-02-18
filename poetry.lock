@@ -268,7 +268,7 @@ redis = ["redis (>=2.10.5)"]
 
 [[package]]
 name = "calcipy"
-version = "0.11.0"
+version = "0.12.0"
 description = "Python package to simplify development. Includes functionality for task running, testing, linting, documenting, and more"
 category = "main"
 optional = false
@@ -557,7 +557,7 @@ types-toml = ">=0.10.0,<0.11.0"
 
 [[package]]
 name = "cz-legacy"
-version = "0.1.3"
+version = "0.1.6"
 description = "Extends Conventional Commits Change Types with User-Defined Legacy Types for Commitizen"
 category = "dev"
 optional = false
@@ -3082,7 +3082,7 @@ matplotlib = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "1dd042bb02661006423a841c70582bd7d2d8c0112a05c63b9004fe604d3fdeaa"
+content-hash = "ca7559212a4025e6456df54ea1e6109705eb0e49d1f4577cac7503ba20e008c6"
 
 [metadata.files]
 absolufy-imports = [
@@ -3204,8 +3204,8 @@ cachecontrol = [
     {file = "CacheControl-0.12.10.tar.gz", hash = "sha256:d8aca75b82eec92d84b5d6eb8c8f66ea16f09d2adb09dbca27fe2d5fc8d3732d"},
 ]
 calcipy = [
-    {file = "calcipy-0.11.0-py3-none-any.whl", hash = "sha256:564e25adc930dc1e42bcdd49277e6d4d35de54959cc8074f9e08dcb3587e0b21"},
-    {file = "calcipy-0.11.0.tar.gz", hash = "sha256:236f07fcbf71361558c1021880f91ffb11da36a2c0dfb866eb82f3d5338d3daf"},
+    {file = "calcipy-0.12.0-py3-none-any.whl", hash = "sha256:1a969bb06e22e223e6040e495c7fd74ea6436c8841f24906d45b22015db9ff43"},
+    {file = "calcipy-0.12.0.tar.gz", hash = "sha256:7c4e5c8a03801722614fb0e26e88d9d4c44fc8347e35dc569f1ef297ca3001b0"},
 ]
 cement = [
     {file = "cement-3.0.6-py3-none-any.whl", hash = "sha256:79c9655e68e4393bf8898d28fc806cc5187c1fc493a75f1af396bd30c6170cc4"},
@@ -3378,8 +3378,8 @@ cyclonedx-python-lib = [
     {file = "cyclonedx_python_lib-1.3.0-py3-none-any.whl", hash = "sha256:2b8b1250f6b22b4836bfb86b87381a228377e4d329d6d6d7488a2cdfbc073049"},
 ]
 cz-legacy = [
-    {file = "cz_legacy-0.1.3-py3-none-any.whl", hash = "sha256:19aceaeff782f6a58a67fa89db479db85ae76206173973fc4a02364ef7ed179b"},
-    {file = "cz_legacy-0.1.3.tar.gz", hash = "sha256:2467a669f91672f33e979089eb7ba3e12f411748865f2530d8f60d1db9cb3dfe"},
+    {file = "cz_legacy-0.1.6-py3-none-any.whl", hash = "sha256:6b1bc282d14a3834dc6321f7e2d97dc8e79512a0896bfa71637b6168fa17552d"},
+    {file = "cz_legacy-0.1.6.tar.gz", hash = "sha256:7c966d26a14afcbc639a89821c0274a7b1e77416db40ab459e373c43af1e6d14"},
 ]
 darglint = [
     {file = "darglint-1.8.1-py3-none-any.whl", hash = "sha256:5ae11c259c17b0701618a20c3da343a3eb98b3bc4b5a83d31cdd94f5ebdced8d"},

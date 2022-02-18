@@ -94,9 +94,9 @@ brotli==1.0.9; python_version >= "3.6" and python_version < "4" \
 cachecontrol==0.12.10; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:b0d43d8f71948ef5ebdee5fe236b86c6ffc7799370453dccb0e894c20dfa487c \
     --hash=sha256:d8aca75b82eec92d84b5d6eb8c8f66ea16f09d2adb09dbca27fe2d5fc8d3732d
-calcipy==0.11.0; python_version >= "3.8" and python_version < "4.0" \
-    --hash=sha256:564e25adc930dc1e42bcdd49277e6d4d35de54959cc8074f9e08dcb3587e0b21 \
-    --hash=sha256:236f07fcbf71361558c1021880f91ffb11da36a2c0dfb866eb82f3d5338d3daf
+calcipy==0.12.0; python_version >= "3.8" and python_version < "4.0" \
+    --hash=sha256:1a969bb06e22e223e6040e495c7fd74ea6436c8841f24906d45b22015db9ff43 \
+    --hash=sha256:7c4e5c8a03801722614fb0e26e88d9d4c44fc8347e35dc569f1ef297ca3001b0
 cement==3.0.6; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:79c9655e68e4393bf8898d28fc806cc5187c1fc493a75f1af396bd30c6170cc4 \
     --hash=sha256:fccec41eab3f15a03445b1ce24c8a7e106d4d5520f6507a7145698ce68923d31
@@ -250,9 +250,9 @@ cryptography==36.0.1; python_version >= "3.6" \
 cyclonedx-python-lib==1.3.0; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:8793fcf6a4735835bda33cda461a9a60c63faf0a8f9c58fc1fc4312e8f307164 \
     --hash=sha256:2b8b1250f6b22b4836bfb86b87381a228377e4d329d6d6d7488a2cdfbc073049
-cz-legacy==0.1.3; python_full_version >= "3.6.1" and python_full_version < "4.0.0" and python_version >= "3.8" and python_version < "4.0" \
-    --hash=sha256:19aceaeff782f6a58a67fa89db479db85ae76206173973fc4a02364ef7ed179b \
-    --hash=sha256:2467a669f91672f33e979089eb7ba3e12f411748865f2530d8f60d1db9cb3dfe
+cz-legacy==0.1.6; python_full_version >= "3.6.1" and python_full_version < "4.0.0" and python_version >= "3.8" and python_version < "4.0" \
+    --hash=sha256:6b1bc282d14a3834dc6321f7e2d97dc8e79512a0896bfa71637b6168fa17552d \
+    --hash=sha256:7c966d26a14afcbc639a89821c0274a7b1e77416db40ab459e373c43af1e6d14
 darglint==1.8.1; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:5ae11c259c17b0701618a20c3da343a3eb98b3bc4b5a83d31cdd94f5ebdced8d \
     --hash=sha256:080d5106df149b199822e7ee7deb9c012b49891538f14a11be681044f0bb20da
