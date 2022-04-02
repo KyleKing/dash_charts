@@ -56,10 +56,11 @@ def initialize_cache(db_instance):
     """
     table = db_instance.db.create_table(CACHE_TABLE_NAME)
 
-    removed_files = []
-    for row in table:
-        if not Path(row[FILENAME_KEY]).is_file():
-            removed_files.append(row[FILENAME_KEY])
+    removed_files = [
+        row[FILENAME_KEY]
+        for row in table
+        if not Path(row[FILENAME_KEY]).is_file()
+    ]
 
     for filename in removed_files:
         table.delete(filename=filename)

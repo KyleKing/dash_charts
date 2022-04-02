@@ -188,7 +188,7 @@ class AppBase:  # noqa: H601
         self.init_app_kwargs = {**default, **self.init_app_kwargs}
         self.app = app or init_app(**self.init_app_kwargs)
 
-    def create(self, assign_layout: bool = True) -> None:  # noqa: CCR001
+    def create(self, assign_layout: bool = True) -> None:    # noqa: CCR001
         """Create the ids, app charts, layout, callbacks, and optional modules.
 
         Args:
@@ -213,13 +213,12 @@ class AppBase:  # noqa: H601
         for mod in self.modules:
             mod.create_elements(self._il)
 
-        # Create app layout. User must call the return_layout method from each module within own return_layout method
         if assign_layout:
             self.app.layout = self.return_layout()
-        if assign_layout and self.validation_layout:
-            self.app.validation_layout = [deepcopy(self.app.layout)] + self.validation_layout
-            pprint('\n\nValidationLayout?')
-            pprint(self.app.validation_layout)
+            if self.validation_layout:
+                self.app.validation_layout = [deepcopy(self.app.layout)] + self.validation_layout
+                pprint('\n\nValidationLayout?')
+                pprint(self.app.validation_layout)
 
         # Create callbacks for app and each module
         self.create_callbacks()

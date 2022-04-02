@@ -166,7 +166,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
         """
         return go.Scatter(
             hoverlabel=self.hover_label_settings,
-            hovertemplate=self._create_hover_text(vis) + '<extra></extra>',
+            hovertemplate=f'{self._create_hover_text(vis)}<extra></extra>',
             hovertext=self._create_hover_text(vis),
             mode='text',
             text=vis.label,
@@ -219,7 +219,7 @@ class TimeVisChart(CustomChart):  # noqa: H601
         )
         return go.Scatter(
             hoverlabel=self.hover_label_settings,
-            hovertemplate=self._create_hover_text(vis) + '<extra></extra>',
+            hovertemplate=f'{self._create_hover_text(vis)}<extra></extra>',
             hovertext=self._create_hover_text(vis),
             marker={'color': self.fillcolor},
             mode='markers+text',

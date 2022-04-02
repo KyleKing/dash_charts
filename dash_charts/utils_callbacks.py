@@ -120,4 +120,4 @@ def get_triggered_id():
         raise PreventUpdate
 
     prop_id = ctx.triggered[0]['prop_id']  # in format: `id.key` where we only want the `id`
-    return re.search(r'(^.+)\.[^\.]+$', prop_id).group(1)
+    return re.search(r'(^.+)\.[^\.]+$', prop_id)[1]

@@ -163,7 +163,7 @@ class GanttChart(CustomChart):  # noqa: H601
         #   hoverable, but only the x/y point appears to be hoverable although it makes a larger hover zone at least
         return go.Scatter(
             hoverlabel=self.hover_label_settings,
-            hovertemplate=self._create_hover_text(task) + '<extra></extra>',
+            hovertemplate=f'{self._create_hover_text(task)}<extra></extra>',
             hovertext=self._create_hover_text(task),
             legendgroup=self.color_lookup[task.category],
             mode='text',
