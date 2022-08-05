@@ -356,13 +356,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#nov2020-mar2021-updates" class="md-nav__link">
-    Nov2020-Mar2021 Updates
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#quick-start" class="md-nav__link">
     Quick Start
   </a>
@@ -1286,13 +1279,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#nov2020-mar2021-updates" class="md-nav__link">
-    Nov2020-Mar2021 Updates
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#quick-start" class="md-nav__link">
     Quick Start
   </a>
@@ -1559,6 +1545,11 @@
 
 
 <h1 id="dash_charts">dash_charts<a class="headerlink" href="#dash_charts" title="Permanent link">⚓︎</a></h1>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>In 2019-2020, I was building applications with Dash and wanted a way to make them more composable and reusable. Since then, I moved on to other projects and Dash has become far more composable. Dash expanded plotly express and introduced templates along with other changes as the ecosystem has evolved!</p>
+<p>Given the advances in Dash, I&rsquo;m going to archive this project, publish a final release to PyPi, and move on to other projects</p>
+</blockquote>
 <p>Python package for <a href="https://dash.plot.ly/">Plotly/Dash</a> apps with support for multi-page, modules, and new charts such as Pareto with an Object Orient Approach</p>
 <p>Includes base classes for building a custom chart or application, new charts such as a Pareto, and base classes for tabbed or multi-page applications. See full documentation at <a href="https://kyleking.me/dash_charts/">https://kyleking.me/dash_charts/</a>. ( TODO: Currently not online )</p>
 <!-- TOC -->
@@ -1611,25 +1602,6 @@
 </ul>
 <!-- /TOC -->
 
-<h2 id="nov2020-mar2021-updates">Nov2020-Mar2021 Updates<a class="headerlink" href="#nov2020-mar2021-updates" title="Permanent link">⚓︎</a></h2>
-<!-- FIXME: Keep updates up to date! -->
-<p>I am in the process of implementing breaking changes for a <code>0.1</code> version. The major change will be to refactor the various chart constructors to match the plotly express initialization arguments</p>
-<p>I plan on reaching &gt;75% test coverage, adding type annotations, and improving the documentation as well</p>
-<p>I considered using a builder pattern, but the plotly.express approach can be implemented through an attributes class that accepts unhandled keyword arguments to the plots</p>
-<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">auto</span><span class="o">..</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="k">class</span> <span class="nc">ChartSettings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
-<span class="linenos" data-linenos=" 3 "></span>
-<span class="linenos" data-linenos=" 4 "></span>    <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span>
-<span class="linenos" data-linenos=" 5 "></span>    <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span>
-<span class="linenos" data-linenos=" 6 "></span>    <span class="n">etc</span><span class="p">:</span> <span class="nb">int</span>
-<span class="linenos" data-linenos=" 7 "></span>
-<span class="linenos" data-linenos=" 8 "></span>
-<span class="linenos" data-linenos=" 9 "></span><span class="k">class</span> <span class="nc">SomeChart</span><span class="p">:</span>
-<span class="linenos" data-linenos="10 "></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="linenos" data-linenos="11 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">something</span> <span class="o">=</span> <span class="n">AttrClass</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</code></pre></div>
-<p>~~Alternatively, the builder pattern might be useful to create new charts with slightly different views.~~ Would require serializing the class in order to copy rather than modify in memory</p>
-<p>Currently blocked by pending changes to <code>calcipy</code> and <code>calcipy-template</code> to how doit tasks are configured</p>
 <h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">⚓︎</a></h2>
 <h3 id="1-install">1. Install<a class="headerlink" href="#1-install" title="Permanent link">⚓︎</a></h3>
 <p>With Poetry install <code>dash_charts</code> with: <code>poetry add dash_charts --git https://github.com/KyleKing/dash_charts.git#main</code></p>
@@ -2093,7 +2065,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 6, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 5, 2022</span>
       
         <br>
         Created:
