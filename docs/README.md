@@ -1,5 +1,11 @@
 # dash_charts
 
+> **Note**
+>
+> In 2019-2020, I was building applications with Dash and wanted a way to make them more composable and reusable. Since then, I moved on to other projects and Dash has become far more composable. Dash expanded plotly express and introduced templates along with other changes as the ecosystem has evolved!
+>
+> Given the advances in Dash, I'm going to archive this project, publish a final release to PyPi, and move on to other projects
+
 Python package for [Plotly/Dash](https://dash.plot.ly/) apps with support for multi-page, modules, and new charts such as Pareto with an Object Orient Approach
 
 Includes base classes for building a custom chart or application, new charts such as a Pareto, and base classes for tabbed or multi-page applications. See full documentation at [https://kyleking.me/dash_charts/](https://kyleking.me/dash_charts/). ( TODO: Currently not online )
@@ -42,33 +48,6 @@ Includes base classes for building a custom chart or application, new charts suc
     - [License](#license)
 
 <!-- /TOC -->
-
-## Nov2020-Mar2021 Updates
-
-<!-- FIXME: Keep updates up to date! -->
-I am in the process of implementing breaking changes for a `0.1` version. The major change will be to refactor the various chart constructors to match the plotly express initialization arguments
-
-I plan on reaching >75% test coverage, adding type annotations, and improving the documentation as well
-
-I considered using a builder pattern, but the plotly.express approach can be implemented through an attributes class that accepts unhandled keyword arguments to the plots
-
-```py
-@attr.s(auto..)
-class ChartSettings(BaseSettings):
-
-    x_label: str
-    y_label: str
-    etc: int
-
-
-class SomeChart:
-    def __init__(self, **kwargs):
-        self.something = AttrClass(**kwargs)
-```
-
-~~Alternatively, the builder pattern might be useful to create new charts with slightly different views.~~ Would require serializing the class in order to copy rather than modify in memory
-
-Currently blocked by pending changes to `calcipy` and `calcipy-template` to how doit tasks are configured
 
 ## Quick Start
 
