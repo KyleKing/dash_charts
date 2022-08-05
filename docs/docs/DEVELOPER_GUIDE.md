@@ -75,5 +75,5 @@ poetry run doit run lock document deploy_docs publish
 | `dash_charts/utils_static_toc.py`          |           22 |         1 |          0 | 95.5%      |
 | **Totals**                                 |         1468 |       233 |         38 | 84.1%      |
 
-Generated on: 2022-02-18T16:02:01.731526
+Generated on: 2022-08-04T20:47:35.216758
 <!-- {cte} -->
