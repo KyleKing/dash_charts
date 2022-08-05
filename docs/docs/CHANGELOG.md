@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Fix
+
+- update README to indicate archival
+
 ## 0.1.0 (2022-02-18)
 
 ## 0.1.0a1 (2022-02-06)
