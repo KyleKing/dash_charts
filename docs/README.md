@@ -401,17 +401,6 @@ Useful Dash reference links
 
 <!-- TODO: See https://github.com/KyleKing/calcipy/issues/38 -->
 
-## Installation
-
-1. ...
-2. ...
-
-    ```sh
-    echo Hello World!
-    ```
-
-3. ...
-
 ## Usage
 
 <!-- TODO: Show an example (screenshots, terminal recording, etc.) -->
